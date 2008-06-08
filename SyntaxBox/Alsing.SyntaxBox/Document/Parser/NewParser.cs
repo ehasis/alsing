@@ -11,7 +11,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
 {
 	public sealed class NewParser : ParserBase
 	{
-        public override void ParseLine(int rowIndex, bool parseKeywords)
+        public override void ParseRow(int rowIndex, bool parseKeywords)
         {
             if (!parseKeywords)
                 ParseLineStructure(rowIndex);

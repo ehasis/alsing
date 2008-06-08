@@ -670,9 +670,9 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
             if (RowIndex >= 0 && RowIndex < Control.Document.Count)
             {
                 //do keyword parse before we render the line...
-                if (Control.Document[RowIndex].RowState == RowState.SegmentParsed)
+                if (Control.Document[RowIndex].RowState == RowState.SpanParsed)
                 {
-                    Control.Document.Parser.ParseLine(RowIndex, true);
+                    Control.Document.Parser.ParseRow(RowIndex, true);
                     Control.Document[RowIndex].RowState = RowState.AllParsed;
                 }
             }
@@ -897,8 +897,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
             {
                 if (r.expansion_StartSpan.EndRow != null)
                 {
-                    if (r.expansion_StartSpan.EndRow.RowState == RowState.SegmentParsed)
-                        Control.Document.Parser.ParseLine(r.expansion_StartSpan.EndRow.Index, true);
+                    if (r.expansion_StartSpan.EndRow.RowState == RowState.SpanParsed)
+                        Control.Document.Parser.ParseRow(r.expansion_StartSpan.EndRow.Index, true);
 
                     Word last = r.expansion_StartSpan.EndWord;
                     xPos += Control.View.FirstVisibleColumn*Control.View.CharWidth;
@@ -935,8 +935,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
             {
                 if (r.expansion_StartSpan.EndRow != null)
                 {
-                    if (r.expansion_StartSpan.EndRow.RowState == RowState.SegmentParsed)
-                        Control.Document.Parser.ParseLine(r.expansion_StartSpan.EndRow.Index, true);
+                    if (r.expansion_StartSpan.EndRow.RowState == RowState.SpanParsed)
+                        Control.Document.Parser.ParseRow(r.expansion_StartSpan.EndRow.Index, true);
 
                     Word last = r.expansion_StartSpan.EndWord;
                     xPos += Control.View.FirstVisibleColumn*Control.View.CharWidth;
@@ -1696,8 +1696,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
         private Point GetTextPointPixelPos(TextPoint tp)
         {
             Row xtr = Control.Document[tp.Y];
-            if (xtr.RowState == RowState.SegmentParsed)
-                Control.Document.Parser.ParseLine(xtr.Index, true);
+            if (xtr.RowState == RowState.SpanParsed)
+                Control.Document.Parser.ParseRow(xtr.Index, true);
 
             Row r = xtr.IsCollapsedEndPart ? xtr.Expansion_StartRow : xtr;
 

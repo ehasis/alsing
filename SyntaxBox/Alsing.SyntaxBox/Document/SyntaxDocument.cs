@@ -26,7 +26,6 @@ namespace Alsing.SourceCode
         #region General declarations
 
         private readonly RowList mDocument = new RowList();
-        private Container components;
 
         /// <summary>
         /// 
@@ -393,7 +392,7 @@ namespace Alsing.SourceCode
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            new System.ComponentModel.Container();
         }
 
         #endregion
@@ -483,7 +482,7 @@ namespace Alsing.SourceCode
         public void EnsureParsed(Row Row)
         {
             ParseAll();
-            Parser.ParseLine(Row.Index, true);
+            Parser.ParseRow(Row.Index, true);
         }
 
         private void Init()
@@ -526,7 +525,7 @@ namespace Alsing.SourceCode
                 for (int i = 0; i < Count; i++)
                 {
                     if (this[i].RowState != RowState.AllParsed)
-                        Parser.ParseLine(i, true);
+                        Parser.ParseRow(i, true);
                 }
                 ParseQueue.Clear();
                 KeywordQueue.Clear();
@@ -628,56 +627,55 @@ namespace Alsing.SourceCode
         /// <summary>
         /// Add a new row with the specified text to the bottom of the document
         /// </summary>
-        /// <param name="Text">Text to add</param>
+        /// <param name="text">Text to add</param>
         /// <returns>The row that was added</returns>		
-        public Row Add(string Text)
+        public Row Add(string text)
         {
-            return Add(Text, true);
+            return Add(text, true);
         }
 
         /// <summary>
         /// Add a new row with the specified text to the bottom of the document
         /// </summary>
-        /// <param name="Text">Text to add</param>
+        /// <param name="text">Text to add</param>
         /// <param name="StoreUndo">true if and undo action should be added to the undo stack</param>
         /// <returns>The row that was added</returns>
-        public Row Add(string Text, bool StoreUndo)
+        public Row Add(string text, bool StoreUndo)
         {
             var xtl = new Row();
             mDocument.Add(xtl);
             xtl.Document = this;
-            xtl.Text = Text;
+            xtl.Text = text;
             return xtl;
         }
 
         /// <summary>
         /// Insert a text at the specified row index
         /// </summary>
-        /// <param name="Text">Text to insert</param>
+        /// <param name="text">Text to insert</param>
         /// <param name="index">Row index where the text should be inserted</param>
         /// <returns>The row that was inserted</returns>
-        public Row Insert(string Text, int index)
+        public Row Insert(string text, int index)
         {
-            return Insert(Text, index, true);
+            return Insert(text, index, true);
         }
 
         /// <summary>
         /// Insert a text at the specified row index
         /// </summary>
-        /// <param name="Text">Text to insert</param>
+        /// <param name="text">Text to insert</param>
         /// <param name="index">Row index where the text should be inserted</param>
-        /// <param name="StoreUndo">true if and undo action should be added to the undo stack</param>
+        /// <param name="storeUndo">true if and undo action should be added to the undo stack</param>
         /// <returns>The row that was inserted</returns>
-        public Row Insert(string Text, int index, bool StoreUndo)
+        public Row Insert(string text, int index, bool storeUndo)
         {
             var xtl = new Row {Document = this};
             mDocument.Insert(index, xtl);
-            xtl.Text = Text;
-            if (StoreUndo)
+            xtl.Text = text;
+            if (storeUndo)
             {
-                var undo = new UndoBlock()
-                           {
-                               Text = Text,
+                var undo = new UndoBlock {
+                               Text = text,
                                
                            };
 
@@ -708,12 +706,13 @@ namespace Alsing.SourceCode
         /// Remove a row at specified row index
         /// </summary>
         /// <param name="index">index of the row that should be removed</param>
-        /// <param name="StoreUndo">true if and undo action should be added to the undo stack</param>
-        public void Remove(int index, bool StoreUndo, bool RaiseChanged)
+        /// <param name="storeUndo">true if and undo action should be added to the undo stack</param>
+        /// <param name="raiseChanged"></param>
+        public void Remove(int index, bool storeUndo, bool raiseChanged)
         {
             Row r = this[index];
 
-            if (StoreUndo)
+            if (storeUndo)
             {
                 var ra = new TextRange();
 
@@ -744,7 +743,7 @@ namespace Alsing.SourceCode
 
             //this.ResetVisibleRows ();
             OnRowDeleted(r);
-            if (RaiseChanged)
+            if (raiseChanged)
                 OnChange();
         }
 
@@ -757,21 +756,21 @@ namespace Alsing.SourceCode
             DeleteRange(Range, true);
         }
 
-        private int ParseRows(Row r)
+        private int ParseRows(Row row)
         {
-            return ParseRows(r, false);
+            return ParseRows(row, false);
         }
 
 
-        private int ParseRows(Row r, bool Keywords)
+        private int ParseRows(Row row, bool Keywords)
         {
             if (!Keywords)
             {
-                int index = IndexOf(r);
+                int index = IndexOf(row);
                 int count = 0;
                 try
                 {
-                    while (r.InQueue && count < 100)
+                    while (row.InQueue && count < 100)
                     {
                         if (index >= 0)
                         {
@@ -779,18 +778,18 @@ namespace Alsing.SourceCode
                                 if (this[index - 1].InQueue)
                                     ParseRow(this[index - 1]);
 
-                            Parser.ParseLine(index, false);
+                            Parser.ParseRow(index, false);
                         }
 
-                        int i = ParseQueue.IndexOf(r);
+                        int i = ParseQueue.IndexOf(row);
                         if (i >= 0)
                             ParseQueue.RemoveAt(i);
-                        r.InQueue = false;
+                        row.InQueue = false;
                         index++;
                         count++;
-                        r = this[index];
+                        row = this[index];
 
-                        if (r == null)
+                        if (row == null)
                             break;
                     }
                 }
@@ -800,16 +799,16 @@ namespace Alsing.SourceCode
             }
             else
             {
-                int index = IndexOf(r);
-                if (index == -1 || r.InKeywordQueue == false)
+                int index = IndexOf(row);
+                if (index == -1 || row.InKeywordQueue == false)
                 {
-                    KeywordQueue.Remove(r);
+                    KeywordQueue.Remove(row);
                     return 0;
                 }
                 int count = 0;
                 try
                 {
-                    while (r.InKeywordQueue && count < 100)
+                    while (row.InKeywordQueue && count < 100)
                     {
                         if (index >= 0)
                         {
@@ -817,13 +816,13 @@ namespace Alsing.SourceCode
                                 if (this[index - 1].InQueue)
                                     ParseRow(this[index - 1]);
 
-                            Parser.ParseLine(index, true);
+                            Parser.ParseRow(index, true);
                         }
                         index++;
                         count++;
-                        r = this[index];
+                        row = this[index];
 
-                        if (r == null)
+                        if (row == null)
                             break;
                     }
                 }
@@ -848,9 +847,9 @@ namespace Alsing.SourceCode
                     if (this[index - 1].InQueue)
                         ParseRow(this[index - 1]);
 
-                Parser.ParseLine(index, false);
+                Parser.ParseRow(index, false);
                 if (ParseKeywords)
-                    Parser.ParseLine(index, true);
+                    Parser.ParseRow(index, true);
             }
 
             int i = ParseQueue.IndexOf(r);
@@ -949,7 +948,6 @@ namespace Alsing.SourceCode
                 if (r.LastRow > Count - 1)
                     r.LastRow = Count - 1;
 
-                string row1 = "";
                 Row xtr = this[r.FirstRow];
                 if (r.FirstColumn > xtr.Text.Length)
                 {
@@ -959,12 +957,11 @@ namespace Alsing.SourceCode
                     //return;
                 }
 
-                row1 = xtr.Text.Substring(0, r.FirstColumn);
+                string row1 = xtr.Text.Substring(0, r.FirstColumn);
 
-                string row2 = "";
                 Row xtr2 = this[r.LastRow];
                 int Max = Math.Min(xtr2.Text.Length, r.LastColumn);
-                row2 = xtr2.Text.Substring(Max);
+                string row2 = xtr2.Text.Substring(Max);
 
                 string tot = row1 + row2;
                 //bool fold=this[r.LastRow].IsCollapsed | this[r.FirstRow].IsCollapsed ;
@@ -982,7 +979,6 @@ namespace Alsing.SourceCode
 
 
                 Row row = this[start];
-                bool f = row.IsCollapsed;
                 row.Expanded = true;
                 row.Text = tot;
                 row.startSpans.Clear();
@@ -1026,7 +1022,6 @@ namespace Alsing.SourceCode
                 int Max = Math.Min(r2.Text.Length, Range.LastColumn);
                 string s2 = r2.Text.Substring(0, Max);
 
-                string s3 = "";
                 var sb = new StringBuilder();
                 for (int i = Range.FirstRow + 1; i <= Range.LastRow - 1; i++)
                 {
@@ -1035,7 +1030,7 @@ namespace Alsing.SourceCode
                     sb.Append(r3.Text + Environment.NewLine);
                 }
 
-                s3 = sb.ToString();
+                string s3 = sb.ToString();
                 return s1 + s3 + s2;
             }
             else
@@ -1110,7 +1105,6 @@ namespace Alsing.SourceCode
         {
             Modified = true;
             Row xtr = this[yPos];
-            string lft, rgt;
             if (xPos > xtr.Text.Length)
             {
                 //virtualwhitespace fix
@@ -1119,8 +1113,8 @@ namespace Alsing.SourceCode
                 text = PaddStr + text;
                 xPos -= Padd;
             }
-            lft = xtr.Text.Substring(0, xPos);
-            rgt = xtr.Text.Substring(xPos);
+            string lft = xtr.Text.Substring(0, xPos);
+            string rgt = xtr.Text.Substring(xPos);
             string NewText = lft + text + rgt;
 
 
@@ -1185,8 +1179,7 @@ namespace Alsing.SourceCode
 
         public void PushUndoBlock(UndoAction Action, string text, int x, int y)
         {
-            var undo = new UndoBlock()
-                       {
+            var undo = new UndoBlock {
                            Action = Action,
                            Text = text
                        };
@@ -1342,14 +1335,10 @@ namespace Alsing.SourceCode
                 {
                     if (CharNo == p.X)
                         return prev;
-                    else
-                        return w.Span;
+                    return w.Span;
                 }
-                else
-                {
-                    CharNo += w.Text.Length;
-                    prev = w.Span;
-                }
+                CharNo += w.Text.Length;
+                prev = w.Span;
             }
 
             return xtr.endSpan;
@@ -1373,8 +1362,7 @@ namespace Alsing.SourceCode
                 {
                     if (w.Text == "")
                         return w;
-                    else
-                        return CorrectWord;
+                    return CorrectWord;
                 }
 
                 if (w.Text.Length + CharNo > p.X || w == xtr[xtr.Count - 1])
@@ -1408,8 +1396,7 @@ namespace Alsing.SourceCode
                 {
                     if (w.Text == "")
                         return w;
-                    else
-                        return CorrectWord;
+                    return CorrectWord;
                 }
 
                 if (w.Text.Length + CharNo > p.X || w == xtr[xtr.Count - 1])
@@ -1464,10 +1451,9 @@ namespace Alsing.SourceCode
                 NeedResetRows = false;
                 VisibleRows = new RowList(); //.Clear ();			
                 int RealRow = 0;
-                Row r = null;
                 for (int i = 0; i < Count; i++)
                 {
-                    r = this[RealRow];
+                    Row r = this[RealRow];
                     VisibleRows.Add(r);
                     bool collapsed = false;
                     if (r.CanFold)
@@ -1564,54 +1550,6 @@ namespace Alsing.SourceCode
             ResetVisibleRows();
 
             OnChange();
-        }
-
-        /// <summary>
-        /// Collapse a given row
-        /// </summary>
-        /// <param name="r">Row to collapse</param>
-        private void CollapseRow(Row r)
-        {
-            //remove rows from visible list
-            Row start = r.Expansion_StartRow;
-            Row end = r.Expansion_EndRow;
-            int count = end.VisibleIndex - start.VisibleIndex - 1;
-            int startIndex = start.VisibleIndex + 1;
-            for (int i = 0; i <= count; i++)
-            {
-                VisibleRows.RemoveAt(startIndex);
-            }
-        }
-
-        /// <summary>
-        /// Expand a given row
-        /// </summary>
-        /// <param name="r">Row to expand</param>
-        private void ExpandRow(Row r)
-        {
-            //add rows to visible list...
-            Row start = r.Expansion_StartRow;
-            Row end = r.Expansion_EndRow;
-            int count = end.Index - start.Index - 1;
-            int startIndex = start.Index + 1;
-
-            int visIndex = start.VisibleIndex + 1;
-            int i = 0;
-            while (i <= count)
-            {
-                Row tmpRow = this[startIndex + i];
-                VisibleRows.Insert(visIndex, tmpRow);
-                if (tmpRow.expansion_StartSpan != null)
-                    if (tmpRow.expansion_StartSpan.Expanded == false)
-                    {
-                        tmpRow = tmpRow.expansion_StartSpan.EndRow;
-                        i = tmpRow.Index - startIndex;
-                    }
-                visIndex++;
-                i++;
-            }
-
-            //ResetVisibleRows ();
         }
 
         /// <summary>
@@ -1750,31 +1688,35 @@ namespace Alsing.SourceCode
             //
 
             Stream stream = assembly.GetManifestResourceStream(resourceName);
-            stream.Seek(0, SeekOrigin.Begin);
+            if (stream != null)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
 
-            //
-            // Read stream.
-            //
 
-            var reader = new StreamReader(stream);
-            String xml = reader.ReadToEnd();
+                //
+                // Read stream.
+                //
 
-            //
-            // Clean up stream.
-            //
+                var reader = new StreamReader(stream);
+                String xml = reader.ReadToEnd();
 
-            stream.Close();
+                //
+                // Clean up stream.
+                //
 
-            //
-            // Initialize.
-            //
+                stream.Close();
 
-            Parser.Init(SyntaxDefinition.FromSyntaxXml(xml));
-            Text = Text;
+                //
+                // Initialize.
+                //
+
+                Parser.Init(SyntaxDefinition.FromSyntaxXml(xml));
+                Text = Text;
+            }
         }
 
 
-        protected internal void OnApplyFormatRanges(Row row)
+        public void OnApplyFormatRanges(Row row)
         {
             row.FormattedWords = row.words;
         }

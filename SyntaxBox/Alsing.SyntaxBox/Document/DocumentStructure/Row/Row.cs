@@ -26,7 +26,7 @@ namespace Alsing.SourceCode
         /// <summary>
         /// the row is span parsed
         /// </summary>
-        SegmentParsed = 1,
+        SpanParsed = 1,
         /// <summary>
         /// the row is both span and keyword parsed
         /// </summary>
@@ -236,7 +236,7 @@ namespace Alsing.SourceCode
                 if (value == _RowState)
                     return;
 
-                if (value == RowState.SegmentParsed && !InKeywordQueue)
+                if (value == RowState.SpanParsed && !InKeywordQueue)
                 {
                     Document.KeywordQueue.Add(this);
                     InKeywordQueue = true;

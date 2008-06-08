@@ -58,7 +58,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
         /// </summary>
         /// <param name="index"></param>
         /// <param name="ParseKeywords"></param>
-        public void ParseLine(int index, bool ParseKeywords)
+        public void ParseRow(int index, bool ParseKeywords)
         {
             InternalParseLine(index, ParseKeywords);
             if (SyntaxDefinition != null)
@@ -657,7 +657,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
             Row.endSpan = currentSpan;
             Row.SetExpansionSegment();
 
-            Row.RowState = ParseKeywords ? RowState.AllParsed : RowState.SegmentParsed;
+            Row.RowState = ParseKeywords ? RowState.AllParsed : RowState.SpanParsed;
 
             if (IsSameButDifferent(index, oldStartSpan))
             {
