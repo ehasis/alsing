@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Alsing</RootNamespace>
+    <AssemblyName>Alsing.Core</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enumerators\GenericRange.cs" />
+    <Compile Include="Extensions\GeneralExtensions.cs" />
+    <Compile Include="Extensions\Lists\ListExtensions.cs" />
+    <Compile Include="Extensions\Logging\LogExtensions.cs" />
+    <Compile Include="Extensions\Logging\SimpleLog.cs" />
+    <Compile Include="Extensions\NullObjectExtensions.cs" />
+    <Compile Include="Extensions\NumericExtensions.cs" />
+    <Compile Include="Functional\Curry.cs" />
+    <Compile Include="Functional\Func.cs" />
+    <Compile Include="Reflection\ReflectionExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\Validation\StringValidationExtensions.cs" />
+    <Compile Include="Extensions\Validation\TypeCheckExtensions.cs" />
+    <Compile Include="Extensions\Validation\ValidatorExtensions.cs" />
+    <Compile Include="GenericMath\Numeric.cs" />
+    <Compile Include="Lists\Bag.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Singleton\Singleton.cs" />
+    <Compile Include="Text\PatternMatchers\BinPatternMatcher.cs" />
+    <Compile Include="Text\PatternMatchers\DecPatternMatcher.cs" />
+    <Compile Include="Text\PatternMatchers\HexPatternMatcher.cs" />
+    <Compile Include="Text\PatternMatchers\IntPatternMatcher.cs" />
+    <Compile Include="Text\PatternMatchers\IPatternMatcher.cs" />
+    <Compile Include="Text\PatternMatchers\PatternMatcherBase.cs" />
+    <Compile Include="Text\PatternMatchers\PropertyPathPatternMatcher.cs" />
+    <Compile Include="Text\PatternMatchers\RegexPatternMatcher.cs" />
+    <Compile Include="Text\PatternMatchers\RegionPatternMatcher.cs" />
+    <Compile Include="Text\Tokenizer\CharUtils.cs" />
+    <Compile Include="Text\Tokenizer\MatchResult.cs" />
+    <Compile Include="Text\Tokenizer\Token.cs" />
+    <Compile Include="Text\Tokenizer\Tokenizer.cs" />
+    <Compile Include="Text\Tokenizer\PatternMatchReference.cs" />
+    <Compile Include="Text\Tokenizer\TokenTree-API.cs" />
+    <Compile Include="Text\Tokenizer\TokenTree-Util.cs" />
+    <Compile Include="Text\Tokenizer\TokenTree.cs" />
+    <Compile Include="Text\Tokenizer\TokenTreeNode.cs" />
+    <Compile Include="Threading\Fork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Text\ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

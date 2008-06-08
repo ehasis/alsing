@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Test test&#xD;&#xA;fsdf&#xD;&#xA;fsdf">
+    <Position X="8.326" Y="3.833" Height="0.75" Width="1.294" />
+  </Comment>
+  <Class Name="AlbinoHorse.Model.Shape">
+    <Position X="2" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAEAAAAAgAAAQAAAAACABAAAAABIAAGAgACAgI=</HashCode>
+      <FileName>Model\Shape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AlbinoHorse.Model.UmlType">
+    <Position X="4.75" Y="6.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="AlbinoHorse.Model.UmlType.Settings" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\UmlType.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="DataSource" Type="AlbinoHorse.Model.IUmlTypeData" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.938" Y="6.5" />
+        <Point X="5.938" Y="6.125" />
+        <Point X="8.438" Y="6.125" />
+        <Point X="8.438" Y="5.259" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.056" Y="0.143" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EgAAAYAEQAQAhgAAAAEZADAgUBAACABJIQClASASggA=</HashCode>
+      <FileName>Model\UmlType.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DataSource" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AlbinoHorse.Model.DefaultUmlTypeData" Collapsed="true">
+    <Position X="9.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAIACAAAABAAAAIBQAAAAEAQAAAAABAYAACQQAIAYAA=</HashCode>
+      <FileName>Model\DefaultUmlTypeData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Interface Name="AlbinoHorse.Model.IUmlTypeData" Collapsed="true">
+    <Position X="8.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAIACAAAABAAAAIBQAAAAEAQAAAAABAYAACQAAIAYAA=</HashCode>
+      <FileName>Model\IUmlTypeData.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

@@ -1,0 +1,25 @@
+﻿(class MyClass
+	(defun SayHello () (print 'hello'))
+	(defun SayHelloTo (name) (print (concat 'hello' name)))
+)
+
+public class MyClass
+{
+	private RuntimeStack stack;
+	public void SetStack(RuntimeStack stack)
+	{
+		this.stack = stack;
+	}
+	
+	public object SayHello()
+	{
+		return stack.HandleCall("SayHello");
+	}
+	
+	public object SayHelloTo(object name)
+	{
+		return stack.HandleCall("SayHelloTo",name);
+	}
+}
+
+

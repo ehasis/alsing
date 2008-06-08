@@ -1,0 +1,126 @@
+﻿;;; -------- ALIASES ---------- 
+
+(setf = setf)
+(setf setq setf)
+(= pi 3.14159265)
+(= => lambda)
+(= fn lambda)
+(= eql ==)
+(= prl print)
+(= func defun)
+
+;;; -------- OPERATORS ----------  
+
+(operator-prio = 1)
+(operator-prio == 1)
+(operator-prio + 2)
+(operator-prio - 2)
+(operator-prio * 3)
+(operator-prio / 3)
+
+
+
+
+(defun ++ (*var) (= var (+ 1 var)))
+(defun -- (*var) (= var (- 1 var)))
+(defun += (*var val) (= var (+ val var)))
+(defun -= (*var val) (= var (- val var)))
+
+
+(defun do (!do-while-body :while %condition)
+    (progn
+        (do-while-body)
+        (while (condition) (do-while-body))))            
+        
+(defmacro for (i start stop &rest for-body)
+	'(progn
+		(= ,i ,start)
+		(while (<= ,i ,stop)
+			(progn ,@for-body)
+			(++ ,i))))    
+			
+(defmacro to (i stop to-body)
+	'(progn
+		(= ,i 0)
+		(while (< ,i ,stop)
+			,to-body
+			(++ ,i))))			    
+			
+(defun where (predicate items)
+    (progn
+       (= res (list))
+        (foreach item items            
+            (if (predicate item) (append res item) ()))
+        (return res)))
+
+
+(defun select (selector items)
+    (progn     
+        (= res (list))
+        (foreach item items            
+            (append res (selector item)))
+        (return res)))  	
+        
+(defun return (var)
+	(var))
+
+	
+		
+		
+(defun list-add (list item)
+	(progn
+		(call-by-name list "Add" item)))
+		
+
+(defun hash-add (hash key item)
+	(progn
+		(call-by-name hash "Add" key item)))
+
+(defun when (!cond !expression)
+	(if (cond)
+		(expression)
+		()))
+
+		
+(= append list-add)	
+
+(defun sum (list)	
+	(if (empty? list)
+		(0)
+		(+ 	(car list) 
+			(sum (cdr list)))))
+
+(defun exists? (val list) 
+  (if (empty? list)
+     (false)
+     (if (== val (car list))
+       (true)
+       (exists? val (cdr list)))))
+       
+;;; -------- CLR INTEROP ----------       
+
+; call clr method	
+(defun call (target @method)
+	(call-by-name target method))
+	
+(= tell call)
+			
+; get clr property			
+(defun get (target @property)
+	(progn
+		(= method (concat "get_" property))
+		(call-by-name target method)))		
+
+; set clr property
+(defun set (target @property value)
+	(progn
+		(= method (concat "set_" property))
+		(call-by-name target method value)))				
+
+		
+; add clr event	
+(defun set-event (target @property value)
+	(progn
+		(= method (concat "add_" property))
+		(call-by-name target method value)))					
+		
