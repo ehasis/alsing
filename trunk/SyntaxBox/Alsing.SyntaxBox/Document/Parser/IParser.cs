@@ -52,7 +52,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
         /// </summary>
         /// <param name="RowIndex">The row index in the document</param>
         /// <param name="ParseKeywords">true if keywords and operators should be parsed , false if only a span parse should be performed</param>
-        void ParseLine(int RowIndex, bool ParseKeywords);
+        void ParseRow(int RowIndex, bool ParseKeywords);
 
         /// <summary>
         /// Called by the SyntaxDocument object when a row must be preview parsed.
