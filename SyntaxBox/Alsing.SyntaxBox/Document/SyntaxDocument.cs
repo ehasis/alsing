@@ -25,23 +25,28 @@ namespace Alsing.SourceCode
     {
         #region General declarations
 
-        private readonly RowList mDocument = new RowList();
+        private readonly RowList rows = new RowList();
 
         /// <summary>
         /// 
         /// </summary>
         public RowList KeywordQueue = new RowList();
 
-        private UndoBlockCollection mCaptureBlock;
-        private bool mCaptureMode;
-        private bool mFolding = true;
+        /// <summary>
+        /// List of rows that should be parsed
+        /// </summary>
+        public RowList ParseQueue = new RowList();
+
+        private UndoBlockCollection captureBlock;
+        private bool captureMode;
+        private bool folding = true;
 
         /// <summary>
         /// For public use only
         /// </summary>
-        private bool mIsParsed = true;
+        private bool isParsed = true;
 
-        private bool mModified;
+        private bool modified;
 
         private string mSyntaxFile = "";
 
@@ -51,10 +56,7 @@ namespace Alsing.SourceCode
         /// </summary>
         public bool NeedResetRows;
 
-        /// <summary>
-        /// List of rows that should be parsed
-        /// </summary>
-        public RowList ParseQueue = new RowList();
+ 
 
         /// <summary>
         /// The active parser of the document
@@ -69,7 +71,7 @@ namespace Alsing.SourceCode
         /// <summary>
         /// Buffer containing undo actions
         /// </summary>
-        public UndoBuffer UndoBuffer = new UndoBuffer();
+        public readonly UndoBuffer UndoBuffer = new UndoBuffer();
 
         /// <summary>
         /// List of rows that is not hidden by folding
@@ -244,10 +246,10 @@ namespace Alsing.SourceCode
         /// </summary>
         public bool Modified
         {
-            get { return mModified; }
+            get { return modified; }
             set
             {
-                mModified = value;
+                modified = value;
                 OnModifiedChanged();
             }
         }
@@ -274,10 +276,10 @@ namespace Alsing.SourceCode
         [DefaultValue(true)]
         public bool Folding
         {
-            get { return mFolding; }
+            get { return folding; }
             set
             {
-                mFolding = value;
+                folding = value;
                 if (!value)
                 {
                     foreach (Row r in this)
@@ -297,7 +299,7 @@ namespace Alsing.SourceCode
         [Browsable(false)]
         public bool IsParsed
         {
-            get { return mIsParsed; }
+            get { return isParsed; }
         }
 
         /// <summary>
@@ -307,15 +309,15 @@ namespace Alsing.SourceCode
         {
             get
             {
-                if (index < 0 || index >= mDocument.Count)
+                if (index < 0 || index >= rows.Count)
                 {
                     //	System.Diagnostics.Debugger.Break ();
                     return null;
                 }
-                return mDocument[index];
+                return rows[index];
             }
 
-            set { mDocument[index] = value; }
+            set { rows[index] = value; }
         }
 
         /// <summary>
@@ -324,7 +326,7 @@ namespace Alsing.SourceCode
         [Browsable(false)]
         public int Count
         {
-            get { return mDocument.Count; }
+            get { return rows.Count; }
         }
 
         /// <summary>
@@ -341,7 +343,7 @@ namespace Alsing.SourceCode
                 var sb = new StringBuilder();
 
                 ParseAll(true);
-                foreach (Row tr in mDocument)
+                foreach (Row tr in rows)
                 {
                     if (i > 0)
                         sb.Append(Environment.NewLine);
@@ -360,7 +362,7 @@ namespace Alsing.SourceCode
                 UndoBuffer.Clear();
                 UndoStep = 0;
                 Modified = false;
-                mIsParsed = false;
+                isParsed = false;
                 //OnChange();
                 InvokeChange();
             }
@@ -405,7 +407,7 @@ namespace Alsing.SourceCode
         /// <returns></returns>
         public IEnumerator GetEnumerator()
         {
-            return mDocument.GetEnumerator();
+            return rows.GetEnumerator();
         }
 
         #endregion
@@ -426,8 +428,8 @@ namespace Alsing.SourceCode
         /// </summary>
         public void StartUndoCapture()
         {
-            mCaptureMode = true;
-            mCaptureBlock = new UndoBlockCollection();
+            captureMode = true;
+            captureBlock = new UndoBlockCollection();
         }
 
         /// <summary>
@@ -437,9 +439,9 @@ namespace Alsing.SourceCode
         /// <returns></returns>
         public UndoBlockCollection EndUndoCapture()
         {
-            mCaptureMode = false;
-            AddToUndoList(mCaptureBlock);
-            return mCaptureBlock;
+            captureMode = false;
+            AddToUndoList(captureBlock);
+            return captureBlock;
         }
 
         /// <summary>
@@ -577,7 +579,7 @@ namespace Alsing.SourceCode
         {
             if (ParseQueue.Count > 0)
             {
-                mIsParsed = false;
+                isParsed = false;
                 int i = 0;
                 while (i < RowCount && ParseQueue.Count > 0)
                 {
@@ -593,9 +595,9 @@ namespace Alsing.SourceCode
             }
             else
             {
-                if (!mIsParsed && !Modified)
+                if (!isParsed && !Modified)
                 {
-                    mIsParsed = true;
+                    isParsed = true;
 
                     foreach (Row r in this)
                     {
@@ -643,7 +645,7 @@ namespace Alsing.SourceCode
         public Row Add(string text, bool StoreUndo)
         {
             var xtl = new Row();
-            mDocument.Add(xtl);
+            rows.Add(xtl);
             xtl.Document = this;
             xtl.Text = text;
             return xtl;
@@ -670,7 +672,7 @@ namespace Alsing.SourceCode
         public Row Insert(string text, int index, bool storeUndo)
         {
             var xtl = new Row {Document = this};
-            mDocument.Insert(index, xtl);
+            rows.Insert(index, xtl);
             xtl.Text = text;
             if (storeUndo)
             {
@@ -734,7 +736,7 @@ namespace Alsing.SourceCode
             }
 
 
-            mDocument.RemoveAt(index);
+            rows.RemoveAt(index);
             if (r.InKeywordQueue)
                 KeywordQueue.Remove(r);
 
@@ -1053,7 +1055,7 @@ namespace Alsing.SourceCode
         /// <returns>Index of the given row</returns>
         public int IndexOf(Row xtr)
         {
-            return mDocument.IndexOf(xtr);
+            return rows.IndexOf(xtr);
         }
 
         /// <summary>
@@ -1061,11 +1063,11 @@ namespace Alsing.SourceCode
         /// </summary>
         public void clear()
         {
-            foreach (Row r in mDocument)
+            foreach (Row r in rows)
             {
                 OnRowDeleted(r);
             }
-            mDocument.Clear();
+            rows.Clear();
             //		this.FormatRanges.Clear ();
             ParseQueue.Clear();
             KeywordQueue.Clear();
@@ -1188,9 +1190,9 @@ namespace Alsing.SourceCode
             undo.Position.X = x;
             //AddToUndoList(undo);
 
-            if (mCaptureMode)
+            if (captureMode)
             {
-                mCaptureBlock.Add(undo);
+                captureBlock.Add(undo);
             }
             else
             {
@@ -1435,15 +1437,15 @@ namespace Alsing.SourceCode
 //			if (System.DateTime.Now > new DateTime (2002,12,31))
 //			{
 //				
-//				this.mDocument = new RowList ();
+//				this.rows = new RowList ();
 //				this.Add ("BETA VERSION EXPIRED");
-//				VisibleRows = this.mDocument;
+//				VisibleRows = this.rows;
 //				return;
 //			}
 
-            if (!mFolding)
+            if (!folding)
             {
-                VisibleRows = mDocument;
+                VisibleRows = rows;
                 NeedResetRows = false;
             }
             else
@@ -1527,7 +1529,7 @@ namespace Alsing.SourceCode
         /// <param name="r"></param>
         public void ToggleRow(Row r)
         {
-            if (!mFolding)
+            if (!folding)
                 return;
 
             if (r.Expansion_EndRow == null || r.Expansion_StartRow == null)
