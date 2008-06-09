@@ -1,13 +1,11 @@
 #Syntax highlight editor for Windows Forms 2.0+
 
 ===Status===
-
 The new SyntaxBox have been upgraded to C#3 and compiles for .NET 2.0.
 
 Work in progress:
  * New parser
  * New renderer
-
 ===Features===
 Powerful Syntax Highlight Windows Forms Control for the Microsoft.NET Platform. 
 Written in 100% managed C#. 
