@@ -8,6 +8,38 @@ Work in progress:
  * New parser
  * New renderer
 
+===Features===
+Powerful Syntax Highlight Windows Forms Control for the Microsoft.NET Platform. 
+Written in 100% managed C#. 
+
+*Features:* 
+ * Syntax Highlight 
+ * Syntax description files 
+ * Folding 
+ * Bracket Matching 
+ * Unlimited Undo/Redo buffer 
+ * Bitmap and non-monospace fonts 
+ * Gutter margin / line number margin 
+ * Gutter Icons 
+ * Bookmarks 
+ * Breakpoints 
+ * Wave lines 
+ * Word Tooltips 
+ * Autolist 
+ * Infotip 
+ * Intellimouse 
+ * Built in dialogs 
+ * Visible Whitespace Support 
+ * RegEx pattern matching 
+ * Print Preview 
+ * Split View 
+ * HTML Export 
+ * RTF Export (via clipboard) 
+ * Spell checking (using 3d party checker) 
+
+And much more , download the trial Version today and try it! 
+
+
 ===History===
 The *SyntaxBox* is a very only project of mine.
 It started back in 2001 when me and my brother formed the company *Compona*
