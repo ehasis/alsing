@@ -1,3 +1,8 @@
-#summary One-sentence summary of this page.
+#Syntax highlight editor for Windows Forms 2.0+.
 
-under construction
+The SyntaxBox is a very only project of mine.
+It started back in 2002 when me and my brother formed the company "Compona"
+Our aim was to sell components over the internet.
+Our first product was the Compona SyntaxBox and was pretty much an instant success since there were very few competing products at that time.
+
+Since we ran our company on our sparetime and I was the only developer of the SyntaxBox, I ended up with a crapload of support cases.
