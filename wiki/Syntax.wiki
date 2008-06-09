@@ -1,10 +1,9 @@
 #summary One-sentence summary of this page.
 
-[http://www.puzzleframework.com/GoogleCode/SyntaxBox/]
+[http://www.puzzleframework.com/GoogleCode/SyntaxBox/SH-Csharp.gif]
 The SyntaxBox highlights code by using our SyntaxDocument component. 
 The SyntaxDocument is capable of highlighting any number of keyword/Operator Groups with different colors , it is also aware of scopes which allows you to define keywords and operators that is valid only within specific blocks. 
 
-[http://www.puzzleframework.com/GoogleCode/SyntaxBox/]
 The SyntaxDocument can also be attatched to multiple SyntaxBoxes , allowing different types of splitviews 
 
 [http://www.puzzleframework.com/GoogleCode/SyntaxBox/]
