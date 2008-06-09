@@ -46,7 +46,7 @@ namespace MDIDemo
             Text = Doc.Title;
         }
 
-        //create an EditForm and attatch our opened document and tell the parser to use the given language.
+        //create an EditForm and attatch our opened document and tell the parser to use the given syntax.
         public EditForm(Document Document, SyntaxDefinition SyntaxDefinition)
         {
             InitializeComponent();

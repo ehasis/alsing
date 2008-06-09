@@ -29,9 +29,9 @@ namespace Alsing.SourceCode
     }
 
     /// <summary>
-    /// The SyntaxDefinition class describes a language.<br/>
+    /// The SyntaxDefinition class describes a syntax.<br/>
     /// It consists of a mainSpanDefinition , which is the start spanDefinition of the SyntaxDefinition<br/>
-    /// It also have a list of filetypes that is valid for this language<br/>
+    /// It also have a list of filetypes that is valid for this syntax<br/>
     /// </summary>
     /// <example>
     /// <b>Apply a Syntax to a SyntaxBox</b>
@@ -69,12 +69,12 @@ namespace Alsing.SourceCode
         private readonly Dictionary<TextStyle, TextStyle> styleLookup = new Dictionary<TextStyle, TextStyle>();
 
         /// <summary>
-        /// List containing the valid filetypes for this language
+        /// List containing the valid filetypes for this syntax
         /// </summary>
         public List<FileType> FileTypes = new List<FileType>();
 
         /// <summary>
-        /// The start spanDefinition for this language
+        /// The start spanDefinition for this syntax
         /// </summary>
         public SpanDefinition mainSpanDefinition;
 
@@ -84,7 +84,7 @@ namespace Alsing.SourceCode
         public string Name = "";
 
         /// <summary>
-        /// Gets all BlockTypes in a given language.
+        /// Gets all BlockTypes in a given syntax.
         /// </summary>
         public SpanDefinition[] SpanDefinitions
         {

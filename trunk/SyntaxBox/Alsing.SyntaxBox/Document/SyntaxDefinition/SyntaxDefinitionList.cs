@@ -46,12 +46,12 @@ namespace Alsing.SourceCode
         public SyntaxDefinition GetLanguageFromFile(string path)
         {
             string extension = Path.GetExtension(path);
-            foreach (SyntaxDefinition lang in languages)
+            foreach (SyntaxDefinition syntax in languages)
             {
-                foreach (FileType ft in lang.FileTypes)
+                foreach (FileType ft in syntax.FileTypes)
                 {
                     if (extension.ToLowerInvariant() == ft.Extension.ToLowerInvariant())
-                        return lang;
+                        return syntax;
                 }
             }
             return null;

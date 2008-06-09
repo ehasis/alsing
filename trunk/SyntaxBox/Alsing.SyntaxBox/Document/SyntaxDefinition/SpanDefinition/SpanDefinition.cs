@@ -24,7 +24,7 @@ namespace Alsing.SourceCode
     /// a spanDefinition  can contain keywords , operators , scopes and child spans.<br/>
     /// <br/>
     /// <br/>
-    /// For example , if we where to describe the language C#<br/>
+    /// For example , if we where to describe the syntax C#<br/>
     /// we would have the following span:<br/>
     /// <br/>
     /// Code span						- the spanDefinition containing all the keywords and operators.<br/>

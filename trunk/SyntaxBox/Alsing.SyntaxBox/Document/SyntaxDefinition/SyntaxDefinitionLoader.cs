@@ -26,7 +26,7 @@ namespace Alsing.SourceCode
 
 
         /// <summary>
-        /// Load a specific language file
+        /// Load a specific syntax file
         /// </summary>
         /// <param name="File">File name</param>
         /// <returns>SyntaxDefinition object</returns>
@@ -68,7 +68,7 @@ namespace Alsing.SourceCode
         }
 
         /// <summary>
-        /// Load a specific language from an xml string
+        /// Load a specific syntax from an xml string
         /// </summary>
         /// <param name="XML"></param>
         /// <returns></returns>
@@ -98,7 +98,7 @@ namespace Alsing.SourceCode
 
         private void ParseLanguage(XmlNode node)
         {
-            //get language name and startblock
+            //get syntax name and startblock
             string Name = "";
             string StartBlock = "";
 

@@ -34,10 +34,10 @@ namespace MDIDemo
         {
             InitializeComponent();
             trvFileTypes.Nodes.Clear();
-            foreach (SyntaxDefinition lang in LangList.GetSyntaxDefinitions())
+            foreach (SyntaxDefinition syntax in LangList.GetSyntaxDefinitions())
             {
-                TreeNode tn = trvFileTypes.Nodes.Add(lang.Name);
-                tn.Tag = lang;
+                TreeNode tn = trvFileTypes.Nodes.Add(syntax.Name);
+                tn.Tag = syntax;
             }
             trvFileTypes.SelectedNode = trvFileTypes.Nodes[0];
         }
@@ -72,9 +72,9 @@ namespace MDIDemo
 
         private void trvFileTypes_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            var lang = (SyntaxDefinition) e.Node.Tag;
+            var syntax = (SyntaxDefinition) e.Node.Tag;
             lvFileTypes.Items.Clear();
-            foreach (FileType ft in lang.FileTypes)
+            foreach (FileType ft in syntax.FileTypes)
             {
                 ListViewItem lvi = lvFileTypes.Items.Add(ft.Name + "   (" + ft.Extension + ")");
                 lvi.Tag = ft;
@@ -89,12 +89,12 @@ namespace MDIDemo
                 lvFileTypes.Items[0].Selected = true;
             }
 
-            var lang = (SyntaxDefinition) trvFileTypes.SelectedNode.Tag;
+            var syntax = (SyntaxDefinition) trvFileTypes.SelectedNode.Tag;
             var ft = (FileType) lvFileTypes.SelectedItems[0].Tag;
             var doc = new Document {Title = ("Untitled" + ft.Extension), Text = ""};
 
 
-            var ef = new EditForm(doc, lang);
+            var ef = new EditForm(doc, syntax);
             EditForm = ef;
             DialogResult = DialogResult.OK;
             Close();
