@@ -1,3 +1,4 @@
 #summary One-sentence summary of this page.
 
-under construction
+See the SyntaxFile quickstart for more inforegarding syntax files:
+[http://alsing.googlecode.com/files/SyntaxFileHelp.htm]
