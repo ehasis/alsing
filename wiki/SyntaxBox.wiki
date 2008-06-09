@@ -1,4 +1,4 @@
-#Syntax highlight editor.
+#Syntax highlight editor for Windows Forms 2.0+
 
 ===History===
 The *SyntaxBox* is a very only project of mine.
