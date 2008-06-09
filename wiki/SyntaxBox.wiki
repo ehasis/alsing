@@ -23,14 +23,14 @@ Written in 100% managed C#.
  * Breakpoints 
  * Wave lines 
  * Word Tooltips 
- * Autolist 
- * Infotip 
+ * AutoList 
+ * InfoTip 
  * IntelliMouse 
  * Built in dialogs 
  * Visible Whitespace Support 
  * RegEx pattern matching 
  * [PrintPreview] 
- * Split View 
+ * SplitView 
  * HTML Export 
  * RTF Export (via clipboard) 
  * Spell checking (using 3d party checker) 
