@@ -161,9 +161,6 @@
       <DependentUpon>Style.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="SyntaxFiles\C#.syn" />
-    <None Include="SyntaxFiles\VB.syn" />
-    <None Include="SyntaxFiles\XML.syn" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">

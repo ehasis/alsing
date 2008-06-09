@@ -98,7 +98,7 @@ namespace MDIDemo
             //add a *.* pattern to the filter
             string filter = "All Files(*.*)|*.*";
 
-            //get all filetypes from our language list.
+            //get all filetypes from our syntax list.
             foreach (SyntaxDefinition l in Languages.GetSyntaxDefinitions())
                 foreach (FileType ft in l.FileTypes)
                     //add the filetype to the filter
@@ -128,9 +128,9 @@ namespace MDIDemo
             var fi = new FileInfo(FileName);
             doc.Title = fi.Name;
             doc.Text = text;
-            SyntaxDefinition language = Languages.GetLanguageFromFile(doc.Path);
+            SyntaxDefinition syntax = Languages.GetLanguageFromFile(doc.Path);
 
-            var ef = new EditForm(doc, language) {MdiParent = this};
+            var ef = new EditForm(doc, syntax) {MdiParent = this};
             ef.Show();
         }
 
