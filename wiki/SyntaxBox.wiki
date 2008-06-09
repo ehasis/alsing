@@ -11,10 +11,10 @@ Powerful Syntax Highlight Windows Forms Control for the Microsoft.NET Platform.
 Written in 100% managed C#. 
 
 *Features:* 
- * Syntax Highlight 
+ * [Syntax Highlight]
  * Syntax description files 
- * Folding 
- * Bracket Matching 
+ * [Folding]
+ * [Bracket Matching]
  * Unlimited Undo/Redo buffer 
  * Bitmap and non-monospace fonts 
  * Gutter margin / line number margin 
@@ -29,7 +29,7 @@ Written in 100% managed C#.
  * Built in dialogs 
  * Visible Whitespace Support 
  * RegEx pattern matching 
- * Print Preview 
+ * [Print Preview] 
  * Split View 
  * HTML Export 
  * RTF Export (via clipboard) 
