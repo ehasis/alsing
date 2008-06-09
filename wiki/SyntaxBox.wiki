@@ -29,7 +29,7 @@ Written in 100% managed C#.
  * Built in dialogs 
  * Visible Whitespace Support 
  * RegEx pattern matching 
- * [Print Preview] 
+ * [PrintPreview] 
  * Split View 
  * HTML Export 
  * RTF Export (via clipboard) 
