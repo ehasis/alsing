@@ -19,7 +19,7 @@ namespace Alsing.SourceCode
     /// Simple Patterns are patterns that consists of a simple fixed string eg. "void" or "for".
     /// Complex Patterns are patterns that consists of RegEx patterns , eg hex numbers or urls can be described as regex patterns.
     /// </summary>
-    public sealed class Pattern
+    public sealed partial class Pattern
     {
         public static readonly string DefaultSeparators = ".,+-*^\\/()[]{}@:;'?£$#%& \t=<>";
 

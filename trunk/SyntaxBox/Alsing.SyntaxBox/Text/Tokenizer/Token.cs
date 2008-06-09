@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿
+using System;
 
 namespace Alsing.Text
 {
@@ -25,7 +25,7 @@ namespace Alsing.Text
 
         public bool HasTag(object tag)
         {
-            return Tags.Contains(tag);
+            return Array.IndexOf(Tags, tag) >= 0;
         }
     }
 }
