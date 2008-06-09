@@ -50,6 +50,9 @@ After a few years I had to give it up because I had virtually no free time of my
 In 2005 the project was turned into opensource and released on [http://puzzleframework.com].
 And it have been hibernating there ever since.
 
+Somewhere after this the ".NET Fireball" team made some sort of rogue branch of the SyntaxBox.
+Renaming the component to something else and hiding any trace of the origin in order to get credits for others work.
+
 However, due to public request I am now kicking some life into it again.
 I have converted the entire project to C#3 and cleaned up the code and API quite a bit.
 ----
