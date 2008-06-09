@@ -2,10 +2,17 @@
 
 ===History===
 The *SyntaxBox* is a very only project of mine.
-It started back in 2002 when me and my brother formed the company *"Compona"*
+It started back in 2002 when me and my brother formed the company *Compona*
 Our aim was to sell components over the internet.
-Our first product was the Compona SyntaxBox and was pretty much an instant success since there were very few competing products at that time.
+Our first product was the Compona SyntaxBox and it was pretty much an instant success as there were very few competing products at that time.
 
-Since we ran our company on our sparetime and I was the only developer of the SyntaxBox, I ended up with a crapload of support cases.
-After a few yeaars I had to give up since I had virtually no free time of my own anymore.
-So the 
+Since we ran our company on our sparetime and I was the only developer of the SyntaxBox, I ended up with a bit too many support cases.
+After a few years I had to give it up because I had virtually no free time of my own anymore.
+
+In 2005 the project was turned into opensource and released on PuzzleFramework.com.
+And it have been hibernating there ever since.
+
+However, due to public request I am now kicking some life into it again.
+I have converted the entire project to C#3 and cleaned up the code and API quite a bit.
+
+The new source compiles for .NET 2.0 (requires VS.NET 2008 due to the C#3 code base)
