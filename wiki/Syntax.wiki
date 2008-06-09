@@ -1,4 +1,4 @@
-#syntax highlight screenshots.
+Syntax highlight screenshots.
 
 [http://www.puzzleframework.com/GoogleCode/SyntaxBox/SH-Csharp.gif]
 
