@@ -12,28 +12,27 @@ using System.Text.RegularExpressions;
 
 namespace Alsing.SourceCode
 {
-    public static class PatternExtensions
+    public partial class Pattern
     {
         /// <summary>
         /// For public use only
         /// </summary>
-        /// <param name="self"></param>
         /// <param name="text"></param>
         /// <param name="position"></param>
         /// <returns></returns>
-        public static bool HasSeparators(this Pattern self,string text, int position)
+        public bool HasSeparators(string text, int position)
         {
-            return (self.CharIsSeparator(text, position - 1) && self.CharIsSeparator(text, position + self.StringPattern.Length));
+            return (this.CharIsSeparator(text, position - 1) && this.CharIsSeparator(text, position + this.StringPattern.Length));
         }
 
 
-        private static bool CharIsSeparator(this Pattern self,string Text, int Position)
+        private bool CharIsSeparator(string Text, int Position)
         {
             if (Position < 0 || Position >= Text.Length)
                 return true;
 
             string s = Text.Substring(Position, 1);
-            if (self.Separators.IndexOf(s) >= 0)
+            if (this.Separators.IndexOf(s) >= 0)
                 return true;
             return false;
         }
@@ -41,43 +40,43 @@ namespace Alsing.SourceCode
         /// <summary>
         /// Returns the index of the pattern in a string
         /// </summary>
-        /// <param name="self"></param>
+        /// <param name="this"></param>
         /// <param name="text">The string in which to find the pattern</param>
         /// <param name="startPosition">Start index in the string</param>
         /// <param name="matchCase">true if a case sensitive match should be performed</param>
         /// <param name="separators"></param>
         /// <returns>A PatternScanResult containing information on where the pattern was found and also the text of the pattern</returns>
-        public static PatternScanResult IndexIn(this Pattern self, string text, int startPosition, bool matchCase, string separators)
+        public PatternScanResult IndexIn( string text, int startPosition, bool matchCase, string separators)
         {
             if (separators == null) { }
             else
             {
-                self.Separators = separators;
+                this.Separators = separators;
             }
 
-            if (!self.IsComplex)
+            if (!this.IsComplex)
             {
-                if (!self.IsKeyword)
-                    return self.SimpleFind(text, startPosition, matchCase);
+                if (!this.IsKeyword)
+                    return this.SimpleFind(text, startPosition, matchCase);
 
-                return self.SimpleFindKeyword(text, startPosition, matchCase);
+                return this.SimpleFindKeyword(text, startPosition, matchCase);
             }
-            if (!self.IsKeyword)
-                return self.ComplexFind(text, startPosition);
+            if (!this.IsKeyword)
+                return this.ComplexFind(text, startPosition);
 
-            return self.ComplexFindKeyword(text, startPosition);
+            return this.ComplexFindKeyword(text, startPosition);
         }
 
 
-        private static PatternScanResult SimpleFind(this Pattern self, string text, int startPosition, bool matchCase)
+        private PatternScanResult SimpleFind( string text, int startPosition, bool matchCase)
         {
-            int Position = matchCase ? text.IndexOf(self.StringPattern, startPosition) : text.ToLowerInvariant().IndexOf(self.LowerStringPattern, startPosition);
+            int Position = matchCase ? text.IndexOf(this.StringPattern, startPosition) : text.ToLowerInvariant().IndexOf(this.LowerStringPattern, startPosition);
 
             PatternScanResult Result;
             if (Position >= 0)
             {
                 Result.Index = Position;
-                Result.Token = text.Substring(Position, self.StringPattern.Length);
+                Result.Token = text.Substring(Position, this.StringPattern.Length);
             }
             else
             {
@@ -88,17 +87,17 @@ namespace Alsing.SourceCode
             return Result;
         }
 
-        private static PatternScanResult SimpleFindKeyword(this Pattern self, string text, int startPosition,
+        private PatternScanResult SimpleFindKeyword( string text, int startPosition,
                                                     bool matchCase)
         {
             PatternScanResult res;
             while (true)
             {
-                res = self.SimpleFind(text, startPosition, matchCase);
+                res = this.SimpleFind(text, startPosition, matchCase);
                 if (res.Token == "")
                     return res;
 
-                if (self.CharIsSeparator(text, res.Index - 1) && self.CharIsSeparator(text, res.Index + res.Token.Length))
+                if (this.CharIsSeparator(text, res.Index - 1) && this.CharIsSeparator(text, res.Index + res.Token.Length))
                     return res;
 
                 startPosition = res.Index + 1;
@@ -112,16 +111,16 @@ namespace Alsing.SourceCode
         }
 
 
-        private static PatternScanResult ComplexFindKeyword(this Pattern self, string text, int startPosition)
+        private PatternScanResult ComplexFindKeyword( string text, int startPosition)
         {
             PatternScanResult res;
             while (true)
             {
-                res = self.ComplexFind(text, startPosition);
+                res = this.ComplexFind(text, startPosition);
                 if (res.Token == "")
                     return res;
 
-                if (self.CharIsSeparator(text, res.Index - 1) && self.CharIsSeparator(text, res.Index + res.Token.Length))
+                if (this.CharIsSeparator(text, res.Index - 1) && this.CharIsSeparator(text, res.Index + res.Token.Length))
                     return res;
 
                 startPosition = res.Index + 1;
@@ -134,9 +133,9 @@ namespace Alsing.SourceCode
             }
         }
 
-        private static PatternScanResult ComplexFind(this Pattern self, string text, int startPosition)
+        private PatternScanResult ComplexFind( string text, int startPosition)
         {
-            MatchCollection mc = self.rx.Matches(text);
+            MatchCollection mc = this.rx.Matches(text);
             foreach (Match m in mc)
             {
                 int pos = m.Index;
