@@ -14,7 +14,7 @@ Written in 100% managed C#.
  * [SyntaxHighlight]
  * Syntax description files 
  * [CodeFolding]
- * [Bracket Matching]
+ * [BracketMatching]
  * Unlimited Undo/Redo buffer 
  * Bitmap and non-monospace fonts 
  * Gutter margin / line number margin 
