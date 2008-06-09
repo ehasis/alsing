@@ -1,5 +1,13 @@
 #Syntax highlight editor for Windows Forms 2.0+
 
+===Status===
+
+The new SyntaxBox have been upgraded to C#3 and compiles for .NET 2.0.
+
+Work in progress:
+ * New parser
+ * New renderer
+
 ===History===
 The *SyntaxBox* is a very only project of mine.
 It started back in 2002 when me and my brother formed the company *Compona*
@@ -14,7 +22,5 @@ And it have been hibernating there ever since.
 
 However, due to public request I am now kicking some life into it again.
 I have converted the entire project to C#3 and cleaned up the code and API quite a bit.
-
-The new source compiles for .NET 2.0 (requires VS.NET 2008 due to the C#3 code base)
 ----
 See the downloads section for resources.
