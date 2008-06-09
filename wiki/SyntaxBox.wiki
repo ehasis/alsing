@@ -13,7 +13,7 @@ Written in 100% managed C#.
 *Features:* 
  * [SyntaxHighlight]
  * Syntax description files 
- * [Folding]
+ * [CodeFolding]
  * [Bracket Matching]
  * Unlimited Undo/Redo buffer 
  * Bitmap and non-monospace fonts 
