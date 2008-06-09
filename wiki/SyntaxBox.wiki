@@ -9,7 +9,7 @@ Our first product was the Compona SyntaxBox and it was pretty much an instant su
 Since we ran our company on our sparetime and I was the only developer of the SyntaxBox, I ended up with a bit too many support cases.
 After a few years I had to give it up because I had virtually no free time of my own anymore.
 
-In 2005 the project was turned into opensource and released on PuzzleFramework.com.
+In 2005 the project was turned into opensource and released on [http://puzzleframework.com].
 And it have been hibernating there ever since.
 
 However, due to public request I am now kicking some life into it again.
