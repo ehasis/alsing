@@ -10,7 +10,7 @@ The SyntaxDocument can also be attatched to multiple SyntaxBoxes , allowing diff
 [http://www.puzzleframework.com/GoogleCode/SyntaxBox/SH-xml.gif]
 
 The SyntaxBox can also display tagbased languages without any problem. 
- 
+
 [http://www.puzzleframework.com/GoogleCode/SyntaxBox/SH-asp.gif]
 
 Because of the capability of nesting syntaxes the SyntaxBox is able to display and fold languages such as ASP.  
