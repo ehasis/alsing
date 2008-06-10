@@ -3,6 +3,8 @@ Syntax highlight editor for Windows Forms 2.0+
 ===Status===
 The new SyntaxBox have been upgraded to C#3 and compiles for .NET 2.0.
 
+Quick start: [http://alsing.googlecode.com/files/Quickstart.htm]
+
 Work in progress:
  * New parser
  * New renderer
