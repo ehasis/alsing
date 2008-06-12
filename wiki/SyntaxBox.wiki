@@ -11,6 +11,7 @@ Work in progress:
 ===Features===
 Powerful Syntax Highlight Windows Forms Control for the Microsoft.NET Platform. 
 Written in 100% managed C#. 
+Supports syntax highlighting and code folding for just about any programming language.
 
 *Features:* 
  * [SyntaxHighlight]
