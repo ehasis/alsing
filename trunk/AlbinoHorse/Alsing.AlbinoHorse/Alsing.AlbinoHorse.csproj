@@ -7,8 +7,8 @@
     <ProjectGuid>{4E22716D-047F-4CBC-9B86-785E2A0CAB67}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlbinoHorse.ClassDesigner</RootNamespace>
-    <AssemblyName>AlbinoHorse.ClassDesigner</AssemblyName>
+    <RootNamespace>Alsing.AlbinoHorse</RootNamespace>
+    <AssemblyName>Alsing.AlbinoHorse</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>

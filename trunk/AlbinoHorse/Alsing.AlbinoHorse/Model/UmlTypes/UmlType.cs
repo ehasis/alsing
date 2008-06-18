@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
-using AlbinoHorse.ClassDesigner.Properties;
+using Alsing.AlbinoHorse.Properties;
 using AlbinoHorse.Infrastructure;
 using AlbinoHorse.Model.Settings;
 using AlbinoHorse.Windows.Forms;
@@ -55,10 +55,7 @@ namespace AlbinoHorse.Model
             int grid = info.GridSize;
             Rectangle renderBounds = Bounds;
 
-            var bboxThis = new BoundingBox();
-            bboxThis.Bounds = renderBounds;
-            bboxThis.Target = this;
-            bboxThis.Data = BodyIdentifier;
+            var bboxThis = new BoundingBox {Bounds = renderBounds, Target = this, Data = BodyIdentifier};
             info.BoundingBoxes.Add(bboxThis);
 
             int x = renderBounds.X;
