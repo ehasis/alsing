@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using AlbinoHorse.ClassDesigner.Properties;
+using Alsing.AlbinoHorse.Properties;
 
 namespace AlbinoHorse.Model
 {

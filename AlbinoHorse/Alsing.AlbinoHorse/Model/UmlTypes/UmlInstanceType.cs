@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using AlbinoHorse.ClassDesigner.Properties;
+using Alsing.AlbinoHorse.Properties;
 using AlbinoHorse.Infrastructure;
 using AlbinoHorse.Model.Settings;
 using AlbinoHorse.Windows.Forms;
