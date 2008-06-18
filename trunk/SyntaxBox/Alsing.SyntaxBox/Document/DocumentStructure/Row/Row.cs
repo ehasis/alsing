@@ -119,7 +119,6 @@ namespace Alsing.SourceCode
         private bool mBookmarked; //is this line bookmarked?
         private bool mBreakpoint; //Does this line have a breakpoint?
         private string mText = "";
-        internal WordList words = new WordList();
 
         /// <summary>
         /// The first collapsable span on this row.
@@ -166,6 +165,8 @@ namespace Alsing.SourceCode
         /// </code>
         /// </example>
         public object Tag;
+
+        internal WordList words = new WordList();
 
         #region PUBLIC PROPERTY BACKCOLOR
 
@@ -397,9 +398,7 @@ namespace Alsing.SourceCode
                 int i = Document.VisibleRows.IndexOf(this);
                 if (i == -1)
                 {
-                    if (startSpan != null && 
-                        startSpan.StartRow != null && 
-                        startSpan.StartRow != this)
+                    if (startSpan != null && startSpan.StartRow != null && startSpan.StartRow != this)
 
                         return startSpan.StartRow.VisibleIndex;
 

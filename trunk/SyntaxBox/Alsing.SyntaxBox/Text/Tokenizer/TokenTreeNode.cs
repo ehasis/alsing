@@ -40,7 +40,7 @@ namespace Alsing.Text
         }
 
         public void AddPattern(string prefix, bool caseSensitive, bool needSeparators, IPatternMatcher matcher,
-                                  object[] tags)
+                               object[] tags)
         {
             if (string.IsNullOrEmpty(prefix))
                 throw new ArgumentNullException("prefix");
@@ -48,23 +48,15 @@ namespace Alsing.Text
             TokenTreeNode node = AddTokenInternal(prefix, caseSensitive);
 
             var patternMatcherReference = new PatternMatchReference(matcher)
-            {
-                NextSibling = FirstExpression,
-                Tags = tags,
-                NeedSeparators = needSeparators
-            };
+                                          {NextSibling = FirstExpression, Tags = tags, NeedSeparators = needSeparators};
 
-            node.FirstExpression = patternMatcherReference;           
+            node.FirstExpression = patternMatcherReference;
         }
 
         public void AddPattern(bool caseSensitive, bool needSeparators, IPatternMatcher matcher, object[] tags)
         {
             var patternMatcherReference = new PatternMatchReference(matcher)
-            {
-                NextSibling = FirstExpression,
-                Tags = tags,
-                NeedSeparators = needSeparators
-            };
+                                          {NextSibling = FirstExpression, Tags = tags, NeedSeparators = needSeparators};
 
             FirstExpression = patternMatcherReference;
         }
@@ -116,7 +108,8 @@ namespace Alsing.Text
             return res;
         }
 
-        private static void MakeRepeatingWS(TokenTreeNode child) {
+        private static void MakeRepeatingWS(TokenTreeNode child)
+        {
             if (child.Char == ' ')
             {
                 // if the node contains " " (whitespace)
@@ -134,7 +127,7 @@ namespace Alsing.Text
             {
                 node = node.NextSibling;
             }
-            
+
             if (node.Char != childChar)
             {
                 var child = new TokenTreeNode();
@@ -170,6 +163,6 @@ namespace Alsing.Text
             }
 
             return node;
-        }        
+        }
     }
 }

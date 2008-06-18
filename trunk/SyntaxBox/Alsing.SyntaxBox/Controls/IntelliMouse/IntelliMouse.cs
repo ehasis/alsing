@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Properties;
 using ScrollEventArgs=Alsing.Windows.Forms.IntelliMouse.ScrollEventArgs;
 using ScrollEventHandler=Alsing.Windows.Forms.IntelliMouse.ScrollEventHandler;
 
@@ -229,19 +230,19 @@ namespace Alsing.Windows.Forms.CoreLib
 
             if (dY > 16)
             {
-                var ms = new MemoryStream(Properties.Resources.MoveDown);
+                var ms = new MemoryStream(Resources.MoveDown);
                 Cursor = new Cursor(ms);
                 CurrentDelta.Y -= 16;
             }
             else if (dY < -16)
             {
-                var ms = new MemoryStream(Properties.Resources.MoveUp);
+                var ms = new MemoryStream(Resources.MoveUp);
                 Cursor = new Cursor(ms);
                 CurrentDelta.Y += 16;
             }
             else
             {
-                var ms = new MemoryStream(Properties.Resources.MoveUpDown);
+                var ms = new MemoryStream(Resources.MoveUpDown);
                 Cursor = new Cursor(ms);
                 CurrentDelta = new Point(0, 0);
             }

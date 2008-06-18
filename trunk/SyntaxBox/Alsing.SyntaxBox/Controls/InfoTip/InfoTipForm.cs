@@ -66,8 +66,7 @@ namespace Alsing.Windows.Forms
 
         private Control ParentControl
         {
-            get
-            { return _Control != null ? (Control) _Control.Target : null; }
+            get { return _Control != null ? (Control) _Control.Target : null; }
             set { _Control = new WeakReference(value); }
         }
 
@@ -121,8 +120,7 @@ namespace Alsing.Windows.Forms
         }
 
         [DllImport("user32.dll", EntryPoint = "SendMessage")]
-        private static extern
-            int SendMessage(IntPtr hWnd, int message, int _data, int _id);
+        private static extern int SendMessage(IntPtr hWnd, int message, int _data, int _id);
 
         public event EventHandler SelectedIndexChanged = null;
 
@@ -243,8 +241,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new
-                System.Resources.ResourceManager(typeof (InfoTipForm));
+            var resources = new System.Resources.ResourceManager(typeof (InfoTipForm));
             this.pnlSelect = new System.Windows.Forms.Panel();
             this.btnNext = new System.Windows.Forms.PictureBox();
             this.btnPrev = new System.Windows.Forms.PictureBox();
@@ -263,10 +260,7 @@ namespace Alsing.Windows.Forms
             // pnlSelect
             // 
             this.pnlSelect.Controls.AddRange(new System.Windows.Forms.Control[]
-                                             {
-                                                 this.btnNext, this.btnPrev, this.lblIndex
-                                             }
-                );
+                                             {this.btnNext, this.btnPrev, this.lblIndex});
             this.pnlSelect.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSelect.DockPadding.All = 4;
             this.pnlSelect.Location = new System.Drawing.Point(32, 0);
@@ -277,30 +271,26 @@ namespace Alsing.Windows.Forms
             // btnNext
             // 
             this.btnNext.BackColor = System.Drawing.SystemColors.Control;
-            this.btnNext.Image = ((System.Drawing.Bitmap) (resources.GetObject(
-                                                              "btnNext.Image")));
+            this.btnNext.Image = ((System.Drawing.Bitmap) (resources.GetObject("btnNext.Image")));
             this.btnNext.Location = new System.Drawing.Point(68, 6);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(9, 11);
             this.btnNext.TabIndex = 1;
             this.btnNext.TabStop = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            this.btnNext.DoubleClick += new System.EventHandler
-                (this.btnNext_DoubleClick);
+            this.btnNext.DoubleClick += new System.EventHandler(this.btnNext_DoubleClick);
             // 
             // btnPrev
             // 
             this.btnPrev.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPrev.Image = ((System.Drawing.Bitmap) (resources.GetObject(
-                                                              "btnPrev.Image")));
+            this.btnPrev.Image = ((System.Drawing.Bitmap) (resources.GetObject("btnPrev.Image")));
             this.btnPrev.Location = new System.Drawing.Point(4, 6);
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(9, 11);
             this.btnPrev.TabIndex = 0;
             this.btnPrev.TabStop = false;
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
-            this.btnPrev.DoubleClick += new System.EventHandler
-                (this.btnPrev_DoubleClick);
+            this.btnPrev.DoubleClick += new System.EventHandler(this.btnPrev_DoubleClick);
             // 
             // lblIndex
             // 
@@ -314,11 +304,7 @@ namespace Alsing.Windows.Forms
             // 
             // panel2
             // 
-            this.panel2.Controls.AddRange(new System.Windows.Forms.Control[]
-                                          {
-                                              this.InfoText
-                                          }
-                );
+            this.panel2.Controls.AddRange(new System.Windows.Forms.Control[] {this.InfoText});
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.DockPadding.All = 4;
             this.panel2.Location = new System.Drawing.Point(112, 0);
@@ -333,10 +319,8 @@ namespace Alsing.Windows.Forms
             this.InfoText.BackColor = System.Drawing.SystemColors.Info;
             this.InfoText.BorderColor = System.Drawing.Color.Black;
             this.InfoText.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
-            this.InfoText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F,
-                                                         System.Drawing.FontStyle.Regular,
-                                                         System.Drawing.GraphicsUnit.Point, (
-                                                                                                (System.Byte) (0)));
+            this.InfoText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular,
+                                                         System.Drawing.GraphicsUnit.Point, ((System.Byte) (0)));
             this.InfoText.ImageList = null;
             this.InfoText.Link_Color = System.Drawing.Color.Blue;
             this.InfoText.Link_Color_Hover = System.Drawing.Color.Blue;
@@ -354,11 +338,7 @@ namespace Alsing.Windows.Forms
             // 
             // pnlImage
             // 
-            this.pnlImage.Controls.AddRange(new System.Windows.Forms.Control[]
-                                            {
-                                                this.picIcon
-                                            }
-                );
+            this.pnlImage.Controls.AddRange(new System.Windows.Forms.Control[] {this.picIcon});
             this.pnlImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlImage.Name = "pnlImage";
             this.pnlImage.Size = new System.Drawing.Size(32, 35);
@@ -377,10 +357,7 @@ namespace Alsing.Windows.Forms
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.AddRange(new System.Windows.Forms.Control[]
-                                          {
-                                              this.panel2, this.pnlSelect, this.pnlImage
-                                          }
-                );
+                                          {this.panel2, this.pnlSelect, this.pnlImage});
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(240, 37);
@@ -392,11 +369,7 @@ namespace Alsing.Windows.Forms
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(240, 37);
             this.ControlBox = false;
-            this.Controls.AddRange(new System.Windows.Forms.Control[]
-                                   {
-                                       this.panel1
-                                   }
-                );
+            this.Controls.AddRange(new System.Windows.Forms.Control[] {this.panel1});
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InfoTipForm";
             this.ShowInTaskbar = false;

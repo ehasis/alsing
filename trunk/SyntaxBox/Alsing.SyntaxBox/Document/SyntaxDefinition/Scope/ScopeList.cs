@@ -8,8 +8,6 @@
 // *
 // *
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using T = Alsing.SourceCode.Scope;
 
@@ -20,11 +18,11 @@ namespace Alsing.SourceCode
     /// </summary>
     public sealed class ScopeList : List<Scope>
     {
-        public SpanDefinition Parent { get; private set; }
-
         public ScopeList(SpanDefinition parent)
         {
             Parent = parent;
         }
+
+        public SpanDefinition Parent { get; private set; }
     }
 }

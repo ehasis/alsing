@@ -326,13 +326,7 @@ namespace Alsing.Windows.Forms.CoreLib
             // SplitViewChildControl
             // 
             this.Controls.AddRange(new System.Windows.Forms.Control[]
-                                   {
-                                       this.TopThumb,
-                                       this.LeftThumb,
-                                       this.Filler,
-                                       this.vScroll,
-                                       this.hScroll
-                                   });
+                                   {this.TopThumb, this.LeftThumb, this.Filler, this.vScroll, this.hScroll});
             this.Name = "SplitViewChildControl";
             this.Size = new System.Drawing.Size(456, 376);
             this.ResumeLayout(false);

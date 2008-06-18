@@ -21,20 +21,17 @@ namespace Alsing.SourceCode
     {
         private IWindowsFormsEditorService edSvc;
 
-        public override object EditValue(ITypeDescriptorContext context,
-                                         IServiceProvider provider, object value)
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
             if (context != null && context.Instance != null && provider != null)
             {
-                edSvc = (IWindowsFormsEditorService) provider.GetService(typeof
-                                                                             (IWindowsFormsEditorService));
+                edSvc = (IWindowsFormsEditorService) provider.GetService(typeof (IWindowsFormsEditorService));
 
 
                 if (edSvc != null)
                 {
                     var style = (TextStyle) value;
-                    using (var tsd = new TextStyleDesignerDialog(style)
-                        )
+                    using (var tsd = new TextStyleDesignerDialog(style))
                     {
                         context.OnComponentChanging();
                         if (edSvc.ShowDialog(tsd) == DialogResult.OK)
@@ -51,8 +48,7 @@ namespace Alsing.SourceCode
         }
 
 
-        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext
-                                                               context)
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
             return UITypeEditorEditStyle.Modal;
         }
@@ -90,8 +86,7 @@ namespace Alsing.SourceCode
             f.Dispose();
         }
 
-        public override bool GetPaintValueSupported
-            (ITypeDescriptorContext context)
+        public override bool GetPaintValueSupported(ITypeDescriptorContext context)
         {
             return true;
         }

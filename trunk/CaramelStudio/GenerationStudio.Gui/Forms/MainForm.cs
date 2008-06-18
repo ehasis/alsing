@@ -35,16 +35,17 @@ namespace GenerationStudio.Gui
             SetupDockingForms();
             SetupNewProject();
 
-            Engine.RegisterAllElementTypes(typeof(RootElement).Assembly);
+            Engine.RegisterAllElementTypes(typeof (RootElement).Assembly);
 
-            ToolStripManager.VisualStylesEnabled = false;            
+            ToolStripManager.VisualStylesEnabled = false;
             Engine.NotifyChange += Engine_NotifyChange;
 
             MainToolStrip.SendToBack();
             MainMenu.SendToBack();
         }
 
-        private void SetupDockingForms() {
+        private void SetupDockingForms()
+        {
             ErrorDockingForm.SetContent(ErrorPanel, "Error List");
             ProjectDockingForm.SetContent(ProjectPanel, "Solution Explorer");
             PropertiesDockingForm.SetContent(PropertyPanel, "Properties");
@@ -71,7 +72,7 @@ namespace GenerationStudio.Gui
 
         private void ShowErrors()
         {
-            var allErrors = root.GetErrorsRecursive();
+            IList<ElementError> allErrors = root.GetErrorsRecursive();
             var dt = new DataTable();
             dt.Columns.Add("Image", typeof (Image));
             dt.Columns.Add("OwnerType", typeof (string));
@@ -79,7 +80,7 @@ namespace GenerationStudio.Gui
             dt.Columns.Add("Message", typeof (string));
             dt.Columns.Add("Item", typeof (Element));
             ErrorGrid.AutoGenerateColumns = false;
-            foreach (var error in allErrors)
+            foreach (ElementError error in allErrors)
             {
                 dt.Rows.Add(error.Owner.GetIcon(), error.Owner.GetType().GetElementName(), error.Owner.GetDisplayName(),
                             error.Message, error.Owner);
@@ -124,11 +125,7 @@ namespace GenerationStudio.Gui
 
         private void FillTree(Element element, TreeNode parentNode)
         {
-            var node = new TreeNode
-                       {
-                           Text = element.GetDisplayName(),
-                           Tag = element
-                       };
+            var node = new TreeNode {Text = element.GetDisplayName(), Tag = element};
 
             ApplyImage(node);
             ApplyErrors(node);
@@ -137,13 +134,10 @@ namespace GenerationStudio.Gui
 
             if (!element.HideChildren())
             {
-                element.AllChildren
-                    .OrderBy(childElement => childElement.Excluded)
-                    .ThenBy(childElement => childElement.GetSortPriority())
-                    .ThenBy(childElement => childElement.GetType().Name)
-                    .ThenBy(childElement => childElement.GetDisplayName())
-                    .ToList()
-                    .ForEach(childElement => FillTree(childElement, node));
+                element.AllChildren.OrderBy(childElement => childElement.Excluded).ThenBy(
+                    childElement => childElement.GetSortPriority()).ThenBy(childElement => childElement.GetType().Name).
+                    ThenBy(childElement => childElement.GetDisplayName()).ToList().ForEach(
+                    childElement => FillTree(childElement, node));
             }
 
             if (element.GetDefaultExpanded())
@@ -211,11 +205,7 @@ namespace GenerationStudio.Gui
                 else
                 {
                     var pathLabel = new LinkLabel
-                                    {
-                                        AutoSize = true,
-                                        Margin = new Padding(0),
-                                        Text = pathElement.GetDisplayName()
-                                    };
+                                    {AutoSize = true, Margin = new Padding(0), Text = pathElement.GetDisplayName()};
 
                     pathLabel.LinkClicked += SummaryPath_LinkClicked;
                     pathLabel.Tag = pathElement;
@@ -270,10 +260,7 @@ namespace GenerationStudio.Gui
             var currentElement = (Element) selectedNode.Tag;
             IList<Type> childTypes = Engine.GetChildTypes(currentElement.GetType());
             ProjectContextMenu.Items.Clear();
-            var addNewLabel = new ToolStripLabel("Elements:")
-                              {
-                                  Font = BoldFont.Font
-                              };
+            var addNewLabel = new ToolStripLabel("Elements:") {Font = BoldFont.Font};
 
             ProjectContextMenu.Items.Add(addNewLabel);
             foreach (Type childType in childTypes)
@@ -292,10 +279,7 @@ namespace GenerationStudio.Gui
                     }
                 }
                 string itemText = string.Format("Add {0}", childType.GetElementName());
-                var item = new ToolStripMenuItem(itemText)
-                           {
-                               Tag = childType
-                           };
+                var item = new ToolStripMenuItem(itemText) {Tag = childType};
 
                 item.Click += NewElement_Click;
                 item.Enabled = allowNew;
@@ -313,10 +297,7 @@ namespace GenerationStudio.Gui
             ProjectContextMenu.Items.Add(separator1);
 
 
-            var verbLabel = new ToolStripLabel("Verbs:")
-                            {
-                                Font = BoldFont.Font
-                            };
+            var verbLabel = new ToolStripLabel("Verbs:") {Font = BoldFont.Font};
 
             ProjectContextMenu.Items.Add(verbLabel);
 
@@ -324,10 +305,7 @@ namespace GenerationStudio.Gui
             foreach (MethodInfo method in elementVerbs)
             {
                 string verbName = method.GetVerbName();
-                var item = new ToolStripMenuItem(verbName)
-                            {
-                                Tag = method
-                            };
+                var item = new ToolStripMenuItem(verbName) {Tag = method};
 
                 item.Click += ElementVerb_Click;
                 ProjectContextMenu.Items.Add(item);
@@ -367,10 +345,7 @@ namespace GenerationStudio.Gui
             {
                 ((NamedElement) newElement).Name = string.Format("New {0}", childType.GetElementName());
             }
-            var newNode = new TreeNode(newElement.GetDisplayName())
-                          {
-                              Tag = newElement
-                          };
+            var newNode = new TreeNode(newElement.GetDisplayName()) {Tag = newElement};
 
 
             selectedNode.Nodes.Add(newNode);

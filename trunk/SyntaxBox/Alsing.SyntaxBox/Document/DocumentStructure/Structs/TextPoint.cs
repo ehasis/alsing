@@ -24,7 +24,7 @@ namespace Alsing.SourceCode
         /// <summary>
         /// 
         /// </summary>
-        public TextPoint() { }
+        public TextPoint() {}
 
         /// <summary>
         /// 

@@ -1,12 +1,10 @@
-﻿
-using System;
+﻿using System;
 
 namespace Alsing.Text
 {
     public sealed class Token
     {
-
-        public Token(string text,object[] tags)
+        public Token(string text, object[] tags)
         {
             if (tags == null)
                 tags = new object[0];

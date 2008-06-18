@@ -80,9 +80,7 @@ namespace Alsing.Drawing.GDI
 
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
-            if (context != null
-                && context.Instance != null
-                && provider != null)
+            if (context != null && context.Instance != null && provider != null)
             {
                 edSvc = (IWindowsFormsEditorService) provider.GetService(typeof (IWindowsFormsEditorService));
 

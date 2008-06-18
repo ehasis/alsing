@@ -29,8 +29,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         public KeyboardAction() {}
 
-        public KeyboardAction(Keys key, bool shift, bool control, bool alt, bool
-                                                                                allowreadonly,
+        public KeyboardAction(Keys key, bool shift, bool control, bool alt, bool allowreadonly,
                               ActionDelegate actionDelegate)
         {
             Key = key;

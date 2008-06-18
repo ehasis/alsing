@@ -8,6 +8,7 @@
 // *
 // *
 
+using System.Collections;
 using System.ComponentModel.Design;
 using System.Windows.Forms.Design;
 using Alsing.SourceCode;
@@ -31,17 +32,14 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         //protected void OnActivate(object s, EventArgs e) {}
 
-        public override void InitializeNewComponent(System.Collections.IDictionary defaultValues)
+        public override void InitializeNewComponent(IDictionary defaultValues)
         {
             base.InitializeNewComponent(defaultValues);
             if (DesignerHost != null)
             {
-                DesignerTransaction trans = DesignerHost.CreateTransaction(
-                    "Adding Syntaxdocument");
-                var sd = DesignerHost.CreateComponent
-                             (typeof(SyntaxDocument)) as
-                         SyntaxDocument;
-                
+                DesignerTransaction trans = DesignerHost.CreateTransaction("Adding Syntaxdocument");
+                var sd = DesignerHost.CreateComponent(typeof (SyntaxDocument)) as SyntaxDocument;
+
                 var sb = Control as SyntaxBoxControl;
 
                 if (sb == null)

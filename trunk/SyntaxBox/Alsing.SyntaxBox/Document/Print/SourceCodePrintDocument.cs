@@ -152,8 +152,7 @@ namespace Alsing.SourceCode
                 {
                     if (w.InfoTip != null && w.InfoTip == "break char")
                     {
-                        ev.Graphics.DrawString(w.Text, fontBreak, Brushes.Black, x, yPos,
-                                               new StringFormat());
+                        ev.Graphics.DrawString(w.Text, fontBreak, Brushes.Black, x, yPos, new StringFormat());
                     }
                     else
                     {
@@ -199,8 +198,7 @@ namespace Alsing.SourceCode
                         c = Color.FromArgb(c.R, c.G, c.B);
 
 
-                        ev.Graphics.DrawString(w.Text, f, new SolidBrush(c), x, yPos, new
-                                                                                          StringFormat());
+                        ev.Graphics.DrawString(w.Text, f, new SolidBrush(c), x, yPos, new StringFormat());
                         x += sf.Width;
                     }
                 }

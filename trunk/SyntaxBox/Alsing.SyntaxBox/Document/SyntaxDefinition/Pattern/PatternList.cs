@@ -76,8 +76,7 @@ namespace Alsing.SourceCode
         /// </summary>
         public PatternList()
         {
-            SimplePatterns = new Hashtable(CaseInsensitiveHashCodeProvider.Default,
-                                           CaseInsensitiveComparer.Default);
+            SimplePatterns = new Hashtable(CaseInsensitiveHashCodeProvider.Default, CaseInsensitiveComparer.Default);
         }
 
         #region IEnumerable Members
@@ -100,8 +99,7 @@ namespace Alsing.SourceCode
         /// <returns></returns>
         public Pattern Add(Pattern Pattern)
         {
-            if (Parent != null && Parent.Parent != null &&
-                Parent.Parent.Parent != null)
+            if (Parent != null && Parent.Parent != null && Parent.Parent.Parent != null)
             {
                 Pattern.Separators = Parent.Parent.Parent.Separators;
                 Parent.Parent.Parent.ChangeVersion();

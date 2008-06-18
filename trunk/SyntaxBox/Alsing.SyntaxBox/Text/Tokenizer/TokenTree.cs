@@ -54,15 +54,11 @@ namespace Alsing.Text
 
         #endregion //END PUBLIC PROPERTY SEPARATORS
 
-        
-
-        
-
         //this is wicked fast
         //do not refactor extract methods from this if you want to keep the speed
         public MatchResult Match(string text, int startIndex)
         {
-            if(string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text))
                 throw new ArgumentNullException(text);
 
             var lastMatch = new MatchResult {Text = text};
@@ -83,8 +79,12 @@ namespace Alsing.Text
                         int patternMatchIndex = patternMatcherReference.Matcher.Match(text, currentIndex);
                         if (patternMatchIndex > 0 && patternMatchIndex > lastMatch.Length)
                         {
-                            bool leftIsSeparator = currentIndex == 0 ? true : separatorCharLookup[text[currentIndex - 1]];
-                            bool rightIsSeparator = (currentIndex+patternMatchIndex) == textLength ? true : separatorCharLookup[text[currentIndex + patternMatchIndex]];
+                            bool leftIsSeparator = currentIndex == 0
+                                                       ? true
+                                                       : separatorCharLookup[text[currentIndex - 1]];
+                            bool rightIsSeparator = (currentIndex + patternMatchIndex) == textLength
+                                                        ? true
+                                                        : separatorCharLookup[text[currentIndex + patternMatchIndex]];
 
                             if (!patternMatcherReference.NeedSeparators || (leftIsSeparator && rightIsSeparator))
                             {
@@ -127,8 +127,13 @@ namespace Alsing.Text
                             int patternMatchIndex = patternMatcherReference.Matcher.Match(text, matchIndex);
                             if (patternMatchIndex > 0 && patternMatchIndex > lastMatch.Length)
                             {
-                                bool leftIsSeparator = currentIndex == 0 ? true : separatorCharLookup[text[currentIndex - 1]];
-                                bool rightIsSeparator = (currentIndex+patternMatchIndex+matchIndex) == textLength ? true : separatorCharLookup[text[currentIndex + patternMatchIndex+matchIndex]];
+                                bool leftIsSeparator = currentIndex == 0
+                                                           ? true
+                                                           : separatorCharLookup[text[currentIndex - 1]];
+                                bool rightIsSeparator = (currentIndex + patternMatchIndex + matchIndex) == textLength
+                                                            ? true
+                                                            : separatorCharLookup[
+                                                                  text[currentIndex + patternMatchIndex + matchIndex]];
 
                                 if (!patternMatcherReference.NeedSeparators || (leftIsSeparator && rightIsSeparator))
                                 {
@@ -181,7 +186,7 @@ namespace Alsing.Text
 
             if (lastMatch.Found)
                 return lastMatch;
- 
+
             //no match was found
             return MatchResult.NoMatch;
         }

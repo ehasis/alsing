@@ -9,8 +9,8 @@
 
 namespace Alsing.SourceCode.SyntaxDocumentParsers
 {
-	public sealed class NewParser : ParserBase
-	{
+    public sealed class NewParser : ParserBase
+    {
         public override void ParseRow(int rowIndex, bool parseKeywords)
         {
             if (!parseKeywords)
@@ -19,12 +19,8 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
                 ParseLineFully(rowIndex);
         }
 
-        private void ParseLineFully(int rowIndex)
-        {
-        }
+        private void ParseLineFully(int rowIndex) {}
 
-        private void ParseLineStructure(int rowIndex)
-        {
-        }
+        private void ParseLineStructure(int rowIndex) {}
     }
 }

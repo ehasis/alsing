@@ -190,12 +190,7 @@ namespace Alsing.Windows.Forms.CoreLib
             // SplitViewControl
             // 
             this.BackColor = System.Drawing.Color.Magenta;
-            this.Controls.AddRange(new System.Windows.Forms.Control[]
-                                   {
-                                       this.Center,
-                                       this.Horizontal,
-                                       this.Vertical
-                                   });
+            this.Controls.AddRange(new System.Windows.Forms.Control[] {this.Center, this.Horizontal, this.Vertical});
             this.Size = new System.Drawing.Size(200, 200);
             this.VisibleChanged += new System.EventHandler(this.SplitViewControl_VisibleChanged);
             this.Enter += new System.EventHandler(this.SplitViewControl_Enter);

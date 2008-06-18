@@ -97,8 +97,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             Close();
         }
 
-        private void GotoLine_Closing(object sender,
-                                      CancelEventArgs e)
+        private void GotoLine_Closing(object sender, CancelEventArgs e)
         {
             //e.Cancel =true;
             //this.Hide ();
@@ -165,18 +164,13 @@ namespace Alsing.Windows.Forms.SyntaxBox
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(242, 82);
             this.Controls.AddRange(new System.Windows.Forms.Control[]
-                                   {
-                                       this.lblLines, this.txtRow, this.btnOK, this.btnCancel
-                                   }
-                );
-            this.FormBorderStyle =
-                System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+                                   {this.lblLines, this.txtRow, this.btnOK, this.btnCancel});
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "GotoLineForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Go To Line";
-            this.Closing += new System.ComponentModel.CancelEventHandler
-                (this.GotoLine_Closing);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.GotoLine_Closing);
             this.Activated += new System.EventHandler(this.GotoLine_Activated);
             this.ResumeLayout(false);
         }

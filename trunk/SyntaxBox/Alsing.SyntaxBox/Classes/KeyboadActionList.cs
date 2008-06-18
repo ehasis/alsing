@@ -15,7 +15,5 @@ namespace Alsing.Windows.Forms.SyntaxBox
     /// <summary>
     /// Collection of KeyboardActions
     /// </summary>
-    public class KeyboardActionList : List<KeyboardAction>
-    {
-    }
+    public class KeyboardActionList : List<KeyboardAction> {}
 }

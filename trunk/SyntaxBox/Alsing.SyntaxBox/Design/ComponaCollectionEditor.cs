@@ -52,10 +52,7 @@ namespace Alsing.Design
 
         protected override CollectionForm CreateCollectionForm()
         {
-            Form = new ComponaCollectionForm(this)
-                   {
-                       StartPosition = FormStartPosition.CenterScreen
-                   };
+            Form = new ComponaCollectionForm(this) {StartPosition = FormStartPosition.CenterScreen};
             return Form;
         }
 
@@ -76,7 +73,7 @@ namespace Alsing.Design
             {
                 Editor = e as ComponaCollectionEditor;
 
-                if (Editor != null) 
+                if (Editor != null)
                     GUI = Editor.CreateGUI();
 
                 GUI.Visible = true;
@@ -126,7 +123,7 @@ namespace Alsing.Design
             public void AddObject(object o)
             {
                 var e = GUI.EditValue as IList;
-                
+
                 e.Add(o);
 
                 IsDirty = true;
@@ -173,7 +170,7 @@ namespace Alsing.Design
             protected void btnDropDownMenuItem_Click(object o, EventArgs e)
             {
                 var tmi = o as TypeMenuItem;
-                if (tmi != null) 
+                if (tmi != null)
                     CreateAndAddInstance(tmi.Type as Type);
             }
 

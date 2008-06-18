@@ -146,7 +146,7 @@ namespace Alsing.Drawing.GDI
             IntPtr ret = NativeMethods.SelectObject(mhDC, mhBMP);
             _OldBmp = ret;
 
-            if (mhDC == (IntPtr)0)
+            if (mhDC == (IntPtr) 0)
                 throw new OutOfMemoryException("hDC creation FAILED!!");
 
             if (mhDC == (IntPtr) 0)

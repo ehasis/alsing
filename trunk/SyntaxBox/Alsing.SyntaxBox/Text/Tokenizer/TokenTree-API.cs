@@ -23,7 +23,8 @@ namespace Alsing.Text
             AddPattern(null, matcher, caseSensitive, needSeparators, tags);
         }
 
-        public void AddPattern(string prefix, IPatternMatcher matcher, bool caseSensitive, bool needSeparators, object[] tags)
+        public void AddPattern(string prefix, IPatternMatcher matcher, bool caseSensitive, bool needSeparators,
+                               object[] tags)
         {
             if (string.IsNullOrEmpty(prefix))
             {
@@ -39,7 +40,6 @@ namespace Alsing.Text
             }
         }
 
-        
 
         public void AddToken(string text, bool caseSensitive, bool needSeparators, object[] tags)
         {

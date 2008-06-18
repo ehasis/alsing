@@ -15,22 +15,14 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
 {
     public sealed class ParseTools
     {
-        public static void AddPatternString(string Text, Row Row, Pattern Pattern,
-                                            TextStyle Style, Span span, bool HasError)
+        public static void AddPatternString(string Text, Row Row, Pattern Pattern, TextStyle Style, Span span,
+                                            bool HasError)
         {
-            var x = new Word
-            {
-                Style = Style,
-                Pattern = Pattern,
-                HasError = HasError,
-                Span = span,
-                Text = Text
-            };
+            var x = new Word {Style = Style, Pattern = Pattern, HasError = HasError, Span = span, Text = Text};
             Row.Add(x);
         }
 
-        public static unsafe void AddString(string Text, Row Row, TextStyle Style,
-                                            Span span)
+        public static unsafe void AddString(string Text, Row Row, TextStyle Style, Span span)
         {
             if (Text == "")
                 return;
@@ -89,16 +81,14 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
                     words.Add(c.ToString());
                 }
                 else
-                    CurrentWord.Append(c.ToString()
-                        );
+                    CurrentWord.Append(c.ToString());
             }
             if (CurrentWord.ToString() != "")
                 words.Add(CurrentWord.ToString());
             return words;
         }
 
-        public static PatternScanResult GetFirstWord(char[] TextBuffer,
-                                                     PatternCollection Patterns, int StartPosition)
+        public static PatternScanResult GetFirstWord(char[] TextBuffer, PatternCollection Patterns, int StartPosition)
         {
             PatternScanResult Result;
             Result.Index = 0;

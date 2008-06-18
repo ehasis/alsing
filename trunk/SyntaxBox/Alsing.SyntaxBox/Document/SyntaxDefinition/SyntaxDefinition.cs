@@ -65,7 +65,9 @@ namespace Alsing.SourceCode
 
         #endregion
 
-        private readonly Dictionary<SpanDefinition, SpanDefinition> spanDefinitionLookup = new Dictionary<SpanDefinition, SpanDefinition>();
+        private readonly Dictionary<SpanDefinition, SpanDefinition> spanDefinitionLookup =
+            new Dictionary<SpanDefinition, SpanDefinition>();
+
         private readonly Dictionary<TextStyle, TextStyle> styleLookup = new Dictionary<TextStyle, TextStyle>();
 
         /// <summary>
