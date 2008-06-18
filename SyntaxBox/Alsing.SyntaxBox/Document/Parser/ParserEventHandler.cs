@@ -1,5 +1,5 @@
 ﻿namespace Alsing.SourceCode
-{   
+{
     /// <summary>
     /// Parser event handler
     /// </summary>

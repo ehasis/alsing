@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Resources;
 using System.Text;
 using System.Windows.Forms;
@@ -22,7 +23,8 @@ using Alsing.Globalization;
 using Alsing.SourceCode;
 using Alsing.Windows.Forms.CoreLib;
 using Alsing.Windows.Forms.SyntaxBox.Painter;
-using System.IO;
+using Properties;
+using ScrollEventArgs=Alsing.Windows.Forms.IntelliMouse.ScrollEventArgs;
 
 #endregion
 
@@ -204,15 +206,12 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         private void CreateAutoList()
         {
-            if (_SyntaxBox != null && !_SyntaxBox.DisableAutoList &&
-                _AutoList == null)
+            if (_SyntaxBox != null && !_SyntaxBox.DisableAutoList && _AutoList == null)
             {
                 Debug.WriteLine("Creating Autolist");
 
                 AutoList = new AutoListForm();
-                NativeMethods.SetWindowLong(AutoList.Handle,
-                                            NativeMethods.GWL_STYLE,
-                                            NativeMethods.WS_CHILD);
+                NativeMethods.SetWindowLong(AutoList.Handle, NativeMethods.GWL_STYLE, NativeMethods.WS_CHILD);
 
                 AutoList.SendToBack();
                 AutoList.Visible = false;
@@ -239,15 +238,12 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         private void CreateInfoTip()
         {
-            if (_SyntaxBox != null && !_SyntaxBox.DisableInfoTip &&
-                _InfoTip == null)
+            if (_SyntaxBox != null && !_SyntaxBox.DisableInfoTip && _InfoTip == null)
             {
                 Debug.WriteLine("Creating Infotip");
 
                 InfoTip = new InfoTipForm(this);
-                NativeMethods.SetWindowLong(InfoTip.Handle,
-                                            NativeMethods.GWL_STYLE,
-                                            NativeMethods.WS_CHILD);
+                NativeMethods.SetWindowLong(InfoTip.Handle, NativeMethods.GWL_STYLE, NativeMethods.WS_CHILD);
 
                 InfoTip.SendToBack();
                 InfoTip.Visible = false;
@@ -266,8 +262,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             Redraw();
         }
 
-        private void IntelliMouse_Scroll(object sender,
-                                         IntelliMouse.ScrollEventArgs e)
+        private void IntelliMouse_Scroll(object sender, ScrollEventArgs e)
         {
             if (e.DeltaY < 0 && vScroll.Value == 0)
             {
@@ -276,8 +271,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                 return;
             }
 
-            if (e.DeltaY > 0 && vScroll.Value >= vScroll.Maximum -
-                                                 View.VisibleRowCount + 1)
+            if (e.DeltaY > 0 && vScroll.Value >= vScroll.Maximum - View.VisibleRowCount + 1)
             {
                 View.YOffset = 0;
                 Redraw();
@@ -333,10 +327,8 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
             foreach (TextStyle ts in styles)
             {
-                sb.AppendFormat("\\red{0}\\green{1}\\blue{2};", ts.ForeColor.R,
-                                ts.ForeColor.G, ts.ForeColor.B);
-                sb.AppendFormat("\\red{0}\\green{1}\\blue{2};", ts.BackColor.R,
-                                ts.BackColor.G, ts.BackColor.B);
+                sb.AppendFormat("\\red{0}\\green{1}\\blue{2};", ts.ForeColor.R, ts.ForeColor.G, ts.ForeColor.B);
+                sb.AppendFormat("\\red{0}\\green{1}\\blue{2};", ts.BackColor.R, ts.BackColor.G, ts.BackColor.B);
             }
 
             sb.Append(@";}");
@@ -354,10 +346,8 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     if (i == r1 && w.Column + w.Text.Length < c1)
                         continue;
 
-                    bool IsFirst = (i == r1 && w.Column <= c1 && w.Column + w.Text.Length
-                                                                 > c1);
-                    bool IsLast = (i == r2 && w.Column < c2 && w.Column + w.Text.Length >
-                                                               c2);
+                    bool IsFirst = (i == r1 && w.Column <= c1 && w.Column + w.Text.Length > c1);
+                    bool IsLast = (i == r2 && w.Column < c2 && w.Column + w.Text.Length > c2);
 
 
                     if (w.Type == WordType.Word && w.Style != null)
@@ -366,12 +356,10 @@ namespace Alsing.Windows.Forms.SyntaxBox
                         clrindex *= 2;
                         clrindex++;
 
-                        sb.Append("{\\cf" + clrindex.ToString
-                                                (CultureInfo.InvariantCulture));
+                        sb.Append("{\\cf" + clrindex.ToString(CultureInfo.InvariantCulture));
                         if (!w.Style.Transparent)
                         {
-                            sb.Append("\\highlight" + (clrindex + 1).ToString
-                                                          (CultureInfo.InvariantCulture));
+                            sb.Append("\\highlight" + (clrindex + 1).ToString(CultureInfo.InvariantCulture));
                         }
                         sb.Append(" ");
                     }
@@ -528,8 +516,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         private void DoResize()
         {
-            if (Visible && Width > 0 && Height > 0 &&
-                IsHandleCreated)
+            if (Visible && Width > 0 && Height > 0 && IsHandleCreated)
             {
                 try
                 {
@@ -545,8 +532,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     {
                         vScroll.Top = TopThumb.Height;
                         if (hScroll.Visible)
-                            vScroll.Height = ClientHeight - hScroll.Height -
-                                             TopThumb.Height;
+                            vScroll.Height = ClientHeight - hScroll.Height - TopThumb.Height;
                         else
                             vScroll.Height = ClientHeight - TopThumb.Height;
                     }
@@ -564,8 +550,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     {
                         hScroll.Left = LeftThumb.Width;
                         if (vScroll.Visible)
-                            hScroll.Width = ClientWidth - vScroll.Width -
-                                            LeftThumb.Width;
+                            hScroll.Width = ClientWidth - vScroll.Width - LeftThumb.Width;
                         else
                             hScroll.Width = ClientWidth - LeftThumb.Width;
                     }
@@ -619,8 +604,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             {
                 if (!_OverWrite || text.Length > 1)
                 {
-                    TextPoint p = Document.InsertText(text, Caret.Position.X,
-                                                      Caret.Position.Y);
+                    TextPoint p = Document.InsertText(text, Caret.Position.X, Caret.Position.Y);
                     Caret.CurrentRow.Parse(true);
                     if (text.Length == 1)
                     {
@@ -647,24 +631,16 @@ namespace Alsing.Windows.Forms.SyntaxBox
                             };
                     var ag = new UndoBlockCollection();
                     var b = new UndoBlock
-                                  {
-                                      Action = UndoAction.DeleteRange,
-                                      Text = Document.GetRange(r),
-                                      Position = Caret.Position
-                                  };
+                            {Action = UndoAction.DeleteRange, Text = Document.GetRange(r), Position = Caret.Position};
                     ag.Add(b);
                     Document.DeleteRange(r, false);
-                    b = new UndoBlock
-                        {
-                            Action = UndoAction.InsertRange
-                        };
+                    b = new UndoBlock {Action = UndoAction.InsertRange};
                     string NewChar = text;
                     b.Text = NewChar;
                     b.Position = Caret.Position;
                     ag.Add(b);
                     Document.AddToUndoList(ag);
-                    Document.InsertText(NewChar, Caret.Position.X, Caret.Position.Y,
-                                        false);
+                    Document.InsertText(NewChar, Caret.Position.X, Caret.Position.Y, false);
                     Caret.CurrentRow.Parse(true);
 
                     Caret.MoveRight(false);
@@ -768,8 +744,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                             Caret.CurrentRow.startSpan.StartRow.Parse(false);
                             Caret.CurrentRow.startSpan.StartRow.Parse(true);
 
-                            string prev = "\t" +
-                                          Caret.CurrentRow.startSpan.StartRow.GetVirtualLeadingWhitespace();
+                            string prev = "\t" + Caret.CurrentRow.startSpan.StartRow.GetVirtualLeadingWhitespace();
 
                             string indent = Caret.CurrentRow.PrevRow.GetLeadingWhitespace();
                             if (indent.Length < prev.Length)
@@ -836,8 +811,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     if (xtr.FirstNonWsWord == xtr.expansion_EndSpan.EndWord)
                     {
                         //int j=xtr.Expansion_StartRow.StartWordIndex;
-                        string indent1 =
-                            xtr.startSpan.StartWord.Row.GetVirtualLeadingWhitespace();
+                        string indent1 = xtr.startSpan.StartWord.Row.GetVirtualLeadingWhitespace();
                         var tr = new TextRange
                                  {
                                      FirstColumn = 0,
@@ -1038,7 +1012,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     }
                     else
                     {
-                        var ms = new MemoryStream(Properties.Resources.FlippedCursor);
+                        var ms = new MemoryStream(Resources.FlippedCursor);
                         Cursor = new Cursor(ms);
                     }
                 }
@@ -1054,7 +1028,8 @@ namespace Alsing.Windows.Forms.SyntaxBox
                             Word w = Document.GetWordFromPos(tp);
                             if (w != null && w.Pattern != null && w.Pattern.Category != null)
                             {
-                                var e = new WordMouseEventArgs {
+                                var e = new WordMouseEventArgs
+                                        {
                                             Pattern = w.Pattern,
                                             Button = MouseButtons.None,
                                             Cursor = Cursors.Hand,
@@ -1142,8 +1117,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             if (InfoTip == null || AutoList == null)
                 return;
 
-            if (!ContainsFocus && !InfoTip.ContainsFocus &&
-                !AutoList.ContainsFocus)
+            if (!ContainsFocus && !InfoTip.ContainsFocus && !AutoList.ContainsFocus)
             {
                 CaretTimer.Enabled = false;
                 Caret.Blink = false;
@@ -1171,8 +1145,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             while (left >= 0 && CharType(xtr.Text.Substring(left, 1)) == Type)
                 left--;
 
-            while (right <= xtr.Text.Length - 1 && CharType(xtr.Text.Substring(right,
-                                                                               1)) == Type)
+            while (right <= xtr.Text.Length - 1 && CharType(xtr.Text.Substring(right, 1)) == Type)
                 right++;
 
             Selection.Bounds.FirstRow = Selection.Bounds.LastRow = xtr.Index;
@@ -1230,18 +1203,15 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
             View.VisibleRowCount = 0;
             if (hScroll.Visible)
-                View.VisibleRowCount = (Height - hScroll.Height)/View.RowHeight
-                                       + 1;
+                View.VisibleRowCount = (Height - hScroll.Height)/View.RowHeight + 1;
             else
-                View.VisibleRowCount = (Height - hScroll.Height)/View.RowHeight
-                                       + 2;
+                View.VisibleRowCount = (Height - hScroll.Height)/View.RowHeight + 2;
 
             View.GutterMarginWidth = ShowGutterMargin ? GutterMarginWidth : 0;
 
             if (ShowLineNumbers)
             {
-                int chars = (Document.Count).ToString
-                    (CultureInfo.InvariantCulture).Length;
+                int chars = (Document.Count).ToString(CultureInfo.InvariantCulture).Length;
                 var s = new String('9', chars);
                 View.LineNumberMarginWidth = 10 + Painter.MeasureString(s).Width;
             }
@@ -1249,8 +1219,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                 View.LineNumberMarginWidth = 0;
 
 
-            View.TotalMarginWidth = View.GutterMarginWidth +
-                                    View.LineNumberMarginWidth;
+            View.TotalMarginWidth = View.GutterMarginWidth + View.LineNumberMarginWidth;
             if (Document.Folding)
                 View.TextMargin = View.TotalMarginWidth + 20;
             else
@@ -1284,15 +1253,14 @@ namespace Alsing.Windows.Forms.SyntaxBox
             try
             {
                 int max = 0;
-                for (int i = View.FirstVisibleRow;
-                     i <
-                     Document.VisibleRows.Count;
-                     i++)
+                for (int i = View.FirstVisibleRow; i < Document.VisibleRows.Count; i++)
                 {
                     if (i >= View.VisibleRowCount + View.FirstVisibleRow)
                         break;
 
-                    string l = Document.VisibleRows[i].IsCollapsed ? Document.VisibleRows[i].VirtualCollapsedRow.Text : Document.VisibleRows[i].Text;
+                    string l = Document.VisibleRows[i].IsCollapsed
+                                   ? Document.VisibleRows[i].VirtualCollapsedRow.Text
+                                   : Document.VisibleRows[i].Text;
 
                     l = l.Replace("\t", new string(' ', TabSize));
                     if (l.Length > max)
@@ -1333,29 +1301,24 @@ namespace Alsing.Windows.Forms.SyntaxBox
         private void InitializeComponent()
         {
             components = new Container();
-            var resources = new
-                ResourceManager(typeof (EditViewControl));
+            var resources = new ResourceManager(typeof (EditViewControl));
             Filler = new PictureBox();
-            CaretTimer = new Timer (components);
+            CaretTimer = new Timer(components);
             tooltip = new ToolTip(components);
 
             SuspendLayout();
 
             if (!_SyntaxBox.DisableIntelliMouse)
             {
-                IntelliMouse = new
-                    IntelliMouseControl
+                IntelliMouse = new IntelliMouseControl
                                {
-                                   BackgroundImage = ((Bitmap)
-                                                      (resources.GetObject("IntelliMouse.BackgroundImage"))),
-                                   Image = ((Bitmap) (resources.GetObject(
-                                                         "IntelliMouse.Image"))),
+                                   BackgroundImage = ((Bitmap) (resources.GetObject("IntelliMouse.BackgroundImage"))),
+                                   Image = ((Bitmap) (resources.GetObject("IntelliMouse.Image"))),
                                    Location = new Point(197, 157),
                                    Name = "IntelliMouse",
                                    Size = new Size(28, 28),
                                    TabIndex = 4,
-                                   TransparencyKey = Color.FromArgb((
-                                                                        (255)), ((0)), ((255))),
+                                   TransparencyKey = Color.FromArgb(((255)), ((0)), ((255))),
                                    Visible = false
                                };
                 // 
@@ -1423,11 +1386,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                 //	Console.WriteLine ("error in editview allowdrop {0}",x.Message);
             }
 
-            Controls.AddRange(new Control[]
-                              {
-                                  IntelliMouse
-                              }
-                );
+            Controls.AddRange(new Control[] {IntelliMouse});
             Size = new Size(0, 0);
             LostFocus += EditViewControl_Leave;
             GotFocus += EditViewControl_Enter;
@@ -1664,26 +1623,20 @@ namespace Alsing.Windows.Forms.SyntaxBox
         {
             TextPoint p = Painter.CharFromPixel(x, y);
 
-            if (p.Y >= Selection.LogicalBounds.FirstRow && p.Y <=
-                                                           Selection.LogicalBounds.LastRow && Selection.IsValid)
+            if (p.Y >= Selection.LogicalBounds.FirstRow && p.Y <= Selection.LogicalBounds.LastRow && Selection.IsValid)
             {
-                if (p.Y > Selection.LogicalBounds.FirstRow && p.Y <
-                                                              Selection.LogicalBounds.LastRow && Selection.IsValid)
+                if (p.Y > Selection.LogicalBounds.FirstRow && p.Y < Selection.LogicalBounds.LastRow && Selection.IsValid)
                     return true;
                 if (p.Y == Selection.LogicalBounds.FirstRow &&
-                    Selection.LogicalBounds.FirstRow ==
-                    Selection.LogicalBounds.LastRow)
+                    Selection.LogicalBounds.FirstRow == Selection.LogicalBounds.LastRow)
                 {
-                    if (p.X >= Selection.LogicalBounds.FirstColumn && p.X <=
-                                                                      Selection.LogicalBounds.LastColumn)
+                    if (p.X >= Selection.LogicalBounds.FirstColumn && p.X <= Selection.LogicalBounds.LastColumn)
                         return true;
                     return false;
                 }
-                if (p.X >= Selection.LogicalBounds.FirstColumn && p.Y ==
-                                                                  Selection.LogicalBounds.FirstRow)
+                if (p.X >= Selection.LogicalBounds.FirstColumn && p.Y == Selection.LogicalBounds.FirstRow)
                     return true;
-                if (p.X <= Selection.LogicalBounds.LastColumn && p.Y ==
-                                                                 Selection.LogicalBounds.LastRow)
+                if (p.X <= Selection.LogicalBounds.LastColumn && p.Y == Selection.LogicalBounds.LastRow)
                     return true;
                 return false;
             }
@@ -1725,11 +1678,10 @@ namespace Alsing.Windows.Forms.SyntaxBox
             try
             {
                 Row xtr2 = Caret.CurrentRow;
-                if (xtr2.VisibleIndex >= View.FirstVisibleRow + View.VisibleRowCount -
-                                         2)
+                if (xtr2.VisibleIndex >= View.FirstVisibleRow + View.VisibleRowCount - 2)
                 {
-                    int Diff = Caret.CurrentRow.VisibleIndex - (View.FirstVisibleRow +
-                                                                View.VisibleRowCount - 2) + View.FirstVisibleRow;
+                    int Diff = Caret.CurrentRow.VisibleIndex - (View.FirstVisibleRow + View.VisibleRowCount - 2) +
+                               View.FirstVisibleRow;
                     if (Diff > Document.VisibleRows.Count - 1)
                         Diff = Document.VisibleRows.Count - 1;
 
@@ -1756,29 +1708,24 @@ namespace Alsing.Windows.Forms.SyntaxBox
             int x;
             if (Caret.CurrentRow.IsCollapsedEndPart)
             {
-                x = Painter.MeasureRow(xtr, Caret.Position.X).Width +
-                    Caret.CurrentRow.Expansion_PixelStart;
+                x = Painter.MeasureRow(xtr, Caret.Position.X).Width + Caret.CurrentRow.Expansion_PixelStart;
                 x -= Painter.MeasureRow(xtr, xtr.Expansion_StartChar).Width;
 
                 if (x >= View.ClientAreaWidth + View.ClientAreaStart)
-                    hScroll.Value = Math.Min(hScroll.Maximum, ((x - View.ClientAreaWidth)
-                                                               /View.CharWidth) + 15);
+                    hScroll.Value = Math.Min(hScroll.Maximum, ((x - View.ClientAreaWidth)/View.CharWidth) + 15);
 
                 if (x < View.ClientAreaStart + 10)
-                    hScroll.Value = Math.Max(hScroll.Minimum, ((x)/View.CharWidth) - 15)
-                        ;
+                    hScroll.Value = Math.Max(hScroll.Minimum, ((x)/View.CharWidth) - 15);
             }
             else
             {
                 x = Painter.MeasureRow(xtr, Caret.Position.X).Width;
 
                 if (x >= View.ClientAreaWidth + View.ClientAreaStart)
-                    hScroll.Value = Math.Min(hScroll.Maximum, ((x - View.ClientAreaWidth)
-                                                               /View.CharWidth) + 15);
+                    hScroll.Value = Math.Min(hScroll.Maximum, ((x - View.ClientAreaWidth)/View.CharWidth) + 15);
 
                 if (x < View.ClientAreaStart)
-                    hScroll.Value = Math.Max(hScroll.Minimum, ((x)/View.CharWidth) - 15)
-                        ;
+                    hScroll.Value = Math.Max(hScroll.Minimum, ((x)/View.CharWidth) - 15);
             }
         }
 
@@ -1812,8 +1759,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// <param name="MatchCase">Case sensitive</param>
         /// <param name="WholeWords">Match whole words only</param>
         /// <param name="UseRegEx"></param>
-        public bool SelectNext(string Pattern, bool MatchCase, bool WholeWords,
-                               bool UseRegEx)
+        public bool SelectNext(string Pattern, bool MatchCase, bool WholeWords, bool UseRegEx)
         {
             string pattern = Pattern;
             for (int i = Caret.Position.Y; i < Document.Count; i++)
@@ -1887,8 +1833,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// </summary>
         public void ToggleBookmark()
         {
-            Document[Caret.Position.Y].Bookmarked =
-                !Document[Caret.Position.Y].Bookmarked;
+            Document[Caret.Position.Y].Bookmarked = !Document[Caret.Position.Y].Bookmarked;
             Redraw();
         }
 
@@ -2137,10 +2082,8 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// The value is retrived from the owning Syntaxbox control.
         /// </summary>
         [Category("Content")]
-        [Description(
-            "The SyntaxDocument that is attatched to the contro")]
-        public
-            SyntaxDocument Document
+        [Description("The SyntaxDocument that is attatched to the contro")]
+        public SyntaxDocument Document
         {
             get { return _SyntaxBox.Document; }
         }
@@ -2339,10 +2282,8 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// Gets or Sets the background Color of the client area.
         /// </summary>
         [Category("Appearance")]
-        [Description(
-            "The background color of the client area")]
-        public new Color
-            BackColor
+        [Description("The background color of the client area")]
+        public new Color BackColor
         {
             get { return _SyntaxBox.BackColor; }
             set { _SyntaxBox.BackColor = value; }
@@ -2761,8 +2702,8 @@ namespace Alsing.Windows.Forms.SyntaxBox
             if (!e.Handled && AutoListVisible)
             {
                 //move autolist selection
-                if ((e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode ==
-                                                                       Keys.PageUp || e.KeyCode == Keys.PageDown))
+                if ((e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode == Keys.PageUp ||
+                     e.KeyCode == Keys.PageDown))
                 {
                     AutoList.SendKey((int) e.KeyCode);
                     e.Handled = true;
@@ -2770,8 +2711,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                 }
 
                 //inject inser text from autolist
-                if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter || e.KeyCode ==
-                                                                          Keys.Tab)
+                if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter || e.KeyCode == Keys.Tab)
                 {
                     string s = AutoList.SelectedText;
                     if (s != "")
@@ -2791,8 +2731,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                 {
                     if (!ReadOnly || ka.AllowReadOnly)
                     {
-                        if ((ka.Key == (Keys) (int) e.KeyCode) && ka.Alt == e.Alt && ka.Shift
-                                                                                     == e.Shift &&
+                        if ((ka.Key == (Keys) (int) e.KeyCode) && ka.Alt == e.Alt && ka.Shift == e.Shift &&
                             ka.Control == e.Control)
                             ka.Action();
                         //if keys match , call action delegate
@@ -2998,11 +2937,8 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     {
                         default:
                             {
-                                InsertText(e.KeyChar.ToString
-                                               (CultureInfo.InvariantCulture)
-                                    );
-                                if (Indent == IndentStyle.Scope || Indent ==
-                                                                   IndentStyle.Smart)
+                                InsertText(e.KeyChar.ToString(CultureInfo.InvariantCulture));
+                                if (Indent == IndentStyle.Scope || Indent == IndentStyle.Smart)
                                 {
                                     if (Caret.CurrentRow.ShouldOutdent)
                                     {
@@ -3022,8 +2958,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                 {
                     if (Caret.Position.X - AutoListStartPos.X >= 0)
                     {
-                        s = s.Substring(AutoListStartPos.X, Caret.Position.X -
-                                                            AutoListStartPos.X);
+                        s = s.Substring(AutoListStartPos.X, Caret.Position.X - AutoListStartPos.X);
                         AutoList.SelectItem(s);
                     }
                 }
@@ -3058,8 +2993,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             {
                 rea.Area = RowArea.GutterArea;
             }
-            else if (e.X < View.LineNumberMarginWidth +
-                           View.GutterMarginWidth)
+            else if (e.X < View.LineNumberMarginWidth + View.GutterMarginWidth)
             {
                 rea.Area = RowArea.LineNumberArea;
             }
@@ -3081,8 +3015,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     {
                         if (r2.expansion_StartSpan != null)
                         {
-                            if (r2.expansion_StartSpan.StartRow != null &&
-                                r2.expansion_StartSpan.EndRow != null &&
+                            if (r2.expansion_StartSpan.StartRow != null && r2.expansion_StartSpan.EndRow != null &&
                                 r2.expansion_StartSpan.Expanded == false)
                             {
                                 if (!IsOverSelection(e.X, e.Y))
@@ -3128,16 +3061,10 @@ namespace Alsing.Windows.Forms.SyntaxBox
                             {
                                 TextPoint tp = pos;
                                 Word w = Document.GetWordFromPos(tp);
-                                if (w != null && w.Pattern != null && w.Pattern.Category !=
-                                                                      null)
+                                if (w != null && w.Pattern != null && w.Pattern.Category != null)
                                 {
                                     var pe = new WordMouseEventArgs
-                                    {
-                                        Pattern = w.Pattern,
-                                        Button = e.Button,
-                                        Cursor = Cursors.Hand,
-                                        Word = w
-                                    };
+                                             {Pattern = w.Pattern, Button = e.Button, Cursor = Cursors.Hand, Word = w};
 
                                     _SyntaxBox.OnWordMouseDown(ref pe);
 
@@ -3229,8 +3156,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             {
                 rea.Area = RowArea.GutterArea;
             }
-            else if (e.X < View.LineNumberMarginWidth +
-                           View.GutterMarginWidth)
+            else if (e.X < View.LineNumberMarginWidth + View.GutterMarginWidth)
             {
                 rea.Area = RowArea.LineNumberArea;
             }
@@ -3292,8 +3218,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                                             string t = "";
                                             int j = 0;
                                             for (int i = r.expansion_StartSpan.StartRow.Index;
-                                                 i <=
-                                                 r.expansion_StartSpan.EndRow.Index;
+                                                 i <= r.expansion_StartSpan.EndRow.Index;
                                                  i++)
                                             {
                                                 if (j > 0)
@@ -3376,8 +3301,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             {
                 rea.Area = RowArea.GutterArea;
             }
-            else if (e.X < View.LineNumberMarginWidth +
-                           View.GutterMarginWidth)
+            else if (e.X < View.LineNumberMarginWidth + View.GutterMarginWidth)
             {
                 rea.Area = RowArea.LineNumberArea;
             }
@@ -3446,8 +3370,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// Overrides the default OnDragOver
         /// </summary>
         /// <param name="drgevent"></param>
-        protected override void OnDragOver(DragEventArgs
-                                               drgevent)
+        protected override void OnDragOver(DragEventArgs drgevent)
         {
             if (!ReadOnly)
             {
@@ -3478,8 +3401,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// Overrides the default OnDragDrop
         /// </summary>
         /// <param name="drgevent"></param>
-        protected override void OnDragDrop(DragEventArgs
-                                               drgevent)
+        protected override void OnDragDrop(DragEventArgs drgevent)
         {
             if (!ReadOnly)
             {
@@ -3495,8 +3417,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     int SelLen = s.Length;
 
 
-                    if (DropStart >= SelStart && DropStart <= SelStart + Math.Abs
-                                                                             (Selection.SelLength))
+                    if (DropStart >= SelStart && DropStart <= SelStart + Math.Abs(Selection.SelLength))
                         DropStart = SelStart;
                     else if (DropStart >= SelStart + SelLen)
                         DropStart -= SelLen;
@@ -3532,8 +3453,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         ///  Overrides the default OnDragEnter
         /// </summary>
         /// <param name="drgevent"></param>
-        protected override void OnDragEnter(DragEventArgs
-                                                drgevent) {}
+        protected override void OnDragEnter(DragEventArgs drgevent) {}
 
         /// <summary>
         ///  Overrides the default OnDragLeave
@@ -3566,8 +3486,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             {
                 rea.Area = RowArea.GutterArea;
             }
-            else if (MouseX < View.LineNumberMarginWidth +
-                              View.GutterMarginWidth)
+            else if (MouseX < View.LineNumberMarginWidth + View.GutterMarginWidth)
             {
                 rea.Area = RowArea.LineNumberArea;
             }
@@ -3589,8 +3508,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     {
                         if (r2.expansion_StartSpan != null)
                         {
-                            if (r2.expansion_StartSpan.StartRow != null &&
-                                r2.expansion_StartSpan.EndRow != null &&
+                            if (r2.expansion_StartSpan.StartRow != null && r2.expansion_StartSpan.EndRow != null &&
                                 r2.expansion_StartSpan.Expanded == false)
                             {
                                 r2.Expanded = true;
@@ -3629,8 +3547,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             {
                 rea.Area = RowArea.GutterArea;
             }
-            else if (MouseX < View.LineNumberMarginWidth +
-                              View.GutterMarginWidth)
+            else if (MouseX < View.LineNumberMarginWidth + View.GutterMarginWidth)
             {
                 rea.Area = RowArea.LineNumberArea;
             }
@@ -3644,8 +3561,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             #endregion
         }
 
-        private void vScroll_Scroll(object sender,
-                                    ScrollEventArgs e)
+        private void vScroll_Scroll(object sender, System.Windows.Forms.ScrollEventArgs e)
         {
             SetMaxHorizontalScroll();
             _InfoTipVisible = false;
@@ -3655,9 +3571,8 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
 
             int diff = e.NewValue - vScroll.Value;
-            if ((diff == - 1 || diff == 1) && (e.Type ==
-                                               ScrollEventType.SmallDecrement || e.Type ==
-                                                                                 ScrollEventType.SmallIncrement))
+            if ((diff == - 1 || diff == 1) &&
+                (e.Type == ScrollEventType.SmallDecrement || e.Type == ScrollEventType.SmallIncrement))
             {
                 ScrollScreen(diff);
             }
@@ -3667,8 +3582,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             }
         }
 
-        private void hScroll_Scroll(object sender,
-                                    ScrollEventArgs e)
+        private void hScroll_Scroll(object sender, System.Windows.Forms.ScrollEventArgs e)
         {
             _InfoTipVisible = false;
             _AutoListVisible = false;

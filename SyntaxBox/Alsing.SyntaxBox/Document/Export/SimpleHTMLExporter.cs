@@ -19,8 +19,8 @@ namespace Alsing.SourceCode.SyntaxDocumentExporters
                 if (s.Transparent)
                     Out("<span style=\"color:" + GetHTMLColor(s.ForeColor) + "\">");
                 else
-                    Out("<span style=\"color:" + GetHTMLColor(s.ForeColor) +
-                        ";background-color:" + GetHTMLColor(s.BackColor) + ";\">");
+                    Out("<span style=\"color:" + GetHTMLColor(s.ForeColor) + ";background-color:" +
+                        GetHTMLColor(s.BackColor) + ";\">");
             }
 
             text = text.Replace("&", "&amp;");
@@ -43,8 +43,7 @@ namespace Alsing.SourceCode.SyntaxDocumentExporters
 
         private static string GetHTMLColor(Color c)
         {
-            return string.Format("#{0}{1}{2}", c.R.ToString("x2"), c.G.ToString("x2"),
-                                 c.B.ToString("x2"));
+            return string.Format("#{0}{1}{2}", c.R.ToString("x2"), c.G.ToString("x2"), c.B.ToString("x2"));
         }
 
         private static void Out(string text)

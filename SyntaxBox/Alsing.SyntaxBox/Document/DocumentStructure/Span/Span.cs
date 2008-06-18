@@ -16,11 +16,6 @@ namespace Alsing.SourceCode
     public class Span
     {
         /// <summary>
-        /// The owner spanDefinition
-        /// </summary>
-        public SpanDefinition spanDefinition;
-
-        /// <summary>
         /// The depth of this span in the span hirarchy
         /// </summary>
         public int Depth;
@@ -49,6 +44,11 @@ namespace Alsing.SourceCode
         /// Gets or Sets what scope triggered this span
         /// </summary>
         public Scope Scope;
+
+        /// <summary>
+        /// The owner spanDefinition
+        /// </summary>
+        public SpanDefinition spanDefinition;
 
         /// <summary>
         /// The row on which the span starts

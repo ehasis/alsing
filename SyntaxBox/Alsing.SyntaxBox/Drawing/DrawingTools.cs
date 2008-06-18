@@ -20,7 +20,6 @@ namespace Alsing.Drawing
 {
     public static class DrawingTools
     {
-
         public static Color MixColors(Color c1, Color c2, double mix)
         {
             double d = mix;
@@ -30,10 +29,10 @@ namespace Alsing.Drawing
 
         private static void DrawBorder(Border3DStyle Style, Color BorderColor, Graphics g, Rectangle r)
         {
-            using (var normal = GetNormalBrush(BorderColor))
-            using (var light = GetLightBrush(BorderColor))
-            using (var dark = GetDarkBrush(BorderColor))
-            using (var darkdark = GetDarkDarkBrush(BorderColor))
+            using (SolidBrush normal = GetNormalBrush(BorderColor))
+            using (SolidBrush light = GetLightBrush(BorderColor))
+            using (SolidBrush dark = GetDarkBrush(BorderColor))
+            using (SolidBrush darkdark = GetDarkDarkBrush(BorderColor))
             {
                 switch (Style)
                 {
@@ -67,8 +66,8 @@ namespace Alsing.Drawing
             }
         }
 
-        private static void DrawSunkenOuterBorder(Graphics g, Brush dark, Rectangle r, Brush light) {
-
+        private static void DrawSunkenOuterBorder(Graphics g, Brush dark, Rectangle r, Brush light)
+        {
             g.FillRectangle(dark, r.Left, r.Top, r.Width, 1);
             g.FillRectangle(dark, r.Left, r.Top, 1, r.Height);
 
@@ -76,7 +75,8 @@ namespace Alsing.Drawing
             g.FillRectangle(light, r.Left + 1, r.Bottom - 1, r.Width - 1, 1);
         }
 
-        private static void RaisedInnerBorder(Graphics g, Brush dark, Rectangle r, Brush light) {
+        private static void RaisedInnerBorder(Graphics g, Brush dark, Rectangle r, Brush light)
+        {
             g.FillRectangle(light, r.Left, r.Top, r.Width - 1, 1);
             g.FillRectangle(light, r.Left, r.Top, 1, r.Height - 1);
 
@@ -84,7 +84,9 @@ namespace Alsing.Drawing
             g.FillRectangle(dark, r.Left, r.Bottom - 1, r.Width, 1);
         }
 
-        private static void DrawRaisedBorder(Graphics g, Brush dark, Rectangle r, Brush darkdark, Brush light, Brush normal) {
+        private static void DrawRaisedBorder(Graphics g, Brush dark, Rectangle r, Brush darkdark, Brush light,
+                                             Brush normal)
+        {
             g.FillRectangle(normal, r.Left, r.Top, r.Width - 1, 1);
             g.FillRectangle(normal, r.Left, r.Top, 1, r.Height - 1);
             g.FillRectangle(light, r.Left + 1, r.Top + 1, r.Width - 2, 1);
@@ -96,7 +98,9 @@ namespace Alsing.Drawing
             g.FillRectangle(dark, r.Left + 1, r.Bottom - 2, r.Width - 2, 1);
         }
 
-        private static void DrawSunkenBorder(Graphics g, Brush dark, Rectangle r, Brush darkdark, Brush light, Brush normal) {
+        private static void DrawSunkenBorder(Graphics g, Brush dark, Rectangle r, Brush darkdark, Brush light,
+                                             Brush normal)
+        {
             g.FillRectangle(dark, r.Left, r.Top, r.Width, 1);
             g.FillRectangle(dark, r.Left, r.Top, 1, r.Height);
             g.FillRectangle(darkdark, r.Left + 1, r.Top + 1, r.Width - 2, 1);
@@ -108,23 +112,31 @@ namespace Alsing.Drawing
             g.FillRectangle(normal, r.Left + 2, r.Bottom - 2, r.Width - 3, 1);
         }
 
-        private static SolidBrush GetNormalBrush(Color BorderColor) {
+        private static SolidBrush GetNormalBrush(Color BorderColor)
+        {
             return new SolidBrush(BorderColor);
         }
 
-        private static SolidBrush GetLightBrush(Color BorderColor) {
-            return BorderColor.GetBrightness() > 0.6 ? new SolidBrush(MixColors(BorderColor, Color.White, 1)) : new SolidBrush(MixColors(BorderColor, Color.White, 0.5));
+        private static SolidBrush GetLightBrush(Color BorderColor)
+        {
+            return BorderColor.GetBrightness() > 0.6
+                       ? new SolidBrush(MixColors(BorderColor, Color.White, 1))
+                       : new SolidBrush(MixColors(BorderColor, Color.White, 0.5));
         }
 
         private static SolidBrush GetDarkDarkBrush(Color BorderColor)
         {
-            SolidBrush darkdark = BorderColor.GetBrightness() < 0.5 ? new SolidBrush(MixColors(BorderColor, Color.Black, 1)) : new SolidBrush(MixColors(BorderColor, Color.Black, 0.6));
+            SolidBrush darkdark = BorderColor.GetBrightness() < 0.5
+                                      ? new SolidBrush(MixColors(BorderColor, Color.Black, 1))
+                                      : new SolidBrush(MixColors(BorderColor, Color.Black, 0.6));
             return darkdark;
         }
 
         private static SolidBrush GetDarkBrush(Color BorderColor)
         {
-            SolidBrush dark = BorderColor.GetBrightness() < 0.5 ? new SolidBrush(MixColors(BorderColor, Color.Black, 0.7)) : new SolidBrush(MixColors(BorderColor, Color.Black, 0.4));
+            SolidBrush dark = BorderColor.GetBrightness() < 0.5
+                                  ? new SolidBrush(MixColors(BorderColor, Color.Black, 0.7))
+                                  : new SolidBrush(MixColors(BorderColor, Color.Black, 0.4));
             return dark;
         }
 
@@ -223,7 +235,7 @@ namespace Alsing.Drawing
 
                         DrawBorder(Border3DStyle.Raised, BorderColor, g, r);
                         DrawBorder(Border3DStyle.Sunken, BorderColor, g,
-                                                new Rectangle(r.Left + 4, r.Top + 4, r.Width - 8, r.Height - 8));
+                                   new Rectangle(r.Left + 4, r.Top + 4, r.Width - 8, r.Height - 8));
                         break;
                     }
                 case BorderStyle2.Column:
@@ -326,7 +338,7 @@ namespace Alsing.Drawing
             Graphics g = Graphics.FromImage(b);
             IntPtr hdc = g.GetHdc();
             NativeMethods.SendMessage(control.Handle, (int) WindowMessage.WM_PRINT, (int) hdc,
-                                              (int) (WMPrintFlags.PRF_CLIENT | WMPrintFlags.PRF_ERASEBKGND));
+                                      (int) (WMPrintFlags.PRF_CLIENT | WMPrintFlags.PRF_ERASEBKGND));
             g.ReleaseHdc(hdc);
             g.Dispose();
 

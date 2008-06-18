@@ -9,7 +9,6 @@
 // *
 
 using System.Drawing;
-using System.Globalization;
 
 namespace Alsing.Windows.Forms.FormatLabel
 {

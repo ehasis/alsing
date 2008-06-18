@@ -1,6 +1,6 @@
 ﻿using System;
-using Alsing.Windows;
 using System.Drawing;
+using Alsing.Windows;
 
 namespace Alsing.Drawing
 {
@@ -17,9 +17,13 @@ namespace Alsing.Drawing
             Graphics = Graphics.FromHdc(hdc);
         }
 
+        #region IDisposable Members
+
         public void Dispose()
         {
             NativeMethods.ReleaseDC(handle, hdc);
         }
+
+        #endregion
     }
 }

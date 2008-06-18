@@ -28,7 +28,7 @@ namespace Alsing.SourceCode
         {
             languages = new List<SyntaxDefinition>();
 
-            string[] files = Directory.GetFiles(".", "*.syn");            
+            string[] files = Directory.GetFiles(".", "*.syn");
             foreach (string file in files)
             {
                 var loader = new SyntaxDefinitionLoader();

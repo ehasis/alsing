@@ -28,14 +28,9 @@ namespace Alsing.SourceCode
         private readonly RowList rows = new RowList();
 
         /// <summary>
-        /// 
+        /// Buffer containing undo actions
         /// </summary>
-        public RowList KeywordQueue = new RowList();
-
-        /// <summary>
-        /// List of rows that should be parsed
-        /// </summary>
-        public RowList ParseQueue = new RowList();
+        public readonly UndoBuffer UndoBuffer = new UndoBuffer();
 
         private UndoBlockCollection captureBlock;
         private bool captureMode;
@@ -45,6 +40,11 @@ namespace Alsing.SourceCode
         /// For public use only
         /// </summary>
         private bool isParsed = true;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RowList KeywordQueue = new RowList();
 
         private bool modified;
 
@@ -56,7 +56,11 @@ namespace Alsing.SourceCode
         /// </summary>
         public bool NeedResetRows;
 
- 
+        /// <summary>
+        /// List of rows that should be parsed
+        /// </summary>
+        public RowList ParseQueue = new RowList();
+
 
         /// <summary>
         /// The active parser of the document
@@ -67,11 +71,6 @@ namespace Alsing.SourceCode
         /// Tag property , lets the user store custom data in the row.
         /// </summary>
         public object Tag;
-
-        /// <summary>
-        /// Buffer containing undo actions
-        /// </summary>
-        public readonly UndoBuffer UndoBuffer = new UndoBuffer();
 
         /// <summary>
         /// List of rows that is not hidden by folding
@@ -373,10 +372,7 @@ namespace Alsing.SourceCode
         /// </summary>
         public string[] Lines
         {
-            get
-            {
-                return Text.Split("\n".ToCharArray());
-            }
+            get { return Text.Split("\n".ToCharArray()); }
             set
             {
                 string s = "";
@@ -490,10 +486,7 @@ namespace Alsing.SourceCode
         private void Init()
         {
             var l = new SyntaxDefinition();
-            l.mainSpanDefinition = new SpanDefinition(l)
-                          {
-                              MultiLine = true
-                          };
+            l.mainSpanDefinition = new SpanDefinition(l) {MultiLine = true};
             Parser.Init(l);
         }
 
@@ -676,10 +669,7 @@ namespace Alsing.SourceCode
             xtl.Text = text;
             if (storeUndo)
             {
-                var undo = new UndoBlock {
-                               Text = text,
-                               
-                           };
+                var undo = new UndoBlock {Text = text,};
 
                 undo.Position.Y = IndexOf(xtl);
                 AddToUndoList(undo);
@@ -1181,10 +1171,7 @@ namespace Alsing.SourceCode
 
         public void PushUndoBlock(UndoAction Action, string text, int x, int y)
         {
-            var undo = new UndoBlock {
-                           Action = Action,
-                           Text = text
-                       };
+            var undo = new UndoBlock {Action = Action, Text = text};
 
             undo.Position.Y = y;
             undo.Position.X = x;

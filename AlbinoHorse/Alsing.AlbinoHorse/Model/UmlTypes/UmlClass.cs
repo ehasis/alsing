@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using Alsing.AlbinoHorse.Properties;
 using AlbinoHorse.Infrastructure;
 using AlbinoHorse.Model.Settings;
+using Alsing.AlbinoHorse.Properties;
 using Brushes=System.Drawing.Brushes;
 using Pens=AlbinoHorse.Model.Settings.Pens;
 
@@ -43,10 +43,7 @@ namespace AlbinoHorse.Model
         protected override IList<UmlTypeMemberSection> GetTypeMemberSections()
         {
             return new List<UmlTypeMemberSection>
-                   {
-                       new UmlTypeMemberSection(this, "Properties"),
-                       new UmlTypeMemberSection(this, "Methods")
-                   };
+                   {new UmlTypeMemberSection(this, "Properties"), new UmlTypeMemberSection(this, "Methods")};
         }
 
         protected override Brush GetCaptionBrush(Rectangle renderBounds)

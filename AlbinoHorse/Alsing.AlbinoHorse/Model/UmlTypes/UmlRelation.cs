@@ -285,9 +285,7 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                              {
-                                 new Point(x + marginSize, y),
-                                 new Point(x + marginSize/2, y + 5),
-                                 new Point(x + 0, y),
+                                 new Point(x + marginSize, y), new Point(x + marginSize/2, y + 5), new Point(x + 0, y),
                                  new Point(x + marginSize/2, y - 5)
                              };
 
@@ -301,9 +299,7 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                              {
-                                 new Point(x - marginSize, y),
-                                 new Point(x - marginSize/2, y + 5),
-                                 new Point(x - 0, y),
+                                 new Point(x - marginSize, y), new Point(x - marginSize/2, y + 5), new Point(x - 0, y),
                                  new Point(x - marginSize/2, y - 5)
                              };
                 info.Graphics.FillPolygon(System.Drawing.Brushes.White, points);
@@ -316,9 +312,7 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                              {
-                                 new Point(x, y + marginSize),
-                                 new Point(x + 5, y + marginSize/2),
-                                 new Point(x, y),
+                                 new Point(x, y + marginSize), new Point(x + 5, y + marginSize/2), new Point(x, y),
                                  new Point(x - 5, y + marginSize/2)
                              };
 
@@ -332,9 +326,7 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                              {
-                                 new Point(x, y - marginSize),
-                                 new Point(x + 5, y - marginSize/2),
-                                 new Point(x, y),
+                                 new Point(x, y - marginSize), new Point(x + 5, y - marginSize/2), new Point(x, y),
                                  new Point(x - 5, y - marginSize/2)
                              };
 

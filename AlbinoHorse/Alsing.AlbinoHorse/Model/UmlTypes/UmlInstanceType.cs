@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Alsing.AlbinoHorse.Properties;
 using AlbinoHorse.Infrastructure;
 using AlbinoHorse.Model.Settings;
 using AlbinoHorse.Windows.Forms;
+using Alsing.AlbinoHorse.Properties;
 using Brushes=System.Drawing.Brushes;
 
 namespace AlbinoHorse.Model

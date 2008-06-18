@@ -38,19 +38,15 @@ namespace Alsing.SourceCode
         /// <summary>
         /// The start row of the range
         /// </summary>
-
         /// <summary>
         /// The start column of the range
         /// </summary>
-
         /// <summary>
         /// The end row of the range
         /// </summary>
-
         /// <summary>
         /// The end column of the range
         /// </summary>
-
         public void SetBounds(int firstColumn, int firstRow, int lastColumn, int lastRow)
         {
             this.firstColumn = firstColumn;

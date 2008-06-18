@@ -77,7 +77,6 @@ namespace Alsing.Design
             }
             else
             {
-                
                 lstMembers.Items.Clear();
                 foreach (object o in e)
                 {
@@ -137,7 +136,7 @@ namespace Alsing.Design
                     }
                 }
             }
-            catch { }
+            catch {}
         }
 
         private SolidBrush GetFgBrush(bool Selected)
@@ -254,8 +253,8 @@ namespace Alsing.Design
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                                     | System.Windows.Forms.AnchorStyles.Right);
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) |
+                                     System.Windows.Forms.AnchorStyles.Right);
             this.groupBox1.Location = new System.Drawing.Point(8, 296);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(520, 8);
@@ -280,9 +279,8 @@ namespace Alsing.Design
             // 
             // lstMembers
             // 
-            this.lstMembers.Anchor = (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                                       | System.Windows.Forms.AnchorStyles.Left)
-                                      | System.Windows.Forms.AnchorStyles.Right);
+            this.lstMembers.Anchor = (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) |
+                                       System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
             this.lstMembers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lstMembers.IntegralHeight = false;
             this.lstMembers.ItemHeight = 16;
@@ -317,13 +315,8 @@ namespace Alsing.Design
             // 
             this.pnlMembers.Controls.AddRange(new System.Windows.Forms.Control[]
                                               {
-                                                  this.btnRemove,
-                                                  this.lstMembers,
-                                                  this.lblMembers,
-                                                  this.btnDown,
-                                                  this.btnUp,
-                                                  this.btnDropdown,
-                                                  this.btnAdd
+                                                  this.btnRemove, this.lstMembers, this.lblMembers, this.btnDown,
+                                                  this.btnUp, this.btnDropdown, this.btnAdd
                                               });
             this.pnlMembers.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMembers.Name = "pnlMembers";
@@ -369,15 +362,10 @@ namespace Alsing.Design
             // 
             // pnlMain
             // 
-            this.pnlMain.Anchor = (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                                    | System.Windows.Forms.AnchorStyles.Left)
-                                   | System.Windows.Forms.AnchorStyles.Right);
+            this.pnlMain.Anchor = (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) |
+                                    System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right);
             this.pnlMain.Controls.AddRange(new System.Windows.Forms.Control[]
-                                           {
-                                               this.pygProperties,
-                                               this.lblProperties,
-                                               this.pnlMembers
-                                           });
+                                           {this.pygProperties, this.lblProperties, this.pnlMembers});
             this.pnlMain.Location = new System.Drawing.Point(8, 0);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(520, 296);
@@ -395,12 +383,7 @@ namespace Alsing.Design
             // CollectionEditorGui
             // 
             this.Controls.AddRange(new System.Windows.Forms.Control[]
-                                   {
-                                       this.groupBox1,
-                                       this.btnOK,
-                                       this.btnCancel,
-                                       this.pnlMain
-                                   });
+                                   {this.groupBox1, this.btnOK, this.btnCancel, this.pnlMain});
             this.Name = "CollectionEditorGui";
             this.Size = new System.Drawing.Size(536, 352);
             this.pnlMembers.ResumeLayout(false);

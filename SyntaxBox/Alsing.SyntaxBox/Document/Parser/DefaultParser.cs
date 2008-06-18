@@ -103,8 +103,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
         {
             try
             {
-                if (!SyntaxFile.ToLowerInvariant().EndsWith(".syn")
-                    )
+                if (!SyntaxFile.ToLowerInvariant().EndsWith(".syn"))
                     SyntaxFile += ".syn";
 
 
@@ -117,8 +116,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
         {
             try
             {
-                if (!syntaxFile.ToLowerInvariant().EndsWith(".syn")
-                    )
+                if (!syntaxFile.ToLowerInvariant().EndsWith(".syn"))
                     syntaxFile += ".syn";
 
 
@@ -239,8 +237,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
 
         #endregion
 
-        private ScanResultWord GetNextWord(string Text, Span currentSpan, int
-                                                                                    StartPos, ref bool HasComplex)
+        private ScanResultWord GetNextWord(string Text, Span currentSpan, int StartPos, ref bool HasComplex)
         {
             SpanDefinition spanDefinition = currentSpan.spanDefinition;
 
@@ -254,8 +251,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
             {
                 foreach (Pattern pattern in spanDefinition.ComplexPatterns)
                 {
-                    PatternScanResult scanres = pattern.IndexIn(Text, StartPos,
-                                                                pattern.Parent.CaseSensitive, Separators);
+                    PatternScanResult scanres = pattern.IndexIn(Text, StartPos, pattern.Parent.CaseSensitive, Separators);
                     if (scanres.Token != "")
                     {
                         if (scanres.Index < BestComplexPos || BestComplexPos == - 1)
@@ -298,8 +294,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
                 if (i <= Text.Length - 3)
                 {
                     string key = Text.Substring(i, 3).ToLowerInvariant();
-                    var patterns2 = (PatternCollection)
-                                    spanDefinition.LookupTable[key];
+                    var patterns2 = (PatternCollection) spanDefinition.LookupTable[key];
                     //ok , there are patterns that start with this char
                     if (patterns2 != null)
                     {
@@ -309,16 +304,14 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
                             if (i + len > Text.Length)
                                 continue;
 
-                            char lastpatternchar = char.ToLower(pattern.StringPattern[len -
-                                                                                      1]);
+                            char lastpatternchar = char.ToLower(pattern.StringPattern[len - 1]);
                             char lasttextchar = char.ToLower(Text[i + len - 1]);
 
                             #region Case Insensitive
 
                             if (lastpatternchar == lasttextchar)
                             {
-                                if (!pattern.IsKeyword || (pattern.IsKeyword &&
-                                                           pattern.HasSeparators(Text, i)))
+                                if (!pattern.IsKeyword || (pattern.IsKeyword && pattern.HasSeparators(Text, i)))
                                 {
                                     if (!pattern.Parent.CaseSensitive)
                                     {
@@ -330,7 +323,9 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
                                             simpleword.ParentList = pattern.Parent;
                                             simpleword.Pattern = pattern;
                                             simpleword.Position = i;
-                                            simpleword.Token = pattern.Parent.NormalizeCase ? pattern.StringPattern : Text.Substring(i, len);
+                                            simpleword.Token = pattern.Parent.NormalizeCase
+                                                                   ? pattern.StringPattern
+                                                                   : Text.Substring(i, len);
                                             break;
                                         }
                                     }
@@ -383,8 +378,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
 
                             if (char.ToLower(lastpatternchar) == char.ToLower(lasttextchar))
                             {
-                                if (!pattern.IsKeyword || (pattern.IsKeyword &&
-                                                           pattern.HasSeparators(Text, i)))
+                                if (!pattern.IsKeyword || (pattern.IsKeyword && pattern.HasSeparators(Text, i)))
                                 {
                                     string s = Text.Substring(i, len).ToLowerInvariant();
 
@@ -394,7 +388,9 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
                                         simpleword.ParentList = pattern.Parent;
                                         simpleword.Pattern = pattern;
                                         simpleword.Position = i;
-                                        simpleword.Token = pattern.Parent.NormalizeCase ? pattern.StringPattern : Text.Substring(i, len);
+                                        simpleword.Token = pattern.Parent.NormalizeCase
+                                                               ? pattern.StringPattern
+                                                               : Text.Substring(i, len);
                                         break;
                                     }
                                 }
@@ -408,8 +404,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
 
                             if (lastpatternchar == lasttextchar)
                             {
-                                if (!pattern.IsKeyword || (pattern.IsKeyword &&
-                                                           pattern.HasSeparators(Text, i)))
+                                if (!pattern.IsKeyword || (pattern.IsKeyword && pattern.HasSeparators(Text, i)))
                                 {
                                     string s = Text.Substring(i, len);
 
@@ -471,21 +466,17 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
             bool HasComplex = true;
             while (true)
             {
-                ScanResultWord Word = GetNextWord(Text, currentSpan, CurrentPosition,
-                                                  ref HasComplex);
+                ScanResultWord Word = GetNextWord(Text, currentSpan, CurrentPosition, ref HasComplex);
 
                 if (!Word.HasContent)
                 {
-                    ParseTools.AddString(Text.Substring(CurrentPosition), Row,
-                                         currentSpan.spanDefinition.Style, currentSpan);
+                    ParseTools.AddString(Text.Substring(CurrentPosition), Row, currentSpan.spanDefinition.Style,
+                                         currentSpan);
                     break;
                 }
-                ParseTools.AddString(Text.Substring(CurrentPosition, Word.Position -
-                                                                     CurrentPosition), Row,
+                ParseTools.AddString(Text.Substring(CurrentPosition, Word.Position - CurrentPosition), Row,
                                      currentSpan.spanDefinition.Style, currentSpan);
-                ParseTools.AddPatternString(Word.Token, Row, Word.Pattern,
-                                            Word.ParentList.Style, currentSpan,
-                                            false);
+                ParseTools.AddPatternString(Word.Token, Row, Word.Pattern, Word.ParentList.Style, currentSpan, false);
                 CurrentPosition = Word.Position + Word.Token.Length;
             }
         }
@@ -539,21 +530,17 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
 
             while (true)
             {
-                ScanResultSegment ChildSegment = GetNextChildSegment(Row,
-                                                                     currentSpan, CurrentPosition);
-                ScanResultSegment EndSegment = GetEndSegment(Row, currentSpan,
-                                                             CurrentPosition);
+                ScanResultSegment ChildSegment = GetNextChildSegment(Row, currentSpan, CurrentPosition);
+                ScanResultSegment EndSegment = GetEndSegment(Row, currentSpan, CurrentPosition);
 
-                if ((EndSegment.HasContent && ChildSegment.HasContent &&
-                     EndSegment.Position <= ChildSegment.Position) ||
+                if ((EndSegment.HasContent && ChildSegment.HasContent && EndSegment.Position <= ChildSegment.Position) ||
                     (EndSegment.HasContent && ChildSegment.HasContent == false))
                 {
                     //this is an end span
 
                     if (ParseKeywords)
                     {
-                        string Text = Row.Text.Substring(CurrentPosition,
-                                                         EndSegment.Position - CurrentPosition);
+                        string Text = Row.Text.Substring(CurrentPosition, EndSegment.Position - CurrentPosition);
                         ParseText(Row, currentSpan, Text);
                     }
 
@@ -567,8 +554,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
 
                     TextStyle st2 = currentSpan.Scope.Style;
 
-                    ParseTools.AddPatternString(EndSegment.Token, Row, EndSegment.Pattern,
-                                                st2, currentSpan, false);
+                    ParseTools.AddPatternString(EndSegment.Token, Row, EndSegment.Pattern, st2, currentSpan, false);
                     while (oldseg != EndSegment.span)
                     {
                         oldseg.EndRow = Row;
@@ -591,8 +577,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
 
                     if (ParseKeywords)
                     {
-                        string Text = Row.Text.Substring(CurrentPosition,
-                                                         ChildSegment.Position - CurrentPosition);
+                        string Text = Row.Text.Substring(CurrentPosition, ChildSegment.Position - CurrentPosition);
                         //TextStyle st=currentSpan.spanDefinition.Style;
                         ParseText(Row, currentSpan, Text);
                         //ParseTools.AddString (Text,Row,st,currentSpan);
@@ -609,8 +594,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
                     Row.startSpans.Add(NewSeg);
 
                     TextStyle st2 = NewSeg.Scope.Style;
-                    ParseTools.AddPatternString(ChildSegment.Token, Row,
-                                                ChildSegment.Pattern, st2, NewSeg, false);
+                    ParseTools.AddPatternString(ChildSegment.Token, Row, ChildSegment.Pattern, st2, NewSeg, false);
                     NewSeg.StartRow = Row;
                     NewSeg.StartWord = Row[Row.Count - 1];
 
@@ -700,8 +684,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
         }
 
 
-        private ScanResultSegment GetEndSegment(Row Row, Span currentSpan,
-                                                int StartPos)
+        private ScanResultSegment GetEndSegment(Row Row, Span currentSpan, int StartPos)
         {
             //this row has no text , just bail out...
             if (StartPos >= Row.Text.Length || currentSpan.Scope == null)
@@ -722,13 +705,11 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
                 {
                     foreach (Pattern end in seg.Scope.EndPatterns)
                     {
-                        PatternScanResult psr = end.IndexIn(Row.Text, StartPos,
-                                                            seg.Scope.CaseSensitive, Separators);
+                        PatternScanResult psr = end.IndexIn(Row.Text, StartPos, seg.Scope.CaseSensitive, Separators);
                         int CurrentPosition = psr.Index;
                         if (psr.Token != "")
                         {
-                            if ((psr.Index < Result.Position && Result.HasContent) ||
-                                !Result.HasContent)
+                            if ((psr.Index < Result.Position && Result.HasContent) || !Result.HasContent)
                             {
                                 //we found a better match
                                 //store this new match
@@ -760,8 +741,7 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
             return Result;
         }
 
-        private ScanResultSegment GetNextChildSegment(Row Row, Span
-                                                                   currentSpan, int StartPos)
+        private ScanResultSegment GetNextChildSegment(Row Row, Span currentSpan, int StartPos)
         {
             //this row has no text , just bail out...
             if (StartPos >= Row.Text.Length)
@@ -776,11 +756,9 @@ namespace Alsing.SourceCode.SyntaxDocumentParsers
                 //scan each scope in each childblock
                 foreach (Scope Scope in ChildBlock.ScopePatterns)
                 {
-                    PatternScanResult psr = Scope.Start.IndexIn(Row.Text, StartPos,
-                                                                Scope.CaseSensitive, Separators);
+                    PatternScanResult psr = Scope.Start.IndexIn(Row.Text, StartPos, Scope.CaseSensitive, Separators);
                     int CurrentPosition = psr.Index;
-                    if ((!Result.HasContent || CurrentPosition < Result.Position) &&
-                        psr.Token != "")
+                    if ((!Result.HasContent || CurrentPosition < Result.Position) && psr.Token != "")
                     {
                         //we found a better match
                         //store this new match

@@ -20,10 +20,7 @@ namespace AlbinoHorse.Model
 
         protected override IList<UmlTypeMemberSection> GetTypeMemberSections()
         {
-            return new List<UmlTypeMemberSection>
-                   {
-                       new UmlTypeMemberSection(this, "Values")
-                   };
+            return new List<UmlTypeMemberSection> {new UmlTypeMemberSection(this, "Values")};
         }
 
         protected override Brush GetCaptionBrush(Rectangle renderBounds)

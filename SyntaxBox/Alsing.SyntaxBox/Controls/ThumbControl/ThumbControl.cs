@@ -13,11 +13,11 @@ using System.Windows.Forms;
 namespace Alsing.Windows.Forms.CoreLib
 {
     public partial class ThumbControl : Control
-	{
-		public ThumbControl()
-		{
-			InitializeComponent();
-		}
+    {
+        public ThumbControl()
+        {
+            InitializeComponent();
+        }
 
         /// <summary>
         /// Draws a 2px Raised Border for the ThumbControl
@@ -27,5 +27,5 @@ namespace Alsing.Windows.Forms.CoreLib
         {
             ControlPaint.DrawBorder3D(e.Graphics, 0, 0, Width, Height, Border3DStyle.Raised);
         }
-	}
+    }
 }

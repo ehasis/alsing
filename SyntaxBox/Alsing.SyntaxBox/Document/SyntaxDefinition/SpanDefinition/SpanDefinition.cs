@@ -230,9 +230,13 @@ namespace Alsing.SourceCode
 
     public class PatternComparer : IComparer<Pattern>
     {
+        #region IComparer<Pattern> Members
+
         public int Compare(Pattern x, Pattern y)
         {
             return y.StringPattern.Length.CompareTo(x.StringPattern.Length);
         }
+
+        #endregion
     }
 }
