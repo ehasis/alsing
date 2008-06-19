@@ -1,6 +1,5 @@
 using System;
 using System.Data;
-using System.Runtime.InteropServices;
 using FirebirdSql.Data.FirebirdClient;
 
 namespace MyMeta.Firebird

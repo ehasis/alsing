@@ -1,59 +1,49 @@
-using System;
-using System.Data;
-using System.Data.OleDb;
+using System.Runtime.InteropServices;
 
 namespace MyMeta.Pervasive
 {
+    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IForeignKey))]
+    public class PervasiveForeignKey : ForeignKey
+    {
+        public override ITable ForeignTable
+        {
+            get
+            {
+                string catalog = ForeignKeys.Table.Database.Name;
+                string schema = GetString(ForeignKeys.f_FKTableSchema);
 
-	using System.Runtime.InteropServices;
-	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IForeignKey))]
+                return dbRoot.Databases[0].Tables[GetString(ForeignKeys.f_FKTableName)];
+            }
+        }
 
-	public class PervasiveForeignKey : ForeignKey
-	{
-		public PervasiveForeignKey()
-		{
+        internal override void AddForeignColumn(string catalog, string schema, string physicalTableName,
+                                                string physicalColumnName, bool primary)
+        {
+            var column = ForeignKeys.Table.Tables[physicalTableName].Columns[physicalColumnName] as Column;
+            Column c = column.Clone();
 
-		}
+            if (primary)
+            {
+                if (null == _primaryColumns)
+                {
+                    _primaryColumns = (Columns) dbRoot.ClassFactory.CreateColumns();
+                    _primaryColumns.ForeignKey = this;
+                }
 
-		override public ITable ForeignTable
-		{
-			get
-			{
-				string catalog = this.ForeignKeys.Table.Database.Name;
-				string schema  = this.GetString(ForeignKeys.f_FKTableSchema);
+                _primaryColumns.AddColumn(c);
+            }
+            else
+            {
+                if (null == _foreignColumns)
+                {
+                    _foreignColumns = (Columns) dbRoot.ClassFactory.CreateColumns();
+                    _foreignColumns.ForeignKey = this;
+                }
 
-				return this.dbRoot.Databases[0].Tables[this.GetString(ForeignKeys.f_FKTableName)];
-			}
-		}
+                _foreignColumns.AddColumn(c);
+            }
 
-		internal override void AddForeignColumn(string catalog, string schema,
-			string physicalTableName, string physicalColumnName, bool primary)
-		{
-			Column column = this.ForeignKeys.Table.Tables[physicalTableName].Columns[physicalColumnName] as Column;
-			Column c = column.Clone();
-
-			if(primary)
-			{
-				if(null == _primaryColumns)
-				{
-					_primaryColumns = (Columns)this.dbRoot.ClassFactory.CreateColumns();
-					_primaryColumns.ForeignKey = this;
-				}
-
-				_primaryColumns.AddColumn(c);
-			}
-			else
-			{
-				if(null == _foreignColumns)
-				{
-					_foreignColumns = (Columns)this.dbRoot.ClassFactory.CreateColumns();
-					_foreignColumns.ForeignKey = this;
-				}
-
-				_foreignColumns.AddColumn(c);
-			}
-
-			column.AddForeignKey(this);
-		}
-	}
+            column.AddForeignKey(this);
+        }
+    }
 }

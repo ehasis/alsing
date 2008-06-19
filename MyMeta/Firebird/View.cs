@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices;
-
 namespace MyMeta.Firebird
 {
     public class FirebirdView : View

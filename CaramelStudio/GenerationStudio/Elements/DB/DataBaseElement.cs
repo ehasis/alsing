@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.Odbc;
-using System.Data.OleDb;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
 using GenerationStudio.AppCore;
@@ -98,18 +94,23 @@ namespace GenerationStudio.Elements
 
                     table.Columns.ClearChildren();
                     foreach (IColumn metaColumn in metaTable.Columns)
-                    { 
-                        var column = new ColumnElement();
-                        column.Name = metaColumn.Name;
-                        column.IsNullable = metaColumn.IsNullable;
-                        column.IsAutoIncrement = metaColumn.IsAutoKey;
-                        column.IsIdentity = metaColumn.IsInPrimaryKey;
-                        column.DefaultValue = metaColumn.Default;
-                        column.NativeType = null;// metaColumn.LanguageType;
-                        column.IsUnique = false;
-                        column.Ordinal = metaColumn.Ordinal;
-                        column.DbType = metaColumn.DbTargetType;
-                        column.MaxLength = metaColumn.NumericPrecision;
+                    {
+                        var column = new ColumnElement
+                                     {
+                                         Name = metaColumn.Name,
+                                         IsNullable = metaColumn.IsNullable,
+                                         IsAutoKey = metaColumn.IsAutoKey,
+                                         IsInPrimaryKey = metaColumn.IsInPrimaryKey,
+                                         Default = metaColumn.Default,
+                                         NativeType = null,
+                                         IsUnique = false,
+                                         Ordinal = metaColumn.Ordinal,
+                                         DbType = metaColumn.DbTargetType,
+                                         MaxLength = metaColumn.NumericPrecision,
+                                         AutoKeySeed = metaColumn.AutoKeySeed,
+                                         AutoKeyIncrement = metaColumn.AutoKeyIncrement
+                   
+                                     };
                         table.Columns.AddChild(column);
                     }
                 }
@@ -122,26 +123,6 @@ namespace GenerationStudio.Elements
             }
 
             host.RefreshProjectTree();
-        }
-
-        private DataTable GetSchema(IDbConnection connection)
-        {
-            if (connection is DbConnection)
-            {
-                return ((DbConnection) connection).GetSchema();
-            }
-
-            throw new NotSupportedException("Unknown provider");
-        }
-
-        private DataTable GetSchema(IDbConnection connection, string collectionName)
-        {
-            if (connection is DbConnection)
-            {
-                return ((DbConnection) connection).GetSchema(collectionName);
-            }
-
-            throw new NotSupportedException("Unknown provider");
         }
 
 

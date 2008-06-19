@@ -1,6 +1,5 @@
 using System;
 using System.Data;
-using System.Runtime.InteropServices;
 using System.Text;
 using FirebirdSql.Data.FirebirdClient;
 
@@ -51,7 +50,7 @@ namespace MyMeta.Firebird
                 catch {}
 
                 int count = _array.Count;
-                Parameter p = null;
+                Parameter p;
 
                 if (count > 0)
                 {
@@ -73,8 +72,6 @@ namespace MyMeta.Firebird
                     f_TypeNameComplete = new DataColumn("TYPE_NAME_COMPLETE", typeof (string));
                     p._row.Table.Columns.Add(f_TypeNameComplete);
 
-                    short ftype = 0;
-                    short dim = 0;
                     DataRowCollection rows = metaData.Rows;
 
                     for (int index = 0; index < count; index++)
@@ -95,7 +92,7 @@ namespace MyMeta.Firebird
 
 
                         // Step 1: DataTypeName
-                        ftype = (short) rows[index]["FIELD_TYPE"];
+                        short ftype = (short) rows[index]["FIELD_TYPE"];
 
                         switch (ftype)
                         {
@@ -228,7 +225,7 @@ namespace MyMeta.Firebird
 
                         s = p._row["TYPE_NAME_COMPLETE"] as string;
 
-                        dim = 0;
+                        short dim = 0;
                         object o = rows[index]["DIM"];
                         if (o != DBNull.Value)
                         {
@@ -263,10 +260,8 @@ namespace MyMeta.Firebird
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                string e = ex.Message;
-            }
+            catch (Exception)
+            {}
 
             if (cn != null)
             {
@@ -274,7 +269,7 @@ namespace MyMeta.Firebird
             }
         }
 
-        private string BuildSql(string procedureName)
+        private static string BuildSql(string procedureName)
         {
             var sql = new StringBuilder();
 

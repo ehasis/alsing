@@ -12,14 +12,14 @@ namespace GenerationStudio.Elements
     [ElementIcon("GenerationStudio.Images.column.gif")]
     public class ColumnElement : NamedElement
     {
-        [OptionalField] private int autoIncrementSeed;
-        [OptionalField] private int autoIncrementStep;
+        [OptionalField] private int autoKeySeed;
+        [OptionalField] private int autoKeyIncrement;
         [OptionalField] private string dbType;
-        [OptionalField] private string defaultValue;
-        [OptionalField] private bool isAutoIncrement;
+        [OptionalField] private string @default;
+        [OptionalField] private bool isAutoKey;
 
 
-        [OptionalField] private bool isIdentity;
+        [OptionalField] private bool isInPrimaryKey;
         [OptionalField] private bool isNullable;
         [OptionalField] private bool isUnique;
         [OptionalField] private int maxLength;
@@ -38,12 +38,12 @@ namespace GenerationStudio.Elements
             }
         }
 
-        public bool IsIdentity
+        public bool IsInPrimaryKey
         {
-            get { return isIdentity; }
+            get { return isInPrimaryKey; }
             set
             {
-                isIdentity = value;
+                isInPrimaryKey = value;
                 OnNotifyChange();
             }
         }
@@ -66,17 +66,17 @@ namespace GenerationStudio.Elements
             set { maxLength = value; }
         }
 
-        public int AutoIncrementSeed
+        public int AutoKeySeed
         {
-            get { return autoIncrementSeed; }
-            set { autoIncrementSeed = value; }
+            get { return autoKeySeed; }
+            set { autoKeySeed = value; }
         }
 
 
-        public int AutoIncrementStep
+        public int AutoKeyIncrement
         {
-            get { return autoIncrementStep; }
-            set { autoIncrementStep = value; }
+            get { return autoKeyIncrement; }
+            set { autoKeyIncrement = value; }
         }
 
         public bool IsUnique
@@ -91,21 +91,21 @@ namespace GenerationStudio.Elements
             set { isNullable = value; }
         }
 
-        public string DefaultValue
+        public string Default
         {
-            get { return defaultValue; }
-            set { defaultValue = value; }
+            get { return @default; }
+            set { @default = value; }
         }
 
-        public bool IsAutoIncrement
+        public bool IsAutoKey
         {
-            get { return isAutoIncrement; }
-            set { isAutoIncrement = value; }
+            get { return isAutoKey; }
+            set { isAutoKey = value; }
         }
 
         public override string GetIconName()
         {
-            if (IsIdentity)
+            if (IsInPrimaryKey)
                 return "GenerationStudio.Images.pk.gif";
             else
                 return base.GetIconName();
@@ -114,7 +114,7 @@ namespace GenerationStudio.Elements
         [ElementVerb("Toggle Identity")]
         public void ToggleIdentity(IHost host)
         {
-            IsIdentity = !IsIdentity;
+            IsInPrimaryKey = !IsInPrimaryKey;
         }
 
         public override int GetSortPriority()
