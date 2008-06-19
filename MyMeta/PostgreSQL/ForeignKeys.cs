@@ -4,10 +4,10 @@ using Npgsql;
 
 namespace MyMeta.PostgreSQL
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IForeignKeys))]
-#endif 
+
 	public class PostgreSQLForeignKeys : ForeignKeys
 	{
 		static string _query = 

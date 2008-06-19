@@ -10,10 +10,10 @@ namespace MyMeta
 	/// Summary description for Collection.
 	/// </summary>
 	/// 
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IPropertyCollection))]
-#endif 
+
 	public class PropertyCollection : Collection, IPropertyCollection, IEnumerable, IEnumerator, ICollection
 	{
 		public PropertyCollection()
@@ -75,9 +75,6 @@ namespace MyMeta
 
 		#region XML User Data
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public string UserDataXPath
 		{ 
 			get
@@ -86,9 +83,6 @@ namespace MyMeta
 			} 
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override internal bool GetXmlNode(out XmlNode node, bool forceCreate)
 		{
 			node = null;
@@ -120,9 +114,6 @@ namespace MyMeta
 			return success;
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public void CreateUserMetaData(XmlNode parentNode)
 		{
 			XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "Properties", null);
@@ -139,9 +130,6 @@ namespace MyMeta
 			}
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		private void QuickCreateProperty(string key, string value, bool isGlobal)
 		{
 			Property prop = new Property();

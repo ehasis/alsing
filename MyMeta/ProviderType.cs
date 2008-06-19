@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 
 namespace MyMeta
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif 
+
 	public class ProviderType : Single, IProviderType, INameValueItem
 	{
 		public ProviderType()

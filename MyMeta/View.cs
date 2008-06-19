@@ -5,10 +5,10 @@ using System.Data.OleDb;
 
 namespace MyMeta
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif 
+
 	public class View : Single, IView, INameValueItem
 	{
 		public View()
@@ -119,10 +119,7 @@ namespace MyMeta
 		#endregion
 
 		#region Properties
-
-#if ENTERPRISE
-		[DispId(0)]
-#endif		
+	
 		override public string Alias
 		{
 			get
@@ -245,9 +242,6 @@ namespace MyMeta
 
 		#region XML User Data
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public string UserDataXPath
 		{ 
 			get
@@ -256,9 +250,6 @@ namespace MyMeta
 			} 
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public string GlobalUserDataXPath
 		{
 			get
@@ -267,9 +258,6 @@ namespace MyMeta
 			}
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override internal bool GetXmlNode(out XmlNode node, bool forceCreate)
 		{
 			node = null;
@@ -301,9 +289,6 @@ namespace MyMeta
 			return success;
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public void CreateUserMetaData(XmlNode parentNode)
 		{
 			XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "View", null);

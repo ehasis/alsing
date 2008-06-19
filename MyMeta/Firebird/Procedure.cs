@@ -2,10 +2,6 @@ using System.Runtime.InteropServices;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IProcedure))]
-#endif
     public class FirebirdProcedure : Procedure
     {
         public override string Alias

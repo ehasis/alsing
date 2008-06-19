@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.Access
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IIndexes))]
-#endif 
+
 	public class AccessIndexes : Indexes
 	{
 		public AccessIndexes()

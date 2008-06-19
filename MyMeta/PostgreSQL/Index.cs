@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.PostgreSQL
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IIndex))]
-#endif 
+
 	public class PostgreSQLIndex : Index
 	{
 		public PostgreSQLIndex()

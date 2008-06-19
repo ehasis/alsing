@@ -5,10 +5,6 @@ using FirebirdSql.Data.FirebirdClient;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IColumns))]
-#endif
     public class FirebirdColumns : Columns
     {
         internal DataColumn f_AutoKey;

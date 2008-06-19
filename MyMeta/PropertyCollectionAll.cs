@@ -10,10 +10,10 @@ namespace MyMeta
 	/// Summary description for Collection.
 	/// </summary>
 	/// 
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
     [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IPropertyCollection))]
-#endif 
+
 	public class PropertyCollectionAll : Collection, IPropertyCollection, IEnumerable, IEnumerator, ICollection
 	{
 
@@ -29,9 +29,7 @@ namespace MyMeta
 		}
 
 		#region IPropertyCollection
-#if ENTERPRISE
-		[DispId(0)]
-#endif		
+
 		public IProperty this[string key] 
 		{ 
 			get

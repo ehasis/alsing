@@ -4,10 +4,10 @@ using Npgsql;
 
 namespace MyMeta.PostgreSQL8
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IParameters))]
-#endif 
+
 	public class PostgreSQL8Parameters : Parameters
 	{
 		public PostgreSQL8Parameters()

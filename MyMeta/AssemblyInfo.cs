@@ -3,12 +3,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-#if ENTERPRISE
-// This attribute allows us to say Columns[i] instead of Columns.Item[i]
-[assembly: System.Runtime.InteropServices.IDispatchImpl(IDispatchImplType.CompatibleImpl)]
-
-[assembly: Guid("e9c5abd2-d461-4017-a703-efc83c20c0f2")]
-#endif
 //
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information

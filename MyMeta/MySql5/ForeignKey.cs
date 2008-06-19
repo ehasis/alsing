@@ -3,10 +3,10 @@ using System.Data;
 
 namespace MyMeta.MySql5
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IForeignKey))]
-#endif 
+
 	public class MySql5ForeignKey : ForeignKey
 	{
 		public MySql5ForeignKey()

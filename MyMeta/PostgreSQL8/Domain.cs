@@ -4,10 +4,10 @@ using Npgsql;
 
 namespace MyMeta.PostgreSQL8
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IDomain))]
-#endif 
+
 	public class PostgreSQL8Domain : Domain
 	{
 		public PostgreSQL8Domain()

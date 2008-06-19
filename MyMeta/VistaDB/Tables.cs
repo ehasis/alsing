@@ -5,10 +5,10 @@ using System.Reflection;
 
 namespace MyMeta.VistaDB
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(ITables))]
-#endif 
+
 	public class VistaDBTables : Tables
 	{
 		public VistaDBTables()

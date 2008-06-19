@@ -6,10 +6,10 @@ using System.Data.OleDb;
 
 namespace MyMeta
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif 
+
 	public class ForeignKeys : Collection, IForeignKeys, IEnumerable, ICollection
 	{
 		public ForeignKeys()
@@ -153,9 +153,6 @@ namespace MyMeta
 			}
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		public ForeignKey GetByName(string name)
 		{
 			ForeignKey obj = null;
@@ -175,10 +172,7 @@ namespace MyMeta
 
 			return obj;
 		}
-
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif		
+	
 		internal ForeignKey GetByPhysicalName(string name)
 		{
 			ForeignKey obj = null;
@@ -212,9 +206,6 @@ namespace MyMeta
 
 		#region XML User Data
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif		
 		override public string UserDataXPath
 		{ 
 			get
@@ -222,10 +213,7 @@ namespace MyMeta
 				return Table.UserDataXPath + @"/ForeignKeys";
 			} 
 		}
-
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif		
+	
 		override internal bool GetXmlNode(out XmlNode node, bool forceCreate)
 		{
 			node = null;
@@ -257,9 +245,6 @@ namespace MyMeta
 			return success;
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public void CreateUserMetaData(XmlNode parentNode)
 		{
 			XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "ForeignKeys", null);

@@ -10,10 +10,10 @@ namespace MyMeta
 	/// Summary description for Collection.
 	/// </summary>
 	/// 
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif 
+
 	public class Collection : MetaObject
 	{
 		public Collection()
@@ -104,9 +104,9 @@ namespace MyMeta
 
 		#endregion
 
-#if ENTERPRISE
+
 	[ComVisible(false)]
-#endif 
+
 		public bool CompareStrings(string s1, string s2)
 		{
 			return (0 == string.Compare(s1, s2, _dbRoot.IgnoreCase)) ? true : false;

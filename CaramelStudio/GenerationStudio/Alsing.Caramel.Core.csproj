@@ -37,7 +37,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization">
@@ -207,6 +206,10 @@
     <ProjectReference Include="..\..\AlbinoHorse\Alsing.AlbinoHorse\Alsing.AlbinoHorse.csproj">
       <Project>{4E22716D-047F-4CBC-9B86-785E2A0CAB67}</Project>
       <Name>Alsing.AlbinoHorse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MyMeta\MyMeta.csproj">
+      <Project>{72BEAB1C-B55F-4F0E-89AF-17F71E74A452}</Project>
+      <Name>MyMeta</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\SyntaxBox\Alsing.SyntaxBox\Alsing.SyntaxBox.NET.csproj">
       <Project>{19EF75B2-B414-4EB0-9486-160FAF93E62C}</Project>

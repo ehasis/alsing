@@ -4,10 +4,10 @@ using Npgsql;
 
 namespace MyMeta.PostgreSQL8
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IDatabases))]
-#endif 
+
 	public class PostgreSQL8Databases : Databases
 	{
 		public PostgreSQL8Databases()

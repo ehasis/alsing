@@ -2,10 +2,6 @@ using System.Runtime.InteropServices;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IView))]
-#endif
     public class FirebirdView : View
     {
         public override IViews SubViews

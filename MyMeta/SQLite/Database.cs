@@ -7,10 +7,10 @@ using ADODB;
 
 namespace MyMeta.SQLite
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IDatabase))]
-#endif 
+
 	public class SQLiteDatabase : Database
 	{
 		internal string _name = "";

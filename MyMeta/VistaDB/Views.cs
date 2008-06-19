@@ -3,16 +3,8 @@ using System.Data;
 
 namespace MyMeta.VistaDB
 {
-#if ENTERPRISE
-	using System.Runtime.InteropServices;
-	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IViews))]
-#endif 
 	public class VistaDBViews : Views
 	{
-		public VistaDBViews()
-		{
-
-		}
 
 		override internal void LoadAll()
 		{

@@ -4,11 +4,6 @@ using MySql.Data.MySqlClient;
 
 namespace MyMeta.MySql5
 {
-#if ENTERPRISE
-	using System.EnterpriseServices;
-	using System.Runtime.InteropServices;
-	[ComVisible(false)]
-#endif
 	public class ClassFactory : IClassFactory
 	{
         public static void Register()

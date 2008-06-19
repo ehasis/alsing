@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 
 namespace MyMeta
 {
-#if ENTERPRISE
+
     [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IProperty))]
-#endif 
+
 	public class KeyValuePair : IProperty
 	{
 		private string key = string.Empty;
@@ -39,9 +39,9 @@ namespace MyMeta
 	/// <summary>
 	/// Summary description for KeyValueCollection.
 	/// </summary>
-#if ENTERPRISE
+
     [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IPropertyCollection))]
-#endif 
+
 	public class KeyValueCollection : IPropertyCollection, IEnumerable, ICollection, IEnumerator
 	{
 		IEnumerator enumerator;

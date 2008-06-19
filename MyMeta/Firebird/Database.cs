@@ -4,10 +4,6 @@ using FirebirdSql.Data.FirebirdClient;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IDatabase))]
-#endif
     public class FirebirdDatabase : Database
     {
         internal string _desc = "";

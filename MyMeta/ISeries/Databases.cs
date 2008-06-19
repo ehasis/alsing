@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.ISeries
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IDatabases))]
-#endif 
+
 	public class ISeriesDatabases : Databases
 	{
 		public ISeriesDatabases()

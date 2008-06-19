@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.DB2
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(ITable))]
-#endif 
+
 	public class DB2Table : Table
 	{
 		public DB2Table()

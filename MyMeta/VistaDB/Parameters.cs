@@ -3,10 +3,10 @@ using System.Data;
 
 namespace MyMeta.VistaDB
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IParameters))]
-#endif 
+
 	public class VistaDBParameters : Parameters
 	{
 		public VistaDBParameters()

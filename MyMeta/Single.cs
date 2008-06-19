@@ -4,10 +4,6 @@ using System.Runtime.InteropServices;
 
 namespace MyMeta
 {
-#if ENTERPRISE
-    
-    [ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif
     public class Single : MetaObject
     {
         #region Properties
