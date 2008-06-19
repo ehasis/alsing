@@ -6,10 +6,6 @@ using System.Xml;
 
 namespace MyMeta
 {
-#if ENTERPRISE
-    
-    [ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif
     public class Domains : Collection, IDomains, IEnumerable, ICollection
     {
         #region DataColumn Binding Stuff
@@ -87,18 +83,11 @@ namespace MyMeta
 
         #region XML User Data
 
-#if ENTERPRISE
-        [ComVisible(false)]
-#endif
-            public override string UserDataXPath
+        public override string UserDataXPath
         {
             get { return Database.UserDataXPath + @"/Domains"; }
         }
 
-
-#if ENTERPRISE
-        [ComVisible(false)]
-#endif
         internal override bool GetXmlNode(out XmlNode node, bool forceCreate)
         {
             node = null;
@@ -130,9 +119,6 @@ namespace MyMeta
             return success;
         }
 
-#if ENTERPRISE
-        [ComVisible(false)]
-#endif
         public override void CreateUserMetaData(XmlNode parentNode)
         {
             XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "Columns", null);
@@ -167,9 +153,6 @@ namespace MyMeta
 
         #region indexers
 
-#if ENTERPRISE
-        [DispId(0)]
-#endif
         public IDomain this[object index]
         {
             get
@@ -186,9 +169,6 @@ namespace MyMeta
             }
         }
 
-#if ENTERPRISE
-        [ComVisible(false)]
-#endif
         public Domain GetByName(string name)
         {
             Domain obj = null;
@@ -209,9 +189,6 @@ namespace MyMeta
             return obj;
         }
 
-#if ENTERPRISE
-        [ComVisible(false)]
-#endif
         internal Domain GetByPhysicalName(string name)
         {
             Domain obj = null;

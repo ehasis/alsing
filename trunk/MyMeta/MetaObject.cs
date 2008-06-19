@@ -6,10 +6,6 @@ using System.Data.OleDb;
 
 namespace MyMeta
 {
-#if ENTERPRISE
-	using System.Runtime.InteropServices;
-	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif
 	public class MetaObject
 	{
 		public MetaObject()
@@ -34,18 +30,12 @@ namespace MyMeta
 
 		#region XML User Data
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		virtual internal bool GetXmlNode(out XmlNode node, bool forceCreate)
 		{
 			node = null;
 			return false;
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		virtual public string UserDataXPath
 		{
 			get
@@ -54,9 +44,6 @@ namespace MyMeta
 			}
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		virtual public string GlobalUserDataXPath
 		{
 			get
@@ -65,17 +52,11 @@ namespace MyMeta
 			}
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		virtual public void CreateUserMetaData(XmlNode parentNode)
 		{
 
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		virtual public void CreateUserMetaData()
 		{
 

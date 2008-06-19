@@ -6,10 +6,10 @@ using System.Data.OleDb;
 
 namespace MyMeta
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif 
+
 	public class Procedures : Collection, IProcedures, IEnumerable, ICollection
 	{
 		public Procedures()
@@ -19,9 +19,6 @@ namespace MyMeta
 
 		#region XML User Data
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public string UserDataXPath
 		{ 
 			get
@@ -30,9 +27,6 @@ namespace MyMeta
 			} 
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override internal bool GetXmlNode(out XmlNode node, bool forceCreate)
 		{
 			node = null;
@@ -64,9 +58,6 @@ namespace MyMeta
 			return success;
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public void CreateUserMetaData(XmlNode parentNode)
 		{
 			XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "Procedures", null);
@@ -146,9 +137,6 @@ namespace MyMeta
 			}
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		public Procedure GetByName(string name)
 		{
 			Procedure obj = null;
@@ -169,10 +157,6 @@ namespace MyMeta
 			return obj;
 		}
 
-
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		public Procedure GetByPhysicalName(string name)
 		{
 			Procedure obj = null;

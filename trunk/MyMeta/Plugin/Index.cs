@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.Plugin
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IIndex))]
-#endif 
+
 	public class PluginIndex : Index
     {
         private IMyMetaPlugin plugin;

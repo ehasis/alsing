@@ -4,10 +4,10 @@ using System.Data.SQLite;
 
 namespace MyMeta.SQLite
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(ITable))]
-#endif 
+
 	public class SQLiteTable : Table
 	{
 		private MetaDataHelper _helper;

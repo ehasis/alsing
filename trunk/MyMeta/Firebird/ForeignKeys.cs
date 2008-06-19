@@ -5,10 +5,6 @@ using FirebirdSql.Data.FirebirdClient;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IForeignKeys))]
-#endif
     public class FirebirdForeignKeys : ForeignKeys
     {
         internal override void LoadAll()

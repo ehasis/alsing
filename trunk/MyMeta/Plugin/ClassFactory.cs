@@ -4,11 +4,6 @@ using MyMeta;
 
 namespace MyMeta.Plugin
 {
-#if ENTERPRISE
-	using System.EnterpriseServices;
-	using System.Runtime.InteropServices;
-	[ComVisible(false)]
-#endif
 	public class ClassFactory : IClassFactory
 	{
         private IMyMetaPlugin plugin;

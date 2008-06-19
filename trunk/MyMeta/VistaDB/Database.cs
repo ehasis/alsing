@@ -4,10 +4,10 @@ using System.Reflection;
 
 namespace MyMeta.VistaDB
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IDatabase))]
-#endif 
+
 	public class VistaDBDatabase : Database
 	{
 		public VistaDBDatabase()

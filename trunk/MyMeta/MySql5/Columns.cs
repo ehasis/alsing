@@ -5,10 +5,10 @@ using System.Collections;
 
 namespace MyMeta.MySql5
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IColumns))]
-#endif 
+
 	public class MySql5Columns : Columns
 	{
 		public MySql5Columns()

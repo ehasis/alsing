@@ -7,10 +7,10 @@ using ADODB;
 
 namespace MyMeta.PostgreSQL8
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IDatabase))]
-#endif 
+
 	public class PostgreSQL8Database : Database
 	{
 		public PostgreSQL8Database()

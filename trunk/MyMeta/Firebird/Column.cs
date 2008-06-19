@@ -3,12 +3,10 @@ using System.Runtime.InteropServices;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
+
 
     ///<summary>
     ///</summary>
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IColumn))]
-#endif
     public class FirebirdColumn : Column
     {
         public override Boolean IsAutoKey

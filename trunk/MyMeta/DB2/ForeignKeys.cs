@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.DB2
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IForeignKeys))]
-#endif 
+
 	public class DB2ForeignKeys : ForeignKeys
 	{
 		public DB2ForeignKeys()

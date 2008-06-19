@@ -2,10 +2,6 @@ using System.Runtime.InteropServices;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IForeignKey))]
-#endif
     public class FirebirdForeignKey : ForeignKey
     {
         public override ITable ForeignTable

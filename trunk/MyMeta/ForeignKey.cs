@@ -5,10 +5,6 @@ using System.Data.OleDb;
 
 namespace MyMeta
 {
-#if ENTERPRISE
-	using System.Runtime.InteropServices;
-	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif 
 	public class ForeignKey : Single, IForeignKey
 	{
 		public ForeignKey()
@@ -90,10 +86,9 @@ namespace MyMeta
 				Database db = this.ForeignKeys.Table.Tables.Database as Database;
 				if(null == db._foreignkeyProperties)
 				{
-					db._foreignkeyProperties = new PropertyCollection();
-					db._foreignkeyProperties.Parent = this;
+					db._foreignkeyProperties = new PropertyCollection {Parent = this};
 
-					string xPath    = this.GlobalUserDataXPath;
+				    string xPath    = this.GlobalUserDataXPath;
 					XmlNode xmlNode = this.dbRoot.UserData.SelectSingleNode(xPath, null);
 
 					if(xmlNode == null)
@@ -130,9 +125,6 @@ namespace MyMeta
 
 		#region Properties
 
-#if ENTERPRISE
-		[DispId(0)]
-#endif
 		override public string Alias
 		{
 			get
@@ -227,9 +219,6 @@ namespace MyMeta
 
 		#region XML User Data
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public string UserDataXPath
 		{ 
 			get
@@ -238,9 +227,6 @@ namespace MyMeta
 			} 
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public string GlobalUserDataXPath
 		{
 			get
@@ -249,9 +235,6 @@ namespace MyMeta
 			}
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override internal bool GetXmlNode(out XmlNode node, bool forceCreate)
 		{
 			node = null;
@@ -283,9 +266,6 @@ namespace MyMeta
 			return success;
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public void CreateUserMetaData(XmlNode parentNode)
 		{
 			XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "ForeignKey", null);

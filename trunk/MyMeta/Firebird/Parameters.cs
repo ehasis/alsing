@@ -6,10 +6,6 @@ using FirebirdSql.Data.FirebirdClient;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IParameters))]
-#endif
     public class FirebirdParameters : Parameters
     {
         internal DataColumn f_TypeNameComplete;

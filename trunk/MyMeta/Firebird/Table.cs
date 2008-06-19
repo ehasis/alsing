@@ -5,10 +5,6 @@ using FirebirdSql.Data.FirebirdClient;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (ITable))]
-#endif
     public class FirebirdTable : Table
     {
         public override IColumns PrimaryKeys

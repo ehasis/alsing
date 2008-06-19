@@ -4,10 +4,6 @@ using System.Xml;
 
 namespace MyMeta
 {
-#if ENTERPRISE
-    
-    [ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif
     public class Column : Single, IColumn, INameValueItem
     {
         private static readonly ForeignKeys _emptyForeignKeys = new ForeignKeys();

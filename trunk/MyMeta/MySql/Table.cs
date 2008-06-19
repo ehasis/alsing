@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.MySql
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(ITable))]
-#endif 
+
 	public class MySqlTable : Table
 	{
 		public MySqlTable()

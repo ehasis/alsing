@@ -6,10 +6,10 @@ using System.Data.SqlClient;
 
 namespace MyMeta.Sql
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IResultColumns))]
-#endif 
+
 	public class SqlResultColumns : ResultColumns
 	{
 		public SqlResultColumns()

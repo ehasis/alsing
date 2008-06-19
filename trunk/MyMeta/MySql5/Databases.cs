@@ -5,10 +5,10 @@ using MySql.Data.MySqlClient;
 
 namespace MyMeta.MySql5
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IDatabases))]
-#endif 
+
 	public class MySql5Databases : Databases
 	{
 		internal string Version = "";

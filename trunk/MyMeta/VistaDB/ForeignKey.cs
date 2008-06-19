@@ -3,10 +3,10 @@ using System.Data;
 
 namespace MyMeta.VistaDB
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IForeignKey))]
-#endif 
+
 	public class VistaDBForeignKey : ForeignKey
 	{
 		public VistaDBForeignKey()

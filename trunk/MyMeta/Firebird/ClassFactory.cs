@@ -5,10 +5,6 @@ using FirebirdSql.Data.FirebirdClient;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(false)]
-#endif
     public class ClassFactory : IClassFactory
     {
         #region IClassFactory Members

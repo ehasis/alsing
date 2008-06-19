@@ -30,22 +30,22 @@ namespace GenerationStudio.Elements
         {
             try
             {
-                var db = Parent as DataBaseElement;
-                IDbConnection connection = db.GetConnection();
-                IDbCommand command = connection.CreateCommand();
-                command.CommandText = string.Format("select * from [{0}]", Name);
-                connection.Open();
-                IDataReader reader = command.ExecuteReader();
+                //var db = Parent as DataBaseElement;
+                //IDbConnection connection = db.GetConnection();
+                //IDbCommand command = connection.CreateCommand();
+                //command.CommandText = string.Format("select * from [{0}]", Name);
+                //connection.Open();
+                //IDataReader reader = command.ExecuteReader();
 
 
-                var dt = new DataTable();
-                dt.Load(reader);
+                //var dt = new DataTable();
+                //dt.Load(reader);
 
-                reader.Close();
-                connection.Close();
-                var editor = host.GetEditor<TableDataView>(this, "View Table");
-                editor.Data = dt;
-                host.ShowEditor(editor);
+                //reader.Close();
+                //connection.Close();
+                //var editor = host.GetEditor<TableDataView>(this, "View Table");
+                //editor.Data = dt;
+                //host.ShowEditor(editor);
             }
             catch (Exception x)
             {

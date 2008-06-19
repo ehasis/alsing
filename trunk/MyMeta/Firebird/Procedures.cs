@@ -5,10 +5,6 @@ using FirebirdSql.Data.FirebirdClient;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IProcedures))]
-#endif
     public class FirebirdProcedures : Procedures
     {
         public override IProcedure this[object name]

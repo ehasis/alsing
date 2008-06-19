@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.Advantage
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IResultColumns))]
-#endif 
+
 	public class AdvantageResultColumns : ResultColumns
 	{
 		public AdvantageResultColumns()

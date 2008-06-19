@@ -6,10 +6,10 @@ using System.Data.OleDb;
 
 namespace MyMeta
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif 
+
 	public class ProviderTypes : Collection, IProviderTypes, IEnumerable, ICollection
 	{
 		public ProviderTypes()
@@ -93,9 +93,6 @@ namespace MyMeta
 
 		#region indexers
 
-#if ENTERPRISE
-		[DispId(0)]
-#endif		
 		public IProviderType this[object index]
 		{
 			get

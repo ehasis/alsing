@@ -4,11 +4,6 @@ using MyMeta;
 
 namespace MyMeta.Advantage
 {
-#if ENTERPRISE
-	using System.EnterpriseServices;
-	using System.Runtime.InteropServices;
-	[ComVisible(false)]
-#endif
 	public class ClassFactory : IClassFactory
 	{
         internal class MyInternalDriver : InternalDriver

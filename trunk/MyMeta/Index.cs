@@ -5,10 +5,10 @@ using System.Data.OleDb;
 
 namespace MyMeta
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif 
+
 	public class Index : Single, IIndex
 	{
 		public Index()
@@ -89,10 +89,7 @@ namespace MyMeta
 		#endregion
 
 		#region Properties
-
-#if ENTERPRISE
-		[DispId(0)]
-#endif		
+	
 		override public string Alias
 		{
 			get
@@ -283,10 +280,7 @@ namespace MyMeta
 		#endregion
 
 		#region XML User Data
-
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif		
+	
 		override public string UserDataXPath
 		{ 
 			get
@@ -294,10 +288,7 @@ namespace MyMeta
 				return Indexes.UserDataXPath + @"/Index[@p='" + this.Name + "']";
 			} 
 		}
-
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif		
+	
 		override public string GlobalUserDataXPath
 		{
 			get
@@ -305,10 +296,7 @@ namespace MyMeta
 				return this.Indexes.Table.Tables.Database.GlobalUserDataXPath + "/Index";
 			}
 		}
-
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif		
+	
 		override internal bool GetXmlNode(out XmlNode node, bool forceCreate)
 		{
 			node = null;
@@ -340,9 +328,6 @@ namespace MyMeta
 			return success;
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif		
 		override public void CreateUserMetaData(XmlNode parentNode)
 		{
 			XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "Index", null);

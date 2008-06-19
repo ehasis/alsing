@@ -2,10 +2,6 @@ using System.Runtime.InteropServices;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IResultColumns))]
-#endif
     public class FirebirdResultColumns : ResultColumns
     {
         internal override void LoadAll()

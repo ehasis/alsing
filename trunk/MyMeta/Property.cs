@@ -10,10 +10,10 @@ namespace MyMeta
 	/// Summary description for Collection.
 	/// </summary>
 	/// 
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IProperty))]
-#endif 
+
 	public class Property : Single, IProperty
 	{
 		public Property()
@@ -21,9 +21,6 @@ namespace MyMeta
 
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		public void QuickCreate(string key, string value, bool isGlobal)
 		{
 			this._key   = key;
@@ -41,9 +38,6 @@ namespace MyMeta
 			} 
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override internal bool GetXmlNode(out XmlNode node, bool forceCreate)
 		{
 			node = null;
@@ -75,9 +69,6 @@ namespace MyMeta
 			return success;
 		}
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
 		override public void CreateUserMetaData(XmlNode parentNode)
 		{
 			XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "Property", null);

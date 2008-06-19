@@ -1,12 +1,7 @@
-using System.Runtime.InteropServices;
 using FirebirdSql.Data.FirebirdClient;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IDatabases))]
-#endif
     public class FirebirdDatabases : Databases
     {
         internal override void LoadAll()

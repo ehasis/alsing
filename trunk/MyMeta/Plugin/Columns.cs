@@ -5,10 +5,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.Plugin
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IColumns))]
-#endif 
+
 	public class PluginColumns : Columns
 	{
         private IMyMetaPlugin plugin;

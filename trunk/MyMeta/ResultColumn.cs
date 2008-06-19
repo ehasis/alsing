@@ -3,288 +3,234 @@ using System.Xml;
 
 namespace MyMeta
 {
-#if ENTERPRISE
-	using System.Runtime.InteropServices;
-	[ComVisible(false), ClassInterface(ClassInterfaceType.AutoDual)]
-#endif 
-	public class ResultColumn : Single, IResultColumn, INameValueItem
-	{
-		public ResultColumn()
-		{
+    public class ResultColumn : Single, IResultColumn, INameValueItem
+    {
+        #region Collections
 
-		}
+        internal PropertyCollectionAll _allProperties;
 
-		#region Collections
+        public virtual IPropertyCollection GlobalProperties
+        {
+            get
+            {
+                Database db = ResultColumns.Procedure.Procedures.Database;
+                if (null == db._resultColumnProperties)
+                {
+                    db._resultColumnProperties = new PropertyCollection {Parent = this};
 
-		virtual public IPropertyCollection GlobalProperties 
-		{ 
-			get
-			{
-				Database db = this.ResultColumns.Procedure.Procedures.Database as Database;
-				if(null == db._resultColumnProperties)
-				{
-					db._resultColumnProperties = new PropertyCollection();
-					db._resultColumnProperties.Parent = this;
+                    string xPath = GlobalUserDataXPath;
+                    XmlNode xmlNode = dbRoot.UserData.SelectSingleNode(xPath, null);
 
-					string xPath    = this.GlobalUserDataXPath;
-					XmlNode xmlNode = this.dbRoot.UserData.SelectSingleNode(xPath, null);
+                    if (xmlNode == null)
+                    {
+                        XmlNode parentNode = db.CreateGlobalXmlNode();
 
-					if(xmlNode == null)
-					{
-						XmlNode parentNode = db.CreateGlobalXmlNode();
+                        xmlNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "ResultColumn", null);
+                        parentNode.AppendChild(xmlNode);
+                    }
 
-						xmlNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "ResultColumn", null);
-						parentNode.AppendChild(xmlNode);
-					}
+                    db._resultColumnProperties.LoadAllGlobal(xmlNode);
+                }
 
-					db._resultColumnProperties.LoadAllGlobal(xmlNode);
-				}
+                return db._resultColumnProperties;
+            }
+        }
 
-				return db._resultColumnProperties;
-			}
-		}
+        public virtual IPropertyCollection AllProperties
+        {
+            get
+            {
+                if (null == _allProperties)
+                {
+                    _allProperties = new PropertyCollectionAll();
+                    _allProperties.Load(Properties, GlobalProperties);
+                }
 
-		virtual public IPropertyCollection AllProperties 
-		{ 
-			get
-			{
-				if(null == _allProperties)
-				{
-					_allProperties = new PropertyCollectionAll();
-					_allProperties.Load(this.Properties, this.GlobalProperties);
-				}
+                return _allProperties;
+            }
+        }
 
-				return _allProperties;
-			}
-		}
-		internal PropertyCollectionAll _allProperties = null;
+        #endregion
 
-		#endregion
+        #region Properties
 
-		#region Properties
+        public override string Alias
+        {
+            get
+            {
+                XmlNode node;
+                if (GetXmlNode(out node, false))
+                {
+                    string niceName;
 
-#if ENTERPRISE
-		[DispId(0)]
-#endif		
-		override public string Alias
-		{
-			get
-			{
-				XmlNode node = null;
-				if(this.GetXmlNode(out node, false))
-				{
-					string niceName = null;
+                    if (GetUserData(node, "n", out niceName))
+                    {
+                        if (string.Empty != niceName)
+                            return niceName;
+                    }
+                }
 
-					if(this.GetUserData(node, "n", out niceName))
-					{
-						if(string.Empty != niceName)
-							return niceName;
-					}
-				}
+                // There was no nice name
+                return Name;
+            }
 
-				// There was no nice name
-				return this.Name;
-			}
+            set
+            {
+                XmlNode node;
+                if (GetXmlNode(out node, true))
+                {
+                    SetUserData(node, "n", value);
+                }
+            }
+        }
 
-			set
-			{
-				XmlNode node = null;
-				if(this.GetXmlNode(out node, true))
-				{
-					this.SetUserData(node, "n", value);
-				}
-			}
-		}
+        public override string Name
+        {
+            get { return GetString(null); }
+        }
 
-		override public string Name
-		{
-			get
-			{
-				return this.GetString(null);
-			}
-		}
+        public virtual Int32 DataType
+        {
+            get { return 0; }
+        }
 
-		virtual	public System.Int32 DataType 
-		{ 
-			get
-			{
-				return 0;
-			}
-		}
+        public virtual string DataTypeName
+        {
+            get { return GetString(null); }
+        }
 
-		virtual public string DataTypeName
-		{
-			get
-			{
-				return this.GetString(null);
-			}
-		}
+        public virtual string DataTypeNameComplete
+        {
+            get { return GetString(null); }
+        }
 
-		virtual public string DataTypeNameComplete
-		{
-			get
-			{
-				return this.GetString(null);
-			}
-		}
+        public virtual Int32 Ordinal
+        {
+            get { return GetInt32(null); }
+        }
 
-		virtual public System.Int32 Ordinal
-		{
-			get
-			{
-				return this.GetInt32(null);
-			}
-		}
+        public virtual string LanguageType
+        {
+            get
+            {
+                if (dbRoot.LanguageNode != null)
+                {
+                    string xPath = @"./Type[@From='" + DataTypeName + "']";
 
-		virtual public string LanguageType
-		{
-			get
-			{
-				if(dbRoot.LanguageNode != null)
-				{
-					string xPath = @"./Type[@From='" + this.DataTypeName + "']";
+                    XmlNode node = dbRoot.LanguageNode.SelectSingleNode(xPath, null);
 
-					XmlNode node = dbRoot.LanguageNode.SelectSingleNode(xPath, null);
+                    if (node != null)
+                    {
+                        string languageType;
+                        if (GetUserData(node, "To", out languageType))
+                        {
+                            return languageType;
+                        }
+                    }
+                }
 
-					if(node != null)
-					{
-						string languageType = "";
-						if(this.GetUserData(node, "To", out languageType))
-						{
-							return languageType;
-						}
-					}
-				}
+                return "Unknown";
+            }
+        }
 
-				return "Unknown";
-			}
-		}
+        public virtual string DbTargetType
+        {
+            get
+            {
+                if (dbRoot.DbTargetNode != null)
+                {
+                    string xPath = @"./Type[@From='" + DataTypeName + "']";
 
-		virtual public string DbTargetType
-		{
-			get
-			{
-				if(dbRoot.DbTargetNode != null)
-				{
-					string xPath = @"./Type[@From='" + this.DataTypeName + "']";
+                    XmlNode node = dbRoot.DbTargetNode.SelectSingleNode(xPath, null);
 
-					XmlNode node = dbRoot.DbTargetNode.SelectSingleNode(xPath, null);
+                    if (node != null)
+                    {
+                        string driverType;
+                        if (GetUserData(node, "To", out driverType))
+                        {
+                            return driverType;
+                        }
+                    }
+                }
 
-					if(node != null)
-					{
-						string driverType = "";
-						if(this.GetUserData(node, "To", out driverType))
-						{
-							return driverType;
-						}
-					}
-				}
+                return "Unknown";
+            }
+        }
 
-				return "Unknown";
-			}
-		}
+        #endregion
 
-		#endregion
+        #region XML User Data
 
-		#region XML User Data
+        public override string GlobalUserDataXPath
+        {
+            get { return ResultColumns.Procedure.Procedures.Database.GlobalUserDataXPath + "/ResultColumn"; }
+        }
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
-		override public string UserDataXPath
-		{ 
-			get
-			{
-				return ResultColumns.UserDataXPath + @"/ResultColumn[@p='" + this.Name + "']";
-			} 
-		}
+        public override string UserDataXPath
+        {
+            get { return ResultColumns.UserDataXPath + @"/ResultColumn[@p='" + Name + "']"; }
+        }
+        internal override bool GetXmlNode(out XmlNode node, bool forceCreate)
+        {
+            node = null;
+            bool success = false;
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
-		override public string GlobalUserDataXPath
-		{
-			get
-			{
-				return this.ResultColumns.Procedure.Procedures.Database.GlobalUserDataXPath + "/ResultColumn";
-			}
-		}
+            if (null == _xmlNode)
+            {
+                // Get the parent node
+                XmlNode parentNode;
+                if (ResultColumns.GetXmlNode(out parentNode, forceCreate))
+                {
+                    // See if our user data already exists
+                    string xPath = @"./ResultColumn[@p='" + Name + "']";
+                    if (!GetUserData(xPath, parentNode, out _xmlNode) && forceCreate)
+                    {
+                        // Create it, and try again
+                        CreateUserMetaData(parentNode);
+                        GetUserData(xPath, parentNode, out _xmlNode);
+                    }
+                }
+            }
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
-		override internal bool GetXmlNode(out XmlNode node, bool forceCreate)
-		{
-			node = null;
-			bool success = false;
+            if (null != _xmlNode)
+            {
+                node = _xmlNode;
+                success = true;
+            }
 
-			if(null == _xmlNode)
-			{
-				// Get the parent node
-				XmlNode parentNode = null;
-				if(this.ResultColumns.GetXmlNode(out parentNode, forceCreate))
-				{
-					// See if our user data already exists
-					string xPath = @"./ResultColumn[@p='" + this.Name + "']";
-					if(!GetUserData(xPath, parentNode, out _xmlNode) && forceCreate)
-					{
-						// Create it, and try again
-						this.CreateUserMetaData(parentNode);
-						GetUserData(xPath, parentNode, out _xmlNode);
-					}
-				}
-			}
+            return success;
+        }
 
-			if(null != _xmlNode)
-			{
-				node = _xmlNode;
-				success = true;
-			}
+        public override void CreateUserMetaData(XmlNode parentNode)
+        {
+            XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "ResultColumn", null);
+            parentNode.AppendChild(myNode);
 
-			return success;
-		}
+            XmlAttribute attr = parentNode.OwnerDocument.CreateAttribute("p");
+            attr.Value = Name;
+            myNode.Attributes.Append(attr);
 
-#if ENTERPRISE
-		[ComVisible(false)]
-#endif
-		override public void CreateUserMetaData(XmlNode parentNode)
-		{
-			XmlNode myNode = parentNode.OwnerDocument.CreateNode(XmlNodeType.Element, "ResultColumn", null);
-			parentNode.AppendChild(myNode);
+            attr = parentNode.OwnerDocument.CreateAttribute("n");
+            attr.Value = "";
+            myNode.Attributes.Append(attr);
+        }
 
-			XmlAttribute attr;
+        #endregion
 
-			attr = parentNode.OwnerDocument.CreateAttribute("p");
-			attr.Value = this.Name;
-			myNode.Attributes.Append(attr);
+        internal ResultColumns ResultColumns;
 
-			attr = parentNode.OwnerDocument.CreateAttribute("n");
-			attr.Value = "";
-			myNode.Attributes.Append(attr);
-		}
+        #region INameValueItem Members
 
-		#endregion
-		
-		#region INameValueCollection Members
+        public string ItemName
+        {
+            get { return Name; }
+        }
 
-		public string ItemName
-		{
-			get
-			{
-				return this.Name;
-			}
-		}
+        public string ItemValue
+        {
+            get { return Ordinal.ToString(); }
+        }
 
-		public string ItemValue
-		{
-			get
-			{
-				return this.Ordinal.ToString();
-			}
-		}
-
-		#endregion
-
-		internal ResultColumns ResultColumns = null;
-	}
+        #endregion
+    }
 }

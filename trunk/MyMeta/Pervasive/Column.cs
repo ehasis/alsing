@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.Pervasive
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IColumn))]
-#endif 
+
 	public class PervasiveColumn : Column
 	{
 		public PervasiveColumn()

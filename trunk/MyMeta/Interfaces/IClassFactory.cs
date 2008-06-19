@@ -1,13 +1,8 @@
 using System;
-using System.EnterpriseServices;
+using System.Data;
 
 namespace MyMeta
 {
-#if ENTERPRISE
-	using System.Runtime.InteropServices;
-    using System.Data;
-	[ComVisible(false)]
-#endif
 	public interface IClassFactory 
 	{
         IDbConnection CreateConnection();

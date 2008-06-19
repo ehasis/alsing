@@ -3,10 +3,6 @@ using System.Runtime.InteropServices;
 
 namespace MyMeta.Firebird
 {
-#if ENTERPRISE
-    
-    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IDomain))]
-#endif
     public class FirebirdDomain : Domain
     {
         public override string DataTypeNameComplete

@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.Sql
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IDomains))]
-#endif 
+
 	public class SqlDomains : Domains
 	{
 		public SqlDomains()

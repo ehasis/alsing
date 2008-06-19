@@ -3,10 +3,10 @@ using System.Data;
 
 namespace MyMeta.VistaDB
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IColumn))]
-#endif 
+
 	public class VistaDBColumn : Column
 	{
 		public VistaDBColumn()

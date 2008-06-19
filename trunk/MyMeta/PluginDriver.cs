@@ -1,23 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace MyMeta
 {
     public class PluginDriver : InternalDriver
     {
-        private IMyMetaPlugin plugin;
-        internal PluginDriver(IMyMetaPlugin plugin)
-            : base(plugin.GetType(),"", false)
+        private readonly IMyMetaPlugin plugin;
+
+        internal PluginDriver(IMyMetaPlugin plugin) : base(plugin.GetType(), "", false)
         {
             this.plugin = plugin;
 
-            this.IsOleDB = canBrowseDatabase();
+            IsOleDB = canBrowseDatabase();
         }
 
         public override string ConnectString
         {
-            get 
+            get
             {
                 string result = base.ConnectString;
                 if (result.Length == 0)
@@ -29,7 +25,7 @@ namespace MyMeta
 
         public override string BrowseConnectionString(string connstr)
         {
-            MyMetaPluginContext pluginContext = new MyMetaPluginContext(this.DriverId, connstr);
+            var pluginContext = new MyMetaPluginContext(DriverId, connstr);
             plugin.Initialize(pluginContext);
             return plugin.GetDatabaseSpecificMetaData(null, "BrowseDatabase") as string;
         }
@@ -38,8 +34,5 @@ namespace MyMeta
         {
             return (null != plugin.GetDatabaseSpecificMetaData(null, "CanBrowseDatabase"));
         }
-
-
-
     }
 }

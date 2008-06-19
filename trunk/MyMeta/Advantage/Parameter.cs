@@ -4,10 +4,10 @@ using System.Data.OleDb;
 
 namespace MyMeta.Advantage
 {
-#if ENTERPRISE
+
 	using System.Runtime.InteropServices;
 	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IParameter))]
-#endif 
+
 	public class AdvantageParameter : Parameter
 	{
 		public AdvantageParameter()
