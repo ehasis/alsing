@@ -1,0 +1,34 @@
+using System;
+using System.Data;
+using System.Runtime.InteropServices;
+
+namespace MyMeta.Firebird
+{
+#if ENTERPRISE
+    
+    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IResultColumn))]
+#endif
+    public class FirebirdResultColumn : ResultColumn
+    {
+        #region Properties
+
+        public override string Name
+        {
+            get { return _column.ColumnName; }
+        }
+
+        public override string DataTypeName
+        {
+            get { return _column.DataType.ToString(); }
+        }
+
+        public override Int32 Ordinal
+        {
+            get { return _column.Ordinal; }
+        }
+
+        #endregion
+
+        internal DataColumn _column;
+    }
+}
