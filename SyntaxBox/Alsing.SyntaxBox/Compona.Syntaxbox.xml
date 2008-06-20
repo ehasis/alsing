@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Puzzle.SyntaxBox.NET3.5</name>
+        <name>Alsing.SyntaxBox</name>
     </assembly>
     <members>
         <member name="T:Alsing.SourceCode.WordList">
@@ -20,6 +20,21 @@
             </summary>
         </member>
         <member name="M:Alsing.SourceCode.TextStyle.#ctor">
+            <summary>
+            Gets or Sets if the style uses a Bold font
+            </summary>
+            <summary>
+            Gets or Sets if the style uses an Italic font
+            </summary>
+            <summary>
+            Gets or Sets if the style uses an Underlined font
+            </summary>
+            <summary>
+            Gets or Sets the ForeColor of the style
+            </summary>
+            <summary>
+            Gets or Sets the BackColor of the style
+            </summary>
             <summary>
             Default constructor
             </summary>
@@ -116,11 +131,6 @@
             
             </summary>
         </member>
-        <member name="F:Alsing.SourceCode.Span.spanDefinition">
-            <summary>
-            The owner spanDefinition
-            </summary>
-        </member>
         <member name="F:Alsing.SourceCode.Span.Depth">
             <summary>
             The depth of this span in the span hirarchy
@@ -149,6 +159,11 @@
         <member name="F:Alsing.SourceCode.Span.Scope">
             <summary>
             Gets or Sets what scope triggered this span
+            </summary>
+        </member>
+        <member name="F:Alsing.SourceCode.Span.spanDefinition">
+            <summary>
+            The owner spanDefinition
             </summary>
         </member>
         <member name="F:Alsing.SourceCode.Span.StartRow">
@@ -3022,6 +3037,15 @@
         </member>
         <member name="M:Alsing.SourceCode.TextRange.SetBounds(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
+            The start row of the range
+            </summary>
+            <summary>
+            The start column of the range
+            </summary>
+            <summary>
+            The end row of the range
+            </summary>
+            <summary>
             The end column of the range
             </summary>
         </member>
@@ -3030,14 +3054,9 @@
             The SyntaxDocument is a component that is responsible for Parsing , Folding , Undo / Redo actions and various text actions.
             </summary>
         </member>
-        <member name="F:Alsing.SourceCode.SyntaxDocument.KeywordQueue">
+        <member name="F:Alsing.SourceCode.SyntaxDocument.UndoBuffer">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Alsing.SourceCode.SyntaxDocument.ParseQueue">
-            <summary>
-            List of rows that should be parsed
+            Buffer containing undo actions
             </summary>
         </member>
         <member name="F:Alsing.SourceCode.SyntaxDocument.isParsed">
@@ -3045,9 +3064,19 @@
             For public use only
             </summary>
         </member>
+        <member name="F:Alsing.SourceCode.SyntaxDocument.KeywordQueue">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:Alsing.SourceCode.SyntaxDocument.NeedResetRows">
             <summary>
             Gets or Sets if folding needs to be recalculated
+            </summary>
+        </member>
+        <member name="F:Alsing.SourceCode.SyntaxDocument.ParseQueue">
+            <summary>
+            List of rows that should be parsed
             </summary>
         </member>
         <member name="F:Alsing.SourceCode.SyntaxDocument.Parser">
@@ -3058,11 +3087,6 @@
         <member name="F:Alsing.SourceCode.SyntaxDocument.Tag">
             <summary>
             Tag property , lets the user store custom data in the row.
-            </summary>
-        </member>
-        <member name="F:Alsing.SourceCode.SyntaxDocument.UndoBuffer">
-            <summary>
-            Buffer containing undo actions
             </summary>
         </member>
         <member name="F:Alsing.SourceCode.SyntaxDocument.VisibleRows">
