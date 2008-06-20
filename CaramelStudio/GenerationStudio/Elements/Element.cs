@@ -120,38 +120,24 @@ namespace GenerationStudio.Elements
 
             if (Excluded)
             {
-                try
-                {
-                    stream = typeof (Element).Assembly.GetManifestResourceStream("GenerationStudio.Images.exclude.gif");
-                    Image exclude = Image.FromStream(stream);
-                    Image bw = Utils.MakeGrayscale((Bitmap) img);
-                    Image tmp = new Bitmap(16, 16);
-                    Graphics g = Graphics.FromImage(tmp);
-                    g.DrawImage(bw, 0, 0);
-                    g.DrawImage(exclude, 0, 0);
-                    return tmp;
-                }
-                catch (Exception x)
-                {
-                    throw;
-                }
+                stream = typeof (Element).Assembly.GetManifestResourceStream("GenerationStudio.Images.exclude.gif");
+                Image exclude = Image.FromStream(stream);
+                Image bw = Utils.MakeGrayscale((Bitmap) img);
+                Image tmp = new Bitmap(16, 16);
+                Graphics g = Graphics.FromImage(tmp);
+                g.DrawImage(bw, 0, 0);
+                g.DrawImage(exclude, 0, 0);
+                return tmp;
             }
-            else if (GetErrorsRecursive().Count > 0)
+            if (GetErrorsRecursive().Count > 0)
             {
-                try
-                {
-                    stream = typeof (Element).Assembly.GetManifestResourceStream("GenerationStudio.Images.error.gif");
-                    Image exclude = Image.FromStream(stream);
-                    Image tmp = new Bitmap(16, 16);
-                    Graphics g = Graphics.FromImage(tmp);
-                    g.DrawImage(img, 0, 0);
-                    g.DrawImage(exclude, 0, 0);
-                    return tmp;
-                }
-                catch (Exception x)
-                {
-                    throw;
-                }
+                stream = typeof (Element).Assembly.GetManifestResourceStream("GenerationStudio.Images.error.gif");
+                Image exclude = Image.FromStream(stream);
+                Image tmp = new Bitmap(16, 16);
+                Graphics g = Graphics.FromImage(tmp);
+                g.DrawImage(img, 0, 0);
+                g.DrawImage(exclude, 0, 0);
+                return tmp;
             }
 
             return img;

@@ -6,11 +6,11 @@ namespace GenerationStudio.Elements
     [Serializable]
     [ElementName("Columns")]
     [ElementIcon("GenerationStudio.Images.Folder.gif")]
-    public class KeysElement : StaticElement
+    public class ForeignKeysElement : StaticElement
     {
         public override string GetDisplayName()
         {
-            return "Keys";
+            return "Foreign Keys";
         }
     }
 }
