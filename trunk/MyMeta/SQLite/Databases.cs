@@ -1,34 +1,25 @@
-using System;
-using System.Data;
 using System.Data.SQLite;
+using System.Runtime.InteropServices;
 
 namespace MyMeta.SQLite
 {
+    [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof (IDatabases))]
+    public class SQLiteDatabases : Databases
+    {
+        internal override void LoadAll()
+        {
+            try
+            {
+                var cn = new SQLiteConnection(dbRoot.ConnectionString);
 
-	using System.Runtime.InteropServices;
-	[ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual), ComDefaultInterface(typeof(IDatabases))]
-
-	public class SQLiteDatabases : Databases
-	{
-		public SQLiteDatabases()
-		{
-
-		}
-
-		override internal void LoadAll()
-		{
-			try
-			{
-				SQLiteConnection cn = new SQLiteConnection(this.dbRoot.ConnectionString); 
-
-				// We add our one and only Database
-				SQLiteDatabase database = (SQLiteDatabase)this.dbRoot.ClassFactory.CreateDatabase();
-				database.dbRoot = this.dbRoot;
-				database.Databases = this;
-				database._name = (cn.Database.Length == 0 ? "main" : cn.Database);
-				this._array.Add(database);
-			}
-			catch {}
-		}
-	}
+                // We add our one and only Database
+                var database = (SQLiteDatabase) dbRoot.ClassFactory.CreateDatabase();
+                database.dbRoot = dbRoot;
+                database.Databases = this;
+                database._name = (cn.Database.Length == 0 ? "main" : cn.Database);
+                _array.Add(database);
+            }
+            catch {}
+        }
+    }
 }

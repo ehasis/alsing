@@ -61,6 +61,7 @@
     <Compile Include="Attributes\ElementNameAttribute.cs" />
     <Compile Include="Attributes\ElementVerbAttribute.cs" />
     <Compile Include="Attributes\ElementParentAttribute.cs" />
+    <Compile Include="Design\ConnectionStringEditor.cs" />
     <Compile Include="Elements\DB\ColumnElement.cs" />
     <Compile Include="Elements\DB\ColumnsElement.cs" />
     <Compile Include="Elements\DB\DataBaseElement.cs" />
@@ -218,6 +219,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\fk.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{2A75196C-D9EB-4129-B803-931327F72D5C}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="MSDASC">
+      <Guid>{2206CEB0-19C1-11D1-89E0-00C04FD7A829}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing.Design;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
 using GenerationStudio.AppCore;
 using GenerationStudio.Attributes;
+using GenerationStudio.Design;
 using GenerationStudio.Gui;
 using MyMeta;
 
@@ -27,6 +30,8 @@ namespace GenerationStudio.Elements
 
         [OptionalField] private ProviderType providerType = ProviderType.SqlServer;
 
+        [DefaultValue(""), Editor(typeof(ConnectionStringUITypeEditor), typeof(UITypeEditor)), Category("Data"),
+         Description("The alternate connection string.")]
         public string ConnectionString
         {
             get { return connectionString; }
@@ -50,7 +55,7 @@ namespace GenerationStudio.Elements
             var myMeta = new dbRoot();
             if (myMeta.Connect(dbDriver.SQL, ConnectionString))
             {
-                MessageBox.Show("Connection was successful"); 
+                MessageBox.Show("Connection was successful");
             }
             else
             {
@@ -78,7 +83,7 @@ namespace GenerationStudio.Elements
                 Engine.MuteNotify();
 
 
-                foreach (ITable metaTable in myMeta.Databases[0].Tables)
+                foreach (ITable metaTable in myMeta.DefaultDatabase.Tables)
                 {
                     string tableName = metaTable.Name;
 
@@ -112,12 +117,9 @@ namespace GenerationStudio.Elements
                     }
 
                     table.ForeignKeys.ClearChildren();
-                    foreach(IForeignKey metaForeignKey in metaTable.ForeignKeys)
+                    foreach (IForeignKey metaForeignKey in metaTable.ForeignKeys)
                     {
-                        var key = new ForeignKeyElement
-                                    {
-                                        Name = metaForeignKey.Name                                        
-                                    };
+                        var key = new ForeignKeyElement {Name = metaForeignKey.Name};
                         table.ForeignKeys.AddChild(key);
                     }
                 }
