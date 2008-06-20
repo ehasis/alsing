@@ -111,16 +111,15 @@ namespace GenerationStudio.Elements
                         table.Columns.AddChild(column);
                     }
 
-                    table.Keys.ClearChildren();
+                    table.ForeignKeys.ClearChildren();
                     foreach(IForeignKey metaForeignKey in metaTable.ForeignKeys)
                     {
-                        var key = new KeyElement
+                        var key = new ForeignKeyElement
                                     {
-                                        Name = metaForeignKey.Name
+                                        Name = metaForeignKey.Name                                        
                                     };
-                        table.Keys.AddChild(key);
+                        table.ForeignKeys.AddChild(key);
                     }
-
                 }
 
                 Engine.EnableNotify();

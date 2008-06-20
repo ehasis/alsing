@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
 using GenerationStudio.Attributes;
 using GenerationStudio.Gui;
@@ -17,12 +16,12 @@ namespace GenerationStudio.Elements
             Columns = new ColumnsElement();
             AddChild(Columns);
 
-            Keys = new KeysElement();
-            AddChild(Keys);
+            ForeignKeys = new ForeignKeysElement();
+            AddChild(ForeignKeys);
         }
 
         public ColumnsElement Columns { get; set; }
-        public KeysElement Keys { get; set; }
+        public ForeignKeysElement ForeignKeys { get; set; }
 
 
         [ElementVerb("View table data")]
@@ -47,7 +46,7 @@ namespace GenerationStudio.Elements
                 //editor.Data = dt;
                 //host.ShowEditor(editor);
             }
-            catch (Exception x)
+            catch (Exception)
             {
                 MessageBox.Show("An error occured");
             }

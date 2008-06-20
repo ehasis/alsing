@@ -64,8 +64,8 @@
     <Compile Include="Elements\DB\ColumnElement.cs" />
     <Compile Include="Elements\DB\ColumnsElement.cs" />
     <Compile Include="Elements\DB\DataBaseElement.cs" />
-    <Compile Include="Elements\DB\KeyElement.cs" />
-    <Compile Include="Elements\DB\KeysElement.cs" />
+    <Compile Include="Elements\DB\ForeignKeyElement.cs" />
+    <Compile Include="Elements\DB\ForeignKeysElement.cs" />
     <Compile Include="Elements\DB\TableElement.cs" />
     <Compile Include="Elements\ElementError.cs" />
     <Compile Include="Elements\NamedElement.cs" />
@@ -157,7 +157,6 @@
     <EmbeddedResource Include="Images\error.gif" />
     <EmbeddedResource Include="Images\exclude.gif" />
     <EmbeddedResource Include="Images\field.bmp" />
-    <EmbeddedResource Include="Images\fk.bmp" />
     <EmbeddedResource Include="Images\implementation.bmp" />
     <EmbeddedResource Include="Images\interface.bmp" />
     <EmbeddedResource Include="Images\mapping.gif" />
@@ -216,6 +215,9 @@
       <Project>{19EF75B2-B414-4EB0-9486-160FAF93E62C}</Project>
       <Name>Alsing.SyntaxBox.NET</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\fk.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
