@@ -24,6 +24,7 @@ namespace GenerationStudio.Elements
             set
             {
                  foreignTable = value;
+                 OnNotifyChange();
             }
         }
 

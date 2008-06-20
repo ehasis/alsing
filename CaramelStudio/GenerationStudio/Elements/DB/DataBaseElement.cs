@@ -123,6 +123,7 @@ namespace GenerationStudio.Elements
                 }
 
                 Engine.EnableNotify();
+                Engine.OnNotifyChange();
             }
             catch
             {
