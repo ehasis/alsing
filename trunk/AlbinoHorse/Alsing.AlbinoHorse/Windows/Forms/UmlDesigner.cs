@@ -60,11 +60,8 @@ namespace AlbinoHorse.Windows.Forms
                 if (currentShape != null)
                 {
                     Shape shape = currentShape;
-                    var args = new ShapeKeyEventArgs();
-                    args.SnapToGrid = SnapToGrid;
-                    args.Sender = this;
-                    args.GridSize = GridSize;
-                    args.Key = e.KeyCode;
+                    var args = new ShapeKeyEventArgs
+                               {SnapToGrid = SnapToGrid, Sender = this, GridSize = GridSize, Key = e.KeyCode};
 
                     shape.OnKeyPress(args);
 
@@ -138,12 +135,8 @@ namespace AlbinoHorse.Windows.Forms
                     {
                         currentBoundingBox = bbox;
                         var shape = (Shape) bbox.Target;
-                        var args = new ShapeMouseEventArgs();
-                        args.BoundingBox = bbox;
-                        args.X = x;
-                        args.Y = y;
-                        args.Button = MouseButtons.Left;
-                        args.Sender = this;
+                        var args = new ShapeMouseEventArgs
+                                   {BoundingBox = bbox, X = x, Y = y, Button = MouseButtons.Left, Sender = this};
                         shape.OnDoubleClick(args);
                         if (args.Redraw)
                             Refresh();
@@ -308,12 +301,9 @@ namespace AlbinoHorse.Windows.Forms
             var visibleBounds = new Rectangle(x, y, PreviewCanvas.ClientSize.Width, PreviewCanvas.ClientSize.Height);
 
 
-            var renderInfo = new RenderInfo();
-            renderInfo.Graphics = e.Graphics;
-            renderInfo.Preview = true;
+            var renderInfo = new RenderInfo
+                             {Graphics = e.Graphics, Preview = true, VisualBounds = visibleBounds, GridSize = GridSize};
 
-            renderInfo.VisualBounds = visibleBounds;
-            renderInfo.GridSize = GridSize;
             e.Graphics.ScaleTransform(zoom, zoom);
             e.Graphics.TranslateTransform((-x/zoom + 50), (-y/zoom + 50));
             renderInfo.Zoom = Zoom;
@@ -341,11 +331,13 @@ namespace AlbinoHorse.Windows.Forms
 
 
             var visibleBounds = new Rectangle(x, y, ClientSize.Width, ClientSize.Height);
-            var renderInfo = new RenderInfo();
-            renderInfo.Graphics = e.Graphics;
-            renderInfo.VisualBounds = visibleBounds;
-            renderInfo.GridSize = GridSize;
-            renderInfo.ShowGrid = ShowGrid;
+            var renderInfo = new RenderInfo
+                             {
+                                 Graphics = e.Graphics,
+                                 VisualBounds = visibleBounds,
+                                 GridSize = GridSize,
+                                 ShowGrid = ShowGrid
+                             };
             e.Graphics.ScaleTransform((float) Zoom, (float) Zoom);
             e.Graphics.TranslateTransform((float) (-x/zoom), (float) (-y/zoom));
             renderInfo.Zoom = Zoom;
@@ -410,14 +402,16 @@ namespace AlbinoHorse.Windows.Forms
                         if (bbox.Target is Shape)
                         {
                             var shape = (Shape) bbox.Target;
-                            var args = new ShapeMouseEventArgs();
-                            args.BoundingBox = bbox;
-                            args.X = x;
-                            args.Y = y;
-                            args.Button = e.Button;
-                            args.Sender = this;
-                            args.GridSize = GridSize;
-                            args.SnapToGrid = SnapToGrid;
+                            var args = new ShapeMouseEventArgs
+                                       {
+                                           BoundingBox = bbox,
+                                           X = x,
+                                           Y = y,
+                                           Button = e.Button,
+                                           Sender = this,
+                                           GridSize = GridSize,
+                                           SnapToGrid = SnapToGrid
+                                       };
                             shape.OnMouseUp(args);
                             if (args.Redraw)
                                 Refresh();
@@ -468,14 +462,16 @@ namespace AlbinoHorse.Windows.Forms
                             currentBoundingBox = bbox;
                             var shape = (Shape) bbox.Target;
                             currentShape = shape;
-                            var args = new ShapeMouseEventArgs();
-                            args.BoundingBox = bbox;
-                            args.X = x;
-                            args.Y = y;
-                            args.Button = e.Button;
-                            args.Sender = this;
-                            args.GridSize = GridSize;
-                            args.SnapToGrid = SnapToGrid;
+                            var args = new ShapeMouseEventArgs
+                                       {
+                                           BoundingBox = bbox,
+                                           X = x,
+                                           Y = y,
+                                           Button = e.Button,
+                                           Sender = this,
+                                           GridSize = GridSize,
+                                           SnapToGrid = SnapToGrid
+                                       };
                             shape.OnMouseDown(args);
                             if (args.Redraw)
                                 Refresh();
@@ -517,14 +513,16 @@ namespace AlbinoHorse.Windows.Forms
                     else
                     {
                         var shape = (Shape) currentBoundingBox.Target;
-                        var args = new ShapeMouseEventArgs();
-                        args.BoundingBox = currentBoundingBox;
-                        args.X = x;
-                        args.Y = y;
-                        args.Button = e.Button;
-                        args.Sender = this;
-                        args.GridSize = GridSize;
-                        args.SnapToGrid = SnapToGrid;
+                        var args = new ShapeMouseEventArgs
+                                   {
+                                       BoundingBox = currentBoundingBox,
+                                       X = x,
+                                       Y = y,
+                                       Button = e.Button,
+                                       Sender = this,
+                                       GridSize = GridSize,
+                                       SnapToGrid = SnapToGrid
+                                   };
                         shape.OnMouseMove(args);
                         if (args.Redraw)
                             MainCanvas.Refresh();
@@ -540,12 +538,8 @@ namespace AlbinoHorse.Windows.Forms
                             if (bbox.Target is Shape)
                             {
                                 var shape = (Shape) bbox.Target;
-                                var args = new ShapeMouseEventArgs();
-                                args.BoundingBox = bbox;
-                                args.X = x;
-                                args.Y = y;
-                                args.Button = e.Button;
-                                args.Sender = this;
+                                var args = new ShapeMouseEventArgs
+                                           {BoundingBox = bbox, X = x, Y = y, Button = e.Button, Sender = this};
                                 shape.OnMouseMove(args);
                                 if (args.Redraw)
                                     MainCanvas.Refresh();
@@ -664,13 +658,14 @@ namespace AlbinoHorse.Windows.Forms
 
             private static Pen MakeDrawRelationPen()
             {
-                var pen = new Pen(Color.Gray, 3);
+                var pen = new Pen(Color.Gray, 3) {DashStyle = DashStyle.Dash};
 
-                pen.DashStyle = DashStyle.Dash;
                 return pen;
             }
         }
 
         #endregion
+
+        
     }
 }
