@@ -21,10 +21,7 @@ namespace GenerationStudio.Elements
 
         [OptionalField] private bool isInPrimaryKey;
         [OptionalField] private bool isNullable;
-        [OptionalField] private bool isUnique;
         [OptionalField] private int maxLength;
-
-        [OptionalField] private Type nativeType;
 
         [OptionalField] private int ordinal;
 
@@ -50,8 +47,7 @@ namespace GenerationStudio.Elements
 
         public Type NativeType
         {
-            get { return nativeType; }
-            set { nativeType = value; }
+            get { return typeof(string); }
         }
 
         public int Ordinal
@@ -77,12 +73,6 @@ namespace GenerationStudio.Elements
         {
             get { return autoKeyIncrement; }
             set { autoKeyIncrement = value; }
-        }
-
-        public bool IsUnique
-        {
-            get { return isUnique; }
-            set { isUnique = value; }
         }
 
         public bool IsNullable

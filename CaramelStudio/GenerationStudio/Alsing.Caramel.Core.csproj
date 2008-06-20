@@ -64,6 +64,7 @@
     <Compile Include="Elements\DB\ColumnElement.cs" />
     <Compile Include="Elements\DB\ColumnsElement.cs" />
     <Compile Include="Elements\DB\DataBaseElement.cs" />
+    <Compile Include="Elements\DB\KeyElement.cs" />
     <Compile Include="Elements\DB\KeysElement.cs" />
     <Compile Include="Elements\DB\TableElement.cs" />
     <Compile Include="Elements\ElementError.cs" />

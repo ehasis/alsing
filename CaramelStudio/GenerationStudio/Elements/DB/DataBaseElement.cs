@@ -102,17 +102,25 @@ namespace GenerationStudio.Elements
                                          IsAutoKey = metaColumn.IsAutoKey,
                                          IsInPrimaryKey = metaColumn.IsInPrimaryKey,
                                          Default = metaColumn.Default,
-                                         NativeType = null,
-                                         IsUnique = false,
                                          Ordinal = metaColumn.Ordinal,
-                                         DbType = metaColumn.DbTargetType,
+                                         DbType = metaColumn.DataTypeName,
                                          MaxLength = metaColumn.NumericPrecision,
                                          AutoKeySeed = metaColumn.AutoKeySeed,
                                          AutoKeyIncrement = metaColumn.AutoKeyIncrement
-                   
                                      };
                         table.Columns.AddChild(column);
                     }
+
+                    table.Keys.ClearChildren();
+                    foreach(IForeignKey metaForeignKey in metaTable.ForeignKeys)
+                    {
+                        var key = new KeyElement
+                                    {
+                                        Name = metaForeignKey.Name
+                                    };
+                        table.Keys.AddChild(key);
+                    }
+
                 }
 
                 Engine.EnableNotify();
