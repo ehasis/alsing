@@ -26,6 +26,23 @@ namespace GenerationStudio.Elements
     [ElementIcon("GenerationStudio.Images.database.gif")]
     public class DataBaseElement : NamedElement
     {
+
+        public DataBaseElement()
+        {
+            Procedures = new ProceduresElement();
+            AddChild(Procedures);
+
+            Views = new ViewsElement();
+            AddChild(Views);
+
+            Tables = new TablesElement();
+            AddChild(Tables);
+        }
+
+        public ProceduresElement Procedures { get; set; }
+        public ViewsElement Views { get; set; }
+        public TablesElement Tables { get; set; }
+
         private string connectionString;
 
         [OptionalField] private ProviderType providerType = ProviderType.SqlServer;
