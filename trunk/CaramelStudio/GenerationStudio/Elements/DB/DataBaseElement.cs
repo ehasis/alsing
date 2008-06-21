@@ -72,17 +72,17 @@ namespace GenerationStudio.Elements
             try
             {
                 Engine.MuteNotify();
-                RememberChildren();
+                BeginUpdateChildren();
 
                 foreach (ITable metaTable in myMeta.DefaultDatabase.Tables)
                 {
-                    var table = GetOrCreateChild<TableElement>(metaTable.Name);
+                    var table = GetNamedChild<TableElement>(metaTable.Name);
                     AddChild(table);
 
-                    table.Columns.RememberChildren();
+                    table.Columns.BeginUpdateChildren();
                     foreach (IColumn metaColumn in metaTable.Columns)
                     {
-                        var column = table.Columns.GetOrCreateChild<ColumnElement>(metaColumn.Name);
+                        var column = table.Columns.GetNamedChild<ColumnElement>(metaColumn.Name);
 
                         column.Name = metaColumn.Name;
                         column.IsNullable = metaColumn.IsNullable;
@@ -98,11 +98,11 @@ namespace GenerationStudio.Elements
                         table.Columns.AddChild(column);
                     }
 
-                    table.ForeignKeys.RememberChildren();
+                    table.ForeignKeys.BeginUpdateChildren();
                     foreach (IForeignKey metaForeignKey in metaTable.ForeignKeys)
                     {
-                        var foreignKey = table.ForeignKeys.GetOrCreateChild<ForeignKeyElement>(metaForeignKey.Name);
-                        foreignKey.ForeignTable = GetOrCreateChild<TableElement>(metaForeignKey.ForeignTable.Name);
+                        var foreignKey = table.ForeignKeys.GetNamedChild<ForeignKeyElement>(metaForeignKey.Name);
+                        foreignKey.ForeignTable = GetNamedChild<TableElement>(metaForeignKey.ForeignTable.Name);
                         table.ForeignKeys.AddChild(foreignKey); 
                     }
                 }
