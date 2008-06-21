@@ -69,6 +69,7 @@
     <Compile Include="Elements\DB\ForeignKeysElement.cs" />
     <Compile Include="Elements\DB\TableElement.cs" />
     <Compile Include="Elements\ElementError.cs" />
+    <Compile Include="Elements\ElementTransaction.cs" />
     <Compile Include="Elements\NamedElement.cs" />
     <Compile Include="Elements\OO\ClassDiagram\DiagramRelationElement.cs" />
     <Compile Include="Elements\OO\ClassDiagram\DiagramCommentElement.cs" />

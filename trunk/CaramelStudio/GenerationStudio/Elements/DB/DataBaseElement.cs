@@ -72,17 +72,17 @@ namespace GenerationStudio.Elements
             try
             {
                 Engine.MuteNotify();
-                BeginUpdateChildren();
+                var dbTrans = BeginTransaction();
 
                 foreach (ITable metaTable in myMeta.DefaultDatabase.Tables)
                 {
-                    var table = GetNamedChild<TableElement>(metaTable.Name);
+                    var table = dbTrans.GetNamedChild<TableElement>(metaTable.Name);
                     AddChild(table);
 
-                    table.Columns.BeginUpdateChildren();
+                    var columnTrans = table.Columns.BeginTransaction();
                     foreach (IColumn metaColumn in metaTable.Columns)
                     {
-                        var column = table.Columns.GetNamedChild<ColumnElement>(metaColumn.Name);
+                        var column = columnTrans.GetNamedChild<ColumnElement>(metaColumn.Name);
 
                         column.Name = metaColumn.Name;
                         column.IsNullable = metaColumn.IsNullable;
@@ -98,11 +98,11 @@ namespace GenerationStudio.Elements
                         table.Columns.AddChild(column);
                     }
 
-                    table.ForeignKeys.BeginUpdateChildren();
+                    var foreignKeyTrans = table.ForeignKeys.BeginTransaction();
                     foreach (IForeignKey metaForeignKey in metaTable.ForeignKeys)
                     {
-                        var foreignKey = table.ForeignKeys.GetNamedChild<ForeignKeyElement>(metaForeignKey.Name);
-                        foreignKey.ForeignTable = GetNamedChild<TableElement>(metaForeignKey.ForeignTable.Name);
+                        var foreignKey = foreignKeyTrans.GetNamedChild<ForeignKeyElement>(metaForeignKey.Name);
+                        foreignKey.ForeignTable = dbTrans.GetNamedChild<TableElement>(metaForeignKey.ForeignTable.Name);
                         table.ForeignKeys.AddChild(foreignKey); 
                     }
                 }
