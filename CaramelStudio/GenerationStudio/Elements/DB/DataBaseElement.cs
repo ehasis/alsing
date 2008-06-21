@@ -71,8 +71,8 @@ namespace GenerationStudio.Elements
 
             try
             {
-                RememberChildren();
                 Engine.MuteNotify();
+                RememberChildren();
 
                 foreach (ITable metaTable in myMeta.DefaultDatabase.Tables)
                 {
@@ -101,8 +101,9 @@ namespace GenerationStudio.Elements
                     table.ForeignKeys.RememberChildren();
                     foreach (IForeignKey metaForeignKey in metaTable.ForeignKeys)
                     {
-                        var key = table.ForeignKeys.GetOrCreateChild<ForeignKeyElement>(metaForeignKey.Name);
-                        table.ForeignKeys.AddChild(key); 
+                        var foreignKey = table.ForeignKeys.GetOrCreateChild<ForeignKeyElement>(metaForeignKey.Name);
+                        foreignKey.ForeignTable = GetOrCreateChild<TableElement>(metaForeignKey.ForeignTable.Name);
+                        table.ForeignKeys.AddChild(foreignKey); 
                     }
                 }
 
