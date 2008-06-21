@@ -29,9 +29,9 @@ namespace GenerationStudio.Elements
         {
             get
             {
-                IEnumerable<Element> res = from child in children select child;
-
-                return res;
+                return 
+                    from child in children 
+                    select child;
             }
         }
 
@@ -40,9 +40,10 @@ namespace GenerationStudio.Elements
         {
             get
             {
-                IEnumerable<Element> res = from child in children where !child.Excluded select child;
-
-                return res;
+                return 
+                    from child in AllChildren 
+                    where !child.Excluded 
+                    select child;
             }
         }
 
@@ -75,14 +76,18 @@ namespace GenerationStudio.Elements
 
         public IList<T> GetChildren<T>() where T : Element
         {
-            IEnumerable<Element> res = from child in children where !child.Excluded && child is T select child;
+            var res = from child in AllChildren 
+                      where !child.Excluded && child is T 
+                      select child;
 
             return res.Cast<T>().ToList();
         }
 
         public T GetChild<T>() where T : Element
         {
-            IEnumerable<Element> res = from child in children where !child.Excluded && child is T select child;
+            var res = from child in children 
+                      where !child.Excluded && child is T 
+                      select child;
 
             return res.Cast<T>().FirstOrDefault();
         }
@@ -93,10 +98,7 @@ namespace GenerationStudio.Elements
         }
 
 
-        public virtual string GetDisplayName()
-        {
-            return "foo";
-        }
+        public abstract string GetDisplayName();
 
         public virtual void OnNotifyChange()
         {
