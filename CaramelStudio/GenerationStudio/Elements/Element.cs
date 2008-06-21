@@ -207,7 +207,7 @@ namespace GenerationStudio.Elements
 
         [NonSerialized]
         private IDictionary<string, Element> oldChildren;
-        public void RememberChildren()
+        public void BeginUpdateChildren()
         {
             oldChildren = new Dictionary<string, Element>();
             foreach (var child in AllChildren)
@@ -218,7 +218,7 @@ namespace GenerationStudio.Elements
             ClearChildren();
         }
 
-        public T GetOrCreateChild<T>(string name) where T : NamedElement, new()
+        public T GetNamedChild<T>(string name) where T : NamedElement, new()
         {
             string key = string.Format("{0}|{1}", typeof(T).Name, name);
             if (oldChildren.ContainsKey(key))
