@@ -71,56 +71,38 @@ namespace GenerationStudio.Elements
 
             try
             {
-                var tableElements = new Dictionary<string, TableElement>();
-                foreach (TableElement child in AllChildren)
-                {
-                    string key = child.GetDisplayName();
-                    tableElements.Add(key, child);
-                }
-
-                ClearChildren();
-
+                RememberChildren();
                 Engine.MuteNotify();
-
 
                 foreach (ITable metaTable in myMeta.DefaultDatabase.Tables)
                 {
-                    string tableName = metaTable.Name;
-
-                    TableElement table;
-                    if (!tableElements.ContainsKey(tableName))
-                    {
-                        table = new TableElement {Name = tableName};
-                        tableElements.Add(tableName, table);
-                    }
-
-                    table = tableElements[tableName];
+                    var table = GetOrCreateChild<TableElement>(metaTable.Name);
                     AddChild(table);
 
-                    table.Columns.ClearChildren();
+                    table.Columns.RememberChildren();
                     foreach (IColumn metaColumn in metaTable.Columns)
                     {
-                        var column = new ColumnElement
-                                     {
-                                         Name = metaColumn.Name,
-                                         IsNullable = metaColumn.IsNullable,
-                                         IsAutoKey = metaColumn.IsAutoKey,
-                                         IsInPrimaryKey = metaColumn.IsInPrimaryKey,
-                                         Default = metaColumn.Default,
-                                         Ordinal = metaColumn.Ordinal,
-                                         DbType = metaColumn.DataTypeName,
-                                         MaxLength = metaColumn.NumericPrecision,
-                                         AutoKeySeed = metaColumn.AutoKeySeed,
-                                         AutoKeyIncrement = metaColumn.AutoKeyIncrement
-                                     };
+                        var column = table.Columns.GetOrCreateChild<ColumnElement>(metaColumn.Name);
+
+                        column.Name = metaColumn.Name;
+                        column.IsNullable = metaColumn.IsNullable;
+                        column.IsAutoKey = metaColumn.IsAutoKey;
+                        column.IsInPrimaryKey = metaColumn.IsInPrimaryKey;
+                        column.Default = metaColumn.Default;
+                        column.Ordinal = metaColumn.Ordinal;
+                        column.DbType = metaColumn.DataTypeName;
+                        column.MaxLength = metaColumn.NumericPrecision;
+                        column.AutoKeySeed = metaColumn.AutoKeySeed;
+                        column.AutoKeyIncrement = metaColumn.AutoKeyIncrement;
+
                         table.Columns.AddChild(column);
                     }
 
-                    table.ForeignKeys.ClearChildren();
+                    table.ForeignKeys.RememberChildren();
                     foreach (IForeignKey metaForeignKey in metaTable.ForeignKeys)
                     {
-                        var key = new ForeignKeyElement {Name = metaForeignKey.Name};
-                        table.ForeignKeys.AddChild(key);
+                        var key = table.ForeignKeys.GetOrCreateChild<ForeignKeyElement>(metaForeignKey.Name);
+                        table.ForeignKeys.AddChild(key); 
                     }
                 }
 

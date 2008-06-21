@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using AlbinoHorse.Infrastructure;
-using AlbinoHorse.Model;
-
-
-namespace AlbinoHorse.Windows.Forms
+﻿namespace AlbinoHorse.Windows.Forms
 {
     public partial class UmlDesigner
     {
