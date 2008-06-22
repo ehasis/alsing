@@ -19,6 +19,11 @@ namespace GenerationStudio.Elements
             host.ShowEditor(editor);
         }
 
+        public override bool GetDefaultExpanded()
+        {
+            return false;
+        }
+
         //public override bool HideChildren()
         //{
         //    return true;
