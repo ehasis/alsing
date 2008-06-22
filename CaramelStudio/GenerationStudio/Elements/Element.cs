@@ -245,5 +245,18 @@ namespace GenerationStudio.Elements
             private set {}
 // ReSharper restore ValueParameterNotUsed
         }
+
+        public T GetNamedChild<T>(string name) where T : NamedElement, new()
+        {
+            string key = string.Format("{0}|{1}", typeof (T).Name, name);
+            
+            foreach(var child in AllChildren)
+            {
+                string childKey = string.Format("{0}|{1}", child.GetType().Name, child.GetDisplayName());
+                if (key == childKey)
+                    return (T)child;
+            }
+            return null;
+        }
     }
 }
