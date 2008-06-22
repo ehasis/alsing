@@ -89,12 +89,11 @@ namespace GenerationStudio.Elements
             try
             {
                 Engine.MuteNotify();
-                var dbTrans = BeginTransaction();
-
+                var tablesTrans = Tables.BeginTransaction();
                 foreach (ITable metaTable in myMeta.DefaultDatabase.Tables)
                 {
-                    var table = dbTrans.GetNamedChild<TableElement>(metaTable.Name);
-                    AddChild(table);
+                    var table = tablesTrans.GetNamedChild<TableElement>(metaTable.Name);
+                    Tables.AddChild(table);
 
                     var columnTrans = table.Columns.BeginTransaction();
                     foreach (IColumn metaColumn in metaTable.Columns)
@@ -119,9 +118,27 @@ namespace GenerationStudio.Elements
                     foreach (IForeignKey metaForeignKey in metaTable.ForeignKeys)
                     {
                         var foreignKey = foreignKeyTrans.GetNamedChild<ForeignKeyElement>(metaForeignKey.Name);
-                        foreignKey.ForeignTable = dbTrans.GetNamedChild<TableElement>(metaForeignKey.ForeignTable.Name);
+                        foreignKey.ForeignTable = tablesTrans.GetNamedChild<TableElement>(metaForeignKey.ForeignTable.Name);
                         table.ForeignKeys.AddChild(foreignKey); 
                     }
+                }
+
+                var viewTrans = Views.BeginTransaction();
+                foreach (IView metaView in myMeta.DefaultDatabase.Views)
+                {
+                    var view = viewTrans.GetNamedChild<ViewElement>(metaView.Name);
+
+                    view.Name = metaView.Name;
+                    Views.AddChild(view);
+                }
+
+                var procTrans = Procedures.BeginTransaction();
+                foreach (IProcedure metaProcedure in myMeta.DefaultDatabase.Procedures)
+                {                    
+                    var procedure = procTrans.GetNamedChild<ProcedureElement>(metaProcedure.Name);
+
+                    procedure.Name = metaProcedure.Name;
+                    Procedures.AddChild(procedure);
                 }
 
                 Engine.EnableNotify();
