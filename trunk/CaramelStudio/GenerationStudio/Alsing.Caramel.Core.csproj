@@ -62,6 +62,7 @@
     <Compile Include="Attributes\ElementVerbAttribute.cs" />
     <Compile Include="Attributes\ElementParentAttribute.cs" />
     <Compile Include="Design\ConnectionStringEditor.cs" />
+    <Compile Include="Design\ElementSelectEditor.cs" />
     <Compile Include="Elements\DB\ColumnElement.cs" />
     <Compile Include="Elements\DB\ColumnsElement.cs" />
     <Compile Include="Elements\DB\DataBaseElement.cs" />

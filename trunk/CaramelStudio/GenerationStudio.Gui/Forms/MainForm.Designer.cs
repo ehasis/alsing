@@ -167,8 +167,10 @@
             this.ElementProperties.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ElementProperties.Location = new System.Drawing.Point(0, 0);
             this.ElementProperties.Name = "ElementProperties";
+            this.ElementProperties.PropertySort = System.Windows.Forms.PropertySort.Alphabetical;
             this.ElementProperties.Size = new System.Drawing.Size(171, 143);
             this.ElementProperties.TabIndex = 3;
+            this.ElementProperties.ToolbarVisible = false;
             // 
             // ErrorPanel
             // 

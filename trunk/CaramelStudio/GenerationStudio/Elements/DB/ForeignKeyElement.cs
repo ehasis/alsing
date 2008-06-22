@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using GenerationStudio.Attributes;
+using GenerationStudio.Design;
 using GenerationStudio.Gui;
 using System.ComponentModel;
 
@@ -15,6 +16,8 @@ namespace GenerationStudio.Elements
     {
         [OptionalField]
         private TableElement foreignTable;
+
+        [ElementSelect("^^^^Tables")]
         public TableElement ForeignTable
         {
             get
