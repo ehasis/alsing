@@ -67,9 +67,11 @@
     <Compile Include="Elements\DB\DataBaseElement.cs" />
     <Compile Include="Elements\DB\ForeignKeyElement.cs" />
     <Compile Include="Elements\DB\ForeignKeysElement.cs" />
+    <Compile Include="Elements\DB\ProcedureElement.cs" />
     <Compile Include="Elements\DB\ProceduresElement.cs" />
     <Compile Include="Elements\DB\TableElement.cs" />
     <Compile Include="Elements\DB\TablesElement.cs" />
+    <Compile Include="Elements\DB\ViewElement.cs" />
     <Compile Include="Elements\DB\ViewsElement.cs" />
     <Compile Include="Elements\ElementError.cs" />
     <Compile Include="Elements\ElementTransaction.cs" />
@@ -241,6 +243,12 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\view.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\sproc.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,7 @@ using GenerationStudio.Gui;
 namespace GenerationStudio.Elements
 {
     [Serializable]
-    [ElementParent(typeof (DataBaseElement))]
+    [ElementParent(typeof (TablesElement))]
     [ElementName("Table")]
     [ElementIcon("GenerationStudio.Images.table.gif")]
     public class TableElement : NamedElement
