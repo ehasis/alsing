@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Design;
 using System.IO;
 using System.Linq;
 using GenerationStudio.AppCore;
 using GenerationStudio.Attributes;
 using GenerationStudio.Drawing;
+using GenerationStudio.Design;
 
 namespace GenerationStudio.Elements
 {
     [Serializable]
     [ElementIcon("GenerationStudio.Images.dummy.bmp")]
+    [Editor(typeof(ElementSelectEditor), typeof(UITypeEditor))]
     public abstract class Element
     {
         private readonly IList<Element> children = new List<Element>();
