@@ -15,24 +15,23 @@ namespace GenerationStudio.Elements
     public class ForeignKeyElement : NamedElement
     {
         [OptionalField]
-        private TableElement foreignTable;
+        private TableElement primaryTable;
 
         [ElementSelect("^^^^Tables")]
-        public TableElement ForeignTable
+        public TableElement PrimaryTable
         {
             get
             {
-                return foreignTable;
+                return primaryTable;
             }
             set
             {
-                 foreignTable = value;
+                 primaryTable = value;
                  OnNotifyChange();
             }
         }
 
-        [Browsable(false)]
-        public TableElement PrimaryTable
+        public TableElement ForeignTable
         {
             get
             {
@@ -44,7 +43,7 @@ namespace GenerationStudio.Elements
         public override IList<ElementError> GetErrors()
         {
             var errors = new List<ElementError>();
-            if (ForeignTable == null)
+            if (PrimaryTable == null)
                 errors.Add(new ElementError(this,
                                             string.Format("Foreign key {0}.{1} is missing foreign table", Parent.Parent.GetDisplayName(),
                                                           GetDisplayName())));

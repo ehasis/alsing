@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.Serialization;
 using GenerationStudio.Attributes;
 using GenerationStudio.Gui;
@@ -45,6 +46,7 @@ namespace GenerationStudio.Elements
             }
         }
 
+        [Browsable(false)]
         public Type NativeType
         {
             get { return typeof(string); }
@@ -97,8 +99,8 @@ namespace GenerationStudio.Elements
         {
             if (IsInPrimaryKey)
                 return "GenerationStudio.Images.pk.gif";
-            else
-                return base.GetIconName();
+
+            return base.GetIconName();
         }
 
         [ElementVerb("Toggle Identity")]

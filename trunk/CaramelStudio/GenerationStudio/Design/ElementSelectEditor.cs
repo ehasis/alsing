@@ -85,7 +85,7 @@ namespace GenerationStudio.Design
                     ItemsListBox.DoubleClick += ValueChanged;
                  //   ItemsListBox.DrawItem += LB_DrawItem;
                     ItemsListBox.ItemHeight = 20;
-                    ItemsListBox.Height = Math.Min(200, items.Count*SystemFonts.DefaultFont.Height);
+                    ItemsListBox.Height = Math.Min(200, (items.Count+1)*SystemFonts.DefaultFont.Height);
                     ItemsListBox.Width = 180;
 
 
@@ -124,11 +124,14 @@ namespace GenerationStudio.Design
         {
             if (e.Value is Element)
             {
+                e.Graphics.SetClip(e.Bounds);
+                e.Graphics.Clear(Color.LightSteelBlue);
                 var item = (Element) e.Value;
                 Image icon = item.GetIcon();
                 var bounds = new Rectangle(3, -1, 16, 16);
 
                 e.Graphics.DrawImage(icon, bounds);
+                e.Graphics.ResetClip();
             }
         }
 
@@ -157,7 +160,17 @@ namespace GenerationStudio.Design
                 selectPath = selectPath.Substring(1);
             }
 
-            var container = (Element)tmp.GetType().GetProperty(selectPath).GetValue(tmp, null);
+            
+            string[] parts = selectPath.Split('.');
+            object instance = tmp;
+            foreach (string part in parts)
+            {
+                PropertyInfo pi = instance.GetType().GetProperty(part);
+                object res = pi.GetValue(instance, null);
+                instance = res;
+            }
+
+            var container = (Element)instance;
             var items = container.AllChildren.ToList();
             return items;
         }
