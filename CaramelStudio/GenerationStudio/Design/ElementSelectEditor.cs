@@ -79,7 +79,6 @@ namespace GenerationStudio.Design
                 if (edSvc != null)
                 {
                     List<Element> items = GetItems(context);
-
                     // Create a CheckedListBox and populate it with all the enum values
                     ItemsListBox = new ListBox { DrawMode = DrawMode.Normal, BorderStyle = BorderStyle.None, Sorted = true };
                     ItemsListBox.MouseDown += OnMouseDown;
@@ -90,15 +89,14 @@ namespace GenerationStudio.Design
                     ItemsListBox.Width = 180;
 
 
-                    
-                    
+                    ItemsListBox.Items.Add("[None]");
                     foreach (var element in items)
-                    {
+                    {                        
                         ItemsListBox.Items.Add(element);
                     }
                     edSvc.DropDownControl(ItemsListBox);
                     if (ItemsListBox.SelectedItem != null)
-                        return ItemsListBox.SelectedItem;
+                        return ItemsListBox.SelectedItem as Element;
                 }
             }
 
@@ -123,19 +121,15 @@ namespace GenerationStudio.Design
         }
 
         public override void PaintValue(PaintValueEventArgs e)
-        {            
-        //    var bp = new Bitmap(e.Bounds.Width, e.Bounds.Height);
-        //    Graphics g = Graphics.FromImage(bp);
+        {
+            if (e.Value is Element)
+            {
+                var item = (Element) e.Value;
+                Image icon = item.GetIcon();
+                var bounds = new Rectangle(3, -1, 16, 16);
 
-            //g.Clear(Color.White);
-            //e.Graphics.DrawImage(bp, e.Bounds.Left, e.Bounds.Top);
-
-
-            var item = (Element)e.Value;
-            Image icon = item.GetIcon();
-            Rectangle bounds = new Rectangle(3, -1, 16, 16);
-
-            e.Graphics.DrawImageUnscaledAndClipped(icon,bounds);
+                e.Graphics.DrawImage(icon, bounds);
+            }
         }
 
         public override bool GetPaintValueSupported(ITypeDescriptorContext context)
@@ -150,6 +144,9 @@ namespace GenerationStudio.Design
 
         private static List<Element> GetItems(ITypeDescriptorContext context) {
             ElementSelectAttribute selector = GetSelector(context);
+            if (selector == null)
+                return new List<Element>();
+
             string selectPath = selector.Path;
 
             var tmp = (Element)context.Instance;
