@@ -9,8 +9,7 @@ namespace GenerationStudio.Elements
     [ElementName("Type element")]
     [ElementIcon("GenerationStudio.Images.type.gif")]
     public class DiagramTypeElement : DiagramMemberElement
-    {
-        //[Browsable(false)]
+    {        
         public TypeElement Type { get; set; }
 
         [Browsable(false)]

@@ -118,11 +118,17 @@ namespace GenerationStudio.Elements
         public virtual Image GetIcon()
         {
             Stream stream = GetType().Assembly.GetManifestResourceStream(GetIconName());
+            if (stream == null)
+                throw new NullReferenceException(string.Format("Image resource '{0}' was not found", GetIconName()));
+
             Image img = Image.FromStream(stream);
 
             if (Excluded)
             {
                 stream = typeof (Element).Assembly.GetManifestResourceStream("GenerationStudio.Images.exclude.gif");
+                if (stream == null)
+                    throw new NullReferenceException("Image resource 'exclude.gif' was not found");
+
                 Image exclude = Image.FromStream(stream);
                 Image bw = Utils.MakeGrayscale((Bitmap) img);
                 Image tmp = new Bitmap(16, 16);
@@ -134,6 +140,9 @@ namespace GenerationStudio.Elements
             if (GetErrorsRecursive().Count > 0)
             {
                 stream = typeof (Element).Assembly.GetManifestResourceStream("GenerationStudio.Images.error.gif");
+                if (stream == null)
+                    throw new NullReferenceException("Image resource 'error.gif' was not found");
+
                 Image exclude = Image.FromStream(stream);
                 Image tmp = new Bitmap(16, 16);
                 Graphics g = Graphics.FromImage(tmp);
@@ -216,6 +225,22 @@ namespace GenerationStudio.Elements
         public override string ToString()
         {
             return GetDisplayName();
+        }
+
+        private string elementId;
+        [Browsable(false)]
+        public string ElementId
+        {
+            get
+            {
+                if (elementId == null)
+                    elementId = Guid.NewGuid().ToString();
+
+                return elementId;
+            }
+// ReSharper disable ValueParameterNotUsed
+            private set {}
+// ReSharper restore ValueParameterNotUsed
         }
     }
 }
