@@ -98,10 +98,10 @@ namespace GenerationStudio.Elements
                     var table = tablesTrans.GetNamedChild<TableElement>(metaTable.Name);
                     Tables.AddChild(table);
 
-                    var columnTrans = table.Columns.BeginTransaction();
+                    var columnsTrans = table.Columns.BeginTransaction();
                     foreach (IColumn metaColumn in metaTable.Columns)
                     {
-                        var column = columnTrans.GetNamedChild<ColumnElement>(metaColumn.Name);
+                        var column = columnsTrans.GetNamedChild<ColumnElement>(metaColumn.Name);
 
                         column.Name = metaColumn.Name;
                         column.IsNullable = metaColumn.IsNullable;
@@ -116,17 +116,32 @@ namespace GenerationStudio.Elements
 
                         table.Columns.AddChild(column);
                     }
+                }
 
-                    var foreignKeyTrans = table.ForeignKeys.BeginTransaction();
+                //update foreign keys
+                //must be done in a 2nd step since all columns are not available in the first loop
+                foreach (ITable metaTable in myMeta.DefaultDatabase.Tables)
+                {
+                    var table = tablesTrans.GetNamedChild<TableElement>(metaTable.Name);
+                    var foreignKeysTrans = table.ForeignKeys.BeginTransaction();
                     foreach (IForeignKey metaForeignKey in metaTable.ForeignKeys)
                     {
                         if (metaForeignKey.PrimaryTable.Name == metaTable.Name)
                             continue;
 
-                        var foreignKey = foreignKeyTrans.GetNamedChild<ForeignKeyElement>(metaForeignKey.Name);
+                        var foreignKey = foreignKeysTrans.GetNamedChild<ForeignKeyElement>(metaForeignKey.Name);
                         foreignKey.PrimaryTable = tablesTrans.GetNamedChild<TableElement>(metaForeignKey.PrimaryTable.Name);
-                        table.ForeignKeys.AddChild(foreignKey); 
-                        
+                        table.ForeignKeys.AddChild(foreignKey);
+                        var foreignKeyTrans = foreignKey.BeginTransaction();
+
+                        for (int i = 0; i < metaForeignKey.ForeignColumns.Count; i++)
+                        {
+                            var columnPair = new ColumnPairElement();
+                            columnPair.PrimaryColumn = foreignKey.PrimaryTable.Columns.GetNamedChild<ColumnElement>(((IColumn)metaForeignKey.PrimaryColumns[i]).Name);
+                            columnPair.ForeignColumn = foreignKey.ForeignTable.Columns.GetNamedChild<ColumnElement>(((IColumn)metaForeignKey.ForeignColumns[i]).Name);
+
+                            foreignKey.AddChild(columnPair);
+                        }
                     }
                 }
 
@@ -141,7 +156,10 @@ namespace GenerationStudio.Elements
 
                 var procTrans = Procedures.BeginTransaction();
                 foreach (IProcedure metaProcedure in myMeta.DefaultDatabase.Procedures)
-                {                    
+                {
+                    if (metaProcedure.Type == 3)
+                        continue;
+
                     var procedure = procTrans.GetNamedChild<ProcedureElement>(metaProcedure.Name);
 
                     procedure.Name = metaProcedure.Name;
