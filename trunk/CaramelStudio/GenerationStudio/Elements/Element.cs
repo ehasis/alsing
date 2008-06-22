@@ -212,5 +212,10 @@ namespace GenerationStudio.Elements
 
             return trans;
         }
+
+        public override string ToString()
+        {
+            return GetDisplayName();
+        }
     }
 }

@@ -4,7 +4,7 @@ using GenerationStudio.Attributes;
 namespace GenerationStudio.Elements
 {
     [Serializable]
-    [ElementName("Columns")]
+    [ElementName("Views")]
     [ElementIcon("GenerationStudio.Images.Folder.gif")]
     public class ViewsElement : StaticElement
     {

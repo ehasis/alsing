@@ -4,7 +4,7 @@ using GenerationStudio.Attributes;
 namespace GenerationStudio.Elements
 {
     [Serializable]
-    [ElementName("Columns")]
+    [ElementName("Tables")]
     [ElementIcon("GenerationStudio.Images.Folder.gif")]
     public class TablesElement : StaticElement
     {

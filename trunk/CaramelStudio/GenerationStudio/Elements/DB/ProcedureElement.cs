@@ -5,8 +5,8 @@ using GenerationStudio.Gui;
 namespace GenerationStudio.Elements
 {
     [Serializable]
-    [ElementParent(typeof(ViewsElement))]
-    [ElementName("View")]
+    [ElementParent(typeof(ProceduresElement))]
+    [ElementName("Procedure")]
     [ElementIcon("GenerationStudio.Images.sproc.gif")]
     public class ProcedureElement : NamedElement
     {
