@@ -39,9 +39,12 @@ namespace GenerationStudio.Elements
             AddChild(Tables);
         }
 
-        public ProceduresElement Procedures { get; set; }
-        public ViewsElement Views { get; set; }
-        public TablesElement Tables { get; set; }
+        [Browsable(false)]
+        public ProceduresElement Procedures { get; private set; }
+        [Browsable(false)]
+        public ViewsElement Views { get; private set; }
+        [Browsable(false)]
+        public TablesElement Tables { get; private set; }
 
         private string connectionString;
 
@@ -117,9 +120,13 @@ namespace GenerationStudio.Elements
                     var foreignKeyTrans = table.ForeignKeys.BeginTransaction();
                     foreach (IForeignKey metaForeignKey in metaTable.ForeignKeys)
                     {
+                        if (metaForeignKey.PrimaryTable.Name == metaTable.Name)
+                            continue;
+
                         var foreignKey = foreignKeyTrans.GetNamedChild<ForeignKeyElement>(metaForeignKey.Name);
-                        foreignKey.ForeignTable = tablesTrans.GetNamedChild<TableElement>(metaForeignKey.ForeignTable.Name);
+                        foreignKey.PrimaryTable = tablesTrans.GetNamedChild<TableElement>(metaForeignKey.PrimaryTable.Name);
                         table.ForeignKeys.AddChild(foreignKey); 
+                        
                     }
                 }
 

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using GenerationStudio.Attributes;
 using GenerationStudio.Gui;
+using System.ComponentModel;
 
 namespace GenerationStudio.Elements
 {
@@ -20,8 +21,10 @@ namespace GenerationStudio.Elements
             AddChild(ForeignKeys);
         }
 
-        public ColumnsElement Columns { get; set; }
-        public ForeignKeysElement ForeignKeys { get; set; }
+        [Browsable(false)]
+        public ColumnsElement Columns { get; private set; }
+        [Browsable(false)]
+        public ForeignKeysElement ForeignKeys { get; private set; }
 
 
         [ElementVerb("View table data")]
