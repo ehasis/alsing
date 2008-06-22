@@ -17,58 +17,58 @@ namespace GenerationStudio.Design
         private ListBox ItemsListBox;
         private bool handleLostfocus;
 
-        //private void LB_DrawItem(object sender, DrawItemEventArgs e)
-        //{
-        //    bool selected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+        private void LB_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            bool selected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
 
-        //    if (e.Index == -1)
-        //        return;
+            if (e.Index == -1)
+                return;
 
+            object item = ItemsListBox.Items[e.Index];
+            string text = item.ToString();
 
-        //    object li = ItemsListBox.Items[e.Index];
-        //    string text = li.ToString();
+            Brush fg = selected ? SystemBrushes.HighlightText : SystemBrushes.WindowText;
 
-        //    Brush fg = selected ? SystemBrushes.HighlightText : SystemBrushes.WindowText;
-
-        //    if (selected)
-        //    {
-        //        const int ofs = 37;
-        //        e.Graphics.FillRectangle(SystemBrushes.Window,
-        //                                 new Rectangle(ofs, e.Bounds.Top, e.Bounds.Width - ofs, ItemsListBox.ItemHeight));
-        //        e.Graphics.FillRectangle(SystemBrushes.Highlight,
-        //                                 new Rectangle(ofs + 1, e.Bounds.Top + 1, e.Bounds.Width - ofs - 2,
-        //                                               ItemsListBox.ItemHeight - 2));
-        //        ControlPaint.DrawFocusRectangle(e.Graphics,
-        //                                        new Rectangle(ofs, e.Bounds.Top, e.Bounds.Width - ofs,
-        //                                                      ItemsListBox.ItemHeight));
-        //    }
-        //    else
-        //    {
-        //        e.Graphics.FillRectangle(SystemBrushes.Window, 0, e.Bounds.Top, e.Bounds.Width, ItemsListBox.ItemHeight);
-        //    }
-
-
-        //    e.Graphics.DrawString(text, e.Font, fg, 38, e.Bounds.Top + 4);
-
-        //    e.Graphics.SetClip(new Rectangle(1, e.Bounds.Top + 2, 34, ItemsListBox.ItemHeight - 4));
+            if (selected)
+            {
+                const int ofs = 24;
+                e.Graphics.FillRectangle(SystemBrushes.Window,
+                                         new Rectangle(ofs, e.Bounds.Top, e.Bounds.Width - ofs, ItemsListBox.ItemHeight));
+                e.Graphics.FillRectangle(SystemBrushes.Highlight,
+                                         new Rectangle(ofs + 1, e.Bounds.Top + 1, e.Bounds.Width - ofs - 2,
+                                                       ItemsListBox.ItemHeight - 2));
+                ControlPaint.DrawFocusRectangle(e.Graphics,
+                                                new Rectangle(ofs, e.Bounds.Top, e.Bounds.Width - ofs,
+                                                              ItemsListBox.ItemHeight));
+            }
+            else
+            {
+                e.Graphics.FillRectangle(SystemBrushes.Window, 0, e.Bounds.Top, e.Bounds.Width, ItemsListBox.ItemHeight);
+            }
 
 
-        //    e.Graphics.FillRectangle(SystemBrushes.Highlight,
-        //                             new Rectangle(1, e.Bounds.Top + 2, 34, ItemsListBox.ItemHeight - 4));
+            e.Graphics.DrawString(text, e.Font, fg, 38, e.Bounds.Top + 4);
 
-        //    IntPtr hdc = e.Graphics.GetHdc();
-        //    var gf = new GDIFont(text, 9);
-        //    int a = 0;
-        //    IntPtr res = NativeMethods.SelectObject(hdc, gf.hFont);
-        //    NativeMethods.SetTextColor(hdc, ColorTranslator.ToWin32(SystemColors.Window));
-        //    NativeMethods.SetBkMode(hdc, 0);
-        //    NativeMethods.TabbedTextOut(hdc, 3, e.Bounds.Top + 5, "abc", 3, 0, ref a, 0);
-        //    NativeMethods.SelectObject(hdc, res);
-        //    gf.Dispose();
-        //    e.Graphics.ReleaseHdc(hdc);
-        //    e.Graphics.DrawRectangle(Pens.Black, new Rectangle(1, e.Bounds.Top + 2, 34, ItemsListBox.ItemHeight - 4));
-        //    e.Graphics.ResetClip();
-        //}
+            e.Graphics.SetClip(new Rectangle(1, e.Bounds.Top + 2, 34, ItemsListBox.ItemHeight - 4));
+
+            if (item is Element)
+            {
+                Element element = item as Element;
+                e.Graphics.FillRectangle(Brushes.LightSteelBlue,
+                                         new Rectangle(1, e.Bounds.Top + 2, 20, ItemsListBox.ItemHeight - 4));
+
+                Image icon = element.GetIcon();
+                var bounds = new Rectangle(3, e.Bounds.Top+2, 16, 16);
+                e.Graphics.DrawImage(icon, bounds);
+
+                e.Graphics.DrawRectangle(Pens.Black, new Rectangle(1, e.Bounds.Top + 2, 20, ItemsListBox.ItemHeight - 5));
+
+                
+
+                
+            }
+            e.Graphics.ResetClip();
+        }
 
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
@@ -80,12 +80,12 @@ namespace GenerationStudio.Design
                 {
                     List<Element> items = GetItems(context);
                     // Create a CheckedListBox and populate it with all the enum values
-                    ItemsListBox = new ListBox { DrawMode = DrawMode.Normal, BorderStyle = BorderStyle.None, Sorted = true };
+                    ItemsListBox = new ListBox { DrawMode = DrawMode.OwnerDrawFixed, BorderStyle = BorderStyle.None, Sorted = true };
                     ItemsListBox.MouseDown += OnMouseDown;
                     ItemsListBox.DoubleClick += ValueChanged;
-                 //   ItemsListBox.DrawItem += LB_DrawItem;
+                    ItemsListBox.DrawItem += LB_DrawItem;
                     ItemsListBox.ItemHeight = 20;
-                    ItemsListBox.Height = Math.Min(200, (items.Count+1)*SystemFonts.DefaultFont.Height);
+                    ItemsListBox.Height = Math.Min(200, (items.Count + 1) * 20);
                     ItemsListBox.Width = 180;
 
 

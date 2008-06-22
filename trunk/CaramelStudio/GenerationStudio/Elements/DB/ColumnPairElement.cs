@@ -21,7 +21,8 @@ namespace GenerationStudio.Elements
 
         public override string GetDisplayName()
         {
-            return "Column Pair";
+            string text = string.Format("Pair: [{0}] - [{1}]", PrimaryColumn, ForeignColumn);
+            return text;
         }
     }
 }
