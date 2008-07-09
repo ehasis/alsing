@@ -1464,6 +1464,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
             if (Control == null)
                 throw new NullReferenceException("Control may not be null");
 
+            const int expansionOffset = 10;
             if (RowIndex <= Control.Document.Count - 1)
             {
                 const int yo = 4;
@@ -1475,27 +1476,27 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     {
                         if (!xtr.IsCollapsed)
                         {
-                            bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + 6, yo, 1,
+                            bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset, yo, 1,
                                            Control.View.RowHeight - yo);
                         }
                     }
                     else if ((xtr.endSpan.Parent != null || xtr.expansion_EndSpan != null))
                     {
-                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + 6, 0, 1, Control.View.RowHeight);
+                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset, 0, 1, Control.View.RowHeight);
                     }
 
                     if (xtr.expansion_StartSpan != null)
                     {
-                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + 2, yo, 9, 9);
-                        bbuff.FillRect(GFX.BackgroundBrush, Control.View.TotalMarginWidth + 3, yo + 1, 7, 7);
+                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset-4, yo, 9, 9);
+                        bbuff.FillRect(GFX.BackgroundBrush, Control.View.TotalMarginWidth + expansionOffset-3, yo + 1, 7, 7);
                         //render plus / minus
-                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + 4, yo + 4, 5, 1);
+                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset-2, yo + 4, 5, 1);
                         if (!xtr.expansion_StartSpan.Expanded)
-                            bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + 6, yo + 2, 1, 5);
+                            bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset, yo + 2, 1, 5);
                     }
                     if (xtr.expansion_EndSpan != null)
                     {
-                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + 7, Control.View.RowHeight - 1,
+                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset+1, Control.View.RowHeight - 1,
                                        5, 1);
                     }
                 }
@@ -1525,6 +1526,20 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     if (RowIndex == LastSpanRow)
                         bbuff.FillRect(Control._SyntaxBox.ScopeIndicatorColor, Control.View.TotalMarginWidth + 14,
                                        Control.View.RowHeight - 2, 4, 2);
+                }
+
+                if (Control._SyntaxBox.ShowRevisionMarks)
+                {
+                    if (xtr.RevisionMark == RowRevisionMark.BeforeSave)
+                    {
+                        bbuff.FillRect(Control._SyntaxBox.RevisionMarkBeforeSave,
+                            Control.View.TotalMarginWidth + 1, 0, 3, Control.View.RowHeight);
+                    }
+                    else if (xtr.RevisionMark == RowRevisionMark.AfterSave)
+                    {
+                        bbuff.FillRect(Control._SyntaxBox.RevisionMarkAfterSave,
+                            Control.View.TotalMarginWidth + 1, 0, 3, Control.View.RowHeight);
+                    }
                 }
             }
         }

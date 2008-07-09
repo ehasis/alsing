@@ -722,7 +722,7 @@ namespace Alsing.SourceCode
                     ra.LastRow = index;
                     ra.LastColumn = r.Text.Length;
                 }
-                PushUndoBlock(UndoAction.DeleteRange, GetRange(ra), ra.FirstColumn, ra.FirstRow);
+                PushUndoBlock(UndoAction.DeleteRange, GetRange(ra), ra.FirstColumn, ra.FirstRow, r.RevisionMark);
             }
 
 
@@ -921,7 +921,8 @@ namespace Alsing.SourceCode
             if (StoreUndo)
             {
                 string deltext = GetRange(Range);
-                PushUndoBlock(UndoAction.DeleteRange, deltext, r.FirstColumn, r.FirstRow);
+                Row xtr = this[r.FirstRow];
+                PushUndoBlock(UndoAction.DeleteRange, deltext, r.FirstColumn, r.FirstRow, xtr.RevisionMark);
             }
 
 
@@ -1097,6 +1098,9 @@ namespace Alsing.SourceCode
         {
             Modified = true;
             Row xtr = this[yPos];
+
+            RowRevisionMark mark = xtr.RevisionMark;
+
             if (xPos > xtr.Text.Length)
             {
                 //virtualwhitespace fix
@@ -1129,7 +1133,7 @@ namespace Alsing.SourceCode
             }
 
             if (StoreUndo)
-                PushUndoBlock(UndoAction.InsertRange, text, xPos, yPos);
+                PushUndoBlock(UndoAction.InsertRange, text, xPos, yPos, mark);
 
             ResetVisibleRows();
             OnChange();
@@ -1169,12 +1173,14 @@ namespace Alsing.SourceCode
                 RowDeleted(this, new RowEventArgs(r));
         }
 
-        public void PushUndoBlock(UndoAction Action, string text, int x, int y)
+        public void PushUndoBlock(UndoAction Action, string Text, int x, int y, RowRevisionMark mark)
         {
-            var undo = new UndoBlock {Action = Action, Text = text};
-
+            UndoBlock undo = new UndoBlock();
+            undo.Action = Action;
+            undo.Text = Text;
             undo.Position.Y = y;
             undo.Position.X = x;
+            undo.RowModified = (mark != RowRevisionMark.Unchanged);
             //AddToUndoList(undo);
 
             if (captureMode)

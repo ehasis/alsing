@@ -66,6 +66,8 @@ namespace Alsing.Windows.Forms
         private Color _LineNumberForeColor = Color.Teal;
         private Color _OutlineColor = SystemColors.ControlDark;
         private bool _ParseOnPaste;
+        private Color _RevisionMarkAfterSave = Color.LimeGreen;
+        private Color _RevisionMarkBeforeSave = Color.Gold;
         private Color _ScopeBackColor = Color.Transparent;
         private Color _ScopeIndicatorColor = Color.Transparent;
         private Color _SelectionBackColor = SystemColors.Highlight;
@@ -73,6 +75,7 @@ namespace Alsing.Windows.Forms
         private Color _SeparatorColor = SystemColors.Control;
         private bool _ShowGutterMargin = true;
         private bool _ShowLineNumbers = true;
+        private bool _ShowRevisionMarks = true;
         private bool _ShowTabGuides;
         private bool _ShowWhitespace;
         private int _SmoothScrollSpeed = 2;
@@ -279,6 +282,24 @@ namespace Alsing.Windows.Forms
             }
         }
 
+
+        /// <summary>
+        /// Determines if the revision marks should be visible.
+        /// </summary>
+        [Category("Appearance - Revision Marks")]
+        [Description(
+            "Determines if the revision marks should be visible")
+        ]
+        [DefaultValue(true)]
+        public bool ShowRevisionMarks
+        {
+            get { return _ShowRevisionMarks; }
+            set
+            {
+                _ShowRevisionMarks = value;
+                Redraw();
+            }
+        }
 
         /// <summary>
         /// Prevents the control from changing the cursor.
@@ -643,6 +664,44 @@ namespace Alsing.Windows.Forms
         {
             get { return _AllowBreakPoints; }
             set { _AllowBreakPoints = value; }
+        }
+
+        /// <summary>
+        /// Gets or Sets the RevisionMarkBeforeSave Color to use for modified rows.
+        /// </summary>
+        [Category("Appearance - Revision Marks")]
+        [Description(
+            "The color to use for revision mark when line is modified")
+        ]
+        [DefaultValue(typeof (Color), "Gold")]
+        public Color
+            RevisionMarkBeforeSave
+        {
+            get { return _RevisionMarkBeforeSave; }
+            set
+            {
+                _RevisionMarkBeforeSave = value;
+                Redraw();
+            }
+        }
+
+        /// <summary>
+        /// Gets or Sets the RevisionMarkAfterSave Color to use for saved rows.
+        /// </summary>
+        [Category("Appearance - Revision Marks")]
+        [Description(
+            "The color to use for revision mark when line is saved")
+        ]
+        [DefaultValue(typeof (Color), "LimeGreen")]
+        public Color
+            RevisionMarkAfterSave
+        {
+            get { return _RevisionMarkAfterSave; }
+            set
+            {
+                _RevisionMarkAfterSave = value;
+                Redraw();
+            }
         }
 
         /// <summary>
