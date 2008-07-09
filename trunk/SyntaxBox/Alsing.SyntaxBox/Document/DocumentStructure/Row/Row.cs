@@ -33,6 +33,13 @@ namespace Alsing.SourceCode
         AllParsed = 2
     }
 
+    public enum RowRevisionMark
+    {
+        Unchanged,
+        BeforeSave,
+        AfterSave
+    }
+
     /// <summary>
     /// The row class represents a row in a SyntaxDocument
     /// </summary>
@@ -41,6 +48,8 @@ namespace Alsing.SourceCode
         #region General Declarations
 
         private RowState _RowState = RowState.NotParsed;
+
+        private RowRevisionMark _RevisionMark = RowRevisionMark.BeforeSave;
 
         /// <summary>
         /// The owner document
@@ -115,6 +124,8 @@ namespace Alsing.SourceCode
         /// Returns true if the row is in the owner documents parse queue
         /// </summary>
         public bool InQueue; //is this line in the parseQueue?
+
+
 
         private bool mBookmarked; //is this line bookmarked?
         private bool mBreakpoint; //Does this line have a breakpoint?
@@ -253,6 +264,12 @@ namespace Alsing.SourceCode
             }
         }
 
+        public RowRevisionMark RevisionMark
+        {
+            get { return _RevisionMark; }
+            set { _RevisionMark = value; }
+        }
+
         #endregion
 
         /// <summary>
@@ -314,7 +331,8 @@ namespace Alsing.SourceCode
                 if (mText != value)
                 {
                     ParsePreview = true;
-                    Document.Modified = true;
+                    this.Document.Modified = true;
+                    RevisionMark = RowRevisionMark.BeforeSave;
                 }
 
                 mText = value;
@@ -323,7 +341,7 @@ namespace Alsing.SourceCode
                     if (ParsePreview)
                     {
                         Document.Parser.ParsePreviewLine(Document.IndexOf(this));
-                        Document.OnApplyFormatRanges(this);
+                        this.Document.OnApplyFormatRanges(this);
                     }
 
                     AddToParseQueue();
@@ -720,20 +738,24 @@ namespace Alsing.SourceCode
         /// Assigns a new text to the row.
         /// </summary>
         /// <param name="text"></param>
-        public void SetText(string text)
+        public void SetText(string Text)
         {
-            Document.StartUndoCapture();
-            var tp = new TextPoint(0, Index);
-            var tr = new TextRange {FirstColumn = 0, FirstRow = tp.Y, LastColumn = Text.Length, LastRow = tp.Y};
+            this.Document.StartUndoCapture();
+            TextPoint tp = new TextPoint(0, this.Index);
+            TextRange tr = new TextRange();
+            tr.FirstColumn = 0;
+            tr.FirstRow = tp.Y;
+            tr.LastColumn = this.Text.Length;
+            tr.LastRow = tp.Y;
 
-            Document.StartUndoCapture();
+            this.Document.StartUndoCapture();
             //delete the current line
-            Document.PushUndoBlock(UndoAction.DeleteRange, Document.GetRange(tr), tr.FirstColumn, tr.FirstRow);
+            this.Document.PushUndoBlock(UndoAction.DeleteRange, this.Document.GetRange(tr), tr.FirstColumn, tr.FirstRow, this.RevisionMark);
             //alter the text
-            Document.PushUndoBlock(UndoAction.InsertRange, text, tp.X, tp.Y);
-            Text = text;
-            Document.EndUndoCapture();
-            Document.InvokeChange();
+            this.Document.PushUndoBlock(UndoAction.InsertRange, Text, tp.X, tp.Y, this.RevisionMark);
+            this.Text = Text;
+            this.Document.EndUndoCapture();
+            this.Document.InvokeChange();
         }
 
         /// <summary>

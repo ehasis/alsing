@@ -17,7 +17,7 @@ namespace Alsing.SourceCode
     /// <summary>
     /// 
     /// </summary>
-    public sealed class UndoBlockCollection : ICollection, IList, IEnumerable, ICloneable
+    public sealed class UndoBlockCollection : IList, ICloneable
     {
         private const int DefaultMinimumCapacity = 16;
 
@@ -35,7 +35,9 @@ namespace Alsing.SourceCode
         /// <summary>
         /// 
         /// </summary>
-        public UndoBlockCollection() {}
+        public UndoBlockCollection()
+        {
+        }
 
         /// <summary>
         /// 
