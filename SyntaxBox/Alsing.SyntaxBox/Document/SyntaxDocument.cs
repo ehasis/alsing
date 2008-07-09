@@ -362,6 +362,12 @@ namespace Alsing.SourceCode
                 UndoStep = 0;
                 Modified = false;
                 isParsed = false;
+
+                foreach (Row r in this)
+                {
+                    r.RevisionMark = RowRevisionMark.Unchanged;
+                }
+
                 //OnChange();
                 InvokeChange();
             }
