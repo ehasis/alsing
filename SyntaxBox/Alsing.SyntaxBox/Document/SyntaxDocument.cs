@@ -424,6 +424,20 @@ namespace Alsing.SourceCode
                 Version = long.MinValue;
         }
 
+        public void SaveRevisionMark()
+        {
+            foreach (Row r in this)
+            {
+                if (r.RevisionMark == RowRevisionMark.BeforeSave)
+                {
+                    r.RevisionMark = RowRevisionMark.AfterSave;
+                }
+            }
+
+            Modified = false;
+            ResetVisibleRows();
+        }
+
         /// <summary>
         /// Starts an Undo Capture.
         /// This method can be called if you with to collect multiple text operations into one undo action
@@ -791,7 +805,9 @@ namespace Alsing.SourceCode
                             break;
                     }
                 }
-                catch {}
+                catch
+                {
+                }
 
                 return count;
             }
@@ -824,7 +840,9 @@ namespace Alsing.SourceCode
                             break;
                     }
                 }
-                catch {}
+                catch
+                {
+                }
 
                 return count;
             }
@@ -1181,7 +1199,7 @@ namespace Alsing.SourceCode
 
         public void PushUndoBlock(UndoAction Action, string Text, int x, int y, RowRevisionMark mark)
         {
-            UndoBlock undo = new UndoBlock();
+            var undo = new UndoBlock();
             undo.Action = Action;
             undo.Text = Text;
             undo.Position.Y = y;
@@ -1211,12 +1229,12 @@ namespace Alsing.SourceCode
             string t = text.Replace(Environment.NewLine, "\n");
             string[] lines = t.Split("\n".ToCharArray());
             var r = new TextRange
-                    {
-                        FirstColumn = xPos,
-                        FirstRow = yPos,
-                        LastRow = (lines.Length - 1 + yPos),
-                        LastColumn = lines[lines.Length - 1].Length
-                    };
+                        {
+                            FirstColumn = xPos,
+                            FirstRow = yPos,
+                            LastRow = (lines.Length - 1 + yPos),
+                            LastColumn = lines[lines.Length - 1].Length
+                        };
 
             if (r.FirstRow == r.LastRow)
                 r.LastColumn += r.FirstColumn;
@@ -1460,7 +1478,9 @@ namespace Alsing.SourceCode
                     if (r.CanFold)
                         if (r.expansion_StartSpan.Expanded == false)
                         {
-                            if (r.expansion_StartSpan.EndWord == null) {}
+                            if (r.expansion_StartSpan.EndWord == null)
+                            {
+                            }
                             else
                             {
                                 r = r.Expansion_EndRow; // .expansion_StartSpan.EndRow;
