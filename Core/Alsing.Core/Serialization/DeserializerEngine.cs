@@ -76,9 +76,13 @@ namespace Alsing.Serialization
                         object refInstance = objectLookup[idRefAttrib.Value];
                         field.SetValue(instance, refInstance);
                     }
-                    if (typeAttrib != null && valueAttrib != null)
+                    if (valueAttrib != null)
                     {
-                        Type type = Type.GetType(typeAttrib.Value);
+                        Type type = field.FieldType;
+                        
+                        if (typeAttrib != null)
+                            type = Type.GetType(typeAttrib.Value);
+
                         TypeConverter tc = TypeDescriptor.GetConverter(type);
                         object res = tc.ConvertFromString(valueAttrib.Value);
                         field.SetValue(instance,res);
