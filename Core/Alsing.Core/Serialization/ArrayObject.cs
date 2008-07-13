@@ -10,14 +10,14 @@ namespace Alsing.Serialization
 
         public override string ToString()
         {
-            return string.Format("Count = {0} : {1}", Items.Length, Type.Name);
+            return string.Format("Count = {0} : {1}", Items.Length, TypeAlias);
         }
 
         public override void Serialize(XmlTextWriter xml)
         {
             xml.WriteStartElement("array");
             xml.WriteAttributeString("id", ID.ToString());
-            xml.WriteAttributeString("type", Type.AssemblyQualifiedName);
+            xml.WriteAttributeString("type", TypeAlias);
             xml.WriteAttributeString("length", Items.Length.ToString ());
 
 
@@ -38,12 +38,6 @@ namespace Alsing.Serialization
         public override void SerializeReference(XmlTextWriter xml)
         {
             xml.WriteAttributeString("id-ref", ID.ToString());
-        }
-
-
-        public override object GetValue()
-        {
-            throw new NotSupportedException();
         }
 
         public void Build(SerializerEngine engine, Array rawArray)

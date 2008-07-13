@@ -1,31 +1,30 @@
 using System;
-using System.Collections;
 using System.Xml;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace Alsing.Serialization
 {
     public class ReferenceObject : ObjectBase
     {
         public bool IsEnumerable;
-        public readonly IList Fields = new ArrayList();
+        public readonly IList<Field> Fields = new List<Field>();
 
         public override string ToString()
         {
-            return string.Format("{0}#{1}", Type.Name, ID);
+            return string.Format("{0}:{1}", TypeAlias , ID);
         }
 
         public override void Serialize(XmlTextWriter xml)
         {
             xml.WriteStartElement("object");
             xml.WriteAttributeString("id", ID.ToString());
-            xml.WriteAttributeString("type", Type.AssemblyQualifiedName);
+            xml.WriteAttributeString("type", TypeAlias);
 
-            foreach (Field property in Fields)
+            foreach (Field field in Fields)
             {
-                property.Serialize(xml);
+                field.Serialize(xml);
             }
-
 
             xml.WriteEndElement();
         }
@@ -35,21 +34,6 @@ namespace Alsing.Serialization
             xml.WriteAttributeString("id-ref", ID.ToString());
         }
 
-        private object result;
-        public override object GetValue()
-        {
-            if (result != null)
-                return result;
-            
-            result = Activator.CreateInstance(Type);
-            foreach (Field field in Fields)
-            {
-                FieldInfo fieldInfo = Type.GetField(field.Name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                object fieldValue = field.Value.GetValue();
-                fieldInfo.SetValue(result, fieldValue);                
-            }
-            
-            return result;
-        }
+        
     }
 }

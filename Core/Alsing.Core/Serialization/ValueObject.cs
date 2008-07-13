@@ -10,7 +10,7 @@ namespace Alsing.Serialization
 
         public override string ToString()
         {
-            return string.Format("'{0}' : {1}", Value, Type.Name);
+            return string.Format("'{0}' : {1}", Value, TypeAlias);
         }
 
         public override void Serialize(XmlTextWriter xml)
@@ -20,15 +20,7 @@ namespace Alsing.Serialization
         public override void SerializeReference(XmlTextWriter xml)
         {
             xml.WriteAttributeString("value", Value);
-            if (!IgnoreType)
-                xml.WriteAttributeString("type", Type.AssemblyQualifiedName);
-        }
-
-        public override object GetValue()
-        {
-            TypeConverter tc = TypeDescriptor.GetConverter(Type);
-            object res = tc.ConvertFromString(Value);
-            return res;
+            xml.WriteAttributeString("type", TypeAlias);
         }
     }
 }
