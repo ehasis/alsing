@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using Alsing.Serialization;
 using GenerationStudio.AppCore;
 using GenerationStudio.Attributes;
 using GenerationStudio.Elements;
@@ -416,28 +417,27 @@ namespace GenerationStudio.Gui
 
         private void MainMenuFileSaveProject_Click(object sender, EventArgs e)
         {
-            SaveProject();
-
-            //SerializerEngine se = new SerializerEngine();
-            //using (FileStream fs = new FileStream(@"c:\labb.txt", FileMode.Create))
-            //{
-            //    se.Serialize(fs, root);
-            //    fs.Flush();
-            //}
+           SaveProject();
         }
 
         private void SaveProject()
         {
-            var fs = new FileStream("c:\\productobjectsoapformatted.Data", FileMode.Create);
-            var sf = new BinaryFormatter
-                     {
-                         AssemblyFormat = FormatterAssemblyStyle.Simple,
-                         FilterLevel = TypeFilterLevel.Full,
-                         TypeFormat = FormatterTypeStyle.TypesAlways
-                     };
+            //var fs = new FileStream("c:\\productobjectsoapformatted.Data", FileMode.Create);
+            //var sf = new BinaryFormatter
+            //         {
+            //             AssemblyFormat = FormatterAssemblyStyle.Simple,
+            //             FilterLevel = TypeFilterLevel.Full,
+            //             TypeFormat = FormatterTypeStyle.TypesAlways
+            //         };
 
-            sf.Serialize(fs, root);
-            fs.Close();
+            //sf.Serialize(fs, root);
+            //fs.Close();
+            var se = new SerializerEngine();
+            using (var fs = new FileStream(@"c:\labb.txt", FileMode.Create))
+            {
+                se.Serialize(fs, root);
+                fs.Flush();
+            }
         }
 
         private void MainMenuFileOpenProject_Click(object sender, EventArgs e)
@@ -451,16 +451,23 @@ namespace GenerationStudio.Gui
         private void OpenProject(string fileName)
         {
             SetupNewProject();
-            var fs = new FileStream(fileName, FileMode.Open);
-            var sf = new BinaryFormatter
-                     {
-                         AssemblyFormat = FormatterAssemblyStyle.Simple,
-                         FilterLevel = TypeFilterLevel.Full,
-                         TypeFormat = FormatterTypeStyle.TypesAlways
-                     };
+            using (var fs = new FileStream(fileName, FileMode.Open))
+            {
+                var de = new DeserializerEngine();
+                object res = de.Deserialize(fs);
+                root = (RootElement) res;
+            }
 
-            root = (RootElement) sf.Deserialize(fs);
-            fs.Close();
+            //var fs = new FileStream(fileName, FileMode.Open);
+            //var sf = new BinaryFormatter
+            //         {
+            //             AssemblyFormat = FormatterAssemblyStyle.Simple,
+            //             FilterLevel = TypeFilterLevel.Full,
+            //             TypeFormat = FormatterTypeStyle.TypesAlways
+            //         };
+
+            //root = (RootElement) sf.Deserialize(fs);
+            //fs.Close();
             FillTreeView();
             NotifyChange();
         }

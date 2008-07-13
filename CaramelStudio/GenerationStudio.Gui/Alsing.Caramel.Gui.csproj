@@ -128,6 +128,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Alsing.Core\Alsing.Core.csproj">
+      <Project>{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}</Project>
+      <Name>Alsing.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GenerationStudio\Alsing.Caramel.Core.csproj">
       <Project>{A9D36715-45EA-4C21-9C7F-9E4F999B845F}</Project>
       <Name>Alsing.Caramel.Core</Name>

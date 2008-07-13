@@ -305,7 +305,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     if (InfoTip != null)
                         InfoTip.Close();
                 }
-                catch {}
+                catch
+                {
+                }
             }
 
             base.WndProc(ref m);
@@ -481,7 +483,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
             {
                 Console.WriteLine("disposing editview");
             }
-            catch {}
+            catch
+            {
+            }
 #endif
 
             if (disposing)
@@ -494,7 +498,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     if (Painter != null)
                         Painter.Dispose();
                 }
-                catch {}
+                catch
+                {
+                }
             }
             base.Dispose(disposing);
         }
@@ -588,7 +594,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     Filler.Width = vScroll.Width;
                     Filler.Height = hScroll.Height;
                 }
-                catch {}
+                catch
+                {
+                }
             }
         }
 
@@ -623,15 +631,19 @@ namespace Alsing.Windows.Forms.SyntaxBox
                 else
                 {
                     var r = new TextRange
-                            {
-                                FirstColumn = Caret.Position.X,
-                                FirstRow = Caret.Position.Y,
-                                LastColumn = (Caret.Position.X + 1),
-                                LastRow = Caret.Position.Y
-                            };
+                                {
+                                    FirstColumn = Caret.Position.X,
+                                    FirstRow = Caret.Position.Y,
+                                    LastColumn = (Caret.Position.X + 1),
+                                    LastRow = Caret.Position.Y
+                                };
                     var ag = new UndoBlockCollection();
                     var b = new UndoBlock
-                            {Action = UndoAction.DeleteRange, Text = Document.GetRange(r), Position = Caret.Position};
+                                {
+                                    Action = UndoAction.DeleteRange,
+                                    Text = Document.GetRange(r),
+                                    Position = Caret.Position
+                                };
                     ag.Add(b);
                     Document.DeleteRange(r, false);
                     b = new UndoBlock {Action = UndoAction.InsertRange};
@@ -786,12 +798,12 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     Row xtr = Caret.CurrentRow;
                     var indent1 = new String('\t', Caret.CurrentRow.Depth);
                     var tr = new TextRange
-                             {
-                                 FirstColumn = 0,
-                                 LastColumn = xtr.GetLeadingWhitespace().Length,
-                                 FirstRow = xtr.Index,
-                                 LastRow = xtr.Index
-                             };
+                                 {
+                                     FirstColumn = 0,
+                                     LastColumn = xtr.GetLeadingWhitespace().Length,
+                                     FirstRow = xtr.Index,
+                                     LastRow = xtr.Index
+                                 };
 
                     Document.DeleteRange(tr);
                     Document.InsertText(indent1, 0, xtr.Index, true);
@@ -813,12 +825,12 @@ namespace Alsing.Windows.Forms.SyntaxBox
                         //int j=xtr.Expansion_StartRow.StartWordIndex;
                         string indent1 = xtr.startSpan.StartWord.Row.GetVirtualLeadingWhitespace();
                         var tr = new TextRange
-                                 {
-                                     FirstColumn = 0,
-                                     LastColumn = xtr.GetLeadingWhitespace().Length,
-                                     FirstRow = xtr.Index,
-                                     LastRow = xtr.Index
-                                 };
+                                     {
+                                         FirstColumn = 0,
+                                         LastColumn = xtr.GetLeadingWhitespace().Length,
+                                         FirstRow = xtr.Index,
+                                         LastRow = xtr.Index
+                                     };
                         Document.DeleteRange(tr);
                         string ts = "\t" + new String(' ', TabSize);
                         while (indent1.IndexOf(ts) >= 0)
@@ -837,7 +849,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     }
                 }
             }
-            catch {}
+            catch
+            {
+            }
         }
 
         private void DeleteForward()
@@ -932,10 +946,14 @@ namespace Alsing.Windows.Forms.SyntaxBox
                 if (newval >= vScroll.Maximum - View.VisibleRowCount + 1)
                     newval = vScroll.Maximum - View.VisibleRowCount + 1;
 
+                newval = Math.Max(newval, vScroll.Minimum);
+
                 vScroll.Value = newval;
                 Redraw();
             }
-            catch {}
+            catch
+            {
+            }
         }
 
         private void PasteText()
@@ -1029,12 +1047,12 @@ namespace Alsing.Windows.Forms.SyntaxBox
                             if (w != null && w.Pattern != null && w.Pattern.Category != null)
                             {
                                 var e = new WordMouseEventArgs
-                                        {
-                                            Pattern = w.Pattern,
-                                            Button = MouseButtons.None,
-                                            Cursor = Cursors.Hand,
-                                            Word = w
-                                        };
+                                            {
+                                                Pattern = w.Pattern,
+                                                Button = MouseButtons.None,
+                                                Cursor = Cursors.Hand,
+                                                Word = w
+                                            };
 
                                 _SyntaxBox.OnWordMouseHover(ref e);
 
@@ -1080,7 +1098,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                         var ea = new CopyEventArgs {Text = t};
                         OnClipboardUpdated(ea);
                     }
-                    catch {}
+                    catch
+                    {
+                    }
                 }
             }
         }
@@ -1311,16 +1331,17 @@ namespace Alsing.Windows.Forms.SyntaxBox
             if (!_SyntaxBox.DisableIntelliMouse)
             {
                 IntelliMouse = new IntelliMouseControl
-                               {
-                                   BackgroundImage = ((Bitmap) (resources.GetObject("IntelliMouse.BackgroundImage"))),
-                                   Image = ((Bitmap) (resources.GetObject("IntelliMouse.Image"))),
-                                   Location = new Point(197, 157),
-                                   Name = "IntelliMouse",
-                                   Size = new Size(28, 28),
-                                   TabIndex = 4,
-                                   TransparencyKey = Color.FromArgb(((255)), ((0)), ((255))),
-                                   Visible = false
-                               };
+                                   {
+                                       BackgroundImage =
+                                           ((Bitmap) (resources.GetObject("IntelliMouse.BackgroundImage"))),
+                                       Image = ((Bitmap) (resources.GetObject("IntelliMouse.Image"))),
+                                       Location = new Point(197, 157),
+                                       Name = "IntelliMouse",
+                                       Size = new Size(28, 28),
+                                       TabIndex = 4,
+                                       TransparencyKey = Color.FromArgb(((255)), ((0)), ((255))),
+                                       Visible = false
+                                   };
                 // 
                 // IntelliMouse
                 // 
@@ -1397,12 +1418,12 @@ namespace Alsing.Windows.Forms.SyntaxBox
         public void InsertAutolistText()
         {
             var tr = new TextRange
-                     {
-                         FirstRow = Caret.Position.Y,
-                         LastRow = Caret.Position.Y,
-                         FirstColumn = AutoListStartPos.X,
-                         LastColumn = Caret.Position.X
-                     };
+                         {
+                             FirstRow = Caret.Position.Y,
+                             LastRow = Caret.Position.Y,
+                             FirstColumn = AutoListStartPos.X,
+                             LastColumn = Caret.Position.X
+                         };
 
             Document.DeleteRange(tr, true);
             Caret.Position.X = AutoListStartPos.X;
@@ -1691,7 +1712,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                         vScroll.Value = index;
                 }
             }
-            catch {}
+            catch
+            {
+            }
 
 
             if (Caret.CurrentRow.VisibleIndex < View.FirstVisibleRow)
@@ -2034,7 +2057,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     if (s != null)
                         return true;
                 }
-                catch {}
+                catch
+                {
+                }
                 return false;
             }
         }
@@ -2634,7 +2659,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     Redraw();
                 }
             }
-            catch {}
+            catch
+            {
+            }
 
 
             if (!ContainsFocus)
@@ -2962,7 +2989,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                         AutoList.SelectItem(s);
                     }
                 }
-                catch {}
+                catch
+                {
+                }
             }
         }
 
@@ -3064,7 +3093,12 @@ namespace Alsing.Windows.Forms.SyntaxBox
                                 if (w != null && w.Pattern != null && w.Pattern.Category != null)
                                 {
                                     var pe = new WordMouseEventArgs
-                                             {Pattern = w.Pattern, Button = e.Button, Cursor = Cursors.Hand, Word = w};
+                                                 {
+                                                     Pattern = w.Pattern,
+                                                     Button = e.Button,
+                                                     Cursor = Cursors.Hand,
+                                                     Word = w
+                                                 };
 
                                     _SyntaxBox.OnWordMouseDown(ref pe);
 
@@ -3194,7 +3228,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                                 BeginDragDrop();
                             }
                         }
-                        else if (View.Action == EditAction.DragText) {}
+                        else if (View.Action == EditAction.DragText)
+                        {
+                        }
                     }
                     else
                     {
@@ -3273,7 +3309,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
                     base.OnMouseMove(e);
                 }
             }
-            catch {}
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -3453,7 +3491,9 @@ namespace Alsing.Windows.Forms.SyntaxBox
         ///  Overrides the default OnDragEnter
         /// </summary>
         /// <param name="drgevent"></param>
-        protected override void OnDragEnter(DragEventArgs drgevent) {}
+        protected override void OnDragEnter(DragEventArgs drgevent)
+        {
+        }
 
         /// <summary>
         ///  Overrides the default OnDragLeave
