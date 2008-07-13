@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Xml;
+using System.Collections;
 
 namespace Alsing.Serialization
 {
     public class DeserializerEngine
     {
         private readonly Dictionary<string, Func<XmlNode, object>> factoryMethodLookup;
-        private readonly Dictionary<string, Action<XmlNode, object>> setupMethodLookup;
         private readonly Dictionary<string, object> objectLookup = new Dictionary<string, object>();
+        private readonly Dictionary<string, Action<XmlNode, object>> setupMethodLookup;
 
         public DeserializerEngine()
         {
@@ -52,7 +54,7 @@ namespace Alsing.Serialization
 
         private void SetupObject(XmlNode objectNode, object instance)
         {
-            foreach(XmlNode node in objectNode)
+            foreach (XmlNode node in objectNode)
             {
                 if (node.Name == "field")
                 {
@@ -60,44 +62,78 @@ namespace Alsing.Serialization
                     FieldInfo field = GetFieldInfo(instance.GetType(), fieldName);
 
 
-                    var idRef = node.Attributes["id-ref"];
-                    var value = node.Attributes["value"];
-                    var isNull = node.Attributes["null"];
-                    var type = node.Attributes["type"];
+                    XmlAttribute idRefAttrib = node.Attributes["id-ref"];
+                    XmlAttribute valueAttrib = node.Attributes["value"];
+                    XmlAttribute nullAttrib = node.Attributes["null"];
+                    XmlAttribute typeAttrib = node.Attributes["type"];
 
-                    if (isNull != null)
+                    if (nullAttrib != null)
                     {
-                        field.SetValue(instance,null);
+                        field.SetValue(instance, null);
                     }
-                    if (idRef != null)
+                    if (idRefAttrib != null)
                     {
-                        object refInstance = objectLookup[idRef.Value];
+                        object refInstance = objectLookup[idRefAttrib.Value];
                         field.SetValue(instance, refInstance);
+                    }
+                    if (typeAttrib != null && valueAttrib != null)
+                    {
+                        Type type = Type.GetType(typeAttrib.Value);
+                        TypeConverter tc = TypeDescriptor.GetConverter(type);
+                        object res = tc.ConvertFromString(valueAttrib.Value);
+                        field.SetValue(instance,res);
                     }
                 }
             }
         }
 
-        private FieldInfo GetFieldInfo(Type type, string fieldName)
+        private static FieldInfo GetFieldInfo(Type type, string fieldName)
         {
-            var field =  type.GetField(fieldName,
-                                               BindingFlags.Public | 
-                                               BindingFlags.NonPublic |
-                                               BindingFlags.Instance );
+            FieldInfo field = type.GetField(fieldName,
+                                            BindingFlags.Public |
+                                            BindingFlags.NonPublic |
+                                            BindingFlags.Instance);
 
             return field ?? GetFieldInfo(type.BaseType, fieldName);
-
-
         }
 
         private void SetupList(XmlNode listNode, object instance)
         {
+            var list = instance as IList;
+            if (list == null)
+                return;
 
+            foreach (XmlNode node in listNode)
+            {
+                if (node.Name == "element")
+                {
+                    XmlAttribute idRefAttrib = node.Attributes["id-ref"];
+                    XmlAttribute valueAttrib = node.Attributes["value"];
+                    XmlAttribute nullAttrib = node.Attributes["null"];
+                    XmlAttribute typeAttrib = node.Attributes["type"];
+
+                    if (nullAttrib != null)
+                    {
+                        list.Add(null);
+                    }
+                    if (idRefAttrib != null)
+                    {
+                        object refInstance = objectLookup[idRefAttrib.Value];
+                        list.Add(refInstance);
+                    }
+                    if (typeAttrib != null && valueAttrib != null)
+                    {
+                        Type type = Type.GetType(typeAttrib.Value);
+                        TypeConverter tc = TypeDescriptor.GetConverter(type);
+                        object res = tc.ConvertFromString(valueAttrib.Value);
+                        list.Add(res);
+                    }
+                }
+            }
         }
 
         private void SetupArray(XmlNode arrayNode, object instance)
         {
-
         }
 
         public object Deserialize(Stream input)
