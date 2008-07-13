@@ -5,8 +5,10 @@ namespace Alsing.Serialization
 {
     public abstract class ObjectBase
     {
-        public int ID;
-        public Type Type;
+        public int ID { get; set; }
+        public Type Type { get; set; }
+
+        public bool IgnoreType { get; set; }
 
         public abstract void Serialize(XmlTextWriter xml);
 

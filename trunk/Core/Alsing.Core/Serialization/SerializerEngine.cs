@@ -129,7 +129,11 @@ namespace Alsing.Serialization
                     current.Fields.Add(field);
                     field.Name = fieldInfo.Name;
                     object fieldValue = fieldInfo.GetValue(item);
-                    field.Value = GetObject(fieldValue);
+                    ObjectBase value = GetObject(fieldValue);
+                    if (value is ValueObject && value.Type == fieldInfo.FieldType)
+                        value.IgnoreType = true;
+
+                    field.Value = value;
                 }
                 currentType = currentType.BaseType;
             }
