@@ -2,18 +2,22 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
+using System.Collections.Generic;
 
 namespace Alsing.Serialization
 {
     public class SerializerEngine
     {
-        private readonly IList allObjects = new ArrayList();
         private int objectID;
-        public Hashtable objectLoookup = new Hashtable();
-        public ObjectBase Root;
+        private readonly IList<ObjectBase> allObjects = new List<ObjectBase>();
+        private readonly IDictionary<object, ObjectBase> objectLoookup = new Dictionary<object, ObjectBase>();
+        private readonly IDictionary<Type,string> types = new Dictionary<Type, string>();
+        private readonly IDictionary<string, Type> typeAliases = new Dictionary<string, Type>();
+        private ObjectBase Root;
 
         private int GetObjectID()
         {
@@ -33,7 +37,17 @@ namespace Alsing.Serialization
             xml.WriteStartElement("root-object");
             Root.SerializeReference(xml);
             xml.WriteEndElement();
+            xml.WriteStartElement("types");
+            foreach (var entry in typeAliases)
+            {
+                xml.WriteStartElement("type");
+                xml.WriteAttributeString("alias", entry.Key);
+                xml.WriteAttributeString("full-name", entry.Value.AssemblyQualifiedName);
+                xml.WriteEndElement();
+            }
+            xml.WriteEndElement();
             xml.WriteStartElement("objects");
+            
             foreach (ObjectBase item in allObjects)
             {
                 item.Serialize(xml);
@@ -57,7 +71,7 @@ namespace Alsing.Serialization
 
             //dont serialize more than once
             if (objectLoookup.ContainsKey(item))
-                return (ObjectBase) objectLoookup[item];
+                return objectLoookup[item];
 
             if (IsValueObject(item))
             {
@@ -130,9 +144,6 @@ namespace Alsing.Serialization
                     field.Name = fieldInfo.Name;
                     object fieldValue = fieldInfo.GetValue(item);
                     ObjectBase value = GetObject(fieldValue);
-                    if (value is ValueObject && value.Type == fieldInfo.FieldType)
-                        value.IgnoreType = true;
-
                     field.Value = value;
                 }
                 currentType = currentType.BaseType;
@@ -149,9 +160,49 @@ namespace Alsing.Serialization
         private void RegisterObject(ObjectBase current, object item)
         {
             objectLoookup.Add(item, current);
-            current.Type = item.GetType();
             current.ID = GetObjectID();
             allObjects.Add(current);
+            RegisterType(item.GetType());
+            current.TypeAlias = types[item.GetType()];
+        }
+
+        private void RegisterType(Type type)
+        {
+            if (types.ContainsKey(type))
+                return;
+
+            string alias = GetTypeName(type);
+            while(typeAliases.ContainsKey(alias))
+            {
+                alias = IncrementAlias(alias);
+            }
+
+            types.Add(type, alias);
+            typeAliases.Add(alias, type);
+        }
+
+        private static string GetTypeName(Type type)
+        {
+            if (type.IsGenericType)
+            {
+
+                var argNames = from argType in type.GetGenericArguments()
+                               select GetTypeName(argType);
+
+                string args = argNames.Aggregate((left, right) => left + "," + right);
+
+                string typeName = type.Name;
+                int index = typeName.IndexOf("`");
+                typeName = typeName.Substring(0, index);
+
+                return string.Format("{0}[of {1}]", typeName, args);
+            }
+            return type.Name;
+        }
+
+        private static string IncrementAlias(string alias)
+        {
+            return string.Format("{0}_",alias);
         }
     }
 }

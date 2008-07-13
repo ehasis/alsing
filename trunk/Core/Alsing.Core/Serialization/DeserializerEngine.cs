@@ -13,6 +13,7 @@ namespace Alsing.Serialization
         private readonly Dictionary<string, Func<XmlNode, object>> factoryMethodLookup;
         private readonly Dictionary<string, object> objectLookup = new Dictionary<string, object>();
         private readonly Dictionary<string, Action<XmlNode, object>> setupMethodLookup;
+        private readonly Dictionary<string, Type> typeLookup = new Dictionary<string, Type>();
 
         public DeserializerEngine()
         {
@@ -44,10 +45,10 @@ namespace Alsing.Serialization
             return res;
         }
 
-        private static object CreateAny(XmlNode node)
+        private object CreateAny(XmlNode node)
         {
-            string typeName = node.Attributes["type"].Value;
-            Type type = Type.GetType(typeName);
+            string typeAlias = node.Attributes["type"].Value;
+            Type type = typeLookup[typeAlias];
             object instance = Activator.CreateInstance(type);
             return instance;
         }
@@ -79,9 +80,9 @@ namespace Alsing.Serialization
                     if (valueAttrib != null)
                     {
                         Type type = field.FieldType;
-                        
+
                         if (typeAttrib != null)
-                            type = Type.GetType(typeAttrib.Value);
+                            type = typeLookup[typeAttrib.Value];
 
                         TypeConverter tc = TypeDescriptor.GetConverter(type);
                         object res = tc.ConvertFromString(valueAttrib.Value);
@@ -146,13 +147,17 @@ namespace Alsing.Serialization
             doc.Load(input);
 
             XmlElement document = doc["document"];
-            if (document == null)
-                throw new NullReferenceException("Invalid serialization data");
-
+            XmlElement types = document["types"];
             XmlElement objects = document["objects"];
 
-            if (objects == null)
-                throw new NullReferenceException("Invalid serialization data");
+            foreach(XmlNode node in types)
+            {
+                string alias = node.Attributes["alias"].Value;
+                string fullName = node.Attributes["full-name"].Value;
+
+                Type type = Type.GetType(fullName);
+                typeLookup.Add(alias, type);
+            }
 
             //create all instances
             foreach (XmlNode node in objects)

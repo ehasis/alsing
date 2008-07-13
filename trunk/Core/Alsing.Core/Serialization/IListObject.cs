@@ -12,10 +12,7 @@ namespace Alsing.Serialization
         {
             xml.WriteStartElement("list");
             xml.WriteAttributeString("id", ID.ToString());
-            xml.WriteAttributeString("type", Type.AssemblyQualifiedName);
-            xml.WriteAttributeString("count", Items.Length.ToString());
-
-
+            xml.WriteAttributeString("type", TypeAlias);
             int i = 0;
             foreach (ObjectBase element in Items)
             {
@@ -32,11 +29,6 @@ namespace Alsing.Serialization
         public override void SerializeReference(XmlTextWriter xml)
         {
             xml.WriteAttributeString("id-ref", ID.ToString());
-        }
-
-        public override object GetValue()
-        {
-            throw new NotSupportedException();
         }
 
         public void Build(SerializerEngine engine, IList rawList)

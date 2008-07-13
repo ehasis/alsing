@@ -20,10 +20,5 @@ namespace Alsing.Serialization
         {
             xml.WriteAttributeString("null", "true");
         }
-
-        public override object GetValue()
-        {
-            return null;
-        }
     }
 }
