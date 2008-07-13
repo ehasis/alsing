@@ -129,7 +129,7 @@ namespace AlbinoHorse.Windows.Forms
             for (int i = BoundingBoxes.Count - 1; i >= 0; i--)
             {
                 BoundingBox bbox = BoundingBoxes[i];
-                if (bbox.Bounds.Contains(x, y))
+                if (bbox.HitTest(x,y))
                 {
                     if (bbox.Target is Shape)
                     {

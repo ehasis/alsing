@@ -8,7 +8,7 @@ namespace AlbinoHorse.Model.Settings
 
     public static class Margins
     {
-        public const int typeBoxSideMargin = 10;
+        public const int TypeBoxSideMargin = 10;
         public const int TypeMemberNameIndent = 30;
     }
 
@@ -49,38 +49,35 @@ namespace AlbinoHorse.Model.Settings
         public static Pen FakeLine = new Pen(Color.FromArgb(130, 130, 130), 1.6f);
         public static Pen InheritanceLine = new Pen(Color.FromArgb(130, 130, 130), 1.6f);
         public static Pen Lolipop = new Pen(Color.FromArgb(130, 130, 130), 1.6f);
-        public static Pen SelectionInner = new Pen(Color.FromArgb(220, 220, 220), 1);
+        public static Pen Selection = new Pen(Brushes.Selection, 9);
         public static Pen SelectionOuter = MakeSelectonPen();
 
         private static Pen MakeAssociationLine()
         {
-            var pen = new Pen(Color.Goldenrod, 1.6f);
-            pen.StartCap = LineCap.Round;
-            pen.EndCap = LineCap.Round;
+            var pen = new Pen(Color.Goldenrod, 1.6f) {StartCap = LineCap.Round, EndCap = LineCap.Round};
             return pen;
         }
 
         private static Pen MakeAssociationBorder()
         {
-            var pen = new Pen(Color.White, 6f);
-            pen.StartCap = LineCap.Round;
-            pen.EndCap = LineCap.Round;
+            var pen = new Pen(Color.White, 6f) {StartCap = LineCap.Round, EndCap = LineCap.Round};
             return pen;
         }
 
 
         private static Pen MakeSelectonPen()
         {
-            var pen = new Pen(Color.Gray, 1);
-            pen.DashStyle = DashStyle.Dash;
+            var pen = new Pen(Color.Gray, 1) {DashStyle = DashStyle.Dash};
             return pen;
         }
 
         private static Pen MakeAbstractBorderPen()
         {
-            var pen = new Pen(Color.FromArgb(130, 130, 130), 1.3f);
-            pen.DashStyle = DashStyle.Dash;
-            pen.Alignment = PenAlignment.Center;
+            var pen = new Pen(Color.FromArgb(130, 130, 130), 1.3f)
+                          {
+                              DashStyle = DashStyle.Dash,
+                              Alignment = PenAlignment.Center
+                          };
             return pen;
         }
     }

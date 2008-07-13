@@ -161,7 +161,7 @@ namespace AlbinoHorse.Model
                 sf.Trimming = StringTrimming.EllipsisCharacter;
                 foreach (UmlTypeMember member in section.TypeMembers)
                 {
-                    var memberBounds = new Rectangle(x + Margins.typeBoxSideMargin, currentY, width - 20, 16);
+                    var memberBounds = new Rectangle(x + Margins.TypeBoxSideMargin, currentY, width - 20, 16);
 
                     #region add property bbox
 
@@ -173,7 +173,7 @@ namespace AlbinoHorse.Model
 
                     #endregion
 
-                    var layoutBounds = new Rectangle(x + Margins.typeBoxSideMargin + Margins.TypeMemberNameIndent,
+                    var layoutBounds = new Rectangle(x + Margins.TypeBoxSideMargin + Margins.TypeMemberNameIndent,
                                                      currentY, width - 5 - Margins.TypeMemberNameIndent, 16);
 
                     Font font = GetTypeMemberFont();
@@ -192,13 +192,13 @@ namespace AlbinoHorse.Model
                     currentY += 16;
                 }
 
-                var newLayoutBounds = new Rectangle(x + Margins.typeBoxSideMargin + Margins.TypeMemberNameIndent,
+                var newLayoutBounds = new Rectangle(x + Margins.TypeBoxSideMargin + Margins.TypeMemberNameIndent,
                                                     currentY, width - 5 - Margins.TypeMemberNameIndent, 16);
                 info.Graphics.DrawString("Add new", Fonts.NewTypeMember, Brushes.Blue, newLayoutBounds, sf);
 
                 var newMemberBBox = new BoundingBox();
                 newMemberBBox.Target = this;
-                newMemberBBox.Bounds = new Rectangle(x + Margins.typeBoxSideMargin, currentY, width - 20, 16);
+                newMemberBBox.Bounds = new Rectangle(x + Margins.TypeBoxSideMargin, currentY, width - 20, 16);
                 newMemberBBox.Data = section.AddNewIdentifier;
                 info.BoundingBoxes.Add(newMemberBBox);
 

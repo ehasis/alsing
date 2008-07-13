@@ -155,8 +155,8 @@ namespace AlbinoHorse.Model
 
         protected virtual void DrawTypeKind(RenderInfo info, int x, int y, int width)
         {
-            var typeKindBounds = new Rectangle(x + Margins.typeBoxSideMargin, y + 4 + 15,
-                                               width - Margins.typeBoxSideMargin*2, 10);
+            var typeKindBounds = new Rectangle(x + Margins.TypeBoxSideMargin, y + 4 + 15,
+                                               width - Margins.TypeBoxSideMargin*2, 10);
             string kind = GetTypeKind();
             info.Graphics.DrawString(kind, Fonts.TypeKind, Brushes.Black, typeKindBounds,
                                      StringFormat.GenericTypographic);
@@ -164,7 +164,7 @@ namespace AlbinoHorse.Model
 
         protected virtual void DrawTypeName(RenderInfo info, int x, int y, int width)
         {
-            var typeNameBounds = new Rectangle(x + Margins.typeBoxSideMargin, y + 4, width - Margins.typeBoxSideMargin*2,
+            var typeNameBounds = new Rectangle(x + Margins.TypeBoxSideMargin, y + 4, width - Margins.TypeBoxSideMargin*2,
                                                10);
             Font typeNameFont = GetTypeNameFont();
             info.Graphics.DrawString(TypeName, typeNameFont, Brushes.Black, typeNameBounds,
@@ -186,8 +186,8 @@ namespace AlbinoHorse.Model
 
         protected void BeginRenameType(UmlDesigner owner)
         {
-            var inputBounds = new Rectangle(Bounds.Left + Margins.typeBoxSideMargin, Bounds.Top + 4,
-                                            Bounds.Width - 25 - Margins.typeBoxSideMargin, 20);
+            var inputBounds = new Rectangle(Bounds.Left + Margins.TypeBoxSideMargin, Bounds.Top + 4,
+                                            Bounds.Width - 25 - Margins.TypeBoxSideMargin, 20);
 
             Action endRenameType = () => { DataSource.TypeName = owner.GetInput(); };
 
