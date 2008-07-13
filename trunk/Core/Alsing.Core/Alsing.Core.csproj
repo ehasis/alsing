@@ -65,6 +65,16 @@
     <Compile Include="GenericMath\Numeric.cs" />
     <Compile Include="Lists\Bag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\ArrayObject.cs" />
+    <Compile Include="Serialization\DeserializerEngine.cs" />
+    <Compile Include="Serialization\Field.cs" />
+    <Compile Include="Serialization\IListObject.cs" />
+    <Compile Include="Serialization\NullObject.cs" />
+    <Compile Include="Serialization\ObjectBase.cs" />
+    <Compile Include="Serialization\ReferenceObject.cs" />
+    <Compile Include="Serialization\SerializerEngine.cs" />
+    <Compile Include="Serialization\ValueObject.cs" />
+    <Compile Include="Serialization\XmlFormatter.cs" />
     <Compile Include="Singleton\Singleton.cs" />
     <Compile Include="Text\PatternMatchers\BinPatternMatcher.cs" />
     <Compile Include="Text\PatternMatchers\DecPatternMatcher.cs" />
