@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Alsing.Collections
 {
     public class CheckSet<T>
     {
         private readonly Dictionary<T, bool> lookup = new Dictionary<T, bool>();
+
         public bool IsChecked(T item)
         {
             bool res;

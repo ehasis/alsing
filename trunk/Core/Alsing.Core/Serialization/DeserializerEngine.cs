@@ -170,7 +170,7 @@ namespace Alsing.Serialization
                     objectLookup.Add(id, res);
                 }
 
-            //configure the instance
+            //configure the instances
             if (objects != null)
                 foreach (XmlNode node in objects)
                 {
