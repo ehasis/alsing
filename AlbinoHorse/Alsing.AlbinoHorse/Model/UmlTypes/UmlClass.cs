@@ -83,7 +83,7 @@ namespace AlbinoHorse.Model
         {
             if (InheritsTypeName != null)
             {
-                info.Graphics.DrawImage(Resources.InheritanceArrow, x + Margins.typeBoxSideMargin, y + 35);
+                info.Graphics.DrawImage(Resources.InheritanceArrow, x + Margins.TypeBoxSideMargin, y + 35);
                 var typeInheritsBounds = new Rectangle(x + 24, y + 33, width - 26, 10);
                 info.Graphics.DrawString(InheritsTypeName, Fonts.InheritsTypeName, Brushes.Black, typeInheritsBounds,
                                          StringFormat.GenericTypographic);

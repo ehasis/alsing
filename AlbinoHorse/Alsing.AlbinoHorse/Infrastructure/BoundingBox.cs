@@ -22,19 +22,9 @@ namespace AlbinoHorse.Infrastructure
 
         #endregion
 
-        //#region Property Section
-        //private string section;
-        //public string Section
-        //{
-        //    get
-        //    {
-        //        return this.section;
-        //    }
-        //    set
-        //    {
-        //        this.section = value;
-        //    }
-        //}
-        //#endregion
+        public virtual bool HitTest(int x,int y)
+        {
+            return Bounds.Contains(x, y);
+        }
     }
 }
