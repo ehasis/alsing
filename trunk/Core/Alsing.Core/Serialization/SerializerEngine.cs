@@ -186,10 +186,10 @@ namespace Alsing.Serialization
             if (type.IsGenericType)
             {
 
-                var argNames = from argType in type.GetGenericArguments()
-                               select GetTypeName(argType);
+                var argNames = (from argType in type.GetGenericArguments()
+                                select GetTypeName(argType)).ToArray();
 
-                string args = argNames.Aggregate((left, right) => left + "," + right);
+                string args = string.Join(",", argNames);
 
                 string typeName = type.Name;
                 int index = typeName.IndexOf("`");
@@ -202,6 +202,7 @@ namespace Alsing.Serialization
 
         private static string IncrementAlias(string alias)
         {
+            //ye ye i know..
             return string.Format("{0}_",alias);
         }
     }

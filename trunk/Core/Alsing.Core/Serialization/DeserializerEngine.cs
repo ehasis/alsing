@@ -147,35 +147,38 @@ namespace Alsing.Serialization
             doc.Load(input);
 
             XmlElement document = doc["document"];
-            XmlElement types = document["types"];
             XmlElement objects = document["objects"];
+            XmlElement types = document["types"];
 
-            foreach(XmlNode node in types)
-            {
-                string alias = node.Attributes["alias"].Value;
-                string fullName = node.Attributes["full-name"].Value;
+            if (types != null)
+                foreach(XmlNode node in types)
+                {
+                    string alias = node.Attributes["alias"].Value;
+                    string fullName = node.Attributes["full-name"].Value;
 
-                Type type = Type.GetType(fullName);
-                typeLookup.Add(alias, type);
-            }
+                    Type type = Type.GetType(fullName);
+                    typeLookup.Add(alias, type);
+                }
 
             //create all instances
-            foreach (XmlNode node in objects)
-            {
-                string id = node.Attributes["id"].Value;
-                Func<XmlNode, object> method = factoryMethodLookup[node.Name];
-                object res = method(node);
-                objectLookup.Add(id, res);
-            }
+            if (objects != null)
+                foreach (XmlNode node in objects)
+                {
+                    string id = node.Attributes["id"].Value;
+                    Func<XmlNode, object> method = factoryMethodLookup[node.Name];
+                    object res = method(node);
+                    objectLookup.Add(id, res);
+                }
 
             //configure the instance
-            foreach (XmlNode node in objects)
-            {
-                string id = node.Attributes["id"].Value;
-                object instance = objectLookup[id];
-                Action<XmlNode, object> method = setupMethodLookup[node.Name];
-                method(node, instance);
-            }
+            if (objects != null)
+                foreach (XmlNode node in objects)
+                {
+                    string id = node.Attributes["id"].Value;
+                    object instance = objectLookup[id];
+                    Action<XmlNode, object> method = setupMethodLookup[node.Name];
+                    method(node, instance);
+                }
 
             //return the root
             return objectLookup["0"];
