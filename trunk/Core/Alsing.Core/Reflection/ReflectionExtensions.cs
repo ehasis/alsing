@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
 namespace Alsing
@@ -29,12 +30,17 @@ namespace Alsing
             if (type == null)
                 return null;
 
-            FieldInfo field = type.GetField(fieldName,
-                                            BindingFlags.Public |
-                                            BindingFlags.NonPublic |
-                                            BindingFlags.Instance);
+            var allFields = from f in type.GetFields(BindingFlags.Public |
+                                                     BindingFlags.NonPublic |
+                                                     BindingFlags.Instance)
+                            where f.Name.ToLowerInvariant() == fieldName.ToLowerInvariant()
+                            select f;
 
-            return field ?? GetFieldInfo(type.BaseType, fieldName);
+            FieldInfo field = allFields.FirstOrDefault();
+            if (field != null)
+                return field;
+
+            return GetFieldInfo(type.BaseType, fieldName);
         }
     }
 }
