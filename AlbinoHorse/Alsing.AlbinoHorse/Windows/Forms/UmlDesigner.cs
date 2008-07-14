@@ -14,7 +14,7 @@ namespace AlbinoHorse.Windows.Forms
         private BoundingItem currentBoundingItem;
         private Shape currentShape;
         private DrawRelation endDrawRelation;
-        private Action endInputAction;
+        private Action EndInputAction { get; set; }
         private bool isPanning;
         private Point mouseCurrentPoint;
         private Point mouseDownAutoscrollPoint;
@@ -191,7 +191,7 @@ namespace AlbinoHorse.Windows.Forms
         public void BeginInput(Rectangle bounds, string text, Font font, Action endInputAction)
         {
             originalText = text;
-            this.endInputAction = endInputAction;
+            EndInputAction = endInputAction;
             txtInput.Visible = false;
             txtInput.Multiline = false;
             txtInput.ScrollBars = ScrollBars.None;
@@ -225,7 +225,7 @@ namespace AlbinoHorse.Windows.Forms
         public void BeginInputMultiLine(Rectangle bounds, string text, Font font, Action endInputAction)
         {
             originalText = text;
-            this.endInputAction = endInputAction;
+            EndInputAction = endInputAction;
             txtInput.Visible = false;
             txtInput.Multiline = true;
             txtInput.ScrollBars = ScrollBars.None;
@@ -260,12 +260,12 @@ namespace AlbinoHorse.Windows.Forms
 
         public void EndInput()
         {
-            if (endInputAction != null)
-                endInputAction();
+            if (EndInputAction != null)
+                EndInputAction();
             else
                 return;
 
-            endInputAction = null;
+            EndInputAction = null;
 
             Font oldFont = txtInput.Font;
 
