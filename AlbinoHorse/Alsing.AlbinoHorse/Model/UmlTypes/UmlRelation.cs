@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using AlbinoHorse.Infrastructure;
+using AlbinoHorse.Model.Settings;
 using Brushes=AlbinoHorse.Model.Settings.Brushes;
 using Pens=AlbinoHorse.Model.Settings.Pens;
 
@@ -112,7 +113,7 @@ namespace AlbinoHorse.Model
         {
             if (Selected)
             {
-                const int marginSize = 15;
+                const int marginSize = Margins.RelationPortMargin;
                 if (portSide == UmlPortSide.Left)
                 {
                     DrawSelectionHandle(info, new Point((int) point.X + marginSize, (int) point.Y));
@@ -137,7 +138,7 @@ namespace AlbinoHorse.Model
 
         private void DrawPortBackground(RenderInfo info, UmlPortSide portSide, PointF point, object portIdentifier)
         {
-            const int marginSize = 15;
+            const int marginSize = Margins.RelationPortMargin;
             if (portSide == UmlPortSide.Left)
             {
                 DrawPortSelector(info, point.X, point.Y, point.X + marginSize, point.Y, portIdentifier);
@@ -162,7 +163,7 @@ namespace AlbinoHorse.Model
 
         private static void DrawPort(RenderInfo info, UmlPortSide portSide, PointF point, Pen pen)
         {
-            const int marginSize = 15;
+            const int marginSize = Margins.RelationPortMargin;
             if (portSide == UmlPortSide.Left)
             {
                 info.Graphics.DrawLine(pen, point.X, point.Y, point.X + marginSize, point.Y);
@@ -186,41 +187,42 @@ namespace AlbinoHorse.Model
 
         private static void DrawArrowPort(RenderInfo info, UmlPortSide portSide, PointF point, Pen pen)
         {
-            const int marginSize = 15;
-            const int arrowSize = 5;
+            const int marginSize = Margins.RelationPortMargin;
+            const int arrowSize = Margins.RelationArrowSize;
+
             if (portSide == UmlPortSide.Left)
             {
                 info.Graphics.DrawLine(pen, point.X, point.Y, point.X + marginSize, point.Y);
-                info.Graphics.DrawLine(pen, point.X + arrowSize, point.Y - 5, point.X + marginSize, point.Y);
-                info.Graphics.DrawLine(pen, point.X + arrowSize, point.Y + 5, point.X + marginSize, point.Y);
+                info.Graphics.DrawLine(pen, point.X + arrowSize, point.Y - Margins.RelationArrowSize, point.X + marginSize, point.Y);
+                info.Graphics.DrawLine(pen, point.X + arrowSize, point.Y + Margins.RelationArrowSize, point.X + marginSize, point.Y);
             }
 
             if (portSide == UmlPortSide.Right)
             {
                 info.Graphics.DrawLine(pen, point.X, point.Y, point.X - marginSize, point.Y);
-                info.Graphics.DrawLine(pen, point.X - arrowSize, point.Y - 5, point.X - marginSize, point.Y);
-                info.Graphics.DrawLine(pen, point.X - arrowSize, point.Y + 5, point.X - marginSize, point.Y);
+                info.Graphics.DrawLine(pen, point.X - arrowSize, point.Y - Margins.RelationArrowSize, point.X - marginSize, point.Y);
+                info.Graphics.DrawLine(pen, point.X - arrowSize, point.Y + Margins.RelationArrowSize, point.X - marginSize, point.Y);
             }
 
             if (portSide == UmlPortSide.Top)
             {
                 info.Graphics.DrawLine(pen, point.X, point.Y, point.X, point.Y + marginSize);
-                info.Graphics.DrawLine(pen, point.X - 5, point.Y + arrowSize, point.X, point.Y + marginSize);
-                info.Graphics.DrawLine(pen, point.X + 5, point.Y + arrowSize, point.X, point.Y + marginSize);
+                info.Graphics.DrawLine(pen, point.X - Margins.RelationArrowSize, point.Y + arrowSize, point.X, point.Y + marginSize);
+                info.Graphics.DrawLine(pen, point.X + Margins.RelationArrowSize, point.Y + arrowSize, point.X, point.Y + marginSize);
             }
 
             if (portSide == UmlPortSide.Bottom)
             {
                 info.Graphics.DrawLine(pen, point.X, point.Y, point.X, point.Y - marginSize);
-                info.Graphics.DrawLine(pen, point.X - 5, point.Y - arrowSize, point.X, point.Y - marginSize);
-                info.Graphics.DrawLine(pen, point.X + 5, point.Y - arrowSize, point.X, point.Y - marginSize);
+                info.Graphics.DrawLine(pen, point.X - Margins.RelationArrowSize, point.Y - arrowSize, point.X, point.Y - marginSize);
+                info.Graphics.DrawLine(pen, point.X + Margins.RelationArrowSize, point.Y - arrowSize, point.X, point.Y - marginSize);
             }
         }
 
         private static void DrawInheritancePort(RenderInfo info, UmlPortSide portSide, PointF point, Pen pen)
         {
-            const int marginSize = 15;
-            const int arrowSize = 5;
+            const int marginSize = Margins.RelationPortMargin;
+            const int arrowSize = Margins.RelationArrowSize;
             var x = (int) point.X;
             var y = (int) point.Y;
             if (portSide == UmlPortSide.Left)
@@ -229,8 +231,8 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                                  {
-                                     new Point(x + marginSize, y), new Point(x + arrowSize, y + 5),
-                                     new Point(x + arrowSize, y - 5)
+                                     new Point(x + marginSize, y), new Point(x + arrowSize, y + Margins.RelationArrowSize),
+                                     new Point(x + arrowSize, y - Margins.RelationArrowSize)
                                  };
                 info.Graphics.FillPolygon(System.Drawing.Brushes.White, points);
                 info.Graphics.DrawPolygon(pen, points);
@@ -242,8 +244,8 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                                  {
-                                     new Point(x - marginSize, y), new Point(x - arrowSize, y + 5),
-                                     new Point(x - arrowSize, y - 5)
+                                     new Point(x - marginSize, y), new Point(x - arrowSize, y + Margins.RelationArrowSize),
+                                     new Point(x - arrowSize, y - Margins.RelationArrowSize)
                                  };
                 info.Graphics.FillPolygon(System.Drawing.Brushes.White, points);
                 info.Graphics.DrawPolygon(pen, points);
@@ -255,8 +257,8 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                                  {
-                                     new Point(x, y + marginSize), new Point(x + 5, y + arrowSize),
-                                     new Point(x - 5, y + arrowSize)
+                                     new Point(x, y + marginSize), new Point(x + Margins.RelationArrowSize, y + arrowSize),
+                                     new Point(x - Margins.RelationArrowSize, y + arrowSize)
                                  };
                 info.Graphics.FillPolygon(System.Drawing.Brushes.White, points);
                 info.Graphics.DrawPolygon(pen, points);
@@ -267,8 +269,8 @@ namespace AlbinoHorse.Model
                 info.Graphics.DrawLine(pen, point.X, point.Y, point.X, point.Y - marginSize);
                 var points = new[]
                                  {
-                                     new Point(x, y - marginSize), new Point(x + 5, y - arrowSize),
-                                     new Point(x - 5, y - arrowSize)
+                                     new Point(x, y - marginSize), new Point(x + Margins.RelationArrowSize, y - arrowSize),
+                                     new Point(x - Margins.RelationArrowSize, y - arrowSize)
                                  };
                 info.Graphics.FillPolygon(System.Drawing.Brushes.White, points);
                 info.Graphics.DrawPolygon(pen, points);
@@ -286,9 +288,9 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                                  {
-                                     new Point(x + marginSize, y), new Point(x + marginSize/2, y + 5),
+                                     new Point(x + marginSize, y), new Point(x + marginSize/2, y + Margins.RelationArrowSize),
                                      new Point(x + 0, y),
-                                     new Point(x + marginSize/2, y - 5)
+                                     new Point(x + marginSize/2, y - Margins.RelationArrowSize)
                                  };
 
                 info.Graphics.FillPolygon(System.Drawing.Brushes.White, points);
@@ -301,9 +303,9 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                                  {
-                                     new Point(x - marginSize, y), new Point(x - marginSize/2, y + 5),
+                                     new Point(x - marginSize, y), new Point(x - marginSize/2, y + Margins.RelationArrowSize),
                                      new Point(x - 0, y),
-                                     new Point(x - marginSize/2, y - 5)
+                                     new Point(x - marginSize/2, y - Margins.RelationArrowSize)
                                  };
                 info.Graphics.FillPolygon(System.Drawing.Brushes.White, points);
                 info.Graphics.DrawPolygon(pen, points);
@@ -315,8 +317,8 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                                  {
-                                     new Point(x, y + marginSize), new Point(x + 5, y + marginSize/2), new Point(x, y),
-                                     new Point(x - 5, y + marginSize/2)
+                                     new Point(x, y + marginSize), new Point(x + Margins.RelationArrowSize, y + marginSize/2), new Point(x, y),
+                                     new Point(x - Margins.RelationArrowSize, y + marginSize/2)
                                  };
 
                 info.Graphics.FillPolygon(System.Drawing.Brushes.White, points);
@@ -329,8 +331,8 @@ namespace AlbinoHorse.Model
 
                 var points = new[]
                                  {
-                                     new Point(x, y - marginSize), new Point(x + 5, y - marginSize/2), new Point(x, y),
-                                     new Point(x - 5, y - marginSize/2)
+                                     new Point(x, y - marginSize), new Point(x + Margins.RelationArrowSize, y - marginSize/2), new Point(x, y),
+                                     new Point(x - Margins.RelationArrowSize, y - marginSize/2)
                                  };
 
                 info.Graphics.FillPolygon(System.Drawing.Brushes.White, points);

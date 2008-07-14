@@ -3,13 +3,12 @@ using System.Drawing.Drawing2D;
 
 namespace AlbinoHorse.Model.Settings
 {
-
-    #region GFX Settings
-
     public static class Margins
     {
         public const int TypeBoxSideMargin = 10;
         public const int TypeMemberNameIndent = 30;
+        public const int RelationPortMargin = 15;
+        public const int RelationArrowSize = 5;
     }
 
     public static class Brushes
@@ -81,6 +80,4 @@ namespace AlbinoHorse.Model.Settings
             return pen;
         }
     }
-
-    #endregion
 }
