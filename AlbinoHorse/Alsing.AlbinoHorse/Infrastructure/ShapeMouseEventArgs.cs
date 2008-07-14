@@ -8,7 +8,7 @@ namespace AlbinoHorse.Infrastructure
         public int X { get; set; }
         public int Y { get; set; }
         public MouseButtons Button { get; set; }
-        public BoundingBox BoundingBox { get; set; }
+        public BoundingItem BoundingItem { get; set; }
         public bool Redraw { get; set; }
         public UmlDesigner Sender { get; set; }
         public int GridSize { get; set; }

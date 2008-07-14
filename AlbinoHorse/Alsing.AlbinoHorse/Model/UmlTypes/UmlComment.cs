@@ -65,7 +65,7 @@ namespace AlbinoHorse.Model
             bboxThis.Bounds = renderBounds;
             bboxThis.Target = this;
             bboxThis.Data = BodyIdentifier;
-            info.BoundingBoxes.Add(bboxThis);
+            info.BoundingItems.Add(bboxThis);
 
             int x = renderBounds.X;
             int y = renderBounds.Y;
@@ -92,7 +92,7 @@ namespace AlbinoHorse.Model
             bboxText.Bounds = textBounds;
             bboxText.Target = this;
             bboxText.Data = TextIdentifier;
-            info.BoundingBoxes.Add(bboxText);
+            info.BoundingItems.Add(bboxText);
 
 
             var textBoundsF = new RectangleF(textBounds.X, textBounds.Y, textBounds.Width, textBounds.Height);
@@ -132,13 +132,13 @@ namespace AlbinoHorse.Model
             args.Sender.ClearSelection();
             Selected = true;
 
-            if (args.BoundingBox.Data == RightResizeIdentifier)
+            if (args.BoundingItem.Data == RightResizeIdentifier)
             {
                 mouseDownPos = new Point(args.X, args.Y);
                 SelectedObject = null;
                 args.Redraw = true;
             }
-            else if (args.BoundingBox.Data == LeftResizeIdentifier)
+            else if (args.BoundingItem.Data == LeftResizeIdentifier)
             {
                 mouseDownPos = new Point(args.X, args.Y);
                 SelectedObject = null;
@@ -161,7 +161,7 @@ namespace AlbinoHorse.Model
 
         public override void OnMouseMove(ShapeMouseEventArgs args)
         {
-            if (args.BoundingBox.Data == RightResizeIdentifier && args.Button == MouseButtons.Left)
+            if (args.BoundingItem.Data == RightResizeIdentifier && args.Button == MouseButtons.Left)
             {
                 int diff = args.X - Bounds.Left;
                 if (diff < 100)
@@ -171,7 +171,7 @@ namespace AlbinoHorse.Model
                 args.Redraw = true;
             }
 
-            if (args.BoundingBox.Data == LeftResizeIdentifier && args.Button == MouseButtons.Left)
+            if (args.BoundingItem.Data == LeftResizeIdentifier && args.Button == MouseButtons.Left)
             {
                 int diff = Bounds.Right - args.X;
                 if (diff < 100)
@@ -189,7 +189,7 @@ namespace AlbinoHorse.Model
                 }
             }
 
-            if ((args.BoundingBox.Data == BodyIdentifier || args.BoundingBox.Data == TextIdentifier) &&
+            if ((args.BoundingItem.Data == BodyIdentifier || args.BoundingItem.Data == TextIdentifier) &&
                 args.Button == MouseButtons.Left)
             {
                 int dx = args.X - mouseDownPos.X;
@@ -217,7 +217,7 @@ namespace AlbinoHorse.Model
 
         public override void OnDoubleClick(ShapeMouseEventArgs args)
         {
-            if (args.BoundingBox.Data == TextIdentifier)
+            if (args.BoundingItem.Data == TextIdentifier)
             {
                 BeginEditText(args.Sender);
             }

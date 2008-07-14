@@ -44,7 +44,7 @@ namespace AlbinoHorse.Model
             bBox.Bounds = bounds;
             bBox.Data = identifier;
             bBox.Target = this;
-            info.BoundingBoxes.Add(bBox);
+            info.BoundingItems.Add(bBox);
         }
 
         protected void DrawSelectionHandle(RenderInfo info, Point point)

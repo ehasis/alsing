@@ -114,7 +114,7 @@ namespace AlbinoHorse.Model
             bboxGroup.Bounds = memberCaptionBounds;
             bboxGroup.Target = this;
             bboxGroup.Data = section.CaptionIdentifier;
-            info.BoundingBoxes.Add(bboxGroup);
+            info.BoundingItems.Add(bboxGroup);
 
             #endregion
 
@@ -144,7 +144,7 @@ namespace AlbinoHorse.Model
             bboxGroupExpander.Bounds = new Rectangle(x + 4, y + 4, 13, 13);
             bboxGroupExpander.Target = this;
             bboxGroupExpander.Data = section.ExpanderIdentifier;
-            info.BoundingBoxes.Add(bboxGroupExpander);
+            info.BoundingItems.Add(bboxGroupExpander);
 
             #endregion
 
@@ -169,7 +169,7 @@ namespace AlbinoHorse.Model
                     memberBBox.Target = this;
                     memberBBox.Bounds = memberBounds;
                     memberBBox.Data = member;
-                    info.BoundingBoxes.Add(memberBBox);
+                    info.BoundingItems.Add(memberBBox);
 
                     #endregion
 
@@ -200,7 +200,7 @@ namespace AlbinoHorse.Model
                 newMemberBBox.Target = this;
                 newMemberBBox.Bounds = new Rectangle(x + Margins.TypeBoxSideMargin, currentY, width - 20, 16);
                 newMemberBBox.Data = section.AddNewIdentifier;
-                info.BoundingBoxes.Add(newMemberBBox);
+                info.BoundingItems.Add(newMemberBBox);
 
                 currentY += 16;
             }
@@ -219,29 +219,29 @@ namespace AlbinoHorse.Model
             args.Sender.ClearSelection();
             Selected = true;
 
-            if (args.BoundingBox.Data == RightResizeIdentifier)
+            if (args.BoundingItem.Data == RightResizeIdentifier)
             {
                 mouseDownPos = new Point(args.X, args.Y);
                 SelectedObject = null;
                 args.Redraw = true;
             }
-            else if (args.BoundingBox.Data == LeftResizeIdentifier)
+            else if (args.BoundingItem.Data == LeftResizeIdentifier)
             {
                 mouseDownPos = new Point(args.X, args.Y);
                 SelectedObject = null;
                 args.Redraw = true;
             }
-            else if (args.BoundingBox.Data == PropertiesIdentifier)
+            else if (args.BoundingItem.Data == PropertiesIdentifier)
             {
                 SelectedObject = PropertiesIdentifier;
                 args.Redraw = true;
             }
-            else if (args.BoundingBox.Data is UmlTypeMember)
+            else if (args.BoundingItem.Data is UmlTypeMember)
             {
-                SelectedObject = args.BoundingBox.Data as UmlTypeMember;
+                SelectedObject = args.BoundingItem.Data as UmlTypeMember;
                 args.Redraw = true;
             }
-            else if (args.BoundingBox.Data == CaptionIdentifier)
+            else if (args.BoundingItem.Data == CaptionIdentifier)
             {
                 mouseDownPos = new Point(args.X, args.Y);
                 mouseDownShapePos = Bounds.Location;
@@ -253,13 +253,13 @@ namespace AlbinoHorse.Model
             {
                 foreach (UmlTypeMemberSection section in TypeMemberSections)
                 {
-                    if (args.BoundingBox.Data == section.CaptionIdentifier)
+                    if (args.BoundingItem.Data == section.CaptionIdentifier)
                     {
                         SelectedObject = section.CaptionIdentifier;
                         args.Redraw = true;
                     }
 
-                    if (args.BoundingBox.Data == section.ExpanderIdentifier)
+                    if (args.BoundingItem.Data == section.ExpanderIdentifier)
                     {
                         SelectedObject = section.CaptionIdentifier;
                         section.Expanded = !section.Expanded;
@@ -273,7 +273,7 @@ namespace AlbinoHorse.Model
         {
             foreach (UmlTypeMemberSection section in TypeMemberSections)
             {
-                if (args.BoundingBox.Data == section.AddNewIdentifier)
+                if (args.BoundingItem.Data == section.AddNewIdentifier)
                 {
                     UmlTypeMember newMember = TypedDataSource.CreateTypeMember(section.Name);
                     SelectedObject = newMember;
@@ -282,7 +282,7 @@ namespace AlbinoHorse.Model
                 }
             }
 
-            //if (args.BoundingBox.Data == AddNewPropertyIdentifier)
+            //if (args.BoundingItem.Data == AddNewPropertyIdentifier)
             //{
             //    UmlTypeMember newProperty = TypedDataSource.CreateTypeMember("Property");
             //    this.SelectedObject = newProperty;
@@ -292,7 +292,7 @@ namespace AlbinoHorse.Model
             //    args.Redraw = true;
             //}
 
-            if (args.BoundingBox.Data == TypeExpanderIdentifier)
+            if (args.BoundingItem.Data == TypeExpanderIdentifier)
             {
                 Expanded = !Expanded;
             }
@@ -301,7 +301,7 @@ namespace AlbinoHorse.Model
 
         public override void OnMouseMove(ShapeMouseEventArgs args)
         {
-            if (args.BoundingBox.Data == RightResizeIdentifier && args.Button == MouseButtons.Left)
+            if (args.BoundingItem.Data == RightResizeIdentifier && args.Button == MouseButtons.Left)
             {
                 int diff = args.X - Bounds.Left;
                 if (diff < 100)
@@ -311,7 +311,7 @@ namespace AlbinoHorse.Model
                 args.Redraw = true;
             }
 
-            if (args.BoundingBox.Data == LeftResizeIdentifier && args.Button == MouseButtons.Left)
+            if (args.BoundingItem.Data == LeftResizeIdentifier && args.Button == MouseButtons.Left)
             {
                 int diff = Bounds.Right - args.X;
                 if (diff < 100)
@@ -329,7 +329,7 @@ namespace AlbinoHorse.Model
                 }
             }
 
-            if (args.BoundingBox.Data == CaptionIdentifier && args.Button == MouseButtons.Left)
+            if (args.BoundingItem.Data == CaptionIdentifier && args.Button == MouseButtons.Left)
             {
                 int dx = args.X - mouseDownPos.X;
                 int dy = args.Y - mouseDownPos.Y;
@@ -358,21 +358,21 @@ namespace AlbinoHorse.Model
         {
             foreach (UmlTypeMemberSection section in TypeMemberSections)
             {
-                if (args.BoundingBox.Data == section.CaptionIdentifier)
+                if (args.BoundingItem.Data == section.CaptionIdentifier)
                 {
                     section.Expanded = !section.Expanded;
                     args.Redraw = true;
                 }
             }
 
-            if (args.BoundingBox.Data == CaptionIdentifier)
+            if (args.BoundingItem.Data == CaptionIdentifier)
             {
                 BeginRenameType(args.Sender);
             }
 
-            if (args.BoundingBox.Data is UmlTypeMember)
+            if (args.BoundingItem.Data is UmlTypeMember)
             {
-                BeginRenameProperty(args.Sender, args.BoundingBox.Data as UmlTypeMember);
+                BeginRenameProperty(args.Sender, args.BoundingItem.Data as UmlTypeMember);
                 args.Redraw = true;
             }
         }
