@@ -32,6 +32,8 @@ namespace Alsing.Serialization
 
         public event FieldMissingHandler FieldMissing;
         public event TypeMissingHandler TypeMissing;
+        public event ObjectCreatedHandler ObjectCreated;
+        public event ObjectConfiguredHandler ObjectConfigured;
 
         protected void OnFieldMissing(string fieldName, object instance, object value)
         {
@@ -43,6 +45,18 @@ namespace Alsing.Serialization
         {
             if (TypeMissing != null)
                 TypeMissing(typeName, ref substitutionType);
+        }
+
+        protected void OnObjectCreated(object instance)
+        {
+            if (ObjectCreated != null)
+                ObjectCreated(instance);
+        }
+
+        protected void OnObjectConfigured(object instance)
+        {
+            if (ObjectConfigured != null)
+                ObjectConfigured(instance);
         }
 
         private Dictionary<string, Func<XmlNode, object>> GetFactoryMethodLookup()
@@ -79,6 +93,9 @@ namespace Alsing.Serialization
                 return null;
 
             object instance = Activator.CreateInstance(type);
+
+            OnObjectCreated(instance);
+
             return instance;
         }
 
@@ -127,6 +144,8 @@ namespace Alsing.Serialization
                     }
                 }
             }
+
+            OnObjectConfigured(instance);
         }
 
 
