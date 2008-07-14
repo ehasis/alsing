@@ -422,7 +422,7 @@ namespace AlbinoHorse.Model
                                                                   (int) Math.Abs(yy2 - yy1));
                                           tmp.Inflate(6, 6);
                                           bbox.Bounds = tmp;
-                                          info.BoundingBoxes.Add(bbox);
+                                          info.BoundingItems.Add(bbox);
 
                                           #endregion
 
@@ -446,7 +446,7 @@ namespace AlbinoHorse.Model
             tmp.Inflate(6, 6);
 
             bbox.Bounds = tmp;
-            info.BoundingBoxes.Add(bbox);
+            info.BoundingItems.Add(bbox);
 
             #endregion
 
@@ -466,7 +466,7 @@ namespace AlbinoHorse.Model
 
         public override void OnMouseMove(ShapeMouseEventArgs args)
         {
-            if (args.BoundingBox.Data == StartPortIdentifier && args.Button == MouseButtons.Left)
+            if (args.BoundingItem.Data == StartPortIdentifier && args.Button == MouseButtons.Left)
             {
                 Rectangle bounds = DataSource.Start.Bounds;
 
@@ -484,7 +484,7 @@ namespace AlbinoHorse.Model
                 args.Redraw = true;
             }
 
-            if (args.BoundingBox.Data == EndPortIdentifier && args.Button == MouseButtons.Left)
+            if (args.BoundingItem.Data == EndPortIdentifier && args.Button == MouseButtons.Left)
             {
                 Rectangle bounds = DataSource.End.Bounds;
 

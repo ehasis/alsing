@@ -16,6 +16,8 @@ namespace AlbinoHorse.Infrastructure
 
         #endregion
 
+        public abstract Rectangle GetBounds();
+
         public abstract bool HitTest(int x, int y);
     }
 
@@ -27,13 +29,18 @@ namespace AlbinoHorse.Infrastructure
 
         #endregion
 
+        public override Rectangle GetBounds()
+        {
+            return Bounds;
+        }
+
         public override bool HitTest(int x,int y)
         {
             return Bounds.Contains(x, y);
         }
     }
 
-    public class BoundingLine : BoundingBox
+    public class BoundingLine : BoundingItem
     {
         public int X1 { get; set; }
         public int Y1 { get; set; }
@@ -41,9 +48,14 @@ namespace AlbinoHorse.Infrastructure
         public int Y2 { get; set; }
         public int Width { get; set; }
 
+        public override Rectangle GetBounds()
+        {
+            return Rectangle.Empty;
+        }
+
         public override bool HitTest(int x, int y)
         {
-            throw new System.NotImplementedException();
+            return false;
         }
     }
 }

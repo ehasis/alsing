@@ -56,7 +56,7 @@ namespace AlbinoHorse.Model
             Rectangle renderBounds = Bounds;
 
             var bboxThis = new BoundingBox {Bounds = renderBounds, Target = this, Data = BodyIdentifier};
-            info.BoundingBoxes.Add(bboxThis);
+            info.BoundingItems.Add(bboxThis);
 
             int x = renderBounds.X;
             int y = renderBounds.Y;
@@ -92,7 +92,7 @@ namespace AlbinoHorse.Model
             bboxTypeExpander.Target = this;
             bboxTypeExpander.Bounds = typeExpanderBounds;
             bboxTypeExpander.Data = TypeExpanderIdentifier;
-            info.BoundingBoxes.Add(bboxTypeExpander);
+            info.BoundingItems.Add(bboxTypeExpander);
 
             #endregion
 
@@ -126,7 +126,7 @@ namespace AlbinoHorse.Model
             bboxCaption.Bounds = captionBounds;
             bboxCaption.Target = this;
             bboxCaption.Data = CaptionIdentifier;
-            info.BoundingBoxes.Add(bboxCaption);
+            info.BoundingItems.Add(bboxCaption);
 
             #endregion
 
@@ -147,7 +147,7 @@ namespace AlbinoHorse.Model
             bboxCaption.Bounds = captionBounds;
             bboxCaption.Target = this;
             bboxCaption.Data = CaptionIdentifier;
-            info.BoundingBoxes.Add(bboxCaption);
+            info.BoundingItems.Add(bboxCaption);
 
             info.Graphics.FillPath(captionBrush, path);
             info.Graphics.DrawPath(borderPen, path);

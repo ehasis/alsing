@@ -7,12 +7,12 @@ namespace AlbinoHorse.Infrastructure
     {
         public RenderInfo()
         {
-            BoundingBoxes = new List<BoundingBox>();
+            BoundingItems = new List<BoundingItem>();
         }
 
         public Graphics Graphics { get; set; }
         public Rectangle VisualBounds { get; set; }
-        public List<BoundingBox> BoundingBoxes { get; set; }
+        public List<BoundingItem> BoundingItems { get; set; }
         public int GridSize { get; set; }
         public bool ShowGrid { get; set; }
         public double Zoom { get; set; }

@@ -11,7 +11,7 @@ namespace AlbinoHorse.Windows.Forms
 {
     public partial class UmlDesigner : Control
     {
-        private BoundingBox currentBoundingBox;
+        private BoundingItem currentBoundingItem;
         private Shape currentShape;
         private DrawRelation endDrawRelation;
         private Action endInputAction;
@@ -41,7 +41,7 @@ namespace AlbinoHorse.Windows.Forms
             PreviewCanvas.Paint += PreviewCanvas_Paint;
             PreviewCanvas.MouseDown += PreviewCanvas_MouseDown;
             PreviewCanvas.MouseMove += PreviewCanvas_MouseMove;
-            BoundingBoxes = new List<BoundingBox>();
+            BoundingItemes = new List<BoundingItem>();
             GridSize = 21;
             ShowGrid = true;
             SnapToGrid = true;
@@ -126,17 +126,17 @@ namespace AlbinoHorse.Windows.Forms
             var x = (int) ((mouseDownPoint.X - MainCanvas.AutoScrollPosition.X)/Zoom);
             var y = (int) ((mouseDownPoint.Y - MainCanvas.AutoScrollPosition.Y)/Zoom);
 
-            for (int i = BoundingBoxes.Count - 1; i >= 0; i--)
+            for (int i = BoundingItemes.Count - 1; i >= 0; i--)
             {
-                BoundingBox bbox = BoundingBoxes[i];
-                if (bbox.HitTest(x,y))
+                BoundingItem bitem = BoundingItemes[i];
+                if (bitem.HitTest(x,y))
                 {
-                    if (bbox.Target is Shape)
+                    if (bitem.Target is Shape)
                     {
-                        currentBoundingBox = bbox;
-                        var shape = (Shape) bbox.Target;
+                        currentBoundingItem = bitem;
+                        var shape = (Shape) bitem.Target;
                         var args = new ShapeMouseEventArgs
-                                   {BoundingBox = bbox, X = x, Y = y, Button = MouseButtons.Left, Sender = this};
+                                   {BoundingItem = bitem, X = x, Y = y, Button = MouseButtons.Left, Sender = this};
                         shape.OnDoubleClick(args);
                         if (args.Redraw)
                             Refresh();
@@ -156,13 +156,13 @@ namespace AlbinoHorse.Windows.Forms
 
         public Rectangle GetItemBounds(object item)
         {
-            foreach (BoundingBox bbox in BoundingBoxes)
+            foreach (BoundingItem bitem in BoundingItemes)
             {
-                if (bbox.Target == item)
-                    return bbox.Bounds;
+                if (bitem.Target == item)
+                    return bitem.GetBounds();
 
-                if (bbox.Data == item)
-                    return bbox.Bounds;
+                if (bitem.Data == item)
+                    return bitem.GetBounds();
             }
 
             return Rectangle.Empty;
@@ -342,7 +342,7 @@ namespace AlbinoHorse.Windows.Forms
             e.Graphics.TranslateTransform((float) (-x/zoom), (float) (-y/zoom));
             renderInfo.Zoom = Zoom;
             Diagram.Draw(renderInfo);
-            BoundingBoxes = renderInfo.BoundingBoxes;
+            BoundingItemes = renderInfo.BoundingItems;
 
             if (EditMode == EditMode.DrawRelation)
             {
@@ -371,14 +371,14 @@ namespace AlbinoHorse.Windows.Forms
                 relationEnd = null;
 
 
-                for (int i = BoundingBoxes.Count - 1; i >= 0; i--)
+                for (int i = BoundingItemes.Count - 1; i >= 0; i--)
                 {
-                    BoundingBox bbox = BoundingBoxes[i];
-                    if (bbox.Bounds.Contains(x, y))
+                    BoundingItem bitem = BoundingItemes[i];
+                    if (bitem.HitTest(x, y))
                     {
-                        if (bbox.Target is Shape)
+                        if (bitem.Target is Shape)
                         {
-                            relationEnd = bbox.Target as Shape;
+                            relationEnd = bitem.Target as Shape;
                         }
                     }
                 }
@@ -392,19 +392,19 @@ namespace AlbinoHorse.Windows.Forms
             else if (EditMode == EditMode.Normal)
             {
                 Cursor = Cursors.Default;
-                currentBoundingBox = null;
+                currentBoundingItem = null;
                 isPanning = false;
-                for (int i = BoundingBoxes.Count - 1; i >= 0; i--)
+                for (int i = BoundingItemes.Count - 1; i >= 0; i--)
                 {
-                    BoundingBox bbox = BoundingBoxes[i];
-                    if (bbox.Bounds.Contains(x, y))
+                    BoundingItem bitem = BoundingItemes[i];
+                    if (bitem.HitTest(x, y))
                     {
-                        if (bbox.Target is Shape)
+                        if (bitem.Target is Shape)
                         {
-                            var shape = (Shape) bbox.Target;
+                            var shape = (Shape) bitem.Target;
                             var args = new ShapeMouseEventArgs
                                        {
-                                           BoundingBox = bbox,
+                                           BoundingItem = bitem,
                                            X = x,
                                            Y = y,
                                            Button = e.Button,
@@ -435,14 +435,14 @@ namespace AlbinoHorse.Windows.Forms
                 EditMode = EditMode.DrawRelation;
                 relationStart = null;
 
-                for (int i = BoundingBoxes.Count - 1; i >= 0; i--)
+                for (int i = BoundingItemes.Count - 1; i >= 0; i--)
                 {
-                    BoundingBox bbox = BoundingBoxes[i];
-                    if (bbox.Bounds.Contains(x, y))
+                    BoundingItem bitem = BoundingItemes[i];
+                    if (bitem.HitTest(x, y))
                     {
-                        if (bbox.Target is Shape)
+                        if (bitem.Target is Shape)
                         {
-                            relationStart = bbox.Target as Shape;
+                            relationStart = bitem.Target as Shape;
                         }
                     }
                 }
@@ -452,19 +452,19 @@ namespace AlbinoHorse.Windows.Forms
                 mouseDownPoint = new Point(e.X, e.Y);
                 mouseDownAutoscrollPoint = new Point(-MainCanvas.AutoScrollPosition.X, -MainCanvas.AutoScrollPosition.Y);
 
-                for (int i = BoundingBoxes.Count - 1; i >= 0; i--)
+                for (int i = BoundingItemes.Count - 1; i >= 0; i--)
                 {
-                    BoundingBox bbox = BoundingBoxes[i];
-                    if (bbox.Bounds.Contains(x, y))
+                    BoundingItem bitem = BoundingItemes[i];
+                    if (bitem.HitTest(x, y))
                     {
-                        if (bbox.Target is Shape)
+                        if (bitem.Target is Shape)
                         {
-                            currentBoundingBox = bbox;
-                            var shape = (Shape) bbox.Target;
+                            currentBoundingItem = bitem;
+                            var shape = (Shape) bitem.Target;
                             currentShape = shape;
                             var args = new ShapeMouseEventArgs
                                        {
-                                           BoundingBox = bbox,
+                                           BoundingItem = bitem,
                                            X = x,
                                            Y = y,
                                            Button = e.Button,
@@ -498,7 +498,7 @@ namespace AlbinoHorse.Windows.Forms
 
                 if (e.Button != MouseButtons.None)
                 {
-                    if (currentBoundingBox == null)
+                    if (currentBoundingItem == null)
                     {
                         if (isPanning)
                         {
@@ -512,10 +512,10 @@ namespace AlbinoHorse.Windows.Forms
                     }
                     else
                     {
-                        var shape = (Shape) currentBoundingBox.Target;
+                        var shape = (Shape) currentBoundingItem.Target;
                         var args = new ShapeMouseEventArgs
                                    {
-                                       BoundingBox = currentBoundingBox,
+                                       BoundingItem = currentBoundingItem,
                                        X = x,
                                        Y = y,
                                        Button = e.Button,
@@ -530,16 +530,16 @@ namespace AlbinoHorse.Windows.Forms
                 }
                 else
                 {
-                    for (int i = BoundingBoxes.Count - 1; i >= 0; i--)
+                    for (int i = BoundingItemes.Count - 1; i >= 0; i--)
                     {
-                        BoundingBox bbox = BoundingBoxes[i];
-                        if (bbox.Bounds.Contains(x, y))
+                        BoundingItem bitem = BoundingItemes[i];
+                        if (bitem.HitTest(x, y))
                         {
-                            if (bbox.Target is Shape)
+                            if (bitem.Target is Shape)
                             {
-                                var shape = (Shape) bbox.Target;
+                                var shape = (Shape) bitem.Target;
                                 var args = new ShapeMouseEventArgs
-                                           {BoundingBox = bbox, X = x, Y = y, Button = e.Button, Sender = this};
+                                           {BoundingItem = bitem, X = x, Y = y, Button = e.Button, Sender = this};
                                 shape.OnMouseMove(args);
                                 if (args.Redraw)
                                     MainCanvas.Refresh();
@@ -641,11 +641,11 @@ namespace AlbinoHorse.Windows.Forms
 
         #endregion
 
-        #region Property BoundingBoxes
+        #region Property BoundingItemes
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public List<BoundingBox> BoundingBoxes { get; set; }
+        public List<BoundingItem> BoundingItemes { get; set; }
 
         #endregion
 
