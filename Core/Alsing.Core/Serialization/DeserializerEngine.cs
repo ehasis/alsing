@@ -1,30 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Xml;
-using System.Collections;
 
 namespace Alsing.Serialization
 {
     public class DeserializerEngine
     {
-        public event FieldMissingHandler FieldMissing;
-        public event TypeMissingHandler TypeMissing;
-
-        protected void OnFieldMissing(string fieldName,object instance,object value)
-        {
-            if (FieldMissing != null)
-                FieldMissing(fieldName, instance, value);
-        }
-
-        protected void OnTypeMissing(string typeName,ref Type substitutionType)
-        {
-            if (TypeMissing != null)
-                TypeMissing(typeName, ref substitutionType);
-        }
-
         private readonly Dictionary<string, Func<XmlNode, object>> factoryMethodLookup;
         private readonly Dictionary<string, object> objectLookup = new Dictionary<string, object>();
         private readonly Dictionary<string, Action<XmlNode, object>> setupMethodLookup;
@@ -34,6 +19,30 @@ namespace Alsing.Serialization
         {
             factoryMethodLookup = GetFactoryMethodLookup();
             setupMethodLookup = GetSetupMethodLookup();
+
+            AddFacility<BackingFieldAutoPromoteFacility>();
+
+        }
+
+        private void AddFacility<T>() where T : IDeserializationFacility , new()
+        {
+            T facility = new T();
+            facility.Attach(this);
+        }
+
+        public event FieldMissingHandler FieldMissing;
+        public event TypeMissingHandler TypeMissing;
+
+        protected void OnFieldMissing(string fieldName, object instance, object value)
+        {
+            if (FieldMissing != null)
+                FieldMissing(fieldName, instance, value);
+        }
+
+        protected void OnTypeMissing(string typeName, ref Type substitutionType)
+        {
+            if (TypeMissing != null)
+                TypeMissing(typeName, ref substitutionType);
         }
 
         private Dictionary<string, Func<XmlNode, object>> GetFactoryMethodLookup()
@@ -64,7 +73,7 @@ namespace Alsing.Serialization
         {
             string typeAlias = node.Attributes["type"].Value;
             Type type = typeLookup[typeAlias];
-            
+
             //ignore if type is missing
             if (type == null)
                 return null;
@@ -92,7 +101,6 @@ namespace Alsing.Serialization
 
                     if (nullAttrib != null)
                     {
-                        
                     }
                     if (idRefAttrib != null)
                     {
@@ -111,7 +119,7 @@ namespace Alsing.Serialization
 
                     if (field == null)
                     {
-                        OnFieldMissing(fieldName,instance,value);
+                        OnFieldMissing(fieldName, instance, value);
                     }
                     else
                     {
@@ -121,7 +129,7 @@ namespace Alsing.Serialization
             }
         }
 
-        
+
         private void SetupList(XmlNode listNode, object instance)
         {
             var list = instance as IList;
@@ -171,14 +179,14 @@ namespace Alsing.Serialization
             XmlElement types = document["types"];
 
             if (types != null)
-                foreach(XmlNode node in types)
+                foreach (XmlNode node in types)
                 {
                     string alias = node.Attributes["alias"].Value;
                     string fullName = node.Attributes["full-name"].Value;
 
                     Type type = Type.GetType(fullName);
                     if (type == null)
-                        OnTypeMissing(fullName,ref type);
+                        OnTypeMissing(fullName, ref type);
 
                     typeLookup.Add(alias, type);
                 }
