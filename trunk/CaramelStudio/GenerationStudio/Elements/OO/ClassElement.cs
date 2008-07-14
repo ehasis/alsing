@@ -1,4 +1,5 @@
 ﻿using System;
+using GenerationStudio.AppCore;
 using GenerationStudio.Attributes;
 
 namespace GenerationStudio.Elements
@@ -8,7 +9,19 @@ namespace GenerationStudio.Elements
     [ElementIcon("GenerationStudio.Images.class.gif")]
     public class ClassElement : InstanceTypeElement
     {
-        public string Inherits { get; set; }
+        private string inherits;
+        public string Inherits
+        {
+            get
+            {
+                return inherits;
+            } 
+            set
+            {
+                inherits = value;
+                Engine.OnNotifyChange();
+            }
+        }
         public bool IsAbstract { get; set; }
     }
 }

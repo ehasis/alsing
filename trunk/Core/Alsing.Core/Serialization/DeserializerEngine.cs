@@ -10,6 +10,21 @@ namespace Alsing.Serialization
 {
     public class DeserializerEngine
     {
+        public event FieldMissingHandler FieldMissing;
+        public event TypeMissingHandler TypeMissing;
+
+        protected void OnFieldMissing(string fieldName,object instance,object value)
+        {
+            if (FieldMissing != null)
+                FieldMissing(fieldName, instance, value);
+        }
+
+        protected void OnTypeMissing(string typeName,ref Type substitutionType)
+        {
+            if (TypeMissing != null)
+                TypeMissing(typeName, ref substitutionType);
+        }
+
         private readonly Dictionary<string, Func<XmlNode, object>> factoryMethodLookup;
         private readonly Dictionary<string, object> objectLookup = new Dictionary<string, object>();
         private readonly Dictionary<string, Action<XmlNode, object>> setupMethodLookup;
@@ -49,6 +64,11 @@ namespace Alsing.Serialization
         {
             string typeAlias = node.Attributes["type"].Value;
             Type type = typeLookup[typeAlias];
+            
+            //ignore if type is missing
+            if (type == null)
+                return null;
+
             object instance = Activator.CreateInstance(type);
             return instance;
         }
@@ -60,7 +80,7 @@ namespace Alsing.Serialization
                 if (node.Name == "field")
                 {
                     string fieldName = node.Attributes["name"].Value;
-                    FieldInfo field = GetFieldInfo(instance.GetType(), fieldName);
+                    FieldInfo field = instance.GetType().GetAnyField(fieldName);
 
 
                     XmlAttribute idRefAttrib = node.Attributes["id-ref"];
@@ -68,14 +88,15 @@ namespace Alsing.Serialization
                     XmlAttribute nullAttrib = node.Attributes["null"];
                     XmlAttribute typeAttrib = node.Attributes["type"];
 
+                    object value = null;
+
                     if (nullAttrib != null)
                     {
-                        field.SetValue(instance, null);
+                        
                     }
                     if (idRefAttrib != null)
                     {
-                        object refInstance = objectLookup[idRefAttrib.Value];
-                        field.SetValue(instance, refInstance);
+                        value = objectLookup[idRefAttrib.Value];
                     }
                     if (valueAttrib != null)
                     {
@@ -85,23 +106,22 @@ namespace Alsing.Serialization
                             type = typeLookup[typeAttrib.Value];
 
                         TypeConverter tc = TypeDescriptor.GetConverter(type);
-                        object res = tc.ConvertFromString(valueAttrib.Value);
-                        field.SetValue(instance,res);
+                        value = tc.ConvertFromString(valueAttrib.Value);
+                    }
+
+                    if (field == null)
+                    {
+                        OnFieldMissing(fieldName,instance,value);
+                    }
+                    else
+                    {
+                        field.SetValue(instance, value);
                     }
                 }
             }
         }
 
-        private static FieldInfo GetFieldInfo(Type type, string fieldName)
-        {
-            FieldInfo field = type.GetField(fieldName,
-                                            BindingFlags.Public |
-                                            BindingFlags.NonPublic |
-                                            BindingFlags.Instance);
-
-            return field ?? GetFieldInfo(type.BaseType, fieldName);
-        }
-
+        
         private void SetupList(XmlNode listNode, object instance)
         {
             var list = instance as IList;
@@ -157,6 +177,9 @@ namespace Alsing.Serialization
                     string fullName = node.Attributes["full-name"].Value;
 
                     Type type = Type.GetType(fullName);
+                    if (type == null)
+                        OnTypeMissing(fullName,ref type);
+
                     typeLookup.Add(alias, type);
                 }
 
@@ -167,6 +190,7 @@ namespace Alsing.Serialization
                     string id = node.Attributes["id"].Value;
                     Func<XmlNode, object> method = factoryMethodLookup[node.Name];
                     object res = method(node);
+
                     objectLookup.Add(id, res);
                 }
 
