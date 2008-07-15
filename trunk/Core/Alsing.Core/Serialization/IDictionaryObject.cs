@@ -23,11 +23,6 @@ namespace Alsing.Serialization
             xml.WriteEndElement();
         }
 
-        public override void SerializeReference(XmlTextWriter xml)
-        {
-            xml.WriteAttributeString("id-ref", ID.ToString());
-        }
-
         public override void Build(SerializerEngine serializerEngine, object item)
         {
             throw new NotImplementedException();

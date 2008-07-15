@@ -11,11 +11,6 @@ namespace Alsing.Serialization
         public bool IsEnumerable;
         public readonly IList<Field> Fields = new List<Field>();
 
-        public override string ToString()
-        {
-            return string.Format("{0}:{1}", TypeAlias , ID);
-        }
-
         public override void Serialize(XmlTextWriter xml)
         {
             xml.WriteStartElement("object");
@@ -28,11 +23,6 @@ namespace Alsing.Serialization
             }
 
             xml.WriteEndElement();
-        }
-
-        public override void SerializeReference(XmlTextWriter xml)
-        {
-            xml.WriteAttributeString("id-ref", ID.ToString());
         }
 
         public override void Build(SerializerEngine engine, object item)

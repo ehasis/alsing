@@ -1,4 +1,3 @@
-using System;
 using System.Xml;
 
 namespace Alsing.Serialization
@@ -8,7 +7,10 @@ namespace Alsing.Serialization
         public int ID { get; set; }
         public string TypeAlias { get; set; }
         public abstract void Serialize(XmlTextWriter xml);
-        public abstract void SerializeReference(XmlTextWriter xml);
+        public virtual void SerializeReference(XmlTextWriter xml)
+        {
+            xml.WriteAttributeString("id-ref", ID.ToString());
+        }
         public abstract void Build(SerializerEngine engine, object item);
     }
 }

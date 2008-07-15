@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Collections.Generic;
@@ -75,21 +71,13 @@ namespace Alsing.Serialization
                 return objectLoookup[item];
 
             if (item.IsValueObject())
-            {
                 return BuildObject<ValueObject>(item);
-            }
             if (item.IsList())
-            {
                 return BuildObject<IListObject>(item);
-            }
             if (item.IsDictionary())
-            {
                 return BuildObject<IDictionaryObject>(item);
-            }
             if (item.IsArray())
-            {
                 return BuildObject<ArrayObject>(item);
-            }
             return BuildObject<ReferenceObject>(item);
         }
 
