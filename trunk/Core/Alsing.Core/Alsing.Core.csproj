@@ -67,6 +67,8 @@
     <Compile Include="Lists\Bag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\ArrayObject.cs" />
+    <Compile Include="Serialization\Extensions.cs" />
+    <Compile Include="Serialization\IDictionaryObject.cs" />
     <Compile Include="Serialization\Facilities\BackingFieldAutoPromoteFacility.cs" />
     <Compile Include="Serialization\Delegates.cs" />
     <Compile Include="Serialization\DeserializerEngine.cs" />

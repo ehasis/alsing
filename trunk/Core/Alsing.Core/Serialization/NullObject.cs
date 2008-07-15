@@ -20,5 +20,9 @@ namespace Alsing.Serialization
         {
             xml.WriteAttributeString("null", "true");
         }
+
+        public override void Build(SerializerEngine engine, object item)
+        {
+        }
     }
 }

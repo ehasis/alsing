@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Collections.Generic;
+using Alsing.Serialization.Extensions;
 
 namespace Alsing.Serialization
 {
@@ -73,88 +74,31 @@ namespace Alsing.Serialization
             if (objectLoookup.ContainsKey(item))
                 return objectLoookup[item];
 
-            if (IsValueObject(item))
+            if (item.IsValueObject())
             {
-                return BuildValueObject(item);
+                return BuildObject<ValueObject>(item);
             }
-            if (item is IList)
+            if (item.IsList())
             {
-                return BuildIListObject((IList) item);
+                return BuildObject<IListObject>(item);
             }
-            if (item.GetType().IsArray)
+            if (item.IsDictionary())
             {
-                return BuildArrayObject((Array) item);
+                return BuildObject<IDictionaryObject>(item);
             }
-            return BuildReferenceObject(item);
+            if (item.IsArray())
+            {
+                return BuildObject<ArrayObject>(item);
+            }
+            return BuildObject<ReferenceObject>(item);
         }
 
-        private static bool IsValueObject(object item)
+        private T BuildObject<T>(object item) where T : ObjectBase,new()
         {
-            TypeConverter tc = TypeDescriptor.GetConverter(item.GetType());
-            return tc.CanConvertFrom(typeof (string)) || item is Type;
-        }
-
-        private ArrayObject BuildArrayObject(Array item)
-        {
-            var current = new ArrayObject();
+            var current = new T();
             RegisterObject(current, item);
             current.Build(this, item);
-            return current;
-        }
-
-        private IListObject BuildIListObject(IList item)
-        {
-            var current = new IListObject();
-            RegisterObject(current, item);
-            current.Build(this, item);
-            return current;
-        }
-
-        private ObjectBase BuildValueObject(object item)
-        {
-            var current = new ValueObject();
-            RegisterObject(current, item);
-            TypeConverter tc = TypeDescriptor.GetConverter(item.GetType());
-            current.Value = tc.ConvertToString(item);
-            return current;
-        }
-
-        private ReferenceObject BuildReferenceObject(object item)
-        {
-            var current = new ReferenceObject();
-            RegisterObject(current, item);
-
-            //let readers of the serialize data know that this should be treated as a list
-            if (item is IEnumerable)
-                current.IsEnumerable = true;
-
-            Type currentType = item.GetType();
-            while (currentType != null)
-            {
-                FieldInfo[] fields =
-                    currentType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
-                                          BindingFlags.DeclaredOnly);
-                foreach (FieldInfo fieldInfo in fields)
-                {
-                    if (IsNonSerialized(fieldInfo))
-                        continue;
-
-                    var field = new Field();
-                    current.Fields.Add(field);
-                    field.Name = fieldInfo.Name;
-                    object fieldValue = fieldInfo.GetValue(item);
-                    ObjectBase value = GetObject(fieldValue);
-                    field.Value = value;
-                }
-                currentType = currentType.BaseType;
-            }
-
-            return current;
-        }
-
-        private static bool IsNonSerialized(FieldInfo field)
-        {
-            return field.GetCustomAttributes(typeof (NonSerializedAttribute), true).Length > 0;
+            return current;  
         }
 
         private void RegisterObject(ObjectBase current, object item)
@@ -171,7 +115,7 @@ namespace Alsing.Serialization
             if (types.ContainsKey(type))
                 return;
 
-            string alias = GetTypeName(type);
+            string alias = type.GetTypeName();
             while(typeAliases.ContainsKey(alias))
             {
                 alias = IncrementAlias(alias);
@@ -179,25 +123,6 @@ namespace Alsing.Serialization
 
             types.Add(type, alias);
             typeAliases.Add(alias, type);
-        }
-
-        private static string GetTypeName(Type type)
-        {
-            if (type.IsGenericType)
-            {
-
-                var argNames = (from argType in type.GetGenericArguments()
-                                select GetTypeName(argType)).ToArray();
-
-                string args = string.Join(",", argNames);
-
-                string typeName = type.Name;
-                int index = typeName.IndexOf("`");
-                typeName = typeName.Substring(0, index);
-
-                return string.Format("{0}[of {1}]", typeName, args);
-            }
-            return type.Name;
         }
 
         private static string IncrementAlias(string alias)
