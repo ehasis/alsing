@@ -11,8 +11,8 @@ namespace Alsing.Serialization
         public override void Serialize(XmlTextWriter xml)
         {
             xml.WriteStartElement("dictionary");
-            xml.WriteAttributeString(Constants.id, ID.ToString());
-            xml.WriteAttributeString(Constants.type, TypeAlias);
+            xml.WriteAttributeString(Constants.Id, ID.ToString());
+            xml.WriteAttributeString(Constants.Type, TypeAlias);
             //foreach (ObjectBase element in Items)
             //{
             //    xml.WriteStartElement("element");

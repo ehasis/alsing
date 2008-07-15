@@ -37,9 +37,9 @@ namespace Alsing.Serialization
             xml.WriteStartElement("types");
             foreach (var entry in typeAliases)
             {
-                xml.WriteStartElement(Constants.type);
-                xml.WriteAttributeString(Constants.alias, entry.Key);
-                xml.WriteAttributeString(Constants.fullName, entry.Value.AssemblyQualifiedName);
+                xml.WriteStartElement(Constants.Type);
+                xml.WriteAttributeString(Constants.Alias, entry.Key);
+                xml.WriteAttributeString(Constants.FullName, entry.Value.AssemblyQualifiedName);
                 xml.WriteEndElement();
             }
             xml.WriteEndElement();

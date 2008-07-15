@@ -2,11 +2,11 @@
 {
     public static class Constants
     {
-        public const string id = "id";
-        public const string idRef = "id-ref";
-        public const string value = "value";
-        public const string type = "type";
-        public const string alias = "alias";
-        public const string fullName = "full-name";
+        public const string Id = "id";
+        public const string IdRef = "id-ref";
+        public const string Value = "value";
+        public const string Type = "type";
+        public const string Alias = "alias";
+        public const string FullName = "full-name";
     }
 }

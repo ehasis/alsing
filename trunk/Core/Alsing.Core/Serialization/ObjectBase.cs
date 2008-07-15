@@ -9,7 +9,7 @@ namespace Alsing.Serialization
         public abstract void Serialize(XmlTextWriter xml);
         public virtual void SerializeReference(XmlTextWriter xml)
         {
-            xml.WriteAttributeString(Constants.idRef, ID.ToString());
+            xml.WriteAttributeString(Constants.IdRef, ID.ToString());
         }
         public abstract void Build(SerializerEngine engine, object item);
     }

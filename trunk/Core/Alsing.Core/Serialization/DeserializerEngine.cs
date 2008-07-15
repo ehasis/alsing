@@ -109,10 +109,10 @@ namespace Alsing.Serialization
                     FieldInfo field = instance.GetType().GetAnyField(fieldName);
 
 
-                    XmlAttribute idRefAttrib = node.Attributes[Constants.idRef];
-                    XmlAttribute valueAttrib = node.Attributes[Constants.value];
+                    XmlAttribute idRefAttrib = node.Attributes[Constants.IdRef];
+                    XmlAttribute valueAttrib = node.Attributes[Constants.Value];
                     XmlAttribute nullAttrib = node.Attributes["null"];
-                    XmlAttribute typeAttrib = node.Attributes[Constants.type];
+                    XmlAttribute typeAttrib = node.Attributes[Constants.Type];
 
                     object value = null;
 
@@ -159,10 +159,10 @@ namespace Alsing.Serialization
             {
                 if (node.Name == "element")
                 {
-                    XmlAttribute idRefAttrib = node.Attributes[Constants.idRef];
-                    XmlAttribute valueAttrib = node.Attributes[Constants.value];
+                    XmlAttribute idRefAttrib = node.Attributes[Constants.IdRef];
+                    XmlAttribute valueAttrib = node.Attributes[Constants.Value];
                     XmlAttribute nullAttrib = node.Attributes["null"];
-                    XmlAttribute typeAttrib = node.Attributes[Constants.type];
+                    XmlAttribute typeAttrib = node.Attributes[Constants.Type];
 
                     if (nullAttrib != null)
                     {
@@ -200,8 +200,8 @@ namespace Alsing.Serialization
             if (types != null)
                 foreach (XmlNode node in types)
                 {
-                    string alias = node.Attributes[Constants.alias].Value;
-                    string fullName = node.Attributes[Constants.fullName].Value;
+                    string alias = node.Attributes[Constants.Alias].Value;
+                    string fullName = node.Attributes[Constants.FullName].Value;
 
                     Type type = Type.GetType(fullName);
                     if (type == null)
@@ -214,7 +214,7 @@ namespace Alsing.Serialization
             if (objects != null)
                 foreach (XmlNode node in objects)
                 {
-                    string id = node.Attributes[Constants.id].Value;
+                    string id = node.Attributes[Constants.Id].Value;
                     Func<XmlNode, object> method = factoryMethodLookup[node.Name];
                     object res = method(node);
 
@@ -225,7 +225,7 @@ namespace Alsing.Serialization
             if (objects != null)
                 foreach (XmlNode node in objects)
                 {
-                    string id = node.Attributes[Constants.id].Value;
+                    string id = node.Attributes[Constants.Id].Value;
                     object instance = objectLookup[id];
                     Action<XmlNode, object> method = setupMethodLookup[node.Name];
                     method(node, instance);
