@@ -17,18 +17,16 @@ namespace Alsing.Serialization
 
         public DeserializerEngine()
         {
+            DeserializationFacilities = new List<IDeserializationFacility>
+                                            {
+                                                new BackingFieldAutoPromoteFacility()
+                                            };
+
             factoryMethodLookup = GetFactoryMethodLookup();
             setupMethodLookup = GetSetupMethodLookup();
-
-            AddFacility<BackingFieldAutoPromoteFacility>();
-
         }
 
-        private void AddFacility<T>() where T : IDeserializationFacility , new()
-        {
-            T facility = new T();
-            facility.Attach(this);
-        }
+        public IList<IDeserializationFacility> DeserializationFacilities { get; private set; }
 
         public event FieldMissingHandler FieldMissing;
         public event TypeMissingHandler TypeMissing;
@@ -37,24 +35,36 @@ namespace Alsing.Serialization
 
         protected void OnFieldMissing(string fieldName, object instance, object value)
         {
+            foreach (IDeserializationFacility facility in DeserializationFacilities)
+                facility.FieldMissing(fieldName, instance, value);
+
             if (FieldMissing != null)
                 FieldMissing(fieldName, instance, value);
         }
 
         protected void OnTypeMissing(string typeName, ref Type substitutionType)
         {
+            foreach (IDeserializationFacility facility in DeserializationFacilities)
+                facility.TypeMissing(typeName, ref substitutionType);
+
             if (TypeMissing != null)
                 TypeMissing(typeName, ref substitutionType);
         }
 
         protected void OnObjectCreated(object instance)
         {
+            foreach (IDeserializationFacility facility in DeserializationFacilities)
+                facility.ObjectCreated(instance);
+
             if (ObjectCreated != null)
                 ObjectCreated(instance);
         }
 
         protected void OnObjectConfigured(object instance)
         {
+            foreach (IDeserializationFacility facility in DeserializationFacilities)
+                facility.ObjectConfigured(instance);
+
             if (ObjectConfigured != null)
                 ObjectConfigured(instance);
         }
@@ -65,6 +75,7 @@ namespace Alsing.Serialization
                           {
                               {"object", CreateAny},
                               {"list", CreateAny},
+                              {"dictionary", CreateAny},
                               {"array", CreateAny}
                           };
 
@@ -77,6 +88,7 @@ namespace Alsing.Serialization
                           {
                               {"object", SetupObject},
                               {"list", SetupList},
+                              {"dictionary", SetupDictionary},
                               {"array", SetupArray}
                           };
 
@@ -94,9 +106,11 @@ namespace Alsing.Serialization
 
             object instance = Activator.CreateInstance(type);
 
-            OnObjectCreated(instance);
-
             return instance;
+        }
+
+        private void SetupDictionary(XmlNode node, object instance)
+        {
         }
 
         private void SetupObject(XmlNode objectNode, object instance)
@@ -144,8 +158,6 @@ namespace Alsing.Serialization
                     }
                 }
             }
-
-            OnObjectConfigured(instance);
         }
 
 
@@ -216,9 +228,9 @@ namespace Alsing.Serialization
                 {
                     string id = node.Attributes[Constants.Id].Value;
                     Func<XmlNode, object> method = factoryMethodLookup[node.Name];
-                    object res = method(node);
-
-                    objectLookup.Add(id, res);
+                    object instance = method(node);
+                    OnObjectCreated(instance);
+                    objectLookup.Add(id, instance);
                 }
 
             //configure the instances
@@ -228,6 +240,7 @@ namespace Alsing.Serialization
                     string id = node.Attributes[Constants.Id].Value;
                     object instance = objectLookup[id];
                     Action<XmlNode, object> method = setupMethodLookup[node.Name];
+                    OnObjectConfigured(instance);
                     method(node, instance);
                 }
 

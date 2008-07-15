@@ -1,7 +1,12 @@
-﻿namespace Alsing.Serialization
+﻿using System;
+
+namespace Alsing.Serialization
 {
     public interface IDeserializationFacility
     {
-        void Attach(DeserializerEngine engine);
+        void FieldMissing(string fieldName, object instance, object value);
+        void TypeMissing(string typeName, ref Type substitutionType);
+        void ObjectCreated(object instance);
+        void ObjectConfigured(object instance);
     }
 }
