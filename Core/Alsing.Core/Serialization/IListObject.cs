@@ -10,8 +10,8 @@ namespace Alsing.Serialization
         public override void Serialize(XmlTextWriter xml)
         {
             xml.WriteStartElement("list");
-            xml.WriteAttributeString("id", ID.ToString());
-            xml.WriteAttributeString("type", TypeAlias);
+            xml.WriteAttributeString(Constants.id, ID.ToString());
+            xml.WriteAttributeString(Constants.type, TypeAlias);
             int i = 0;
             foreach (ObjectBase element in Items)
             {
