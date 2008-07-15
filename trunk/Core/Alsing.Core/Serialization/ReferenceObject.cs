@@ -14,8 +14,8 @@ namespace Alsing.Serialization
         public override void Serialize(XmlTextWriter xml)
         {
             xml.WriteStartElement("object");
-            xml.WriteAttributeString("id", ID.ToString());
-            xml.WriteAttributeString("type", TypeAlias);
+            xml.WriteAttributeString(Constants.id, ID.ToString());
+            xml.WriteAttributeString(Constants.type, TypeAlias);
 
             foreach (Field field in Fields)
             {

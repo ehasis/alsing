@@ -13,8 +13,8 @@ namespace Alsing.Serialization
 
         public override void SerializeReference(XmlTextWriter xml)
         {
-            xml.WriteAttributeString("value", Value);
-            xml.WriteAttributeString("type", TypeAlias);
+            xml.WriteAttributeString(Constants.value, Value);
+            xml.WriteAttributeString(Constants.type, TypeAlias);
         }
 
         public override void Build(SerializerEngine serializerEngine, object item)
