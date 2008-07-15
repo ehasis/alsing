@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Xml;
 
 namespace Alsing.Serialization
@@ -19,6 +20,12 @@ namespace Alsing.Serialization
         {
             xml.WriteAttributeString("value", Value);
             xml.WriteAttributeString("type", TypeAlias);
+        }
+
+        public override void Build(SerializerEngine serializerEngine, object item)
+        {
+            TypeConverter tc = TypeDescriptor.GetConverter(item.GetType());
+            Value = tc.ConvertToString(item);
         }
     }
 }

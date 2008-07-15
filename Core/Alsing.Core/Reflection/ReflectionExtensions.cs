@@ -42,5 +42,24 @@ namespace Alsing
 
             return GetFieldInfo(type.BaseType, fieldName);
         }
+
+        public static string GetTypeName(this Type type)
+        {
+            if (type.IsGenericType)
+            {
+
+                var argNames = (from argType in type.GetGenericArguments()
+                                select GetTypeName(argType)).ToArray();
+
+                string args = string.Join(",", argNames);
+
+                string typeName = type.Name;
+                int index = typeName.IndexOf("`");
+                typeName = typeName.Substring(0, index);
+
+                return string.Format("{0}[of {1}]", typeName, args);
+            }
+            return type.Name;
+        }
     }
 }

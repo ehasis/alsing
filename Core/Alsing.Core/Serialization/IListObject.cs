@@ -30,8 +30,9 @@ namespace Alsing.Serialization
             xml.WriteAttributeString("id-ref", ID.ToString());
         }
 
-        public void Build(SerializerEngine engine, IList rawList)
+        public override void Build(SerializerEngine engine,object item )
         {
+            IList rawList = item.As<IList>();
             Items = new ObjectBase[rawList.Count];
             for (int i = 0; i < rawList.Count; i++)
             {

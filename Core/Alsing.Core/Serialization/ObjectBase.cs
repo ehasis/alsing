@@ -9,5 +9,6 @@ namespace Alsing.Serialization
         public string TypeAlias { get; set; }
         public abstract void Serialize(XmlTextWriter xml);
         public abstract void SerializeReference(XmlTextWriter xml);
+        public abstract void Build(SerializerEngine engine, object item);
     }
 }

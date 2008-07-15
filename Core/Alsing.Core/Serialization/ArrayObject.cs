@@ -40,8 +40,9 @@ namespace Alsing.Serialization
             xml.WriteAttributeString("id-ref", ID.ToString());
         }
 
-        public void Build(SerializerEngine engine, Array rawArray)
+        public override void Build(SerializerEngine engine, object item)
         {
+            var rawArray = item.As<Array>();
             Items = new ObjectBase[rawArray.Length];
             for (int i = 0; i < rawArray.Length; i++)
             {
