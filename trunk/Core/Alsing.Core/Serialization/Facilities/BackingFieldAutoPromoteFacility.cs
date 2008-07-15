@@ -2,14 +2,9 @@
 
 namespace Alsing.Serialization
 {
-    public class BackingFieldAutoPromoteFacility : IDeserializationFacility
+    public class BackingFieldAutoPromoteFacility : DeserializationFacilityBase
     {
-        public void Attach(DeserializerEngine engine)
-        {
-            engine.FieldMissing += engine_FieldMissing;
-        }
-
-        static void engine_FieldMissing(string fieldName, object instance, object value)
+        public override void FieldMissing(string fieldName, object instance, object value)
         {
             const string pattern = ">k__BackingField";
             if (!fieldName.EndsWith(pattern))
@@ -18,11 +13,11 @@ namespace Alsing.Serialization
             string newName = fieldName.Substring(1, fieldName.Length - pattern.Length - 1).ToLowerInvariant();
 
             FieldInfo field = instance.GetType().GetAnyField(newName);
-            
+
             if (field == null)
                 return;
 
-            field.SetValue(instance,value);
+            field.SetValue(instance, value);
         }
     }
 }

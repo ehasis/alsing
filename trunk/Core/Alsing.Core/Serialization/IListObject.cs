@@ -27,7 +27,7 @@ namespace Alsing.Serialization
 
         public override void Build(SerializerEngine engine,object item )
         {
-            IList rawList = item.As<IList>();
+            var rawList = item.As<IList>();
             Items = new ObjectBase[rawList.Count];
             for (int i = 0; i < rawList.Count; i++)
             {

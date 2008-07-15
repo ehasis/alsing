@@ -69,6 +69,7 @@
     <Compile Include="Serialization\ArrayObject.cs" />
     <Compile Include="Serialization\Constants.cs" />
     <Compile Include="Serialization\Extensions.cs" />
+    <Compile Include="Serialization\Facilities\DeserializationFacilityBase.cs" />
     <Compile Include="Serialization\IDictionaryObject.cs" />
     <Compile Include="Serialization\Facilities\BackingFieldAutoPromoteFacility.cs" />
     <Compile Include="Serialization\Delegates.cs" />
