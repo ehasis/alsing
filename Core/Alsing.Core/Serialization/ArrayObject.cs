@@ -7,12 +7,6 @@ namespace Alsing.Serialization
     {
         public ObjectBase[] Items;
 
-
-        public override string ToString()
-        {
-            return string.Format("Count = {0} : {1}", Items.Length, TypeAlias);
-        }
-
         public override void Serialize(XmlTextWriter xml)
         {
             xml.WriteStartElement("array");
@@ -32,12 +26,6 @@ namespace Alsing.Serialization
             }
 
             xml.WriteEndElement();
-        }
-
-
-        public override void SerializeReference(XmlTextWriter xml)
-        {
-            xml.WriteAttributeString("id-ref", ID.ToString());
         }
 
         public override void Build(SerializerEngine engine, object item)

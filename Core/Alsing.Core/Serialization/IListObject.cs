@@ -25,11 +25,6 @@ namespace Alsing.Serialization
             xml.WriteEndElement();
         }
 
-        public override void SerializeReference(XmlTextWriter xml)
-        {
-            xml.WriteAttributeString("id-ref", ID.ToString());
-        }
-
         public override void Build(SerializerEngine engine,object item )
         {
             IList rawList = item.As<IList>();

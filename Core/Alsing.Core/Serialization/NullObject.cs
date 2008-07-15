@@ -6,11 +6,6 @@ namespace Alsing.Serialization
     {
         public static readonly NullObject Default = new NullObject();
 
-        public override string ToString()
-        {
-            return "{null}";
-        }
-
         public override void Serialize(XmlTextWriter xml)
         {
 
