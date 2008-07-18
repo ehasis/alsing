@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Xml;
 
 namespace Alsing.Serialization
 {
-    public class IListObject : ObjectBase
+    public class MetaIList : MetaObject
     {
-        public ObjectBase[] Items;
+        public MetaObject[] Items;
 
         public override void Serialize(XmlTextWriter xml)
         {
@@ -13,7 +13,7 @@ namespace Alsing.Serialization
             xml.WriteAttributeString(Constants.Id, ID.ToString());
             xml.WriteAttributeString(Constants.Type, TypeAlias);
             int i = 0;
-            foreach (ObjectBase element in Items)
+            foreach (MetaObject element in Items)
             {
                 xml.WriteStartElement("element");
                 xml.WriteAttributeString("index", i.ToString());
@@ -28,7 +28,7 @@ namespace Alsing.Serialization
         public override void Build(SerializerEngine engine,object item )
         {
             var rawList = item.As<IList>();
-            Items = new ObjectBase[rawList.Count];
+            Items = new MetaObject[rawList.Count];
             for (int i = 0; i < rawList.Count; i++)
             {
                 object rawValue = rawList[i];

@@ -2,7 +2,7 @@ using System.Xml;
 
 namespace Alsing.Serialization
 {
-    public abstract class ObjectBase
+    public abstract class MetaObject
     {
         public int ID { get; set; }
         public string TypeAlias { get; set; }

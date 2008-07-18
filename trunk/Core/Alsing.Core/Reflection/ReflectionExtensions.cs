@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -6,6 +7,13 @@ namespace Alsing
 {
     public static class ReflectionExtensions
     {
+        public static bool HasAttribute<T>(this FieldInfo field)
+        {
+            return field
+                .GetCustomAttributes(typeof(T), true)
+                .HasContent();
+        }
+
         public static bool HasAttribute<T>(this MethodBase method)
         {
             return method
@@ -60,6 +68,22 @@ namespace Alsing
                 return string.Format("{0}[of {1}]", typeName, args);
             }
             return type.Name;
+        }
+
+        public static IEnumerable<FieldInfo> GetAllFields(this Type type)
+        {
+            Type currentType = type;
+            while (currentType != null)
+            {
+                FieldInfo[] fields =
+                    currentType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
+                                          BindingFlags.DeclaredOnly);
+                foreach (FieldInfo fieldInfo in fields)
+                {
+                    yield return fieldInfo;
+                }
+                currentType = currentType.BaseType;
+            }
         }
     }
 }

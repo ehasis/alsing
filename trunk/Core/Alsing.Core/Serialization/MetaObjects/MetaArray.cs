@@ -3,9 +3,9 @@ using System.Xml;
 
 namespace Alsing.Serialization
 {
-    public class ArrayObject : ObjectBase
+    public class MetaArray : MetaObject
     {
-        public ObjectBase[] Items;
+        public MetaObject[] Items;
 
         public override void Serialize(XmlTextWriter xml)
         {
@@ -16,7 +16,7 @@ namespace Alsing.Serialization
 
 
             int i = 0;
-            foreach (ObjectBase element in Items)
+            foreach (MetaObject element in Items)
             {
                 xml.WriteStartElement("element");
                 xml.WriteAttributeString("index", i.ToString ());
@@ -31,7 +31,7 @@ namespace Alsing.Serialization
         public override void Build(SerializerEngine engine, object item)
         {
             var rawArray = item.As<Array>();
-            Items = new ObjectBase[rawArray.Length];
+            Items = new MetaObject[rawArray.Length];
             for (int i = 0; i < rawArray.Length; i++)
             {
                 object rawValue = rawArray.GetValue(i);

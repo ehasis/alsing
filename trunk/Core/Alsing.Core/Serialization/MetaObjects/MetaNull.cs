@@ -2,9 +2,9 @@ using System.Xml;
 
 namespace Alsing.Serialization
 {
-    public class NullObject : ObjectBase
+    public class MetaNull : MetaObject
     {
-        public static readonly NullObject Default = new NullObject();
+        public static readonly MetaNull Default = new MetaNull();
 
         public override void Serialize(XmlTextWriter xml)
         {
