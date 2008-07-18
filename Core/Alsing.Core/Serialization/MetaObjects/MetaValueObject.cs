@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace Alsing.Serialization
 {
-    public class ValueObject : ObjectBase
+    public class MetaValueObject : MetaObject
     {
         public string Value { get; set; }
 

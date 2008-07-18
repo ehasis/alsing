@@ -4,9 +4,9 @@ using System.Collections;
 
 namespace Alsing.Serialization
 {
-    public class IDictionaryObject : ObjectBase
+    public class MetaIDictionary : MetaObject
     {
-        private readonly Dictionary<ObjectBase, ObjectBase> Entries = new Dictionary<ObjectBase, ObjectBase>();
+        private readonly Dictionary<MetaObject, MetaObject> Entries = new Dictionary<MetaObject, MetaObject>();
         public override void Serialize(XmlTextWriter xml)
         {
             xml.WriteStartElement("dictionary");
@@ -35,8 +35,8 @@ namespace Alsing.Serialization
             var dictionary = item.As<IDictionary>();
             foreach(DictionaryEntry rawEntry in dictionary)
             {
-                ObjectBase key = engine.GetObject(rawEntry.Key);
-                ObjectBase value = engine.GetObject(rawEntry.Value);
+                MetaObject key = engine.GetObject(rawEntry.Key);
+                MetaObject value = engine.GetObject(rawEntry.Value);
                 Entries.Add(key, value);
             }
         }

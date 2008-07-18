@@ -10,11 +10,11 @@ namespace Alsing.Serialization
     public class SerializerEngine
     {
         private int objectID;
-        private readonly IList<ObjectBase> allObjects = new List<ObjectBase>();
-        private readonly IDictionary<object, ObjectBase> objectLoookup = new Dictionary<object, ObjectBase>();
+        private readonly IList<MetaObject> allObjects = new List<MetaObject>();
+        private readonly IDictionary<object, MetaObject> objectLoookup = new Dictionary<object, MetaObject>();
         private readonly IDictionary<Type,string> types = new Dictionary<Type, string>();
         private readonly IDictionary<string, Type> typeAliases = new Dictionary<string, Type>();
-        private ObjectBase Root;
+        private MetaObject Root;
 
         private int GetObjectID()
         {
@@ -30,10 +30,39 @@ namespace Alsing.Serialization
                               Indentation = 1,
                               IndentChar = '\t'
                           };
+            WriteDocument(xml);
+            xml.Flush();
+        }
+
+        private void WriteDocument(XmlTextWriter xml)
+        {
             xml.WriteStartElement("document");
+            WriteRootReference(xml);
+            WriteTypes(xml);
+            WriteObjects(xml);
+            xml.WriteEndElement();
+        }
+
+        private void WriteRootReference(XmlTextWriter xml)
+        {
             xml.WriteStartElement("root-object");
             Root.SerializeReference(xml);
             xml.WriteEndElement();
+        }
+
+        private void WriteObjects(XmlTextWriter xml)
+        {
+            xml.WriteStartElement("objects");
+            
+            foreach (MetaObject item in allObjects)
+            {
+                item.Serialize(xml);
+            }
+            xml.WriteEndElement();
+        }
+
+        private void WriteTypes(XmlTextWriter xml)
+        {
             xml.WriteStartElement("types");
             foreach (var entry in typeAliases)
             {
@@ -43,15 +72,6 @@ namespace Alsing.Serialization
                 xml.WriteEndElement();
             }
             xml.WriteEndElement();
-            xml.WriteStartElement("objects");
-            
-            foreach (ObjectBase item in allObjects)
-            {
-                item.Serialize(xml);
-            }
-            xml.WriteEndElement();
-            xml.WriteEndElement();
-            xml.Flush();
         }
 
 
@@ -60,28 +80,28 @@ namespace Alsing.Serialization
             Root = GetObject(graph);
         }
 
-        public ObjectBase GetObject(object item)
+        public MetaObject GetObject(object item)
         {
             //return null
             if (item == null)
-                return NullObject.Default;
+                return MetaNull.Default;
 
             //dont serialize more than once
             if (objectLoookup.ContainsKey(item))
                 return objectLoookup[item];
 
             if (item.IsValueObject())
-                return BuildObject<ValueObject>(item);
+                return BuildObject<MetaValueObject>(item);
             if (item.IsList())
-                return BuildObject<IListObject>(item);
+                return BuildObject<MetaIList>(item);
             if (item.IsDictionary())
-                return BuildObject<IDictionaryObject>(item);
+                return BuildObject<MetaIDictionary>(item);
             if (item.IsArray())
-                return BuildObject<ArrayObject>(item);
-            return BuildObject<ReferenceObject>(item);
+                return BuildObject<MetaArray>(item);
+            return BuildObject<MetaReferenceObject>(item);
         }
 
-        private T BuildObject<T>(object item) where T : ObjectBase,new()
+        private T BuildObject<T>(object item) where T : MetaObject,new()
         {
             var current = new T();
             RegisterObject(current, item);
@@ -89,7 +109,7 @@ namespace Alsing.Serialization
             return current;  
         }
 
-        private void RegisterObject(ObjectBase current, object item)
+        private void RegisterObject(MetaObject current, object item)
         {
             objectLoookup.Add(item, current);
             current.ID = GetObjectID();

@@ -5,7 +5,7 @@ namespace Alsing.Serialization
     public class Field
     {
         public string Name;
-        public ObjectBase Value;
+        public MetaObject Value;
 
         public void Serialize(XmlTextWriter xml)
         {
