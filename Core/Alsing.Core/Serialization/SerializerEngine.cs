@@ -14,8 +14,21 @@ namespace Alsing.Serialization
         private readonly IDictionary<object, MetaObject> objectLoookup = new Dictionary<object, MetaObject>();
         private readonly IDictionary<Type,string> types = new Dictionary<Type, string>();
         private readonly IDictionary<string, Type> typeAliases = new Dictionary<string, Type>();
+        public IList<ObjectManager> ObjectManagers { get; private set; }
         private MetaObject Root;
 
+        public SerializerEngine()
+        {
+            ObjectManagers = new List<ObjectManager>
+                                 {
+                                     new NullManager(),
+                                     new ArrayManager(),
+                                     new ListManager(),
+                                     new DictionaryManager(),
+                                     new ValueObjectManager(),
+                                     new ReferenceObjectManager()
+                                 };
+        }
         private int GetObjectID()
         {
             return objectID++;
