@@ -14,6 +14,7 @@ namespace Alsing.Serialization
         private readonly Dictionary<string, object> objectLookup = new Dictionary<string, object>();
         private readonly Dictionary<string, Action<XmlNode, object>> setupMethodLookup;
         private readonly Dictionary<string, Type> typeLookup = new Dictionary<string, Type>();
+        public IList<ObjectManager> ObjectManagers { get; private set; }
 
         public DeserializerEngine()
         {
@@ -21,6 +22,16 @@ namespace Alsing.Serialization
                                             {
                                                 new BackingFieldAutoPromoteFacility()
                                             };
+
+            ObjectManagers = new List<ObjectManager>
+                                 {
+                                     new NullManager(),
+                                     new ValueObjectManager(),
+                                     new ArrayManager(),
+                                     new ListManager(),
+                                     new DictionaryManager(),
+                                     new ReferenceObjectManager()
+                                 };
 
             factoryMethodLookup = GetFactoryMethodLookup();
             setupMethodLookup = GetSetupMethodLookup();
