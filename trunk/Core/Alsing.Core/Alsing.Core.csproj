@@ -66,7 +66,12 @@
     <Compile Include="GenericMath\Numeric.cs" />
     <Compile Include="Lists\Bag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\Managers\ArrayManager.cs" />
+    <Compile Include="Serialization\Managers\DictionaryManager.cs" />
+    <Compile Include="Serialization\Managers\ListManager.cs" />
+    <Compile Include="Serialization\Managers\NullManager.cs" />
     <Compile Include="Serialization\Managers\ObjectManager.cs" />
+    <Compile Include="Serialization\Managers\ValueObjectManager.cs" />
     <Compile Include="Serialization\MetaObjects\MetaArray.cs" />
     <Compile Include="Serialization\Constants.cs" />
     <Compile Include="Serialization\Extensions.cs" />

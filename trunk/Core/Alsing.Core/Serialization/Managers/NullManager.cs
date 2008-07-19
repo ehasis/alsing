@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Alsing.Serialization
 {
-    public class ReferenceObjectManager : ObjectManager<MetaReferenceObject>
+    public class NullManager : ObjectManager<MetaNull>
     {
         public override bool CanSerialize(SerializerEngine engine, object item)
         {
-            return true;
+            return item == null;
         }
 
         public override MetaObject GetObject(SerializerEngine engine, object item)

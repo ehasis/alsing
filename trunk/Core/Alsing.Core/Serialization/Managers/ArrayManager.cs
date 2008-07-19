@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alsing;
+using Alsing.Serialization.Extensions;
 
 namespace Alsing.Serialization
 {
-    public class ReferenceObjectManager : ObjectManager<MetaReferenceObject>
+    public class ArrayManager : ObjectManager<MetaReferenceObject>
     {
         public override bool CanSerialize(SerializerEngine engine, object item)
         {
-            return true;
+            return item.IsArray();
         }
 
         public override MetaObject GetObject(SerializerEngine engine, object item)

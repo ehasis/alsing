@@ -14,4 +14,9 @@ namespace Alsing.Serialization
         public abstract object CreateObject(DeserializerEngine engine, XmlNode node);
         public abstract void SetupObject(DeserializerEngine engine, XmlNode node);
     }
+
+    public abstract class ObjectManager<T> : ObjectManager where T:MetaObject,new()
+    {
+        
+    }
 }
