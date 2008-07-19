@@ -9,17 +9,17 @@ namespace Alsing.Serialization
             return item == null;
         }
 
-        public override MetaObject GetObject(SerializerEngine engine, object item)
+        public override MetaObject SerializerGetObject(SerializerEngine engine, object item)
+        {
+            return MetaNull.Default;
+        }
+
+        public override object DeserializerCreateObject(DeserializerEngine engine, System.Xml.XmlNode node)
         {
             throw new NotImplementedException();
         }
 
-        public override object CreateObject(DeserializerEngine engine, System.Xml.XmlNode node)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SetupObject(DeserializerEngine engine, System.Xml.XmlNode node)
+        public override void DeserializerSetupObject(DeserializerEngine engine, System.Xml.XmlNode node)
         {
             throw new NotImplementedException();
         }

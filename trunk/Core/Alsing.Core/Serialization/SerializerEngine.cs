@@ -3,7 +3,6 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Collections.Generic;
-using Alsing.Serialization.Extensions;
 
 namespace Alsing.Serialization
 {
@@ -22,10 +21,10 @@ namespace Alsing.Serialization
             ObjectManagers = new List<ObjectManager>
                                  {
                                      new NullManager(),
+                                     new ValueObjectManager(),
                                      new ArrayManager(),
                                      new ListManager(),
                                      new DictionaryManager(),
-                                     new ValueObjectManager(),
                                      new ReferenceObjectManager()
                                  };
         }
@@ -95,34 +94,21 @@ namespace Alsing.Serialization
 
         public MetaObject GetObject(object item)
         {
-            //return null
-            if (item == null)
-                return MetaNull.Default;
-
             //dont serialize more than once
-            if (objectLoookup.ContainsKey(item))
-                return objectLoookup[item];
+            if (item != null)
+                if (objectLoookup.ContainsKey(item))
+                    return objectLoookup[item];
 
-            if (item.IsValueObject())
-                return BuildObject<MetaValueObject>(item);
-            if (item.IsList())
-                return BuildObject<MetaIList>(item);
-            if (item.IsDictionary())
-                return BuildObject<MetaIDictionary>(item);
-            if (item.IsArray())
-                return BuildObject<MetaArray>(item);
-            return BuildObject<MetaReferenceObject>(item);
+            foreach(var manager in ObjectManagers)
+            {
+                if (manager.CanSerialize(this,item))
+                    return manager.SerializerGetObject(this, item);
+            }
+
+            throw new Exception("No manager was able to handle the object");
         }
 
-        private T BuildObject<T>(object item) where T : MetaObject,new()
-        {
-            var current = new T();
-            RegisterObject(current, item);
-            current.Build(this, item);
-            return current;  
-        }
-
-        private void RegisterObject(MetaObject current, object item)
+        internal void RegisterObject(MetaObject current, object item)
         {
             objectLoookup.Add(item, current);
             current.ID = GetObjectID();
