@@ -8,7 +8,8 @@ namespace Alsing.Serialization
 {
     public class MetaReferenceObject : MetaObject
     {
-        public readonly IList<Field> Fields = new List<Field>();
+        //public readonly IList<Field> Fields = new List<Field>();
+        private readonly Dictionary<string, MetaObject> Fields = new Dictionary<string, MetaObject>();
 
         public override void Serialize(XmlTextWriter xml)
         {
@@ -16,9 +17,12 @@ namespace Alsing.Serialization
             xml.WriteAttributeString(Constants.Id, ID.ToString());
             xml.WriteAttributeString(Constants.Type, TypeAlias);
 
-            foreach (Field field in Fields)
+            foreach (var field in Fields)
             {
-                field.Serialize(xml);
+                xml.WriteStartElement("field");
+                xml.WriteAttributeString("name", field.Key);
+                field.Value.SerializeReference(xml);
+                xml.WriteEndElement();
             }
 
             xml.WriteEndElement();
@@ -34,13 +38,7 @@ namespace Alsing.Serialization
                 object fieldValue = fieldInfo.GetValue(item);
                 MetaObject value = engine.GetObject(fieldValue);
 
-                var field = new Field
-                                {
-                                    Name = fieldInfo.Name, 
-                                    Value = value
-                                };
-
-                Fields.Add(field);
+                Fields.Add(fieldInfo.Name, value);
             }
         }
 

@@ -81,7 +81,6 @@
     <Compile Include="Serialization\Delegates.cs" />
     <Compile Include="Serialization\DeserializerEngine.cs" />
     <Compile Include="Serialization\Facilities\IDeserializationFacility.cs" />
-    <Compile Include="Serialization\Field.cs" />
     <Compile Include="Serialization\MetaObjects\MetaIList.cs" />
     <Compile Include="Serialization\MetaObjects\MetaNull.cs" />
     <Compile Include="Serialization\MetaObjects\MetaObject.cs" />
