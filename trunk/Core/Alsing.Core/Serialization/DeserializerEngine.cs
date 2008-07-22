@@ -10,10 +10,9 @@ namespace Alsing.Serialization
 {
     public class DeserializerEngine
     {
-        private readonly Dictionary<string, Func<XmlNode, object>> factoryMethodLookup;
         private readonly Dictionary<string, object> objectLookup = new Dictionary<string, object>();
         private readonly Dictionary<string, Action<XmlNode, object>> setupMethodLookup;
-        private readonly Dictionary<string, Type> typeLookup = new Dictionary<string, Type>();
+        internal readonly Dictionary<string, Type> TypeLookup = new Dictionary<string, Type>();
         public IList<ObjectManager> ObjectManagers { get; private set; }
 
         public DeserializerEngine()
@@ -33,7 +32,6 @@ namespace Alsing.Serialization
                                      new ReferenceObjectManager()
                                  };
 
-            factoryMethodLookup = GetFactoryMethodLookup();
             setupMethodLookup = GetSetupMethodLookup();
         }
 
@@ -80,19 +78,6 @@ namespace Alsing.Serialization
                 ObjectConfigured(instance);
         }
 
-        private Dictionary<string, Func<XmlNode, object>> GetFactoryMethodLookup()
-        {
-            var res = new Dictionary<string, Func<XmlNode, object>>
-                          {
-                              {"object", CreateAny},
-                              {"list", CreateAny},
-                              {"dictionary", CreateAny},
-                              {"array", CreateAny}
-                          };
-
-            return res;
-        }
-
         private Dictionary<string, Action<XmlNode, object>> GetSetupMethodLookup()
         {
             var res = new Dictionary<string, Action<XmlNode, object>>
@@ -109,7 +94,7 @@ namespace Alsing.Serialization
         private object CreateAny(XmlNode node)
         {
             string typeAlias = node.Attributes["type"].Value;
-            Type type = typeLookup[typeAlias];
+            Type type = TypeLookup[typeAlias];
 
             //ignore if type is missing
             if (type == null)
@@ -153,7 +138,7 @@ namespace Alsing.Serialization
                         Type type = field.FieldType;
 
                         if (typeAttrib != null)
-                            type = typeLookup[typeAttrib.Value];
+                            type = TypeLookup[typeAttrib.Value];
 
                         TypeConverter tc = TypeDescriptor.GetConverter(type);
                         value = tc.ConvertFromString(valueAttrib.Value);
@@ -230,18 +215,23 @@ namespace Alsing.Serialization
                     if (type == null)
                         OnTypeMissing(fullName, ref type);
 
-                    typeLookup.Add(alias, type);
+                    TypeLookup.Add(alias, type);
                 }
 
             //create all instances
             if (objects != null)
                 foreach (XmlNode node in objects)
                 {
-                    string id = node.Attributes[Constants.Id].Value;
-                    Func<XmlNode, object> method = factoryMethodLookup[node.Name];
-                    object instance = method(node);
-                    OnObjectCreated(instance);
-                    objectLookup.Add(id, instance);
+                    foreach(var manager in ObjectManagers)
+                    {
+                        if (manager.CanDeserialize(this, node))
+                        {
+                            object instance = manager.DeserializerCreateObject(this, node);
+                            OnObjectCreated(instance);
+                            string id = node.Attributes[Constants.Id].Value;
+                            objectLookup.Add(id, instance);
+                        }
+                    }
                 }
 
             //configure the instances

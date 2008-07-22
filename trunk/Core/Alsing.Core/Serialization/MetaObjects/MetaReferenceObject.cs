@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Reflection;
 using System.Xml;
 using System.Collections.Generic;
@@ -8,7 +7,6 @@ namespace Alsing.Serialization
 {
     public class MetaReferenceObject : MetaObject
     {
-        //public readonly IList<Field> Fields = new List<Field>();
         private readonly Dictionary<string, MetaObject> Fields = new Dictionary<string, MetaObject>();
 
         public override void Serialize(XmlTextWriter xml)

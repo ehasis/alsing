@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Xml;
 
 namespace Alsing.Serialization
 {
@@ -14,14 +14,18 @@ namespace Alsing.Serialization
             return MetaNull.Default;
         }
 
-        public override object DeserializerCreateObject(DeserializerEngine engine, System.Xml.XmlNode node)
+        public override object DeserializerCreateObject(DeserializerEngine engine, XmlNode node)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
-        public override void DeserializerSetupObject(DeserializerEngine engine, System.Xml.XmlNode node)
+        public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode node)
         {
-            throw new NotImplementedException();
+        }
+
+        public override bool CanDeserialize(DeserializerEngine engine, XmlNode node)
+        {
+            return false;
         }
     }
 }

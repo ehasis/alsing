@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using Alsing.Serialization.Extensions;
 
 namespace Alsing.Serialization
@@ -10,14 +11,14 @@ namespace Alsing.Serialization
             return item.IsList();
         }
 
-        public override object DeserializerCreateObject(DeserializerEngine engine, System.Xml.XmlNode node)
+        public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode node)
         {
             throw new NotImplementedException();
         }
 
-        public override void DeserializerSetupObject(DeserializerEngine engine, System.Xml.XmlNode node)
+        public override bool CanDeserialize(DeserializerEngine engine, XmlNode node)
         {
-            throw new NotImplementedException();
+            return node.Name == "list";
         }
     }
 }
