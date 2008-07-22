@@ -14,16 +14,16 @@ namespace Alsing.Serialization
             return MetaNull.Default;
         }
 
-        public override object DeserializerCreateObject(DeserializerEngine engine, XmlNode node)
+        public override object DeserializerCreateObject(DeserializerEngine engine, XmlNode objectNode)
         {
             return null;
         }
 
-        public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode node)
+        public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode objectNode, object instance)
         {
         }
 
-        public override bool CanDeserialize(DeserializerEngine engine, XmlNode node)
+        public override bool CanDeserialize(DeserializerEngine engine, XmlNode objectNode)
         {
             return false;
         }

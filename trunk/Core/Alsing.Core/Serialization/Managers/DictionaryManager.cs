@@ -11,14 +11,14 @@ namespace Alsing.Serialization
             return item.IsDictionary();
         }
 
-        public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode node)
+        public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode objectNode, object instance)
         {
             throw new NotImplementedException();
         }
 
-        public override bool CanDeserialize(DeserializerEngine engine, XmlNode node)
+        public override bool CanDeserialize(DeserializerEngine engine, XmlNode objectNode)
         {
-            return node.Name == "dictionary";
+            return objectNode.Name == "dictionary";
         }
     }
 }

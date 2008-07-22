@@ -9,9 +9,9 @@ namespace Alsing.Serialization
         public abstract MetaObject SerializerGetObject(SerializerEngine engine, object item);
 
 
-        public abstract bool CanDeserialize(DeserializerEngine engine, XmlNode node);
-        public abstract object DeserializerCreateObject(DeserializerEngine engine, XmlNode node);
-        public abstract void DeserializerSetupObject(DeserializerEngine engine, XmlNode node);
+        public abstract bool CanDeserialize(DeserializerEngine engine, XmlNode objectNode);
+        public abstract object DeserializerCreateObject(DeserializerEngine engine, XmlNode objectNode);
+        public abstract void DeserializerSetupObject(DeserializerEngine engine, XmlNode objectNode, object instance);
         //   public abstract object DeserializerGetObject(DeserializerEngine engine, XmlNode node);
     }
 
@@ -25,9 +25,9 @@ namespace Alsing.Serialization
             return current;
         }
 
-        public override object DeserializerCreateObject(DeserializerEngine engine, XmlNode node)
+        public override object DeserializerCreateObject(DeserializerEngine engine, XmlNode objectNode)
         {
-            string typeAlias = node.Attributes["type"].Value;
+            string typeAlias = objectNode.Attributes["type"].Value;
             Type type = engine.TypeLookup[typeAlias];
 
             //ignore if type is missing
