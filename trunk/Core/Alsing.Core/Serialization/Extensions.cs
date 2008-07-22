@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.ComponentModel;
 
@@ -24,7 +24,7 @@ namespace Alsing.Serialization.Extensions
         public static bool IsValueObject(this object item)
         {
             TypeConverter tc = TypeDescriptor.GetConverter(item.GetType());
-            return tc.CanConvertFrom(typeof(string)) || item is Type;
+            return tc.CanConvertFrom(typeof (string)) || item is Type;
         }
     }
 }

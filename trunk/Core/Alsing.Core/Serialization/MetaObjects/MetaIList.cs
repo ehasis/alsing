@@ -25,7 +25,7 @@ namespace Alsing.Serialization
             xml.WriteEndElement();
         }
 
-        public override void Build(SerializerEngine engine,object item )
+        public override void Build(SerializerEngine engine, object item)
         {
             var rawList = item.As<IList>();
             Items = new MetaObject[rawList.Count];
