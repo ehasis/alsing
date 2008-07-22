@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Reflection;
 using System.Xml;
 
 namespace Alsing.Serialization
@@ -11,8 +8,8 @@ namespace Alsing.Serialization
     public class DeserializerEngine
     {
         internal readonly Dictionary<string, object> ObjectLookup = new Dictionary<string, object>();
-        private readonly Dictionary<string, Action<XmlNode, object>> setupMethodLookup;
         internal readonly Dictionary<string, Type> TypeLookup = new Dictionary<string, Type>();
+        internal readonly Dictionary<string, ObjectManager> InstanceManager = new Dictionary<string, ObjectManager>();
         public IList<ObjectManager> ObjectManagers { get; private set; }
 
         public DeserializerEngine()
@@ -31,8 +28,6 @@ namespace Alsing.Serialization
                                      new DictionaryManager(),
                                      new ReferenceObjectManager()
                                  };
-
-            setupMethodLookup = GetSetupMethodLookup();
         }
 
         public IList<IDeserializationFacility> DeserializationFacilities { get; private set; }
@@ -78,109 +73,6 @@ namespace Alsing.Serialization
                 ObjectConfigured(instance);
         }
 
-        private Dictionary<string, Action<XmlNode, object>> GetSetupMethodLookup()
-        {
-            var res = new Dictionary<string, Action<XmlNode, object>>
-                          {
-                              {"object", SetupObject},
-                              {"list", SetupList},
-                              {"dictionary", SetupDictionary},
-                              {"array", SetupArray}
-                          };
-
-            return res;
-        }
-
-        private void SetupDictionary(XmlNode node, object instance)
-        {
-        }
-
-        private void SetupObject(XmlNode objectNode, object instance)
-        {
-            foreach (XmlNode node in objectNode)
-            {
-                if (node.Name == "field")
-                {
-                    string fieldName = node.Attributes["name"].Value;
-                    FieldInfo field = instance.GetType().GetAnyField(fieldName);
-
-
-                    XmlAttribute idRefAttrib = node.Attributes[Constants.IdRef];
-                    XmlAttribute valueAttrib = node.Attributes[Constants.Value];
-                    XmlAttribute nullAttrib = node.Attributes["null"];
-                    XmlAttribute typeAttrib = node.Attributes[Constants.Type];
-
-                    object value = null;
-
-                    if (nullAttrib != null)
-                    {
-                    }
-                    if (idRefAttrib != null)
-                    {
-                        value = ObjectLookup[idRefAttrib.Value];
-                    }
-                    if (valueAttrib != null)
-                    {
-                        Type type = field.FieldType;
-
-                        if (typeAttrib != null)
-                            type = TypeLookup[typeAttrib.Value];
-
-                        TypeConverter tc = TypeDescriptor.GetConverter(type);
-                        value = tc.ConvertFromString(valueAttrib.Value);
-                    }
-
-                    if (field == null)
-                    {
-                        OnFieldMissing(fieldName, instance, value);
-                    }
-                    else
-                    {
-                        field.SetValue(instance, value);
-                    }
-                }
-            }
-        }
-
-
-        private void SetupList(XmlNode listNode, object instance)
-        {
-            var list = instance as IList;
-            if (list == null)
-                return;
-
-            foreach (XmlNode node in listNode)
-            {
-                if (node.Name == "element")
-                {
-                    XmlAttribute idRefAttrib = node.Attributes[Constants.IdRef];
-                    XmlAttribute valueAttrib = node.Attributes[Constants.Value];
-                    XmlAttribute nullAttrib = node.Attributes["null"];
-                    XmlAttribute typeAttrib = node.Attributes[Constants.Type];
-
-                    if (nullAttrib != null)
-                    {
-                        list.Add(null);
-                    }
-                    if (idRefAttrib != null)
-                    {
-                        object refInstance = ObjectLookup[idRefAttrib.Value];
-                        list.Add(refInstance);
-                    }
-                    if (typeAttrib != null && valueAttrib != null)
-                    {
-                        Type type = Type.GetType(typeAttrib.Value);
-                        TypeConverter tc = TypeDescriptor.GetConverter(type);
-                        object res = tc.ConvertFromString(valueAttrib.Value);
-                        list.Add(res);
-                    }
-                }
-            }
-        }
-
-        private void SetupArray(XmlNode arrayNode, object instance)
-        {
-        }
 
         public object Deserialize(Stream input)
         {
@@ -216,6 +108,7 @@ namespace Alsing.Serialization
                             OnObjectCreated(instance);
                             string id = node.Attributes[Constants.Id].Value;
                             ObjectLookup.Add(id, instance);
+                            InstanceManager.Add(id, manager);
                         }
                     }
                 }
@@ -225,10 +118,11 @@ namespace Alsing.Serialization
                 foreach (XmlNode node in objects)
                 {
                     string id = node.Attributes[Constants.Id].Value;
+                    ObjectManager manager = InstanceManager[id];
                     object instance = ObjectLookup[id];
-                    Action<XmlNode, object> method = setupMethodLookup[node.Name];
-                    OnObjectConfigured(instance);
-                    method(node, instance);
+
+                    manager.DeserializerSetupObject(this,node,instance);
+                    OnObjectConfigured(instance);                    
                 }
 
             //return the root

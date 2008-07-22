@@ -8,5 +8,6 @@
         public const string Type = "type";
         public const string Alias = "alias";
         public const string FullName = "full-name";
+        public const string Null = "null";
     }
 }
