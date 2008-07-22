@@ -20,7 +20,7 @@ namespace Alsing.Serialization
             return null;
         }
 
-        public override object DeserializerGetValue(DeserializerEngine engine, XmlNode node,Type fieldType)
+        public override object DeserializerGetValue(DeserializerEngine engine, XmlNode node, Type fieldType)
         {
             return null;
         }

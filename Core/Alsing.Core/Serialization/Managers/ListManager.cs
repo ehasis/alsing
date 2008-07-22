@@ -23,27 +23,13 @@ namespace Alsing.Serialization
             {
                 if (node.Name == "element")
                 {
-                    XmlAttribute idRefAttrib = node.Attributes[Constants.IdRef];
-                    XmlAttribute valueAttrib = node.Attributes[Constants.Value];
-                    XmlAttribute nullAttrib = node.Attributes["null"];
-                    XmlAttribute typeAttrib = node.Attributes[Constants.Type];
+                    Type elementType = null;
 
-                    if (nullAttrib != null)
-                    {
-                        list.Add(null);
-                    }
-                    if (idRefAttrib != null)
-                    {
-                        object refInstance = engine.ObjectLookup[idRefAttrib.Value];
-                        list.Add(refInstance);
-                    }
-                    if (typeAttrib != null && valueAttrib != null)
-                    {
-                        Type type = Type.GetType(typeAttrib.Value);
-                        TypeConverter tc = TypeDescriptor.GetConverter(type);
-                        object res = tc.ConvertFromString(valueAttrib.Value);
-                        list.Add(res);
-                    }
+                    //if (field != null)
+                    //    elementType = field.FieldType;
+
+                    object value = engine.GetReference(node, elementType);
+                    list.Add(value);
                 }
             }
         }
