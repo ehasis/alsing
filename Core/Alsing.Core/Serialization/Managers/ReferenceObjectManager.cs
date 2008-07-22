@@ -12,6 +12,11 @@ namespace Alsing.Serialization
             return true;
         }
 
+        public override bool CanDeserialize(DeserializerEngine engine, XmlNode objectNode)
+        {
+            return objectNode.Name == "object";
+        }
+
         public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode objectNode, object instance)
         {
             foreach (XmlNode node in objectNode)
@@ -24,7 +29,7 @@ namespace Alsing.Serialization
 
                     XmlAttribute idRefAttrib = node.Attributes[Constants.IdRef];
                     XmlAttribute valueAttrib = node.Attributes[Constants.Value];
-                    XmlAttribute nullAttrib = node.Attributes["null"];
+                    XmlAttribute nullAttrib = node.Attributes[Constants.Null];
                     XmlAttribute typeAttrib = node.Attributes[Constants.Type];
 
                     object value = null;
@@ -57,11 +62,6 @@ namespace Alsing.Serialization
                     }
                 }
             }
-        }
-
-        public override bool CanDeserialize(DeserializerEngine engine, XmlNode objectNode)
-        {
-            return objectNode.Name == "object";
         }
     }
 }
