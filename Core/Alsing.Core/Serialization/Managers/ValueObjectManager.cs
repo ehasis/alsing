@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Xml;
 using Alsing.Serialization.Extensions;
 
 namespace Alsing.Serialization
@@ -13,14 +11,19 @@ namespace Alsing.Serialization
             return item.IsValueObject();
         }
 
-        public override object DeserializerCreateObject(DeserializerEngine engine, System.Xml.XmlNode node)
+        public override object DeserializerCreateObject(DeserializerEngine engine, XmlNode node)
+        {
+            throw new Exception("this should never be called");
+        }
+
+        public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode node)
         {
             throw new NotImplementedException();
         }
 
-        public override void DeserializerSetupObject(DeserializerEngine engine, System.Xml.XmlNode node)
+        public override bool CanDeserialize(DeserializerEngine engine, XmlNode node)
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }
