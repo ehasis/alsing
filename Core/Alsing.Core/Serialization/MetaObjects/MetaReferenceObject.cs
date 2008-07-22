@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Xml;
-using System.Collections.Generic;
 
 namespace Alsing.Serialization
 {
@@ -28,7 +28,7 @@ namespace Alsing.Serialization
 
         public override void Build(SerializerEngine engine, object item)
         {
-            foreach (var fieldInfo in item.GetType().GetAllFields())
+            foreach (FieldInfo fieldInfo in item.GetType().GetAllFields())
             {
                 if (IsNonSerialized(fieldInfo))
                     continue;

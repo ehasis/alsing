@@ -12,7 +12,9 @@ namespace Alsing.Serialization
         public abstract bool CanDeserialize(DeserializerEngine engine, XmlNode objectNode);
         public abstract object DeserializerCreateObject(DeserializerEngine engine, XmlNode objectNode);
         public abstract void DeserializerSetupObject(DeserializerEngine engine, XmlNode objectNode, object instance);
-        //   public abstract object DeserializerGetObject(DeserializerEngine engine, XmlNode node);
+        
+        public abstract bool CanDeserializeValue(DeserializerEngine engine, XmlNode node);
+        public abstract object DeserializerGetValue(DeserializerEngine engine, XmlNode node);
     }
 
     public abstract class ObjectManager<T> : ObjectManager where T : MetaObject, new()
@@ -37,6 +39,16 @@ namespace Alsing.Serialization
             object instance = Activator.CreateInstance(type);
 
             return instance;
+        }
+
+        public override bool CanDeserializeValue(DeserializerEngine engine, XmlNode node)
+        {
+            return true;
+        }
+
+        public override object DeserializerGetValue(DeserializerEngine engine, XmlNode node)
+        {
+            return null;
         }
     }
 }

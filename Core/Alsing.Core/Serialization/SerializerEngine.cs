@@ -1,19 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Collections.Generic;
 
 namespace Alsing.Serialization
 {
     public class SerializerEngine
     {
-        private int objectID;
         private readonly IList<MetaObject> allObjects = new List<MetaObject>();
         private readonly IDictionary<object, MetaObject> objectLoookup = new Dictionary<object, MetaObject>();
-        private readonly IDictionary<Type,string> types = new Dictionary<Type, string>();
         private readonly IDictionary<string, Type> typeAliases = new Dictionary<string, Type>();
-        public IList<ObjectManager> ObjectManagers { get; private set; }
+        private readonly IDictionary<Type, string> types = new Dictionary<Type, string>();
+        private int objectID;
         private MetaObject Root;
 
         public SerializerEngine()
@@ -28,6 +27,9 @@ namespace Alsing.Serialization
                                      new ReferenceObjectManager()
                                  };
         }
+
+        public IList<ObjectManager> ObjectManagers { get; private set; }
+
         private int GetObjectID()
         {
             return objectID++;
@@ -65,7 +67,7 @@ namespace Alsing.Serialization
         private void WriteObjects(XmlTextWriter xml)
         {
             xml.WriteStartElement("objects");
-            
+
             foreach (MetaObject item in allObjects)
             {
                 item.Serialize(xml);
@@ -99,9 +101,9 @@ namespace Alsing.Serialization
                 if (objectLoookup.ContainsKey(item))
                     return objectLoookup[item];
 
-            foreach(var manager in ObjectManagers)
+            foreach (ObjectManager manager in ObjectManagers)
             {
-                if (manager.CanSerialize(this,item))
+                if (manager.CanSerialize(this, item))
                     return manager.SerializerGetObject(this, item);
             }
 
@@ -123,7 +125,7 @@ namespace Alsing.Serialization
                 return;
 
             string alias = type.GetTypeName();
-            while(typeAliases.ContainsKey(alias))
+            while (typeAliases.ContainsKey(alias))
             {
                 alias = IncrementAlias(alias);
             }
@@ -135,7 +137,7 @@ namespace Alsing.Serialization
         private static string IncrementAlias(string alias)
         {
             //ye ye i know..
-            return string.Format("{0}_",alias);
+            return string.Format("{0}_", alias);
         }
     }
 }

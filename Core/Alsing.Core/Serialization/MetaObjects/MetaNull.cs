@@ -8,7 +8,6 @@ namespace Alsing.Serialization
 
         public override void Serialize(XmlTextWriter xml)
         {
-
         }
 
         public override void SerializeReference(XmlTextWriter xml)

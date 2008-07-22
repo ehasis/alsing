@@ -7,10 +7,9 @@ namespace Alsing.Serialization
 {
     public class DeserializerEngine
     {
+        internal readonly Dictionary<string, ObjectManager> InstanceManager = new Dictionary<string, ObjectManager>();
         internal readonly Dictionary<string, object> ObjectLookup = new Dictionary<string, object>();
         internal readonly Dictionary<string, Type> TypeLookup = new Dictionary<string, Type>();
-        internal readonly Dictionary<string, ObjectManager> InstanceManager = new Dictionary<string, ObjectManager>();
-        public IList<ObjectManager> ObjectManagers { get; private set; }
 
         public DeserializerEngine()
         {
@@ -29,6 +28,8 @@ namespace Alsing.Serialization
                                      new ReferenceObjectManager()
                                  };
         }
+
+        public IList<ObjectManager> ObjectManagers { get; private set; }
 
         public IList<IDeserializationFacility> DeserializationFacilities { get; private set; }
 
@@ -83,6 +84,65 @@ namespace Alsing.Serialization
             XmlElement objects = document["objects"];
             XmlElement types = document["types"];
 
+            DeserializerGetTypes(types);
+
+            DeserializerCreateObjects(objects);
+
+            DeserializerSetupObjects(objects);
+
+            //return the root
+            return ObjectLookup["0"];
+        }
+
+        internal object GetReference(XmlNode objectNode)
+        {
+            foreach(var manager in ObjectManagers)
+            {
+                if (manager.CanDeserializeValue(this, objectNode))
+                    return manager.DeserializerGetValue(this, objectNode);
+            }
+
+            return null;
+        }
+
+        private void DeserializerSetupObjects(XmlElement objects)
+        {
+//configure the instances
+            if (objects != null)
+                foreach (XmlNode node in objects)
+                {
+                    string id = node.Attributes[Constants.Id].Value;
+                    ObjectManager manager = InstanceManager[id];
+                    object instance = ObjectLookup[id];
+
+                    manager.DeserializerSetupObject(this, node, instance);
+                    OnObjectConfigured(instance);
+                }
+        }
+
+        private void DeserializerCreateObjects(XmlElement objects)
+        {
+//create all instances
+            if (objects != null)
+                foreach (XmlNode node in objects)
+                {
+                    foreach (ObjectManager manager in ObjectManagers)
+                    {
+                        if (manager.CanDeserialize(this, node))
+                        {
+                            object instance = manager.DeserializerCreateObject(this, node);
+                            OnObjectCreated(instance);
+                            string id = node.Attributes[Constants.Id].Value;
+                            ObjectLookup.Add(id, instance);
+                            InstanceManager.Add(id, manager);
+                            break;
+                        }
+                    }
+                }
+        }
+
+        private void DeserializerGetTypes(XmlElement types)
+        {
             if (types != null)
                 foreach (XmlNode node in types)
                 {
@@ -95,38 +155,6 @@ namespace Alsing.Serialization
 
                     TypeLookup.Add(alias, type);
                 }
-
-            //create all instances
-            if (objects != null)
-                foreach (XmlNode node in objects)
-                {
-                    foreach(var manager in ObjectManagers)
-                    {
-                        if (manager.CanDeserialize(this, node))
-                        {
-                            object instance = manager.DeserializerCreateObject(this, node);
-                            OnObjectCreated(instance);
-                            string id = node.Attributes[Constants.Id].Value;
-                            ObjectLookup.Add(id, instance);
-                            InstanceManager.Add(id, manager);
-                        }
-                    }
-                }
-
-            //configure the instances
-            if (objects != null)
-                foreach (XmlNode node in objects)
-                {
-                    string id = node.Attributes[Constants.Id].Value;
-                    ObjectManager manager = InstanceManager[id];
-                    object instance = ObjectLookup[id];
-
-                    manager.DeserializerSetupObject(this,node,instance);
-                    OnObjectConfigured(instance);                    
-                }
-
-            //return the root
-            return ObjectLookup["0"];
         }
     }
 }

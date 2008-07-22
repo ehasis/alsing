@@ -19,6 +19,16 @@ namespace Alsing.Serialization
             return null;
         }
 
+        public override object DeserializerGetValue(DeserializerEngine engine, XmlNode node)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override bool CanDeserializeValue(DeserializerEngine engine, XmlNode node)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode objectNode, object instance)
         {
         }
