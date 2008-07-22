@@ -10,7 +10,7 @@ namespace Alsing.Serialization
 {
     public class DeserializerEngine
     {
-        private readonly Dictionary<string, object> objectLookup = new Dictionary<string, object>();
+        internal readonly Dictionary<string, object> ObjectLookup = new Dictionary<string, object>();
         private readonly Dictionary<string, Action<XmlNode, object>> setupMethodLookup;
         internal readonly Dictionary<string, Type> TypeLookup = new Dictionary<string, Type>();
         public IList<ObjectManager> ObjectManagers { get; private set; }
@@ -42,7 +42,7 @@ namespace Alsing.Serialization
         public event ObjectCreatedHandler ObjectCreated;
         public event ObjectConfiguredHandler ObjectConfigured;
 
-        protected void OnFieldMissing(string fieldName, object instance, object value)
+        protected internal void OnFieldMissing(string fieldName, object instance, object value)
         {
             foreach (IDeserializationFacility facility in DeserializationFacilities)
                 facility.FieldMissing(fieldName, instance, value);
@@ -51,7 +51,7 @@ namespace Alsing.Serialization
                 FieldMissing(fieldName, instance, value);
         }
 
-        protected void OnTypeMissing(string typeName, ref Type substitutionType)
+        protected internal void OnTypeMissing(string typeName, ref Type substitutionType)
         {
             foreach (IDeserializationFacility facility in DeserializationFacilities)
                 facility.TypeMissing(typeName, ref substitutionType);
@@ -60,7 +60,7 @@ namespace Alsing.Serialization
                 TypeMissing(typeName, ref substitutionType);
         }
 
-        protected void OnObjectCreated(object instance)
+        protected internal void OnObjectCreated(object instance)
         {
             foreach (IDeserializationFacility facility in DeserializationFacilities)
                 facility.ObjectCreated(instance);
@@ -69,7 +69,7 @@ namespace Alsing.Serialization
                 ObjectCreated(instance);
         }
 
-        protected void OnObjectConfigured(object instance)
+        protected internal void OnObjectConfigured(object instance)
         {
             foreach (IDeserializationFacility facility in DeserializationFacilities)
                 facility.ObjectConfigured(instance);
@@ -89,20 +89,6 @@ namespace Alsing.Serialization
                           };
 
             return res;
-        }
-
-        private object CreateAny(XmlNode node)
-        {
-            string typeAlias = node.Attributes["type"].Value;
-            Type type = TypeLookup[typeAlias];
-
-            //ignore if type is missing
-            if (type == null)
-                return null;
-
-            object instance = Activator.CreateInstance(type);
-
-            return instance;
         }
 
         private void SetupDictionary(XmlNode node, object instance)
@@ -131,7 +117,7 @@ namespace Alsing.Serialization
                     }
                     if (idRefAttrib != null)
                     {
-                        value = objectLookup[idRefAttrib.Value];
+                        value = ObjectLookup[idRefAttrib.Value];
                     }
                     if (valueAttrib != null)
                     {
@@ -178,7 +164,7 @@ namespace Alsing.Serialization
                     }
                     if (idRefAttrib != null)
                     {
-                        object refInstance = objectLookup[idRefAttrib.Value];
+                        object refInstance = ObjectLookup[idRefAttrib.Value];
                         list.Add(refInstance);
                     }
                     if (typeAttrib != null && valueAttrib != null)
@@ -229,7 +215,7 @@ namespace Alsing.Serialization
                             object instance = manager.DeserializerCreateObject(this, node);
                             OnObjectCreated(instance);
                             string id = node.Attributes[Constants.Id].Value;
-                            objectLookup.Add(id, instance);
+                            ObjectLookup.Add(id, instance);
                         }
                     }
                 }
@@ -239,14 +225,14 @@ namespace Alsing.Serialization
                 foreach (XmlNode node in objects)
                 {
                     string id = node.Attributes[Constants.Id].Value;
-                    object instance = objectLookup[id];
+                    object instance = ObjectLookup[id];
                     Action<XmlNode, object> method = setupMethodLookup[node.Name];
                     OnObjectConfigured(instance);
                     method(node, instance);
                 }
 
             //return the root
-            return objectLookup["0"];
+            return ObjectLookup["0"];
         }
     }
 }
