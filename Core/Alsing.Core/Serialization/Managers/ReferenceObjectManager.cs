@@ -26,31 +26,13 @@ namespace Alsing.Serialization
                     string fieldName = node.Attributes["name"].Value;
                     FieldInfo field = instance.GetType().GetAnyField(fieldName);
 
+                    Type fieldType = null;
 
-                    XmlAttribute idRefAttrib = node.Attributes[Constants.IdRef];
-                    XmlAttribute valueAttrib = node.Attributes[Constants.Value];
-                    XmlAttribute nullAttrib = node.Attributes[Constants.Null];
-                    XmlAttribute typeAttrib = node.Attributes[Constants.Type];
+                    if (field != null)
+                        fieldType = field.FieldType;
 
-                    object value = null;
+                    object value = engine.GetReference(node, fieldType);
 
-                    if (nullAttrib != null)
-                    {
-                    }
-                    if (idRefAttrib != null)
-                    {
-                        value = engine.ObjectLookup[idRefAttrib.Value];
-                    }
-                    if (valueAttrib != null)
-                    {
-                        Type type = field.FieldType;
-
-                        if (typeAttrib != null)
-                            type = engine.TypeLookup[typeAttrib.Value];
-
-                        TypeConverter tc = TypeDescriptor.GetConverter(type);
-                        value = tc.ConvertFromString(valueAttrib.Value);
-                    }
 
                     if (field == null)
                     {

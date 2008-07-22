@@ -94,12 +94,12 @@ namespace Alsing.Serialization
             return ObjectLookup["0"];
         }
 
-        internal object GetReference(XmlNode objectNode)
+        internal object GetReference(XmlNode objectNode,Type fieldType)
         {
             foreach(var manager in ObjectManagers)
             {
                 if (manager.CanDeserializeValue(this, objectNode))
-                    return manager.DeserializerGetValue(this, objectNode);
+                    return manager.DeserializerGetValue(this, objectNode,fieldType);
             }
 
             return null;

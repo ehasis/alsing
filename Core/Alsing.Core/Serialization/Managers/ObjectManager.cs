@@ -14,7 +14,7 @@ namespace Alsing.Serialization
         public abstract void DeserializerSetupObject(DeserializerEngine engine, XmlNode objectNode, object instance);
         
         public abstract bool CanDeserializeValue(DeserializerEngine engine, XmlNode node);
-        public abstract object DeserializerGetValue(DeserializerEngine engine, XmlNode node);
+        public abstract object DeserializerGetValue(DeserializerEngine engine, XmlNode node,Type fieldType);
     }
 
     public abstract class ObjectManager<T> : ObjectManager where T : MetaObject, new()
@@ -43,12 +43,23 @@ namespace Alsing.Serialization
 
         public override bool CanDeserializeValue(DeserializerEngine engine, XmlNode node)
         {
-            return true;
+            XmlAttribute idRefAttrib = node.Attributes[Constants.IdRef];
+
+            if (idRefAttrib == null)
+                return false;
+
+            string id = idRefAttrib.Value;
+
+            var manager = engine.InstanceManager[id];
+            return manager == this;
         }
 
-        public override object DeserializerGetValue(DeserializerEngine engine, XmlNode node)
+        public override object DeserializerGetValue(DeserializerEngine engine, XmlNode node, Type fieldType)
         {
-            return null;
+            XmlAttribute idRefAttrib = node.Attributes[Constants.IdRef];
+            string id = idRefAttrib.Value;
+
+            return engine.ObjectLookup[id];
         }
     }
 }

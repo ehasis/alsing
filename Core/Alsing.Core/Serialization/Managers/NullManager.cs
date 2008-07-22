@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System;
+using System.Xml;
 
 namespace Alsing.Serialization
 {
@@ -19,14 +20,19 @@ namespace Alsing.Serialization
             return null;
         }
 
-        public override object DeserializerGetValue(DeserializerEngine engine, XmlNode node)
+        public override object DeserializerGetValue(DeserializerEngine engine, XmlNode node,Type fieldType)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
 
         public override bool CanDeserializeValue(DeserializerEngine engine, XmlNode node)
         {
-            throw new System.NotImplementedException();
+            XmlAttribute nullAttrib = node.Attributes[Constants.Null];
+
+            if (nullAttrib != null)
+                return true;
+
+            return false;
         }
 
         public override void DeserializerSetupObject(DeserializerEngine engine, XmlNode objectNode, object instance)
