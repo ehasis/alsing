@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.ComponentModel;
 using System.Xml;
 using Alsing.Serialization.Extensions;
 
