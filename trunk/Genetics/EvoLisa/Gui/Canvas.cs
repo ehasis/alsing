@@ -6,6 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
+//test
 namespace GenArt
 {
     public partial class Canvas : Control
