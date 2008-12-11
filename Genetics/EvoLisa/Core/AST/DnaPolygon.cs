@@ -4,6 +4,7 @@ using GenArt.Classes;
 
 namespace GenArt.AST
 {
+    [Serializable]
     public class DnaPolygon
     {
         public List<DnaPoint> Points { get; set; }

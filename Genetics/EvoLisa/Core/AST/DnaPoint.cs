@@ -3,6 +3,7 @@ using GenArt.Classes;
 
 namespace GenArt.AST
 {
+    [Serializable]
     public class DnaPoint
     {
         public int X { get; set; }
