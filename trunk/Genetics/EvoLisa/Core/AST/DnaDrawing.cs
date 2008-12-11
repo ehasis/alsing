@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 using GenArt.Classes;
+using System;
 
 namespace GenArt.AST
 {
+    [Serializable]
     public class DnaDrawing
     {
         public List<DnaPolygon> Polygons { get; set; }

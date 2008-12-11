@@ -1,7 +1,9 @@
 ﻿using GenArt.Classes;
+using System;
 
 namespace GenArt.AST
 {
+    [Serializable]
     public class DnaBrush
     {
         public int Red { get; set; }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -288,7 +289,7 @@
             this.numericUpDownRemovePolygonMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownRemovePolygonMutationRate.TabIndex = 37;
             this.toolTipInfo.SetToolTip(this.numericUpDownRemovePolygonMutationRate, "Probability that a mutation will remove a polygon from the canvas. A value of 100" +
-                    "0 gives a 1 in 1000 chance.");
+                    "0 gives a 1 in 1000 chance that the mutation will occur in a generation.");
             this.numericUpDownRemovePolygonMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -316,9 +317,7 @@
             this.numericUpDownMovePolygonMutationRate.Name = "numericUpDownMovePolygonMutationRate";
             this.numericUpDownMovePolygonMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownMovePolygonMutationRate.TabIndex = 36;
-            this.toolTipInfo.SetToolTip(this.numericUpDownMovePolygonMutationRate, "Probability that a mutation will move a polygon on the canvas. When a polygon mov" +
-                    "es it changes its priority (z-axis) on the canvas. A value of 1000 gives a 1 in " +
-                    "1000 chance.");
+            this.toolTipInfo.SetToolTip(this.numericUpDownMovePolygonMutationRate, resources.GetString("numericUpDownMovePolygonMutationRate.ToolTip"));
             this.numericUpDownMovePolygonMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -347,7 +346,7 @@
             this.numericUpDownAddPolygonMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownAddPolygonMutationRate.TabIndex = 35;
             this.toolTipInfo.SetToolTip(this.numericUpDownAddPolygonMutationRate, "Probability that a mutation will add a polygon to the canvas. A value of 1000 giv" +
-                    "es a 1 in 1000 chance.");
+                    "es a 1 in 1000 chance that the mutation will occur in a generation.");
             this.numericUpDownAddPolygonMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -369,7 +368,7 @@
             this.trackBarAddPolygonMutationRate.TickFrequency = 100;
             this.trackBarAddPolygonMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.toolTipInfo.SetToolTip(this.trackBarAddPolygonMutationRate, "Probability that a mutation will add a polygon to the canvas. A value of 1000 giv" +
-                    "es a 1 in 1000 chance.");
+                    "es a 1 in 1000 chance that the mutation will occur in a generation.");
             this.trackBarAddPolygonMutationRate.Value = 1;
             // 
             // label6
@@ -381,7 +380,7 @@
             this.label6.TabIndex = 28;
             this.label6.Text = "Add";
             this.toolTipInfo.SetToolTip(this.label6, "Probability that a mutation will add a polygon to the canvas. A value of 1000 giv" +
-                    "es a 1 in 1000 chance.");
+                    "es a 1 in 1000 chance that the mutation will occur in a generation.");
             // 
             // label7
             // 
@@ -391,6 +390,7 @@
             this.label7.Size = new System.Drawing.Size(34, 13);
             this.label7.TabIndex = 34;
             this.label7.Text = "Move";
+            this.toolTipInfo.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             // 
             // trackBarRemovePolygonMutationRate
             // 
@@ -407,7 +407,7 @@
             this.trackBarRemovePolygonMutationRate.TickFrequency = 100;
             this.trackBarRemovePolygonMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.toolTipInfo.SetToolTip(this.trackBarRemovePolygonMutationRate, "Probability that a mutation will remove a polygon from the canvas. A value of 100" +
-                    "0 gives a 1 in 1000 chance.");
+                    "0 gives a 1 in 1000 chance that the mutation will occur in a generation.");
             this.trackBarRemovePolygonMutationRate.Value = 1;
             // 
             // trackBarMovePolygonMutationRate
@@ -424,6 +424,7 @@
             this.trackBarMovePolygonMutationRate.TabIndex = 32;
             this.trackBarMovePolygonMutationRate.TickFrequency = 100;
             this.trackBarMovePolygonMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarMovePolygonMutationRate, resources.GetString("trackBarMovePolygonMutationRate.ToolTip"));
             this.trackBarMovePolygonMutationRate.Value = 1;
             // 
             // label8
@@ -435,7 +436,7 @@
             this.label8.TabIndex = 31;
             this.label8.Text = "Remove";
             this.toolTipInfo.SetToolTip(this.label8, "Probability that a mutation will remove a polygon from the canvas. A value of 100" +
-                    "0 gives a 1 in 1000 chance.");
+                    "0 gives a 1 in 1000 chance that the mutation will occur in a generation.");
             // 
             // tabPage2
             // 
@@ -484,6 +485,8 @@
             this.numericUpDownRemovePointMutationRate.Name = "numericUpDownRemovePointMutationRate";
             this.numericUpDownRemovePointMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownRemovePointMutationRate.TabIndex = 54;
+            this.toolTipInfo.SetToolTip(this.numericUpDownRemovePointMutationRate, "Probability that a mutation will remove a point from a polygon. A value of 1000 g" +
+                    "ives a 1 in 1000 chance that the mutation will occur in a generation.");
             this.numericUpDownRemovePointMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -511,6 +514,7 @@
             this.numericUpDownMovePointMinMutationRate.Name = "numericUpDownMovePointMinMutationRate";
             this.numericUpDownMovePointMinMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownMovePointMinMutationRate.TabIndex = 53;
+            this.toolTipInfo.SetToolTip(this.numericUpDownMovePointMinMutationRate, resources.GetString("numericUpDownMovePointMinMutationRate.ToolTip"));
             this.numericUpDownMovePointMinMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -538,6 +542,7 @@
             this.numericUpDownMovePointMidMutationRate.Name = "numericUpDownMovePointMidMutationRate";
             this.numericUpDownMovePointMidMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownMovePointMidMutationRate.TabIndex = 52;
+            this.toolTipInfo.SetToolTip(this.numericUpDownMovePointMidMutationRate, resources.GetString("numericUpDownMovePointMidMutationRate.ToolTip"));
             this.numericUpDownMovePointMidMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -565,6 +570,7 @@
             this.numericUpDownMovePointMaxMutationRate.Name = "numericUpDownMovePointMaxMutationRate";
             this.numericUpDownMovePointMaxMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownMovePointMaxMutationRate.TabIndex = 51;
+            this.toolTipInfo.SetToolTip(this.numericUpDownMovePointMaxMutationRate, resources.GetString("numericUpDownMovePointMaxMutationRate.ToolTip"));
             this.numericUpDownMovePointMaxMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -592,6 +598,8 @@
             this.numericUpDownAddPointMutationRate.Name = "numericUpDownAddPointMutationRate";
             this.numericUpDownAddPointMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownAddPointMutationRate.TabIndex = 50;
+            this.toolTipInfo.SetToolTip(this.numericUpDownAddPointMutationRate, "Probability that a mutation will add a point to a polygon. A value of 1000 gives " +
+                    "a 1 in 1000 chance that the mutation will occur in a generation.");
             this.numericUpDownAddPointMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -606,6 +614,7 @@
             this.label11.Size = new System.Drawing.Size(56, 13);
             this.label11.TabIndex = 49;
             this.label11.Text = "Move max";
+            this.toolTipInfo.SetToolTip(this.label11, resources.GetString("label11.ToolTip"));
             // 
             // trackBarMovePointMidMutationRate
             // 
@@ -621,6 +630,7 @@
             this.trackBarMovePointMidMutationRate.TabIndex = 44;
             this.trackBarMovePointMidMutationRate.TickFrequency = 100;
             this.trackBarMovePointMidMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarMovePointMidMutationRate, resources.GetString("trackBarMovePointMidMutationRate.ToolTip"));
             this.trackBarMovePointMidMutationRate.Value = 1;
             // 
             // trackBarMovePointMaxMutationRate
@@ -637,6 +647,7 @@
             this.trackBarMovePointMaxMutationRate.TabIndex = 47;
             this.trackBarMovePointMaxMutationRate.TickFrequency = 100;
             this.trackBarMovePointMaxMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarMovePointMaxMutationRate, resources.GetString("trackBarMovePointMaxMutationRate.ToolTip"));
             this.trackBarMovePointMaxMutationRate.Value = 1;
             // 
             // label12
@@ -647,6 +658,7 @@
             this.label12.Size = new System.Drawing.Size(53, 13);
             this.label12.TabIndex = 46;
             this.label12.Text = "Move mid";
+            this.toolTipInfo.SetToolTip(this.label12, resources.GetString("label12.ToolTip"));
             // 
             // trackBarAddPointMutationRate
             // 
@@ -662,6 +674,8 @@
             this.trackBarAddPointMutationRate.TabIndex = 35;
             this.trackBarAddPointMutationRate.TickFrequency = 100;
             this.trackBarAddPointMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarAddPointMutationRate, "Probability that a mutation will add a point to a polygon. A value of 1000 gives " +
+                    "a 1 in 1000 chance that the mutation will occur in a generation.");
             this.trackBarAddPointMutationRate.Value = 1;
             // 
             // label5
@@ -672,6 +686,8 @@
             this.label5.Size = new System.Drawing.Size(26, 13);
             this.label5.TabIndex = 37;
             this.label5.Text = "Add";
+            this.toolTipInfo.SetToolTip(this.label5, "Probability that a mutation will add a point to a polygon. A value of 1000 gives " +
+                    "a 1 in 1000 chance that the mutation will occur in a generation.");
             // 
             // label9
             // 
@@ -681,6 +697,7 @@
             this.label9.Size = new System.Drawing.Size(53, 13);
             this.label9.TabIndex = 43;
             this.label9.Text = "Move min";
+            this.toolTipInfo.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
             // 
             // trackBarRemovePointMutationRate
             // 
@@ -696,6 +713,8 @@
             this.trackBarRemovePointMutationRate.TabIndex = 38;
             this.trackBarRemovePointMutationRate.TickFrequency = 100;
             this.trackBarRemovePointMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarRemovePointMutationRate, "Probability that a mutation will remove a point from a polygon. A value of 1000 g" +
+                    "ives a 1 in 1000 chance that the mutation will occur in a generation.");
             this.trackBarRemovePointMutationRate.Value = 1;
             // 
             // trackBarMovePointMinMutationRate
@@ -712,6 +731,7 @@
             this.trackBarMovePointMinMutationRate.TabIndex = 41;
             this.trackBarMovePointMinMutationRate.TickFrequency = 100;
             this.trackBarMovePointMinMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarMovePointMinMutationRate, resources.GetString("trackBarMovePointMinMutationRate.ToolTip"));
             this.trackBarMovePointMinMutationRate.Value = 1;
             // 
             // label10
@@ -722,6 +742,8 @@
             this.label10.Size = new System.Drawing.Size(47, 13);
             this.label10.TabIndex = 40;
             this.label10.Text = "Remove";
+            this.toolTipInfo.SetToolTip(this.label10, "Probability that a mutation will remove a point from a polygon. A value of 1000 g" +
+                    "ives a 1 in 1000 chance that the mutation will occur in a generation.");
             // 
             // tabPage3
             // 
@@ -767,6 +789,9 @@
             this.numericUpDownGreenMutationRate.Name = "numericUpDownGreenMutationRate";
             this.numericUpDownGreenMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownGreenMutationRate.TabIndex = 39;
+            this.toolTipInfo.SetToolTip(this.numericUpDownGreenMutationRate, "Probability that a mutation will change the green color channel of a polygon. A v" +
+                    "alue of 1000 gives a 1 in 1000 chance that the mutation will occur in a generati" +
+                    "on.");
             this.numericUpDownGreenMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -794,6 +819,9 @@
             this.numericUpDownBlueMutationRate.Name = "numericUpDownBlueMutationRate";
             this.numericUpDownBlueMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownBlueMutationRate.TabIndex = 38;
+            this.toolTipInfo.SetToolTip(this.numericUpDownBlueMutationRate, "Probability that a mutation will change the blue color channel of a polygon. A va" +
+                    "lue of 1000 gives a 1 in 1000 chance that the mutation will occur in a generatio" +
+                    "n.");
             this.numericUpDownBlueMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -821,6 +849,9 @@
             this.numericUpDownAlphaMutationRate.Name = "numericUpDownAlphaMutationRate";
             this.numericUpDownAlphaMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownAlphaMutationRate.TabIndex = 37;
+            this.toolTipInfo.SetToolTip(this.numericUpDownAlphaMutationRate, "Probability that a mutation will change the alpha (transparency) color channel of" +
+                    " a polygon. A value of 1000 gives a 1 in 1000 chance that the mutation will occu" +
+                    "r in a generation.");
             this.numericUpDownAlphaMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -848,6 +879,9 @@
             this.numericUpDownRedMutationRate.Name = "numericUpDownRedMutationRate";
             this.numericUpDownRedMutationRate.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownRedMutationRate.TabIndex = 36;
+            this.toolTipInfo.SetToolTip(this.numericUpDownRedMutationRate, "Probability that a mutation will change the red color channel of a polygon. A val" +
+                    "ue of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation" +
+                    ".");
             this.numericUpDownRedMutationRate.Value = new decimal(new int[] {
             1,
             0,
@@ -862,6 +896,9 @@
             this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 25;
             this.label4.Text = "Alpha";
+            this.toolTipInfo.SetToolTip(this.label4, "Probability that a mutation will change the alpha (transparency) color channel of" +
+                    " a polygon. A value of 1000 gives a 1 in 1000 chance that the mutation will occu" +
+                    "r in a generation.");
             // 
             // trackBarRedMutationRate
             // 
@@ -877,6 +914,9 @@
             this.trackBarRedMutationRate.TabIndex = 14;
             this.trackBarRedMutationRate.TickFrequency = 100;
             this.trackBarRedMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarRedMutationRate, "Probability that a mutation will change the red color channel of a polygon. A val" +
+                    "ue of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation" +
+                    ".");
             this.trackBarRedMutationRate.Value = 1;
             // 
             // trackBarAlphaMutationRate
@@ -893,6 +933,9 @@
             this.trackBarAlphaMutationRate.TabIndex = 23;
             this.trackBarAlphaMutationRate.TickFrequency = 100;
             this.trackBarAlphaMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarAlphaMutationRate, "Probability that a mutation will change the alpha (transparency) color channel of" +
+                    " a polygon. A value of 1000 gives a 1 in 1000 chance that the mutation will occu" +
+                    "r in a generation.");
             this.trackBarAlphaMutationRate.Value = 1;
             // 
             // label1
@@ -903,6 +946,9 @@
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 16;
             this.label1.Text = "Red";
+            this.toolTipInfo.SetToolTip(this.label1, "Probability that a mutation will change the red color channel of a polygon. A val" +
+                    "ue of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation" +
+                    ".");
             // 
             // label3
             // 
@@ -912,6 +958,9 @@
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 22;
             this.label3.Text = "Blue";
+            this.toolTipInfo.SetToolTip(this.label3, "Probability that a mutation will change the blue color channel of a polygon. A va" +
+                    "lue of 1000 gives a 1 in 1000 chance that the mutation will occur in a generatio" +
+                    "n.");
             // 
             // trackBarGreenMutationRate
             // 
@@ -927,6 +976,9 @@
             this.trackBarGreenMutationRate.TabIndex = 17;
             this.trackBarGreenMutationRate.TickFrequency = 100;
             this.trackBarGreenMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarGreenMutationRate, "Probability that a mutation will change the green color channel of a polygon. A v" +
+                    "alue of 1000 gives a 1 in 1000 chance that the mutation will occur in a generati" +
+                    "on.");
             this.trackBarGreenMutationRate.Value = 1;
             // 
             // trackBarBlueMutationRate
@@ -943,6 +995,9 @@
             this.trackBarBlueMutationRate.TabIndex = 20;
             this.trackBarBlueMutationRate.TickFrequency = 100;
             this.trackBarBlueMutationRate.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarBlueMutationRate, "Probability that a mutation will change the blue color channel of a polygon. A va" +
+                    "lue of 1000 gives a 1 in 1000 chance that the mutation will occur in a generatio" +
+                    "n.");
             this.trackBarBlueMutationRate.Value = 1;
             // 
             // label2
@@ -953,6 +1008,9 @@
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 19;
             this.label2.Text = "Green";
+            this.toolTipInfo.SetToolTip(this.label2, "Probability that a mutation will change the green color channel of a polygon. A v" +
+                    "alue of 1000 gives a 1 in 1000 chance that the mutation will occur in a generati" +
+                    "on.");
             // 
             // tabPage5
             // 
@@ -977,6 +1035,7 @@
             this.tabControl3.SelectedIndex = 0;
             this.tabControl3.Size = new System.Drawing.Size(424, 249);
             this.tabControl3.TabIndex = 6;
+            this.toolTipInfo.SetToolTip(this.tabControl3, "The maximum sum of points for all the polygons on the canvas.");
             // 
             // tabPage6
             // 
@@ -1022,6 +1081,7 @@
             this.numericUpDownPointsPerPolygonMin.Name = "numericUpDownPointsPerPolygonMin";
             this.numericUpDownPointsPerPolygonMin.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownPointsPerPolygonMin.TabIndex = 42;
+            this.toolTipInfo.SetToolTip(this.numericUpDownPointsPerPolygonMin, "The minimum number of points per polygon. This value can not be lower than 3.");
             this.numericUpDownPointsPerPolygonMin.Value = new decimal(new int[] {
             3,
             0,
@@ -1035,7 +1095,7 @@
             0,
             0,
             0});
-            this.numericUpDownPolygonsMax.Location = new System.Drawing.Point(214, 22);
+            this.numericUpDownPolygonsMax.Location = new System.Drawing.Point(211, 22);
             this.numericUpDownPolygonsMax.Maximum = new decimal(new int[] {
             500,
             0,
@@ -1049,6 +1109,7 @@
             this.numericUpDownPolygonsMax.Name = "numericUpDownPolygonsMax";
             this.numericUpDownPolygonsMax.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownPolygonsMax.TabIndex = 41;
+            this.toolTipInfo.SetToolTip(this.numericUpDownPolygonsMax, "The maximum number of polygons on the canvas.");
             this.numericUpDownPolygonsMax.Value = new decimal(new int[] {
             1,
             0,
@@ -1062,7 +1123,7 @@
             0,
             0,
             0});
-            this.numericUpDownPointsPerPolygonMax.Location = new System.Drawing.Point(214, 64);
+            this.numericUpDownPointsPerPolygonMax.Location = new System.Drawing.Point(211, 64);
             this.numericUpDownPointsPerPolygonMax.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1076,6 +1137,7 @@
             this.numericUpDownPointsPerPolygonMax.Name = "numericUpDownPointsPerPolygonMax";
             this.numericUpDownPointsPerPolygonMax.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownPointsPerPolygonMax.TabIndex = 40;
+            this.toolTipInfo.SetToolTip(this.numericUpDownPointsPerPolygonMax, "The maximum number of points per polygon.");
             this.numericUpDownPointsPerPolygonMax.Value = new decimal(new int[] {
             3,
             0,
@@ -1103,6 +1165,7 @@
             this.numericUpDownPolygonsMin.Name = "numericUpDownPolygonsMin";
             this.numericUpDownPolygonsMin.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownPolygonsMin.TabIndex = 39;
+            this.toolTipInfo.SetToolTip(this.numericUpDownPolygonsMin, "The minimum number of polygons on the canvas.");
             this.numericUpDownPolygonsMin.Value = new decimal(new int[] {
             1,
             0,
@@ -1119,6 +1182,7 @@
             this.trackBarPointsPerPolygonMax.TabIndex = 38;
             this.trackBarPointsPerPolygonMax.TickFrequency = 10;
             this.trackBarPointsPerPolygonMax.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarPointsPerPolygonMax, "The maximum number of points per polygon.");
             this.trackBarPointsPerPolygonMax.Value = 1;
             // 
             // trackBarPolygonsMax
@@ -1131,25 +1195,28 @@
             this.trackBarPolygonsMax.TabIndex = 33;
             this.trackBarPolygonsMax.TickFrequency = 10;
             this.trackBarPolygonsMax.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarPolygonsMax, "The maximum number of polygons on the canvas.");
             this.trackBarPolygonsMax.Value = 1;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(209, 6);
+            this.label14.Location = new System.Drawing.Point(208, 6);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(27, 13);
             this.label14.TabIndex = 35;
             this.label14.Text = "Max";
+            this.toolTipInfo.SetToolTip(this.label14, "The maximum number of polygons on the canvas.");
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(209, 48);
+            this.label25.Location = new System.Drawing.Point(207, 48);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(58, 13);
             this.label25.TabIndex = 37;
             this.label25.Text = "Max points";
+            this.toolTipInfo.SetToolTip(this.label25, "The maximum number of points per polygon.");
             // 
             // trackBarPointsPerPolygonMin
             // 
@@ -1161,6 +1228,7 @@
             this.trackBarPointsPerPolygonMin.TabIndex = 32;
             this.trackBarPointsPerPolygonMin.TickFrequency = 10;
             this.trackBarPointsPerPolygonMin.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarPointsPerPolygonMin, "The minimum number of points per polygon. This value can not be lower than 3.");
             this.trackBarPointsPerPolygonMin.Value = 1;
             // 
             // trackBarPolygonsMin
@@ -1173,6 +1241,7 @@
             this.trackBarPolygonsMin.TabIndex = 26;
             this.trackBarPolygonsMin.TickFrequency = 10;
             this.trackBarPolygonsMin.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarPolygonsMin, "The minimum number of polygons on the canvas.");
             this.trackBarPolygonsMin.Value = 1;
             // 
             // label13
@@ -1183,6 +1252,7 @@
             this.label13.Size = new System.Drawing.Size(24, 13);
             this.label13.TabIndex = 28;
             this.label13.Text = "Min";
+            this.toolTipInfo.SetToolTip(this.label13, "The minimum number of polygons on the canvas.");
             // 
             // label15
             // 
@@ -1192,6 +1262,7 @@
             this.label15.Size = new System.Drawing.Size(55, 13);
             this.label15.TabIndex = 31;
             this.label15.Text = "Min points";
+            this.toolTipInfo.SetToolTip(this.label15, "The minimum number of points per polygon. This value can not be lower than 3.");
             // 
             // tabPage7
             // 
@@ -1237,6 +1308,8 @@
             this.numericUpDownMovePointRangeMid.Name = "numericUpDownMovePointRangeMid";
             this.numericUpDownMovePointRangeMid.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownMovePointRangeMid.TabIndex = 54;
+            this.toolTipInfo.SetToolTip(this.numericUpDownMovePointRangeMid, "The maximum distance in pixels that a point in a polygon can move during a medium" +
+                    " movement range mutation.");
             this.numericUpDownMovePointRangeMid.Value = new decimal(new int[] {
             1,
             0,
@@ -1264,6 +1337,7 @@
             this.numericUpDownPointsMax.Name = "numericUpDownPointsMax";
             this.numericUpDownPointsMax.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownPointsMax.TabIndex = 53;
+            this.toolTipInfo.SetToolTip(this.numericUpDownPointsMax, "The maximum sum of points for all the polygons on the canvas.");
             this.numericUpDownPointsMax.Value = new decimal(new int[] {
             1,
             0,
@@ -1291,6 +1365,8 @@
             this.numericUpDownMovePointRangeMin.Name = "numericUpDownMovePointRangeMin";
             this.numericUpDownMovePointRangeMin.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownMovePointRangeMin.TabIndex = 52;
+            this.toolTipInfo.SetToolTip(this.numericUpDownMovePointRangeMin, "The maximum distance in pixels that a point in a polygon can move during a minimu" +
+                    "m movement range mutation.");
             this.numericUpDownMovePointRangeMin.Value = new decimal(new int[] {
             1,
             0,
@@ -1318,6 +1394,7 @@
             this.numericUpDownPointsMin.Name = "numericUpDownPointsMin";
             this.numericUpDownPointsMin.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownPointsMin.TabIndex = 51;
+            this.toolTipInfo.SetToolTip(this.numericUpDownPointsMin, "The minimum sum of points for all the polygons on the canvas.");
             this.numericUpDownPointsMin.Value = new decimal(new int[] {
             1,
             0,
@@ -1334,6 +1411,8 @@
             this.trackBarMovePointRangeMid.TabIndex = 50;
             this.trackBarMovePointRangeMid.TickFrequency = 10;
             this.trackBarMovePointRangeMid.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarMovePointRangeMid, "The maximum distance in pixels that a point in a polygon can move during a medium" +
+                    " movement range mutation.");
             this.trackBarMovePointRangeMid.Value = 1;
             // 
             // trackBarPointsMax
@@ -1348,6 +1427,7 @@
             this.trackBarPointsMax.TabIndex = 45;
             this.trackBarPointsMax.TickFrequency = 150;
             this.trackBarPointsMax.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarPointsMax, "The maximum sum of points for all the polygons on the canvas.");
             this.trackBarPointsMax.Value = 1;
             // 
             // label16
@@ -1358,6 +1438,7 @@
             this.label16.Size = new System.Drawing.Size(27, 13);
             this.label16.TabIndex = 47;
             this.label16.Text = "Max";
+            this.toolTipInfo.SetToolTip(this.label16, "The maximum sum of points for all the polygons on the canvas.");
             // 
             // label17
             // 
@@ -1367,6 +1448,8 @@
             this.label17.Size = new System.Drawing.Size(53, 13);
             this.label17.TabIndex = 49;
             this.label17.Text = "Mid move";
+            this.toolTipInfo.SetToolTip(this.label17, "The maximum distance in pixels that a point in a polygon can move during a medium" +
+                    " movement range mutation.");
             // 
             // trackBarMovePointRangeMin
             // 
@@ -1378,6 +1461,8 @@
             this.trackBarMovePointRangeMin.TabIndex = 44;
             this.trackBarMovePointRangeMin.TickFrequency = 10;
             this.trackBarMovePointRangeMin.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarMovePointRangeMin, "The maximum distance in pixels that a point in a polygon can move during a minimu" +
+                    "m movement range mutation.");
             this.trackBarMovePointRangeMin.Value = 1;
             // 
             // trackBarPointsMin
@@ -1390,6 +1475,7 @@
             this.trackBarPointsMin.TabIndex = 39;
             this.trackBarPointsMin.TickFrequency = 10;
             this.trackBarPointsMin.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarPointsMin, "The minimum sum of points for all the polygons on the canvas.");
             this.trackBarPointsMin.Value = 1;
             // 
             // label18
@@ -1400,6 +1486,7 @@
             this.label18.Size = new System.Drawing.Size(24, 13);
             this.label18.TabIndex = 41;
             this.label18.Text = "Min";
+            this.toolTipInfo.SetToolTip(this.label18, "The minimum sum of points for all the polygons on the canvas.");
             // 
             // label19
             // 
@@ -1409,6 +1496,8 @@
             this.label19.Size = new System.Drawing.Size(53, 13);
             this.label19.TabIndex = 43;
             this.label19.Text = "Min move";
+            this.toolTipInfo.SetToolTip(this.label19, "The maximum distance in pixels that a point in a polygon can move during a minimu" +
+                    "m movement range mutation.");
             // 
             // tabPage8
             // 
@@ -1461,6 +1550,7 @@
             this.numericUpDownRedRangeMax.Name = "numericUpDownRedRangeMax";
             this.numericUpDownRedRangeMax.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownRedRangeMax.TabIndex = 82;
+            this.toolTipInfo.SetToolTip(this.numericUpDownRedRangeMax, "Maximum value for red color channel in polygons.");
             this.numericUpDownRedRangeMax.Value = new decimal(new int[] {
             1,
             0,
@@ -1483,6 +1573,7 @@
             this.numericUpDownGreenRangeMax.Name = "numericUpDownGreenRangeMax";
             this.numericUpDownGreenRangeMax.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownGreenRangeMax.TabIndex = 81;
+            this.toolTipInfo.SetToolTip(this.numericUpDownGreenRangeMax, "Maximum value for green color channel in polygons.");
             this.numericUpDownGreenRangeMax.Value = new decimal(new int[] {
             1,
             0,
@@ -1505,6 +1596,7 @@
             this.numericUpDownBlueRangeMax.Name = "numericUpDownBlueRangeMax";
             this.numericUpDownBlueRangeMax.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownBlueRangeMax.TabIndex = 80;
+            this.toolTipInfo.SetToolTip(this.numericUpDownBlueRangeMax, "Maximum value for blue color channel in polygons.");
             this.numericUpDownBlueRangeMax.Value = new decimal(new int[] {
             1,
             0,
@@ -1527,6 +1619,7 @@
             this.numericUpDownAlphaRangeMax.Name = "numericUpDownAlphaRangeMax";
             this.numericUpDownAlphaRangeMax.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownAlphaRangeMax.TabIndex = 79;
+            this.toolTipInfo.SetToolTip(this.numericUpDownAlphaRangeMax, "Maximum value for alpha (transparency) color channel in polygons.");
             this.numericUpDownAlphaRangeMax.Value = new decimal(new int[] {
             1,
             0,
@@ -1549,7 +1642,7 @@
             this.numericUpDownRedRangeMin.Name = "numericUpDownRedRangeMin";
             this.numericUpDownRedRangeMin.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownRedRangeMin.TabIndex = 78;
-            this.toolTipInfo.SetToolTip(this.numericUpDownRedRangeMin, "Minimum value for red color channel in polygon colors");
+            this.toolTipInfo.SetToolTip(this.numericUpDownRedRangeMin, "Minimum value for red color channel in polygons.");
             this.numericUpDownRedRangeMin.Value = new decimal(new int[] {
             1,
             0,
@@ -1572,6 +1665,7 @@
             this.numericUpDownGreenRangeMin.Name = "numericUpDownGreenRangeMin";
             this.numericUpDownGreenRangeMin.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownGreenRangeMin.TabIndex = 77;
+            this.toolTipInfo.SetToolTip(this.numericUpDownGreenRangeMin, "Minimum value for green color channel in polygons.");
             this.numericUpDownGreenRangeMin.Value = new decimal(new int[] {
             1,
             0,
@@ -1594,6 +1688,7 @@
             this.numericUpDownBlueRangeMin.Name = "numericUpDownBlueRangeMin";
             this.numericUpDownBlueRangeMin.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownBlueRangeMin.TabIndex = 76;
+            this.toolTipInfo.SetToolTip(this.numericUpDownBlueRangeMin, "Minimum value for blue color channel in polygons.");
             this.numericUpDownBlueRangeMin.Value = new decimal(new int[] {
             1,
             0,
@@ -1616,6 +1711,7 @@
             this.numericUpDownAlphaRangeMin.Name = "numericUpDownAlphaRangeMin";
             this.numericUpDownAlphaRangeMin.Size = new System.Drawing.Size(53, 20);
             this.numericUpDownAlphaRangeMin.TabIndex = 75;
+            this.toolTipInfo.SetToolTip(this.numericUpDownAlphaRangeMin, "Minimum value for alpha (transparency) color channel in polygons.");
             this.numericUpDownAlphaRangeMin.Value = new decimal(new int[] {
             1,
             0,
@@ -1631,6 +1727,7 @@
             this.trackBarAlphaRangeMax.TabIndex = 74;
             this.trackBarAlphaRangeMax.TickFrequency = 10;
             this.trackBarAlphaRangeMax.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarAlphaRangeMax, "Maximum value for alpha (transparency) color channel in polygons.");
             this.trackBarAlphaRangeMax.Value = 1;
             // 
             // trackBarBlueRangeMax
@@ -1642,6 +1739,7 @@
             this.trackBarBlueRangeMax.TabIndex = 69;
             this.trackBarBlueRangeMax.TickFrequency = 10;
             this.trackBarBlueRangeMax.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarBlueRangeMax, "Maximum value for blue color channel in polygons.");
             this.trackBarBlueRangeMax.Value = 1;
             // 
             // label24
@@ -1652,6 +1750,7 @@
             this.label24.Size = new System.Drawing.Size(50, 13);
             this.label24.TabIndex = 71;
             this.label24.Text = "Blue max";
+            this.toolTipInfo.SetToolTip(this.label24, "Maximum value for blue color channel in polygons.");
             // 
             // label26
             // 
@@ -1661,6 +1760,7 @@
             this.label26.Size = new System.Drawing.Size(56, 13);
             this.label26.TabIndex = 73;
             this.label26.Text = "Alpha max";
+            this.toolTipInfo.SetToolTip(this.label26, "Maximum value for alpha (transparency) color channel in polygons.");
             // 
             // trackBarGreenRangeMax
             // 
@@ -1671,6 +1771,7 @@
             this.trackBarGreenRangeMax.TabIndex = 68;
             this.trackBarGreenRangeMax.TickFrequency = 10;
             this.trackBarGreenRangeMax.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarGreenRangeMax, "Maximum value for green color channel in polygons.");
             this.trackBarGreenRangeMax.Value = 1;
             // 
             // trackBarRedRangeMax
@@ -1682,6 +1783,7 @@
             this.trackBarRedRangeMax.TabIndex = 63;
             this.trackBarRedRangeMax.TickFrequency = 10;
             this.trackBarRedRangeMax.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarRedRangeMax, "Maximum value for red color channel in polygons.");
             this.trackBarRedRangeMax.Value = 1;
             // 
             // label27
@@ -1692,6 +1794,7 @@
             this.label27.Size = new System.Drawing.Size(49, 13);
             this.label27.TabIndex = 65;
             this.label27.Text = "Red max";
+            this.toolTipInfo.SetToolTip(this.label27, "Maximum value for red color channel in polygons.");
             // 
             // label28
             // 
@@ -1701,6 +1804,7 @@
             this.label28.Size = new System.Drawing.Size(58, 13);
             this.label28.TabIndex = 67;
             this.label28.Text = "Green max";
+            this.toolTipInfo.SetToolTip(this.label28, "Maximum value for green color channel in polygons.");
             // 
             // trackBarAlphaRangeMin
             // 
@@ -1711,6 +1815,7 @@
             this.trackBarAlphaRangeMin.TabIndex = 62;
             this.trackBarAlphaRangeMin.TickFrequency = 10;
             this.trackBarAlphaRangeMin.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarAlphaRangeMin, "Minimum value for alpha (transparency) color channel in polygons.");
             this.trackBarAlphaRangeMin.Value = 1;
             // 
             // trackBarBlueRangeMin
@@ -1722,6 +1827,7 @@
             this.trackBarBlueRangeMin.TabIndex = 57;
             this.trackBarBlueRangeMin.TickFrequency = 10;
             this.trackBarBlueRangeMin.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarBlueRangeMin, "Minimum value for blue color channel in polygons.");
             this.trackBarBlueRangeMin.Value = 1;
             // 
             // label20
@@ -1732,6 +1838,7 @@
             this.label20.Size = new System.Drawing.Size(47, 13);
             this.label20.TabIndex = 59;
             this.label20.Text = "Blue min";
+            this.toolTipInfo.SetToolTip(this.label20, "Minimum value for blue color channel in polygons.");
             // 
             // label21
             // 
@@ -1741,6 +1848,7 @@
             this.label21.Size = new System.Drawing.Size(53, 13);
             this.label21.TabIndex = 61;
             this.label21.Text = "Alpha min";
+            this.toolTipInfo.SetToolTip(this.label21, "Minimum value for alpha (transparency) color channel in polygons.");
             // 
             // trackBarGreenRangeMin
             // 
@@ -1751,6 +1859,7 @@
             this.trackBarGreenRangeMin.TabIndex = 56;
             this.trackBarGreenRangeMin.TickFrequency = 10;
             this.trackBarGreenRangeMin.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.toolTipInfo.SetToolTip(this.trackBarGreenRangeMin, "Minimum value for green color channel in polygons.");
             this.trackBarGreenRangeMin.Value = 1;
             // 
             // trackBarRedRangeMin
@@ -1762,7 +1871,7 @@
             this.trackBarRedRangeMin.TabIndex = 51;
             this.trackBarRedRangeMin.TickFrequency = 10;
             this.trackBarRedRangeMin.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.toolTipInfo.SetToolTip(this.trackBarRedRangeMin, "Minimum value for red color channel in polygon colors");
+            this.toolTipInfo.SetToolTip(this.trackBarRedRangeMin, "Minimum value for red color channel in polygons.");
             this.trackBarRedRangeMin.Value = 1;
             // 
             // label22
@@ -1773,7 +1882,7 @@
             this.label22.Size = new System.Drawing.Size(46, 13);
             this.label22.TabIndex = 53;
             this.label22.Text = "Red min";
-            this.toolTipInfo.SetToolTip(this.label22, "Minimum value for red color channel in polygon colors");
+            this.toolTipInfo.SetToolTip(this.label22, "Minimum value for red color channel in polygons.");
             // 
             // label23
             // 
@@ -1783,6 +1892,7 @@
             this.label23.Size = new System.Drawing.Size(55, 13);
             this.label23.TabIndex = 55;
             this.label23.Text = "Green min";
+            this.toolTipInfo.SetToolTip(this.label23, "Minimum value for green color channel in polygons.");
             // 
             // menuStrip1
             // 
@@ -1893,7 +2003,7 @@
             // 
             // toolTipInfo
             // 
-            this.toolTipInfo.ToolTipTitle = "Tada ok";
+            this.toolTipInfo.ToolTipTitle = "Description";
             // 
             // SettingsForm
             // 
