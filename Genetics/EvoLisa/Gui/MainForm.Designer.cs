@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pnlCanvas = new GenArt.Canvas();
             this.picPattern = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
@@ -62,6 +61,7 @@
             this.toolStripStatusLabelPolygons = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelAvgPoints = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pnlCanvas = new GenArt.Canvas();
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -70,16 +70,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarScale)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnlCanvas
-            // 
-            this.pnlCanvas.BackColor = System.Drawing.Color.Black;
-            this.pnlCanvas.Location = new System.Drawing.Point(6, 16);
-            this.pnlCanvas.Name = "pnlCanvas";
-            this.pnlCanvas.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlCanvas.Size = new System.Drawing.Size(600, 600);
-            this.pnlCanvas.TabIndex = 1;
-            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
             // 
             // picPattern
             // 
@@ -132,7 +122,7 @@
             this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1072, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(914, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -142,7 +132,7 @@
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
@@ -151,20 +141,20 @@
             this.sourceImageToolStripMenuItem,
             this.dNAToolStripMenuItem});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // sourceImageToolStripMenuItem
             // 
             this.sourceImageToolStripMenuItem.Name = "sourceImageToolStripMenuItem";
-            this.sourceImageToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.sourceImageToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.sourceImageToolStripMenuItem.Text = "Source Image";
             this.sourceImageToolStripMenuItem.Click += new System.EventHandler(this.sourceImageToolStripMenuItem_Click);
             // 
             // dNAToolStripMenuItem
             // 
             this.dNAToolStripMenuItem.Name = "dNAToolStripMenuItem";
-            this.dNAToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.dNAToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.dNAToolStripMenuItem.Text = "DNA";
             this.dNAToolStripMenuItem.Click += new System.EventHandler(this.dNAToolStripMenuItem_Click);
             // 
@@ -173,13 +163,13 @@
             this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dNAToolStripMenuItem1});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // dNAToolStripMenuItem1
             // 
             this.dNAToolStripMenuItem1.Name = "dNAToolStripMenuItem1";
-            this.dNAToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.dNAToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
             this.dNAToolStripMenuItem1.Text = "DNA";
             this.dNAToolStripMenuItem1.Click += new System.EventHandler(this.dNAToolStripMenuItem1_Click);
             // 
@@ -188,13 +178,13 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.optionsToolStripMenuItem.Text = "Options...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -219,7 +209,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.pnlCanvas);
-            this.splitContainer1.Size = new System.Drawing.Size(1072, 625);
+            this.splitContainer1.Size = new System.Drawing.Size(914, 625);
             this.splitContainer1.SplitterDistance = 230;
             this.splitContainer1.TabIndex = 21;
             // 
@@ -247,7 +237,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label5.Location = new System.Drawing.Point(0, 521);
+            this.label5.Location = new System.Drawing.Point(0, 526);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(119, 13);
             this.label5.TabIndex = 22;
@@ -256,10 +246,10 @@
             // trackBarScale
             // 
             this.trackBarScale.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.trackBarScale.Location = new System.Drawing.Point(0, 534);
+            this.trackBarScale.Location = new System.Drawing.Point(0, 539);
             this.trackBarScale.Minimum = 1;
             this.trackBarScale.Name = "trackBarScale";
-            this.trackBarScale.Size = new System.Drawing.Size(230, 50);
+            this.trackBarScale.Size = new System.Drawing.Size(230, 45);
             this.trackBarScale.TabIndex = 21;
             this.trackBarScale.Value = 3;
             this.trackBarScale.Scroll += new System.EventHandler(this.trackBarScale_Scroll);
@@ -281,7 +271,7 @@
             this.toolStripStatusLabelAvgPoints});
             this.statusStrip1.Location = new System.Drawing.Point(0, 649);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1072, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(914, 22);
             this.statusStrip1.TabIndex = 26;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -289,7 +279,7 @@
             // 
             this.toolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(48, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(43, 17);
             this.toolStripStatusLabel1.Text = "Fitness";
             // 
             // toolStripStatusLabelFitness
@@ -297,79 +287,89 @@
             this.toolStripStatusLabelFitness.AutoSize = false;
             this.toolStripStatusLabelFitness.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripStatusLabelFitness.Name = "toolStripStatusLabelFitness";
-            this.toolStripStatusLabelFitness.Size = new System.Drawing.Size(136, 17);
+            this.toolStripStatusLabelFitness.Size = new System.Drawing.Size(86, 17);
             this.toolStripStatusLabelFitness.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(70, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(65, 17);
             this.toolStripStatusLabel2.Text = "Generation";
             // 
             // toolStripStatusLabelGeneration
             // 
             this.toolStripStatusLabelGeneration.AutoSize = false;
             this.toolStripStatusLabelGeneration.Name = "toolStripStatusLabelGeneration";
-            this.toolStripStatusLabelGeneration.Size = new System.Drawing.Size(136, 17);
+            this.toolStripStatusLabelGeneration.Size = new System.Drawing.Size(86, 17);
             this.toolStripStatusLabelGeneration.Spring = true;
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(57, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(51, 17);
             this.toolStripStatusLabel3.Text = "Selected";
             // 
             // toolStripStatusLabelSelected
             // 
             this.toolStripStatusLabelSelected.AutoSize = false;
             this.toolStripStatusLabelSelected.Name = "toolStripStatusLabelSelected";
-            this.toolStripStatusLabelSelected.Size = new System.Drawing.Size(136, 17);
+            this.toolStripStatusLabelSelected.Size = new System.Drawing.Size(86, 17);
             this.toolStripStatusLabelSelected.Spring = true;
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(42, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(40, 17);
             this.toolStripStatusLabel4.Text = "Points";
             // 
             // toolStripStatusLabelPoints
             // 
             this.toolStripStatusLabelPoints.AutoSize = false;
             this.toolStripStatusLabelPoints.Name = "toolStripStatusLabelPoints";
-            this.toolStripStatusLabelPoints.Size = new System.Drawing.Size(136, 17);
+            this.toolStripStatusLabelPoints.Size = new System.Drawing.Size(86, 17);
             this.toolStripStatusLabelPoints.Spring = true;
             // 
             // toolStripStatusLabel5
             // 
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(58, 17);
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(56, 17);
             this.toolStripStatusLabel5.Text = "Polygons";
             // 
             // toolStripStatusLabelPolygons
             // 
             this.toolStripStatusLabelPolygons.AutoSize = false;
             this.toolStripStatusLabelPolygons.Name = "toolStripStatusLabelPolygons";
-            this.toolStripStatusLabelPolygons.Size = new System.Drawing.Size(136, 17);
+            this.toolStripStatusLabelPolygons.Size = new System.Drawing.Size(86, 17);
             this.toolStripStatusLabelPolygons.Spring = true;
             // 
             // toolStripStatusLabel6
             // 
             this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(99, 17);
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(95, 17);
             this.toolStripStatusLabel6.Text = "Points / polygon";
             // 
             // toolStripStatusLabelAvgPoints
             // 
             this.toolStripStatusLabelAvgPoints.AutoSize = false;
             this.toolStripStatusLabelAvgPoints.Name = "toolStripStatusLabelAvgPoints";
-            this.toolStripStatusLabelAvgPoints.Size = new System.Drawing.Size(117, 17);
+            this.toolStripStatusLabelAvgPoints.Size = new System.Drawing.Size(86, 17);
             this.toolStripStatusLabelAvgPoints.Spring = true;
+            // 
+            // pnlCanvas
+            // 
+            this.pnlCanvas.BackColor = System.Drawing.Color.Black;
+            this.pnlCanvas.Location = new System.Drawing.Point(6, 16);
+            this.pnlCanvas.Name = "pnlCanvas";
+            this.pnlCanvas.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlCanvas.Size = new System.Drawing.Size(600, 600);
+            this.pnlCanvas.TabIndex = 1;
+            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1072, 671);
+            this.ClientSize = new System.Drawing.Size(914, 671);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip1);
