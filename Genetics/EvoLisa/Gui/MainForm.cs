@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using GenArt.AST;
 using GenArt.Classes;
+using System.IO;
 
 namespace GenArt
 {
@@ -25,6 +26,8 @@ namespace GenArt
         private int selected;
         private SettingsForm settingsForm;
         private Color[,] sourceColors;
+        private int scale;
+        private ImageFormat animFormat = ImageFormat.Jpeg;
 
         private Thread thread;
 
@@ -34,6 +37,8 @@ namespace GenArt
             Settings = Serializer.DeserializeSettings();
             if (Settings == null)
                 Settings = new Settings();
+            scale = trackBarScale.Value;
+            comboBoxAnimSaveFormat.SelectedIndex = 2;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -55,6 +60,8 @@ namespace GenArt
             if (currentDrawing == null)
                 currentDrawing = GetNewInitializedDrawing();
             lastSelected = 0;
+            lastSavedFitness = Int32.MaxValue;
+            lastSavedSelected = 0;
 
             while (isRunning)
             {
@@ -74,11 +81,14 @@ namespace GenArt
                     if (newErrorLevel <= errorLevel)
                     {
                         selected++;
+                        errorLevel = newErrorLevel;
+
+                        SaveAnimationImage(newDrawing);
+
                         lock (currentDrawing)
                         {
                             currentDrawing = newDrawing;
                         }
-                        errorLevel = newErrorLevel;
                     }
                 }
                 //else, discard new drawing
@@ -208,12 +218,12 @@ namespace GenArt
 
 
             using (
-                var backBuffer = new Bitmap(trackBarScale.Value*picPattern.Width, trackBarScale.Value*picPattern.Height,
+                var backBuffer = new Bitmap(scale*picPattern.Width, scale*picPattern.Height,
                                             PixelFormat.Format24bppRgb))
             using (Graphics backGraphics = Graphics.FromImage(backBuffer))
             {
                 backGraphics.SmoothingMode = SmoothingMode.HighQuality;
-                Renderer.Render(guiDrawing, backGraphics, trackBarScale.Value);
+                Renderer.Render(guiDrawing, backGraphics, scale);
 
                 e.Graphics.DrawImage(backBuffer, 0, 0);
             }
@@ -239,8 +249,8 @@ namespace GenArt
 
         private void SetCanvasSize()
         {
-            pnlCanvas.Height = trackBarScale.Value*picPattern.Height;
-            pnlCanvas.Width = trackBarScale.Value*picPattern.Width;
+            pnlCanvas.Height = scale*picPattern.Height;
+            pnlCanvas.Width = scale*picPattern.Width;
 
             RepaintCanvas();
         }
@@ -280,6 +290,76 @@ namespace GenArt
             }
         }
 
+        private void SaveGeneratedImage()
+        {
+            if (guiDrawing == null)
+                return;
+
+            string fileName = FileUtil.GetSaveFileName(FileUtil.ImgExtension);
+            ImageFormat imageFormat = ImageFormat.Jpeg;
+            string fileLow = fileName.ToLower();
+            if (fileLow.EndsWith("bmp"))
+                imageFormat = ImageFormat.Bmp;
+            if (fileLow.EndsWith("gif"))
+                imageFormat = ImageFormat.Gif;
+
+            if (string.IsNullOrEmpty(fileName) == false && currentDrawing != null)
+            {
+                SaveVectorImage(fileName, guiDrawing, imageFormat);
+            }
+        }
+
+        private void SaveVectorImage(string fileName, DnaDrawing drawing, ImageFormat imageFormat)
+        {
+            using (
+                var img = new Bitmap(scale * picPattern.Width, scale * picPattern.Height,
+                                            PixelFormat.Format24bppRgb))
+            {
+                using (Graphics imgGfx = Graphics.FromImage(img))
+                {
+                    imgGfx.SmoothingMode = SmoothingMode.HighQuality;
+                    Renderer.Render(drawing, imgGfx, scale);
+
+                    try
+                    {
+                        img.Save(fileName, imageFormat);
+                    }
+                    catch (Exception ex) { ; }
+                }
+            }
+        }
+
+        private double lastSavedFitness = Int32.MaxValue;
+        private int lastSavedSelected = 0;
+
+        private void SaveAnimationImage(DnaDrawing drawing)
+        {
+            if (radioButtonAnimSaveNever.Checked)
+                return;
+
+            string path = textBoxAnimSaveDir.Text;
+
+            if (string.IsNullOrEmpty(path))
+                return;
+
+            if (radioButtonAnimSaveFitness.Checked)
+                if (errorLevel > (lastSavedFitness - Convert.ToDouble(numericUpDownAnimSaveSteps.Value)))
+                    return;
+
+            if (radioButtonAnimSaveSelected.Checked)
+                if (selected < (lastSavedSelected + numericUpDownAnimSaveSteps.Value))
+                    return;
+
+            if (!Directory.Exists(path))
+                return;
+
+            lastSavedSelected = selected;
+            lastSavedFitness = errorLevel;
+
+            string fileName = path + "\\" + selected + "." + animFormat.ToString();
+            SaveVectorImage(fileName, drawing, animFormat);
+        }
+
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (settingsForm != null)
@@ -307,9 +387,41 @@ namespace GenArt
             SaveDNA();
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SaveGeneratedImage();
+        }
+
         private void trackBarScale_Scroll(object sender, EventArgs e)
         {
+            scale = trackBarScale.Value;
             SetCanvasSize();
+        }
+
+        private void buttonSelectAnimDir_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            if (!dialog.ShowDialog().Equals(DialogResult.Cancel))
+            {
+                textBoxAnimSaveDir.Text = dialog.SelectedPath;
+            }
+        }
+
+        private void comboBoxAnimSaveFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBoxAnimSaveFormat.SelectedIndex)
+            {
+                case 0:
+                    animFormat = ImageFormat.Bmp;
+                    break;
+                case 1:
+                    animFormat = ImageFormat.Gif;
+                    break;
+                case 2:
+                    animFormat = ImageFormat.Jpeg;
+                    break;
+            }
+
         }
     }
 }
