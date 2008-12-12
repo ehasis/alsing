@@ -120,6 +120,18 @@
   <metadata name="toolTipInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
+  <metadata name="toolTipInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
+  <data name="numericUpDownMovePolygonMutationRate.ToolTip" xml:space="preserve">
+    <value>Probability that a mutation will move a polygon on the canvas. When a polygon moves it changes its priority (z-axis) on the canvas. A value of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation.</value>
+  </data>
+  <data name="label7.ToolTip" xml:space="preserve">
+    <value>Probability that a mutation will move a polygon on the canvas. When a polygon moves it changes its priority (z-axis) on the canvas. A value of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation.</value>
+  </data>
+  <data name="trackBarMovePolygonMutationRate.ToolTip" xml:space="preserve">
+    <value>Probability that a mutation will move a polygon on the canvas. When a polygon moves it changes its priority (z-axis) on the canvas. A value of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation.</value>
+  </data>
   <data name="numericUpDownMovePointMinMutationRate.ToolTip" xml:space="preserve">
     <value>Probability that a mutation will move a point in a polygon a distance up to the minimum point movement range (see Ranges tab, Points subtab). A value of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation.</value>
   </data>
@@ -146,18 +158,6 @@
   </data>
   <data name="trackBarMovePointMinMutationRate.ToolTip" xml:space="preserve">
     <value>Probability that a mutation will move a point in a polygon a distance up to the minimum point movement range (see Ranges tab, Points subtab). A value of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation.</value>
-  </data>
-  <metadata name="toolTipInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 17</value>
-  </metadata>
-  <data name="numericUpDownMovePolygonMutationRate.ToolTip" xml:space="preserve">
-    <value>Probability that a mutation will move a polygon on the canvas. When a polygon moves it changes its priority (z-axis) on the canvas. A value of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation.</value>
-  </data>
-  <data name="label7.ToolTip" xml:space="preserve">
-    <value>Probability that a mutation will move a polygon on the canvas. When a polygon moves it changes its priority (z-axis) on the canvas. A value of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation.</value>
-  </data>
-  <data name="trackBarMovePolygonMutationRate.ToolTip" xml:space="preserve">
-    <value>Probability that a mutation will move a polygon on the canvas. When a polygon moves it changes its priority (z-axis) on the canvas. A value of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation.</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
