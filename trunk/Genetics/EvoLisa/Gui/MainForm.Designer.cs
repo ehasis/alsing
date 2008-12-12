@@ -40,10 +40,22 @@
             this.sourceImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dNAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dNAToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label6 = new System.Windows.Forms.Label();
+            this.radioButtonAnimSaveNever = new System.Windows.Forms.RadioButton();
+            this.radioButtonAnimSaveFitness = new System.Windows.Forms.RadioButton();
+            this.radioButtonAnimSaveSelected = new System.Windows.Forms.RadioButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.numericUpDownAnimSaveSteps = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxAnimSaveDir = new System.Windows.Forms.TextBox();
+            this.buttonSelectAnimDir = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -61,12 +73,17 @@
             this.toolStripStatusLabelPolygons = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelAvgPoints = new System.Windows.Forms.ToolStripStatusLabel();
+            this.comboBoxAnimSaveFormat = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.pnlCanvas = new GenArt.Canvas();
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAnimSaveSteps)).BeginInit();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarScale)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -161,15 +178,23 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
             this.dNAToolStripMenuItem1});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItem1.Text = "Generated Image";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // dNAToolStripMenuItem1
             // 
             this.dNAToolStripMenuItem1.Name = "dNAToolStripMenuItem1";
-            this.dNAToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
+            this.dNAToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
             this.dNAToolStripMenuItem1.Text = "DNA";
             this.dNAToolStripMenuItem1.Click += new System.EventHandler(this.dNAToolStripMenuItem1_Click);
             // 
@@ -197,6 +222,15 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label7);
+            this.splitContainer1.Panel1.Controls.Add(this.comboBoxAnimSaveFormat);
+            this.splitContainer1.Panel1.Controls.Add(this.label6);
+            this.splitContainer1.Panel1.Controls.Add(this.radioButtonAnimSaveNever);
+            this.splitContainer1.Panel1.Controls.Add(this.radioButtonAnimSaveFitness);
+            this.splitContainer1.Panel1.Controls.Add(this.radioButtonAnimSaveSelected);
+            this.splitContainer1.Panel1.Controls.Add(this.panel2);
+            this.splitContainer1.Panel1.Controls.Add(this.label3);
+            this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.label10);
             this.splitContainer1.Panel1.Controls.Add(this.label8);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
@@ -212,6 +246,137 @@
             this.splitContainer1.Size = new System.Drawing.Size(914, 625);
             this.splitContainer1.SplitterDistance = 230;
             this.splitContainer1.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label6.Location = new System.Drawing.Point(0, 404);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(148, 13);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "Save animation images when:";
+            // 
+            // radioButtonAnimSaveNever
+            // 
+            this.radioButtonAnimSaveNever.AutoSize = true;
+            this.radioButtonAnimSaveNever.Checked = true;
+            this.radioButtonAnimSaveNever.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.radioButtonAnimSaveNever.Location = new System.Drawing.Point(0, 417);
+            this.radioButtonAnimSaveNever.Name = "radioButtonAnimSaveNever";
+            this.radioButtonAnimSaveNever.Size = new System.Drawing.Size(230, 17);
+            this.radioButtonAnimSaveNever.TabIndex = 27;
+            this.radioButtonAnimSaveNever.TabStop = true;
+            this.radioButtonAnimSaveNever.Text = "Never";
+            this.radioButtonAnimSaveNever.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonAnimSaveFitness
+            // 
+            this.radioButtonAnimSaveFitness.AutoSize = true;
+            this.radioButtonAnimSaveFitness.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.radioButtonAnimSaveFitness.Location = new System.Drawing.Point(0, 434);
+            this.radioButtonAnimSaveFitness.Name = "radioButtonAnimSaveFitness";
+            this.radioButtonAnimSaveFitness.Size = new System.Drawing.Size(230, 17);
+            this.radioButtonAnimSaveFitness.TabIndex = 28;
+            this.radioButtonAnimSaveFitness.Text = "Fitness improves by:";
+            this.radioButtonAnimSaveFitness.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonAnimSaveSelected
+            // 
+            this.radioButtonAnimSaveSelected.AutoSize = true;
+            this.radioButtonAnimSaveSelected.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.radioButtonAnimSaveSelected.Location = new System.Drawing.Point(0, 451);
+            this.radioButtonAnimSaveSelected.Name = "radioButtonAnimSaveSelected";
+            this.radioButtonAnimSaveSelected.Size = new System.Drawing.Size(230, 17);
+            this.radioButtonAnimSaveSelected.TabIndex = 29;
+            this.radioButtonAnimSaveSelected.Text = "Selected increases by:";
+            this.radioButtonAnimSaveSelected.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.numericUpDownAnimSaveSteps);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 468);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(230, 22);
+            this.panel2.TabIndex = 30;
+            // 
+            // numericUpDownAnimSaveSteps
+            // 
+            this.numericUpDownAnimSaveSteps.Dock = System.Windows.Forms.DockStyle.Left;
+            this.numericUpDownAnimSaveSteps.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownAnimSaveSteps.Location = new System.Drawing.Point(0, 0);
+            this.numericUpDownAnimSaveSteps.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDownAnimSaveSteps.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownAnimSaveSteps.Name = "numericUpDownAnimSaveSteps";
+            this.numericUpDownAnimSaveSteps.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownAnimSaveSteps.TabIndex = 2;
+            this.numericUpDownAnimSaveSteps.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(126, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Steps";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label3.Location = new System.Drawing.Point(0, 490);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(222, 13);
+            this.label3.TabIndex = 26;
+            this.label3.Text = "Save animation images to the following folder:";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.textBoxAnimSaveDir);
+            this.panel1.Controls.Add(this.buttonSelectAnimDir);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 503);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(230, 23);
+            this.panel1.TabIndex = 25;
+            // 
+            // textBoxAnimSaveDir
+            // 
+            this.textBoxAnimSaveDir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxAnimSaveDir.Location = new System.Drawing.Point(0, 0);
+            this.textBoxAnimSaveDir.Name = "textBoxAnimSaveDir";
+            this.textBoxAnimSaveDir.Size = new System.Drawing.Size(206, 20);
+            this.textBoxAnimSaveDir.TabIndex = 1;
+            // 
+            // buttonSelectAnimDir
+            // 
+            this.buttonSelectAnimDir.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonSelectAnimDir.Location = new System.Drawing.Point(206, 0);
+            this.buttonSelectAnimDir.Name = "buttonSelectAnimDir";
+            this.buttonSelectAnimDir.Size = new System.Drawing.Size(24, 23);
+            this.buttonSelectAnimDir.TabIndex = 0;
+            this.buttonSelectAnimDir.Text = "...";
+            this.buttonSelectAnimDir.UseVisualStyleBackColor = true;
+            this.buttonSelectAnimDir.Click += new System.EventHandler(this.buttonSelectAnimDir_Click);
             // 
             // label10
             // 
@@ -287,7 +452,7 @@
             this.toolStripStatusLabelFitness.AutoSize = false;
             this.toolStripStatusLabelFitness.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripStatusLabelFitness.Name = "toolStripStatusLabelFitness";
-            this.toolStripStatusLabelFitness.Size = new System.Drawing.Size(86, 17);
+            this.toolStripStatusLabelFitness.Size = new System.Drawing.Size(91, 17);
             this.toolStripStatusLabelFitness.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -300,7 +465,7 @@
             // 
             this.toolStripStatusLabelGeneration.AutoSize = false;
             this.toolStripStatusLabelGeneration.Name = "toolStripStatusLabelGeneration";
-            this.toolStripStatusLabelGeneration.Size = new System.Drawing.Size(86, 17);
+            this.toolStripStatusLabelGeneration.Size = new System.Drawing.Size(91, 17);
             this.toolStripStatusLabelGeneration.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -313,7 +478,7 @@
             // 
             this.toolStripStatusLabelSelected.AutoSize = false;
             this.toolStripStatusLabelSelected.Name = "toolStripStatusLabelSelected";
-            this.toolStripStatusLabelSelected.Size = new System.Drawing.Size(86, 17);
+            this.toolStripStatusLabelSelected.Size = new System.Drawing.Size(91, 17);
             this.toolStripStatusLabelSelected.Spring = true;
             // 
             // toolStripStatusLabel4
@@ -326,7 +491,7 @@
             // 
             this.toolStripStatusLabelPoints.AutoSize = false;
             this.toolStripStatusLabelPoints.Name = "toolStripStatusLabelPoints";
-            this.toolStripStatusLabelPoints.Size = new System.Drawing.Size(86, 17);
+            this.toolStripStatusLabelPoints.Size = new System.Drawing.Size(91, 17);
             this.toolStripStatusLabelPoints.Spring = true;
             // 
             // toolStripStatusLabel5
@@ -339,7 +504,7 @@
             // 
             this.toolStripStatusLabelPolygons.AutoSize = false;
             this.toolStripStatusLabelPolygons.Name = "toolStripStatusLabelPolygons";
-            this.toolStripStatusLabelPolygons.Size = new System.Drawing.Size(86, 17);
+            this.toolStripStatusLabelPolygons.Size = new System.Drawing.Size(91, 17);
             this.toolStripStatusLabelPolygons.Spring = true;
             // 
             // toolStripStatusLabel6
@@ -352,8 +517,33 @@
             // 
             this.toolStripStatusLabelAvgPoints.AutoSize = false;
             this.toolStripStatusLabelAvgPoints.Name = "toolStripStatusLabelAvgPoints";
-            this.toolStripStatusLabelAvgPoints.Size = new System.Drawing.Size(86, 17);
+            this.toolStripStatusLabelAvgPoints.Size = new System.Drawing.Size(91, 17);
             this.toolStripStatusLabelAvgPoints.Spring = true;
+            // 
+            // comboBoxAnimSaveFormat
+            // 
+            this.comboBoxAnimSaveFormat.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.comboBoxAnimSaveFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAnimSaveFormat.FormattingEnabled = true;
+            this.comboBoxAnimSaveFormat.Items.AddRange(new object[] {
+            "Bmp",
+            "Gif",
+            "Jpg"});
+            this.comboBoxAnimSaveFormat.Location = new System.Drawing.Point(0, 383);
+            this.comboBoxAnimSaveFormat.Name = "comboBoxAnimSaveFormat";
+            this.comboBoxAnimSaveFormat.Size = new System.Drawing.Size(230, 21);
+            this.comboBoxAnimSaveFormat.TabIndex = 32;
+            this.comboBoxAnimSaveFormat.SelectedIndexChanged += new System.EventHandler(this.comboBoxAnimSaveFormat_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label7.Location = new System.Drawing.Point(0, 370);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(135, 13);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "Animation image file format:";
             // 
             // pnlCanvas
             // 
@@ -386,6 +576,11 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAnimSaveSteps)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarScale)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -429,6 +624,20 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxAnimSaveDir;
+        private System.Windows.Forms.Button buttonSelectAnimDir;
+        private System.Windows.Forms.RadioButton radioButtonAnimSaveFitness;
+        private System.Windows.Forms.RadioButton radioButtonAnimSaveSelected;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RadioButton radioButtonAnimSaveNever;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDownAnimSaveSteps;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox comboBoxAnimSaveFormat;
     }
 }
 
