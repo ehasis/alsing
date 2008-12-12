@@ -150,6 +150,21 @@ namespace GenArt
             tmrRedraw.Enabled = false;
         }
 
+
+        private void RepaintCanvas()
+        {
+            if (currentDrawing == null)
+                return;
+
+            lock (currentDrawing)
+            {
+                guiDrawing = currentDrawing.Clone();
+            }
+            pnlCanvas.Invalidate();
+            lastRepaint = DateTime.Now;
+            lastSelected = selected;
+        }
+
         private void tmrRedraw_Tick(object sender, EventArgs e)
         {
             if (currentDrawing == null)
@@ -159,7 +174,7 @@ namespace GenArt
             int points = currentDrawing.PointCount;
             double avg = 0;
             if (polygons != 0)
-                avg = points/polygons;
+                avg = points / polygons;
 
             toolStripStatusLabelFitness.Text = errorLevel.ToString();
             toolStripStatusLabelGeneration.Text = generation.ToString();
@@ -179,13 +194,7 @@ namespace GenArt
 
             if (shouldRepaint)
             {
-                lock (currentDrawing)
-                {
-                    guiDrawing = currentDrawing.Clone();
-                }
-                pnlCanvas.Invalidate();
-                lastRepaint = DateTime.Now;
-                lastSelected = selected;
+                RepaintCanvas();
             }
         }
 
@@ -232,6 +241,8 @@ namespace GenArt
         {
             pnlCanvas.Height = trackBarScale.Value*picPattern.Height;
             pnlCanvas.Width = trackBarScale.Value*picPattern.Width;
+
+            RepaintCanvas();
         }
 
         private void OpenDNA()
