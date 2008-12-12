@@ -329,7 +329,7 @@ namespace GenArt
             }
         }
 
-        private double lastSavedFitness = Int32.MaxValue;
+        private double lastSavedFitness = Double.MaxValue;
         private int lastSavedSelected = 0;
 
         private void SaveAnimationImage(DnaDrawing drawing)
