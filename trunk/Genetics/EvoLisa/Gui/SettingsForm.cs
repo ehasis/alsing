@@ -271,7 +271,7 @@ namespace GenArt
             SetRangePointTabPageDataBindings();
         }
 
-        private void tabPage8_Click(object sender, EventArgs e)
+        private void tabPage8_Enter(object sender, EventArgs e)
         {
             SetRangeColorTabPageDataBindings();
         }

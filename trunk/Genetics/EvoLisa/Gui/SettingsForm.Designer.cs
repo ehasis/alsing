@@ -1532,7 +1532,7 @@
             this.tabPage8.TabIndex = 2;
             this.tabPage8.Text = "Colors";
             this.tabPage8.UseVisualStyleBackColor = true;
-            this.tabPage8.Click += new System.EventHandler(this.tabPage8_Click);
+            this.tabPage8.Enter += new System.EventHandler(this.tabPage8_Enter);
             // 
             // numericUpDownRedRangeMax
             // 
