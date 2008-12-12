@@ -60,7 +60,7 @@ namespace GenArt
             if (currentDrawing == null)
                 currentDrawing = GetNewInitializedDrawing();
             lastSelected = 0;
-            lastSavedFitness = Int32.MaxValue;
+            lastSavedFitness = Double.MaxValue;
             lastSavedSelected = 0;
 
             while (isRunning)
