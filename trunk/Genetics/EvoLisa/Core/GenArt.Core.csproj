@@ -50,11 +50,8 @@
     <Compile Include="Classes\Renderer.cs" />
     <Compile Include="Classes\Serializer.cs" />
     <Compile Include="Classes\Settings.cs" />
-<<<<<<< .mine
     <Compile Include="Classes\SourceImage.cs" />
-=======
     <Compile Include="Classes\Stats.cs" />
->>>>>>> .r148
     <Compile Include="Classes\Tools.cs" />
     <Compile Include="Interfaces\IEvolutionJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

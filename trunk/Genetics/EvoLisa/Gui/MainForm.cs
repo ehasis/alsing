@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using GenArt.AST;
 using GenArt.Classes;
+using GenArt.Core.Classes;
 using GenArt.Core.Interfaces;
 
 namespace GenArt
@@ -46,52 +47,61 @@ namespace GenArt
 
         private void StartEvolution()
         {
-            IEvolutionJob job = new DefaultEvolutionJob(SetupSourceColorMatrix());
-            double newErrorLevel = 0;
+            var sourceImage = new SourceImage
+                                  {
+                                      Colors = SetupSourceColorMatrix(picPattern.Image as Bitmap),
+                                      Width = picPattern.Width,
+                                      Height = picPattern.Height
+                                  };
+
+            IEvolutionJob job = new DefaultEvolutionJob(sourceImage);
+            double newErrorLevel;
 
             while (Project.IsRunning)
             {
 
-                newErrorLevel = job.GetNextErrorLevel();
+                var newDrawing = job.GetBestDrawing();
+                
                 Project.Generations++;
 
-                if (job.DidMutate)
+
+                if (newDrawing.IsDirty)
                 {
                     Project.Mutations++;
 
-                    if (newErrorLevel <= Project.ErrorLevel)
+                    if (newDrawing.ErrorLevel <= Project.ErrorLevel)
                     {
                         Project.Selected++;
 
-                        if (newErrorLevel < Project.ErrorLevel)
+                        if (newDrawing.ErrorLevel < Project.ErrorLevel)
                             Project.Positive++;
                         else
                             Project.Neutral++;
 
                         lock (currentDrawing)
                         {
-                            currentDrawing = job.CurrentDrawing;
+                            currentDrawing = newDrawing;
                             Project.Drawing = currentDrawing.Clone();
                         }
 
-                        Project.ErrorLevel = newErrorLevel;
+                        Project.ErrorLevel = newDrawing.ErrorLevel;
                     }
                 }
             }
         }
 
         //converts the source image to a Color[,] for faster lookup
-        private Color[,] SetupSourceColorMatrix()
+        private Color[,] SetupSourceColorMatrix(Bitmap sourceBitmap)
         {
-            var sourceColors = new Color[Tools.MaxWidth,Tools.MaxHeight];
+            var sourceColors = new Color[sourceBitmap.Width, sourceBitmap.Height];
             var sourceImage = picPattern.Image as Bitmap;
 
             if (sourceImage == null)
                 throw new NotSupportedException("A source image of Bitmap format must be provided");
 
-            for (int y = 0; y < Tools.MaxHeight; y++)
+            for (int y = 0; y < sourceBitmap.Height; y++)
             {
-                for (int x = 0; x < Tools.MaxWidth; x++)
+                for (int x = 0; x < sourceBitmap.Width; x++)
                 {
                     Color c = sourceImage.GetPixel(x, y);
                     sourceColors[x, y] = c;
@@ -254,9 +264,6 @@ namespace GenArt
                 return;
 
             picPattern.Image = Image.FromFile(fileName);
-
-            Tools.MaxHeight = picPattern.Height;
-            Tools.MaxWidth = picPattern.Width;
 
             SetCanvasSize();
 
