@@ -156,12 +156,17 @@ namespace GenArt
             if (Project.IsRunning)
             {
                 KillThread();
-                Project.ElapsedTime += DateTime.Now - Project.LastStartTime;
+                UpdateElapsed();
             }
 
             btnStart.Text = "Start";
             Project.IsRunning = false;
             tmrRedraw.Enabled = false;
+        }
+
+        private void UpdateElapsed()
+        {
+            Project.ElapsedTime += DateTime.Now - Project.LastStartTime;
         }
 
 
@@ -323,6 +328,9 @@ namespace GenArt
 
             if (Project == null)
                 return;
+
+            if (Project.IsRunning)
+                UpdateElapsed();
 
             Serializer.Serialize(Project, fileName);
 
