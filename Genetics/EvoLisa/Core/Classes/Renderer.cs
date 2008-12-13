@@ -24,6 +24,7 @@ namespace GenArt.Classes
             {
                 Point[] points = GetGdiPoints(polygon.Points, scale);
                 g.FillPolygon(brush,points);
+                //g.DrawPolygon(new Pen(brush, 1), points);
             }
         }
 

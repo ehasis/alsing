@@ -13,33 +13,29 @@ namespace GenArt
 {
     public partial class MainForm : Form
     {
-        public static Settings Settings;
-        private ImageFormat animFormat = ImageFormat.Jpeg;
-        private DnaDrawing currentDrawing;
+        public DnaProject Project;
+        private string projectPath = "";
 
+        private DnaDrawing currentDrawing = new DnaDrawing(); // make non null to make sure lock will always work...
 
-        private int generation;
         private DnaDrawing guiDrawing;
-        private bool isRunning;
         private DateTime lastRepaint = DateTime.MinValue;
-        private double lastSavedFitness = Double.MaxValue;
-        private int lastSavedSelected;
         private int lastSelected;
         private TimeSpan repaintIntervall = new TimeSpan(0, 0, 0, 0, 0);
         private int repaintOnSelectedSteps = 3;
-        private int scale;
-        private int selected;
         private SettingsForm settingsForm;
+        private StatsForm statsForm;
 
         private Thread thread;
 
         public MainForm()
         {
             InitializeComponent();
-            Settings = Serializer.DeserializeSettings();
-            if (Settings == null)
-                Settings = new Settings();
-            scale = trackBarScale.Value;
+
+            Project = new DnaProject();
+            Project.Init();
+
+            Project.Settings.Scale = trackBarScale.Value;
             comboBoxAnimSaveFormat.SelectedIndex = 2;
         }
 
@@ -51,13 +47,40 @@ namespace GenArt
         private void StartEvolution()
         {
             IEvolutionJob job = new DefaultEvolutionJob(SetupSourceColorMatrix());
-            while (isRunning)
+            double newErrorLevel = 0;
+
+            while (Project.IsRunning)
             {
-                currentDrawing = job.GetBestDrawing();
+
+                newErrorLevel = job.GetNextErrorLevel();
+                Project.Generations++;
+
+                if (job.DidMutate)
+                {
+                    Project.Mutations++;
+
+                    if (newErrorLevel <= Project.ErrorLevel)
+                    {
+                        Project.Selected++;
+
+                        if (newErrorLevel < Project.ErrorLevel)
+                            Project.Positive++;
+                        else
+                            Project.Neutral++;
+
+                        lock (currentDrawing)
+                        {
+                            currentDrawing = job.CurrentDrawing;
+                            Project.Drawing = currentDrawing.Clone();
+                        }
+
+                        Project.ErrorLevel = newErrorLevel;
+                    }
+                }
             }
         }
 
-        //covnerts the source image to a Color[,] for faster lookup
+        //converts the source image to a Color[,] for faster lookup
         private Color[,] SetupSourceColorMatrix()
         {
             var sourceColors = new Color[Tools.MaxWidth,Tools.MaxHeight];
@@ -81,7 +104,7 @@ namespace GenArt
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (isRunning)
+            if (Project.IsRunning)
                 Stop();
             else
                 Start();
@@ -90,7 +113,7 @@ namespace GenArt
         private void Start()
         {
             btnStart.Text = "Stop";
-            isRunning = true;
+            Project.IsRunning = true;
             tmrRedraw.Enabled = true;
 
             if (thread != null)
@@ -102,6 +125,7 @@ namespace GenArt
                              Priority = ThreadPriority.AboveNormal
                          };
 
+            Project.LastStartTime = DateTime.Now;
             thread.Start();
         }
 
@@ -116,11 +140,14 @@ namespace GenArt
 
         private void Stop()
         {
-            if (isRunning)
+            if (Project.IsRunning)
+            {
                 KillThread();
+                Project.ElapsedTime += DateTime.Now - Project.LastStartTime;
+            }
 
             btnStart.Text = "Start";
-            isRunning = false;
+            Project.IsRunning = false;
             tmrRedraw.Enabled = false;
         }
 
@@ -136,7 +163,7 @@ namespace GenArt
             }
             pnlCanvas.Invalidate();
             lastRepaint = DateTime.Now;
-            lastSelected = selected;
+            lastSelected = Project.Selected;
         }
 
         private void tmrRedraw_Tick(object sender, EventArgs e)
@@ -144,18 +171,14 @@ namespace GenArt
             if (currentDrawing == null)
                 return;
 
-            int polygons = currentDrawing.Polygons.Count;
-            int points = currentDrawing.PointCount;
-            double avg = 0;
-            if (polygons != 0)
-                avg = points/polygons;
+            if (currentDrawing.Polygons == null)
+                return;
 
-            toolStripStatusLabelFitness.Text = currentDrawing.ErrorLevel.ToString();
-            toolStripStatusLabelGeneration.Text = generation.ToString();
-            toolStripStatusLabelSelected.Text = selected.ToString();
-            toolStripStatusLabelPoints.Text = points.ToString();
-            toolStripStatusLabelPolygons.Text = polygons.ToString();
-            toolStripStatusLabelAvgPoints.Text = avg.ToString();
+            if (statsForm != null)
+            {
+                if (statsForm.Visible)
+                    statsForm.UpdateStats();
+            }
 
             bool shouldRepaint = false;
             if (repaintIntervall.Ticks > 0)
@@ -163,7 +186,7 @@ namespace GenArt
                     shouldRepaint = true;
 
             if (repaintOnSelectedSteps > 0)
-                if (lastSelected + repaintOnSelectedSteps < selected)
+                if (lastSelected + repaintOnSelectedSteps < Project.Selected)
                     shouldRepaint = true;
 
             if (shouldRepaint)
@@ -182,16 +205,45 @@ namespace GenArt
 
 
             using (
-                var backBuffer = new Bitmap(scale*picPattern.Width, scale*picPattern.Height,
+                var backBuffer = new Bitmap(Project.Settings.Scale * picPattern.Width, Project.Settings.Scale * picPattern.Height,
                                             PixelFormat.Format24bppRgb))
             using (Graphics backGraphics = Graphics.FromImage(backBuffer))
             {
                 backGraphics.SmoothingMode = SmoothingMode.HighQuality;
-                Renderer.Render(guiDrawing, backGraphics, scale);
+                Renderer.Render(guiDrawing, backGraphics, Project.Settings.Scale);
 
                 e.Graphics.DrawImage(backBuffer, 0, 0);
             }
         }
+
+
+        private void NewProject()
+        {
+            Project = new DnaProject();
+            Project.Init();
+            projectPath = "";
+        }
+
+        private void OpenProject()
+        {
+            SetTitleBar();
+        }
+
+        private void SaveProject()
+        {
+            SetTitleBar();
+        }
+
+        private void SaveProjectAs()
+        {
+            SetTitleBar();
+        }
+
+        private void SetTitleBar()
+        {
+            this.Text = projectPath; 
+        }
+
 
         private void OpenImage()
         {
@@ -209,12 +261,31 @@ namespace GenArt
             SetCanvasSize();
 
             splitContainer1.SplitterDistance = picPattern.Width + 30;
+
+            Project.ImagePath = fileName;
+            ResetProjectLevels();
+            Project.LastSavedFitness = double.MaxValue;
+            Project.LastSavedSelected = 0;
+        }
+
+        private void ResetProjectLevels()
+        {
+            Project.ErrorLevel = double.MaxValue;
+            Project.Generations = 0;
+            Project.Mutations = 0;
+            Project.Selected = 0;
+            Project.Positive = 0;
+            Project.Neutral = 0;
+            Project.LastSavedFitness = 0;
+            Project.LastSavedSelected = 0;
+            Project.LastStartTime = DateTime.MinValue;
+            Project.ElapsedTime = TimeSpan.MinValue;
         }
 
         private void SetCanvasSize()
         {
-            pnlCanvas.Height = scale*picPattern.Height;
-            pnlCanvas.Width = scale*picPattern.Width;
+            pnlCanvas.Height = Project.Settings.Scale * picPattern.Height;
+            pnlCanvas.Width = Project.Settings.Scale * picPattern.Width;
 
             RepaintCanvas();
         }
@@ -226,9 +297,10 @@ namespace GenArt
             DnaDrawing drawing = Serializer.DeserializeDnaDrawing(FileUtil.GetOpenFileName(FileUtil.DnaExtension));
             if (drawing != null)
             {
-                //TODO: why?
-                //if (currentDrawing == null)
-                //    currentDrawing = GetNewInitializedDrawing();
+                //TODO: why? 
+                //ANSW: To be able to safely lock on currentDrawing...
+                if (currentDrawing == null)
+                    currentDrawing = new DnaDrawing();
 
                 lock (currentDrawing)
                 {
@@ -237,6 +309,7 @@ namespace GenArt
                 }
                 pnlCanvas.Invalidate();
                 lastRepaint = DateTime.Now;
+                ResetProjectLevels();
             }
         }
 
@@ -270,14 +343,14 @@ namespace GenArt
 
             if (string.IsNullOrEmpty(fileName) == false && currentDrawing != null)
             {
-                SaveVectorImage(fileName, guiDrawing, imageFormat);
+                SaveVectorImage(fileName, guiDrawing, imageFormat, Project.Settings.Scale);
             }
         }
 
-        private void SaveVectorImage(string fileName, DnaDrawing drawing, ImageFormat imageFormat)
+        private void SaveVectorImage(string fileName, DnaDrawing drawing, ImageFormat imageFormat, int scale)
         {
             using (
-                var img = new Bitmap(scale*picPattern.Width, scale*picPattern.Height,
+                var img = new Bitmap(scale * picPattern.Width, scale * picPattern.Height,
                                      PixelFormat.Format24bppRgb))
             {
                 using (Graphics imgGfx = Graphics.FromImage(img))
@@ -302,39 +375,62 @@ namespace GenArt
             if (radioButtonAnimSaveNever.Checked)
                 return;
 
-            string path = textBoxAnimSaveDir.Text;
+            string path = Project.Settings.AnimSaveDir;
 
             if (string.IsNullOrEmpty(path))
                 return;
 
             if (radioButtonAnimSaveFitness.Checked)
-                if (currentDrawing.ErrorLevel > (lastSavedFitness - Convert.ToDouble(numericUpDownAnimSaveSteps.Value)))
+                if (Project.ErrorLevel > (Project.LastSavedFitness - Convert.ToDouble(numericUpDownAnimSaveSteps.Value)))
                     return;
 
             if (radioButtonAnimSaveSelected.Checked)
-                if (selected < (lastSavedSelected + numericUpDownAnimSaveSteps.Value))
+                if (Project.Selected < (Project.LastSavedSelected + numericUpDownAnimSaveSteps.Value))
                     return;
 
             if (!Directory.Exists(path))
                 return;
 
-            lastSavedSelected = selected;
-            lastSavedFitness = currentDrawing.ErrorLevel;
+            Project.LastSavedSelected = Project.Selected;
+            Project.LastSavedFitness = Project.ErrorLevel;
 
-            string fileName = path + "\\" + selected + "." + animFormat;
-            SaveVectorImage(fileName, drawing, animFormat);
+            string fileName = path + "\\" + Project.Selected + "." + Project.Settings.AnimFormat;
+            SaveVectorImage(fileName, drawing, Project.Settings.AnimFormat, Project.Settings.AnimScale);
         }
 
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShowSettings()
         {
             if (settingsForm != null)
                 if (settingsForm.IsDisposed)
                     settingsForm = null;
 
             if (settingsForm == null)
-                settingsForm = new SettingsForm();
+            {
+                settingsForm = new SettingsForm(this);
+                settingsForm.Init();
+            }
 
             settingsForm.Show();
+        }
+
+        private void ShowStats()
+        {
+            if (statsForm != null)
+                if (statsForm.IsDisposed)
+                    statsForm = null;
+
+            if (statsForm == null)
+            {
+                statsForm = new StatsForm(this);
+                //statsForm.Init();
+            }
+
+            statsForm.Show();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSettings();
         }
 
         private void sourceImageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -359,7 +455,7 @@ namespace GenArt
 
         private void trackBarScale_Scroll(object sender, EventArgs e)
         {
-            scale = trackBarScale.Value;
+            Project.Settings.Scale = trackBarScale.Value;
             SetCanvasSize();
         }
 
@@ -377,15 +473,42 @@ namespace GenArt
             switch (comboBoxAnimSaveFormat.SelectedIndex)
             {
                 case 0:
-                    animFormat = ImageFormat.Bmp;
+                    Project.Settings.AnimFormat = ImageFormat.Bmp;
                     break;
                 case 1:
-                    animFormat = ImageFormat.Gif;
+                    Project.Settings.AnimFormat = ImageFormat.Gif;
                     break;
                 case 2:
-                    animFormat = ImageFormat.Jpeg;
+                    Project.Settings.AnimFormat = ImageFormat.Jpeg;
                     break;
             }
         }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            NewProject();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            OpenProject();
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            SaveProject();
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            SaveProjectAs();
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            ShowStats();
+        }
+
+
     }
 }
