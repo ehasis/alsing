@@ -1,11 +1,13 @@
 ﻿using System.Drawing.Imaging;
+using System.Xml.Serialization;
+using System;
 namespace GenArt.Classes
 {
     public class Settings
     {
         public Settings()
         {
-            AnimFormat = ImageFormat.Jpeg;
+            HistoryImageFormat = ImageFormat.Jpeg;
 
             Reset();
         }
@@ -42,10 +44,35 @@ namespace GenArt.Classes
 
         public int Scale { get; set; }
 
-        public ImageFormat AnimFormat { get; set; }
-        public string AnimSaveDir { get; set; }
-        public int AnimScale { get; set; }
+        [XmlIgnore]
+        public ImageFormat HistoryImageFormat 
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(HistoryImageSaveTriggerName))
+                    return ImageFormat.Jpeg;
+                return (ImageFormat)Enum.Parse(typeof(ImageFormat), HistoryImageFormatName); 
+            }
+            set { HistoryImageFormatName = value.ToString(); } 
+        }
+        public string HistoryImageFormatName { get; set; }
 
+        public int HistoryImageScale { get; set; }
+        public decimal HistoryImageSteps { get; set; }
+
+        [XmlIgnore]
+        public HistorySaveTrigger HistoryImageSaveTrigger
+        {
+            get 
+            {
+                if (string.IsNullOrEmpty(HistoryImageSaveTriggerName))
+                    return HistorySaveTrigger.None;
+                return (HistorySaveTrigger)Enum.Parse(typeof(HistorySaveTrigger), HistoryImageSaveTriggerName); 
+            }
+            set { HistoryImageSaveTriggerName = value.ToString(); }
+        }
+
+        public string HistoryImageSaveTriggerName { get; set; }
 
         //Mutation rates
         private int addPointMutationRate = 1500;

@@ -68,9 +68,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.trackBarScale = new System.Windows.Forms.TrackBar();
             this.picPattern = new System.Windows.Forms.PictureBox();
-            this.pnlCanvas = new GenArt.Canvas();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pnlCanvas = new GenArt.Canvas();
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -233,14 +233,14 @@
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(129, 22);
             this.toolStripMenuItem6.Text = "Statistics...";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.optionsToolStripMenuItem.Text = "Options...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -325,6 +325,7 @@
             this.radioButtonAnimSaveNever.TabStop = true;
             this.radioButtonAnimSaveNever.Text = "Never";
             this.radioButtonAnimSaveNever.UseVisualStyleBackColor = true;
+            this.radioButtonAnimSaveNever.CheckedChanged += new System.EventHandler(this.radioButtonAnimSaveNever_CheckedChanged);
             // 
             // radioButtonAnimSaveFitness
             // 
@@ -336,6 +337,7 @@
             this.radioButtonAnimSaveFitness.TabIndex = 28;
             this.radioButtonAnimSaveFitness.Text = "Fitness improves by:";
             this.radioButtonAnimSaveFitness.UseVisualStyleBackColor = true;
+            this.radioButtonAnimSaveFitness.CheckedChanged += new System.EventHandler(this.radioButtonAnimSaveFitness_CheckedChanged);
             // 
             // radioButtonAnimSaveSelected
             // 
@@ -347,6 +349,7 @@
             this.radioButtonAnimSaveSelected.TabIndex = 29;
             this.radioButtonAnimSaveSelected.Text = "Selected increases by:";
             this.radioButtonAnimSaveSelected.UseVisualStyleBackColor = true;
+            this.radioButtonAnimSaveSelected.CheckedChanged += new System.EventHandler(this.radioButtonAnimSaveSelected_CheckedChanged);
             // 
             // panel2
             // 
@@ -385,6 +388,7 @@
             0,
             0,
             0});
+            this.numericUpDownAnimSaveSteps.ValueChanged += new System.EventHandler(this.numericUpDownAnimSaveSteps_ValueChanged);
             // 
             // label4
             // 
@@ -485,16 +489,6 @@
             this.picPattern.TabIndex = 3;
             this.picPattern.TabStop = false;
             // 
-            // pnlCanvas
-            // 
-            this.pnlCanvas.BackColor = System.Drawing.Color.Black;
-            this.pnlCanvas.Location = new System.Drawing.Point(6, 16);
-            this.pnlCanvas.Name = "pnlCanvas";
-            this.pnlCanvas.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlCanvas.Size = new System.Drawing.Size(600, 600);
-            this.pnlCanvas.TabIndex = 1;
-            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -511,6 +505,16 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(42, 17);
             this.toolStripStatusLabel1.Text = "Ready.";
             // 
+            // pnlCanvas
+            // 
+            this.pnlCanvas.BackColor = System.Drawing.Color.Black;
+            this.pnlCanvas.Location = new System.Drawing.Point(6, 16);
+            this.pnlCanvas.Name = "pnlCanvas";
+            this.pnlCanvas.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlCanvas.Size = new System.Drawing.Size(600, 600);
+            this.pnlCanvas.TabIndex = 1;
+            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -522,7 +526,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Genetic Vectorizer by Roger Alsing ";
+            this.Text = "Drawin - Genetic Vectorizer by Roger Alsing ";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

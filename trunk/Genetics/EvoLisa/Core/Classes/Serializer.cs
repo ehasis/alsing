@@ -36,6 +36,23 @@ namespace GenArt.Classes
             }
         }
 
+        public static void Serialize(DnaProject project, string fileName)
+        {
+            if (fileName == null)
+                return;
+
+            //try
+            //{
+                XmlSerializer serializer = new XmlSerializer(project.GetType());
+                using (FileStream writer = new FileStream(fileName, FileMode.Create))
+                {
+                    serializer.Serialize(writer, project);
+                }
+            //}
+            //catch (Exception ex) { ; }
+        }
+
+
         public static void Serialize(DnaDrawing drawing, string fileName)
         {
             if (fileName == null)
@@ -107,6 +124,23 @@ namespace GenArt.Classes
             return null;
         }
 
+        public static DnaProject DeserializeDnaProject(string fileName)
+        {
+            if (!File.Exists(fileName))
+                return null;
+
+            //try
+            //{
+                XmlSerializer serializer = new XmlSerializer(typeof(DnaProject));
+                using (FileStream reader = new FileStream(fileName, FileMode.Open))
+                {
+                    return (DnaProject)serializer.Deserialize(reader);
+                }
+            //}
+            //catch (Exception ex) { ; }
+            return null;
+        }
+
         public static DnaDrawing DeserializeDnaDrawing(string fileName)
         {
             if (!File.Exists(fileName))
@@ -149,5 +183,6 @@ namespace GenArt.Classes
             }
             return null;
         }
+
     }
 }

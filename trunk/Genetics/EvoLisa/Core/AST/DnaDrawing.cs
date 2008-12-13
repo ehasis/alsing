@@ -10,6 +10,7 @@ namespace GenArt.AST
     public class DnaDrawing
     {
         public List<DnaPolygon> Polygons { get; set; }
+        [XmlIgnore]
         public SourceImage SourceImage { get; set; }        
 
         [XmlIgnore]
