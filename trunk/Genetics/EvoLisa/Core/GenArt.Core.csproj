@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E4DF4818-A171-41E0-9AC4-4FDB8AF6482A}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -44,11 +44,13 @@
     <Compile Include="AST\DnaDrawing.cs" />
     <Compile Include="AST\DnaPoint.cs" />
     <Compile Include="AST\DnaPolygon.cs" />
+    <Compile Include="AST\DnaProject.cs" />
     <Compile Include="Classes\FileUtil.cs" />
     <Compile Include="Classes\FitnessCalculator.cs" />
     <Compile Include="Classes\Renderer.cs" />
     <Compile Include="Classes\Serializer.cs" />
     <Compile Include="Classes\Settings.cs" />
+    <Compile Include="Classes\Stats.cs" />
     <Compile Include="Classes\Tools.cs" />
     <Compile Include="Interfaces\IEvolutionJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

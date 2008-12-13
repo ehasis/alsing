@@ -13,9 +13,10 @@ namespace GenArt.AST
 
         public void Init()
         {
-            Red = Tools.GetRandomNumber(0, 255);
-            Green = Tools.GetRandomNumber(0, 255);
-            Blue = Tools.GetRandomNumber(0, 255);
+            Red = Tools.GetRandomNumber(Settings.ActiveRedRangeMin, Settings.ActiveRedRangeMax);
+            Green = Tools.GetRandomNumber(Settings.ActiveGreenRangeMin, Settings.ActiveGreenRangeMax);
+            Blue = Tools.GetRandomNumber(Settings.ActiveBlueRangeMin, Settings.ActiveBlueRangeMax);
+            //Alpha = Tools.GetRandomNumber(Settings.ActiveAlphaRangeMin, Settings.ActiveAlphaRangeMax);
             Alpha = Tools.GetRandomNumber(10, 60);
         }
 

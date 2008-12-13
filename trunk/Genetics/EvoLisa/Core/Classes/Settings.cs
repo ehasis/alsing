@@ -1,7 +1,15 @@
-﻿namespace GenArt.Classes
+﻿using System.Drawing.Imaging;
+namespace GenArt.Classes
 {
     public class Settings
     {
+        public Settings()
+        {
+            AnimFormat = ImageFormat.Jpeg;
+
+            Reset();
+        }
+
         public static int ActiveAddPointMutationRate = 1500;
         public static int ActiveAddPolygonMutationRate = 700;
         public static int ActiveAlphaMutationRate = 1500;
@@ -31,9 +39,16 @@
         public static int ActiveRedRangeMin;
         public static int ActiveRemovePointMutationRate = 1500;
         public static int ActiveRemovePolygonMutationRate = 1500;
-        private int addPointMutationRate = 1500;
+
+        public int Scale { get; set; }
+
+        public ImageFormat AnimFormat { get; set; }
+        public string AnimSaveDir { get; set; }
+        public int AnimScale { get; set; }
+
 
         //Mutation rates
+        private int addPointMutationRate = 1500;
         private int addPolygonMutationRate = 700;
         private int alphaMutationRate = 1500;
         private int alphaRangeMax = 60;
@@ -62,11 +77,6 @@
         private int removePointMutationRate = 1500;
 
         private int removePolygonMutationRate = 1500;
-
-        public Settings()
-        {
-            Reset();
-        }
 
         public int AddPolygonMutationRate
         {
@@ -461,6 +471,46 @@
             ActiveMovePointRangeMin = 3;
 
             Discard();
+        }
+
+        public void CopyTo(Settings settings)
+        {
+            settings.AddPolygonMutationRate = AddPolygonMutationRate;
+            settings.RemovePolygonMutationRate = RemovePolygonMutationRate;
+            settings.MovePolygonMutationRate = MovePolygonMutationRate;
+
+            settings.AddPointMutationRate = AddPointMutationRate;
+            settings.RemovePointMutationRate = RemovePointMutationRate;
+            settings.MovePointMaxMutationRate = MovePointMaxMutationRate;
+            settings.MovePointMidMutationRate = MovePointMidMutationRate;
+            settings.MovePointMinMutationRate = MovePointMinMutationRate;
+
+            settings.RedMutationRate = RedMutationRate;
+            settings.GreenMutationRate = GreenMutationRate;
+            settings.BlueMutationRate = BlueMutationRate;
+            settings.AlphaMutationRate = AlphaMutationRate;
+
+            //Limits / Constraints
+            settings.RedRangeMin = RedRangeMin;
+            settings.RedRangeMax = RedRangeMax;
+            settings.GreenRangeMin = GreenRangeMin;
+            settings.GreenRangeMax = GreenRangeMax;
+            settings.BlueRangeMin = BlueRangeMin;
+            settings.BlueRangeMax = BlueRangeMax;
+            settings.AlphaRangeMin = AlphaRangeMin;
+            settings.AlphaRangeMax = AlphaRangeMax;
+
+            settings.PolygonsMax = PolygonsMax;
+            settings.PolygonsMin = PolygonsMin;
+
+            settings.PointsPerPolygonMax = PointsPerPolygonMax;
+            settings.PointsPerPolygonMin = PointsPerPolygonMin;
+
+            settings.PointsMax = PointsMax;
+            settings.PointsMin = PointsMin;
+
+            settings.MovePointRangeMid = MovePointRangeMid;
+            settings.MovePointRangeMin = MovePointRangeMin;
         }
     }
 }

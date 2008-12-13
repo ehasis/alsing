@@ -11,12 +11,19 @@ namespace GenArt.Classes
     {
         private DnaDrawing currentDrawing;
         public Color[,] SourceColors { get; set; }
+        private double errorLevel = double.MaxValue;
+        private bool didMutate = false;
 
         public DefaultEvolutionJob(Color[,] sourceColors)
         {
             SourceColors = sourceColors;
             currentDrawing = GetNewInitializedDrawing();
-            currentDrawing.ErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, SourceColors);
+            errorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, SourceColors);
+        }
+
+        public bool DidMutate
+        {
+            get { return didMutate; }
         }
 
         private static DnaDrawing GetNewInitializedDrawing()
@@ -28,30 +35,41 @@ namespace GenArt.Classes
 
         #region IEvolutionJob Members
 
+        public DnaDrawing CurrentDrawing
+        {
+            get { return currentDrawing; }
+        }
+
         public DnaDrawing GetBestDrawing()
         {
-            DnaDrawing newDrawing;
-            lock (currentDrawing)
-            {
-                newDrawing = currentDrawing.Clone();
-            }
+            GetNextErrorLevel();
+            return currentDrawing;
+        }
+
+        public double GetNextErrorLevel()
+        {
+            DnaDrawing newDrawing = currentDrawing.Clone();
+            didMutate = false;
+
             newDrawing.Mutate();
 
+            //TODO: Why not loop until we get a mutation - that way we don't waste lots of clones ^^
             if (newDrawing.IsDirty)
             {
+                didMutate = true;
 
-                newDrawing.ErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, SourceColors);
+                double nextErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, SourceColors);
 
-                if (newDrawing.ErrorLevel <= currentDrawing.ErrorLevel)
+                if (nextErrorLevel <= errorLevel)
                 {
-                    lock (currentDrawing)
-                    {
-                        currentDrawing = newDrawing;
-                    }
+                    errorLevel = nextErrorLevel;
+                    currentDrawing = newDrawing;
                 }
+
+                return nextErrorLevel;
             }
 
-            return currentDrawing;
+            return errorLevel;
         }
 
         #endregion
