@@ -11,6 +11,7 @@ namespace GenArt.AST
     {
         public List<DnaPolygon> Polygons { get; set; }
         public SourceImage SourceImage { get; set; }
+        public double ErrorLevel { get; set; }
 
         [XmlIgnore]
         public bool IsDirty { get; private set; }
@@ -48,6 +49,7 @@ namespace GenArt.AST
                               {
                                   Polygons = new List<DnaPolygon>(),
                                   SourceImage = SourceImage,
+                                  ErrorLevel = ErrorLevel,
                               };
             foreach (DnaPolygon polygon in Polygons)
                 drawing.Polygons.Add(polygon.Clone());

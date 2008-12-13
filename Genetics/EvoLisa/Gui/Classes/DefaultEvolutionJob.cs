@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using GenArt.AST;
+using GenArt.Core.Classes;
 using GenArt.Core.Interfaces;
 using System.Drawing;
 
@@ -10,21 +11,15 @@ namespace GenArt.Classes
     public class DefaultEvolutionJob : IEvolutionJob
     {
         private DnaDrawing currentDrawing;
-        public Color[,] SourceColors { get; set; }
-        private double errorLevel = double.MaxValue;
-        private bool didMutate = false;
 
-        public DefaultEvolutionJob(Color[,] sourceColors)
+
+        public DefaultEvolutionJob(SourceImage sourceImage)
         {
-            SourceColors = sourceColors;
             currentDrawing = GetNewInitializedDrawing();
-            errorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, SourceColors);
+            currentDrawing.SourceImage = sourceImage;
+            currentDrawing.ErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, sourceImage);
         }
 
-        public bool DidMutate
-        {
-            get { return didMutate; }
-        }
 
         private static DnaDrawing GetNewInitializedDrawing()
         {
@@ -35,11 +30,6 @@ namespace GenArt.Classes
 
         #region IEvolutionJob Members
 
-        public DnaDrawing CurrentDrawing
-        {
-            get { return currentDrawing; }
-        }
-
         public DnaDrawing GetBestDrawing()
         {
             GetNextErrorLevel();
@@ -49,27 +39,24 @@ namespace GenArt.Classes
         public double GetNextErrorLevel()
         {
             DnaDrawing newDrawing = currentDrawing.Clone();
-            didMutate = false;
 
             newDrawing.Mutate();
 
             //TODO: Why not loop until we get a mutation - that way we don't waste lots of clones ^^
             if (newDrawing.IsDirty)
             {
-                didMutate = true;
 
-                double nextErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, SourceColors);
+                newDrawing.ErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
 
-                if (nextErrorLevel <= errorLevel)
+                if (newDrawing.ErrorLevel <= currentDrawing.ErrorLevel)
                 {
-                    errorLevel = nextErrorLevel;
                     currentDrawing = newDrawing;
                 }
 
-                return nextErrorLevel;
+                return newDrawing.ErrorLevel;
             }
 
-            return errorLevel;
+            return currentDrawing.ErrorLevel;
         }
 
         #endregion
