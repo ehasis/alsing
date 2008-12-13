@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using GenArt.Classes;
-using GenArt.Core.Classes;
 
 namespace GenArt.AST
 {
@@ -23,8 +22,12 @@ namespace GenArt.AST
             {
                 var point = new DnaPoint
                                 {
-                                    X = Math.Min(Math.Max(0, origin.X + Tools.GetRandomNumber(-3, 3)), drawing.SourceImage.Width),
-                                    Y = Math.Min(Math.Max(0, origin.Y + Tools.GetRandomNumber(-3, 3)), drawing.SourceImage.Height)
+                                    X =
+                                        Math.Min(Math.Max(0, origin.X + Tools.GetRandomNumber(-3, 3)),
+                                                 drawing.SourceImage.Width),
+                                    Y =
+                                        Math.Min(Math.Max(0, origin.Y + Tools.GetRandomNumber(-3, 3)),
+                                                 drawing.SourceImage.Height)
                                 };
 
                 Points.Add(point);
@@ -38,7 +41,7 @@ namespace GenArt.AST
         {
             var newPolygon = new DnaPolygon
                                  {
-                                     Points = new List<DnaPoint>(), 
+                                     Points = new List<DnaPoint>(),
                                      Brush = Brush.Clone()
                                  };
             foreach (DnaPoint point in Points)
