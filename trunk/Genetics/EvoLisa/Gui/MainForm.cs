@@ -2,32 +2,34 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using GenArt.AST;
 using GenArt.Classes;
-using System.IO;
+using GenArt.Core.Interfaces;
 
 namespace GenArt
 {
     public partial class MainForm : Form
     {
         public static Settings Settings;
+        private ImageFormat animFormat = ImageFormat.Jpeg;
         private DnaDrawing currentDrawing;
 
-        private double errorLevel = double.MaxValue;
+
         private int generation;
         private DnaDrawing guiDrawing;
         private bool isRunning;
         private DateTime lastRepaint = DateTime.MinValue;
+        private double lastSavedFitness = Double.MaxValue;
+        private int lastSavedSelected;
         private int lastSelected;
         private TimeSpan repaintIntervall = new TimeSpan(0, 0, 0, 0, 0);
         private int repaintOnSelectedSteps = 3;
+        private int scale;
         private int selected;
         private SettingsForm settingsForm;
-        private Color[,] sourceColors;
-        private int scale;
-        private ImageFormat animFormat = ImageFormat.Jpeg;
 
         private Thread thread;
 
@@ -43,62 +45,22 @@ namespace GenArt
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private static DnaDrawing GetNewInitializedDrawing()
-        {
-            var drawing = new DnaDrawing();
-            drawing.Init();
-            return drawing;
         }
 
 
         private void StartEvolution()
         {
-            SetupSourceColorMatrix();
-            if (currentDrawing == null)
-                currentDrawing = GetNewInitializedDrawing();
-            lastSelected = 0;
-            lastSavedFitness = Double.MaxValue;
-            lastSavedSelected = 0;
-
+            IEvolutionJob job = new DefaultEvolutionJob(SetupSourceColorMatrix());
             while (isRunning)
             {
-                DnaDrawing newDrawing;
-                lock (currentDrawing)
-                {
-                    newDrawing = currentDrawing.Clone();
-                }
-                newDrawing.Mutate();
-
-                if (newDrawing.IsDirty)
-                {
-                    generation++;
-
-                    double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, sourceColors);
-
-                    if (newErrorLevel <= errorLevel)
-                    {
-                        selected++;
-                        errorLevel = newErrorLevel;
-
-                        SaveAnimationImage(newDrawing);
-
-                        lock (currentDrawing)
-                        {
-                            currentDrawing = newDrawing;
-                        }
-                    }
-                }
-                //else, discard new drawing
+                currentDrawing = job.GetBestDrawing();
             }
         }
 
         //covnerts the source image to a Color[,] for faster lookup
-        private void SetupSourceColorMatrix()
+        private Color[,] SetupSourceColorMatrix()
         {
-            sourceColors = new Color[Tools.MaxWidth,Tools.MaxHeight];
+            var sourceColors = new Color[Tools.MaxWidth,Tools.MaxHeight];
             var sourceImage = picPattern.Image as Bitmap;
 
             if (sourceImage == null)
@@ -112,6 +74,8 @@ namespace GenArt
                     sourceColors[x, y] = c;
                 }
             }
+
+            return sourceColors;
         }
 
 
@@ -184,9 +148,9 @@ namespace GenArt
             int points = currentDrawing.PointCount;
             double avg = 0;
             if (polygons != 0)
-                avg = points / polygons;
+                avg = points/polygons;
 
-            toolStripStatusLabelFitness.Text = errorLevel.ToString();
+            toolStripStatusLabelFitness.Text = currentDrawing.ErrorLevel.ToString();
             toolStripStatusLabelGeneration.Text = generation.ToString();
             toolStripStatusLabelSelected.Text = selected.ToString();
             toolStripStatusLabelPoints.Text = points.ToString();
@@ -262,8 +226,9 @@ namespace GenArt
             DnaDrawing drawing = Serializer.DeserializeDnaDrawing(FileUtil.GetOpenFileName(FileUtil.DnaExtension));
             if (drawing != null)
             {
-                if (currentDrawing == null)
-                    currentDrawing = GetNewInitializedDrawing();
+                //TODO: why?
+                //if (currentDrawing == null)
+                //    currentDrawing = GetNewInitializedDrawing();
 
                 lock (currentDrawing)
                 {
@@ -312,8 +277,8 @@ namespace GenArt
         private void SaveVectorImage(string fileName, DnaDrawing drawing, ImageFormat imageFormat)
         {
             using (
-                var img = new Bitmap(scale * picPattern.Width, scale * picPattern.Height,
-                                            PixelFormat.Format24bppRgb))
+                var img = new Bitmap(scale*picPattern.Width, scale*picPattern.Height,
+                                     PixelFormat.Format24bppRgb))
             {
                 using (Graphics imgGfx = Graphics.FromImage(img))
                 {
@@ -324,13 +289,13 @@ namespace GenArt
                     {
                         img.Save(fileName, imageFormat);
                     }
-                    catch (Exception ex) { ; }
+                    catch (Exception ex)
+                    {
+                        ;
+                    }
                 }
             }
         }
-
-        private double lastSavedFitness = Double.MaxValue;
-        private int lastSavedSelected = 0;
 
         private void SaveAnimationImage(DnaDrawing drawing)
         {
@@ -343,7 +308,7 @@ namespace GenArt
                 return;
 
             if (radioButtonAnimSaveFitness.Checked)
-                if (errorLevel > (lastSavedFitness - Convert.ToDouble(numericUpDownAnimSaveSteps.Value)))
+                if (currentDrawing.ErrorLevel > (lastSavedFitness - Convert.ToDouble(numericUpDownAnimSaveSteps.Value)))
                     return;
 
             if (radioButtonAnimSaveSelected.Checked)
@@ -354,9 +319,9 @@ namespace GenArt
                 return;
 
             lastSavedSelected = selected;
-            lastSavedFitness = errorLevel;
+            lastSavedFitness = currentDrawing.ErrorLevel;
 
-            string fileName = path + "\\" + selected + "." + animFormat.ToString();
+            string fileName = path + "\\" + selected + "." + animFormat;
             SaveVectorImage(fileName, drawing, animFormat);
         }
 
@@ -400,7 +365,7 @@ namespace GenArt
 
         private void buttonSelectAnimDir_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            var dialog = new FolderBrowserDialog();
             if (!dialog.ShowDialog().Equals(DialogResult.Cancel))
             {
                 textBoxAnimSaveDir.Text = dialog.SelectedPath;
@@ -421,7 +386,6 @@ namespace GenArt
                     animFormat = ImageFormat.Jpeg;
                     break;
             }
-
         }
     }
 }

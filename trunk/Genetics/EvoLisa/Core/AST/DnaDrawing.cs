@@ -9,6 +9,7 @@ namespace GenArt.AST
     public class DnaDrawing
     {
         public List<DnaPolygon> Polygons { get; set; }
+        public double ErrorLevel { get; set; }
 
         [XmlIgnore]
         public bool IsDirty { get; private set; }
@@ -46,7 +47,7 @@ namespace GenArt.AST
             drawing.Polygons = new List<DnaPolygon>();
             foreach (DnaPolygon polygon in Polygons)
                 drawing.Polygons.Add(polygon.Clone());
-
+            drawing.ErrorLevel = ErrorLevel;
             return drawing;
         }
 

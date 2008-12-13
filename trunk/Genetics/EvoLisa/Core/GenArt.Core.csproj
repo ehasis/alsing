@@ -50,6 +50,7 @@
     <Compile Include="Classes\Serializer.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\Tools.cs" />
+    <Compile Include="Interfaces\IEvolutionJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
