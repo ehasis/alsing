@@ -59,12 +59,12 @@ namespace GenArt
             while (Project.IsRunning)
             {
 
-                var newDrawing = job.GetBestDrawing();
-                double newErrorLevel = newDrawing.GetErrorLevel();
+                
+                double newErrorLevel = job.GetNextErrorLevel();
                 Project.Generations++;
 
 
-                if (newDrawing.IsDirty)
+                if (job.IsDirty)
                 {
                     Project.Mutations++;
 
@@ -77,6 +77,7 @@ namespace GenArt
                         else
                             Project.Neutral++;
 
+                        var newDrawing = job.GetDrawing();
                         lock (currentDrawing)
                         {
                             currentDrawing = newDrawing;

@@ -9,6 +9,9 @@ namespace GenArt.Core.Interfaces
 {
     public interface IEvolutionJob
     {
-        DnaDrawing GetBestDrawing();
+        DnaDrawing GetDrawing();
+
+        double GetNextErrorLevel();
+        bool IsDirty { get; }
     }
 }
