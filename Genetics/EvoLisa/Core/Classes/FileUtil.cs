@@ -4,8 +4,9 @@ namespace GenArt.Classes
 {
     public static class FileUtil
     {
-        public static string DnaExtension = "dna files (*.dna)|*.dna|xml files (*.xml)|*.xml|All files (*.*)|*.*";
         public static string ProjectExtension = "dnaproj files (*.dnaproj)|*.dnaproj|xml files (*.xml)|*.xml|All files (*.*)|*.*";
+        public static string DnaExtension = "dna files (*.dna)|*.dna|xml files (*.xml)|*.xml|All files (*.*)|*.*";
+
         public static string ImgExtension =
             "gif files (*.gif)|*.gif|bmp files (*.bmp)|*.bmp|jpg files (*.jpg)|*.jpg|jpeg files (*.jpeg)|*.jpeg|All files (*.*)|*.*";
 

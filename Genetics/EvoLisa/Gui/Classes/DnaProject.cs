@@ -4,7 +4,7 @@ using System.Text;
 using GenArt.Classes;
 using System.Xml.Serialization;
 
-namespace GenArt.AST
+namespace GenArt.Classes
 {
     public class DnaProject
     {

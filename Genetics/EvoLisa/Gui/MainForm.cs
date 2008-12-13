@@ -7,17 +7,17 @@ using System.Threading;
 using System.Windows.Forms;
 using GenArt.AST;
 using GenArt.Classes;
-using GenArt.Core.Classes;
 using GenArt.Core.Interfaces;
+using GenArt.Core.Classes;
 
 namespace GenArt
 {
     public partial class MainForm : Form
     {
         public DnaProject Project;
-        private string projectPath = "";
+        private string projectFileName = "";
 
-        private DnaDrawing currentDrawing = new DnaDrawing(); // make non null to make sure lock will always work...
+        private DnaDrawing currentDrawing = null;
 
         private DnaDrawing guiDrawing;
         private DateTime lastRepaint = DateTime.MinValue;
@@ -48,18 +48,18 @@ namespace GenArt
         private void StartEvolution()
         {
             var sourceImage = new SourceImage
-                                  {
-                                      Colors = SetupSourceColorMatrix(picPattern.Image as Bitmap),
-                                      Width = picPattern.Width,
-                                      Height = picPattern.Height
-                                  };
+            {
+                Colors = SetupSourceColorMatrix(picPattern.Image as Bitmap),
+                Width = picPattern.Width,
+                Height = picPattern.Height
+            };
 
             IEvolutionJob job = new DefaultEvolutionJob(sourceImage);
 
             while (Project.IsRunning)
             {
 
-                
+
                 double newErrorLevel = job.GetNextErrorLevel();
                 Project.Generations++;
 
@@ -78,6 +78,9 @@ namespace GenArt
                             Project.Neutral++;
 
                         var newDrawing = job.GetDrawing();
+                        if (currentDrawing == null) // to make always lockable...
+                            currentDrawing = new DnaDrawing();
+
                         lock (currentDrawing)
                         {
                             currentDrawing = newDrawing;
@@ -130,10 +133,10 @@ namespace GenArt
                 KillThread();
 
             thread = new Thread(StartEvolution)
-                         {
-                             IsBackground = true,
-                             Priority = ThreadPriority.AboveNormal
-                         };
+            {
+                IsBackground = true,
+                Priority = ThreadPriority.AboveNormal
+            };
 
             Project.LastStartTime = DateTime.Now;
             thread.Start();
@@ -179,9 +182,6 @@ namespace GenArt
         private void tmrRedraw_Tick(object sender, EventArgs e)
         {
             if (currentDrawing == null)
-                return;
-
-            if (currentDrawing.Polygons == null)
                 return;
 
             if (statsForm != null)
@@ -231,35 +231,124 @@ namespace GenArt
         {
             Project = new DnaProject();
             Project.Init();
-            projectPath = "";
+            projectFileName = "";
+            this.Text = "[New Project]";
         }
 
         private void OpenProject()
         {
+            Stop();
+
+            string fileName = FileUtil.GetOpenFileName(FileUtil.ProjectExtension);
+            DnaProject project = Serializer.DeserializeDnaProject(fileName);
+
+            if (project != null)
+            {
+                Project = project;
+
+                if (!string.IsNullOrEmpty(Project.ImagePath))
+                    OpenImage(Project.ImagePath);
+
+                if (Project.Drawing != null)
+                {
+                    if (currentDrawing == null)
+                        currentDrawing = new DnaDrawing();
+
+                    lock (currentDrawing)
+                    {
+                        currentDrawing = Project.Drawing;
+                        guiDrawing = currentDrawing.Clone();
+                    }
+                }
+                ActivateProjectSettings();
+
+                ResetProjectLevels();
+                RepaintCanvas();
+
+                projectFileName = fileName;
+            }
+
             SetTitleBar();
+        }
+
+        private void ActivateProjectSettings()
+        {
+            trackBarScale.Value = Project.Settings.Scale;
+            switch (Project.Settings.HistoryImageSaveTrigger)
+            {
+                case HistorySaveTrigger.None:
+                    radioButtonAnimSaveNever.Checked = true;
+                    break;
+                case HistorySaveTrigger.Fitness:
+                    radioButtonAnimSaveFitness.Checked = true;
+                    break;
+                case HistorySaveTrigger.Selected:
+                    radioButtonAnimSaveSelected.Checked = true;
+                    break;
+            }
+            switch (Project.Settings.HistoryImageFormatName)
+            {
+                case "Bmp":
+                    comboBoxAnimSaveFormat.SelectedIndex = 0;
+                    break;
+                case "Gif":
+                    comboBoxAnimSaveFormat.SelectedIndex = 1;
+                    break;
+                case "Jpg":
+                    comboBoxAnimSaveFormat.SelectedIndex = 2;
+                    break;
+            }
+            Project.Settings.HistoryImageSteps = numericUpDownAnimSaveSteps.Value;
+
+            Project.Settings.Activate();
         }
 
         private void SaveProject()
         {
-            SetTitleBar();
+            SaveProjectAs(projectFileName);
         }
 
         private void SaveProjectAs()
         {
+            SaveProjectAs(null);
+        }
+
+        private void SaveProjectAs(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+                fileName = FileUtil.GetSaveFileName(FileUtil.ProjectExtension);
+
+            if (string.IsNullOrEmpty(fileName))
+                return;
+
+            if (Project == null)
+                return;
+
+            Serializer.Serialize(Project, fileName);
+
+            projectFileName = fileName;
+
             SetTitleBar();
         }
 
         private void SetTitleBar()
         {
-            this.Text = projectPath; 
+            this.Text = projectFileName;
         }
 
 
         private void OpenImage()
         {
+            OpenImage(null);
+        }
+
+        private void OpenImage(string fileName)
+        {
             Stop();
 
-            string fileName = FileUtil.GetOpenFileName(FileUtil.ImgExtension);
+            if (string.IsNullOrEmpty(fileName))
+                fileName = FileUtil.GetOpenFileName(FileUtil.ImgExtension);
+
             if (string.IsNullOrEmpty(fileName))
                 return;
 
@@ -271,8 +360,6 @@ namespace GenArt
 
             Project.ImagePath = fileName;
             ResetProjectLevels();
-            Project.LastSavedFitness = double.MaxValue;
-            Project.LastSavedSelected = 0;
         }
 
         private void ResetProjectLevels()
@@ -304,19 +391,15 @@ namespace GenArt
             DnaDrawing drawing = Serializer.DeserializeDnaDrawing(FileUtil.GetOpenFileName(FileUtil.DnaExtension));
             if (drawing != null)
             {
-                //TODO: why? 
-                //ANSW: To be able to safely lock on currentDrawing...
                 if (currentDrawing == null)
                     currentDrawing = new DnaDrawing();
-
                 lock (currentDrawing)
                 {
                     currentDrawing = drawing;
                     guiDrawing = currentDrawing.Clone();
                 }
-                pnlCanvas.Invalidate();
-                lastRepaint = DateTime.Now;
                 ResetProjectLevels();
+                RepaintCanvas();
             }
         }
 
@@ -382,27 +465,37 @@ namespace GenArt
             if (radioButtonAnimSaveNever.Checked)
                 return;
 
-            string path = Project.Settings.AnimSaveDir;
+            string path = projectFileName;
 
             if (string.IsNullOrEmpty(path))
                 return;
 
-            if (radioButtonAnimSaveFitness.Checked)
+            if (Project.Settings.HistoryImageSaveTrigger.Equals(HistorySaveTrigger.Fitness))
                 if (Project.ErrorLevel > (Project.LastSavedFitness - Convert.ToDouble(numericUpDownAnimSaveSteps.Value)))
                     return;
 
-            if (radioButtonAnimSaveSelected.Checked)
+            if (Project.Settings.HistoryImageSaveTrigger.Equals(HistorySaveTrigger.Selected))
                 if (Project.Selected < (Project.LastSavedSelected + numericUpDownAnimSaveSteps.Value))
                     return;
 
-            if (!Directory.Exists(path))
+            if (!File.Exists(path))
                 return;
+
+            path = new FileInfo(path).DirectoryName + "\\History";
+
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            path += "\\Images";
+
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
 
             Project.LastSavedSelected = Project.Selected;
             Project.LastSavedFitness = Project.ErrorLevel;
 
-            string fileName = path + "\\" + Project.Selected + "." + Project.Settings.AnimFormat;
-            SaveVectorImage(fileName, drawing, Project.Settings.AnimFormat, Project.Settings.AnimScale);
+            string fileName = path + "\\" + Project.Selected + "." + Project.Settings.HistoryImageFormat;
+            SaveVectorImage(fileName, drawing, Project.Settings.HistoryImageFormat, Project.Settings.HistoryImageScale);
         }
 
         private void ShowSettings()
@@ -480,13 +573,13 @@ namespace GenArt
             switch (comboBoxAnimSaveFormat.SelectedIndex)
             {
                 case 0:
-                    Project.Settings.AnimFormat = ImageFormat.Bmp;
+                    Project.Settings.HistoryImageFormat = ImageFormat.Bmp;
                     break;
                 case 1:
-                    Project.Settings.AnimFormat = ImageFormat.Gif;
+                    Project.Settings.HistoryImageFormat = ImageFormat.Gif;
                     break;
                 case 2:
-                    Project.Settings.AnimFormat = ImageFormat.Jpeg;
+                    Project.Settings.HistoryImageFormat = ImageFormat.Jpeg;
                     break;
             }
         }
@@ -514,6 +607,26 @@ namespace GenArt
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
             ShowStats();
+        }
+
+        private void radioButtonAnimSaveNever_CheckedChanged(object sender, EventArgs e)
+        {
+            Project.Settings.HistoryImageSaveTrigger = HistorySaveTrigger.None;
+        }
+
+        private void radioButtonAnimSaveFitness_CheckedChanged(object sender, EventArgs e)
+        {
+            Project.Settings.HistoryImageSaveTrigger = HistorySaveTrigger.Fitness;
+        }
+
+        private void radioButtonAnimSaveSelected_CheckedChanged(object sender, EventArgs e)
+        {
+            Project.Settings.HistoryImageSaveTrigger = HistorySaveTrigger.Selected;
+        }
+
+        private void numericUpDownAnimSaveSteps_ValueChanged(object sender, EventArgs e)
+        {
+            Project.Settings.HistoryImageSteps = numericUpDownAnimSaveSteps.Value;
         }
 
 
