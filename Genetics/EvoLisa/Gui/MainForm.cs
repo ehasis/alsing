@@ -55,13 +55,12 @@ namespace GenArt
                                   };
 
             IEvolutionJob job = new DefaultEvolutionJob(sourceImage);
-            double newErrorLevel;
 
             while (Project.IsRunning)
             {
 
                 var newDrawing = job.GetBestDrawing();
-                
+                double newErrorLevel = newDrawing.GetErrorLevel();
                 Project.Generations++;
 
 
@@ -69,11 +68,11 @@ namespace GenArt
                 {
                     Project.Mutations++;
 
-                    if (newDrawing.ErrorLevel <= Project.ErrorLevel)
+                    if (newErrorLevel <= Project.ErrorLevel)
                     {
                         Project.Selected++;
 
-                        if (newDrawing.ErrorLevel < Project.ErrorLevel)
+                        if (newErrorLevel < Project.ErrorLevel)
                             Project.Positive++;
                         else
                             Project.Neutral++;
@@ -84,7 +83,7 @@ namespace GenArt
                             Project.Drawing = currentDrawing.Clone();
                         }
 
-                        Project.ErrorLevel = newDrawing.ErrorLevel;
+                        Project.ErrorLevel = newErrorLevel;
                     }
                 }
             }
