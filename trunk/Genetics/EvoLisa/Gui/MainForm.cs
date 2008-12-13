@@ -54,7 +54,8 @@ namespace GenArt
                 Height = picPattern.Height
             };
 
-            IEvolutionJob job = new DefaultEvolutionJob(sourceImage);
+            //IEvolutionJob job = new DefaultEvolutionJob(sourceImage);
+            IEvolutionJob job = new ClusteredEvolutionJob(sourceImage);
 
             while (Project.IsRunning)
             {
