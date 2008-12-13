@@ -46,7 +46,7 @@ namespace GenArt.Classes
                 worker.StartWorking();
             }
 
-            Thread.Sleep(10);
+            Thread.Sleep(1);
 
             foreach (var worker in workers)
             {
