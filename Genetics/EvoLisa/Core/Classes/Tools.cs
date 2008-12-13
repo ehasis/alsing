@@ -4,19 +4,23 @@ namespace GenArt.Classes
 {
     public static class Tools
     {
-        private static readonly Random random = new Random();
+        [ThreadStatic]
+        private static Random random;
 
 
         public static int GetRandomNumber(int min, int max)
         {
+            //thread static hack
+            if (random == null)
+                random = new Random();
+
             return random.Next(min, max);
         }
 
         public static bool WillMutate(int mutationRate)
         {
-            if (GetRandomNumber(0, mutationRate) == 1)
-                return true;
-            return false;
+            int val = GetRandomNumber(0, mutationRate);
+            return val == 1;
         }
     }
 }
