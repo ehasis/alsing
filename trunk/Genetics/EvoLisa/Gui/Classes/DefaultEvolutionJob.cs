@@ -7,13 +7,13 @@ namespace GenArt.Classes
     public class DefaultEvolutionJob : IEvolutionJob
     {
         private DnaDrawing currentDrawing;
-
+        private double currentErrorLevel;
 
         public DefaultEvolutionJob(SourceImage sourceImage)
         {
             currentDrawing = GetNewInitializedDrawing();
             currentDrawing.SourceImage = sourceImage;
-            currentDrawing.ErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, sourceImage);
+            currentErrorLevel = currentDrawing.GetErrorLevel();
         }
 
         #region IEvolutionJob Members
@@ -42,17 +42,18 @@ namespace GenArt.Classes
             //TODO: Why not loop until we get a mutation - that way we don't waste lots of clones ^^
             if (newDrawing.IsDirty)
             {
-                newDrawing.ErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
+                var newErrorLevel = newDrawing.GetErrorLevel();
 
-                if (newDrawing.ErrorLevel <= currentDrawing.ErrorLevel)
+                if (newErrorLevel <= currentErrorLevel)
                 {
                     currentDrawing = newDrawing;
+                    currentErrorLevel = newErrorLevel;
                 }
 
-                return newDrawing.ErrorLevel;
+                return newErrorLevel;
             }
 
-            return currentDrawing.ErrorLevel;
+            return currentErrorLevel;
         }
     }
 }
