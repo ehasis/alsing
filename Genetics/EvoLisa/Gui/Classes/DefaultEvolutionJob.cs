@@ -9,18 +9,19 @@ namespace GenArt.Classes
         private DnaDrawing currentDrawing;
         private double currentErrorLevel;
 
+        public bool IsDirty { get; set; }
+
         public DefaultEvolutionJob(SourceImage sourceImage)
         {
             currentDrawing = GetNewInitializedDrawing();
             currentDrawing.SourceImage = sourceImage;
-            currentErrorLevel = currentDrawing.GetErrorLevel();
+            currentErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, currentDrawing.SourceImage);
         }
 
         #region IEvolutionJob Members
 
-        public DnaDrawing GetBestDrawing()
+        public DnaDrawing GetDrawing()
         {
-            GetNextErrorLevel();
             return currentDrawing;
         }
 
@@ -42,7 +43,7 @@ namespace GenArt.Classes
             //TODO: Why not loop until we get a mutation - that way we don't waste lots of clones ^^
             if (newDrawing.IsDirty)
             {
-                var newErrorLevel = newDrawing.GetErrorLevel();
+                var newErrorLevel =  FitnessCalculator.GetDrawingFitness(newDrawing,newDrawing.SourceImage);
 
                 if (newErrorLevel <= currentErrorLevel)
                 {
@@ -50,9 +51,11 @@ namespace GenArt.Classes
                     currentErrorLevel = newErrorLevel;
                 }
 
+                IsDirty = true;
                 return newErrorLevel;
             }
 
+            IsDirty = false;
             return currentErrorLevel;
         }
     }

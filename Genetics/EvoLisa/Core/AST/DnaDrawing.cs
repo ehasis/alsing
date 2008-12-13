@@ -12,11 +12,6 @@ namespace GenArt.AST
         public List<DnaPolygon> Polygons { get; set; }
         public SourceImage SourceImage { get; set; }        
 
-        public double GetErrorLevel()
-        {
-            return FitnessCalculator.GetDrawingFitness(this, SourceImage);
-        }
-
         [XmlIgnore]
         public bool IsDirty { get; private set; }
 
