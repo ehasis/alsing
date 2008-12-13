@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using GenArt.Classes;
 using System;
+using GenArt.Core.Classes;
 
 namespace GenArt.AST
 {
@@ -9,6 +10,7 @@ namespace GenArt.AST
     public class DnaDrawing
     {
         public List<DnaPolygon> Polygons { get; set; }
+        public SourceImage SourceImage { get; set; }
 
         [XmlIgnore]
         public bool IsDirty { get; private set; }
@@ -42,8 +44,11 @@ namespace GenArt.AST
 
         public DnaDrawing Clone()
         {
-            var drawing = new DnaDrawing();
-            drawing.Polygons = new List<DnaPolygon>();
+            var drawing = new DnaDrawing
+                              {
+                                  Polygons = new List<DnaPolygon>(),
+                                  SourceImage = SourceImage,
+                              };
             foreach (DnaPolygon polygon in Polygons)
                 drawing.Polygons.Add(polygon.Clone());
             return drawing;
@@ -93,7 +98,7 @@ namespace GenArt.AST
             if (Polygons.Count < Settings.ActivePolygonsMax)
             {
                 var newPolygon = new DnaPolygon();
-                newPolygon.Init();
+                newPolygon.Init(this);
 
                 int index = Tools.GetRandomNumber(0, Polygons.Count);
 

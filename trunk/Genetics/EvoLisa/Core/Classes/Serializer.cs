@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using System.Text;
-using System.Xml.Serialization;
 using System.IO;
-using System.Windows.Forms;
-using GenArt.AST;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using GenArt.AST;
 
 namespace GenArt.Classes
 {
@@ -28,13 +25,15 @@ namespace GenArt.Classes
 
             try
             {
-                XmlSerializer serializer = new XmlSerializer(settings.GetType());
-                using (FileStream writer = new FileStream(fileName, FileMode.Create))
+                var serializer = new XmlSerializer(settings.GetType());
+                using (var writer = new FileStream(fileName, FileMode.Create))
                 {
                     serializer.Serialize(writer, settings);
                 }
             }
-            catch (Exception ex) { ; }
+            catch (Exception)
+            {
+            }
         }
 
         public static void Serialize(DnaDrawing drawing, string fileName)
@@ -46,13 +45,15 @@ namespace GenArt.Classes
             {
                 try
                 {
-                    XmlSerializer serializer = new XmlSerializer(drawing.GetType());
-                    using (FileStream writer = new FileStream(fileName, FileMode.Create))
+                    var serializer = new XmlSerializer(drawing.GetType());
+                    using (var writer = new FileStream(fileName, FileMode.Create))
                     {
                         serializer.Serialize(writer, drawing);
                     }
                 }
-                catch (Exception ex) { ; }
+                catch (Exception)
+                {
+                }
             }
             else
             {
@@ -67,13 +68,15 @@ namespace GenArt.Classes
 
             try
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                using (FileStream writer = new FileStream(fileName, FileMode.Create))
+                var formatter = new BinaryFormatter();
+                using (var writer = new FileStream(fileName, FileMode.Create))
                 {
                     formatter.Serialize(writer, drawing);
                 }
             }
-            catch (Exception ex) { ; }
+            catch (Exception)
+            {
+            }
         }
 
         public static Settings DeserializeSettings()
@@ -92,13 +95,15 @@ namespace GenArt.Classes
 
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Settings));
-                using (FileStream reader = new FileStream(fileName, FileMode.Open))
+                var serializer = new XmlSerializer(typeof (Settings));
+                using (var reader = new FileStream(fileName, FileMode.Open))
                 {
-                    return (Settings)serializer.Deserialize(reader);
+                    return (Settings) serializer.Deserialize(reader);
                 }
             }
-            catch (Exception ex) { ; }
+            catch
+            {
+            }
             return null;
         }
 
@@ -111,19 +116,18 @@ namespace GenArt.Classes
             {
                 try
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(DnaDrawing));
-                    using (FileStream reader = new FileStream(fileName, FileMode.Open))
+                    var serializer = new XmlSerializer(typeof (DnaDrawing));
+                    using (var reader = new FileStream(fileName, FileMode.Open))
                     {
-                        return (DnaDrawing)serializer.Deserialize(reader);
+                        return (DnaDrawing) serializer.Deserialize(reader);
                     }
                 }
-                catch (Exception ex) { ; }
+                catch
+                {
+                }
                 return null;
             }
-            else
-            {
-                return DeserializeDnaDrawingBinary(fileName);
-            }
+            return DeserializeDnaDrawingBinary(fileName);
         }
 
         public static DnaDrawing DeserializeDnaDrawingBinary(string fileName)
@@ -133,13 +137,16 @@ namespace GenArt.Classes
 
             try
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                using (FileStream reader = new FileStream(fileName, FileMode.Open))
+                var formatter = new BinaryFormatter();
+                using (var reader = new FileStream(fileName, FileMode.Open))
                 {
-                    return (DnaDrawing)formatter.Deserialize(reader);
+                    return (DnaDrawing) formatter.Deserialize(reader);
                 }
             }
-            catch (Exception ex) { ; }
+            catch
+            {
+ 
+            }
             return null;
         }
     }

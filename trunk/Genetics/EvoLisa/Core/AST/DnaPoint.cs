@@ -1,5 +1,6 @@
 ﻿using System;
 using GenArt.Classes;
+using GenArt.Core.Classes;
 
 namespace GenArt.AST
 {
@@ -9,10 +10,10 @@ namespace GenArt.AST
         public int X { get; set; }
         public int Y { get; set; }
 
-        public void Init()
+        public void Init(DnaDrawing drawing)
         {
-            X = Tools.GetRandomNumber(0, Tools.MaxWidth);
-            Y = Tools.GetRandomNumber(0, Tools.MaxHeight);
+            X = Tools.GetRandomNumber(0, drawing.SourceImage.Width);
+            Y = Tools.GetRandomNumber(0, drawing.SourceImage.Height);
         }
 
         public DnaPoint Clone()
@@ -28,8 +29,8 @@ namespace GenArt.AST
         {
             if (Tools.WillMutate(Settings.ActiveMovePointMaxMutationRate))
             {
-                X = Tools.GetRandomNumber(0, Tools.MaxWidth);
-                Y = Tools.GetRandomNumber(0, Tools.MaxHeight);
+                X = Tools.GetRandomNumber(0, drawing.SourceImage.Width);
+                Y = Tools.GetRandomNumber(0, drawing.SourceImage.Height);
                 drawing.SetDirty();
             }
 
@@ -40,13 +41,13 @@ namespace GenArt.AST
                         Math.Max(0,
                                  X +
                                  Tools.GetRandomNumber(-Settings.ActiveMovePointRangeMid,
-                                                       Settings.ActiveMovePointRangeMid)), Tools.MaxWidth);
+                                                       Settings.ActiveMovePointRangeMid)), drawing.SourceImage.Width);
                 Y =
                     Math.Min(
                         Math.Max(0,
                                  Y +
                                  Tools.GetRandomNumber(-Settings.ActiveMovePointRangeMid,
-                                                       Settings.ActiveMovePointRangeMid)), Tools.MaxHeight);
+                                                       Settings.ActiveMovePointRangeMid)), drawing.SourceImage.Height);
                 drawing.SetDirty();
             }
 
@@ -57,13 +58,13 @@ namespace GenArt.AST
                         Math.Max(0,
                                  X +
                                  Tools.GetRandomNumber(-Settings.ActiveMovePointRangeMin,
-                                                       Settings.ActiveMovePointRangeMin)), Tools.MaxWidth);
+                                                       Settings.ActiveMovePointRangeMin)), drawing.SourceImage.Width);
                 Y =
                     Math.Min(
                         Math.Max(0,
                                  Y +
                                  Tools.GetRandomNumber(-Settings.ActiveMovePointRangeMin,
-                                                       Settings.ActiveMovePointRangeMin)), Tools.MaxHeight);
+                                                       Settings.ActiveMovePointRangeMin)), drawing.SourceImage.Height);
                 drawing.SetDirty();
             }
         }
