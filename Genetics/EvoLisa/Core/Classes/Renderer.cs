@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
-
 using GenArt.AST;
 
 namespace GenArt.Classes
@@ -9,7 +7,7 @@ namespace GenArt.Classes
     public static class Renderer
     {
         //Render a Drawing
-        public static void Render(DnaDrawing drawing,Graphics g,int scale)
+        public static void Render(DnaDrawing drawing, Graphics g, int scale)
         {
             g.Clear(Color.Black);
 
@@ -23,19 +21,19 @@ namespace GenArt.Classes
             using (Brush brush = GetGdiBrush(polygon.Brush))
             {
                 Point[] points = GetGdiPoints(polygon.Points, scale);
-                g.FillPolygon(brush,points);
+                g.FillPolygon(brush, points);
                 //g.DrawPolygon(new Pen(brush, 1), points);
             }
         }
 
         //Convert a list of DnaPoint to a list of System.Drawing.Point's
-        private static Point[] GetGdiPoints(IList<DnaPoint> points,int scale)
+        private static Point[] GetGdiPoints(IList<DnaPoint> points, int scale)
         {
-            Point[] pts = new Point[points.Count];
+            var pts = new Point[points.Count];
             int i = 0;
             foreach (DnaPoint pt in points)
             {
-                pts[i++] = new Point(pt.X * scale, pt.Y * scale);
+                pts[i++] = new Point(pt.X*scale, pt.Y*scale);
             }
             return pts;
         }
@@ -45,7 +43,5 @@ namespace GenArt.Classes
         {
             return new SolidBrush(Color.FromArgb(b.Alpha, b.Red, b.Green, b.Blue));
         }
-
-        
     }
 }

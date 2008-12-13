@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GenArt.Classes;
+using GenArt.Core.Classes;
 
 namespace GenArt.AST
 {
@@ -10,19 +11,21 @@ namespace GenArt.AST
         public List<DnaPoint> Points { get; set; }
         public DnaBrush Brush { get; set; }
 
-        public void Init()
+        public void Init(DnaDrawing drawing)
         {
             Points = new List<DnaPoint>();
 
             //int count = Tools.GetRandomNumber(3, 3);
             var origin = new DnaPoint();
-            origin.Init();
+            origin.Init(drawing);
 
             for (int i = 0; i < Settings.ActivePointsPerPolygonMin; i++)
             {
-                var point = new DnaPoint();
-                point.X = Math.Min(Math.Max(0, origin.X + Tools.GetRandomNumber(-3, 3)), Tools.MaxWidth);
-                point.Y = Math.Min(Math.Max(0, origin.Y + Tools.GetRandomNumber(-3, 3)), Tools.MaxHeight);
+                var point = new DnaPoint
+                                {
+                                    X = Math.Min(Math.Max(0, origin.X + Tools.GetRandomNumber(-3, 3)), drawing.SourceImage.Width),
+                                    Y = Math.Min(Math.Max(0, origin.Y + Tools.GetRandomNumber(-3, 3)), drawing.SourceImage.Height)
+                                };
 
                 Points.Add(point);
             }
@@ -33,9 +36,11 @@ namespace GenArt.AST
 
         public DnaPolygon Clone()
         {
-            var newPolygon = new DnaPolygon();
-            newPolygon.Points = new List<DnaPoint>();
-            newPolygon.Brush = Brush.Clone();
+            var newPolygon = new DnaPolygon
+                                 {
+                                     Points = new List<DnaPoint>(), 
+                                     Brush = Brush.Clone()
+                                 };
             foreach (DnaPoint point in Points)
                 newPolygon.Points.Add(point.Clone());
 
