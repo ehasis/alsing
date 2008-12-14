@@ -1,67 +1,53 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using GenArt.AST;
 using GenArt.Core.Classes;
 
 namespace GenArt.Classes
 {
-    public static class FitnessCalculator
-    {
-        public static double GetDrawingFitness(DnaDrawing newDrawing, SourceImage sourceImage)
-        {
-            double error = 0;
+	public class FitnessCalculator
+	{
+		// 2008-12-14 DanByström: method optimized for speed
+		public static double GetDrawingFitness( DnaDrawing newDrawing, SourceImage sourceImage )
+		{
+			double error = 0;
 
-            using (var b = new Bitmap(sourceImage.Width, sourceImage.Height, PixelFormat.Format24bppRgb))
-            using (Graphics g = Graphics.FromImage(b))
-            {
-                Renderer.Render(newDrawing, g, 1);
+			using ( Bitmap bmp = new Bitmap( sourceImage.Width, sourceImage.Height ) )
+			using ( Graphics g = Graphics.FromImage( bmp ) )
+			{
+				Renderer.Render( newDrawing, g, 1 );
 
-                BitmapData bmd1 = b.LockBits(new Rectangle(0, 0, sourceImage.Width, sourceImage.Height), ImageLockMode.ReadOnly,
-                                             PixelFormat.Format24bppRgb);
+				BitmapData bd = bmp.LockBits(
+					new Rectangle( 0, 0, sourceImage.Width, sourceImage.Height ),
+					ImageLockMode.ReadOnly,
+					PixelFormat.Format32bppArgb );
 
+				unchecked
+				{
+					unsafe
+					{
+						fixed ( Pixel* psourcePixels = sourceImage.Pixels )
+						{
+							Pixel* p1 = (Pixel*)bd.Scan0.ToPointer();
+							Pixel* p2 = psourcePixels;
+							for ( int i = sourceImage.Pixels.Length ; i > 0 ; i--, p1++, p2++ )
+							{
+								int R = p1->R - p2->R;
+								int G = p1->G - p2->G;
+								int B = p1->B - p2->B;
+								error += R * R + G * G + B * B;
+							}
+						}
+					}
+				}
 
-                for (int y = 0; y < sourceImage.Height; y++)
-                {
-                    for (int x = 0; x < sourceImage.Width; x++)
-                    {
-                        Color c1 = GetPixel(bmd1, x, y);
-                        Color c2 = sourceImage.Colors[x, y];
+				bmp.UnlockBits( bd );
+			}
 
-                        if (c2.A == 0)
-                        {
-                            if (c1 != Color.Black)
-                            {
-                                error += 255;
-                            }
-                        }
-                        else
-                        {
-                            double pixelError = GetColorFitness(c1, c2);
-                            error += pixelError;
-                        }
-                    }
-                }
+			return error;
+		}
 
-                b.UnlockBits(bmd1);
-            }
+	}
 
-            return error;
-        }
-
-
-        private static unsafe Color GetPixel(BitmapData bmd, int x, int y)
-        {
-            byte* p = (byte*) bmd.Scan0 + y*bmd.Stride + 3*x;
-            return Color.FromArgb(p[2], p[1], p[0]);
-        }
-
-        private static double GetColorFitness(Color c1, Color c2)
-        {
-            double r = c1.R - c2.R;
-            double g = c1.G - c2.G;
-            double b = c1.B - c2.B;
-
-            return r*r + g*g + b*b;
-        }
-    }
 }

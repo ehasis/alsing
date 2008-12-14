@@ -49,7 +49,7 @@ namespace GenArt
         {
             var sourceImage = new SourceImage
                                   {
-                                      Colors = SetupSourceColorMatrix(picPattern.Image as Bitmap),
+                                      Pixels = SetupSourceColorMatrix(picPattern.Image as Bitmap),
                                       Width = picPattern.Width,
                                       Height = picPattern.Height
                                   };
@@ -57,8 +57,8 @@ namespace GenArt
             //IEvolutionJob job = new LayeredEvolutionJob(sourceImage, 4);
 
             //DefaultEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
-            //IEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
-            IEvolutionJob job = new ClusteredEvolutionJob(sourceImage);
+            IEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
+            //IEvolutionJob job = new ClusteredEvolutionJob(sourceImage);
 
             while (Project.IsRunning)
             {
@@ -93,26 +93,26 @@ namespace GenArt
             }
         }
 
-        //converts the source image to a Color[,] for faster lookup
-        private Color[,] SetupSourceColorMatrix(Bitmap sourceBitmap)
-        {
-            var sourceColors = new Color[sourceBitmap.Width, sourceBitmap.Height];
-            var sourceImage = picPattern.Image as Bitmap;
+				//converts the source image to a Color[,] for faster lookup
+				private Pixel[] SetupSourceColorMatrix( Bitmap sourceBitmap )
+				{
+					var sourceColors = new Pixel[sourceBitmap.Width * sourceBitmap.Height];
+					var sourceImage = picPattern.Image as Bitmap;
 
-            if (sourceImage == null)
-                throw new NotSupportedException("A source image of Bitmap format must be provided");
+					if ( sourceImage == null )
+						throw new NotSupportedException( "A source image of Bitmap format must be provided" );
 
-            for (int y = 0; y < sourceBitmap.Height; y++)
-            {
-                for (int x = 0; x < sourceBitmap.Width; x++)
-                {
-                    Color c = sourceImage.GetPixel(x, y);
-                    sourceColors[x, y] = c;
-                }
-            }
+					for ( int y = 0 ; y < sourceBitmap.Height ; y++ )
+					{
+						for ( int x = 0 ; x < sourceBitmap.Width ; x++ )
+						{
+							Color c = sourceImage.GetPixel( x, y );
+							sourceColors[y * sourceBitmap.Width + x] = c;
+						}
+					}
 
-            return sourceColors;
-        }
+					return sourceColors;
+				}
 
 
         private void btnStart_Click(object sender, EventArgs e)

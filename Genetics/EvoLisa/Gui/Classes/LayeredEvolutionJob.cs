@@ -76,21 +76,21 @@ namespace GenArt.Classes
             var newSourceImage = new SourceImage();
             newSourceImage.Height = sourceImage.Height;
             newSourceImage.Width = sourceImage.Width;
-            newSourceImage.Colors = new Color[newSourceImage.Width,newSourceImage.Height];
+            newSourceImage.Pixels = new Pixel[newSourceImage.Width*newSourceImage.Height];
             for (int y = 0; y < sourceImage.Height; y++)
             {
                 for (int x = 0; x < sourceImage.Width; x++)
                 {
-                    Color c = sourceImage.Colors[x, y];
+                    Color c = sourceImage.Pixel(x, y);
                     var intensity = (int) (c.GetBrightness()*255);
 
                     if (intensity >= workerMin && intensity <= workerMin + range)
                     {
-                        newSourceImage.Colors[x, y] = c;
+											newSourceImage.setPixel( x, y, c );
                     }
                     else
                     {
-                        newSourceImage.Colors[x, y] = Color.Black;
+											newSourceImage.setPixel( x, y, Color.Black );
                     }
                 }
             }
