@@ -379,7 +379,7 @@ namespace GenArt
             Project.LastSavedFitness = 0;
             Project.LastSavedSelected = 0;
             Project.LastStartTime = DateTime.MinValue;
-            Project.ElapsedTime = TimeSpan.MinValue;
+            Project.ElapsedTime = TimeSpan.Zero;
         }
 
         private void SetCanvasSize()
