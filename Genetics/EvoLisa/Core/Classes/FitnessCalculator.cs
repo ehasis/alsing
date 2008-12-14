@@ -31,8 +31,18 @@ namespace GenArt.Classes
                         Color c1 = GetPixel(bmd1, x, y);
                         Color c2 = sourceImage.Colors[x, y];
 
-                        double pixelError = GetColorFitness(c1, c2);
-                        error += pixelError;
+                        if (c2.A == 0)
+                        {
+                            if (c1 != Color.Black)
+                            {
+                                error += 255;
+                            }
+                        }
+                        else
+                        {
+                            double pixelError = GetColorFitness(c1, c2);
+                            error += pixelError;
+                        }
                     }
                 }
 

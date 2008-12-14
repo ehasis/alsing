@@ -11,7 +11,6 @@ namespace GenArt.Classes
         public DnaDrawing CurrentDrawing { get; set; }
         public double CurrentErrorLevel { get; set; }
         public bool IsDirty { get; set; }
-        public Bitmap Background { get; set; }
 
 
         public LayeredWorker(SourceImage sourceImage)
@@ -35,7 +34,7 @@ namespace GenArt.Classes
             while (newDrawing.IsDirty == false)
                 newDrawing.Mutate();
 
-            double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage,Background);
+            double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage,null);
 
             if (newErrorLevel <= CurrentErrorLevel)
             {

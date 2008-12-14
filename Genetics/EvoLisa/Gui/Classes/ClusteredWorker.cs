@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using GenArt.AST;
 
 namespace GenArt.Classes
 {
     public class ClusteredWorker
     {
-        private Thread workerThread;
-        private double currentErrorLevel;
         private DnaDrawing currentDrawing;
-        public ClusteredWorker()
-        {
-
-        }
+        private double currentErrorLevel;
+        private bool isRunning;
+        private Thread workerThread;
 
         internal void SetJob(DnaDrawing drawing, double errorLevel)
         {
@@ -24,30 +18,29 @@ namespace GenArt.Classes
 
         private void WorkerThreadStart()
         {
-            while(isRunning)
+            while (isRunning)
             {
-                var newDrawing = currentDrawing.Clone();
-                newDrawing.Mutate();
-                if (newDrawing.IsDirty)
+                DnaDrawing newDrawing = currentDrawing.Clone();
+
+                while (newDrawing.IsDirty == false)
+                    newDrawing.Mutate();
+
+                double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
+                if (newErrorLevel < currentErrorLevel)
                 {
-                    var newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
-                    if (newErrorLevel < currentErrorLevel)
-                    {
-                        currentDrawing = newDrawing;
-                        currentErrorLevel = newErrorLevel;
-                    }
+                    currentDrawing = newDrawing;
+                    currentErrorLevel = newErrorLevel;
                 }
             }
         }
 
-        private bool isRunning;
         internal void StartWorking()
         {
             workerThread = new Thread(WorkerThreadStart)
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.Normal
-            };
+                               {
+                                   IsBackground = true,
+                                   Priority = ThreadPriority.Normal
+                               };
             isRunning = true;
             workerThread.Start();
         }

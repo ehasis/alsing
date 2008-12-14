@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using GenArt.AST;
 using GenArt.Core.Classes;
 using GenArt.Core.Interfaces;
@@ -9,61 +9,34 @@ namespace GenArt.Classes
 {
     public class LayeredEvolutionJob : IEvolutionJob
     {
+        private readonly SourceImage sourceImage;
+        private readonly IList<LayeredWorker> workers;
         private DnaDrawing currentDrawing;
         private double currentErrorLevel;
-        public int LayerCount { get; set; }
-        private readonly IList<LayeredWorker> workers;
-        private readonly SourceImage sourceImage;
 
-        public LayeredEvolutionJob(SourceImage sourceImage,int layerCount)
+        public LayeredEvolutionJob(SourceImage sourceImage, int layerCount)
         {
             this.sourceImage = sourceImage;
             LayerCount = layerCount;
             workers = new List<LayeredWorker>();
             int range = 255/LayerCount;
             int workerMin = 0;
-            for(int i=0;i<LayerCount;i++)
+            for (int i = 0; i < LayerCount; i++)
             {
-                var background = GetIntensityMap(sourceImage, workerMin, range);
+                SourceImage newSourceImage = GetIntensityMap(sourceImage, workerMin, range);
 
-                var worker = new LayeredWorker (sourceImage)
-                {
-                    MinIntensity = workerMin, 
-                    MaxIntensity = (workerMin + range),
-                    Background = background,
-                };
+                var worker = new LayeredWorker(newSourceImage)
+                                 {
+                                     MinIntensity = workerMin,
+                                     MaxIntensity = (workerMin + range),
+                                 };
 
                 workers.Add(worker);
                 workerMin += range;
             }
         }
 
-        private static Bitmap GetIntensityMap(SourceImage sourceImage, int workerMin, int range)
-        {
-            var background = new Bitmap(sourceImage.Width, sourceImage.Height, PixelFormat.Format24bppRgb);
-
-            for (int y = 0; y < sourceImage.Height; y++)
-            {
-                for (int x = 0; x < sourceImage.Width; x++)
-                {
-                    Color c = sourceImage.Colors[x, y];
-                    int intensity = (c.R + c.G + c.B)/3;
-
-                    if (intensity >= workerMin && intensity <= workerMin + range)
-                    {
-                        //remove pixels that are supposed to be drawn by this layer
-                        background.SetPixel(x, y, Color.Black);
-                    }
-                    else
-                    {
-                        //colors outside the layers range is included in the background for this layer
-                        background.SetPixel(x, y, c);
-                    }
-                }
-            }
-
-            return background;
-        }
+        public int LayerCount { get; set; }
 
         #region IEvolutionJob Members
 
@@ -77,12 +50,19 @@ namespace GenArt.Classes
             var drawing = new DnaDrawing();
             drawing.SourceImage = sourceImage;
             drawing.Polygons = new List<DnaPolygon>();
-            foreach(LayeredWorker worker in workers)
+            int i = 0;
+            foreach (LayeredWorker worker in workers)
             {
+                i++;
+
+                if (i == 1)
+                    continue;
+
                 DnaDrawing workerDrawing = worker.GetDrawing();
                 drawing.Polygons.AddRange(workerDrawing.Clone().Polygons);
                 //drawing = worker.GetDrawing();
             }
+
             currentDrawing = drawing;
 
             currentErrorLevel = FitnessCalculator.GetDrawingFitness(drawing, sourceImage);
@@ -90,5 +70,42 @@ namespace GenArt.Classes
         }
 
         #endregion
+
+        private static SourceImage GetIntensityMap(SourceImage sourceImage, int workerMin, int range)
+        {
+            var newSourceImage = new SourceImage();
+            newSourceImage.Height = sourceImage.Height;
+            newSourceImage.Width = sourceImage.Width;
+            newSourceImage.Colors = new Color[newSourceImage.Width,newSourceImage.Height];
+            for (int y = 0; y < sourceImage.Height; y++)
+            {
+                for (int x = 0; x < sourceImage.Width; x++)
+                {
+                    Color c = sourceImage.Colors[x, y];
+                    var intensity = (int) (c.GetBrightness()*255);
+
+                    if (intensity >= workerMin && intensity <= workerMin + range)
+                    {
+                        newSourceImage.Colors[x, y] = c;
+                    }
+                    else
+                    {
+                        newSourceImage.Colors[x, y] = Color.Black;
+                    }
+                }
+            }
+
+            return newSourceImage;
+        }
+
+        public double GetColorDist(Color c1, Color c2)
+        {
+            double r = c1.R - c2.R;
+            double g = c1.G - c2.G;
+            double b = c1.B - c2.B;
+
+            double dist = Math.Sqrt(r*r + g*g + b*b);
+            return dist;
+        }
     }
 }
