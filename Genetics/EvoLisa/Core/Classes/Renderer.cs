@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using GenArt.AST;
 
 namespace GenArt.Classes
@@ -23,7 +24,7 @@ namespace GenArt.Classes
             using (Brush brush = GetGdiBrush(polygon.Brush))
             {
                 Point[] points = GetGdiPoints(polygon.Points, scale);
-                g.FillPolygon(brush, points);
+                g.FillPolygon(brush, points,FillMode.Winding);
                 //g.DrawPolygon(new Pen(brush, 1), points);
             }
         }

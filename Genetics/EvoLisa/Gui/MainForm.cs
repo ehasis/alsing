@@ -7,23 +7,22 @@ using System.Threading;
 using System.Windows.Forms;
 using GenArt.AST;
 using GenArt.Classes;
-using GenArt.Core.Interfaces;
 using GenArt.Core.Classes;
+using GenArt.Core.Interfaces;
 
 namespace GenArt
 {
     public partial class MainForm : Form
     {
-        public DnaProject Project;
-        private string projectFileName = "";
-
-        private DnaDrawing currentDrawing = null;
+        private DnaDrawing currentDrawing;
 
         private DnaDrawing guiDrawing;
         private DateTime lastRepaint = DateTime.MinValue;
         private int lastSelected;
+        public DnaProject Project;
+        private string projectFileName = "";
         private TimeSpan repaintIntervall = new TimeSpan(0, 0, 0, 0, 0);
-        private int repaintOnSelectedSteps = 3;
+        private const int repaintOnSelectedSteps = 3;
         private SettingsForm settingsForm;
         private StatsForm statsForm;
 
@@ -63,7 +62,7 @@ namespace GenArt
             while (Project.IsRunning)
             {
                 double newErrorLevel = job.GetNextErrorLevel();
-              //  Project.Generations += job.Generations;
+                //  Project.Generations += job.Generations;
 
                 Project.Mutations++;
 
@@ -76,7 +75,7 @@ namespace GenArt
                     else
                         Project.Neutral++;
 
-                    var newDrawing = job.GetDrawing();
+                    DnaDrawing newDrawing = job.GetDrawing();
                     if (currentDrawing == null) // to make always lockable...
                         currentDrawing = new DnaDrawing();
 
@@ -93,26 +92,26 @@ namespace GenArt
             }
         }
 
-				//converts the source image to a Color[,] for faster lookup
-				private Pixel[] SetupSourceColorMatrix( Bitmap sourceBitmap )
-				{
-					var sourceColors = new Pixel[sourceBitmap.Width * sourceBitmap.Height];
-					var sourceImage = picPattern.Image as Bitmap;
+        //converts the source image to a Color[,] for faster lookup
+        private Pixel[] SetupSourceColorMatrix(Bitmap sourceBitmap)
+        {
+            var sourceColors = new Pixel[sourceBitmap.Width*sourceBitmap.Height];
+            var sourceImage = picPattern.Image as Bitmap;
 
-					if ( sourceImage == null )
-						throw new NotSupportedException( "A source image of Bitmap format must be provided" );
+            if (sourceImage == null)
+                throw new NotSupportedException("A source image of Bitmap format must be provided");
 
-					for ( int y = 0 ; y < sourceBitmap.Height ; y++ )
-					{
-						for ( int x = 0 ; x < sourceBitmap.Width ; x++ )
-						{
-							Color c = sourceImage.GetPixel( x, y );
-							sourceColors[y * sourceBitmap.Width + x] = c;
-						}
-					}
+            for (int y = 0; y < sourceBitmap.Height; y++)
+            {
+                for (int x = 0; x < sourceBitmap.Width; x++)
+                {
+                    Color c = sourceImage.GetPixel(x, y);
+                    sourceColors[y*sourceBitmap.Width + x] = c;
+                }
+            }
 
-					return sourceColors;
-				}
+            return sourceColors;
+        }
 
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -133,10 +132,10 @@ namespace GenArt
                 KillThread();
 
             thread = new Thread(StartEvolution)
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.AboveNormal
-            };
+                         {
+                             IsBackground = true,
+                             Priority = ThreadPriority.AboveNormal
+                         };
 
             Project.LastStartTime = DateTime.Now;
             thread.Start();
@@ -220,7 +219,8 @@ namespace GenArt
 
 
             using (
-                var backBuffer = new Bitmap(Project.Settings.Scale * picPattern.Width, Project.Settings.Scale * picPattern.Height,
+                var backBuffer = new Bitmap(Project.Settings.Scale*picPattern.Width,
+                                            Project.Settings.Scale*picPattern.Height,
                                             PixelFormat.Format24bppRgb))
             using (Graphics backGraphics = Graphics.FromImage(backBuffer))
             {
@@ -237,7 +237,7 @@ namespace GenArt
             Project = new DnaProject();
             Project.Init();
             projectFileName = "";
-            this.Text = "[New Project]";
+            Text = "[New Project]";
         }
 
         private void OpenProject()
@@ -341,7 +341,7 @@ namespace GenArt
 
         private void SetTitleBar()
         {
-            this.Text = projectFileName;
+            Text = projectFileName;
         }
 
 
@@ -386,8 +386,8 @@ namespace GenArt
 
         private void SetCanvasSize()
         {
-            pnlCanvas.Height = Project.Settings.Scale * picPattern.Height;
-            pnlCanvas.Width = Project.Settings.Scale * picPattern.Width;
+            pnlCanvas.Height = Project.Settings.Scale*picPattern.Height;
+            pnlCanvas.Width = Project.Settings.Scale*picPattern.Width;
 
             RepaintCanvas();
         }
@@ -417,7 +417,7 @@ namespace GenArt
             string fileName = FileUtil.GetSaveFileName(FileUtil.DnaExtension);
             if (string.IsNullOrEmpty(fileName) == false && currentDrawing != null)
             {
-                DnaDrawing clone = null;
+                DnaDrawing clone;
                 lock (currentDrawing)
                 {
                     clone = currentDrawing.Clone();
@@ -449,7 +449,7 @@ namespace GenArt
         private void SaveVectorImage(string fileName, DnaDrawing drawing, ImageFormat imageFormat, int scale)
         {
             using (
-                var img = new Bitmap(scale * picPattern.Width, scale * picPattern.Height,
+                var img = new Bitmap(scale*picPattern.Width, scale*picPattern.Height,
                                      PixelFormat.Format24bppRgb))
             {
                 using (Graphics imgGfx = Graphics.FromImage(img))
@@ -461,9 +461,8 @@ namespace GenArt
                     {
                         img.Save(fileName, imageFormat);
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        ;
                     }
                 }
             }
@@ -644,7 +643,5 @@ namespace GenArt
         {
             Project.Settings.HistoryImageSteps = numericUpDownAnimSaveSteps.Value;
         }
-
-
     }
 }
