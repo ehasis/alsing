@@ -21,12 +21,10 @@ namespace GenArt.Classes
         //Render a polygon
         private static void Render(DnaPolygon polygon, Graphics g, int scale)
         {
+            Point[] points = GetGdiPoints(polygon.Points, scale);
             using (Brush brush = GetGdiBrush(polygon.Brush))
             {
-                Point[] points = GetGdiPoints(polygon.Points, scale);
-                //g.FillPolygon(brush, points,FillMode.Winding);
-                g.FillClosedCurve(brush, points, FillMode.Winding);
-                //g.DrawPolygon(new Pen(brush, 1), points);
+                g.FillClosedCurve(brush, points, FillMode.Winding);                
             }
         }
 
@@ -45,6 +43,12 @@ namespace GenArt.Classes
         //Convert a DnaBrush to a System.Drawing.Brush
         private static Brush GetGdiBrush(DnaBrush b)
         {
+            //var pb = new PathGradientBrush(points);
+            //pb.CenterColor = Color.FromArgb(b.Alpha, b.Red, b.Green, b.Blue);
+            //pb.SurroundColors = new Color[] {Color.Transparent};
+
+            //return pb;
+
             return new SolidBrush(Color.FromArgb(b.Alpha, b.Red, b.Green, b.Blue));
         }
     }
