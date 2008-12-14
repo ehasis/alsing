@@ -109,8 +109,8 @@ namespace GenArt.Core.Classes
             {
                 double avg = 0;
                 TimeSpan elapsed = project.GetElapsedTime();
-                if (elapsed.Seconds > 0)
-                    avg = ((double) project.Generations/elapsed.Seconds);
+                if (elapsed.TotalSeconds > 0)
+                    avg = ((double) project.Generations/elapsed.TotalSeconds);
                 return avg;
             }
         }
@@ -123,8 +123,8 @@ namespace GenArt.Core.Classes
             {
                 double avg = 0;
                 TimeSpan elapsed = project.GetElapsedTime();
-                if (elapsed.Seconds > 0)
-                    avg = ((double)project.Mutations / elapsed.Seconds);
+                if (elapsed.TotalSeconds > 0)
+                    avg = ((double)project.Mutations / elapsed.TotalSeconds);
                 return avg;
             }
         }
@@ -137,8 +137,8 @@ namespace GenArt.Core.Classes
             {
                 double avg = 0;
                 TimeSpan elapsed = project.GetElapsedTime();
-                if (elapsed.Seconds > 0)
-                    avg = ((double)project.Selected / elapsed.Seconds);
+                if (elapsed.TotalSeconds > 0)
+                    avg = ((double)project.Selected / elapsed.TotalSeconds);
                 return avg;
             }
         }
@@ -151,8 +151,8 @@ namespace GenArt.Core.Classes
             {
                 double avg = 0;
                 TimeSpan elapsed = project.GetElapsedTime();
-                if (elapsed.Seconds > 0)
-                    avg = ((double)project.Selected / elapsed.Seconds);
+                if (elapsed.TotalSeconds > 0)
+                    avg = ((double)project.Selected / elapsed.TotalSeconds);
                 return avg;
             }
         }
