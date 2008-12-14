@@ -403,6 +403,7 @@ namespace GenArt
                 {
                     currentDrawing = drawing;
                     guiDrawing = currentDrawing.Clone();
+                    Project.Drawing = currentDrawing;
                 }
                 ResetProjectLevels();
                 RepaintCanvas();
