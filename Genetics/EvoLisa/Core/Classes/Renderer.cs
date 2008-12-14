@@ -24,7 +24,8 @@ namespace GenArt.Classes
             using (Brush brush = GetGdiBrush(polygon.Brush))
             {
                 Point[] points = GetGdiPoints(polygon.Points, scale);
-                g.FillPolygon(brush, points,FillMode.Winding);
+                //g.FillPolygon(brush, points,FillMode.Winding);
+                g.FillClosedCurve(brush, points, FillMode.Winding);
                 //g.DrawPolygon(new Pen(brush, 1), points);
             }
         }
