@@ -9,16 +9,25 @@ namespace GenArt.Classes
         private DnaDrawing currentDrawing;
         private double currentErrorLevel;
 
-        public DefaultEvolutionJob(SourceImage sourceImage)
+        public DefaultEvolutionJob(SourceImage sourceImage) : this(sourceImage, null)
         {
-            currentDrawing = GetNewInitializedDrawing();
+        }
+
+        public DefaultEvolutionJob(SourceImage sourceImage, DnaDrawing drawing)
+        {
+            if (drawing == null)
+                drawing = GetNewInitializedDrawing();
+            lock (drawing)
+            {
+                currentDrawing = drawing.Clone();
+            }
             currentDrawing.SourceImage = sourceImage;
             currentErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, currentDrawing.SourceImage);
         }
 
         #region IEvolutionJob Members
 
-        public bool IsDirty { get; set; }
+        public int Generations { get; set; }
 
         public DnaDrawing GetDrawing()
         {
@@ -27,10 +36,14 @@ namespace GenArt.Classes
 
         public double GetNextErrorLevel()
         {
+            Generations = 0;
             DnaDrawing newDrawing = currentDrawing.Clone();
 
             while (newDrawing.IsDirty == false)
+            {
                 newDrawing.Mutate();
+                Generations++;
+            }
 
             double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
 
