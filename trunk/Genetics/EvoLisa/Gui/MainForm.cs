@@ -56,14 +56,14 @@ namespace GenArt
 
             //IEvolutionJob job = new LayeredEvolutionJob(sourceImage, 4);
 
-            DefaultEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
+            //DefaultEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
             //IEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
-            //IEvolutionJob job = new ClusteredEvolutionJob(sourceImage);
+            IEvolutionJob job = new ClusteredEvolutionJob(sourceImage);
 
             while (Project.IsRunning)
             {
                 double newErrorLevel = job.GetNextErrorLevel();
-                Project.Generations += job.Generations;
+              //  Project.Generations += job.Generations;
 
                 Project.Mutations++;
 
