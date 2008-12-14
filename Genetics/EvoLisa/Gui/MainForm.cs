@@ -87,6 +87,8 @@ namespace GenArt
                     }
 
                     Project.ErrorLevel = newErrorLevel;
+
+                    SaveAnimationImage(newDrawing);
                 }
             }
         }
@@ -474,6 +476,9 @@ namespace GenArt
 
             string path = projectFileName;
 
+            if (!string.IsNullOrEmpty(textBoxAnimSaveDir.Text))
+                path = textBoxAnimSaveDir.Text;
+
             if (string.IsNullOrEmpty(path))
                 return;
 
@@ -502,7 +507,11 @@ namespace GenArt
             Project.LastSavedFitness = Project.ErrorLevel;
 
             string fileName = path + "\\" + Project.Selected + "." + Project.Settings.HistoryImageFormat;
-            SaveVectorImage(fileName, drawing, Project.Settings.HistoryImageFormat, Project.Settings.HistoryImageScale);
+            int scale = Project.Settings.HistoryImageScale;
+            if (scale < 1)
+                scale = Project.Settings.Scale;
+
+            SaveVectorImage(fileName, drawing, Project.Settings.HistoryImageFormat, scale);
         }
 
         private void ShowSettings()
