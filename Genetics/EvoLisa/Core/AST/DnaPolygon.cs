@@ -50,6 +50,8 @@ namespace GenArt.AST
             return newPolygon;
         }
 
+        public bool IsComplex { get; set; }
+
         public void Mutate(DnaDrawing drawing)
         {
             if (Tools.WillMutate(Settings.ActiveAddPointMutationRate))
@@ -60,6 +62,8 @@ namespace GenArt.AST
 
             Brush.Mutate(drawing);
             Points.ForEach(p => p.Mutate(drawing));
+
+            IsComplex = false;// checkComplex();
         }
 
         private void RemovePoint(DnaDrawing drawing)
@@ -89,8 +93,8 @@ namespace GenArt.AST
                     DnaPoint prev = Points[index - 1];
                     DnaPoint next = Points[index];
 
-                    newPoint.X = (prev.X + next.X)/2;
-                    newPoint.Y = (prev.Y + next.Y)/2;
+                    newPoint.X = (prev.X + next.X) / 2;
+                    newPoint.Y = (prev.Y + next.Y) / 2;
 
 
                     Points.Insert(index, newPoint);
@@ -99,5 +103,39 @@ namespace GenArt.AST
                 }
             }
         }
+
+        //smeck, funkar ju inte
+        public bool checkComplex()
+        {
+            int i = 0, j;
+            for (j = i + 2; j < Points.Count - 1; j++)
+                if (intersect(i, j))
+                    return true;
+            for (i = 1; i < Points.Count; i++)
+                for (j = i + 2; j < Points.Count; j++)
+                    if (intersect(i, j))
+                        return true;
+            return false;
+        }
+
+        public bool intersect(int i1, int i2)
+        {
+            int s1 = (i1 > 0) ? i1 - 1 : Points.Count - 1;
+            int s2 = (i2 > 0) ? i2 - 1 : Points.Count - 1;
+            return ccw(Points[s1], Points[i1], Points[s2])
+                != ccw(Points[s1], Points[i1], Points[i2])
+                && ccw(Points[s2], Points[i2], Points[s1])
+                != ccw(Points[s2], Points[i2], Points[i1]);
+        }
+
+        public bool ccw(DnaPoint p1, DnaPoint p2, DnaPoint p3)
+        {
+            double dx1 = p2.X - p1.X;
+            double dy1 = p2.Y - p1.Y;
+            double dx2 = p3.X - p2.X;
+            double dy2 = p3.Y - p2.Y;
+            return dy1 * dx2 < dy2 * dx1;
+        }
+
     }
 }
