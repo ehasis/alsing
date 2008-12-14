@@ -12,6 +12,5 @@ namespace GenArt.Core.Interfaces
         DnaDrawing GetDrawing();
 
         double GetNextErrorLevel();
-        bool IsDirty { get; }
     }
 }

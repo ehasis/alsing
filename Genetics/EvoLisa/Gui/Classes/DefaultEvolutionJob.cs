@@ -29,25 +29,19 @@ namespace GenArt.Classes
         {
             DnaDrawing newDrawing = currentDrawing.Clone();
 
-            newDrawing.Mutate();
+            while (newDrawing.IsDirty == false)
+                newDrawing.Mutate();
 
-            //TODO: Why not loop until we get a mutation - that way we don't waste lots of clones ^^
-            if (newDrawing.IsDirty)
+            double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
+
+            if (newErrorLevel <= currentErrorLevel)
             {
-                double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
-
-                if (newErrorLevel <= currentErrorLevel)
-                {
-                    currentDrawing = newDrawing;
-                    currentErrorLevel = newErrorLevel;
-                }
-
-                IsDirty = true;
-                return newErrorLevel;
+                currentDrawing = newDrawing;
+                currentErrorLevel = newErrorLevel;
             }
 
-            IsDirty = false;
-            return currentErrorLevel;
+            return newErrorLevel;
+
         }
 
         #endregion
