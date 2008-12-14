@@ -48,48 +48,44 @@ namespace GenArt
         private void StartEvolution()
         {
             var sourceImage = new SourceImage
-            {
-                Colors = SetupSourceColorMatrix(picPattern.Image as Bitmap),
-                Width = picPattern.Width,
-                Height = picPattern.Height
-            };
+                                  {
+                                      Colors = SetupSourceColorMatrix(picPattern.Image as Bitmap),
+                                      Width = picPattern.Width,
+                                      Height = picPattern.Height
+                                  };
 
-            IEvolutionJob job = new DefaultEvolutionJob(sourceImage);
+            IEvolutionJob job = new LayeredEvolutionJob(sourceImage, 2);
+
+            //IEvolutionJob job = new DefaultEvolutionJob(sourceImage);
             //IEvolutionJob job = new ClusteredEvolutionJob(sourceImage);
 
             while (Project.IsRunning)
             {
-
-
                 double newErrorLevel = job.GetNextErrorLevel();
                 Project.Generations++;
 
+                Project.Mutations++;
 
-                if (job.IsDirty)
+                if (newErrorLevel <= Project.ErrorLevel)
                 {
-                    Project.Mutations++;
+                    Project.Selected++;
 
-                    if (newErrorLevel <= Project.ErrorLevel)
+                    if (newErrorLevel < Project.ErrorLevel)
+                        Project.Positive++;
+                    else
+                        Project.Neutral++;
+
+                    var newDrawing = job.GetDrawing();
+                    if (currentDrawing == null) // to make always lockable...
+                        currentDrawing = new DnaDrawing();
+
+                    lock (currentDrawing)
                     {
-                        Project.Selected++;
-
-                        if (newErrorLevel < Project.ErrorLevel)
-                            Project.Positive++;
-                        else
-                            Project.Neutral++;
-
-                        var newDrawing = job.GetDrawing();
-                        if (currentDrawing == null) // to make always lockable...
-                            currentDrawing = new DnaDrawing();
-
-                        lock (currentDrawing)
-                        {
-                            currentDrawing = newDrawing;
-                            Project.Drawing = currentDrawing.Clone();
-                        }
-
-                        Project.ErrorLevel = newErrorLevel;
+                        currentDrawing = newDrawing;
+                        Project.Drawing = currentDrawing.Clone();
                     }
+
+                    Project.ErrorLevel = newErrorLevel;
                 }
             }
         }

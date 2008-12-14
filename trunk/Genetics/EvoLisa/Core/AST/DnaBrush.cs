@@ -17,6 +17,7 @@ namespace GenArt.AST
             Green = Tools.GetRandomNumber(Settings.ActiveGreenRangeMin, Settings.ActiveGreenRangeMax);
             Blue = Tools.GetRandomNumber(Settings.ActiveBlueRangeMin, Settings.ActiveBlueRangeMax);
             //Alpha = Tools.GetRandomNumber(Settings.ActiveAlphaRangeMin, Settings.ActiveAlphaRangeMax);
+            //Alpha = Tools.GetRandomNumber(10, 60);
             Alpha = Tools.GetRandomNumber(10, 60);
         }
 
