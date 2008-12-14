@@ -21,6 +21,9 @@ namespace GenArt.Classes
         //Render a polygon
         private static void Render(DnaPolygon polygon, Graphics g, int scale)
         {
+            if (polygon.IsComplex)
+                return;
+
             Point[] points = GetGdiPoints(polygon.Points, scale);
             using (Brush brush = GetGdiBrush(polygon.Brush))
             {
