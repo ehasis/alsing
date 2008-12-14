@@ -49,9 +49,17 @@ namespace GenArt.Classes
         {
             get 
             {
-                if (string.IsNullOrEmpty(HistoryImageSaveTriggerName))
+                if (string.IsNullOrEmpty(HistoryImageFormatName))
                     return ImageFormat.Jpeg;
-                return (ImageFormat)Enum.Parse(typeof(ImageFormat), HistoryImageFormatName); 
+                switch (HistoryImageFormatName.ToLower())
+                {
+                    case "bmp":
+                        return ImageFormat.Bmp;
+                    case "gif":
+                        return ImageFormat.Gif;
+                    default:
+                        return ImageFormat.Jpeg;
+                }
             }
             set { HistoryImageFormatName = value.ToString(); } 
         }
