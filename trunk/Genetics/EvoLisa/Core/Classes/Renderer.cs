@@ -7,23 +7,15 @@ namespace GenArt.Classes
     public static class Renderer
     {
         //Render a Drawing
-        public static void Render(DnaDrawing drawing,Bitmap background, Graphics g, int scale)
-        {
-            g.Clear(Color.Black);
-            g.DrawImage(background,0,0,background.Width * scale,background.Height * scale);
-
-            foreach (DnaPolygon polygon in drawing.Polygons)
-                Render(polygon, g, scale);
-        }
-
-        //Render a Drawing
         public static void Render(DnaDrawing drawing, Graphics g, int scale)
         {
             g.Clear(Color.Black);
 
+
             foreach (DnaPolygon polygon in drawing.Polygons)
                 Render(polygon, g, scale);
         }
+
 
         //Render a polygon
         private static void Render(DnaPolygon polygon, Graphics g, int scale)

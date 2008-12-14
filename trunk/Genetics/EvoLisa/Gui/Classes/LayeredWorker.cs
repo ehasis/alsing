@@ -34,7 +34,7 @@ namespace GenArt.Classes
             while (newDrawing.IsDirty == false)
                 newDrawing.Mutate();
 
-            double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage,null);
+            double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
 
             if (newErrorLevel <= CurrentErrorLevel)
             {

@@ -7,18 +7,14 @@ namespace GenArt.Classes
 {
     public static class FitnessCalculator
     {
-        public static double GetDrawingFitness(DnaDrawing newDrawing, SourceImage sourceImage,Bitmap background)
+        public static double GetDrawingFitness(DnaDrawing newDrawing, SourceImage sourceImage)
         {
             double error = 0;
 
             using (var b = new Bitmap(sourceImage.Width, sourceImage.Height, PixelFormat.Format24bppRgb))
             using (Graphics g = Graphics.FromImage(b))
             {
-
-                if (background != null)
-                    Renderer.Render(newDrawing,background, g, 1);
-                else
-                    Renderer.Render(newDrawing, g, 1);
+                Renderer.Render(newDrawing, g, 1);
 
                 BitmapData bmd1 = b.LockBits(new Rectangle(0, 0, sourceImage.Width, sourceImage.Height), ImageLockMode.ReadOnly,
                                              PixelFormat.Format24bppRgb);
@@ -52,10 +48,6 @@ namespace GenArt.Classes
             return error;
         }
 
-        public static double GetDrawingFitness(DnaDrawing newDrawing, SourceImage sourceImage)
-        {
-            return GetDrawingFitness(newDrawing, sourceImage, null);
-        }
 
         private static unsafe Color GetPixel(BitmapData bmd, int x, int y)
         {
