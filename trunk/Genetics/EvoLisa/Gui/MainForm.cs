@@ -62,7 +62,9 @@ namespace GenArt
             while (Project.IsRunning)
             {
                 double newErrorLevel = job.GetNextErrorLevel();
-                //  Project.Generations += job.Generations;
+                DefaultEvolutionJob defJob = job as DefaultEvolutionJob;
+                if (defJob != null)
+                    Project.Generations += defJob.Generations;
 
                 Project.Mutations++;
 
@@ -279,6 +281,7 @@ namespace GenArt
         private void ActivateProjectSettings()
         {
             trackBarScale.Value = Project.Settings.Scale;
+            trackBarAnimScale.Value = Project.Settings.HistoryImageScale;
             switch (Project.Settings.HistoryImageSaveTrigger)
             {
                 case HistorySaveTrigger.None:
@@ -303,7 +306,7 @@ namespace GenArt
                     comboBoxAnimSaveFormat.SelectedIndex = 2;
                     break;
             }
-            Project.Settings.HistoryImageSteps = numericUpDownAnimSaveSteps.Value;
+            numericUpDownAnimSaveSteps.Value = Project.Settings.HistoryImageSteps;
 
             Project.Settings.Activate();
         }
@@ -642,6 +645,11 @@ namespace GenArt
         private void numericUpDownAnimSaveSteps_ValueChanged(object sender, EventArgs e)
         {
             Project.Settings.HistoryImageSteps = numericUpDownAnimSaveSteps.Value;
+        }
+
+        private void trackBarAnimScale_Scroll(object sender, EventArgs e)
+        {
+            Project.Settings.HistoryImageScale = Convert.ToInt32(trackBarAnimScale.Value);
         }
     }
 }
