@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using GenArt.AST;
@@ -81,16 +81,16 @@ namespace GenArt.Classes
             {
                 for (int x = 0; x < sourceImage.Width; x++)
                 {
-                    Color c = sourceImage.Pixel(x, y);
+                    Color c = sourceImage.GetPixel(x, y);
                     var intensity = (int) (c.GetBrightness()*255);
 
                     if (intensity >= workerMin && intensity <= workerMin + range)
                     {
-											newSourceImage.setPixel( x, y, c );
+											newSourceImage.SetPixel( x, y, c );
                     }
                     else
                     {
-											newSourceImage.setPixel( x, y, Color.Black );
+											newSourceImage.SetPixel( x, y, Color.Black );
                     }
                 }
             }

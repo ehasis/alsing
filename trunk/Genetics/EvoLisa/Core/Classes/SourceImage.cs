@@ -33,20 +33,20 @@ namespace GenArt.Core.Classes
 	// 2008-12-14 DanByström:
 	//  removed Color[,] Colors
 	//  added Pixels[]
-	//  added Pixel( int x, int y );
-	//  added setPixel( int x, int y, Color c )
+	//  added GetPixel( int x, int y );
+	//  added SetPixel( int x, int y, Color c )
 	public class SourceImage
 	{
 		public Pixel[] Pixels { get; set; }
 		public int Width { get; set; }
 		public int Height { get; set; }
 
-		public Pixel Pixel( int x, int y )
+		public Pixel GetPixel( int x, int y )
 		{
 			return Pixels[y * Width + x];
 		}
 
-		public void setPixel( int x, int y, Color c )
+		public void SetPixel( int x, int y, Color c )
 		{
 			Pixels[y * Width + x] = c;
 		}

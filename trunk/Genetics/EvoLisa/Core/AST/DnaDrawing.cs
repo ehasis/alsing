@@ -14,7 +14,7 @@ namespace GenArt.AST
         public SourceImage SourceImage { get; set; }        
 
         [XmlIgnore]
-        public bool IsDirty { get; private set; }
+        private bool IsDirty { get; set; }
 
         public int PointCount
         {
@@ -58,17 +58,21 @@ namespace GenArt.AST
 
         public void Mutate()
         {
-            if (Tools.WillMutate(Settings.ActiveAddPolygonMutationRate))
-                AddPolygon();
+            //mutate always cause atleast one new mutation
+            while (!IsDirty)
+            {
+                if (Tools.WillMutate(Settings.ActiveAddPolygonMutationRate))
+                    AddPolygon();
 
-            if (Tools.WillMutate(Settings.ActiveRemovePolygonMutationRate))
-                RemovePolygon();
+                if (Tools.WillMutate(Settings.ActiveRemovePolygonMutationRate))
+                    RemovePolygon();
 
-            if (Tools.WillMutate(Settings.ActiveMovePolygonMutationRate))
-                MovePolygon();
+                if (Tools.WillMutate(Settings.ActiveMovePolygonMutationRate))
+                    MovePolygon();
 
-            foreach (DnaPolygon polygon in Polygons)
-                polygon.Mutate(this);
+                foreach (DnaPolygon polygon in Polygons)
+                    polygon.Mutate(this);
+            }
         }
 
         public void MovePolygon()

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
-using GenArt.AST;
-using GenArt.Core.Classes;
+﻿using GenArt.AST;
 
 namespace GenArt.Core.Interfaces
 {
