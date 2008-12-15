@@ -39,11 +39,10 @@ namespace GenArt.Classes
             Generations = 0;
             DnaDrawing newDrawing = currentDrawing.Clone();
 
-            while (newDrawing.IsDirty == false)
-            {
-                newDrawing.Mutate();
-                Generations++;
-            }
+
+            newDrawing.Mutate();
+            Generations++;
+
 
             double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
 
