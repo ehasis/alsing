@@ -8,15 +8,19 @@ namespace GenArt.Classes
     {
         private DnaDrawing currentDrawing;
         private double currentErrorLevel;
+        private Settings settings;
 
-        public DefaultEvolutionJob(SourceImage sourceImage) : this(sourceImage, null)
+        public DefaultEvolutionJob(SourceImage sourceImage, Settings settings)
+            : this(sourceImage, null, settings)
         {
         }
 
-        public DefaultEvolutionJob(SourceImage sourceImage, DnaDrawing drawing)
+        public DefaultEvolutionJob(SourceImage sourceImage, DnaDrawing drawing, Settings settings)
         {
+            this.settings = settings;
+
             if (drawing == null)
-                drawing = GetNewInitializedDrawing();
+                drawing = GetNewInitializedDrawing(settings);
             lock (drawing)
             {
                 currentDrawing = drawing.Clone();
@@ -40,7 +44,7 @@ namespace GenArt.Classes
             DnaDrawing newDrawing = currentDrawing.Clone();
 
 
-            newDrawing.Mutate();
+            newDrawing.Mutate(settings);
             Generations++;
 
 
@@ -58,10 +62,10 @@ namespace GenArt.Classes
 
         #endregion
 
-        private static DnaDrawing GetNewInitializedDrawing()
+        private static DnaDrawing GetNewInitializedDrawing(Settings settings)
         {
             var drawing = new DnaDrawing();
-            drawing.Init();
+            drawing.Init(settings);
             return drawing;
         }
     }

@@ -56,7 +56,7 @@ namespace GenArt
             //IEvolutionJob job = new LayeredEvolutionJob(sourceImage, 4);
 
             //DefaultEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
-            IEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
+            IEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing, Project.Settings);
             //IEvolutionJob job = new ClusteredEvolutionJob(sourceImage);
 
             while (Project.IsRunning)
@@ -307,8 +307,6 @@ namespace GenArt
                     break;
             }
             numericUpDownAnimSaveSteps.Value = Project.Settings.HistoryImageSteps;
-
-            Project.Settings.Activate();
         }
 
         private void SaveProject()

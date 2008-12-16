@@ -10,9 +10,9 @@ namespace GenArt.AST
     {
         public void Init()
         {
-            Drawing = new DnaDrawing();
-            Drawing.Init();
             Settings = new Settings();
+            Drawing = new DnaDrawing();
+            Drawing.Init(Settings);
             ErrorLevel = double.MaxValue;
             LastSavedFitness = double.MaxValue;
         }

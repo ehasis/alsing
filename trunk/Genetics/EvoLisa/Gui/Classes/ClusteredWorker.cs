@@ -9,11 +9,13 @@ namespace GenArt.Classes
         private double currentErrorLevel;
         private bool isRunning;
         private Thread workerThread;
+        private Settings settings;
 
-        internal void SetJob(DnaDrawing drawing, double errorLevel)
+        internal void SetJob(DnaDrawing drawing, double errorLevel, Settings settings)
         {
             currentErrorLevel = errorLevel;
             currentDrawing = drawing;
+            this.settings = settings;
         }
 
         private void WorkerThreadStart()
@@ -22,7 +24,7 @@ namespace GenArt.Classes
             {
                 DnaDrawing newDrawing = currentDrawing.Clone();
 
-                newDrawing.Mutate();
+                newDrawing.Mutate(settings);
 
                 double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
                 if (newErrorLevel < currentErrorLevel)
