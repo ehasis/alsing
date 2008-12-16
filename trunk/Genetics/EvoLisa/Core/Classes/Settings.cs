@@ -412,7 +412,7 @@ namespace GenArt.Classes
             MovePointMidMutationRate = 1500;
             MovePointMinMutationRate = 1500;
 
-            RedMutationRate = 1500;
+
             GreenMutationRate = 1500;
             BlueMutationRate = 1500;
             AlphaMutationRate = 1500;
