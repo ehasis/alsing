@@ -399,31 +399,33 @@ namespace GenArt.Classes
         {
             HistoryImageFormat = ImageFormat.Jpeg;
 
-            MuteAddPolygonNew = true;
+         //   MuteAddPolygonNew = true;
             MuteMovePointMax = true;
-            MuteMovePointMid = true;
+         //   MuteMovePointMid = true;
 
-            ColorMutationRate = 1500;
+            ColorMutationRate = 1000;
             MuteLinePolygon = true;
-            MuteLineFillPolygon = true;
+       //     MuteLineFillPolygon = true;
+            MuteCurveFillPolygon = true;
             MuteCurvePolygon = true;
+            MuteAddPointClone = true;
 
-            AddPolygonMutationRate = 700;
-            AddPolygonCloneMutationRate = 700;
-            RemovePolygonMutationRate = 1500;
-            MovePolygonMutationRate = 700;
+            AddPolygonMutationRate = 400;
+            AddPolygonCloneMutationRate = 400;
+            RemovePolygonMutationRate = 1000;
+            MovePolygonMutationRate = 400;
 
-            AddPointMutationRate = 1500;
-            AddPointCloneMutationRate = 1500;
-            RemovePointMutationRate = 1500;
-            MovePointMaxMutationRate = 1500;
-            MovePointMidMutationRate = 1500;
-            MovePointMinMutationRate = 1500;
+            AddPointMutationRate = 1000;
+            AddPointCloneMutationRate = 1000;
+            RemovePointMutationRate = 1000;
+            MovePointMaxMutationRate = 1000;
+            MovePointMidMutationRate = 1000;
+            MovePointMinMutationRate = 1000;
 
 
-            GreenMutationRate = 1500;
-            BlueMutationRate = 1500;
-            AlphaMutationRate = 1500;
+            GreenMutationRate = 1000;
+            BlueMutationRate = 1000;
+            AlphaMutationRate = 1000;
 
             ////Limits / Constraints
             RedRangeMin = 0;
@@ -435,10 +437,10 @@ namespace GenArt.Classes
             AlphaRangeMin = 30;
             AlphaRangeMax = 60;
 
-            PolygonsMax = 255;
+            PolygonsMax = 50;
             PolygonsMin = 0;
 
-            PointsPerPolygonMax = 10;
+            PointsPerPolygonMax = 50;
             PointsPerPolygonMin = 3;
 
             PointsMax = 1500;
