@@ -13,6 +13,8 @@ namespace GenArt.Classes
         {
             g.Clear(Color.Black);
 
+            if (drawing.BgImage != null)
+                g.DrawImage(drawing.BgImage, new Point(0, 0));
 
             foreach (DnaPolygon polygon in drawing.Polygons)
                 Render(polygon, g, scale);
