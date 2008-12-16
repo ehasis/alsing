@@ -95,7 +95,7 @@ namespace GenArt.Classes
         private int pointsPerPolygonMin = 3;
         private int polygonsMax = 255;
         private int polygonsMin;
-        private int redMutationRate = 1500;
+        private int colorMutationRate = 300;
         private int redRangeMax = 255;
         private int redRangeMin;
         private int removePointMutationRate = 1500;
@@ -174,10 +174,10 @@ namespace GenArt.Classes
             set { movePointMinMutationRate = value; }
         }
 
-        public int RedMutationRate
+        public int ColorMutationRate
         {
-            get { return redMutationRate; }
-            set { redMutationRate = value; }
+            get { return colorMutationRate; }
+            set { colorMutationRate = value; }
         }
 
         public int GreenMutationRate
@@ -481,7 +481,7 @@ namespace GenArt.Classes
             settings.MovePointMidMutationRate = MovePointMidMutationRate;
             settings.MovePointMinMutationRate = MovePointMinMutationRate;
 
-            settings.RedMutationRate = RedMutationRate;
+            settings.ColorMutationRate = ColorMutationRate;
             settings.GreenMutationRate = GreenMutationRate;
             settings.BlueMutationRate = BlueMutationRate;
             settings.AlphaMutationRate = AlphaMutationRate;

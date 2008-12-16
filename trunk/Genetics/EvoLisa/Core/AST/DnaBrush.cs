@@ -32,27 +32,28 @@ namespace GenArt.AST
 
         public void Mutate(DnaDrawing drawing, Settings settings)
         {
-            if (Tools.WillMutate(settings.RedMutationRate))
+            if (Tools.WillMutate(settings.ColorMutationRate) )
             {
-                Red = Tools.GetRandomNumber(settings.RedRangeMin, settings.RedRangeMax);
-                drawing.SetDirty();
-            }
+                Red = Red
+                    .Randomize(-15, 15)
+                    .Min(255)
+                    .Max(0);
 
-            if (Tools.WillMutate(settings.GreenMutationRate))
-            {
-                Green = Tools.GetRandomNumber(settings.GreenRangeMin, settings.GreenRangeMax);
-                drawing.SetDirty();
-            }
+                Green = Green
+                    .Randomize(-15, 15)
+                    .Min(255)
+                    .Max(0);
 
-            if (Tools.WillMutate(settings.BlueMutationRate))
-            {
-                Blue = Tools.GetRandomNumber(settings.BlueRangeMin, settings.BlueRangeMax);
-                drawing.SetDirty();
-            }
+                Blue = Blue
+                    .Randomize(-15, 15)
+                    .Min(255)
+                    .Max(0);
 
-            if (Tools.WillMutate(settings.AlphaMutationRate))
-            {
-                Alpha = Tools.GetRandomNumber(settings.AlphaRangeMin, settings.AlphaRangeMax);
+                Alpha = Alpha
+                    .Randomize(-5, 5)
+                    .Min(settings.AlphaRangeMax)
+                    .Max(settings.AlphaRangeMin);
+
                 drawing.SetDirty();
             }
         }
