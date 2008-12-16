@@ -74,16 +74,6 @@ namespace GenArt.AST
                                      Tools.GetRandomNumber(-settings.MovePointRangeMin,
                                                            settings.MovePointRangeMin)), drawing.SourceImage.Height);
 
-                    //X = X
-                    //    .Randomize(-settings.MovePointRangeMin, settings.MovePointRangeMin)
-                    //    .Max(0)
-                    //    .Min(drawing.SourceImage.Width);
-
-                    //Y = Y
-                    //    .Randomize(-settings.MovePointRangeMin, settings.MovePointRangeMin)
-                    //    .Max(0)
-                    //    .Min(drawing.SourceImage.Height);
-
                     drawing.SetDirty();
                 }
            }
