@@ -219,5 +219,14 @@ namespace GenArt.AST
             return dy1 * dx2 < dy2 * dx1;
         }
 
+
+        public void Offset(int x, int y)
+        {
+            foreach(DnaPoint point in Points)
+            {
+                point.X += x;
+                point.Y += y;
+            }
+        }
     }
 }
