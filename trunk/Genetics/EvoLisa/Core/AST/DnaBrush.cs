@@ -34,20 +34,20 @@ namespace GenArt.AST
         {
             if (Tools.WillMutate(settings.ColorMutationRate))
             {
-                Red = Tools.GetRandomNumber(0, 255);
+                Red = Tools.GetRandomNumber(settings.RedRangeMin, settings.RedRangeMax);
 
                 drawing.SetDirty();
             }
 
             if (Tools.WillMutate(settings.ColorMutationRate))
             {
-                Green = Tools.GetRandomNumber(0, 255);
+                Green = Tools.GetRandomNumber(settings.GreenRangeMin, settings.GreenRangeMax);
 
                 drawing.SetDirty();
             }
             if (Tools.WillMutate(settings.ColorMutationRate))
             {
-                Blue = Tools.GetRandomNumber(0, 255);
+                Blue = Tools.GetRandomNumber(settings.BlueRangeMin, settings.BlueRangeMax);
 
                 drawing.SetDirty();
             }
