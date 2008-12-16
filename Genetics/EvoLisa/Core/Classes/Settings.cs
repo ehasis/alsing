@@ -399,6 +399,10 @@ namespace GenArt.Classes
         {
             HistoryImageFormat = ImageFormat.Jpeg;
 
+            MuteAddPolygonNew = true;
+            MuteMovePointMax = true;
+            MuteMovePointMid = true;
+
             //MuteCurvePolygon = true;
             //MuteLinePolygon = true;
 
