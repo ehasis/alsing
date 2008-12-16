@@ -102,12 +102,21 @@ namespace GenArt.AST
         {
             if (Polygons.Count < Settings.ActivePolygonsMax)
             {
-                var newPolygon = new DnaPolygon();
-                newPolygon.Init(this);
+                if (Polygons.Count > 0)
+                {
+                    DnaPolygon master = Polygons[Tools.GetRandomNumber(0, Polygons.Count)];
+                    var newPolygon = master.Clone();
+                    Polygons.Insert(Polygons.IndexOf(master), newPolygon);
+                }
+                else
+                {
+                    var newPolygon = new DnaPolygon();
+                    newPolygon.Init(this);
 
-                int index = Tools.GetRandomNumber(0, Polygons.Count);
+                    int index = Tools.GetRandomNumber(0, Polygons.Count);
 
-                Polygons.Insert(index, newPolygon);
+                    Polygons.Insert(index, newPolygon);
+                }
                 SetDirty();
             }
         }
