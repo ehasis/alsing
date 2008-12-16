@@ -64,6 +64,9 @@ namespace GenArt.AST
                 if (Tools.WillMutate(settings.AddPolygonMutationRate))
                     AddPolygon(settings);
 
+                if (Tools.WillMutate(settings.AddPolygonCloneMutationRate))
+                    AddPolygonClone(settings);
+
                 if (Tools.WillMutate(settings.RemovePolygonMutationRate))
                     RemovePolygon(settings);
 

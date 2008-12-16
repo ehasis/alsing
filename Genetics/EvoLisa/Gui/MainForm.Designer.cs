@@ -50,6 +50,7 @@
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.checkBoxAnimSaveDNA = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxAnimSaveFormat = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -65,15 +66,14 @@
             this.buttonSelectAnimDir = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.trackBarScale = new System.Windows.Forms.TrackBar();
             this.picPattern = new System.Windows.Forms.PictureBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.label9 = new System.Windows.Forms.Label();
             this.trackBarAnimScale = new System.Windows.Forms.TrackBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.trackBarScale = new System.Windows.Forms.TrackBar();
             this.pnlCanvas = new GenArt.Canvas();
-            this.checkBoxAnimSaveDNA = new System.Windows.Forms.CheckBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -81,10 +81,10 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAnimSaveSteps)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimScale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarScale)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -285,6 +285,17 @@
             this.splitContainer1.SplitterDistance = 230;
             this.splitContainer1.TabIndex = 21;
             // 
+            // checkBoxAnimSaveDNA
+            // 
+            this.checkBoxAnimSaveDNA.AutoSize = true;
+            this.checkBoxAnimSaveDNA.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.checkBoxAnimSaveDNA.Location = new System.Drawing.Point(0, 282);
+            this.checkBoxAnimSaveDNA.Name = "checkBoxAnimSaveDNA";
+            this.checkBoxAnimSaveDNA.Size = new System.Drawing.Size(230, 17);
+            this.checkBoxAnimSaveDNA.TabIndex = 36;
+            this.checkBoxAnimSaveDNA.Text = "Save DNA for each animation image.";
+            this.checkBoxAnimSaveDNA.UseVisualStyleBackColor = true;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -465,27 +476,6 @@
             this.label8.TabIndex = 23;
             this.label8.Text = "1";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label5.Location = new System.Drawing.Point(0, 513);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(119, 13);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "Generated image scale:";
-            // 
-            // trackBarScale
-            // 
-            this.trackBarScale.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.trackBarScale.Location = new System.Drawing.Point(0, 526);
-            this.trackBarScale.Minimum = 1;
-            this.trackBarScale.Name = "trackBarScale";
-            this.trackBarScale.Size = new System.Drawing.Size(230, 45);
-            this.trackBarScale.TabIndex = 21;
-            this.trackBarScale.Value = 3;
-            this.trackBarScale.Scroll += new System.EventHandler(this.trackBarScale_Scroll);
-            // 
             // picPattern
             // 
             this.picPattern.Image = global::GenArt.Properties.Resources.ml1;
@@ -495,22 +485,6 @@
             this.picPattern.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picPattern.TabIndex = 3;
             this.picPattern.TabStop = false;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 636);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(984, 22);
-            this.statusStrip1.TabIndex = 26;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(42, 17);
-            this.toolStripStatusLabel1.Text = "Ready.";
             // 
             // label9
             // 
@@ -533,6 +507,27 @@
             this.trackBarAnimScale.Value = 3;
             this.trackBarAnimScale.Scroll += new System.EventHandler(this.trackBarAnimScale_Scroll);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label5.Location = new System.Drawing.Point(0, 513);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(119, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Generated image scale:";
+            // 
+            // trackBarScale
+            // 
+            this.trackBarScale.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.trackBarScale.Location = new System.Drawing.Point(0, 526);
+            this.trackBarScale.Minimum = 1;
+            this.trackBarScale.Name = "trackBarScale";
+            this.trackBarScale.Size = new System.Drawing.Size(230, 45);
+            this.trackBarScale.TabIndex = 21;
+            this.trackBarScale.Value = 3;
+            this.trackBarScale.Scroll += new System.EventHandler(this.trackBarScale_Scroll);
+            // 
             // pnlCanvas
             // 
             this.pnlCanvas.BackColor = System.Drawing.Color.Black;
@@ -543,16 +538,21 @@
             this.pnlCanvas.TabIndex = 1;
             this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
             // 
-            // checkBoxAnimSaveDNA
+            // statusStrip1
             // 
-            this.checkBoxAnimSaveDNA.AutoSize = true;
-            this.checkBoxAnimSaveDNA.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBoxAnimSaveDNA.Location = new System.Drawing.Point(0, 282);
-            this.checkBoxAnimSaveDNA.Name = "checkBoxAnimSaveDNA";
-            this.checkBoxAnimSaveDNA.Size = new System.Drawing.Size(230, 17);
-            this.checkBoxAnimSaveDNA.TabIndex = 36;
-            this.checkBoxAnimSaveDNA.Text = "Save DNA for each animation image.";
-            this.checkBoxAnimSaveDNA.UseVisualStyleBackColor = true;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 636);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(984, 22);
+            this.statusStrip1.TabIndex = 26;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(42, 17);
+            this.toolStripStatusLabel1.Text = "Ready.";
             // 
             // MainForm
             // 
@@ -579,11 +579,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAnimSaveSteps)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarScale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimScale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarScale)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimScale)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

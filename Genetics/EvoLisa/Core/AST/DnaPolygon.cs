@@ -38,8 +38,58 @@ namespace GenArt.AST
                 Points.Add(point);
             }
 
+            bool findNew = true;
+
+            if (settings.MuteCurvePolygon &&
+                settings.MuteLinePolygon &&
+                settings.MuteCurveFillPolygon &&
+                settings.MuteLineFillPolygon)
+                findNew = false;
+
+            while (findNew)
+            {
+                bool splines = (Tools.GetRandomNumber(0, 2) == 1) ? true : false;
+                bool filled = (Tools.GetRandomNumber(0, 2) == 1) ? true : false;
+                findNew = !SetSplinesAndFilled(settings, splines, filled);
+            }
+
             Brush = new DnaBrush();
             Brush.Init(settings);
+        }
+
+        private bool SetSplinesAndFilled(Settings settings, bool splines, bool filled)
+        {
+            bool muted = false;
+            if (splines)
+            {
+                if (filled)
+                {
+                    muted = settings.MuteCurveFillPolygon;
+                }
+                else
+                {
+                    muted = settings.MuteCurvePolygon;
+                }
+            }
+            else
+            {
+                if (filled)
+                {
+                    muted = settings.MuteLineFillPolygon;
+                }
+                else
+                {
+                    muted = settings.MuteLinePolygon;
+                }
+            }
+
+            if (muted)
+                return false;
+
+            Splines = splines;
+            Filled = filled;
+
+            return true;
         }
 
         public DnaPolygon Clone()
@@ -51,6 +101,11 @@ namespace GenArt.AST
                                  };
             foreach (DnaPoint point in Points)
                 newPolygon.Points.Add(point.Clone());
+
+            newPolygon.Width = Width;
+            newPolygon.Tension = Tension;
+            newPolygon.Splines = Splines;
+            newPolygon.Filled = Filled;
 
             return newPolygon;
         }
@@ -65,10 +120,26 @@ namespace GenArt.AST
             if (Tools.WillMutate(settings.RemovePointMutationRate))
                 RemovePoint(drawing, settings);
 
+            if (Tools.WillMutate(settings.FlipSplinesMutationRate))
+                FlipSplines(drawing, settings);
+
+            if (Tools.WillMutate(settings.FlipFilledMutationRate))
+                FlipFilled(drawing, settings);
+
             Brush.Mutate(drawing, settings);
             Points.ForEach(p => p.Mutate(drawing, settings));
 
             IsComplex = false;// checkComplex();
+        }
+
+        private void FlipFilled(DnaDrawing drawing, Settings settings)
+        {
+            SetSplinesAndFilled(settings, Splines, !Filled);
+        }
+
+        private void FlipSplines(DnaDrawing drawing, Settings settings)
+        {
+            SetSplinesAndFilled(settings, !Splines, Filled);
         }
 
         private void RemovePoint(DnaDrawing drawing, Settings settings)
