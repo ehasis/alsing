@@ -16,7 +16,8 @@ namespace GenArt.AST
             Red = Tools.GetRandomNumber(settings.RedRangeMin, settings.RedRangeMax);
             Green = Tools.GetRandomNumber(settings.GreenRangeMin, settings.GreenRangeMax);
             Blue = Tools.GetRandomNumber(settings.BlueRangeMin, settings.BlueRangeMax);
-            Alpha = Tools.GetRandomNumber(settings.AlphaRangeMin, settings.AlphaRangeMax);
+            //Alpha = Tools.GetRandomNumber(settings.AlphaRangeMin, settings.AlphaRangeMax);
+            Alpha = Tools.GetRandomNumber(10, 60);
         }
 
         public DnaBrush Clone()

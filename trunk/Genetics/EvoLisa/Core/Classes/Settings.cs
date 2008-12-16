@@ -403,14 +403,17 @@ namespace GenArt.Classes
             MuteMovePointMax = true;
             MuteMovePointMid = true;
 
+            ColorMutationRate = 1500;
             //MuteCurvePolygon = true;
             //MuteLinePolygon = true;
 
             AddPolygonMutationRate = 700;
+            AddPolygonCloneMutationRate = 700;
             RemovePolygonMutationRate = 1500;
             MovePolygonMutationRate = 700;
 
             AddPointMutationRate = 1500;
+            AddPointCloneMutationRate = 1500;
             RemovePointMutationRate = 1500;
             MovePointMaxMutationRate = 1500;
             MovePointMidMutationRate = 1500;

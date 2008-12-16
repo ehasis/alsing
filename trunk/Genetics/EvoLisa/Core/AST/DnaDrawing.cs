@@ -14,7 +14,7 @@ namespace GenArt.AST
         public SourceImage SourceImage { get; set; }        
 
         [XmlIgnore]
-        private bool IsDirty { get; set; }
+        public bool IsDirty { get; set; }
 
         public int PointCount
         {
@@ -113,7 +113,7 @@ namespace GenArt.AST
                 Polygons.Insert(index, newPolygon);
 
                 SetDirty();
-             }
+            }
         }
 
         public void AddPolygonClone(Settings settings)

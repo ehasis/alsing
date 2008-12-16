@@ -44,20 +44,22 @@ namespace GenArt.AST
                 Points.Add(point);
             }
 
-            bool findNew = true;
+            //bool findNew = true;
 
-            if (settings.MuteCurvePolygon &&
-                settings.MuteLinePolygon &&
-                settings.MuteCurveFillPolygon &&
-                settings.MuteLineFillPolygon)
-                findNew = false;
+            //if (settings.MuteCurvePolygon &&
+            //    settings.MuteLinePolygon &&
+            //    settings.MuteCurveFillPolygon &&
+            //    settings.MuteLineFillPolygon)
+            //    findNew = false;
 
-            while (findNew)
-            {
-                bool splines = (Tools.GetRandomNumber(0, 2) == 1) ? true : false;
-                bool filled = (Tools.GetRandomNumber(0, 2) == 1) ? true : false;
-                findNew = !SetSplinesAndFilled(settings, splines, filled);
-            }
+            //while (findNew)
+            //{
+            //    bool splines = (Tools.GetRandomNumber(0, 2) == 1) ? true : false;
+            //    bool filled = (Tools.GetRandomNumber(0, 2) == 1) ? true : false;
+            //    findNew = !SetSplinesAndFilled(settings, splines, filled);
+            //}
+            Splines = true;
+            Filled = true;
 
             Brush = new DnaBrush();
             Brush.Init(settings);
@@ -126,16 +128,16 @@ namespace GenArt.AST
             if (Tools.WillMutate(settings.RemovePointMutationRate))
                 RemovePoint(drawing, settings);
 
-            if (Tools.WillMutate(settings.FlipSplinesMutationRate))
-                FlipSplines(drawing, settings);
+            //if (Tools.WillMutate(settings.FlipSplinesMutationRate))
+            //    FlipSplines(drawing, settings);
 
-            if (Tools.WillMutate(settings.FlipFilledMutationRate))
-                FlipFilled(drawing, settings);
+            //if (Tools.WillMutate(settings.FlipFilledMutationRate))
+            //    FlipFilled(drawing, settings);
 
             Brush.Mutate(drawing, settings);
             Points.ForEach(p => p.Mutate(drawing, settings));
 
-            IsComplex = false;// checkComplex();
+            //IsComplex = false;// checkComplex();
         }
 
         private void FlipFilled(DnaDrawing drawing, Settings settings)
