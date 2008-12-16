@@ -44,7 +44,7 @@ namespace GenArt.Classes
                 bmp.UnlockBits(bd);
             }
 
-            error += newDrawing.Polygons.Count * 3 ;
+           // error += newDrawing.Polygons.Count * 3 ;
             return error;
         }
     }
