@@ -7,20 +7,20 @@ namespace GenArt
 {
     public static class IntExtensions
     {
-        //public static int Max(this int self,int max)
-        //{
-        //    return Math.Max(self, max);
-        //}
+        public static int Max(this int self, int max)
+        {
+            return Math.Max(self, max);
+        }
 
-        //public static int Min(this int self, int min)
-        //{
-        //    return Math.Min(self, min);
-        //}
+        public static int Min(this int self, int min)
+        {
+            return Math.Min(self, min);
+        }
 
-        //public static int Randomize(this int self, int min,int max)
-        //{
-        //    return self + Tools.GetRandomNumber(min, max);
-        //}
+        public static int Randomize(this int self, int min, int max)
+        {
+            return self + Tools.GetRandomNumber(min, max);
+        }
     }
 }
 
