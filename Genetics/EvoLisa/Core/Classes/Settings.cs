@@ -12,35 +12,25 @@ namespace GenArt.Classes
             Reset();
         }
 
-        public static int ActiveAddPointMutationRate = 1500;
-        public static int ActiveAddPolygonMutationRate = 700;
-        public static int ActiveAlphaMutationRate = 1500;
-        public static int ActiveAlphaRangeMax = 60;
-        public static int ActiveAlphaRangeMin = 30;
-        public static int ActiveBlueMutationRate = 1500;
-        public static int ActiveBlueRangeMax = 255;
-        public static int ActiveBlueRangeMin;
-        public static int ActiveGreenMutationRate = 1500;
-        public static int ActiveGreenRangeMax = 255;
-        public static int ActiveGreenRangeMin;
-        public static int ActiveMovePointMaxMutationRate = 1500;
-        public static int ActiveMovePointMidMutationRate = 1500;
-        public static int ActiveMovePointMinMutationRate = 1500;
+        public int StartX { get; set; }
+        public int StartY { get; set; }
 
-        public static int ActiveMovePointRangeMid = 20;
-        public static int ActiveMovePointRangeMin = 3;
-        public static int ActiveMovePolygonMutationRate = 700;
-        public static int ActivePointsMax = 1500;
-        public static int ActivePointsMin;
-        public static int ActivePointsPerPolygonMax = 10;
-        public static int ActivePointsPerPolygonMin = 3;
-        public static int ActivePolygonsMax = 255;
-        public static int ActivePolygonsMin;
-        public static int ActiveRedMutationRate = 1500;
-        public static int ActiveRedRangeMax = 255;
-        public static int ActiveRedRangeMin;
-        public static int ActiveRemovePointMutationRate = 1500;
-        public static int ActiveRemovePolygonMutationRate = 1500;
+        public bool MuteLinePolygon { get; set; }
+        public bool MuteCurvePolygon { get; set; }
+        public bool MuteLineFillPolygon { get; set; }
+        public bool MuteCurveFillPolygon { get; set; }
+
+        public bool MuteAddPolygonClone { get; set; }
+        public bool MuteAddPolygonNew { get; set; }
+        public bool MuteRemovePolygon { get; set; }
+        public bool MuteMovePolygon { get; set; }
+
+        public bool MuteAddPointNew { get; set; }
+        public bool MuteAddPointClone { get; set; }
+        public bool MuteRemovePoint { get; set; }
+        public bool MuteMovePointMax { get; set; }
+        public bool MuteMovePointMid { get; set; }
+        public bool MuteMovePointMin { get; set; }
 
         public int Scale { get; set; }
 
@@ -386,130 +376,75 @@ namespace GenArt.Classes
             }
         }
 
-        public void Activate()
-        {
-            ActiveAddPolygonMutationRate = AddPolygonMutationRate;
-            ActiveRemovePolygonMutationRate = RemovePolygonMutationRate;
-            ActiveMovePolygonMutationRate = MovePolygonMutationRate;
-
-            ActiveAddPointMutationRate = AddPointMutationRate;
-            ActiveRemovePointMutationRate = RemovePointMutationRate;
-            ActiveMovePointMaxMutationRate = MovePointMaxMutationRate;
-            ActiveMovePointMidMutationRate = MovePointMidMutationRate;
-            ActiveMovePointMinMutationRate = MovePointMinMutationRate;
-
-            ActiveRedMutationRate = RedMutationRate;
-            ActiveGreenMutationRate = GreenMutationRate;
-            ActiveBlueMutationRate = BlueMutationRate;
-            ActiveAlphaMutationRate = AlphaMutationRate;
-
-            //Limits / Constraints
-            ActiveRedRangeMin = RedRangeMin;
-            ActiveRedRangeMax = RedRangeMax;
-            ActiveGreenRangeMin = GreenRangeMin;
-            ActiveGreenRangeMax = GreenRangeMax;
-            ActiveBlueRangeMin = BlueRangeMin;
-            ActiveBlueRangeMax = BlueRangeMax;
-            ActiveAlphaRangeMin = AlphaRangeMin;
-            ActiveAlphaRangeMax = AlphaRangeMax;
-
-            ActivePolygonsMax = PolygonsMax;
-            ActivePolygonsMin = PolygonsMin;
-
-            ActivePointsPerPolygonMax = PointsPerPolygonMax;
-            ActivePointsPerPolygonMin = PointsPerPolygonMin;
-
-            ActivePointsMax = PointsMax;
-            ActivePointsMin = PointsMin;
-
-            ActiveMovePointRangeMid = MovePointRangeMid;
-            ActiveMovePointRangeMin = MovePointRangeMin;
-        }
-
-        public void Discard()
-        {
-            AddPolygonMutationRate = ActiveAddPolygonMutationRate;
-            RemovePolygonMutationRate = ActiveRemovePolygonMutationRate;
-            MovePolygonMutationRate = ActiveMovePolygonMutationRate;
-
-            AddPointMutationRate = ActiveAddPointMutationRate;
-            RemovePointMutationRate = ActiveRemovePointMutationRate;
-            MovePointMaxMutationRate = ActiveMovePointMaxMutationRate;
-            MovePointMidMutationRate = ActiveMovePointMidMutationRate;
-            MovePointMinMutationRate = ActiveMovePointMinMutationRate;
-
-            RedMutationRate = ActiveRedMutationRate;
-            GreenMutationRate = ActiveGreenMutationRate;
-            BlueMutationRate = ActiveBlueMutationRate;
-            AlphaMutationRate = ActiveAlphaMutationRate;
-
-            //Limits / Constraints
-            RedRangeMin = ActiveRedRangeMin;
-            RedRangeMax = ActiveRedRangeMax;
-            GreenRangeMin = ActiveGreenRangeMin;
-            GreenRangeMax = ActiveGreenRangeMax;
-            BlueRangeMin = ActiveBlueRangeMin;
-            BlueRangeMax = ActiveBlueRangeMax;
-            AlphaRangeMin = ActiveAlphaRangeMin;
-            AlphaRangeMax = ActiveAlphaRangeMax;
-
-            PolygonsMax = ActivePolygonsMax;
-            PolygonsMin = ActivePolygonsMin;
-
-            PointsPerPolygonMax = ActivePointsPerPolygonMax;
-            PointsPerPolygonMin = ActivePointsPerPolygonMin;
-
-            PointsMax = ActivePointsMax;
-            PointsMin = ActivePointsMin;
-
-            MovePointRangeMid = ActiveMovePointRangeMid;
-            MovePointRangeMin = ActiveMovePointRangeMin;
-        }
-
         public void Reset()
         {
-            ActiveAddPolygonMutationRate = 700;
-            ActiveRemovePolygonMutationRate = 1500;
-            ActiveMovePolygonMutationRate = 700;
+            //ActiveAddPolygonMutationRate = 700;
+            //ActiveRemovePolygonMutationRate = 1500;
+            //ActiveMovePolygonMutationRate = 700;
 
-            ActiveAddPointMutationRate = 1500;
-            ActiveRemovePointMutationRate = 1500;
-            ActiveMovePointMaxMutationRate = 1500;
-            ActiveMovePointMidMutationRate = 1500;
-            ActiveMovePointMinMutationRate = 1500;
+            //ActiveAddPointMutationRate = 1500;
+            //ActiveRemovePointMutationRate = 1500;
+            //ActiveMovePointMaxMutationRate = 1500;
+            //ActiveMovePointMidMutationRate = 1500;
+            //ActiveMovePointMinMutationRate = 1500;
 
-            ActiveRedMutationRate = 1500;
-            ActiveGreenMutationRate = 1500;
-            ActiveBlueMutationRate = 1500;
-            ActiveAlphaMutationRate = 1500;
+            //ActiveRedMutationRate = 1500;
+            //ActiveGreenMutationRate = 1500;
+            //ActiveBlueMutationRate = 1500;
+            //ActiveAlphaMutationRate = 1500;
 
-            //Limits / Constraints
-            ActiveRedRangeMin = 0;
-            ActiveRedRangeMax = 255;
-            ActiveGreenRangeMin = 0;
-            ActiveGreenRangeMax = 255;
-            ActiveBlueRangeMin = 0;
-            ActiveBlueRangeMax = 255;
-            ActiveAlphaRangeMin = 30;
-            ActiveAlphaRangeMax = 60;
+            ////Limits / Constraints
+            //ActiveRedRangeMin = 0;
+            //ActiveRedRangeMax = 255;
+            //ActiveGreenRangeMin = 0;
+            //ActiveGreenRangeMax = 255;
+            //ActiveBlueRangeMin = 0;
+            //ActiveBlueRangeMax = 255;
+            //ActiveAlphaRangeMin = 30;
+            //ActiveAlphaRangeMax = 60;
 
-            ActivePolygonsMax = 255;
-            ActivePolygonsMin = 0;
+            //ActivePolygonsMax = 255;
+            //ActivePolygonsMin = 0;
 
-            ActivePointsPerPolygonMax = 10;
-            ActivePointsPerPolygonMin = 3;
+            //ActivePointsPerPolygonMax = 10;
+            //ActivePointsPerPolygonMin = 3;
 
-            ActivePointsMax = 1500;
-            ActivePointsMin = 0;
+            //ActivePointsMax = 1500;
+            //ActivePointsMin = 0;
 
-            ActiveMovePointRangeMid = 20;
-            ActiveMovePointRangeMin = 3;
+            //ActiveMovePointRangeMid = 20;
+            //ActiveMovePointRangeMin = 3;
 
-            Discard();
         }
 
         public void CopyTo(Settings settings)
         {
+            settings.StartX = StartX;
+            settings.StartY = StartY;
+
+            settings.MuteAddPointClone = MuteAddPointClone;
+            settings.MuteAddPointNew = MuteAddPointNew;
+            settings.MuteAddPolygonClone = MuteAddPolygonClone;
+            settings.MuteAddPolygonNew = MuteAddPolygonNew;
+            settings.MuteCurveFillPolygon = MuteCurveFillPolygon;
+            settings.MuteCurvePolygon = MuteCurvePolygon;
+            settings.MuteLineFillPolygon = MuteLineFillPolygon;
+            settings.MuteLinePolygon = MuteLinePolygon;
+            settings.MuteMovePointMax = MuteMovePointMax;
+            settings.MuteMovePointMid = MuteMovePointMid;
+            settings.MuteMovePointMin = MuteMovePointMin;
+            settings.MuteMovePolygon = MuteMovePolygon;
+            settings.MuteRemovePoint = MuteRemovePoint;
+            settings.MuteRemovePolygon = MuteRemovePolygon;
+
+            settings.Scale = Scale;
+            settings.HistoryImageFormat = HistoryImageFormat;
+            settings.HistoryImageFormatName = HistoryImageFormatName;
+            settings.HistoryImageSaveTrigger = HistoryImageSaveTrigger;
+            settings.HistoryImageSaveTriggerName = HistoryImageSaveTriggerName;
+            settings.HistoryImageScale = HistoryImageScale;
+            settings.HistoryImageSteps = HistoryImageSteps;
+
             settings.AddPolygonMutationRate = AddPolygonMutationRate;
             settings.RemovePolygonMutationRate = RemovePolygonMutationRate;
             settings.MovePolygonMutationRate = MovePolygonMutationRate;

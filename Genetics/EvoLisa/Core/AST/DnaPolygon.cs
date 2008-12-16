@@ -10,7 +10,12 @@ namespace GenArt.AST
         public List<DnaPoint> Points { get; set; }
         public DnaBrush Brush { get; set; }
 
-        public void Init(DnaDrawing drawing)
+        public int Width { get; set; }
+        public bool Splines { get; set; }
+        public bool Filled { get; set; }
+        public float Tension { get; set; }
+
+        public void Init(DnaDrawing drawing, Settings settings)
         {
             Points = new List<DnaPoint>();
 
@@ -18,7 +23,7 @@ namespace GenArt.AST
             var origin = new DnaPoint();
             origin.Init(drawing);
 
-            for (int i = 0; i < Settings.ActivePointsPerPolygonMin; i++)
+            for (int i = 0; i < settings.PointsPerPolygonMin; i++)
             {
                 var point = new DnaPoint
                                 {
@@ -34,7 +39,7 @@ namespace GenArt.AST
             }
 
             Brush = new DnaBrush();
-            Brush.Init();
+            Brush.Init(settings);
         }
 
         public DnaPolygon Clone()
@@ -52,25 +57,25 @@ namespace GenArt.AST
 
         public bool IsComplex { get; set; }
 
-        public void Mutate(DnaDrawing drawing)
+        public void Mutate(DnaDrawing drawing, Settings settings)
         {
-            if (Tools.WillMutate(Settings.ActiveAddPointMutationRate))
-                AddPoint(drawing);
+            if (Tools.WillMutate(settings.AddPointMutationRate))
+                AddPoint(drawing, settings);
 
-            if (Tools.WillMutate(Settings.ActiveRemovePointMutationRate))
-                RemovePoint(drawing);
+            if (Tools.WillMutate(settings.RemovePointMutationRate))
+                RemovePoint(drawing, settings);
 
-            Brush.Mutate(drawing);
-            Points.ForEach(p => p.Mutate(drawing));
+            Brush.Mutate(drawing, settings);
+            Points.ForEach(p => p.Mutate(drawing, settings));
 
             IsComplex = false;// checkComplex();
         }
 
-        private void RemovePoint(DnaDrawing drawing)
+        private void RemovePoint(DnaDrawing drawing, Settings settings)
         {
-            if (Points.Count > Settings.ActivePointsPerPolygonMin)
+            if (Points.Count > settings.PointsPerPolygonMin)
             {
-                if (drawing.PointCount > Settings.ActivePointsMin)
+                if (drawing.PointCount > settings.PointsMin)
                 {
                     int index = Tools.GetRandomNumber(0, Points.Count);
                     Points.RemoveAt(index);
@@ -80,11 +85,11 @@ namespace GenArt.AST
             }
         }
 
-        private void AddPoint(DnaDrawing drawing)
+        private void AddPoint(DnaDrawing drawing, Settings settings)
         {
-            if (Points.Count < Settings.ActivePointsPerPolygonMax)
+            if (Points.Count < settings.PointsPerPolygonMax)
             {
-                if (drawing.PointCount < Settings.ActivePointsMax)
+                if (drawing.PointCount < settings.PointsMax)
                 {
                     var newPoint = new DnaPoint();
 

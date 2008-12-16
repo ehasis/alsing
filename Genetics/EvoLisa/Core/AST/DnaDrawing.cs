@@ -33,12 +33,12 @@ namespace GenArt.AST
             IsDirty = true;
         }
 
-        public void Init()
+        public void Init(Settings settings)
         {
             Polygons = new List<DnaPolygon>();
 
-            for (int i = 0; i < Settings.ActivePolygonsMin; i++)
-                AddPolygon();
+            for (int i = 0; i < settings.PolygonsMin; i++)
+                AddPolygon(settings);
 
             SetDirty();
         }
@@ -56,26 +56,26 @@ namespace GenArt.AST
         }
 
 
-        public void Mutate()
+        public void Mutate(Settings settings)
         {
             //mutate always cause atleast one new mutation
             while (!IsDirty)
             {
-                if (Tools.WillMutate(Settings.ActiveAddPolygonMutationRate))
-                    AddPolygon();
+                if (Tools.WillMutate(settings.AddPolygonMutationRate))
+                    AddPolygon(settings);
 
-                if (Tools.WillMutate(Settings.ActiveRemovePolygonMutationRate))
-                    RemovePolygon();
+                if (Tools.WillMutate(settings.RemovePolygonMutationRate))
+                    RemovePolygon(settings);
 
-                if (Tools.WillMutate(Settings.ActiveMovePolygonMutationRate))
-                    MovePolygon();
+                if (Tools.WillMutate(settings.MovePolygonMutationRate))
+                    MovePolygon(settings);
 
                 foreach (DnaPolygon polygon in Polygons)
-                    polygon.Mutate(this);
+                    polygon.Mutate(this, settings);
             }
         }
 
-        public void MovePolygon()
+        public void MovePolygon(Settings settings)
         {
             if (Polygons.Count < 1)
                 return;
@@ -88,9 +88,9 @@ namespace GenArt.AST
             SetDirty();
         }
 
-        public void RemovePolygon()
+        public void RemovePolygon(Settings settings)
         {
-            if (Polygons.Count > Settings.ActivePolygonsMin)
+            if (Polygons.Count > settings.PolygonsMin)
             {
                 int index = Tools.GetRandomNumber(0, Polygons.Count);
                 Polygons.RemoveAt(index);
@@ -98,9 +98,9 @@ namespace GenArt.AST
             }
         }
 
-        public void AddPolygon()
+        public void AddPolygon(Settings settings)
         {
-            if (Polygons.Count < Settings.ActivePolygonsMax)
+            if (Polygons.Count < settings.PolygonsMax)
             {
                 if (Polygons.Count > 5)
                 {
@@ -111,7 +111,7 @@ namespace GenArt.AST
                 else
                 {
                     var newPolygon = new DnaPolygon();
-                    newPolygon.Init(this);
+                    newPolygon.Init(this, settings);
 
                     int index = Tools.GetRandomNumber(0, Polygons.Count);
 

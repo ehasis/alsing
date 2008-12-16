@@ -120,6 +120,9 @@
   <metadata name="toolTipInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
+  <metadata name="toolTipInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
   <data name="numericUpDownMovePolygonMutationRate.ToolTip" xml:space="preserve">
     <value>Probability that a mutation will move a polygon on the canvas. When a polygon moves it changes its priority (z-axis) on the canvas. A value of 1000 gives a 1 in 1000 chance that the mutation will occur in a generation.</value>
   </data>

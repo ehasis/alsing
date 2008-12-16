@@ -137,6 +137,13 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.toolTipInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBoxMuteCurveFillPolygon = new System.Windows.Forms.CheckBox();
+            this.checkBoxMuteCurvePolygon = new System.Windows.Forms.CheckBox();
+            this.checkBoxMuteLineFillPolygon = new System.Windows.Forms.CheckBox();
+            this.checkBoxMuteLinePolygon = new System.Windows.Forms.CheckBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1018,7 +1025,7 @@
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(430, 255);
             this.tabPage5.TabIndex = 1;
-            this.tabPage5.Text = "Ranges";
+            this.tabPage5.Text = "Constraints";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // tabControl3
@@ -1037,6 +1044,13 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.label30);
+            this.tabPage6.Controls.Add(this.checkBox1);
+            this.tabPage6.Controls.Add(this.label29);
+            this.tabPage6.Controls.Add(this.checkBoxMuteLinePolygon);
+            this.tabPage6.Controls.Add(this.checkBoxMuteLineFillPolygon);
+            this.tabPage6.Controls.Add(this.checkBoxMuteCurvePolygon);
+            this.tabPage6.Controls.Add(this.checkBoxMuteCurveFillPolygon);
             this.tabPage6.Controls.Add(this.numericUpDownPointsPerPolygonMin);
             this.tabPage6.Controls.Add(this.numericUpDownPolygonsMax);
             this.tabPage6.Controls.Add(this.numericUpDownPointsPerPolygonMax);
@@ -1917,26 +1931,26 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(120, 6);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(120, 6);
             // 
             // settingsToolStripMenuItem
             // 
@@ -1950,14 +1964,14 @@
             // applyToolStripMenuItem
             // 
             this.applyToolStripMenuItem.Name = "applyToolStripMenuItem";
-            this.applyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.applyToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.applyToolStripMenuItem.Text = "Apply";
             this.applyToolStripMenuItem.Click += new System.EventHandler(this.applyToolStripMenuItem_Click);
             // 
             // resetToolStripMenuItem1
             // 
             this.resetToolStripMenuItem1.Name = "resetToolStripMenuItem1";
-            this.resetToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.resetToolStripMenuItem1.Size = new System.Drawing.Size(105, 22);
             this.resetToolStripMenuItem1.Text = "Reset";
             this.resetToolStripMenuItem1.Click += new System.EventHandler(this.resetToolStripMenuItem1_Click);
             // 
@@ -1986,6 +2000,74 @@
             // toolTipInfo
             // 
             this.toolTipInfo.ToolTipTitle = "Description";
+            // 
+            // checkBoxMuteCurveFillPolygon
+            // 
+            this.checkBoxMuteCurveFillPolygon.AutoSize = true;
+            this.checkBoxMuteCurveFillPolygon.Location = new System.Drawing.Point(9, 111);
+            this.checkBoxMuteCurveFillPolygon.Name = "checkBoxMuteCurveFillPolygon";
+            this.checkBoxMuteCurveFillPolygon.Size = new System.Drawing.Size(86, 17);
+            this.checkBoxMuteCurveFillPolygon.TabIndex = 43;
+            this.checkBoxMuteCurveFillPolygon.Text = "Filled curved";
+            this.checkBoxMuteCurveFillPolygon.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxMuteCurvePolygon
+            // 
+            this.checkBoxMuteCurvePolygon.AutoSize = true;
+            this.checkBoxMuteCurvePolygon.Location = new System.Drawing.Point(9, 134);
+            this.checkBoxMuteCurvePolygon.Name = "checkBoxMuteCurvePolygon";
+            this.checkBoxMuteCurvePolygon.Size = new System.Drawing.Size(60, 17);
+            this.checkBoxMuteCurvePolygon.TabIndex = 44;
+            this.checkBoxMuteCurvePolygon.Text = "Curved";
+            this.checkBoxMuteCurvePolygon.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxMuteLineFillPolygon
+            // 
+            this.checkBoxMuteLineFillPolygon.AutoSize = true;
+            this.checkBoxMuteLineFillPolygon.Location = new System.Drawing.Point(9, 157);
+            this.checkBoxMuteLineFillPolygon.Name = "checkBoxMuteLineFillPolygon";
+            this.checkBoxMuteLineFillPolygon.Size = new System.Drawing.Size(74, 17);
+            this.checkBoxMuteLineFillPolygon.TabIndex = 45;
+            this.checkBoxMuteLineFillPolygon.Text = "Filled lines";
+            this.checkBoxMuteLineFillPolygon.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxMuteLinePolygon
+            // 
+            this.checkBoxMuteLinePolygon.AutoSize = true;
+            this.checkBoxMuteLinePolygon.Location = new System.Drawing.Point(9, 180);
+            this.checkBoxMuteLinePolygon.Name = "checkBoxMuteLinePolygon";
+            this.checkBoxMuteLinePolygon.Size = new System.Drawing.Size(51, 17);
+            this.checkBoxMuteLinePolygon.TabIndex = 46;
+            this.checkBoxMuteLinePolygon.Text = "Lines";
+            this.checkBoxMuteLinePolygon.UseVisualStyleBackColor = true;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(6, 95);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(196, 13);
+            this.label29.TabIndex = 47;
+            this.label29.Text = "Disallow polygons of the following types:";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(211, 111);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(136, 17);
+            this.checkBox1.TabIndex = 48;
+            this.checkBox1.Text = "Add polygon by cloning";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(207, 95);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(199, 13);
+            this.label30.TabIndex = 49;
+            this.label30.Text = "Disallow mutations of the following types:";
             // 
             // SettingsForm
             // 
@@ -2188,5 +2270,12 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem1;
         private System.Windows.Forms.ToolTip toolTipInfo;
+        private System.Windows.Forms.CheckBox checkBoxMuteCurveFillPolygon;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.CheckBox checkBoxMuteLinePolygon;
+        private System.Windows.Forms.CheckBox checkBoxMuteLineFillPolygon;
+        private System.Windows.Forms.CheckBox checkBoxMuteCurvePolygon;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

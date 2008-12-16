@@ -36,7 +36,6 @@ namespace GenArt
         private void ApplySettings()
         {
             copy.CopyTo(Settings);
-            Settings.Activate();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)

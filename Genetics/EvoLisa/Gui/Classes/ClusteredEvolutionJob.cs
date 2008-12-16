@@ -11,16 +11,19 @@ namespace GenArt.Classes
         private DnaDrawing currentDrawing;
         private double currentErrorLevel;
         private readonly IList<ClusteredWorker> workers;
+        private Settings settings;
 
-        public ClusteredEvolutionJob(SourceImage sourceImage)
+        public ClusteredEvolutionJob(SourceImage sourceImage, Settings settings)
         {
+            this.settings = settings;
+
             workers = new List<ClusteredWorker>();
             for (int i = 0; i < 2;i++ )
             {
                 var worker = new ClusteredWorker();
                 workers.Add(worker);
             }
-            currentDrawing = GetNewInitializedDrawing();
+            currentDrawing = GetNewInitializedDrawing(settings);
             currentDrawing.SourceImage = sourceImage;
             currentErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, currentDrawing.SourceImage);
         }
@@ -38,7 +41,7 @@ namespace GenArt.Classes
         {
             foreach(var worker in workers)
             {
-                worker.SetJob(currentDrawing,currentErrorLevel);
+                worker.SetJob(currentDrawing,currentErrorLevel, settings);
             }
 
             foreach (var worker in workers)
@@ -71,10 +74,10 @@ namespace GenArt.Classes
 
         #endregion
 
-        private static DnaDrawing GetNewInitializedDrawing()
+        private static DnaDrawing GetNewInitializedDrawing(Settings settings)
         {
             var drawing = new DnaDrawing();
-            drawing.Init();
+            drawing.Init(settings);
             return drawing;
         }
     }

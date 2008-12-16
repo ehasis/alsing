@@ -14,7 +14,7 @@ namespace GenArt.Classes
         private DnaDrawing currentDrawing;
         private double currentErrorLevel;
 
-        public LayeredEvolutionJob(SourceImage sourceImage, int layerCount)
+        public LayeredEvolutionJob(SourceImage sourceImage, int layerCount, Settings settings)
         {
             this.sourceImage = sourceImage;
             LayerCount = layerCount;
@@ -25,7 +25,7 @@ namespace GenArt.Classes
             {
                 SourceImage newSourceImage = GetIntensityMap(sourceImage, workerMin, range);
 
-                var worker = new LayeredWorker(newSourceImage)
+                var worker = new LayeredWorker(newSourceImage, settings)
                                  {
                                      MinIntensity = workerMin,
                                      MaxIntensity = (workerMin + range),

@@ -11,19 +11,21 @@ namespace GenArt.Classes
         public DnaDrawing CurrentDrawing { get; set; }
         public double CurrentErrorLevel { get; set; }
         public bool IsDirty { get; set; }
+        private Settings settings;
 
 
-        public LayeredWorker(SourceImage sourceImage)
+        public LayeredWorker(SourceImage sourceImage, Settings settings)
         {
-            CurrentDrawing = GetNewInitializedDrawing();
+            this.settings = settings;
+            CurrentDrawing = GetNewInitializedDrawing(settings);
             CurrentDrawing.SourceImage = sourceImage;
             CurrentErrorLevel = double.MaxValue;
         }
 
-        private static DnaDrawing GetNewInitializedDrawing()
+        private static DnaDrawing GetNewInitializedDrawing(Settings settings)
         {
             var drawing = new DnaDrawing();
-            drawing.Init();
+            drawing.Init(settings);
             return drawing;
         }
 
@@ -31,7 +33,7 @@ namespace GenArt.Classes
         {
             DnaDrawing newDrawing = CurrentDrawing.Clone();
 
-            newDrawing.Mutate();
+            newDrawing.Mutate(settings);
 
             double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
 
