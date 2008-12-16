@@ -127,6 +127,9 @@ namespace GenArt.AST
                     DnaPolygon parent = Polygons[Tools.GetRandomNumber(0, Polygons.Count)];
                     var newPolygon = parent.Clone();
                     Polygons.Insert(Polygons.IndexOf(parent), newPolygon);
+
+                    newPolygon.Offset(Tools.GetRandomNumber(-6, 6), Tools.GetRandomNumber(-6, 6));
+
                     SetDirty();
                 }
             }
