@@ -58,17 +58,21 @@ namespace GenArt.AST
 
         public void Mutate(Settings settings)
         {
-            if (Tools.WillMutate(settings.AddPolygonMutationRate))
-                AddPolygon(settings);
+            if (!settings.MuteAddPolygonNew)
+                if (Tools.WillMutate(settings.AddPolygonMutationRate))
+                    AddPolygon(settings);
 
-            if (Tools.WillMutate(settings.AddPolygonCloneMutationRate))
-                AddPolygonClone(settings);
+            if (!settings.MuteAddPolygonClone)
+                if (Tools.WillMutate(settings.AddPolygonCloneMutationRate))
+                    AddPolygonClone(settings);
 
-            if (Tools.WillMutate(settings.RemovePolygonMutationRate))
-                RemovePolygon(settings);
+            if (!settings.MuteRemovePolygon)
+                if (Tools.WillMutate(settings.RemovePolygonMutationRate))
+                    RemovePolygon(settings);
 
-            if (Tools.WillMutate(settings.MovePolygonMutationRate))
-                MovePolygon(settings);
+            if (!settings.MuteMovePolygon)
+                if (Tools.WillMutate(settings.MovePolygonMutationRate))
+                    MovePolygon(settings);
 
             foreach (DnaPolygon polygon in Polygons)
                 polygon.Mutate(this, settings);
@@ -103,7 +107,6 @@ namespace GenArt.AST
             {
                 var newPolygon = new DnaPolygon();
                 newPolygon.Init(this, settings);
-
 
                 int index = Tools.GetRandomNumber(0, Polygons.Count);
 
