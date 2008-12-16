@@ -53,6 +53,7 @@
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\SourceImage.cs" />
     <Compile Include="Classes\Tools.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Interfaces\IEvolutionJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

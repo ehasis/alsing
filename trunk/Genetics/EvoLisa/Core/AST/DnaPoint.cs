@@ -32,39 +32,7 @@ namespace GenArt.AST
                 X = Tools.GetRandomNumber(0, drawing.SourceImage.Width);
                 Y = Tools.GetRandomNumber(0, drawing.SourceImage.Height);
                 drawing.SetDirty();
-            }
 
-            if (Tools.WillMutate(settings.MovePointMidMutationRate))
-            {
-                X =
-                    Math.Min(
-                        Math.Max(0,
-                                 X +
-                                 Tools.GetRandomNumber(-settings.MovePointRangeMid,
-                                                       settings.MovePointRangeMid)), drawing.SourceImage.Width);
-                Y =
-                    Math.Min(
-                        Math.Max(0,
-                                 Y +
-                                 Tools.GetRandomNumber(-settings.MovePointRangeMid,
-                                                       settings.MovePointRangeMid)), drawing.SourceImage.Height);
-                drawing.SetDirty();
-            }
-
-            if (Tools.WillMutate(settings.MovePointMinMutationRate))
-            {
-                X =
-                    Math.Min(
-                        Math.Max(0,
-                                 X +
-                                 Tools.GetRandomNumber(-settings.MovePointRangeMin,
-                                                       settings.MovePointRangeMin)), drawing.SourceImage.Width);
-                Y =
-                    Math.Min(
-                        Math.Max(0,
-                                 Y +
-                                 Tools.GetRandomNumber(-settings.MovePointRangeMin,
-                                                       settings.MovePointRangeMin)), drawing.SourceImage.Height);
                 drawing.SetDirty();
             }
         }

@@ -87,7 +87,7 @@ namespace GenArt.Classes
         private int movePointMidMutationRate = 1500;
         private int movePointMinMutationRate = 1500;
         private int movePointRangeMid = 20;
-        private int movePointRangeMin = 3;
+        private int movePointRangeMin = 4;
         private int movePolygonMutationRate = 700;
         private int pointsMax = 1500;
         private int pointsMin;
