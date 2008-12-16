@@ -7,8 +7,6 @@ namespace GenArt.Classes
     {
         public Settings()
         {
-            HistoryImageFormat = ImageFormat.Jpeg;
-
             Reset();
         }
 
@@ -70,6 +68,8 @@ namespace GenArt.Classes
         public string HistoryImageSaveTriggerName { get; set; }
 
         //Mutation rates
+        private int flipSplinesMutationRate = 1500;
+        private int flipFilledMutationRate = 1500;
         private int addPointMutationRate = 1500;
         private int addPointCloneMutationRate = 1500;
         private int addPolygonMutationRate = 700;
@@ -101,6 +101,18 @@ namespace GenArt.Classes
         private int removePointMutationRate = 1500;
 
         private int removePolygonMutationRate = 1500;
+
+        public int FlipSplinesMutationRate
+        {
+            get { return flipSplinesMutationRate; }
+            set { flipSplinesMutationRate = value; }
+        }
+
+        public int FlipFilledMutationRate
+        {
+            get { return flipFilledMutationRate; }
+            set { flipFilledMutationRate = value; }
+        }
 
         public int AddPolygonMutationRate
         {
@@ -385,47 +397,54 @@ namespace GenArt.Classes
 
         public void Reset()
         {
-            //ActiveAddPolygonMutationRate = 700;
-            //ActiveRemovePolygonMutationRate = 1500;
-            //ActiveMovePolygonMutationRate = 700;
+            HistoryImageFormat = ImageFormat.Jpeg;
 
-            //ActiveAddPointMutationRate = 1500;
-            //ActiveRemovePointMutationRate = 1500;
-            //ActiveMovePointMaxMutationRate = 1500;
-            //ActiveMovePointMidMutationRate = 1500;
-            //ActiveMovePointMinMutationRate = 1500;
+            //MuteCurvePolygon = true;
+            //MuteLinePolygon = true;
 
-            //ActiveRedMutationRate = 1500;
-            //ActiveGreenMutationRate = 1500;
-            //ActiveBlueMutationRate = 1500;
-            //ActiveAlphaMutationRate = 1500;
+            AddPolygonMutationRate = 700;
+            RemovePolygonMutationRate = 1500;
+            MovePolygonMutationRate = 700;
+
+            AddPointMutationRate = 1500;
+            RemovePointMutationRate = 1500;
+            MovePointMaxMutationRate = 1500;
+            MovePointMidMutationRate = 1500;
+            MovePointMinMutationRate = 1500;
+
+            RedMutationRate = 1500;
+            GreenMutationRate = 1500;
+            BlueMutationRate = 1500;
+            AlphaMutationRate = 1500;
 
             ////Limits / Constraints
-            //ActiveRedRangeMin = 0;
-            //ActiveRedRangeMax = 255;
-            //ActiveGreenRangeMin = 0;
-            //ActiveGreenRangeMax = 255;
-            //ActiveBlueRangeMin = 0;
-            //ActiveBlueRangeMax = 255;
-            //ActiveAlphaRangeMin = 30;
-            //ActiveAlphaRangeMax = 60;
+            RedRangeMin = 0;
+            RedRangeMax = 255;
+            GreenRangeMin = 0;
+            GreenRangeMax = 255;
+            BlueRangeMin = 0;
+            BlueRangeMax = 255;
+            AlphaRangeMin = 30;
+            AlphaRangeMax = 60;
 
-            //ActivePolygonsMax = 255;
-            //ActivePolygonsMin = 0;
+            PolygonsMax = 255;
+            PolygonsMin = 0;
 
-            //ActivePointsPerPolygonMax = 10;
-            //ActivePointsPerPolygonMin = 3;
+            PointsPerPolygonMax = 10;
+            PointsPerPolygonMin = 3;
 
-            //ActivePointsMax = 1500;
-            //ActivePointsMin = 0;
+            PointsMax = 1500;
+            PointsMin = 0;
 
-            //ActiveMovePointRangeMid = 20;
-            //ActiveMovePointRangeMin = 3;
+            MovePointRangeMid = 20;
+            MovePointRangeMin = 3;
 
         }
 
         public void CopyTo(Settings settings)
         {
+            settings.FlipFilledMutationRate = FlipFilledMutationRate;
+            settings.FlipSplinesMutationRate = FlipSplinesMutationRate;
 
             settings.MuteAddPointClone = MuteAddPointClone;
             settings.MuteAddPointNew = MuteAddPointNew;

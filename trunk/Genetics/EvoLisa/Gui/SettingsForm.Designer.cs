@@ -137,13 +137,13 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.toolTipInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.label29 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.checkBoxMuteCurveFillPolygon = new System.Windows.Forms.CheckBox();
             this.checkBoxMuteCurvePolygon = new System.Windows.Forms.CheckBox();
             this.checkBoxMuteLineFillPolygon = new System.Windows.Forms.CheckBox();
             this.checkBoxMuteLinePolygon = new System.Windows.Forms.CheckBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label30 = new System.Windows.Forms.Label();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -2001,6 +2001,34 @@
             // 
             this.toolTipInfo.ToolTipTitle = "Description";
             // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(6, 95);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(196, 13);
+            this.label29.TabIndex = 47;
+            this.label29.Text = "Disallow polygons of the following types:";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(211, 111);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(136, 17);
+            this.checkBox1.TabIndex = 48;
+            this.checkBox1.Text = "Add polygon by cloning";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(207, 95);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(199, 13);
+            this.label30.TabIndex = 49;
+            this.label30.Text = "Disallow mutations of the following types:";
+            // 
             // checkBoxMuteCurveFillPolygon
             // 
             this.checkBoxMuteCurveFillPolygon.AutoSize = true;
@@ -2040,34 +2068,6 @@
             this.checkBoxMuteLinePolygon.TabIndex = 46;
             this.checkBoxMuteLinePolygon.Text = "Lines";
             this.checkBoxMuteLinePolygon.UseVisualStyleBackColor = true;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(6, 95);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(196, 13);
-            this.label29.TabIndex = 47;
-            this.label29.Text = "Disallow polygons of the following types:";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(211, 111);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(136, 17);
-            this.checkBox1.TabIndex = 48;
-            this.checkBox1.Text = "Add polygon by cloning";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(207, 95);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(199, 13);
-            this.label30.TabIndex = 49;
-            this.label30.Text = "Disallow mutations of the following types:";
             // 
             // SettingsForm
             // 
@@ -2270,12 +2270,12 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem1;
         private System.Windows.Forms.ToolTip toolTipInfo;
-        private System.Windows.Forms.CheckBox checkBoxMuteCurveFillPolygon;
         private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBoxMuteLinePolygon;
         private System.Windows.Forms.CheckBox checkBoxMuteLineFillPolygon;
         private System.Windows.Forms.CheckBox checkBoxMuteCurvePolygon;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxMuteCurveFillPolygon;
     }
 }
