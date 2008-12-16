@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 using GenArt.Classes;
 using System;
 using GenArt.Core.Classes;
+using System.Drawing;
 
 namespace GenArt.AST
 {
@@ -11,7 +12,9 @@ namespace GenArt.AST
     {
         public List<DnaPolygon> Polygons { get; set; }
         [XmlIgnore]
-        public SourceImage SourceImage { get; set; }        
+        public SourceImage SourceImage { get; set; }
+        [XmlIgnore]
+        public Image BgImage { get; set; }
 
         [XmlIgnore]
         public bool IsDirty { get; set; }

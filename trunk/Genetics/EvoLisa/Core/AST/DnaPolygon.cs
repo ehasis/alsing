@@ -23,11 +23,11 @@ namespace GenArt.AST
             var origin = new DnaPoint();
             origin.Init(drawing);
 
-            if (drawing.Polygons.Count < 1)
-            {
-                origin.X = drawing.SourceImage.Width / 2;
-                origin.Y = drawing.SourceImage.Width / 2;
-            }
+            //if (drawing.Polygons.Count < 1)
+            //{
+            //    origin.X = drawing.SourceImage.Width / 2;
+            //    origin.Y = drawing.SourceImage.Width / 2;
+            //}
 
             for (int i = 0; i < settings.PointsPerPolygonMin; i++)
             {

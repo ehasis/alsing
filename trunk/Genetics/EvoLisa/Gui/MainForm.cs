@@ -17,6 +17,8 @@ namespace GenArt
         private DnaDrawing currentDrawing;
 
         private DnaDrawing guiDrawing;
+        private Image bgImage;
+
         private DateTime lastRepaint = DateTime.MinValue;
         private int lastSelected;
         public DnaProject Project;
@@ -226,6 +228,8 @@ namespace GenArt
                                             PixelFormat.Format24bppRgb))
             using (Graphics backGraphics = Graphics.FromImage(backBuffer))
             {
+                guiDrawing.BgImage = bgImage;
+
                 backGraphics.SmoothingMode = SmoothingMode.HighQuality;
                 Renderer.Render(guiDrawing, backGraphics, Project.Settings.Scale);
 
@@ -648,6 +652,37 @@ namespace GenArt
         private void trackBarAnimScale_Scroll(object sender, EventArgs e)
         {
             Project.Settings.HistoryImageScale = Convert.ToInt32(trackBarAnimScale.Value);
+        }
+
+        private void buttonMoveFocus_Click(object sender, EventArgs e)
+        {
+            Stop();
+
+            int scale = Project.Settings.Scale;
+
+            using (
+                var img = new Bitmap(scale * picPattern.Width, scale * picPattern.Height,
+                                     PixelFormat.Format24bppRgb))
+            {
+                using (Graphics imgGfx = Graphics.FromImage(img))
+                {
+                    imgGfx.SmoothingMode = SmoothingMode.HighQuality;
+                    Renderer.Render(guiDrawing, imgGfx, scale);
+
+                    bgImage = (Image) img.Clone();
+                }
+            }
+
+            lock (currentDrawing)
+            {
+                currentDrawing.Polygons.Clear();
+                currentDrawing.AddPolygon(Project.Settings);
+
+                Project.Drawing = currentDrawing;
+            }
+
+
+            Start();
         }
     }
 }

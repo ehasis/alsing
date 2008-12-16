@@ -71,9 +71,10 @@
             this.trackBarAnimScale = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
             this.trackBarScale = new System.Windows.Forms.TrackBar();
-            this.pnlCanvas = new GenArt.Canvas();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.buttonMoveFocus = new System.Windows.Forms.Button();
+            this.pnlCanvas = new GenArt.Canvas();
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -257,6 +258,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.buttonMoveFocus);
             this.splitContainer1.Panel1.Controls.Add(this.checkBoxAnimSaveDNA);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
             this.splitContainer1.Panel1.Controls.Add(this.comboBoxAnimSaveFormat);
@@ -528,16 +530,6 @@
             this.trackBarScale.Value = 3;
             this.trackBarScale.Scroll += new System.EventHandler(this.trackBarScale_Scroll);
             // 
-            // pnlCanvas
-            // 
-            this.pnlCanvas.BackColor = System.Drawing.Color.Black;
-            this.pnlCanvas.Location = new System.Drawing.Point(6, 16);
-            this.pnlCanvas.Name = "pnlCanvas";
-            this.pnlCanvas.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlCanvas.Size = new System.Drawing.Size(600, 600);
-            this.pnlCanvas.TabIndex = 1;
-            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -553,6 +545,27 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(42, 17);
             this.toolStripStatusLabel1.Text = "Ready.";
+            // 
+            // buttonMoveFocus
+            // 
+            this.buttonMoveFocus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonMoveFocus.Location = new System.Drawing.Point(0, 259);
+            this.buttonMoveFocus.Name = "buttonMoveFocus";
+            this.buttonMoveFocus.Size = new System.Drawing.Size(230, 23);
+            this.buttonMoveFocus.TabIndex = 37;
+            this.buttonMoveFocus.Text = "Move focus";
+            this.buttonMoveFocus.UseVisualStyleBackColor = true;
+            this.buttonMoveFocus.Click += new System.EventHandler(this.buttonMoveFocus_Click);
+            // 
+            // pnlCanvas
+            // 
+            this.pnlCanvas.BackColor = System.Drawing.Color.Black;
+            this.pnlCanvas.Location = new System.Drawing.Point(6, 16);
+            this.pnlCanvas.Name = "pnlCanvas";
+            this.pnlCanvas.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlCanvas.Size = new System.Drawing.Size(600, 600);
+            this.pnlCanvas.TabIndex = 1;
+            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
             // 
             // MainForm
             // 
@@ -636,6 +649,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TrackBar trackBarAnimScale;
         private System.Windows.Forms.CheckBox checkBoxAnimSaveDNA;
+        private System.Windows.Forms.Button buttonMoveFocus;
     }
 }
 
