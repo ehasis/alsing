@@ -28,34 +28,34 @@ namespace GenArt.Classes
             Point[] points = GetGdiPoints(polygon.Points, scale);
             using (Brush brush = GetGdiBrush(polygon.Brush))
             {
-                if (polygon.Splines)
-                {
-                    if (polygon.Filled)
-                    {
+                //if (polygon.Splines)
+                //{
+                    //if (polygon.Filled)
+                    //{
                         g.FillClosedCurve(brush, points, FillMode.Winding);                
-                    }
-                    else
-                    {
-                        using (Pen pen = new Pen(brush, Math.Max(1, polygon.Width)))
-                        {
-                            g.DrawClosedCurve(pen, points, Math.Abs(polygon.Tension), FillMode.Winding);
-                        }
-                    }
-                }
-                else
-                {
-                    if (polygon.Filled)
-                    {
-                        g.FillPolygon(brush, points, FillMode.Winding);
-                    }
-                    else
-                    {
-                        using (Pen pen = new Pen(brush, Math.Max(1, polygon.Width)))
-                        {
-                            g.DrawPolygon(pen, points);
-                        }
-                    }
-                }
+                    //}
+                    //else
+                    //{
+                    //    using (Pen pen = new Pen(brush, Math.Max(1, polygon.Width)))
+                    //    {
+                    //        g.DrawClosedCurve(pen, points, Math.Abs(polygon.Tension), FillMode.Winding);
+                    //    }
+                    //}
+                //}
+                //else
+                //{
+                //    if (polygon.Filled)
+                //    {
+                //        g.FillPolygon(brush, points, FillMode.Winding);
+                //    }
+                //    else
+                //    {
+                //        using (Pen pen = new Pen(brush, Math.Max(1, polygon.Width)))
+                //        {
+                //            g.DrawPolygon(pen, points);
+                //        }
+                //    }
+                //}
             }
         }
 

@@ -27,12 +27,19 @@ namespace GenArt.AST
 
         public void Mutate(DnaDrawing drawing, Settings settings)
         {
-            if (Tools.WillMutate(settings.MovePointMaxMutationRate))
-            {
-                X = Tools.GetRandomNumber(0, drawing.SourceImage.Width);
-                Y = Tools.GetRandomNumber(0, drawing.SourceImage.Height);
-                drawing.SetDirty();
 
+            if (Tools.WillMutate(settings.MovePointMinMutationRate))
+            {
+                X = X
+                    .Randomize(-settings.MovePointRangeMin, settings.MovePointRangeMin)
+                    .Max(0)
+                    .Min(drawing.SourceImage.Width);
+
+                Y = Y
+                    .Randomize(-settings.MovePointRangeMin, settings.MovePointRangeMin)
+                    .Max(0)
+                    .Min(drawing.SourceImage.Height);
+                
                 drawing.SetDirty();
             }
         }
