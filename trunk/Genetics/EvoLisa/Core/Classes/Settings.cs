@@ -12,9 +12,6 @@ namespace GenArt.Classes
             Reset();
         }
 
-        public int StartX { get; set; }
-        public int StartY { get; set; }
-
         public bool MuteLinePolygon { get; set; }
         public bool MuteCurvePolygon { get; set; }
         public bool MuteLineFillPolygon { get; set; }
@@ -74,7 +71,9 @@ namespace GenArt.Classes
 
         //Mutation rates
         private int addPointMutationRate = 1500;
+        private int addPointCloneMutationRate = 1500;
         private int addPolygonMutationRate = 700;
+        private int addPolygonCloneMutationRate = 700;
         private int alphaMutationRate = 1500;
         private int alphaRangeMax = 60;
         private int alphaRangeMin = 30;
@@ -106,11 +105,13 @@ namespace GenArt.Classes
         public int AddPolygonMutationRate
         {
             get { return addPolygonMutationRate; }
-            set
-            {
-                addPolygonMutationRate = value;
-                //this.OnPropertyChanged("AddPolygonMutationRate");
-            }
+            set { addPolygonMutationRate = value; }
+        }
+
+        public int AddPolygonCloneMutationRate
+        {
+            get { return addPolygonCloneMutationRate; }
+            set { addPolygonCloneMutationRate = value; }
         }
 
         public int RemovePolygonMutationRate
@@ -129,6 +130,12 @@ namespace GenArt.Classes
         {
             get { return addPointMutationRate; }
             set { addPointMutationRate = value; }
+        }
+
+        public int AddPointCloneMutationRate
+        {
+            get { return addPointCloneMutationRate; }
+            set { addPointCloneMutationRate = value; }
         }
 
         public int RemovePointMutationRate
@@ -419,8 +426,6 @@ namespace GenArt.Classes
 
         public void CopyTo(Settings settings)
         {
-            settings.StartX = StartX;
-            settings.StartY = StartY;
 
             settings.MuteAddPointClone = MuteAddPointClone;
             settings.MuteAddPointNew = MuteAddPointNew;
@@ -446,10 +451,12 @@ namespace GenArt.Classes
             settings.HistoryImageSteps = HistoryImageSteps;
 
             settings.AddPolygonMutationRate = AddPolygonMutationRate;
+            settings.AddPolygonCloneMutationRate = AddPolygonCloneMutationRate;
             settings.RemovePolygonMutationRate = RemovePolygonMutationRate;
             settings.MovePolygonMutationRate = MovePolygonMutationRate;
 
             settings.AddPointMutationRate = AddPointMutationRate;
+            settings.AddPointCloneMutationRate = AddPointCloneMutationRate;
             settings.RemovePointMutationRate = RemovePointMutationRate;
             settings.MovePointMaxMutationRate = MovePointMaxMutationRate;
             settings.MovePointMidMutationRate = MovePointMidMutationRate;
