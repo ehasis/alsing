@@ -102,7 +102,7 @@ namespace GenArt.AST
         {
             if (Polygons.Count < Settings.ActivePolygonsMax)
             {
-                if (Polygons.Count > 0)
+                if (Polygons.Count > 5)
                 {
                     DnaPolygon master = Polygons[Tools.GetRandomNumber(0, Polygons.Count)];
                     var newPolygon = master.Clone();
