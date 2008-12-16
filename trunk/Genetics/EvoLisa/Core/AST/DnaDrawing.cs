@@ -58,24 +58,20 @@ namespace GenArt.AST
 
         public void Mutate(Settings settings)
         {
-            //mutate always cause atleast one new mutation
-            while (!IsDirty)
-            {
-                if (Tools.WillMutate(settings.AddPolygonMutationRate))
-                    AddPolygon(settings);
+            if (Tools.WillMutate(settings.AddPolygonMutationRate))
+                AddPolygon(settings);
 
-                if (Tools.WillMutate(settings.AddPolygonCloneMutationRate))
-                    AddPolygonClone(settings);
+            if (Tools.WillMutate(settings.AddPolygonCloneMutationRate))
+                AddPolygonClone(settings);
 
-                if (Tools.WillMutate(settings.RemovePolygonMutationRate))
-                    RemovePolygon(settings);
+            if (Tools.WillMutate(settings.RemovePolygonMutationRate))
+                RemovePolygon(settings);
 
-                if (Tools.WillMutate(settings.MovePolygonMutationRate))
-                    MovePolygon(settings);
+            if (Tools.WillMutate(settings.MovePolygonMutationRate))
+                MovePolygon(settings);
 
-                foreach (DnaPolygon polygon in Polygons)
-                    polygon.Mutate(this, settings);
-            }
+            foreach (DnaPolygon polygon in Polygons)
+                polygon.Mutate(this, settings);
         }
 
         public void MovePolygon(Settings settings)
@@ -105,26 +101,16 @@ namespace GenArt.AST
         {
             if (Polygons.Count < settings.PolygonsMax)
             {
-
-                if (Tools.GetRandomNumber(0, 100) < 98 && Polygons.Count > 0)
-                {
-                    DnaPolygon master = Polygons[Tools.GetRandomNumber(0, Polygons.Count)];
-                    var newPolygon = master.Clone();
-                    Polygons.Insert(Polygons.IndexOf(master), newPolygon);
-                }
-                else
-                {
-                    var newPolygon = new DnaPolygon();
-                    newPolygon.Init(this, settings);
+                var newPolygon = new DnaPolygon();
+                newPolygon.Init(this, settings);
 
 
-                    int index = Tools.GetRandomNumber(0, Polygons.Count);
+                int index = Tools.GetRandomNumber(0, Polygons.Count);
 
-                    Polygons.Insert(index, newPolygon);
-                }
+                Polygons.Insert(index, newPolygon);
 
                 SetDirty();
-            }
+             }
         }
 
         public void AddPolygonClone(Settings settings)
