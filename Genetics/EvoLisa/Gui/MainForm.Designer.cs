@@ -50,6 +50,7 @@
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.buttonMoveFocus = new System.Windows.Forms.Button();
             this.checkBoxAnimSaveDNA = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.comboBoxAnimSaveFormat = new System.Windows.Forms.ComboBox();
@@ -71,10 +72,9 @@
             this.trackBarAnimScale = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
             this.trackBarScale = new System.Windows.Forms.TrackBar();
+            this.pnlCanvas = new GenArt.Canvas();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.buttonMoveFocus = new System.Windows.Forms.Button();
-            this.pnlCanvas = new GenArt.Canvas();
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -110,7 +110,6 @@
             // 
             // tmrRedraw
             // 
-            this.tmrRedraw.Interval = 10;
             this.tmrRedraw.Tick += new System.EventHandler(this.tmrRedraw_Tick);
             // 
             // label2
@@ -142,13 +141,13 @@
             this.toolStripMenuItem4,
             this.saveToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(138, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(161, 22);
             this.toolStripMenuItem3.Text = "New Project";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -159,39 +158,39 @@
             this.sourceImageToolStripMenuItem,
             this.dNAToolStripMenuItem});
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(146, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(169, 22);
             this.toolStripMenuItem2.Text = "Project";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // sourceImageToolStripMenuItem
             // 
             this.sourceImageToolStripMenuItem.Name = "sourceImageToolStripMenuItem";
-            this.sourceImageToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.sourceImageToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.sourceImageToolStripMenuItem.Text = "Source Image";
             this.sourceImageToolStripMenuItem.Click += new System.EventHandler(this.sourceImageToolStripMenuItem_Click);
             // 
             // dNAToolStripMenuItem
             // 
             this.dNAToolStripMenuItem.Name = "dNAToolStripMenuItem";
-            this.dNAToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.dNAToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.dNAToolStripMenuItem.Text = "DNA";
             this.dNAToolStripMenuItem.Click += new System.EventHandler(this.dNAToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(138, 22);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(161, 22);
             this.toolStripMenuItem4.Text = "Save Project";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -202,27 +201,27 @@
             this.toolStripMenuItem1,
             this.dNAToolStripMenuItem1});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.saveToolStripMenuItem.Text = "Save As...";
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItem5.Text = "Project";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItem1.Text = "Generated Image";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // dNAToolStripMenuItem1
             // 
             this.dNAToolStripMenuItem1.Name = "dNAToolStripMenuItem1";
-            this.dNAToolStripMenuItem1.Size = new System.Drawing.Size(164, 22);
+            this.dNAToolStripMenuItem1.Size = new System.Drawing.Size(188, 22);
             this.dNAToolStripMenuItem1.Text = "DNA";
             this.dNAToolStripMenuItem1.Click += new System.EventHandler(this.dNAToolStripMenuItem1_Click);
             // 
@@ -232,20 +231,20 @@
             this.toolStripMenuItem6,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(129, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem6.Text = "Statistics...";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.optionsToolStripMenuItem.Text = "Options...";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -287,11 +286,22 @@
             this.splitContainer1.SplitterDistance = 230;
             this.splitContainer1.TabIndex = 21;
             // 
+            // buttonMoveFocus
+            // 
+            this.buttonMoveFocus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonMoveFocus.Location = new System.Drawing.Point(0, 249);
+            this.buttonMoveFocus.Name = "buttonMoveFocus";
+            this.buttonMoveFocus.Size = new System.Drawing.Size(230, 23);
+            this.buttonMoveFocus.TabIndex = 37;
+            this.buttonMoveFocus.Text = "Move focus";
+            this.buttonMoveFocus.UseVisualStyleBackColor = true;
+            this.buttonMoveFocus.Click += new System.EventHandler(this.buttonMoveFocus_Click);
+            // 
             // checkBoxAnimSaveDNA
             // 
             this.checkBoxAnimSaveDNA.AutoSize = true;
             this.checkBoxAnimSaveDNA.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBoxAnimSaveDNA.Location = new System.Drawing.Point(0, 282);
+            this.checkBoxAnimSaveDNA.Location = new System.Drawing.Point(0, 272);
             this.checkBoxAnimSaveDNA.Name = "checkBoxAnimSaveDNA";
             this.checkBoxAnimSaveDNA.Size = new System.Drawing.Size(230, 17);
             this.checkBoxAnimSaveDNA.TabIndex = 36;
@@ -302,7 +312,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label7.Location = new System.Drawing.Point(0, 299);
+            this.label7.Location = new System.Drawing.Point(0, 289);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(135, 13);
             this.label7.TabIndex = 33;
@@ -317,7 +327,7 @@
             "Bmp",
             "Gif",
             "Jpg"});
-            this.comboBoxAnimSaveFormat.Location = new System.Drawing.Point(0, 312);
+            this.comboBoxAnimSaveFormat.Location = new System.Drawing.Point(0, 302);
             this.comboBoxAnimSaveFormat.Name = "comboBoxAnimSaveFormat";
             this.comboBoxAnimSaveFormat.Size = new System.Drawing.Size(230, 21);
             this.comboBoxAnimSaveFormat.TabIndex = 32;
@@ -327,7 +337,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label6.Location = new System.Drawing.Point(0, 333);
+            this.label6.Location = new System.Drawing.Point(0, 323);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(148, 13);
             this.label6.TabIndex = 31;
@@ -338,7 +348,7 @@
             this.radioButtonAnimSaveNever.AutoSize = true;
             this.radioButtonAnimSaveNever.Checked = true;
             this.radioButtonAnimSaveNever.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.radioButtonAnimSaveNever.Location = new System.Drawing.Point(0, 346);
+            this.radioButtonAnimSaveNever.Location = new System.Drawing.Point(0, 336);
             this.radioButtonAnimSaveNever.Name = "radioButtonAnimSaveNever";
             this.radioButtonAnimSaveNever.Size = new System.Drawing.Size(230, 17);
             this.radioButtonAnimSaveNever.TabIndex = 27;
@@ -351,7 +361,7 @@
             // 
             this.radioButtonAnimSaveFitness.AutoSize = true;
             this.radioButtonAnimSaveFitness.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.radioButtonAnimSaveFitness.Location = new System.Drawing.Point(0, 363);
+            this.radioButtonAnimSaveFitness.Location = new System.Drawing.Point(0, 353);
             this.radioButtonAnimSaveFitness.Name = "radioButtonAnimSaveFitness";
             this.radioButtonAnimSaveFitness.Size = new System.Drawing.Size(230, 17);
             this.radioButtonAnimSaveFitness.TabIndex = 28;
@@ -363,7 +373,7 @@
             // 
             this.radioButtonAnimSaveSelected.AutoSize = true;
             this.radioButtonAnimSaveSelected.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.radioButtonAnimSaveSelected.Location = new System.Drawing.Point(0, 380);
+            this.radioButtonAnimSaveSelected.Location = new System.Drawing.Point(0, 370);
             this.radioButtonAnimSaveSelected.Name = "radioButtonAnimSaveSelected";
             this.radioButtonAnimSaveSelected.Size = new System.Drawing.Size(230, 17);
             this.radioButtonAnimSaveSelected.TabIndex = 29;
@@ -376,7 +386,7 @@
             this.panel2.Controls.Add(this.numericUpDownAnimSaveSteps);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 397);
+            this.panel2.Location = new System.Drawing.Point(0, 387);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(230, 22);
             this.panel2.TabIndex = 30;
@@ -423,7 +433,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label3.Location = new System.Drawing.Point(0, 419);
+            this.label3.Location = new System.Drawing.Point(0, 409);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(222, 13);
             this.label3.TabIndex = 26;
@@ -434,7 +444,7 @@
             this.panel1.Controls.Add(this.textBoxAnimSaveDir);
             this.panel1.Controls.Add(this.buttonSelectAnimDir);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 432);
+            this.panel1.Location = new System.Drawing.Point(0, 422);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(230, 23);
             this.panel1.TabIndex = 25;
@@ -492,7 +502,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label9.Location = new System.Drawing.Point(0, 455);
+            this.label9.Location = new System.Drawing.Point(0, 445);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(115, 13);
             this.label9.TabIndex = 35;
@@ -501,10 +511,10 @@
             // trackBarAnimScale
             // 
             this.trackBarAnimScale.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.trackBarAnimScale.Location = new System.Drawing.Point(0, 468);
+            this.trackBarAnimScale.Location = new System.Drawing.Point(0, 458);
             this.trackBarAnimScale.Minimum = 1;
             this.trackBarAnimScale.Name = "trackBarAnimScale";
-            this.trackBarAnimScale.Size = new System.Drawing.Size(230, 45);
+            this.trackBarAnimScale.Size = new System.Drawing.Size(230, 50);
             this.trackBarAnimScale.TabIndex = 34;
             this.trackBarAnimScale.Value = 3;
             this.trackBarAnimScale.Scroll += new System.EventHandler(this.trackBarAnimScale_Scroll);
@@ -513,7 +523,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label5.Location = new System.Drawing.Point(0, 513);
+            this.label5.Location = new System.Drawing.Point(0, 508);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(119, 13);
             this.label5.TabIndex = 22;
@@ -522,13 +532,23 @@
             // trackBarScale
             // 
             this.trackBarScale.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.trackBarScale.Location = new System.Drawing.Point(0, 526);
+            this.trackBarScale.Location = new System.Drawing.Point(0, 521);
             this.trackBarScale.Minimum = 1;
             this.trackBarScale.Name = "trackBarScale";
-            this.trackBarScale.Size = new System.Drawing.Size(230, 45);
+            this.trackBarScale.Size = new System.Drawing.Size(230, 50);
             this.trackBarScale.TabIndex = 21;
             this.trackBarScale.Value = 3;
             this.trackBarScale.Scroll += new System.EventHandler(this.trackBarScale_Scroll);
+            // 
+            // pnlCanvas
+            // 
+            this.pnlCanvas.BackColor = System.Drawing.Color.Black;
+            this.pnlCanvas.Location = new System.Drawing.Point(6, 16);
+            this.pnlCanvas.Name = "pnlCanvas";
+            this.pnlCanvas.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlCanvas.Size = new System.Drawing.Size(600, 600);
+            this.pnlCanvas.TabIndex = 1;
+            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
             // 
             // statusStrip1
             // 
@@ -543,29 +563,8 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(42, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(47, 17);
             this.toolStripStatusLabel1.Text = "Ready.";
-            // 
-            // buttonMoveFocus
-            // 
-            this.buttonMoveFocus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonMoveFocus.Location = new System.Drawing.Point(0, 259);
-            this.buttonMoveFocus.Name = "buttonMoveFocus";
-            this.buttonMoveFocus.Size = new System.Drawing.Size(230, 23);
-            this.buttonMoveFocus.TabIndex = 37;
-            this.buttonMoveFocus.Text = "Move focus";
-            this.buttonMoveFocus.UseVisualStyleBackColor = true;
-            this.buttonMoveFocus.Click += new System.EventHandler(this.buttonMoveFocus_Click);
-            // 
-            // pnlCanvas
-            // 
-            this.pnlCanvas.BackColor = System.Drawing.Color.Black;
-            this.pnlCanvas.Location = new System.Drawing.Point(6, 16);
-            this.pnlCanvas.Name = "pnlCanvas";
-            this.pnlCanvas.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlCanvas.Size = new System.Drawing.Size(600, 600);
-            this.pnlCanvas.TabIndex = 1;
-            this.pnlCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlCanvas_Paint);
             // 
             // MainForm
             // 
