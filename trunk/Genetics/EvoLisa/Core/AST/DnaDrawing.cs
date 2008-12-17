@@ -133,6 +133,8 @@ namespace GenArt.AST
 
                     newPolygon.Offset(Tools.GetRandomNumber(-6, 6), Tools.GetRandomNumber(-6, 6));
 
+                    newPolygon.Width = Tools.GetRandomNumber(1, 8);
+
                     SetDirty();
                 }
             }
