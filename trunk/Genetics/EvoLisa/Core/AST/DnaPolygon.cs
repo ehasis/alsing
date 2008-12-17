@@ -233,5 +233,16 @@ namespace GenArt.AST
                 point.Y += y;
             }
         }
+
+        public override string ToString()
+        {
+            string points = "";
+            foreach(var point in Points)
+            {
+                points += point.ToString() + " ";
+            }
+
+            return string.Format("Polygon({0})", points);
+        }
     }
 }

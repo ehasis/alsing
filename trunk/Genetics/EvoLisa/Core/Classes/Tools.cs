@@ -7,6 +7,11 @@ namespace GenArt.Classes
         [ThreadStatic]
         private static Random random;
 
+        public static void InitRandom(int seed)
+        {
+            random = new Random(seed);
+        }
+
 
         public static int GetRandomNumber(int min, int max)
         {

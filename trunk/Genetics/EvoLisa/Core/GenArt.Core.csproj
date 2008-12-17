@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AST\DnaBrush.cs" />
     <Compile Include="AST\DnaDrawing.cs" />
+    <Compile Include="AST\DnaPartitionResult.cs" />
     <Compile Include="AST\DnaPoint.cs" />
     <Compile Include="AST\DnaPolygon.cs" />
     <Compile Include="AST\DnaProject.cs" />

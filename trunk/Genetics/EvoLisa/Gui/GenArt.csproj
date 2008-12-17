@@ -66,8 +66,6 @@
     <Compile Include="Classes\ClusteredWorker.cs" />
     <Compile Include="Classes\DefaultEvolutionJob.cs" />
     <Compile Include="Classes\FileUtil.cs" />
-    <Compile Include="Classes\LayeredEvolutionJob.cs" />
-    <Compile Include="Classes\LayeredWorker.cs" />
     <Compile Include="Classes\Stats.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

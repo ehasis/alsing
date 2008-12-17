@@ -13,8 +13,6 @@ namespace GenArt.AST
         public List<DnaPolygon> Polygons { get; set; }
         [XmlIgnore]
         public SourceImage SourceImage { get; set; }
-        [XmlIgnore]
-        public Image BgImage { get; set; }
 
         [XmlIgnore]
         public bool IsDirty { get; set; }
@@ -61,24 +59,28 @@ namespace GenArt.AST
 
         public void Mutate(Settings settings)
         {
-            if (!settings.MuteAddPolygonNew)
-                if (Tools.WillMutate(settings.AddPolygonMutationRate))
-                    AddPolygon(settings);
+            IsDirty = false;
+            while (!IsDirty)
+            {
+                if (!settings.MuteAddPolygonNew)
+                    if (Tools.WillMutate(settings.AddPolygonMutationRate))
+                        AddPolygon(settings);
 
-            if (!settings.MuteAddPolygonClone)
-                if (Tools.WillMutate(settings.AddPolygonCloneMutationRate))
-                    AddPolygonClone(settings);
+                if (!settings.MuteAddPolygonClone)
+                    if (Tools.WillMutate(settings.AddPolygonCloneMutationRate))
+                        AddPolygonClone(settings);
 
-            if (!settings.MuteRemovePolygon)
-                if (Tools.WillMutate(settings.RemovePolygonMutationRate))
-                    RemovePolygon(settings);
+                if (!settings.MuteRemovePolygon)
+                    if (Tools.WillMutate(settings.RemovePolygonMutationRate))
+                        RemovePolygon(settings);
 
-            if (!settings.MuteMovePolygon)
-                if (Tools.WillMutate(settings.MovePolygonMutationRate))
-                    MovePolygon(settings);
+                if (!settings.MuteMovePolygon)
+                    if (Tools.WillMutate(settings.MovePolygonMutationRate))
+                        MovePolygon(settings);
 
-            foreach (DnaPolygon polygon in Polygons)
-                polygon.Mutate(this, settings);
+                foreach (DnaPolygon polygon in Polygons)
+                    polygon.Mutate(this, settings);
+            }
         }
 
         public void MovePolygon(Settings settings)

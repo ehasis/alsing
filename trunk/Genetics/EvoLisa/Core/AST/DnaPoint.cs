@@ -74,5 +74,10 @@ namespace GenArt.AST
                 }
            }
         }
+
+        public override string ToString()
+        {
+            return string.Format("Point({0},{1})", X, Y);
+        }
     }
 }
