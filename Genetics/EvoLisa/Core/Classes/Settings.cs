@@ -406,9 +406,9 @@ namespace GenArt.Classes
 
             ColorMutationRate = 1000;
             MuteLinePolygon = true;
-            //MuteCurveFillPolygon = true;
+            MuteCurveFillPolygon = true;
             MuteLineFillPolygon = true;
-            MuteCurvePolygon = true;
+            //MuteCurvePolygon = true;
             MuteAddPointClone = true;
 
             AddPolygonMutationRate = 400;

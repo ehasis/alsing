@@ -40,7 +40,7 @@ namespace GenArt.Classes
                     {
                         using (Pen pen = new Pen(brush, Math.Max(1, polygon.Width)))
                         {
-                            g.DrawClosedCurve(pen, points, Math.Abs(polygon.Tension), FillMode.Winding);
+                            g.DrawCurve(pen, points, 3F);
                         }
                     }
                 }
