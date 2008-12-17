@@ -26,7 +26,7 @@ namespace GenArt.AST
             if (drawing.Polygons.Count < 1)
             {
                 origin.X = drawing.SourceImage.Width / 2;
-                origin.Y = drawing.SourceImage.Width / 2;
+                origin.Y = drawing.SourceImage.Height / 2;
             }
 
             for (int i = 0; i < settings.PointsPerPolygonMin; i++)

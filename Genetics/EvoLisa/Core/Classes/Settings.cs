@@ -402,7 +402,7 @@ namespace GenArt.Classes
             //Mute these three to cause a cell-like growth pattern...
             MuteAddPolygonNew = true;
             MuteMovePointMax = true;
-            //MuteMovePointMid = true;
+            MuteMovePointMid = true;
 
             MuteAddPointClone = true;
 
