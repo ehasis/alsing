@@ -11,8 +11,9 @@ namespace GenArt.AST
     public class DnaDrawing
     {
         public List<DnaPolygon> Polygons { get; set; }
-        [XmlIgnore]
-        public SourceImage SourceImage { get; set; }
+        //[XmlIgnore]
+        //public SourceImage SourceImage { get; set; }
+
 
         [XmlIgnore]
         public bool IsDirty { get; set; }
@@ -34,12 +35,12 @@ namespace GenArt.AST
             IsDirty = true;
         }
 
-        public void Init(Settings settings)
+        public void Init(JobInfo info)
         {
             Polygons = new List<DnaPolygon>();
 
-            for (int i = 0; i < settings.PolygonsMin; i++)
-                AddPolygon(settings);
+            for (int i = 0; i < info.Settings.PolygonsMin; i++)
+                AddPolygon(info);
 
             SetDirty();
         }
@@ -49,7 +50,7 @@ namespace GenArt.AST
             var drawing = new DnaDrawing
                               {
                                   Polygons = new List<DnaPolygon>(),
-                                  SourceImage = SourceImage,
+                                  //SourceImage = SourceImage,
                               };
             foreach (DnaPolygon polygon in Polygons)
                 drawing.Polygons.Add(polygon.Clone());
@@ -57,33 +58,33 @@ namespace GenArt.AST
         }
 
 
-        public void Mutate(Settings settings)
+        public void Mutate(JobInfo info)
         {
             IsDirty = false;
             while (!IsDirty)
             {
-                if (!settings.MuteAddPolygonNew)
-                    if (Tools.WillMutate(settings.AddPolygonMutationRate))
-                        AddPolygon(settings);
+                if (!info.Settings.MuteAddPolygonNew)
+                    if (Tools.WillMutate(info.Settings.AddPolygonMutationRate))
+                        AddPolygon(info);
 
-                if (!settings.MuteAddPolygonClone)
-                    if (Tools.WillMutate(settings.AddPolygonCloneMutationRate))
-                        AddPolygonClone(settings);
+                if (!info.Settings.MuteAddPolygonClone)
+                    if (Tools.WillMutate(info.Settings.AddPolygonCloneMutationRate))
+                        AddPolygonClone(info);
 
-                if (!settings.MuteRemovePolygon)
-                    if (Tools.WillMutate(settings.RemovePolygonMutationRate))
-                        RemovePolygon(settings);
+                if (!info.Settings.MuteRemovePolygon)
+                    if (Tools.WillMutate(info.Settings.RemovePolygonMutationRate))
+                        RemovePolygon(info);
 
-                if (!settings.MuteMovePolygon)
-                    if (Tools.WillMutate(settings.MovePolygonMutationRate))
-                        MovePolygon(settings);
+                if (!info.Settings.MuteMovePolygon)
+                    if (Tools.WillMutate(info.Settings.MovePolygonMutationRate))
+                        MovePolygon(info);
 
                 foreach (DnaPolygon polygon in Polygons)
-                    polygon.Mutate(this, settings);
+                    polygon.Mutate(this, info);
             }
         }
 
-        public void MovePolygon(Settings settings)
+        public void MovePolygon(JobInfo info)
         {
             if (Polygons.Count < 1)
                 return;
@@ -96,9 +97,9 @@ namespace GenArt.AST
             SetDirty();
         }
 
-        public void RemovePolygon(Settings settings)
+        public void RemovePolygon(JobInfo info)
         {
-            if (Polygons.Count > settings.PolygonsMin)
+            if (Polygons.Count > info.Settings.PolygonsMin)
             {
                 int index = Tools.GetRandomNumber(0, Polygons.Count);
                 Polygons.RemoveAt(index);
@@ -106,12 +107,12 @@ namespace GenArt.AST
             }
         }
 
-        public void AddPolygon(Settings settings)
+        public void AddPolygon(JobInfo info)
         {
-            if (Polygons.Count < settings.PolygonsMax)
+            if (Polygons.Count < info.Settings.PolygonsMax)
             {
                 var newPolygon = new DnaPolygon();
-                newPolygon.Init(this, settings);
+                newPolygon.Init(this, info);
 
                 int index = Tools.GetRandomNumber(0, Polygons.Count);
 
@@ -121,12 +122,12 @@ namespace GenArt.AST
             }
         }
 
-        public void AddPolygonClone(Settings settings)
+        public void AddPolygonClone(JobInfo info)
         {
-            if (Polygons.Count < settings.PolygonsMax)
+            if (Polygons.Count < info.Settings.PolygonsMax)
             {
                 if (Polygons.Count < 1)
-                    AddPolygon(settings);
+                    AddPolygon(info);
                 else
                 {
                     DnaPolygon parent = Polygons[Tools.GetRandomNumber(0, Polygons.Count)];

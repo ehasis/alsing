@@ -11,14 +11,14 @@ namespace GenArt.Classes
         private readonly IList<ClusteredWorker> workers;
         private double currentErrorLevel = double.MaxValue;
 
-        public ClusteredEvolutionJob(SourceImage sourceImage, Settings settings)
+        public ClusteredEvolutionJob(JobInfo info)
         {
             workers = new List<ClusteredWorker>();
             const int workerCount = 2;
-            int partitionHeight = sourceImage.Height/workerCount;
+            int partitionHeight = info.SourceImage.Height / workerCount;
             for (int i = 0; i < workerCount; i++)
             {
-                var worker = new ClusteredWorker(1, i*partitionHeight, partitionHeight, sourceImage, settings);
+                var worker = new ClusteredWorker(1, i * partitionHeight, partitionHeight, info);
                 workers.Add(worker);
             }
 

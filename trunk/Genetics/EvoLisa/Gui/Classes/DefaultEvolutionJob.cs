@@ -8,25 +8,25 @@ namespace GenArt.Classes
     {
         private DnaDrawing currentDrawing;
         private double currentErrorLevel;
-        private Settings settings;
+        private JobInfo info;
 
-        public DefaultEvolutionJob(SourceImage sourceImage, Settings settings)
-            : this(sourceImage, null, settings)
+        public DefaultEvolutionJob(JobInfo info)
+            : this(null, info)
         {
         }
 
-        public DefaultEvolutionJob(SourceImage sourceImage, DnaDrawing drawing, Settings settings)
+        public DefaultEvolutionJob(DnaDrawing drawing, JobInfo info)
         {
-            this.settings = settings;
+            this.info = info;
 
             if (drawing == null)
-                drawing = GetNewInitializedDrawing(settings);
+                drawing = GetNewInitializedDrawing(info);
             lock (drawing)
             {
                 currentDrawing = drawing.Clone();
             }
-            currentDrawing.SourceImage = sourceImage;
-            currentErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, currentDrawing.SourceImage);
+
+            currentErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, info.SourceImage);
         }
 
         #region IEvolutionJob Members
@@ -45,11 +45,11 @@ namespace GenArt.Classes
 
             while (newDrawing.IsDirty == false)
             {
-                newDrawing.Mutate(settings);
+                newDrawing.Mutate(info);
                 Generations++;
             }
 
-            double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage);
+            double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, info.SourceImage);
 
             if (newErrorLevel <= currentErrorLevel)
             {
@@ -63,10 +63,10 @@ namespace GenArt.Classes
 
         #endregion
 
-        private static DnaDrawing GetNewInitializedDrawing(Settings settings)
+        private static DnaDrawing GetNewInitializedDrawing(JobInfo info)
         {
             var drawing = new DnaDrawing();
-            drawing.Init(settings);
+            drawing.Init(info);
             return drawing;
         }
     }

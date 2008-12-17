@@ -11,11 +11,11 @@ namespace GenArt.AST
         public int Blue { get; set; }
         public int Alpha { get; set; }
 
-        public void Init(Settings settings)
+        public void Init(JobInfo info)
         {
-            Red = Tools.GetRandomNumber(settings.RedRangeMin, settings.RedRangeMax);
-            Green = Tools.GetRandomNumber(settings.GreenRangeMin, settings.GreenRangeMax);
-            Blue = Tools.GetRandomNumber(settings.BlueRangeMin, settings.BlueRangeMax);
+            Red = Tools.GetRandomNumber(info.Settings.RedRangeMin, info.Settings.RedRangeMax);
+            Green = Tools.GetRandomNumber(info.Settings.GreenRangeMin, info.Settings.GreenRangeMax);
+            Blue = Tools.GetRandomNumber(info.Settings.BlueRangeMin, info.Settings.BlueRangeMax);
             //Alpha = Tools.GetRandomNumber(settings.AlphaRangeMin, settings.AlphaRangeMax);
             Alpha = Tools.GetRandomNumber(10, 60);
         }
@@ -31,31 +31,31 @@ namespace GenArt.AST
                        };
         }
 
-        public void Mutate(DnaDrawing drawing, Settings settings)
+        public void Mutate(DnaDrawing drawing, JobInfo info)
         {
-            if (Tools.WillMutate(settings.ColorMutationRate))
+            if (Tools.WillMutate(info.Settings.ColorMutationRate))
             {
-                Red = Tools.GetRandomNumber(settings.RedRangeMin, settings.RedRangeMax);
+                Red = Tools.GetRandomNumber(info.Settings.RedRangeMin, info.Settings.RedRangeMax);
 
                 drawing.SetDirty();
             }
 
-            if (Tools.WillMutate(settings.ColorMutationRate))
+            if (Tools.WillMutate(info.Settings.ColorMutationRate))
             {
-                Green = Tools.GetRandomNumber(settings.GreenRangeMin, settings.GreenRangeMax);
+                Green = Tools.GetRandomNumber(info.Settings.GreenRangeMin, info.Settings.GreenRangeMax);
 
                 drawing.SetDirty();
             }
-            if (Tools.WillMutate(settings.ColorMutationRate))
+            if (Tools.WillMutate(info.Settings.ColorMutationRate))
             {
-                Blue = Tools.GetRandomNumber(settings.BlueRangeMin, settings.BlueRangeMax);
+                Blue = Tools.GetRandomNumber(info.Settings.BlueRangeMin, info.Settings.BlueRangeMax);
 
                 drawing.SetDirty();
             }
 
-            if (Tools.WillMutate(settings.ColorMutationRate))
+            if (Tools.WillMutate(info.Settings.ColorMutationRate))
             {
-                Alpha = Tools.GetRandomNumber(settings.AlphaRangeMin, settings.AlphaRangeMax);
+                Alpha = Tools.GetRandomNumber(info.Settings.AlphaRangeMin, info.Settings.AlphaRangeMax);
 
                 drawing.SetDirty();
             }

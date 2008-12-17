@@ -10,10 +10,10 @@ namespace GenArt.AST
         public int X { get; set; }
         public int Y { get; set; }
 
-        public void Init(DnaDrawing drawing)
+        public void Init(DnaDrawing drawing,JobInfo info)
         {
-            X = Tools.GetRandomNumber(0, drawing.SourceImage.Width);
-            Y = Tools.GetRandomNumber(0, drawing.SourceImage.Height);
+            X = Tools.GetRandomNumber(0, info.SourceImage.Width);
+            Y = Tools.GetRandomNumber(0, info.SourceImage.Height);
         }
 
         public DnaPoint Clone()
@@ -25,50 +25,50 @@ namespace GenArt.AST
                        };
         }
 
-        public void Mutate(DnaDrawing drawing, Settings settings)
+        public void Mutate(DnaDrawing drawing, JobInfo info)
         {
-            if (!settings.MuteMovePointMax)
+            if (!info.Settings.MuteMovePointMax)
             {
-                if (Tools.WillMutate(settings.MovePointMaxMutationRate))
+                if (Tools.WillMutate(info.Settings.MovePointMaxMutationRate))
                 {
-                    X = Tools.GetRandomNumber(0, drawing.SourceImage.Width);
-                    Y = Tools.GetRandomNumber(0, drawing.SourceImage.Height);
+                    X = Tools.GetRandomNumber(0, info.SourceImage.Width);
+                    Y = Tools.GetRandomNumber(0, info.SourceImage.Height);
                     drawing.SetDirty();
                 }
             }
 
-            if (!settings.MuteMovePointMid)
+            if (!info.Settings.MuteMovePointMid)
             {
-                if (Tools.WillMutate(settings.MovePointMidMutationRate))
+                if (Tools.WillMutate(info.Settings.MovePointMidMutationRate))
                 {
 
                     X = X
-                        .Randomize(-settings.MovePointRangeMid, settings.MovePointRangeMid)
+                        .Randomize(-info.Settings.MovePointRangeMid, info.Settings.MovePointRangeMid)
                         .Max(0)
-                        .Min(drawing.SourceImage.Width);
+                        .Min(info.SourceImage.Width);
 
                     Y = Y
-                        .Randomize(-settings.MovePointRangeMid, settings.MovePointRangeMid)
+                        .Randomize(-info.Settings.MovePointRangeMid, info.Settings.MovePointRangeMid)
                         .Max(0)
-                        .Min(drawing.SourceImage.Height);
+                        .Min(info.SourceImage.Height);
 
                     drawing.SetDirty();
                 }
             }
 
-            if (!settings.MuteMovePointMin)
+            if (!info.Settings.MuteMovePointMin)
             {
-                if (Tools.WillMutate(settings.MovePointMinMutationRate))
+                if (Tools.WillMutate(info.Settings.MovePointMinMutationRate))
                 {
                     X = X
-                        .Randomize(-settings.MovePointRangeMin, settings.MovePointRangeMin)
+                        .Randomize(-info.Settings.MovePointRangeMin, info.Settings.MovePointRangeMin)
                         .Max(0)
-                        .Min(drawing.SourceImage.Width);
+                        .Min(info.SourceImage.Width);
 
                     Y = Y
-                        .Randomize(-settings.MovePointRangeMin, settings.MovePointRangeMin)
+                        .Randomize(-info.Settings.MovePointRangeMin, info.Settings.MovePointRangeMin)
                         .Max(0)
-                        .Min(drawing.SourceImage.Height);
+                        .Min(info.SourceImage.Height);
 
                     drawing.SetDirty();
                 }
