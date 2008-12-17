@@ -438,6 +438,9 @@ namespace GenArt
                 return;
 
             string fileName = FileUtil.GetSaveFileName(FileUtil.ImgExtension);
+            if (string.IsNullOrEmpty(fileName))
+                return;
+
             ImageFormat imageFormat = ImageFormat.Jpeg;
             string fileLow = fileName.ToLower();
             if (fileLow.EndsWith("bmp"))
