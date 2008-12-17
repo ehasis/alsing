@@ -110,6 +110,7 @@
             // 
             // tmrRedraw
             // 
+            this.tmrRedraw.Interval = 1;
             this.tmrRedraw.Tick += new System.EventHandler(this.tmrRedraw_Tick);
             // 
             // label2

@@ -58,8 +58,8 @@ namespace GenArt
             //IEvolutionJob job = new LayeredEvolutionJob(sourceImage, 4);
 
             //DefaultEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
-            IEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing, Project.Settings);
-            //IEvolutionJob job = new ClusteredEvolutionJob(sourceImage);
+            //IEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing, Project.Settings);
+            IEvolutionJob job = new ClusteredEvolutionJob(sourceImage,Project.Settings);
 
             while (Project.IsRunning)
             {
@@ -228,7 +228,6 @@ namespace GenArt
                                             PixelFormat.Format24bppRgb))
             using (Graphics backGraphics = Graphics.FromImage(backBuffer))
             {
-                guiDrawing.BgImage = bgImage;
 
                 backGraphics.SmoothingMode = SmoothingMode.HighQuality;
                 Renderer.Render(guiDrawing, backGraphics, Project.Settings.Scale);

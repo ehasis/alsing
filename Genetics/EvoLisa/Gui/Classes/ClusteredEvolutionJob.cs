@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using GenArt.AST;
 using GenArt.Core.Classes;
 using GenArt.Core.Interfaces;
@@ -8,77 +7,74 @@ namespace GenArt.Classes
 {
     public class ClusteredEvolutionJob : IEvolutionJob
     {
-        private DnaDrawing currentDrawing;
-        private double currentErrorLevel;
         private readonly IList<ClusteredWorker> workers;
-        private Settings settings;
+        private double currentErrorLevel = double.MaxValue;
 
         public ClusteredEvolutionJob(SourceImage sourceImage, Settings settings)
         {
-            this.settings = settings;
-
             workers = new List<ClusteredWorker>();
-            for (int i = 0; i < 2;i++ )
+            const int workerCount = 2;
+            int partitionHeight = sourceImage.Height/workerCount;
+            for (int i = 0; i < workerCount; i++)
             {
-                var worker = new ClusteredWorker();
+                var worker = new ClusteredWorker(1, i*partitionHeight, partitionHeight, sourceImage, settings);
                 workers.Add(worker);
             }
-            currentDrawing = GetNewInitializedDrawing(settings);
-            currentDrawing.SourceImage = sourceImage;
-            currentErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, currentDrawing.SourceImage);
-        }
 
-        #region IEvolutionJob Members
+            foreach(ClusteredWorker worker in workers)
+            {
+                worker.StartWorking();
+            }
+        }
 
         public bool IsDirty { get; set; }
 
+        #region IEvolutionJob Members
+
         public DnaDrawing GetDrawing()
         {
-            return currentDrawing;
+            return workers[0].GetCurrentDrawing();
         }
 
         public double GetNextErrorLevel()
         {
-            foreach(var worker in workers)
+
+            int tailIndex = 0;
+
+            while (true)
             {
-                worker.SetJob(currentDrawing,currentErrorLevel, settings);
-            }
+                var results = new List<DnaPartitionResult>();
 
-            foreach (var worker in workers)
-            {
-                worker.StartWorking();
-            }
-
-            Thread.Sleep(10);
-
-            foreach (var worker in workers)
-            {
-                worker.StopWorking();
-            }
-
-            IsDirty = false;
-            foreach (var worker in workers)
-            {
-                double workerError = worker.GetErrorLevel();
-
-                if (workerError < currentErrorLevel)
+                foreach (ClusteredWorker worker in workers)
                 {
-                    currentDrawing = worker.GetDrawing();
-                    currentErrorLevel = workerError;
-                    IsDirty = true;
+                    DnaPartitionResult partitionResult = worker.GetNextResult();
+                    results.Add(partitionResult);
                 }
+
+                double newErrorLevel = 0;
+                foreach (DnaPartitionResult partitionResult in results)
+                {
+                    newErrorLevel += partitionResult.ErrorLevel;
+                }
+
+                if (newErrorLevel < currentErrorLevel)
+                {
+                    currentErrorLevel = newErrorLevel;
+                    int newSeed = Tools.GetRandomNumber(0, 5000);
+                    foreach (ClusteredWorker worker in workers)
+                    {
+                        worker.AcceptGoodDrawing(tailIndex, newSeed);
+                    }
+                    break;
+                }
+
+                tailIndex++;
             }
+
 
             return currentErrorLevel;
         }
 
         #endregion
-
-        private static DnaDrawing GetNewInitializedDrawing(Settings settings)
-        {
-            var drawing = new DnaDrawing();
-            drawing.Init(settings);
-            return drawing;
-        }
     }
 }
