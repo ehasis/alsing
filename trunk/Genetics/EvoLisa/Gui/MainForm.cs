@@ -138,7 +138,7 @@ namespace GenArt
             thread = new Thread(StartEvolution)
                          {
                              IsBackground = true,
-                             Priority = ThreadPriority.AboveNormal
+                             Priority = ThreadPriority.Normal
                          };
 
             Project.LastStartTime = DateTime.Now;
