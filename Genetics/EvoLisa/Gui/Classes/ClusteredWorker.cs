@@ -1,33 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using GenArt.AST;
-using GenArt.Core.Classes;
 
 namespace GenArt.Classes
 {
     public class ClusteredWorker
     {
-        private DnaDrawing parentDrawing;
-        private bool isRunning;
-        private Thread workerThread;
-        private Settings settings;
-        private SourceImage sourceImage;
-        private int randomSeed;
+        private readonly JobInfo info;
+        private readonly int partitionHeight;
         private readonly int partitionY;
-        private readonly int partitionHeight = 0;
+        private readonly object syncRoot = new object();
         private readonly Queue<DnaPartitionResult> workerTail;
         private readonly List<DnaPartitionResult> workerUsedTail;
-        private readonly object syncRoot = new object();
-        private bool hasNewParent = false;
+        private bool hasNewParent;
+        private bool isRunning;
+        private DnaDrawing parentDrawing;
+        private int randomSeed;
+        private Thread workerThread;
 
-        public ClusteredWorker(int randomSeed,int partitionY,int partitionHeight,SourceImage sourceImage,Settings settings)
+
+        public ClusteredWorker(int randomSeed, int partitionY, int partitionHeight, JobInfo info)
         {
             this.randomSeed = randomSeed;
             this.partitionY = partitionY;
             this.partitionHeight = partitionHeight;
-            this.settings = settings;
-            this.sourceImage = sourceImage;
+            this.info = info;
             workerTail = new Queue<DnaPartitionResult>();
             workerUsedTail = new List<DnaPartitionResult>();
         }
@@ -35,10 +32,10 @@ namespace GenArt.Classes
         public void StartWorking()
         {
             workerThread = new Thread(WorkerThreadStart)
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.BelowNormal
-            };
+                               {
+                                   IsBackground = true,
+                                   Priority = ThreadPriority.BelowNormal
+                               };
 
             isRunning = true;
             workerThread.Start();
@@ -50,10 +47,9 @@ namespace GenArt.Classes
 
             while (isRunning)
             {
-
                 lock (syncRoot)
                 {
-                    if(hasNewParent)
+                    if (hasNewParent)
                     {
                         Tools.InitRandom(randomSeed);
                         hasNewParent = false;
@@ -61,7 +57,7 @@ namespace GenArt.Classes
 
                     DnaDrawing newDrawing = GetMutatedSeedSyncedDrawing();
 
-                    double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, newDrawing.SourceImage,
+                    double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, info.SourceImage,
                                                                                partitionY, partitionHeight);
 
                     var result = new DnaPartitionResult
@@ -80,17 +76,16 @@ namespace GenArt.Classes
         {
             DnaDrawing newDrawing = parentDrawing.Clone();
 
-            newDrawing.Mutate(settings);
+            newDrawing.Mutate(info);
             return newDrawing;
         }
 
         private void Initialize()
         {
             Tools.InitRandom(randomSeed);
-            parentDrawing = new DnaDrawing()
+            parentDrawing = new DnaDrawing
                                 {
                                     Polygons = new List<DnaPolygon>(),
-                                    SourceImage = sourceImage,
                                 };
         }
 
@@ -99,15 +94,15 @@ namespace GenArt.Classes
             while (workerTail.Count == 0)
                 Thread.Sleep(2);
 
-            lock(syncRoot)
+            lock (syncRoot)
             {
-                var result = workerTail.Dequeue();
+                DnaPartitionResult result = workerTail.Dequeue();
                 workerUsedTail.Add(result);
                 return result;
             }
         }
 
-        public void AcceptGoodDrawing(int tailIndex,int newSeed)
+        public void AcceptGoodDrawing(int tailIndex, int newSeed)
         {
             lock (syncRoot)
             {
@@ -120,7 +115,7 @@ namespace GenArt.Classes
                 workerTail.Clear();
             }
         }
-        
+
         public DnaDrawing GetCurrentDrawing()
         {
             return parentDrawing;

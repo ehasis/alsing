@@ -12,7 +12,7 @@ namespace GenArt.AST
         {
             Settings = new Settings();
             Drawing = new DnaDrawing();
-            Drawing.Init(Settings);
+          //  Drawing.Init(Settings);
             ErrorLevel = double.MaxValue;
             LastSavedFitness = double.MaxValue;
         }

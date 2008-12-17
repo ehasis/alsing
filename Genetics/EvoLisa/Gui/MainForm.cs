@@ -55,11 +55,16 @@ namespace GenArt
                                       Height = picPattern.Height
                                   };
 
+            JobInfo info = new JobInfo()
+                               {
+                                   Settings = Project.Settings,
+                                   SourceImage = sourceImage,
+                               };
             //IEvolutionJob job = new LayeredEvolutionJob(sourceImage, 4);
 
             //DefaultEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
-            //IEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing, Project.Settings);
-            IEvolutionJob job = new ClusteredEvolutionJob(sourceImage,Project.Settings);
+            IEvolutionJob job = new DefaultEvolutionJob(info);
+            //IEvolutionJob job = new ClusteredEvolutionJob(info);
 
             while (Project.IsRunning)
             {
@@ -658,34 +663,34 @@ namespace GenArt
 
         private void buttonMoveFocus_Click(object sender, EventArgs e)
         {
-            Stop();
+            //Stop();
 
-            int scale = Project.Settings.Scale;
+            //int scale = Project.Settings.Scale;
 
-            using (
-                var img = new Bitmap(scale * picPattern.Width, scale * picPattern.Height,
-                                     PixelFormat.Format24bppRgb))
-            {
-                using (Graphics imgGfx = Graphics.FromImage(img))
-                {
-                    imgGfx.SmoothingMode = SmoothingMode.HighQuality;
-                    Renderer.Render(guiDrawing, imgGfx, scale);
+            //using (
+            //    var img = new Bitmap(scale * picPattern.Width, scale * picPattern.Height,
+            //                         PixelFormat.Format24bppRgb))
+            //{
+            //    using (Graphics imgGfx = Graphics.FromImage(img))
+            //    {
+            //        imgGfx.SmoothingMode = SmoothingMode.HighQuality;
+            //        Renderer.Render(guiDrawing, imgGfx, scale);
 
-                    bgImage = (Image) img.Clone();
-                }
-            }
+            //        bgImage = (Image) img.Clone();
+            //    }
+            //}
 
-            lock (currentDrawing)
-            {
-                currentDrawing.Polygons.Clear();
-                currentDrawing.AddPolygon(Project.Settings);
+            //lock (currentDrawing)
+            //{
+            //    currentDrawing.Polygons.Clear();
+            //    currentDrawing.AddPolygon(Project.Settings);
 
-                ResetProjectLevels();
-                Project.Drawing = currentDrawing;
-            }
+            //    ResetProjectLevels();
+            //    Project.Drawing = currentDrawing;
+            //}
 
 
-            Start();
+            //Start();
         }
     }
 }
