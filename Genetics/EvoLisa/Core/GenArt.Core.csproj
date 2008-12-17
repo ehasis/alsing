@@ -48,6 +48,7 @@
     <Compile Include="AST\DnaProject.cs" />
     <Compile Include="Classes\FitnessCalculator.cs" />
     <Compile Include="Classes\HistorySaveTrigger.cs" />
+    <Compile Include="Classes\JobInfo.cs" />
     <Compile Include="Classes\OptimizedSerializer.cs" />
     <Compile Include="Classes\Renderer.cs" />
     <Compile Include="Classes\Serializer.cs" />
