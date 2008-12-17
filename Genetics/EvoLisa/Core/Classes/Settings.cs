@@ -399,14 +399,15 @@ namespace GenArt.Classes
         {
             HistoryImageFormat = ImageFormat.Jpeg;
 
-         //   MuteAddPolygonNew = true;
+            //Mute these three to cause a cell-like growth pattern...
+            MuteAddPolygonNew = true;
             MuteMovePointMax = true;
          //   MuteMovePointMid = true;
 
             ColorMutationRate = 1000;
             MuteLinePolygon = true;
-       //     MuteLineFillPolygon = true;
-            MuteCurveFillPolygon = true;
+            //MuteCurveFillPolygon = true;
+            MuteLineFillPolygon = true;
             MuteCurvePolygon = true;
             MuteAddPointClone = true;
 

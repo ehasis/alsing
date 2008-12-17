@@ -23,11 +23,11 @@ namespace GenArt.AST
             var origin = new DnaPoint();
             origin.Init(drawing);
 
-            //if (drawing.Polygons.Count < 1)
-            //{
-            //    origin.X = drawing.SourceImage.Width / 2;
-            //    origin.Y = drawing.SourceImage.Width / 2;
-            //}
+            if (drawing.Polygons.Count < 1)
+            {
+                origin.X = drawing.SourceImage.Width / 2;
+                origin.Y = drawing.SourceImage.Width / 2;
+            }
 
             for (int i = 0; i < settings.PointsPerPolygonMin; i++)
             {
@@ -51,6 +51,8 @@ namespace GenArt.AST
                 settings.MuteCurveFillPolygon &&
                 settings.MuteLineFillPolygon)
                 findNew = false;
+
+            Width = Tools.GetRandomNumber(1, 8);
 
             while (findNew)
             {
@@ -131,6 +133,9 @@ namespace GenArt.AST
 
             if (Tools.WillMutate(settings.FlipFilledMutationRate))
                 FlipFilled(drawing, settings);
+
+            if (Tools.WillMutate(settings.FlipFilledMutationRate))
+                Width = Tools.GetRandomNumber(1, 8);
 
             Brush.Mutate(drawing, settings);
             Points.ForEach(p => p.Mutate(drawing, settings));
