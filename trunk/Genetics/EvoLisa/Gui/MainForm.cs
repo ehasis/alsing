@@ -678,6 +678,7 @@ namespace GenArt
                 currentDrawing.Polygons.Clear();
                 currentDrawing.AddPolygon(Project.Settings);
 
+                ResetProjectLevels();
                 Project.Drawing = currentDrawing;
             }
 
