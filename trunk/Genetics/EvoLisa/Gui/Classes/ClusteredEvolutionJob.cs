@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using GenArt.AST;
 using GenArt.Core.Classes;
 using GenArt.Core.Interfaces;
@@ -57,10 +58,10 @@ namespace GenArt.Classes
                     newErrorLevel += partitionResult.ErrorLevel;
                 }
 
-                if (newErrorLevel < currentErrorLevel)
+                if (newErrorLevel <= currentErrorLevel)
                 {
                     currentErrorLevel = newErrorLevel;
-                    int newSeed = Tools.GetRandomNumber(0, 5000);
+                    int newSeed = Tools.GetRandomNumber(int.MinValue, int.MaxValue);
                     foreach (ClusteredWorker worker in workers)
                     {
                         worker.AcceptGoodDrawing(tailIndex, newSeed);
@@ -69,6 +70,7 @@ namespace GenArt.Classes
                 }
 
                 tailIndex++;
+                Thread.Sleep(10);
             }
 
 
