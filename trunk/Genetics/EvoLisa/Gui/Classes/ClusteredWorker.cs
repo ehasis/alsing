@@ -6,27 +6,42 @@ namespace GenArt.Classes
 {
     public class ClusteredWorker
     {
+        private class WorkerData
+        {
+            public Queue<DnaPartitionResult> workerTail;
+            public List<DnaPartitionResult> workerUsedTail;
+            public int randomSeed;
+            public bool hasNewParent;
+        }
+
+
         private readonly JobInfo info;
         private readonly int partitionHeight;
         private readonly int partitionY;
         private readonly object syncRoot = new object();
-        private readonly Queue<DnaPartitionResult> workerTail;
-        private readonly List<DnaPartitionResult> workerUsedTail;
-        private bool hasNewParent;
+
+        private WorkerData data;
+
+        
         private bool isRunning;
         private DnaDrawing parentDrawing;
-        private int randomSeed;
+
         private Thread workerThread;
 
 
         public ClusteredWorker(int randomSeed, int partitionY, int partitionHeight, JobInfo info)
         {
-            this.randomSeed = randomSeed;
+            data = new WorkerData
+                       {
+                           randomSeed = randomSeed,
+                           workerTail = new Queue<DnaPartitionResult>(),
+                           workerUsedTail = new List<DnaPartitionResult>(),
+                       };
+ 
             this.partitionY = partitionY;
             this.partitionHeight = partitionHeight;
             this.info = info;
-            workerTail = new Queue<DnaPartitionResult>();
-            workerUsedTail = new List<DnaPartitionResult>();
+
         }
 
         public void StartWorking()
@@ -47,28 +62,28 @@ namespace GenArt.Classes
 
             while (isRunning)
             {
-                lock (syncRoot)
+
+                if (data.hasNewParent)
                 {
-                    if (hasNewParent)
-                    {
-                        Tools.InitRandom(randomSeed);
-                        hasNewParent = false;
-                    }
-
-                    DnaDrawing newDrawing = GetMutatedSeedSyncedDrawing();
-
-                    double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, info.SourceImage,
-                                                                               partitionY, partitionHeight);
-
-                    var result = new DnaPartitionResult
-                                     {
-                                         Drawing = newDrawing,
-                                         ErrorLevel = newErrorLevel,
-                                     };
-
-
-                    workerTail.Enqueue(result);
+                    Tools.InitRandom(data.randomSeed);
+                    data.hasNewParent = false;
                 }
+
+
+                DnaDrawing newDrawing = GetMutatedSeedSyncedDrawing();
+
+                double newErrorLevel = FitnessCalculator.GetDrawingFitness(newDrawing, info.SourceImage,
+                                                                           partitionY, partitionHeight);
+
+                var result = new DnaPartitionResult
+                                 {
+                                     Drawing = newDrawing,
+                                     ErrorLevel = newErrorLevel,
+                                 };
+
+
+                data.workerTail.Enqueue(result);
+
             }
         }
 
@@ -82,7 +97,7 @@ namespace GenArt.Classes
 
         private void Initialize()
         {
-            Tools.InitRandom(randomSeed);
+            Tools.InitRandom(data.randomSeed);
             parentDrawing = new DnaDrawing
                                 {
                                     Polygons = new List<DnaPolygon>(),
@@ -91,29 +106,27 @@ namespace GenArt.Classes
 
         public DnaPartitionResult GetNextResult()
         {
-            while (workerTail.Count == 0)
-                Thread.Sleep(2);
+            while (data.workerTail.Count == 0)
+                Thread.Sleep(2); //only happens at startup and on rare occasions
 
-            lock (syncRoot)
-            {
-                DnaPartitionResult result = workerTail.Dequeue();
-                workerUsedTail.Add(result);
-                return result;
-            }
+            DnaPartitionResult result = data.workerTail.Dequeue();
+            data.workerUsedTail.Add(result);
+            return result;
         }
 
         public void AcceptGoodDrawing(int tailIndex, int newSeed)
         {
-            lock (syncRoot)
-            {
-                DnaPartitionResult result = workerUsedTail[tailIndex];
-                parentDrawing = result.Drawing.Clone();
-                randomSeed = newSeed;
-                //Tools.InitRandom(randomSeed); //must be done in the correct thread
-                hasNewParent = true;
-                workerUsedTail.Clear();
-                workerTail.Clear();
-            }
+            DnaPartitionResult result = data.workerUsedTail[tailIndex];
+            parentDrawing = result.Drawing.Clone();
+            WorkerData newData = new WorkerData
+                                     {
+                                         randomSeed = newSeed,
+                                         hasNewParent = true,
+                                         workerUsedTail = new List<DnaPartitionResult>(),
+                                         workerTail = new Queue<DnaPartitionResult>(),
+
+                                     };
+            data = newData;
         }
 
         public DnaDrawing GetCurrentDrawing()
