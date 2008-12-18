@@ -70,7 +70,7 @@ namespace GenArt.Classes
                 }
 
                 tailIndex++;
-                Thread.Sleep(10);
+              //  Thread.Sleep(10);
             }
 
 

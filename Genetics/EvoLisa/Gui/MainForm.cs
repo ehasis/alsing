@@ -14,17 +14,17 @@ namespace GenArt
 {
     public partial class MainForm : Form
     {
+        private const int repaintOnSelectedSteps = 3;
+        private Image bgImage;
         private DnaDrawing currentDrawing;
 
         private DnaDrawing guiDrawing;
-        private Image bgImage;
 
         private DateTime lastRepaint = DateTime.MinValue;
         private int lastSelected;
         public DnaProject Project;
         private string projectFileName = "";
         private TimeSpan repaintIntervall = new TimeSpan(0, 0, 0, 0, 0);
-        private const int repaintOnSelectedSteps = 3;
         private SettingsForm settingsForm;
         private StatsForm statsForm;
 
@@ -55,21 +55,21 @@ namespace GenArt
                                       Height = picPattern.Height
                                   };
 
-            JobInfo info = new JobInfo()
-                               {
-                                   Settings = Project.Settings,
-                                   SourceImage = sourceImage,
-                               };
+            var info = new JobInfo
+                           {
+                               Settings = Project.Settings,
+                               SourceImage = sourceImage,
+                           };
             //IEvolutionJob job = new LayeredEvolutionJob(sourceImage, 4);
 
             //DefaultEvolutionJob job = new DefaultEvolutionJob(sourceImage, currentDrawing);
-            IEvolutionJob job = new DefaultEvolutionJob(info);
-            //IEvolutionJob job = new ClusteredEvolutionJob(info);
+            //IEvolutionJob job = new DefaultEvolutionJob(info);
+            IEvolutionJob job = new ClusteredEvolutionJob(info);
 
             while (Project.IsRunning)
             {
                 double newErrorLevel = job.GetNextErrorLevel();
-                DefaultEvolutionJob defJob = job as DefaultEvolutionJob;
+                var defJob = job as DefaultEvolutionJob;
                 if (defJob != null)
                     Project.Generations += defJob.Generations;
 
@@ -233,7 +233,6 @@ namespace GenArt
                                             PixelFormat.Format24bppRgb))
             using (Graphics backGraphics = Graphics.FromImage(backBuffer))
             {
-
                 backGraphics.SmoothingMode = SmoothingMode.HighQuality;
                 Renderer.Render(guiDrawing, backGraphics, Project.Settings.Scale);
 
