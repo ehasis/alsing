@@ -49,7 +49,7 @@ namespace GenArt.Classes
             workerThread = new Thread(WorkerThreadStart)
                                {
                                    IsBackground = true,
-                                   Priority = ThreadPriority.BelowNormal
+                                   Priority = ThreadPriority.AboveNormal
                                };
 
             isRunning = true;
@@ -62,11 +62,12 @@ namespace GenArt.Classes
 
             while (isRunning)
             {
+                WorkerData tmpData = data;
 
-                if (data.hasNewParent)
+                if (tmpData.hasNewParent)
                 {
-                    Tools.InitRandom(data.randomSeed);
-                    data.hasNewParent = false;
+                    Tools.InitRandom(tmpData.randomSeed);
+                    tmpData.hasNewParent = false;
                 }
 
 
@@ -82,7 +83,7 @@ namespace GenArt.Classes
                                  };
 
 
-                data.workerTail.Enqueue(result);
+                tmpData.workerTail.Enqueue(result);
 
             }
         }
