@@ -62,7 +62,10 @@ namespace GenArt.Classes
 
             while (isRunning)
             {
-                WorkerData tmpData = data;
+                //assign current work data to a tmp var, so that we use the same data through the entire itteration
+                //even if data is changed by the main thread, nothing will break or go wrong.
+                WorkerData tmpData = data; 
+
 
                 if (tmpData.hasNewParent)
                 {
@@ -107,11 +110,15 @@ namespace GenArt.Classes
 
         public DnaPartitionResult GetNextResult()
         {
-            while (data.workerTail.Count == 0)
+            WorkerData tmp = data;
+            while (tmp.workerTail.Count == 0)
+            {
                 Thread.Sleep(2); //only happens at startup and on rare occasions
+                tmp = data;
+            }
 
-            DnaPartitionResult result = data.workerTail.Dequeue();
-            data.workerUsedTail.Add(result);
+            DnaPartitionResult result = tmp.workerTail.Dequeue();
+            tmp.workerUsedTail.Add(result);
             return result;
         }
 
@@ -119,7 +126,7 @@ namespace GenArt.Classes
         {
             DnaPartitionResult result = data.workerUsedTail[tailIndex];
             parentDrawing = result.Drawing.Clone();
-            WorkerData newData = new WorkerData
+            var newData = new WorkerData
                                      {
                                          randomSeed = newSeed,
                                          hasNewParent = true,
@@ -127,7 +134,7 @@ namespace GenArt.Classes
                                          workerTail = new Queue<DnaPartitionResult>(),
 
                                      };
-            data = newData;
+            data = newData; // assign new data to worker, worker will get it next loop itteration
         }
 
         public DnaDrawing GetCurrentDrawing()
