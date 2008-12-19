@@ -125,7 +125,7 @@ namespace GenArt.Classes
         public void AcceptGoodDrawing(int tailIndex, int newSeed)
         {
             DnaPartitionResult result = data.workerUsedTail[tailIndex];
-            parentDrawing = result.Drawing.Clone();
+            parentDrawing = result.Drawing; //.Clone();
             var newData = new WorkerData
                                      {
                                          randomSeed = newSeed,
