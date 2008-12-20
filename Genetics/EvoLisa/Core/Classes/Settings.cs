@@ -1,14 +1,39 @@
-﻿using System.Drawing.Imaging;
-using System.Xml.Serialization;
-using System;
-namespace GenArt.Classes
+﻿namespace GenArt.Classes
 {
     public class Settings
     {
+        private int alphaRangeMax = 60;
+        private int alphaRangeMin = 30;
+        private int movePointRangeMid = 20;
+        private int movePointRangeMin = 4;
+        private int pointsMax = 1500;
+        private int pointsMin;
+        private int pointsPerPolygonMax = 10;
+        private int pointsPerPolygonMin = 3;
+        private int polygonsMax = 255;
+        private int polygonsMin;
+
         public Settings()
         {
+            FlipSplinesMutationRate = 1500;
+            FlipFilledMutationRate = 1500;
+            AddPolygonMutationRate = 700;
+            AddPolygonCloneMutationRate = 700;
+            RemovePolygonMutationRate = 1500;
+            MovePolygonMutationRate = 700;
+            AddPointMutationRate = 1500;
+            AddPointCloneMutationRate = 1500;
+            RemovePointMutationRate = 1500;
+            MovePointMaxMutationRate = 1500;
+            MovePointMidMutationRate = 1500;
+            MovePointMinMutationRate = 1500;
+            ColorMutationRate = 300;
+            AlphaMutationRate = 1500;
+
             Reset();
         }
+
+        //Features
 
         public bool MuteLinePolygon { get; set; }
         public bool MuteCurvePolygon { get; set; }
@@ -26,251 +51,26 @@ namespace GenArt.Classes
         public bool MuteMovePointMax { get; set; }
         public bool MuteMovePointMid { get; set; }
         public bool MuteMovePointMin { get; set; }
-
         public int Scale { get; set; }
 
-        [XmlIgnore]
-        public ImageFormat HistoryImageFormat 
-        {
-            get 
-            {
-                if (string.IsNullOrEmpty(HistoryImageFormatName))
-                    return ImageFormat.Jpeg;
-                switch (HistoryImageFormatName.ToLower())
-                {
-                    case "bmp":
-                        return ImageFormat.Bmp;
-                    case "gif":
-                        return ImageFormat.Gif;
-                    default:
-                        return ImageFormat.Jpeg;
-                }
-            }
-            set { HistoryImageFormatName = value.ToString(); } 
-        }
-        public string HistoryImageFormatName { get; set; }
+        ////Mutation rates
 
-        public int HistoryImageScale { get; set; }
-        public decimal HistoryImageSteps { get; set; }
-
-        [XmlIgnore]
-        public HistorySaveTrigger HistoryImageSaveTrigger
-        {
-            get 
-            {
-                if (string.IsNullOrEmpty(HistoryImageSaveTriggerName))
-                    return HistorySaveTrigger.None;
-                return (HistorySaveTrigger)Enum.Parse(typeof(HistorySaveTrigger), HistoryImageSaveTriggerName); 
-            }
-            set { HistoryImageSaveTriggerName = value.ToString(); }
-        }
-
-        public string HistoryImageSaveTriggerName { get; set; }
-
-        //Mutation rates
-        private int flipSplinesMutationRate = 1500;
-        private int flipFilledMutationRate = 1500;
-        private int addPointMutationRate = 1500;
-        private int addPointCloneMutationRate = 1500;
-        private int addPolygonMutationRate = 700;
-        private int addPolygonCloneMutationRate = 700;
-        private int alphaMutationRate = 1500;
-        private int alphaRangeMax = 60;
-        private int alphaRangeMin = 30;
-        private int blueMutationRate = 1500;
-        private int blueRangeMax = 255;
-        private int blueRangeMin;
-        private int greenMutationRate = 1500;
-        private int greenRangeMax = 255;
-        private int greenRangeMin;
-        private int movePointMaxMutationRate = 1500;
-        private int movePointMidMutationRate = 1500;
-        private int movePointMinMutationRate = 1500;
-        private int movePointRangeMid = 20;
-        private int movePointRangeMin = 4;
-        private int movePolygonMutationRate = 700;
-        private int pointsMax = 1500;
-        private int pointsMin;
-        private int pointsPerPolygonMax = 10;
-        private int pointsPerPolygonMin = 3;
-        private int polygonsMax = 255;
-        private int polygonsMin;
-        private int colorMutationRate = 300;
-        private int redRangeMax = 255;
-        private int redRangeMin;
-        private int removePointMutationRate = 1500;
-
-        private int removePolygonMutationRate = 1500;
-
-        public int FlipSplinesMutationRate
-        {
-            get { return flipSplinesMutationRate; }
-            set { flipSplinesMutationRate = value; }
-        }
-
-        public int FlipFilledMutationRate
-        {
-            get { return flipFilledMutationRate; }
-            set { flipFilledMutationRate = value; }
-        }
-
-        public int AddPolygonMutationRate
-        {
-            get { return addPolygonMutationRate; }
-            set { addPolygonMutationRate = value; }
-        }
-
-        public int AddPolygonCloneMutationRate
-        {
-            get { return addPolygonCloneMutationRate; }
-            set { addPolygonCloneMutationRate = value; }
-        }
-
-        public int RemovePolygonMutationRate
-        {
-            get { return removePolygonMutationRate; }
-            set { removePolygonMutationRate = value; }
-        }
-
-        public int MovePolygonMutationRate
-        {
-            get { return movePolygonMutationRate; }
-            set { movePolygonMutationRate = value; }
-        }
-
-        public int AddPointMutationRate
-        {
-            get { return addPointMutationRate; }
-            set { addPointMutationRate = value; }
-        }
-
-        public int AddPointCloneMutationRate
-        {
-            get { return addPointCloneMutationRate; }
-            set { addPointCloneMutationRate = value; }
-        }
-
-        public int RemovePointMutationRate
-        {
-            get { return removePointMutationRate; }
-            set { removePointMutationRate = value; }
-        }
-
-        public int MovePointMaxMutationRate
-        {
-            get { return movePointMaxMutationRate; }
-            set { movePointMaxMutationRate = value; }
-        }
-
-        public int MovePointMidMutationRate
-        {
-            get { return movePointMidMutationRate; }
-            set { movePointMidMutationRate = value; }
-        }
-
-        public int MovePointMinMutationRate
-        {
-            get { return movePointMinMutationRate; }
-            set { movePointMinMutationRate = value; }
-        }
-
-        public int ColorMutationRate
-        {
-            get { return colorMutationRate; }
-            set { colorMutationRate = value; }
-        }
-
-        public int GreenMutationRate
-        {
-            get { return greenMutationRate; }
-            set { greenMutationRate = value; }
-        }
-
-        public int BlueMutationRate
-        {
-            get { return blueMutationRate; }
-            set { blueMutationRate = value; }
-        }
-
-        public int AlphaMutationRate
-        {
-            get { return alphaMutationRate; }
-            set { alphaMutationRate = value; }
-        }
+        public int FlipSplinesMutationRate { get; set; }
+        public int FlipFilledMutationRate { get; set; }
+        public int AddPolygonMutationRate { get; set; }
+        public int AddPolygonCloneMutationRate { get; set; }
+        public int RemovePolygonMutationRate { get; set; }
+        public int MovePolygonMutationRate { get; set; }
+        public int AddPointMutationRate { get; set; }
+        public int AddPointCloneMutationRate { get; set; }
+        public int RemovePointMutationRate { get; set; }
+        public int MovePointMaxMutationRate { get; set; }
+        public int MovePointMidMutationRate { get; set; }
+        public int MovePointMinMutationRate { get; set; }
+        public int ColorMutationRate { get; set; }
+        public int AlphaMutationRate { get; set; }
 
         //Ranges
-
-        public int RedRangeMin
-        {
-            get { return redRangeMin; }
-            set
-            {
-                if (value > redRangeMax)
-                    RedRangeMax = value;
-
-                redRangeMin = value;
-            }
-        }
-
-        public int RedRangeMax
-        {
-            get { return redRangeMax; }
-            set
-            {
-                if (value < redRangeMin)
-                    RedRangeMin = value;
-
-                redRangeMax = value;
-            }
-        }
-
-        public int GreenRangeMin
-        {
-            get { return greenRangeMin; }
-            set
-            {
-                if (value > greenRangeMax)
-                    GreenRangeMax = value;
-
-                greenRangeMin = value;
-            }
-        }
-
-        public int GreenRangeMax
-        {
-            get { return greenRangeMax; }
-            set
-            {
-                if (value < greenRangeMin)
-                    GreenRangeMin = value;
-
-                greenRangeMax = value;
-            }
-        }
-
-        public int BlueRangeMin
-        {
-            get { return blueRangeMin; }
-            set
-            {
-                if (value > blueRangeMax)
-                    BlueRangeMax = value;
-
-                blueRangeMin = value;
-            }
-        }
-
-        public int BlueRangeMax
-        {
-            get { return blueRangeMax; }
-            set
-            {
-                if (value < blueRangeMin)
-                    BlueRangeMin = value;
-
-                blueRangeMax = value;
-            }
-        }
 
         public int AlphaRangeMin
         {
@@ -397,14 +197,12 @@ namespace GenArt.Classes
 
         public void Reset()
         {
-            HistoryImageFormat = ImageFormat.Jpeg;
-
             //Mute these three to cause a cell-like growth pattern...
-         //   MuteAddPolygonNew = true;
+            //   MuteAddPolygonNew = true;
             MuteAddPolygonClone = true;
             MuteMovePointMax = true;
-      //      MuteMovePointMid = true;
-            
+            //      MuteMovePointMid = true;
+
 
             MuteAddPointClone = true;
 
@@ -427,18 +225,9 @@ namespace GenArt.Classes
             MovePointMidMutationRate = 600;
             MovePointMinMutationRate = 600;
 
-
-            GreenMutationRate = 600;
-            BlueMutationRate = 600;
             AlphaMutationRate = 600;
 
             ////Limits / Constraints
-            RedRangeMin = 0;
-            RedRangeMax = 255;
-            GreenRangeMin = 0;
-            GreenRangeMax = 255;
-            BlueRangeMin = 0;
-            BlueRangeMax = 255;
             AlphaRangeMin = 30;
             AlphaRangeMax = 60;
 
@@ -453,7 +242,6 @@ namespace GenArt.Classes
 
             MovePointRangeMid = 20;
             MovePointRangeMin = 3;
-
         }
 
         public void CopyTo(Settings settings)
@@ -477,12 +265,6 @@ namespace GenArt.Classes
             settings.MuteRemovePolygon = MuteRemovePolygon;
 
             settings.Scale = Scale;
-            settings.HistoryImageFormat = HistoryImageFormat;
-            settings.HistoryImageFormatName = HistoryImageFormatName;
-            settings.HistoryImageSaveTrigger = HistoryImageSaveTrigger;
-            settings.HistoryImageSaveTriggerName = HistoryImageSaveTriggerName;
-            settings.HistoryImageScale = HistoryImageScale;
-            settings.HistoryImageSteps = HistoryImageSteps;
 
             settings.AddPolygonMutationRate = AddPolygonMutationRate;
             settings.AddPolygonCloneMutationRate = AddPolygonCloneMutationRate;
@@ -497,17 +279,9 @@ namespace GenArt.Classes
             settings.MovePointMinMutationRate = MovePointMinMutationRate;
 
             settings.ColorMutationRate = ColorMutationRate;
-            settings.GreenMutationRate = GreenMutationRate;
-            settings.BlueMutationRate = BlueMutationRate;
             settings.AlphaMutationRate = AlphaMutationRate;
 
             //Limits / Constraints
-            settings.RedRangeMin = RedRangeMin;
-            settings.RedRangeMax = RedRangeMax;
-            settings.GreenRangeMin = GreenRangeMin;
-            settings.GreenRangeMax = GreenRangeMax;
-            settings.BlueRangeMin = BlueRangeMin;
-            settings.BlueRangeMax = BlueRangeMax;
             settings.AlphaRangeMin = AlphaRangeMin;
             settings.AlphaRangeMax = AlphaRangeMax;
 

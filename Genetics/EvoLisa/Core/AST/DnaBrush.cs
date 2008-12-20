@@ -13,10 +13,9 @@ namespace GenArt.AST
 
         public void Init(JobInfo info)
         {
-            Red = info.GetRandomNumber(info.Settings.RedRangeMin, info.Settings.RedRangeMax);
-            Green = info.GetRandomNumber(info.Settings.GreenRangeMin, info.Settings.GreenRangeMax);
-            Blue = info.GetRandomNumber(info.Settings.BlueRangeMin, info.Settings.BlueRangeMax);
-            //Alpha = info.GetRandomNumber(settings.AlphaRangeMin, settings.AlphaRangeMax);
+            Red = info.GetRandomNumber(0, 255);
+            Green = info.GetRandomNumber(0, 255);
+            Blue = info.GetRandomNumber(0, 255);
             Alpha = info.GetRandomNumber(10, 60);
         }
 
@@ -35,20 +34,20 @@ namespace GenArt.AST
         {
             if (info.WillMutate(info.Settings.ColorMutationRate))
             {
-                Red = info.GetRandomNumber(info.Settings.RedRangeMin, info.Settings.RedRangeMax);
+                Red = info.GetRandomNumber(0, 255);
 
                 drawing.SetDirty();
             }
 
             if (info.WillMutate(info.Settings.ColorMutationRate))
             {
-                Green = info.GetRandomNumber(info.Settings.GreenRangeMin, info.Settings.GreenRangeMax);
+                Green = info.GetRandomNumber(0, 255);
 
                 drawing.SetDirty();
             }
             if (info.WillMutate(info.Settings.ColorMutationRate))
             {
-                Blue = info.GetRandomNumber(info.Settings.BlueRangeMin, info.Settings.BlueRangeMax);
+                Blue = info.GetRandomNumber(0, 255);
 
                 drawing.SetDirty();
             }

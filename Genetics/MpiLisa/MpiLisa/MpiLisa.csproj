@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="DataContracts\MpiMasterResponse.cs" />
     <Compile Include="DataContracts\MpiWorkerResponse.cs" />
-    <Compile Include="Master.cs" />
     <Compile Include="MasterInstance.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,7 +62,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Worker.cs" />
+    <Compile Include="NodeStarter.cs" />
     <Compile Include="WorkerInstance.cs" />
   </ItemGroup>
   <ItemGroup>
