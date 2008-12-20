@@ -42,21 +42,15 @@
   <ItemGroup>
     <Compile Include="AST\DnaBrush.cs" />
     <Compile Include="AST\DnaDrawing.cs" />
-    <Compile Include="AST\DnaPartitionResult.cs" />
     <Compile Include="AST\DnaPoint.cs" />
     <Compile Include="AST\DnaPolygon.cs" />
-    <Compile Include="AST\DnaProject.cs" />
     <Compile Include="Classes\FitnessCalculator.cs" />
     <Compile Include="Classes\HistorySaveTrigger.cs" />
     <Compile Include="Classes\JobInfo.cs" />
-    <Compile Include="Classes\OptimizedSerializer.cs" />
     <Compile Include="Classes\Renderer.cs" />
-    <Compile Include="Classes\Serializer.cs" />
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Classes\SourceImage.cs" />
-    <Compile Include="Classes\Tools.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
-    <Compile Include="Interfaces\IEvolutionJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

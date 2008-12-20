@@ -64,19 +64,19 @@ namespace GenArt.AST
             while (!IsDirty)
             {
                 if (!info.Settings.MuteAddPolygonNew)
-                    if (Tools.WillMutate(info.Settings.AddPolygonMutationRate))
+                    if (info.WillMutate(info.Settings.AddPolygonMutationRate))
                         AddPolygon(info);
 
                 if (!info.Settings.MuteAddPolygonClone)
-                    if (Tools.WillMutate(info.Settings.AddPolygonCloneMutationRate))
+                    if (info.WillMutate(info.Settings.AddPolygonCloneMutationRate))
                         AddPolygonClone(info);
 
                 if (!info.Settings.MuteRemovePolygon)
-                    if (Tools.WillMutate(info.Settings.RemovePolygonMutationRate))
+                    if (info.WillMutate(info.Settings.RemovePolygonMutationRate))
                         RemovePolygon(info);
 
                 if (!info.Settings.MuteMovePolygon)
-                    if (Tools.WillMutate(info.Settings.MovePolygonMutationRate))
+                    if (info.WillMutate(info.Settings.MovePolygonMutationRate))
                         MovePolygon(info);
 
                 foreach (DnaPolygon polygon in Polygons)
@@ -89,10 +89,10 @@ namespace GenArt.AST
             if (Polygons.Count < 1)
                 return;
 
-            int index = Tools.GetRandomNumber(0, Polygons.Count);
+            int index = info.GetRandomNumber(0, Polygons.Count);
             DnaPolygon poly = Polygons[index];
             Polygons.RemoveAt(index);
-            index = Tools.GetRandomNumber(0, Polygons.Count);
+            index = info.GetRandomNumber(0, Polygons.Count);
             Polygons.Insert(index, poly);
             SetDirty();
         }
@@ -101,7 +101,7 @@ namespace GenArt.AST
         {
             if (Polygons.Count > info.Settings.PolygonsMin)
             {
-                int index = Tools.GetRandomNumber(0, Polygons.Count);
+                int index = info.GetRandomNumber(0, Polygons.Count);
                 Polygons.RemoveAt(index);
                 SetDirty();
             }
@@ -114,7 +114,7 @@ namespace GenArt.AST
                 var newPolygon = new DnaPolygon();
                 newPolygon.Init(this, info);
 
-                int index = Tools.GetRandomNumber(0, Polygons.Count);
+                int index = info.GetRandomNumber(0, Polygons.Count);
 
                 Polygons.Insert(index, newPolygon);
 
@@ -130,13 +130,13 @@ namespace GenArt.AST
                     AddPolygon(info);
                 else
                 {
-                    DnaPolygon parent = Polygons[Tools.GetRandomNumber(0, Polygons.Count)];
+                    DnaPolygon parent = Polygons[info.GetRandomNumber(0, Polygons.Count)];
                     var newPolygon = parent.Clone();
                     Polygons.Insert(Polygons.IndexOf(parent), newPolygon);
 
-                    newPolygon.Offset(Tools.GetRandomNumber(-6, 6), Tools.GetRandomNumber(-6, 6));
+                    newPolygon.Offset(info.GetRandomNumber(-6, 6), info.GetRandomNumber(-6, 6));
 
-                    newPolygon.Width = Tools.GetRandomNumber(1, 8);
+                    newPolygon.Width = info.GetRandomNumber(1, 8);
 
                     SetDirty();
                 }

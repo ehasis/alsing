@@ -12,8 +12,8 @@ namespace GenArt.AST
 
         public void Init(DnaDrawing drawing,JobInfo info)
         {
-            X = Tools.GetRandomNumber(0, info.SourceImage.Width);
-            Y = Tools.GetRandomNumber(0, info.SourceImage.Height);
+            X = info.GetRandomNumber(0, info.SourceImage.Width);
+            Y = info.GetRandomNumber(0, info.SourceImage.Height);
         }
 
         public DnaPoint Clone()
@@ -29,26 +29,26 @@ namespace GenArt.AST
         {
             if (!info.Settings.MuteMovePointMax)
             {
-                if (Tools.WillMutate(info.Settings.MovePointMaxMutationRate))
+                if (info.WillMutate(info.Settings.MovePointMaxMutationRate))
                 {
-                    X = Tools.GetRandomNumber(0, info.SourceImage.Width);
-                    Y = Tools.GetRandomNumber(0, info.SourceImage.Height);
+                    X = info.GetRandomNumber(0, info.SourceImage.Width);
+                    Y = info.GetRandomNumber(0, info.SourceImage.Height);
                     drawing.SetDirty();
                 }
             }
 
             if (!info.Settings.MuteMovePointMid)
             {
-                if (Tools.WillMutate(info.Settings.MovePointMidMutationRate))
+                if (info.WillMutate(info.Settings.MovePointMidMutationRate))
                 {
 
                     X = X
-                        .Randomize(-info.Settings.MovePointRangeMid, info.Settings.MovePointRangeMid)
+                        .Randomize(info ,- info.Settings.MovePointRangeMid, info.Settings.MovePointRangeMid)
                         .Max(0)
                         .Min(info.SourceImage.Width);
 
                     Y = Y
-                        .Randomize(-info.Settings.MovePointRangeMid, info.Settings.MovePointRangeMid)
+                        .Randomize(info, -info.Settings.MovePointRangeMid, info.Settings.MovePointRangeMid)
                         .Max(0)
                         .Min(info.SourceImage.Height);
 
@@ -58,15 +58,15 @@ namespace GenArt.AST
 
             if (!info.Settings.MuteMovePointMin)
             {
-                if (Tools.WillMutate(info.Settings.MovePointMinMutationRate))
+                if (info.WillMutate(info.Settings.MovePointMinMutationRate))
                 {
                     X = X
-                        .Randomize(-info.Settings.MovePointRangeMin, info.Settings.MovePointRangeMin)
+                        .Randomize(info, -info.Settings.MovePointRangeMin, info.Settings.MovePointRangeMin)
                         .Max(0)
                         .Min(info.SourceImage.Width);
 
                     Y = Y
-                        .Randomize(-info.Settings.MovePointRangeMin, info.Settings.MovePointRangeMin)
+                        .Randomize(info, -info.Settings.MovePointRangeMin, info.Settings.MovePointRangeMin)
                         .Max(0)
                         .Min(info.SourceImage.Height);
 

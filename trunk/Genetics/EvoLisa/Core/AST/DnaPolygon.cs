@@ -19,7 +19,7 @@ namespace GenArt.AST
         {
             Points = new List<DnaPoint>();
 
-            //int count = Tools.GetRandomNumber(3, 3);
+            //int count = info.GetRandomNumber(3, 3);
             var origin = new DnaPoint();
             origin.Init(drawing, info);
 
@@ -34,10 +34,10 @@ namespace GenArt.AST
                 var point = new DnaPoint
                                 {
                                     X =
-                                        Math.Min(Math.Max(0, origin.X + Tools.GetRandomNumber(-3, 3)),
+                                        Math.Min(Math.Max(0, origin.X + info.GetRandomNumber(-3, 3)),
                                                  info.SourceImage.Width),
                                     Y =
-                                        Math.Min(Math.Max(0, origin.Y + Tools.GetRandomNumber(-3, 3)),
+                                        Math.Min(Math.Max(0, origin.Y + info.GetRandomNumber(-3, 3)),
                                                  info.SourceImage.Height)
                                 };
 
@@ -52,12 +52,12 @@ namespace GenArt.AST
                 info.Settings.MuteLineFillPolygon)
                 findNew = false;
 
-            Width = Tools.GetRandomNumber(1, 8);
+            Width = info.GetRandomNumber(1, 8);
 
             while (findNew)
             {
-                bool splines = (Tools.GetRandomNumber(0, 2) == 1) ? true : false;
-                bool filled = (Tools.GetRandomNumber(0, 2) == 1) ? true : false;
+                bool splines = (info.GetRandomNumber(0, 2) == 1) ? true : false;
+                bool filled = (info.GetRandomNumber(0, 2) == 1) ? true : false;
                 findNew = !SetSplinesAndFilled(info.Settings, splines, filled);
             }
 
@@ -122,23 +122,26 @@ namespace GenArt.AST
 
         public void Mutate(DnaDrawing drawing, JobInfo info)
         {
-            if (Tools.WillMutate(info.Settings.AddPointMutationRate))
+            if (info.WillMutate(info.Settings.AddPointMutationRate))
                 AddPoint(drawing, info);
 
-            if (Tools.WillMutate(info.Settings.RemovePointMutationRate))
+            if (info.WillMutate(info.Settings.RemovePointMutationRate))
                 RemovePoint(drawing, info);
 
-            if (Tools.WillMutate(info.Settings.FlipSplinesMutationRate))
+            if (info.WillMutate(info.Settings.FlipSplinesMutationRate))
                 FlipSplines(drawing, info);
 
-            if (Tools.WillMutate(info.Settings.FlipFilledMutationRate))
+            if (info.WillMutate(info.Settings.FlipFilledMutationRate))
                 FlipFilled(drawing, info);
 
-            if (Tools.WillMutate(info.Settings.FlipFilledMutationRate))
-                Width = Tools.GetRandomNumber(1, 8);
+            if (info.WillMutate(info.Settings.FlipFilledMutationRate))
+                Width = info.GetRandomNumber(1, 8);
 
             Brush.Mutate(drawing, info);
-            Points.ForEach(p => p.Mutate(drawing, info));
+            foreach(var point in Points)
+            {
+                point.Mutate(drawing, info);
+            }
 
             //IsComplex = false;// checkComplex();
         }
@@ -159,7 +162,7 @@ namespace GenArt.AST
             {
                 if (drawing.PointCount > info.Settings.PointsMin)
                 {
-                    int index = Tools.GetRandomNumber(0, Points.Count);
+                    int index = info.GetRandomNumber(0, Points.Count);
                     Points.RemoveAt(index);
 
                     drawing.SetDirty();
@@ -175,7 +178,7 @@ namespace GenArt.AST
                 {
                     var newPoint = new DnaPoint();
 
-                    int index = Tools.GetRandomNumber(1, Points.Count - 1);
+                    int index = info.GetRandomNumber(1, Points.Count - 1);
 
                     DnaPoint prev = Points[index - 1];
                     DnaPoint next = Points[index];

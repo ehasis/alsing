@@ -17,9 +17,9 @@ namespace GenArt
             return Math.Min(self, min);
         }
 
-        public static int Randomize(this int self, int min, int max)
+        public static int Randomize(this int self,JobInfo info, int min, int max)
         {
-            return self + Tools.GetRandomNumber(min, max);
+            return self + info.GetRandomNumber(min, max);
         }
     }
 }
