@@ -13,14 +13,7 @@ namespace MpiLisa
             using (new MPI.Environment(ref args))
             {
                 Intracommunicator comm = Communicator.world;
-                if (comm.Rank == 0)
-                {
-                    Master.Run(comm);
-                }
-                else
-                {
-                    Worker.Run(comm);                    
-                }
+                NodeStarter.Run(comm);                    
             }
         }
     }

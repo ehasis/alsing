@@ -1,45 +1,53 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using GenArt.Classes;
 using GenArt.Core.Classes;
-using MPI;
 
 namespace MpiLisa
 {
-    public static class Master
+    public static class NodeStarter
     {
 
         internal static void Run(MPI.Intracommunicator comm)
         {
             var info = new JobInfo
-            {
-                Settings = new Settings(),
-                SourceImage = GetSourceImage()
-            };
+                           {
+                               //hack, let every node init their own job data
+                               Settings = new Settings(), //should be shared and sent to all workers later
+                               SourceImage = GetSourceImage() //should also be sent to all workers later
+                           };
 
             int nodes = comm.Size;
             int rank = comm.Rank;
+
+            //setup partition size
             int partitionSize = info.SourceImage.Height / nodes;
             int partitionY = rank * partitionSize;
 
-            var instance = new MasterInstance(0, partitionY, partitionSize, info);
-
-            instance.WorkLoop(comm);
+            if (comm.Rank == 0)
+            {
+                var instance = new MasterInstance(0, partitionY, partitionSize, info);
+                instance.WorkLoop(comm);
+            }
+            else
+            {
+                var instance = new WorkerInstance(0, partitionY, partitionSize, info);
+                instance.WorkLoop(comm);
+            }
         }
 
         private static SourceImage GetSourceImage()
         {
             Bitmap bitmap = Properties.Resources.MonaLisa;
             var image = new SourceImage
-            {
-                Pixels = SetupSourceColorMatrix(bitmap),
-                Width = bitmap.Width,
-                Height = bitmap.Height
-            };
+                            {
+                                Pixels = SetupSourceColorMatrix(bitmap),
+                                Width = bitmap.Width,
+                                Height = bitmap.Height
+                            };
 
             return image;
         }
