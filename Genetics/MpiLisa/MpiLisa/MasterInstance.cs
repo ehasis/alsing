@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using GenArt.AST;
 using GenArt.Classes;
 using MPI;
 using MpiLisa.DataContracts;
-using System.Linq;
 
 namespace MpiLisa
 {
@@ -23,15 +20,10 @@ namespace MpiLisa
         public override void WorkLoop(Intracommunicator comm)
         {
             double currentTotalErrorLevel = int.MaxValue;
-            var workers = new List<int>();
-            for (int i = 1; i < comm.Size; i++)
-            {
-                workers.Add(i);
-            }
-
 
             Console.WriteLine("Starting server (rank {0}) , Partition Y {1} , Partition Height {2}", comm.Rank,
                               partitionY, partitionHeight);
+
             int generations = 0;
             DateTime startTime = DateTime.Now;
             while (true)
@@ -39,51 +31,29 @@ namespace MpiLisa
                 //ignorant debugging of MPI, I just output console text and images in a folder
                 NotifyProgress(generations, startTime, currentTotalErrorLevel);
 
-                //fetch a mutated child of the current parent
-                currentDrawing = GetMutatedSeedSyncedDrawing();
-
-                double newErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, info.SourceImage,
-                                                                           partitionY, partitionHeight);
-                //start by posting the masters own partition
-                var response = new MpiWorkerResponse
-                {
-                   ErrorLevel = newErrorLevel,
-                };
+                double newErrorLevel = GetFitnessForNewChild();
 
                 //fetch the partition results from each node
-                var allResponses = comm.Gather(response, 0);
-
-                //sum up the partitioned error levels
-                double newTotalErrorLevel = allResponses.Sum(r => r.ErrorLevel);
-
-
+                double newTotalErrorLevel = SenderWorkerResponse(comm, newErrorLevel);
                 //if the new total errir is better, then flag this as a keeper
                 bool accepted = (newTotalErrorLevel <= currentTotalErrorLevel);
 
-                currentTotalErrorLevel = SendMasterCommand(comm, currentTotalErrorLevel, newTotalErrorLevel, accepted);
+                var masterCommand = new MpiMasterResponse
+                                        {
+                                            Accepted = accepted,
+                                            NewRandomSeed = random.Next(int.MinValue, int.MaxValue),
+                                        };
+
+                ReceiveMasterCommand(comm, masterCommand);
+
+                //if the new total drawing is better, store its fitness
+                if (accepted)
+                {
+                    currentTotalErrorLevel = newTotalErrorLevel;
+                }
 
                 generations++;
             }
-        }
-
-        private double SendMasterCommand(Intracommunicator comm, double currentErrorLevel, double newTotalErrorLevel,
-                                         bool accepted)
-        {
-            var masterCommand = new MpiMasterResponse
-                                    {
-                                        Accepted = accepted,
-                                        NewRandomSeed = random.Next(int.MinValue, int.MaxValue),
-                                    };
-
-            comm.Broadcast(ref masterCommand, 0);
-
-            if (accepted)
-            {
-                currentErrorLevel = newTotalErrorLevel;
-                parentDrawing = currentDrawing;
-                info.InitRandom(masterCommand.NewRandomSeed);
-            }
-            return currentErrorLevel;
         }
 
         private void NotifyProgress(int generations, DateTime startTime, double currentErrorLevel)

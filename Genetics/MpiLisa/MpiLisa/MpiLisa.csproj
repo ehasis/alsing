@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContracts\MpiMasterResponse.cs" />
-    <Compile Include="DataContracts\MpiWorkerResponse.cs" />
     <Compile Include="MasterInstance.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
