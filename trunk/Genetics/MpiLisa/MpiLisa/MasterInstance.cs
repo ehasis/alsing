@@ -44,20 +44,17 @@ namespace MpiLisa
 
                 double newErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, info.SourceImage,
                                                                            partitionY, partitionHeight);
-                //start by measuring the masters own partition
-                double newTotalErrorLevel = newErrorLevel; 
-
-                //then add the error for each worker
-             //   workers.ForEach(worker => newTotalErrorLevel += comm.Receive<MpiWorkerResponse>(worker, 0).ErrorLevel);
-
+                //start by posting the masters own partition
                 var response = new MpiWorkerResponse
-                                   {
-                                       ErrorLevel = newErrorLevel,
-                                   };
+                {
+                   ErrorLevel = newErrorLevel,
+                };
 
+                //fetch the partition results from each node
                 var allResponses = comm.Gather(response, 0);
 
-                newTotalErrorLevel = allResponses.Sum(r => r.ErrorLevel);
+                //sum up the partitioned error levels
+                double newTotalErrorLevel = allResponses.Sum(r => r.ErrorLevel);
 
 
                 //if the new total errir is better, then flag this as a keeper
