@@ -22,7 +22,7 @@ namespace MpiLisa
             this.partitionY = partitionY;
             this.partitionHeight = partitionHeight;
             this.info = info;
-            Tools.InitRandom(randomSeed);
+            info.InitRandom(randomSeed);
             parentDrawing = new DnaDrawing
                                 {
                                     Polygons = new List<DnaPolygon>(),
@@ -53,7 +53,9 @@ namespace MpiLisa
                              };
 
             currentDrawing = newDrawing;
-            comm.Send(result, 0, 0);
+
+            comm.Gather(result, 0);
+            //comm.Send(result, 0, 0);
         }
 
         protected void ReceiveMasterCommand(Intracommunicator comm, MpiMasterResponse masterCommand)
@@ -63,7 +65,7 @@ namespace MpiLisa
             if (masterCommand.Accepted)
             {
                 randomSeed = masterCommand.NewRandomSeed;
-                Tools.InitRandom(randomSeed);
+                info.InitRandom(randomSeed);
                 parentDrawing = currentDrawing;
             }
         }

@@ -7,6 +7,7 @@ using GenArt.AST;
 using GenArt.Classes;
 using MPI;
 using MpiLisa.DataContracts;
+using System.Linq;
 
 namespace MpiLisa
 {
@@ -35,18 +36,31 @@ namespace MpiLisa
             DateTime startTime = DateTime.Now;
             while (true)
             {
+                //ignorant debugging of MPI, I just output console text and images in a folder
                 NotifyProgress(generations, startTime, currentTotalErrorLevel);
 
-
+                //fetch a mutated child of the current parent
                 currentDrawing = GetMutatedSeedSyncedDrawing();
 
                 double newErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, info.SourceImage,
                                                                            partitionY, partitionHeight);
+                //start by measuring the masters own partition
+                double newTotalErrorLevel = newErrorLevel; 
 
-                double newTotalErrorLevel = newErrorLevel;
+                //then add the error for each worker
+             //   workers.ForEach(worker => newTotalErrorLevel += comm.Receive<MpiWorkerResponse>(worker, 0).ErrorLevel);
 
-                workers.ForEach(worker => newTotalErrorLevel += comm.Receive<MpiWorkerResponse>(worker, 0).ErrorLevel);
+                var response = new MpiWorkerResponse
+                                   {
+                                       ErrorLevel = newErrorLevel,
+                                   };
 
+                var allResponses = comm.Gather(response, 0);
+
+                newTotalErrorLevel = allResponses.Sum(r => r.ErrorLevel);
+
+
+                //if the new total errir is better, then flag this as a keeper
                 bool accepted = (newTotalErrorLevel <= currentTotalErrorLevel);
 
                 currentTotalErrorLevel = SendMasterCommand(comm, currentTotalErrorLevel, newTotalErrorLevel, accepted);
@@ -70,7 +84,7 @@ namespace MpiLisa
             {
                 currentErrorLevel = newTotalErrorLevel;
                 parentDrawing = currentDrawing;
-                Tools.InitRandom(masterCommand.NewRandomSeed);
+                info.InitRandom(masterCommand.NewRandomSeed);
             }
             return currentErrorLevel;
         }
