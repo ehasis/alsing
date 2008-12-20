@@ -413,24 +413,24 @@ namespace GenArt.Classes
             MuteLinePolygon = true;
             MuteCurvePolygon = true;
 
-            ColorMutationRate = 1000;
+            ColorMutationRate = 600;
 
-            AddPolygonMutationRate = 400;
-            AddPolygonCloneMutationRate = 400;
-            RemovePolygonMutationRate = 1000;
-            MovePolygonMutationRate = 400;
+            AddPolygonMutationRate = 200;
+            AddPolygonCloneMutationRate = 200;
+            RemovePolygonMutationRate = 600;
+            MovePolygonMutationRate = 200;
 
-            AddPointMutationRate = 1000;
-            AddPointCloneMutationRate = 1000;
-            RemovePointMutationRate = 1000;
-            MovePointMaxMutationRate = 1000;
-            MovePointMidMutationRate = 1000;
-            MovePointMinMutationRate = 1000;
+            AddPointMutationRate = 600;
+            AddPointCloneMutationRate = 600;
+            RemovePointMutationRate = 600;
+            MovePointMaxMutationRate = 600;
+            MovePointMidMutationRate = 600;
+            MovePointMinMutationRate = 600;
 
 
-            GreenMutationRate = 1000;
-            BlueMutationRate = 1000;
-            AlphaMutationRate = 1000;
+            GreenMutationRate = 600;
+            BlueMutationRate = 600;
+            AlphaMutationRate = 600;
 
             ////Limits / Constraints
             RedRangeMin = 0;
