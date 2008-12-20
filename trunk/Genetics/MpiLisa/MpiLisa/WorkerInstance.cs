@@ -34,28 +34,26 @@ namespace MpiLisa
             Console.WriteLine("Starting worker {0} , Partition Y {1} , Partition Height {2}", comm.Rank,partitionY,partitionHeight);
             while (true)
             {
-                currentDrawing = GetMutatedSeedSyncedDrawing();
+                
 
-                double newErrorLevel = FitnessCalculator.GetDrawingFitness(currentDrawing, info.SourceImage,
-                                                                           partitionY, partitionHeight);
+                double newErrorLevel = GetFitnessForNewChild();
 
-                SenderWorkerResponse(comm, currentDrawing, newErrorLevel);
+                SenderWorkerResponse(comm, newErrorLevel);
 
-                ReceiveMasterCommand(comm, null);
+                ReceiveMasterCommand(comm,null);
             }
         }
 
-        protected void SenderWorkerResponse(Intracommunicator comm, DnaDrawing newDrawing, double newErrorLevel)
+        protected double GetFitnessForNewChild()
         {
-            var result = new MpiWorkerResponse
-                             {
-                                 ErrorLevel = newErrorLevel,
-                             };
+            currentDrawing = GetMutatedSeedSyncedDrawing();
+            return FitnessCalculator.GetDrawingFitness(currentDrawing, info.SourceImage,
+                                                       partitionY, partitionHeight);
+        }
 
-            currentDrawing = newDrawing;
-
-            comm.Gather(result, 0);
-            //comm.Send(result, 0, 0);
+        protected double SenderWorkerResponse(Intracommunicator comm, double newErrorLevel)
+        {
+            return comm.Reduce(newErrorLevel, Operation<double>.Add, 0);
         }
 
         protected void ReceiveMasterCommand(Intracommunicator comm, MpiMasterResponse masterCommand)
@@ -64,8 +62,7 @@ namespace MpiLisa
 
             if (masterCommand.Accepted)
             {
-                randomSeed = masterCommand.NewRandomSeed;
-                info.InitRandom(randomSeed);
+                info.InitRandom(masterCommand.NewRandomSeed);
                 parentDrawing = currentDrawing;
             }
         }
