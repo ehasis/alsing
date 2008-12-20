@@ -33,16 +33,13 @@ namespace MpiLisa
 
                 double newErrorLevel = GetFitnessForNewChild();
 
-                //fetch the partition results from each node
+                //send out own progress and receive all nodes total progress
                 double newTotalErrorLevel = SenderWorkerResponse(comm, newErrorLevel);
+                
                 //if the new total errir is better, then flag this as a keeper
-                bool accepted = (newTotalErrorLevel <= currentTotalErrorLevel);
+                bool accepted = EvaluateIfNewTotalFitnessIsBetter(currentTotalErrorLevel, newTotalErrorLevel);
 
-                var masterCommand = new MpiMasterResponse
-                                        {
-                                            Accepted = accepted,
-                                            NewRandomSeed = random.Next(int.MinValue, int.MaxValue),
-                                        };
+                MpiMasterResponse masterCommand = GetMasterCommand(accepted);
 
                 ReceiveMasterCommand(comm, masterCommand);
 
@@ -54,6 +51,20 @@ namespace MpiLisa
 
                 generations++;
             }
+        }
+
+        private MpiMasterResponse GetMasterCommand(bool accepted)
+        {
+            return new MpiMasterResponse
+                       {
+                           Accepted = accepted,
+                           NewRandomSeed = random.Next(int.MinValue, int.MaxValue),
+                       };
+        }
+
+        private bool EvaluateIfNewTotalFitnessIsBetter(double currentTotalErrorLevel, double newTotalErrorLevel)
+        {
+            return (newTotalErrorLevel <= currentTotalErrorLevel);
         }
 
         private void NotifyProgress(int generations, DateTime startTime, double currentErrorLevel)
