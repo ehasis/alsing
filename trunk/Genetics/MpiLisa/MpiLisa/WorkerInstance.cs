@@ -33,9 +33,7 @@ namespace MpiLisa
         {
             Console.WriteLine("Starting worker {0} , Partition Y {1} , Partition Height {2}", comm.Rank,partitionY,partitionHeight);
             while (true)
-            {
-                
-
+            {                
                 double newErrorLevel = GetFitnessForNewChild();
 
                 SenderWorkerResponse(comm, newErrorLevel);
