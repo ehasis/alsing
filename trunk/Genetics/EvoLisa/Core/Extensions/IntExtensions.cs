@@ -24,6 +24,7 @@ namespace GenArt
     }
 }
 
+//hack to use extensions in .net 2.0
 namespace System.Runtime.CompilerServices
 {
     public class ExtensionAttribute : Attribute { }
