@@ -49,7 +49,6 @@
     <Compile Include="Common\ContainsAttribute.cs" />
     <Compile Include="Common\NotNullAttribute.cs" />
     <Compile Include="Common\UseDefaultsAttribute.cs" />
-    <Compile Include="Composite\ProxyActivator.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\DefaultCompositeBuilder.cs" />
     <Compile Include="Composite\DefaultCompositeBuilderFactory.cs" />
