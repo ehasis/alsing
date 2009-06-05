@@ -2,6 +2,8 @@
 {
     using System;
 
+    using OtherModel;
+
     using QI4N.Framework;
 
     internal class Program
@@ -12,27 +14,31 @@
             //var carFactory = factory.NewComposite<CarEntityFactory>();
             //var car = carFactory.Create(null, "");
 
-            var modelBuilder = new DefaultObjectBuilder<Model>();
-            Model model = modelBuilder.NewInstance();
+            var factory = new DefaultCompositeBuilderFactory();
+            var helloWorld = factory.NewComposite<HelloWorldBehaviour>();
+            Console.WriteLine(helloWorld.Say());
 
-            model.Value = "hej";
-            Console.WriteLine(model.Value);
-            Console.WriteLine(model.IsComputed);
-            Console.WriteLine(model.IsMutable);
+            //var modelBuilder = new DefaultObjectBuilder<Model>();
+            //Model model = modelBuilder.NewInstance();
 
-            var manuBuilder = new DefaultCompositeBuilder<Manufacturer>();
-            Manufacturer manufacturer = manuBuilder.NewInstance();
-            manufacturer.Country.Value = "swe";
+            //model.Value = "hej";
+            //Console.WriteLine(model.Value);
+            //Console.WriteLine(model.IsComputed);
+            //Console.WriteLine(model.IsMutable);
 
-            CompositeBuilderFactory factory = new DefaultCompositeBuilderFactory();
-            var car = factory.NewComposite<Car>();
+            //var manuBuilder = new DefaultCompositeBuilder<Manufacturer>();
+            //Manufacturer manufacturer = manuBuilder.NewInstance();
+            //manufacturer.Country.Value = "swe";
 
-            //       car.Model.Value = model.Value;
+            //CompositeBuilderFactory factory = new DefaultCompositeBuilderFactory();
+            //var car = factory.NewComposite<Car>();
 
-            var icar = car as Identity;
-            icar.Identity.Value = "tjorven";
+            ////       car.Model.Value = model.Value;
 
-            Console.WriteLine(icar.Identity.Value);
+            //var icar = car as Identity;
+            //icar.Identity.Value = "tjorven";
+
+            //Console.WriteLine(icar.Identity.Value);
 
 
             //ObjectBuilderFactory factory = new DefaultObjectBuilderFactory();
