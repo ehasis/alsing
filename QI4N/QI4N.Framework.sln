@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QI4N.Framework", "QI4N.Framework\QI4N.Framework.csproj", "{46604E99-EE88-42DD-B56D-B396E4886CE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication23", "TestHost\ConsoleApplication23.csproj", "{7D4E0AC2-3081-461D-8F71-BD739A60C8BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46604E99-EE88-42DD-B56D-B396E4886CE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46604E99-EE88-42DD-B56D-B396E4886CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46604E99-EE88-42DD-B56D-B396E4886CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46604E99-EE88-42DD-B56D-B396E4886CE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D4E0AC2-3081-461D-8F71-BD739A60C8BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4E0AC2-3081-461D-8F71-BD739A60C8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4E0AC2-3081-461D-8F71-BD739A60C8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4E0AC2-3081-461D-8F71-BD739A60C8BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
