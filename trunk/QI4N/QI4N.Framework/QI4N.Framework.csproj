@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{46604E99-EE88-42DD-B56D-B396E4886CE2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QI4N.Framework</RootNamespace>
+    <AssemblyName>QI4N.Framework</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\AppliesToAttribute.cs" />
+    <Compile Include="Common\ContainsAttribute.cs" />
+    <Compile Include="Common\NotNullAttribute.cs" />
+    <Compile Include="Common\UseDefaultsAttribute.cs" />
+    <Compile Include="Composite\ProxyActivator.cs" />
+    <Compile Include="Composite\CompositeTypeCache.cs" />
+    <Compile Include="Composite\DefaultCompositeBuilder.cs" />
+    <Compile Include="Composite\DefaultCompositeBuilderFactory.cs" />
+    <Compile Include="Entity\Association\AbstractAssociation.cs" />
+    <Compile Include="Entity\Association\AssociationInfo.cs" />
+    <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />
+    <Compile Include="Entity\EntityStateHolder.cs" />
+    <Compile Include="Object\DefaultObjectBuilder.cs" />
+    <Compile Include="Injection\Scope\InjectionScopeAttribute.cs" />
+    <Compile Include="Injection\Scope\ServiceAttribute.cs" />
+    <Compile Include="Injection\Scope\StrucutreAttribute.cs" />
+    <Compile Include="Mixin\MixinsAttribute.cs" />
+    <Compile Include="ModuleInstance.cs" />
+    <Compile Include="Object\ObjectActivator.cs" />
+    <Compile Include="Property\ImmutableAttribute.cs" />
+    <Compile Include="Property\PropertyInstanceMixin.cs" />
+    <Compile Include="Proxy\ProxyInstanceBuilder.cs" />
+    <Compile Include="Object\DefaultObjectBuilderFactory.cs" />
+    <Compile Include="Proxy\ProxyTypeBuilder.cs" />
+    <Compile Include="Entity\Association\Association.cs" />
+    <Compile Include="Composite\Composite.cs" />
+    <Compile Include="Composite\CompositeBuilder.cs" />
+    <Compile Include="Composite\CompositeBuilderFactory.cs" />
+    <Compile Include="Entity\Entity.cs" />
+    <Compile Include="Entity\EntityBuilder.cs" />
+    <Compile Include="Entity\EntityComposite.cs" />
+    <Compile Include="Entity\Identity.cs" />
+    <Compile Include="Proxy\InvocationHandler.cs" />
+    <Compile Include="Entity\Association\ManyAssociation.cs" />
+    <Compile Include="Proxy\Method.cs" />
+    <Compile Include="Object\ObjectBuilder.cs" />
+    <Compile Include="Object\ObjectBuilderFactory.cs" />
+    <Compile Include="Property\Property.cs" />
+    <Compile Include="Property\PropertyInfo.cs" />
+    <Compile Include="Reflection\TypeExtensions.cs" />
+    <Compile Include="Service\ServiceComposite.cs" />
+    <Compile Include="Property\StateHolder.cs" />
+    <Compile Include="StructureContext.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="UnitOfWork\UnitOfWorkFactory.cs" />
+    <Compile Include="Value\Value.cs" />
+    <Compile Include="Value\ValueComposite.cs" />
+    <Compile Include="Common\AppliesToFilter.cs" />
+    <Compile Include="Entity\Association\AssociationMixin.cs" />
+    <Compile Include="Entity\EntityBuilderMixin.cs" />
+    <Compile Include="Entity\IdentityMixin.cs" />
+    <Compile Include="Entity\Association\ManyAssociationMixin.cs" />
+    <Compile Include="Property\PropertyMixin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Injection\Scope\StateAttribute.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
