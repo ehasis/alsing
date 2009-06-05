@@ -4,40 +4,43 @@
 
     using Activation;
 
-    public class ProxyInstanceBuilder<T>
+    public class ProxyInstanceBuilder
     {
-        private static readonly object syncRoot = new object();
-
-        private static ObjectActivator<T> proxyActivator;
-
-        public T NewInstance()
+        public T NewInstance<T>(Type type)
         {
-            EnsureActivatorExists();
+            var proxyActivator = GetActivator<T>(type);
 
-            T instance = proxyActivator.Invoke();
+            var instance = proxyActivator.Invoke();
 
             return instance;
         }
 
-        private static ObjectActivator<T> BuildActivator()
+        public T NewInstance<T>()
+        {
+            var proxyActivator = GetActivator<T>(typeof(T));
+
+            var instance = proxyActivator.Invoke();
+
+            return instance;
+        }
+
+        public object NewInstance(Type type)
+        {
+            var proxyActivator = GetActivator<object>(type);
+
+            var instance = proxyActivator.Invoke();
+
+            return instance;
+        }
+
+        private static ObjectActivator<T> GetActivator<T>(Type type)
         {
             var proxyBuilder = new ProxyTypeBuilder();
 
-            Type proxyType = proxyBuilder.BuildProxyType(typeof(T));
-            ObjectActivator<T> activator = ObjectActivator.GetActivator<T>(proxyType);
+            Type proxyType = proxyBuilder.BuildProxyType(type);
+            var activator = ObjectActivator.GetActivator<T>(proxyType);
 
             return activator;
-        }
-
-        private static void EnsureActivatorExists()
-        {
-            lock (syncRoot)
-            {
-                if (proxyActivator == null)
-                {
-                    proxyActivator = BuildActivator();
-                }
-            }
         }
     }
 }

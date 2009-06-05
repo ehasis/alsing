@@ -1,37 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ConsoleApplication23.OtherModel
+﻿namespace ConsoleApplication23.OtherModel
 {
+    using System;
+
     using QI4N.Framework;
 
+    [Mixins(typeof(HelloWorldStateMixin))]
     public interface HelloWorldState
     {
         Property<string> Name { get; }
+
         Property<string> Phrase { get; }
     }
 
-    public interface HelloWorldBehaviour
+    public class HelloWorldStateMixin : HelloWorldState
     {
-        string Say();
+        [State]
+        private Property<string> name;
+
+        [State]
+        private Property<string> phrase;
+
+        public Property<string> Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        public Property<string> Phrase
+        {
+            get
+            {
+                return phrase;
+            }
+        }
     }
 
-    public class HelloWorldBehaviourMixin : HelloWorldBehaviour
+
+    public class HelloWorldMixin : HelloWorldComposite
     {
         [This]
         private HelloWorldState state;
 
         public String Say()
         {
-            return state.Phrase.Value + " " + state.Name.Value;
+            return this.state.Phrase.Value + " " + this.state.Name.Value;
         }
     }
 
-    [Mixins(typeof(HelloWorldBehaviourMixin))]
-    public interface HelloWorldComposite : HelloWorldBehaviour, HelloWorldState, Composite
+    [Mixins(typeof(HelloWorldMixin))]
+    public interface HelloWorldComposite : Composite
     {
-
+        string Say();
     }
 }

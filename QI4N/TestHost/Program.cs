@@ -14,24 +14,24 @@
             //var carFactory = factory.NewComposite<CarEntityFactory>();
             //var car = carFactory.Create(null, "");
 
-            var factory = new DefaultCompositeBuilderFactory();
-            var helloWorld = factory.NewComposite<HelloWorldBehaviour>();
-            Console.WriteLine(helloWorld.Say());
+            //var factory = new DefaultCompositeBuilderFactory();
+            //var helloWorld = factory.NewComposite<HelloWorldComposite>();
+            //Console.WriteLine(helloWorld.Say());
 
-            //var modelBuilder = new DefaultObjectBuilder<Model>();
-            //Model model = modelBuilder.NewInstance();
+            var modelBuilder = new DefaultObjectBuilder<Model>();
+            Model model = modelBuilder.NewInstance();
 
-            //model.Value = "hej";
-            //Console.WriteLine(model.Value);
-            //Console.WriteLine(model.IsComputed);
-            //Console.WriteLine(model.IsMutable);
+            model.Value = "hej";
+            Console.WriteLine(model.Value);
+            Console.WriteLine(model.IsComputed);
+            Console.WriteLine(model.IsMutable);
 
-            //var manuBuilder = new DefaultCompositeBuilder<Manufacturer>();
-            //Manufacturer manufacturer = manuBuilder.NewInstance();
-            //manufacturer.Country.Value = "swe";
+            var manuBuilder = new DefaultCompositeBuilder<Manufacturer>();
+            Manufacturer manufacturer = manuBuilder.NewInstance();
+         //   manufacturer.Country.Value = "swe";
 
-            //CompositeBuilderFactory factory = new DefaultCompositeBuilderFactory();
-            //var car = factory.NewComposite<Car>();
+            CompositeBuilderFactory factory = new DefaultCompositeBuilderFactory();
+            var car = factory.NewComposite<Car>();
 
             ////       car.Model.Value = model.Value;
 

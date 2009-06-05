@@ -2,12 +2,14 @@
 {
     using System;
 
+    using Proxy;
+
     public class DefaultObjectBuilder<T> : ObjectBuilder<T>
     {
         public T NewInstance()
         {
-            ProxyActivator<T> activator = ProxyActivator.GetActivator<T>(typeof(T));
-            T instance = activator.Invoke();
+            var builder = new ProxyInstanceBuilder();
+            var instance = builder.NewInstance<T>();
             return instance;
         }
 
