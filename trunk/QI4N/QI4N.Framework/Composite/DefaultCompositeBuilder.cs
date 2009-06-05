@@ -42,17 +42,17 @@
             return matchingComposites.Single();
         }
 
-        private void ConfigureInstance(T instance, Type compositeType)
+        private void ConfigureInstance(T compositeInstance, Type compositeType)
         {
-            instance
+            compositeInstance
                     .GetType()
                     .GetFields()
-                    .Select(f => f.GetValue(instance))
+                    .Select(f => f.GetValue(compositeInstance))
                     .ToList()
-                    .ForEach(mixin => this.ConfigureMixinInstance(mixin, compositeType));
+                    .ForEach(mixinInstance => this.ConfigureMixinInstance(mixinInstance, compositeType,compositeInstance));
         }
 
-        private void ConfigureMixinInstance(object mixinInstance, Type compositeType)
+        private void ConfigureMixinInstance(object mixinInstance, Type compositeType,object compositeInstance)
         {
             const BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
@@ -68,6 +68,10 @@
 
                 foreach (var fieldAttribute in fieldAttributes)
                 {
+                    if (fieldAttribute is ThisAttribute)
+                    {
+                        field.SetValue(mixinInstance, compositeInstance);
+                    }
                     if (fieldAttribute is StateAttribute)
                     {
                         if (typeof(Property).IsAssignableFrom(field.FieldType))

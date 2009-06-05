@@ -57,6 +57,7 @@
     <Compile Include="Entity\Association\AssociationInfo.cs" />
     <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />
     <Compile Include="Entity\EntityStateHolder.cs" />
+    <Compile Include="Injection\Scope\ThisAttribute.cs" />
     <Compile Include="Object\DefaultObjectBuilder.cs" />
     <Compile Include="Injection\Scope\InjectionScopeAttribute.cs" />
     <Compile Include="Injection\Scope\ServiceAttribute.cs" />
