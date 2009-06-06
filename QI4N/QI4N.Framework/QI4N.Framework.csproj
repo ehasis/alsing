@@ -55,6 +55,7 @@
     <Compile Include="Concern\ConcernOf.cs" />
     <Compile Include="Entity\Association\AbstractAssociation.cs" />
     <Compile Include="Entity\Association\AssociationInfo.cs" />
+    <Compile Include="Entity\Association\AssociationInstanceMixin.cs" />
     <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />
     <Compile Include="Entity\EntityStateHolder.cs" />
     <Compile Include="Injection\Scope\ThisAttribute.cs" />
@@ -98,7 +99,7 @@
     <Compile Include="Entity\Association\AssociationMixin.cs" />
     <Compile Include="Entity\EntityBuilderMixin.cs" />
     <Compile Include="Entity\IdentityMixin.cs" />
-    <Compile Include="Entity\Association\ManyAssociationMixin.cs" />
+    <Compile Include="Entity\Association\ManyAssociationInstanceMixin.cs" />
     <Compile Include="Property\PropertyMixin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Injection\Scope\StateAttribute.cs" />

@@ -13,6 +13,14 @@
 
         public AbstractAssociation GetAssociation(MethodInfo associationMethod)
         {
+            if (!this.associations.ContainsKey(associationMethod))
+            {
+                //lazy build properties
+                var proxyBuilder = new ProxyInstanceBuilder();
+                var association = proxyBuilder.NewInstance(associationMethod.ReturnType) as AbstractAssociation;
+                this.associations.Add(associationMethod, association);
+            }
+
             return this.associations[associationMethod];
         }
 

@@ -1,7 +1,15 @@
 ﻿namespace QI4N.Framework
 {
-    public interface Association<T>
+    [Mixins(typeof(AssociationInstanceMixin<>))]
+    public interface Association<T> : Association
     {
-        T Value { get; set; }
+        T Get();
+
+        void Set(T value);
+    }
+
+    public interface Association : AbstractAssociation
+    {
+        
     }
 }

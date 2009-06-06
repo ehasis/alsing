@@ -2,37 +2,41 @@
 {
     using System;
 
-    using OtherModel;
-
     using QI4N.Framework;
 
     internal class Program
     {
         private static void Main()
         {
-            //var factory = new DefaultCompositeBuilderFactory();
-            //var carFactory = factory.NewComposite<CarEntityFactory>();
-            //var car = carFactory.Create(null, "");
-
-            //var f = new DefaultCompositeBuilderFactory();
-            //var helloWorld = f.NewComposite<HelloWorldComposite>();
-            //Console.WriteLine(helloWorld.Say());
-
-            var modelBuilder = new DefaultObjectBuilder<Model>();
-            Model model = modelBuilder.NewInstance();
-
-            model.Value = "hej";
-            Console.WriteLine(model.Value);
-            Console.WriteLine(model.IsComputed);
-            Console.WriteLine(model.IsMutable);
-
-            var manuBuilder = new DefaultCompositeBuilder<Manufacturer>();
-            Manufacturer manufacturer = manuBuilder.NewInstance();
-            manufacturer.Country.Value = "Sweden";
-            Console.WriteLine(manufacturer.Country.Value);
-
             CompositeBuilderFactory factory = new DefaultCompositeBuilderFactory();
+            
+            var modelBuilder = new DefaultObjectBuilder<Model>();
+
+            Model model = modelBuilder.NewInstance();
+            model.Set("Amazon");
+
+            var manufacturer = factory.NewComposite<Manufacturer>();
+            manufacturer.Country.Set("Sweden");
+            manufacturer.CarsProduced.Set(77);
+            manufacturer.Name.Set("VOLVO");
+
             var car = factory.NewComposite<Car>();
+            car.Manufacturer.Set(manufacturer);
+            car.Model.Set(model.Value);
+
+            var accident = factory.NewComposite<Accident>();
+            accident.Description.Set("Roger fell off the chair");
+            accident.Occured.Set(new DateTime(2009, 06, 01));
+            accident.Repaired.Set(new DateTime(2010, 01, 01));
+            
+            car.Accidents.Add(accident);
+
+
+            Console.WriteLine(manufacturer.CarsProduced.Get());
+            foreach(var a in car.Accidents)
+            {
+                Console.WriteLine(a.Description.Value);
+            }
 
             ////       car.Model.Value = model.Value;
 
@@ -40,7 +44,6 @@
             //icar.Identity.Value = "tjorven";
 
             //Console.WriteLine(icar.Identity.Value);
-
 
             //ObjectBuilderFactory factory = new DefaultObjectBuilderFactory();
 
