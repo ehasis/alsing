@@ -23,8 +23,9 @@ namespace ConsoleApplication23
             EntityBuilder<Car> builder = uow.NewEntityBuilder<Car>();
 
             Car prototype = builder.StateFor();
-            prototype.Manufacturer.Value = manufacturer;
-            prototype.Model.Value = model;
+
+            prototype.Manufacturer.Set(manufacturer);
+            prototype.Model.Set(model);
 
             return builder.NewInstance();
         }

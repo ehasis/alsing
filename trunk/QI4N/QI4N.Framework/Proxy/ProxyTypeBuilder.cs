@@ -91,11 +91,12 @@
             generator.Emit(OpCodes.Ldarg_0);
             generator.Emit(OpCodes.Ldfld, fieldBuilder);
 
-            int paramCount = method.GetParameters().Length;
+            var paramArray = method.GetParameters();
+            int paramCount = paramArray.Length;
 
             for (int i = 0; i < paramCount; i++)
             {
-                generator.Emit(OpCodes.Ldarg, i + 2);
+                generator.Emit(OpCodes.Ldarg, i + 1);
             }
             generator.Emit(OpCodes.Callvirt, method);
 

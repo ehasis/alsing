@@ -1,12 +1,10 @@
 ﻿namespace QI4N.Framework
 {
-    [Mixins(typeof(ManyAssociationMixin<>))]
-    public interface ManyAssociation<T>
+    using System.Collections.Generic;
+
+    [Mixins(typeof(ManyAssociationInstanceMixin<>))]
+    public interface ManyAssociation<T> : ICollection<T> , AbstractAssociation
     {
-        void Add(T item);
 
-        void Remove(T item);
-
-        void Clear();
     }
 }

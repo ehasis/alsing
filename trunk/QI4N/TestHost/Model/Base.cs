@@ -4,12 +4,7 @@
 
     using QI4N.Framework;
 
-    public interface Vehicle
-    {
-        Property<string> Color { get; }
-    }
-
-    public interface Car : Vehicle
+    public interface Car
     {
         [Immutable]
         Association<Manufacturer> Manufacturer { get; }

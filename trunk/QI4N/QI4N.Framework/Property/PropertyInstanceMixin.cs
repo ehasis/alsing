@@ -1,5 +1,8 @@
 ﻿namespace QI4N.Framework
 {
+    using System.Diagnostics;
+
+    [DebuggerDisplay("Value = {Value}")]
     public class PropertyInstanceMixin<T> : Property<T>
     {
         public bool IsComputed
@@ -18,20 +21,21 @@
             }
         }
 
-        private T value;
+        public T Value { get; set; }
 
-        public T Value
+        #region Property<T> Members
+
+
+        public void Set(T value)
         {
-            get
-            {
-                return this.value;
-            }
-
-            set
-            {
-                this.value = value;
-            }
+            Value = value;
         }
 
+        public T Get()
+        {
+            return Value;
+        }
+
+        #endregion
     }
 }
