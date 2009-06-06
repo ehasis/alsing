@@ -110,7 +110,73 @@
 
         private static void CreateInvocationHandlerMethod(MethodInfo method, ILGenerator generator, FieldBuilder fieldBuilder)
         {
-            throw new NotImplementedException();
+            MethodInfo invokeMethod = typeof(InvocationHandler).GetMethod("Invoke");
+
+            var paramInfos = method.GetParameters();
+            var paramTypes = paramInfos.Select(p => p.ParameterType);
+            int paramCount = method.GetParameters().Length;
+
+            // Build parameter object array
+            var paramArray = generator.DeclareLocal(typeof(object[]));
+            generator.Emit(OpCodes.Ldc_I4_S,paramCount);
+            generator.Emit(OpCodes.Newarr, typeof(object));
+            generator.Emit(OpCodes.Stloc, paramArray);
+            //---
+
+            int j = 0;
+
+            //Fill parameter object array
+            foreach (Type parameterType in paramTypes)
+            {
+                //load arr
+                generator.Emit(OpCodes.Ldloc, paramArray);
+                //load index
+                generator.Emit(OpCodes.Ldc_I4, j);
+                //load arg
+                generator.Emit(OpCodes.Ldarg, j + 1);
+                //box if needed
+                if (parameterType.IsByRef)
+                {
+                    generator.Emit(OpCodes.Ldind_Ref);
+                    Type t = parameterType.GetElementType();
+                    if (t.IsValueType)
+                    {
+                        generator.Emit(OpCodes.Box, t);
+                    }
+                }
+                else if (parameterType.IsValueType)
+                {
+                    generator.Emit(OpCodes.Box, parameterType);
+                }
+                generator.Emit(OpCodes.Stelem_Ref);
+                j++;
+            }
+
+            //This .
+            generator.Emit(OpCodes.Ldarg_0);
+            //Mixin .
+            generator.Emit(OpCodes.Ldfld,fieldBuilder);
+            // param 1 = this
+            generator.Emit(OpCodes.Ldarg_0);
+            // param 2 = methodinfo
+            generator.Emit(OpCodes.Ldnull);
+            // param 3 = parameter array
+            generator.Emit(OpCodes.Ldloc,paramArray);
+
+            //call this.mixin.invoke(this,methodinfo,paramArray);
+            generator.Emit(OpCodes.Callvirt,invokeMethod);
+
+            if (method.ReturnType == typeof(void))
+            {
+                generator.Emit(OpCodes.Pop);
+            }
+            else if (method.ReturnType.IsValueType)
+            {
+                generator.Emit(OpCodes.Unbox, method.ReturnType);
+                generator.Emit(OpCodes.Ldobj, method.ReturnType);
+            }
+
+            generator.Emit(OpCodes.Ret);
         }
 
         private void CreateMethod(MethodInfo method)
