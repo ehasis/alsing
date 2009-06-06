@@ -111,6 +111,9 @@
         private static void CreateInvocationHandlerMethod(MethodInfo method, ILGenerator generator, FieldBuilder fieldBuilder)
         {
             MethodInfo invokeMethod = typeof(InvocationHandler).GetMethod("Invoke");
+            MethodInfo getFromCacheMethod = typeof(MethodInfoCache).GetMethod("GetMethod");
+
+            int methodId = MethodInfoCache.AddMethod(method);
 
             var paramInfos = method.GetParameters();
             var paramTypes = paramInfos.Select(p => p.ParameterType);
@@ -159,7 +162,10 @@
             // param 1 = this
             generator.Emit(OpCodes.Ldarg_0);
             // param 2 = methodinfo
-            generator.Emit(OpCodes.Ldnull);
+
+            generator.Emit(OpCodes.Ldc_I4, methodId);
+            generator.Emit(OpCodes.Call,getFromCacheMethod);
+
             // param 3 = parameter array
             generator.Emit(OpCodes.Ldloc,paramArray);
 

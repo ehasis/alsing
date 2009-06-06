@@ -28,7 +28,8 @@
 
             var manuBuilder = new DefaultCompositeBuilder<Manufacturer>();
             Manufacturer manufacturer = manuBuilder.NewInstance();
-            //Console.WriteLine(manufacturer.Country.Value);
+            manufacturer.Country.Value = "Sweden";
+            Console.WriteLine(manufacturer.Country.Value);
 
             CompositeBuilderFactory factory = new DefaultCompositeBuilderFactory();
             var car = factory.NewComposite<Car>();
