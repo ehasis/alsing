@@ -14,8 +14,8 @@
             //var carFactory = factory.NewComposite<CarEntityFactory>();
             //var car = carFactory.Create(null, "");
 
-            //var factory = new DefaultCompositeBuilderFactory();
-            //var helloWorld = factory.NewComposite<HelloWorldComposite>();
+            //var f = new DefaultCompositeBuilderFactory();
+            //var helloWorld = f.NewComposite<HelloWorldComposite>();
             //Console.WriteLine(helloWorld.Say());
 
             var modelBuilder = new DefaultObjectBuilder<Model>();
@@ -28,7 +28,7 @@
 
             var manuBuilder = new DefaultCompositeBuilder<Manufacturer>();
             Manufacturer manufacturer = manuBuilder.NewInstance();
-         //   manufacturer.Country.Value = "swe";
+            //Console.WriteLine(manufacturer.Country.Value);
 
             CompositeBuilderFactory factory = new DefaultCompositeBuilderFactory();
             var car = factory.NewComposite<Car>();

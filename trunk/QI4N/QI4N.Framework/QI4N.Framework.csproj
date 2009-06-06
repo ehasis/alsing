@@ -52,6 +52,7 @@
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\DefaultCompositeBuilder.cs" />
     <Compile Include="Composite\DefaultCompositeBuilderFactory.cs" />
+    <Compile Include="Concern\ConcernOf.cs" />
     <Compile Include="Entity\Association\AbstractAssociation.cs" />
     <Compile Include="Entity\Association\AssociationInfo.cs" />
     <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />

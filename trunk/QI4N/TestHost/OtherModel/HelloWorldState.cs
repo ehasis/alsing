@@ -4,7 +4,6 @@
 
     using QI4N.Framework;
 
-    [Mixins(typeof(HelloWorldStateMixin))]
     public interface HelloWorldState
     {
         Property<string> Name { get; }
@@ -12,33 +11,13 @@
         Property<string> Phrase { get; }
     }
 
-    public class HelloWorldStateMixin : HelloWorldState
+    public interface HelloWorldBehavior
     {
-        [State]
-        private Property<string> name;
-
-        [State]
-        private Property<string> phrase;
-
-        public Property<string> Name
-        {
-            get
-            {
-                return name;
-            }
-        }
-
-        public Property<string> Phrase
-        {
-            get
-            {
-                return phrase;
-            }
-        }
+        string Say();
     }
 
 
-    public class HelloWorldMixin : HelloWorldComposite
+    public class HelloWorldBehaviorMixin : HelloWorldBehavior
     {
         [This]
         private HelloWorldState state;
@@ -49,8 +28,8 @@
         }
     }
 
-    [Mixins(typeof(HelloWorldMixin))]
-    public interface HelloWorldComposite : Composite
+    [Mixins(typeof(HelloWorldBehaviorMixin))]
+    public interface HelloWorldComposite : HelloWorldState,HelloWorldBehavior, Composite
     {
         string Say();
     }
