@@ -27,5 +27,10 @@
             }
             return this.properties[propertyMethod];
         }
+
+        public void AddProperty(MethodInfo propertyMethod, Property property)
+        {
+            properties.Add(propertyMethod, property);
+        }
     }
 }

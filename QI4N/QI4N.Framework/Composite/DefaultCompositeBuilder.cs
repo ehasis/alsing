@@ -97,6 +97,8 @@
 
                 var builder = new ProxyInstanceBuilder();
                 object fieldValue = builder.NewInstance(field.FieldType);
+
+                field.SetValue(mixinInstance, fieldValue);
             }
             else if (typeof(StateHolder).IsAssignableFrom(field.FieldType))
             {
