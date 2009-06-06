@@ -21,8 +21,6 @@
 
         private Type[] interfaces;
 
-        private Type proxyType;
-
         private TypeBuilder typeBuilder;
 
 
@@ -40,29 +38,20 @@
 
             foreach (Type type in this.interfaces)
             {
-                this.CreateMethods(type);
+                foreach (MethodInfo method in type.GetAllMethods())
+                {
+                    this.CreateMethod(method);
+                }
             }
 
             this.CreateDefaultCtor();
-            this.CreateProxyType();
 
-            return this.proxyType;
+
+            var proxyType = this.typeBuilder.CreateType();
+
+            return proxyType;
         }
 
-        private static IEnumerable<MethodInfo> GetMethods(Type type)
-        {
-            const BindingFlags flags = BindingFlags.Instance |
-                                       BindingFlags.Public |
-                                       BindingFlags.NonPublic;
-
-            MethodInfo[] ownMethods = type.GetMethods(flags)
-                    .ToArray();
-
-            foreach (MethodInfo method in ownMethods)
-            {
-                yield return method;
-            }
-        }
 
         private void CreateAssemblyBuilder()
         {
@@ -94,114 +83,73 @@
             }
 
             generator.Emit(OpCodes.Ret);
-            // TODO: init mixins here
+        }
+
+        private static void CreateDelegatedMixinMethod(MethodInfo method, ILGenerator generator, FieldBuilder fieldBuilder)
+        {
+            //delegate calls to fieldbuilder 
+            generator.Emit(OpCodes.Ldarg_0);
+            generator.Emit(OpCodes.Ldfld, fieldBuilder);
+
+            int paramCount = method.GetParameters().Length;
+
+            for (int i = 0; i < paramCount; i++)
+            {
+                generator.Emit(OpCodes.Ldarg, i + 2);
+            }
+            generator.Emit(OpCodes.Callvirt, method);
+
+            generator.Emit(OpCodes.Ret);
         }
 
         private void CreateInterfaceList()
         {
             Type[] all = this.compositeType.GetAllInterfaces().ToArray();
-            var interfaceList = new List<Type>();
-            interfaceList.AddRange(all);
+            this.interfaces = all;
+        }
 
-            this.interfaces = interfaceList.ToArray();
+        private static void CreateInvocationHandlerMethod(MethodInfo method, ILGenerator generator, FieldBuilder fieldBuilder)
+        {
+            throw new NotImplementedException();
         }
 
         private void CreateMethod(MethodInfo method)
         {
-            MethodBuilder methodBuilder = this.GetMethodBuilder(method);
+            MethodBuilder methodBuilder = typeBuilder.GetMethodOverrideBuilder(method);
 
             ILGenerator generator = methodBuilder.GetILGenerator();
 
+            FieldBuilder fieldBuilder = this.GetDelegatingFieldBuilder(method);
 
-            var fieldBuilder = (from fb in fieldBuilders
-                                from i in fb.FieldType.GetInterfaces()
-                                where i == method.DeclaringType
-                                select fb).FirstOrDefault();
-
+            //If possible, delegate call to mixin implementation
             if (fieldBuilder != null)
             {
-                this.CreateDelegatedMixinMethod(method,generator, fieldBuilder);
+                CreateDelegatedMixinMethod(method, generator, fieldBuilder);
+                return;
             }
-            else
+
+            fieldBuilder = this.GetInterceptorFieldBuilder(method);
+
+            //If possible, delegate call to mixin interceptor
+            if (fieldBuilder != null)
             {
-                this.CreateUnMappedMethod(method, generator);
+                CreateInvocationHandlerMethod(method, generator, fieldBuilder);
+                return;
             }
 
-
-            
-        }
-
-        private MethodBuilder GetMethodBuilder(MethodInfo method)
-        {
-            const MethodAttributes methodAttributes = MethodAttributes.NewSlot |
-                                                      MethodAttributes.Private |
-                                                      MethodAttributes.Virtual |
-                                                      MethodAttributes.Final |
-                                                      MethodAttributes.HideBySig;
-
-            string methodName = string.Format("{1} in {0}", method.DeclaringType.Name, method.Name);
-            Type[] parameters = method
-                    .GetParameters()
-                    .Select(p => p.ParameterType)
-                    .ToArray();
-
-            MethodBuilder methodBuilder = this
-                    .typeBuilder
-                    .DefineMethod(methodName, methodAttributes, CallingConventions.Standard, method.ReturnType, parameters);
-
-            this.typeBuilder.DefineMethodOverride(methodBuilder, method);
-            return methodBuilder;
-        }
-
-        private void CreateUnMappedMethod(MethodInfo method, ILGenerator generator)
-        {
-            if (method.ReturnType != typeof(void))
-            {
-                LocalBuilder local = generator.DeclareLocal(method.ReturnType);
-                local.SetLocalSymInfo("FakeReturn");
-                generator.Emit(OpCodes.Ldloc, local);
-            }
-            generator.Emit(OpCodes.Ret);
-        }
-
-        private void CreateDelegatedMixinMethod(MethodInfo method, ILGenerator generator,FieldBuilder fieldBuilder )
-        {
-            //delegate calls to fieldbuilder 
-            generator.Emit(OpCodes.Ldarg_0);
-            generator.Emit(OpCodes.Ldfld,fieldBuilder);
-
-            int paramCount = method.GetParameters().Length;
-
-            for (int i = 0; i < paramCount;i++ )
-            {
-                generator.Emit(OpCodes.Ldarg,i+2);
-            }
-            generator.Emit(OpCodes.Callvirt,method);
-
-            generator.Emit(OpCodes.Ret);
-        }
-
-        private void CreateMethods(Type type)
-        {
-            IEnumerable<MethodInfo> methods = GetMethods(type);
-
-            foreach (MethodInfo method in methods)
-            {
-                this.CreateMethod(method);
-            }
+            //else just No Op it
+            CreateNoOpMethod(method, generator);
         }
 
         private void CreateMixinFields()
         {
-
-            foreach(Type interfaceType in this.interfaceToMixinMap.Keys)
+            foreach (Type interfaceType in this.interfaceToMixinMap.Keys)
             {
-                foreach(Type mixinType in this.interfaceToMixinMap[interfaceType])
+                foreach (Type mixinType in this.interfaceToMixinMap[interfaceType])
                 {
                     Type fieldType = mixinType;
 
-                    string mixinFieldName = string.Format("_{0}", fieldType.GetTypeName());
-                    mixinFieldName = mixinFieldName.Replace("`", "");
+                    string mixinFieldName = string.Format("field {0}", fieldType.GetTypeName());
 
                     //TODO: ensure unique name
 
@@ -221,14 +169,14 @@
                                            select mixinType;
 
                 var genericMixins = new List<Type>();
-                foreach(Type mixinType in mixins)
+                foreach (Type mixinType in mixins)
                 {
                     Type genericType = mixinType;
 
                     //handle generic type mixins
                     if (mixinType.IsGenericTypeDefinition)
                     {
-                        var generics = interfaceType.GetGenericArguments();
+                        Type[] generics = interfaceType.GetGenericArguments();
                         genericType = mixinType.MakeGenericType(generics);
                     }
 
@@ -239,10 +187,18 @@
             }
         }
 
-        private void CreateProxyType()
+        private static void CreateNoOpMethod(MethodInfo method, ILGenerator generator)
         {
-            this.proxyType = this.typeBuilder.CreateType();
+            if (method.ReturnType != typeof(void))
+            {
+                LocalBuilder local = generator.DeclareLocal(method.ReturnType);
+                local.SetLocalSymInfo("FakeReturn");
+                generator.Emit(OpCodes.Ldloc, local);
+            }
+            generator.Emit(OpCodes.Ret);
         }
+
+
 
         private void CreateTypeBuilder()
         {
@@ -255,5 +211,29 @@
 
             this.typeBuilder = moduleBuilder.DefineType(typeName, typeAttributes, typeof(object), this.interfaces);
         }
+
+        private FieldBuilder GetDelegatingFieldBuilder(MethodInfo method)
+        {
+            FieldBuilder fieldBuilder = (from fb in this.fieldBuilders
+                                         from i in fb.FieldType.GetInterfaces()
+                                         where i == method.DeclaringType
+                                         select fb).FirstOrDefault();
+
+            return fieldBuilder;
+        }
+
+        private FieldBuilder GetInterceptorFieldBuilder(MethodInfo method)
+        {
+            FieldBuilder fieldBuilder = (from fb in this.fieldBuilders
+                                         where typeof(InvocationHandler).IsAssignableFrom(fb.FieldType)
+                                         from a in fb.FieldType.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
+                                         from t in a.AppliesToTypes
+                                         let f = Activator.CreateInstance(t, null) as AppliesToFilter
+                                         where f.AppliesTo(method, fb.FieldType, this.compositeType, null)
+                                         select fb).FirstOrDefault();
+            return fieldBuilder;
+        }
+
+        
     }
 }

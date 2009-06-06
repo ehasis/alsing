@@ -15,7 +15,7 @@
 
             var builder = new ProxyInstanceBuilder();
             var instance = builder.NewInstance<T>(compositeType);
-            ConfigureInstance(instance,compositeType);
+            ConfigureInstance(instance);
             return instance;
         }
 
@@ -35,7 +35,7 @@
             return matchingComposites.Single();
         }
 
-        private static void ConfigureInstance(T compositeInstance, Type compositeType)
+        private static void ConfigureInstance(T compositeInstance)
         {
             compositeInstance
                     .GetType()
@@ -53,7 +53,7 @@
                     .GetType()
                     .GetFields(flags);
 
-            Type mixinInterface = mixinInstance.GetType().GetInterfaces().First();
+            
 
             foreach (FieldInfo field in fields)
             {
@@ -67,14 +67,16 @@
                     }
                     if (fieldAttribute is StateAttribute)
                     {
-                        InjectState(mixinInstance, field, fieldAttribute, mixinInterface);
+                        
+                        InjectState(mixinInstance, field, fieldAttribute);
                     }
                 }
             }
         }
 
-        private static void InjectState(object mixinInstance, FieldInfo field, InjectionScopeAttribute fieldAttribute, Type mixinInterface)
+        private static void InjectState(object mixinInstance, FieldInfo field, InjectionScopeAttribute fieldAttribute)
         {
+            Type mixinInterface = mixinInstance.GetType().GetInterfaces().First();
             if (typeof(Property).IsAssignableFrom(field.FieldType))
             {
                 var stateAttribute = fieldAttribute as StateAttribute;
