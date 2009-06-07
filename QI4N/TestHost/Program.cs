@@ -14,7 +14,7 @@
 
             // Create composite builder
             var carBuilder = factory.NewCompositeBuilder<Car>();
-            var manufacturerBuilder = factory.NewCompositeBuilder<Manufacturer>();                        
+            var manufacturerBuilder = factory.NewCompositeBuilder<Manufacturer>();
             var accidentBuilder = factory.NewCompositeBuilder<Accident>();
 
             // prototype support is in place and works
@@ -33,30 +33,28 @@
             var protoCar = carBuilder.StateOfComposite();
             protoCar.Model.Value = "Amazon";
 
-            // Associations are not available to plain composites
-            // protoCar.Manufacturer.Set(manufacturer); <- does not work yet
-
-            // create a car entity
+            // create a car composite based on the prototype
             var car = carBuilder.NewInstance();
             car.Manufacturer.Set(manufacturer);
 
+            var idCar = car as Identity;
+            Console.WriteLine(idCar.Identity.Value);
+
             // create a prototype value object
             var protoAccident = accidentBuilder.StateOfComposite();
-            protoAccident.Description.Value = "Roger fell off the chair";
+            protoAccident.Description.Value = "Wheel fell off";
             protoAccident.Occured.Value = new DateTime(2009, 06, 01);
-            protoAccident.Repaired.Value = new DateTime(2010, 01, 01);
-
+            protoAccident.Repaired.Value = new DateTime(2010, 01, 01);           
             // instance the value object
             var accident = accidentBuilder.NewInstance();
 
             // Add a value to an "ManyAssociation"
             car.Accidents.Add(accident);
 
-            Console.WriteLine(manufacturer.CarsProduced.Get());
-            foreach(var a in car.Accidents)
+            Console.WriteLine(manufacturer.CarsProduced.Value);
+            foreach (var a in car.Accidents)
             {
-                Console.WriteLine(a.Description.Get());
-                Console.WriteLine(a.GetType().Name);
+                Console.WriteLine(a.Description.Value);
             }
 
             ////       car.Model.Value = model.Value;
