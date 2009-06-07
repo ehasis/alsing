@@ -9,6 +9,8 @@
 
     using Proxy;
 
+    using Reflection;
+
     public class CompositeBuilderImpl<T> : CompositeBuilder<T>
     {
         protected IDictionary<MethodInfo, AbstractAssociation> associationValues;
@@ -81,6 +83,7 @@
 
             var instance = ProxyInstanceBuilder.NewProxyInstance<T>(compositeType);
             ConfigureInstance(instance);
+
             return instance;
         }
 
@@ -98,7 +101,7 @@
                 }
                 else
                 {
-                    value = propertyContext.GetPropertyBinding().GetDefaultValue();
+                    value = null;// propertyContext.GetPropertyBinding().GetDefaultValue();
                 }
 
                 AbstractProperty property = propertyContext.NewInstance(this.moduleInstance, value, accessor.ReturnType);
@@ -145,7 +148,7 @@
         }
 
 
-        private static void ConfigureInstance(T compositeInstance)
+        private void ConfigureInstance(T compositeInstance)
         {
             compositeInstance
                     .GetType()
@@ -153,9 +156,32 @@
                     .Select(f => f.GetValue(compositeInstance))
                     .ToList()
                     .ForEach(mixinInstance => ConfigureMixinInstance(mixinInstance, compositeInstance));
+
+            compositeInstance
+                    .GetType()
+                    .GetAllInterfaces()
+                    .ToList()
+                    .ForEach(type => type
+                                             .GetMethods((BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+                                             .ToList()
+                                             .ForEach(accessor => this.AssignState(accessor, compositeInstance))
+                                             );
         }
 
-        private static void ConfigureMixinInstance(object mixinInstance, object compositeInstance)
+        private void AssignState(MethodInfo accessor, object compositeInstance)
+        {
+            if (this.Properties.ContainsKey(accessor))
+            {
+                var state = this.Properties[accessor];
+              //  var value = state.GetValue();
+
+
+                //propertyInstance.SetValue(value);
+            }
+ 
+        }
+
+        private void ConfigureMixinInstance(object mixinInstance, object compositeInstance)
         {
             const BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
@@ -191,29 +217,21 @@
             return matchingComposites.Single();
         }
 
-        private static void InjectState(object mixinInstance, FieldInfo field, InjectionScopeAttribute fieldAttribute)
+        private void InjectState(object mixinInstance, FieldInfo field, InjectionScopeAttribute fieldAttribute)
         {
             Type mixinInterface = mixinInstance.GetType().GetInterfaces().First();
             if (typeof(AbstractProperty).IsAssignableFrom(field.FieldType))
             {
                 var stateAttribute = fieldAttribute as StateAttribute;
-                PropertyInfo property = stateAttribute.GetProperty(field, mixinInterface);
-
-                //object[] propertyAttributes = property.GetCustomAttributes(typeof(InjectionScopeAttribute), true);
-
-                object fieldValue = ProxyInstanceBuilder.NewProxyInstance(field.FieldType);
-
-                field.SetValue(mixinInstance, fieldValue);
+                var propertyInstance = ProxyInstanceBuilder.NewProxyInstance(field.FieldType) as AbstractProperty;             
+                field.SetValue(mixinInstance, propertyInstance);
             }
             else if (typeof(AbstractAssociation).IsAssignableFrom(field.FieldType))
             {
                 var stateAttribute = fieldAttribute as StateAttribute;
-                PropertyInfo property = stateAttribute.GetProperty(field, mixinInterface);
+                var associationInstance = ProxyInstanceBuilder.NewProxyInstance(field.FieldType) as AbstractAssociation;
 
-                //object[] propertyAttributes = property.GetCustomAttributes(typeof(InjectionScopeAttribute), true);
-                object fieldValue = ProxyInstanceBuilder.NewProxyInstance(field.FieldType);
-
-                field.SetValue(mixinInstance, fieldValue);
+                field.SetValue(mixinInstance, associationInstance);
             }
             else if (typeof(StateHolder).IsAssignableFrom(field.FieldType))
             {
