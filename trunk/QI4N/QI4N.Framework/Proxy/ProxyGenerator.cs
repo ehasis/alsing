@@ -4,9 +4,11 @@
 
     using Activation;
 
-    public class Proxy
+    using Internal;
+
+    public static class ProxyGenerator
     {
-        public T NewProxyInstance<T>(Type type)
+        public static T NewProxyInstance<T>(Type type)
         {
             ObjectActivator<T> proxyActivator = GetActivator<T>(type);
 
@@ -15,14 +17,19 @@
             return instance;
         }
 
-        public T NewProxyInstance<T>()
+        public static T NewProxyInstance<T>()
         {
-            return this.NewProxyInstance<T>(typeof(T));
+            return NewProxyInstance<T>(typeof(T));
         }
 
-        public object NewProxyInstance(Type type)
+        public static object NewProxyInstance(Type type)
         {
-            return this.NewProxyInstance<object>(type);
+            return NewProxyInstance<object>(type);
+        }
+
+        internal static object NewProxyInstance(Type[] interfaces, StateInvocationHandler handler)
+        {
+            throw new NotImplementedException();
         }
 
         private static ObjectActivator<T> GetActivator<T>(Type type)

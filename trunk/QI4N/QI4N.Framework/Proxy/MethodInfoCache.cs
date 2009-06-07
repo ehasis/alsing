@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Proxy
+namespace QI4N.Framework.Proxy
 {
     using System.Collections.Generic;
     using System.Reflection;
@@ -10,7 +10,7 @@
         public static int AddMethod(MethodInfo methodInfo)
         {
             int methodId = methodLookup.Count;
-            methodLookup.Add( methodInfo);
+            methodLookup.Add(methodInfo);
 
             return methodId;
         }

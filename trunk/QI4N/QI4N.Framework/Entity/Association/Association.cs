@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     [Mixins(typeof(AssociationInstanceMixin<>))]
     public interface Association<T> : Association
@@ -10,6 +10,5 @@
 
     public interface Association : AbstractAssociation
     {
-        
     }
 }

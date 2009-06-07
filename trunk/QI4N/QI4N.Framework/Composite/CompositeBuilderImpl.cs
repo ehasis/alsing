@@ -7,6 +7,8 @@
 
     using Internal;
 
+    using Proxy;
+
     public class CompositeBuilderImpl<T> : CompositeBuilder<T>
     {
         protected IDictionary<MethodInfo, AbstractAssociation> associationValues;
@@ -31,28 +33,31 @@
 
         public CompositeBuilderImpl()
         {
-            
         }
 
-        protected IDictionary<MethodInfo,Property> Properties
+        public IDictionary<MethodInfo, AbstractAssociation> Associations
         {
             get
             {
-                if (propertyValues == null)
-                    propertyValues = new Dictionary<MethodInfo, Property>();
+                if (this.associationValues == null)
+                {
+                    this.associationValues = new Dictionary<MethodInfo, AbstractAssociation>();
+                }
 
-                return propertyValues;
+                return this.associationValues;
             }
         }
 
-        public IDictionary<MethodInfo,AbstractAssociation> Associations
+        protected IDictionary<MethodInfo, Property> Properties
         {
             get
             {
-                if (associationValues == null)
-                    associationValues = new Dictionary<MethodInfo, AbstractAssociation>();
+                if (this.propertyValues == null)
+                {
+                    this.propertyValues = new Dictionary<MethodInfo, Property>();
+                }
 
-                return associationValues;
+                return this.propertyValues;
             }
         }
 
@@ -74,8 +79,7 @@
         {
             Type compositeType = GetMatchingComposite();
 
-            var builder = new Proxy.Proxy();
-            var instance = builder.NewProxyInstance<T>(compositeType);
+            var instance = ProxyGenerator.NewProxyInstance<T>(compositeType);
             ConfigureInstance(instance);
             return instance;
         }
@@ -84,51 +88,58 @@
         {
             // Calculate total set of Properties for this Composite
             var properties = new Dictionary<MethodInfo, Property>();
-            foreach (PropertyContext propertyContext in context.GetPropertyContexts())
+            foreach (PropertyContext propertyContext in this.context.GetPropertyContexts())
             {
                 object value;
                 MethodInfo accessor = propertyContext.GetPropertyBinding().GetPropertyResolution().GetPropertyModel().GetAccessor();
-                if (propertyValues != null && propertyValues.ContainsKey(accessor))
+                if (this.propertyValues != null && this.propertyValues.ContainsKey(accessor))
                 {
-                    value = propertyValues[accessor].GetValue();
+                    value = this.propertyValues[accessor].GetValue();
                 }
                 else
                 {
                     value = propertyContext.GetPropertyBinding().GetDefaultValue();
                 }
 
-                Property property = propertyContext.NewInstance(moduleInstance, value, accessor.ReturnType);
+                Property property = propertyContext.NewInstance(this.moduleInstance, value, accessor.ReturnType);
                 PropertyBinding binding = propertyContext.GetPropertyBinding();
                 PropertyResolution propertyResolution = binding.GetPropertyResolution();
                 PropertyModel propertyModel = propertyResolution.GetPropertyModel();
                 properties.Add(propertyModel.GetAccessor(), property);
             }
 
-            CompositeInstance compositeInstance = context.NewCompositeInstance(moduleInstance,
-                                                                                uses,
-                                                                                new CompositeBuilderState(properties));
-            return (T) compositeInstance.GetProxy();
+            CompositeInstance compositeInstance = this.context.NewCompositeInstance(this.moduleInstance,
+                                                                                    this.uses,
+                                                                                    new CompositeBuilderState(properties));
+            return (T)compositeInstance.GetProxy();
         }
 
         public K StateFor<K>()
         {
-            return (K)(object)this.StateOfComposite();
+            // Instantiate proxy for given interface
+
+            var handler = new StateInvocationHandler(this.context, this.moduleInstance, this.Properties);
+
+            var interfaces = new[]
+                                 {
+                                         typeof(K)
+                                 };
+            object instance = ProxyGenerator.NewProxyInstance(interfaces, handler);
+            return (K)instance;
         }
 
         public T StateOfComposite()
         {
-            //if (Equals(this.stateFor, default(T)))
-            //{
-            //    Type compositeType = GetMatchingComposite();
-            //    var builder = new Proxy.Proxy();
-            //    var instance = builder.NewProxyInstance<T>(compositeType);
-            //    ConfigureInstance(instance);
-            //    this.stateFor = instance;
-            //}
+            // Instantiate proxy for given composite interface
 
-            //return this.stateFor;
+            var handler = new StateInvocationHandler(this.context, this.moduleInstance, this.Properties);
 
-            throw new NotImplementedException();
+            var interfaces = new[]
+                                 {
+                                         typeof(T)
+                                 };
+            object instance = ProxyGenerator.NewProxyInstance(interfaces, handler);
+            return (T)instance;
         }
 
         public void use(params object[] usedObjects)
@@ -197,8 +208,8 @@
                 PropertyInfo property = stateAttribute.GetProperty(field, mixinInterface);
 
                 //object[] propertyAttributes = property.GetCustomAttributes(typeof(InjectionScopeAttribute), true);
-                var builder = new Proxy.Proxy();
-                object fieldValue = builder.NewProxyInstance(field.FieldType);
+
+                object fieldValue = ProxyGenerator.NewProxyInstance(field.FieldType);
 
                 field.SetValue(mixinInstance, fieldValue);
             }
@@ -208,9 +219,7 @@
                 PropertyInfo property = stateAttribute.GetProperty(field, mixinInterface);
 
                 //object[] propertyAttributes = property.GetCustomAttributes(typeof(InjectionScopeAttribute), true);
-
-                var builder = new Proxy.Proxy();
-                object fieldValue = builder.NewProxyInstance(field.FieldType);
+                object fieldValue = ProxyGenerator.NewProxyInstance(field.FieldType);
 
                 field.SetValue(mixinInstance, fieldValue);
             }
@@ -234,8 +243,7 @@
             }
             else
             {
-                var builder = new Proxy.Proxy();
-                object privateMixinInstance = builder.NewProxyInstance(field.FieldType);
+                object privateMixinInstance = ProxyGenerator.NewProxyInstance(field.FieldType);
 
                 field.SetValue(mixinInstance, privateMixinInstance);
             }
@@ -255,14 +263,6 @@
     public interface PropertyModel
     {
         MethodInfo GetAccessor();
-    }
-
-    public class CompositeBuilderState
-    {
-        public CompositeBuilderState(IDictionary<MethodInfo, Property> properties)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public interface PropertyContext

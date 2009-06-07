@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     using System.Diagnostics;
 
@@ -23,19 +23,14 @@
 
         public T Value { get; set; }
 
-        #region Property<T> Members
-
+        public T Get()
+        {
+            return this.Value;
+        }
 
         public void Set(T value)
         {
-            Value = value;
+            this.Value = value;
         }
-
-        public T Get()
-        {
-            return Value;
-        }
-
-        #endregion
     }
 }
