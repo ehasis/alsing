@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Reflection
+namespace QI4N.Framework.Reflection
 {
     using System;
     using System.Collections.Generic;
@@ -10,43 +10,15 @@
     {
         public static IEnumerable<Type> GetAllInterfaces(this Type targetType)
         {
-
             if (targetType.IsInterface)
+            {
                 yield return targetType;
+            }
 
             foreach (Type type in targetType.GetInterfaces())
             {
                 yield return type;
             }
-        }
-
-        public static PropertyInfo GetInterfaceProperty(this Type interfaceType, string propertyName)
-        {
-            PropertyInfo propertyInfo = (
-                                                from i in interfaceType.GetAllInterfaces()
-                                                select i.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.IgnoreCase | BindingFlags.Public)
-                                        ).FirstOrDefault();
-
-            return propertyInfo;
-        }
-
-        public static string GetTypeName(this Type type)
-        {
-            if (type.IsGenericType)
-            {
-
-                var argNames = (from argType in type.GetGenericArguments()
-                                select GetTypeName(argType)).ToArray();
-
-                string args = string.Join(",", argNames);
-
-                string typeName = type.Name;
-                int index = typeName.IndexOf("`");
-                typeName = typeName.Substring(0, index);
-
-                return string.Format("{0}[of {1}]", typeName, args);
-            }
-            return type.Name;
         }
 
         public static IEnumerable<MethodInfo> GetAllMethods(this Type type)
@@ -62,6 +34,16 @@
             {
                 yield return method;
             }
+        }
+
+        public static PropertyInfo GetInterfaceProperty(this Type interfaceType, string propertyName)
+        {
+            PropertyInfo propertyInfo = (
+                                                from i in interfaceType.GetAllInterfaces()
+                                                select i.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.IgnoreCase | BindingFlags.Public)
+                                        ).FirstOrDefault();
+
+            return propertyInfo;
         }
 
         public static MethodBuilder GetMethodOverrideBuilder(this TypeBuilder typeBuilder, MethodInfo method)
@@ -83,6 +65,24 @@
 
             typeBuilder.DefineMethodOverride(methodBuilder, method);
             return methodBuilder;
+        }
+
+        public static string GetTypeName(this Type type)
+        {
+            if (type.IsGenericType)
+            {
+                string[] argNames = (from argType in type.GetGenericArguments()
+                                     select GetTypeName(argType)).ToArray();
+
+                string args = string.Join(",", argNames);
+
+                string typeName = type.Name;
+                int index = typeName.IndexOf("`");
+                typeName = typeName.Substring(0, index);
+
+                return string.Format("{0}[of {1}]", typeName, args);
+            }
+            return type.Name;
         }
     }
 }

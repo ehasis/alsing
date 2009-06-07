@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Proxy
+namespace QI4N.Framework.Proxy
 {
     using System;
     using System.Collections.Generic;
@@ -46,43 +46,9 @@
 
             this.CreateDefaultCtor();
 
-
-            var proxyType = this.typeBuilder.CreateType();
+            Type proxyType = this.typeBuilder.CreateType();
 
             return proxyType;
-        }
-
-
-        private void CreateAssemblyBuilder()
-        {
-            AppDomain domain = Thread.GetDomain();
-            var assemblyName = new AssemblyName
-                                   {
-                                           Name = Guid.NewGuid().ToString(),
-                                           Version = new Version(1, 0, 0, 0)
-                                   };
-
-            this.assemblyBuilder = domain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-        }
-
-        private void CreateDefaultCtor()
-        {
-            ConstructorBuilder ctorBuilder = this.typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[]
-                                                                                                                                          {
-                                                                                                                                          });
-            ILGenerator generator = ctorBuilder.GetILGenerator();
-
-            foreach (FieldBuilder field in this.fieldBuilders)
-            {
-                ConstructorInfo ctor = field.FieldType.GetConstructor(new Type[]
-                                                                          {
-                                                                          });
-                generator.Emit(OpCodes.Ldarg_0);
-                generator.Emit(OpCodes.Newobj, ctor);
-                generator.Emit(OpCodes.Stfld, field);
-            }
-
-            generator.Emit(OpCodes.Ret);
         }
 
         private static void CreateDelegatedMixinMethod(MethodInfo method, ILGenerator generator, FieldBuilder fieldBuilder)
@@ -91,7 +57,7 @@
             generator.Emit(OpCodes.Ldarg_0);
             generator.Emit(OpCodes.Ldfld, fieldBuilder);
 
-            var paramArray = method.GetParameters();
+            ParameterInfo[] paramArray = method.GetParameters();
             int paramCount = paramArray.Length;
 
             for (int i = 0; i < paramCount; i++)
@@ -103,12 +69,6 @@
             generator.Emit(OpCodes.Ret);
         }
 
-        private void CreateInterfaceList()
-        {
-            Type[] all = this.compositeType.GetAllInterfaces().ToArray();
-            this.interfaces = all;
-        }
-
         private static void CreateInvocationHandlerMethod(MethodInfo method, ILGenerator generator, FieldBuilder fieldBuilder)
         {
             MethodInfo invokeMethod = typeof(InvocationHandler).GetMethod("Invoke");
@@ -116,13 +76,13 @@
 
             int methodId = MethodInfoCache.AddMethod(method);
 
-            var paramInfos = method.GetParameters();
-            var paramTypes = paramInfos.Select(p => p.ParameterType);
+            ParameterInfo[] paramInfos = method.GetParameters();
+            IEnumerable<Type> paramTypes = paramInfos.Select(p => p.ParameterType);
             int paramCount = method.GetParameters().Length;
 
             // Build parameter object array
-            var paramArray = generator.DeclareLocal(typeof(object[]));
-            generator.Emit(OpCodes.Ldc_I4_S,paramCount);
+            LocalBuilder paramArray = generator.DeclareLocal(typeof(object[]));
+            generator.Emit(OpCodes.Ldc_I4_S, paramCount);
             generator.Emit(OpCodes.Newarr, typeof(object));
             generator.Emit(OpCodes.Stloc, paramArray);
             //---
@@ -159,19 +119,19 @@
             //This .
             generator.Emit(OpCodes.Ldarg_0);
             //Mixin .
-            generator.Emit(OpCodes.Ldfld,fieldBuilder);
+            generator.Emit(OpCodes.Ldfld, fieldBuilder);
             // param 1 = this
             generator.Emit(OpCodes.Ldarg_0);
             // param 2 = methodinfo
 
             generator.Emit(OpCodes.Ldc_I4, methodId);
-            generator.Emit(OpCodes.Call,getFromCacheMethod);
+            generator.Emit(OpCodes.Call, getFromCacheMethod);
 
             // param 3 = parameter array
-            generator.Emit(OpCodes.Ldloc,paramArray);
+            generator.Emit(OpCodes.Ldloc, paramArray);
 
             //call this.mixin.invoke(this,methodinfo,paramArray);
-            generator.Emit(OpCodes.Callvirt,invokeMethod);
+            generator.Emit(OpCodes.Callvirt, invokeMethod);
 
             if (method.ReturnType == typeof(void))
             {
@@ -186,9 +146,59 @@
             generator.Emit(OpCodes.Ret);
         }
 
+        private static void CreateNoOpMethod(MethodInfo method, ILGenerator generator)
+        {
+            if (method.ReturnType != typeof(void))
+            {
+                LocalBuilder local = generator.DeclareLocal(method.ReturnType);
+                local.SetLocalSymInfo("FakeReturn");
+                generator.Emit(OpCodes.Ldloc, local);
+            }
+            generator.Emit(OpCodes.Ret);
+        }
+
+
+        private void CreateAssemblyBuilder()
+        {
+            AppDomain domain = Thread.GetDomain();
+            var assemblyName = new AssemblyName
+                                   {
+                                           Name = Guid.NewGuid().ToString(),
+                                           Version = new Version(1, 0, 0, 0)
+                                   };
+
+            this.assemblyBuilder = domain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+        }
+
+        private void CreateDefaultCtor()
+        {
+            ConstructorBuilder ctorBuilder = this.typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[]
+                                                                                                                                          {
+                                                                                                                                          });
+            ILGenerator generator = ctorBuilder.GetILGenerator();
+
+            foreach (FieldBuilder field in this.fieldBuilders)
+            {
+                ConstructorInfo ctor = field.FieldType.GetConstructor(new Type[]
+                                                                          {
+                                                                          });
+                generator.Emit(OpCodes.Ldarg_0);
+                generator.Emit(OpCodes.Newobj, ctor);
+                generator.Emit(OpCodes.Stfld, field);
+            }
+
+            generator.Emit(OpCodes.Ret);
+        }
+
+        private void CreateInterfaceList()
+        {
+            Type[] all = this.compositeType.GetAllInterfaces().ToArray();
+            this.interfaces = all;
+        }
+
         private void CreateMethod(MethodInfo method)
         {
-            MethodBuilder methodBuilder = typeBuilder.GetMethodOverrideBuilder(method);
+            MethodBuilder methodBuilder = this.typeBuilder.GetMethodOverrideBuilder(method);
 
             ILGenerator generator = methodBuilder.GetILGenerator();
 
@@ -260,18 +270,6 @@
             }
         }
 
-        private static void CreateNoOpMethod(MethodInfo method, ILGenerator generator)
-        {
-            if (method.ReturnType != typeof(void))
-            {
-                LocalBuilder local = generator.DeclareLocal(method.ReturnType);
-                local.SetLocalSymInfo("FakeReturn");
-                generator.Emit(OpCodes.Ldloc, local);
-            }
-            generator.Emit(OpCodes.Ret);
-        }
-
-
 
         private void CreateTypeBuilder()
         {
@@ -306,7 +304,5 @@
                                          select fb).FirstOrDefault();
             return fieldBuilder;
         }
-
-        
     }
 }

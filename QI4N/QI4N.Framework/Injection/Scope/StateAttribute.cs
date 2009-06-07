@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     using System;
     using System.Reflection;
@@ -24,7 +24,7 @@
             string propertyName = this.GetPropertyName(field);
 
             PropertyInfo property = mixinInterface.GetInterfaceProperty(propertyName);
-  
+
             if (property == null)
             {
                 throw new Exception(string.Format("Property for StateHolder '{0}' not found", propertyName));

@@ -1,7 +1,7 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     [Immutable]
-    public interface ValueComposite : Value,Composite
+    public interface ValueComposite : Value, Composite
     {
     }
 }

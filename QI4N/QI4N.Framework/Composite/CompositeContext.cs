@@ -2,14 +2,39 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
 
-    public interface CompositeContext
+    public class CompositeContext
     {
-        CompositeBinding GetCompositeBinding();
+        public CompositeBinding GetCompositeBinding()
+        {
+            throw new NotImplementedException();
+        }
 
-        IEnumerable<PropertyContext> GetPropertyContexts();
+        public IEnumerable<PropertyContext> GetPropertyContexts()
+        {
+            throw new NotImplementedException();
+        }
 
-        CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, HashSet<object> uses, CompositeBuilderState compositeBuilderState);
+        public CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, HashSet<object> uses, CompositeBuilderState compositeBuilderState)
+        {
+            throw new NotImplementedException();
+        }
+
+        public MethodDescriptor GetMethodDescriptor(MethodInfo method)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public interface MethodDescriptor
+    {
+        CompositeMethodContext GetCompositeMethodContext();
+    }
+
+    public interface CompositeMethodContext
+    {
+        PropertyContext GetPropertyContext();
     }
 
     public interface CompositeBinding
