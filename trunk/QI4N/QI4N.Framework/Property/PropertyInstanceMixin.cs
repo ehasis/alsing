@@ -32,5 +32,15 @@ namespace QI4N.Framework
         {
             this.Value = value;
         }
+
+        object AbstractProperty.Get()
+        {
+            return this.Value;
+        }
+
+        void AbstractProperty.Set(object value)
+        {
+            this.Value = (T)value;
+        }
     }
 }
