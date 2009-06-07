@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     using System;
     using System.Reflection;
@@ -19,7 +19,7 @@
     {
         public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type modifierClass)
         {
-            return typeof(Property).IsAssignableFrom(method.ReturnType);
+            return typeof(AbstractProperty).IsAssignableFrom(method.ReturnType);
         }
     }
 }

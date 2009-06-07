@@ -9,9 +9,9 @@
     {
         private readonly IDictionary<MethodInfo, AbstractAssociation> associations = new Dictionary<MethodInfo, AbstractAssociation>();
 
-        private readonly IDictionary<MethodInfo, Property> properties = new Dictionary<MethodInfo, Property>();
+        private readonly IDictionary<MethodInfo, AbstractProperty> properties = new Dictionary<MethodInfo, AbstractProperty>();
 
-        public void AddProperty(MethodInfo propertyMethod, Property property)
+        public void AddProperty(MethodInfo propertyMethod, AbstractProperty property)
         {
             this.properties.Add(propertyMethod, property);
         }
@@ -28,12 +28,12 @@
             return this.associations[associationMethod];
         }
 
-        public Property GetProperty(MethodInfo propertyMethod)
+        public AbstractProperty GetProperty(MethodInfo propertyMethod)
         {
             if (!this.properties.ContainsKey(propertyMethod))
             {
                 //lazy build properties
-                var property = ProxyInstanceBuilder.NewProxyInstance(propertyMethod.ReturnType) as Property;
+                var property = ProxyInstanceBuilder.NewProxyInstance(propertyMethod.ReturnType) as AbstractProperty;
                 this.properties.Add(propertyMethod, property);
             }
             return this.properties[propertyMethod];

@@ -19,7 +19,7 @@
 
         protected ModuleInstance moduleInstance;
 
-        protected IDictionary<MethodInfo, Property> propertyValues;
+        protected IDictionary<MethodInfo, AbstractProperty> propertyValues;
 
         protected HashSet<Object> uses;
 
@@ -48,13 +48,13 @@
             }
         }
 
-        protected IDictionary<MethodInfo, Property> Properties
+        protected IDictionary<MethodInfo, AbstractProperty> Properties
         {
             get
             {
                 if (this.propertyValues == null)
                 {
-                    this.propertyValues = new Dictionary<MethodInfo, Property>();
+                    this.propertyValues = new Dictionary<MethodInfo, AbstractProperty>();
                 }
 
                 return this.propertyValues;
@@ -87,7 +87,7 @@
         public T NewInstanceJava()
         {
             // Calculate total set of Properties for this Composite
-            var properties = new Dictionary<MethodInfo, Property>();
+            var properties = new Dictionary<MethodInfo, AbstractProperty>();
             foreach (PropertyContext propertyContext in this.context.GetPropertyContexts())
             {
                 object value;
@@ -101,7 +101,7 @@
                     value = propertyContext.GetPropertyBinding().GetDefaultValue();
                 }
 
-                Property property = propertyContext.NewInstance(this.moduleInstance, value, accessor.ReturnType);
+                AbstractProperty property = propertyContext.NewInstance(this.moduleInstance, value, accessor.ReturnType);
                 PropertyBinding binding = propertyContext.GetPropertyBinding();
                 PropertyResolution propertyResolution = binding.GetPropertyResolution();
                 PropertyModel propertyModel = propertyResolution.GetPropertyModel();
@@ -194,7 +194,7 @@
         private static void InjectState(object mixinInstance, FieldInfo field, InjectionScopeAttribute fieldAttribute)
         {
             Type mixinInterface = mixinInstance.GetType().GetInterfaces().First();
-            if (typeof(Property).IsAssignableFrom(field.FieldType))
+            if (typeof(AbstractProperty).IsAssignableFrom(field.FieldType))
             {
                 var stateAttribute = fieldAttribute as StateAttribute;
                 PropertyInfo property = stateAttribute.GetProperty(field, mixinInterface);
@@ -261,7 +261,7 @@
     {
         PropertyBinding GetPropertyBinding();
 
-        Property NewInstance(ModuleInstance moduleInstance, object value, Type type);
+        AbstractProperty NewInstance(ModuleInstance moduleInstance, object value, Type type);
     }
 
     public interface PropertyBinding

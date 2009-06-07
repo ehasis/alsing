@@ -1,7 +1,7 @@
 namespace QI4N.Framework
 {
     [Mixins(typeof(PropertyInstanceMixin<>))]
-    public interface Property<T> : Property, PropertyInfo<T>
+    public interface Property<T> : AbstractProperty, PropertyInfo<T>
     {
         T Value { get; set; }
 
@@ -10,7 +10,7 @@ namespace QI4N.Framework
         T Get();
     }
 
-    public interface Property
+    public interface AbstractProperty
     {
     }
 }

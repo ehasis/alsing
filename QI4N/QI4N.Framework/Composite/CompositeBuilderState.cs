@@ -6,9 +6,9 @@
 
     public class CompositeBuilderState
     {
-        private readonly IDictionary<MethodInfo, Property> properties;
+        private readonly IDictionary<MethodInfo, AbstractProperty> properties;
 
-        public CompositeBuilderState(IDictionary<MethodInfo, Property> properties)
+        public CompositeBuilderState(IDictionary<MethodInfo, AbstractProperty> properties)
         {
             this.properties = properties;
         }
@@ -19,7 +19,7 @@
             throw new NotSupportedException("May not use Associations in Composites that are not accessed through a UnitOfWork");
         }
 
-        public Property GetProperty(MethodInfo method)
+        public AbstractProperty GetProperty(MethodInfo method)
         {
             return this.properties[method];
         }
