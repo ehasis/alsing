@@ -2,6 +2,7 @@ namespace QI4N.Framework.Proxy
 {
     using System.Collections.Generic;
     using System.Reflection;
+    using System.Diagnostics;
 
     public static class MethodInfoCache
     {
@@ -15,6 +16,7 @@ namespace QI4N.Framework.Proxy
             return methodId;
         }
 
+        [DebuggerStepThrough]
         public static MethodInfo GetMethod(int methodId)
         {
             return methodLookup[methodId];

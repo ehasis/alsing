@@ -8,7 +8,7 @@ namespace QI4N.Framework
     {
         public T NewInstance()
         {
-            var instance = ProxyGenerator.NewProxyInstance<T>();
+            var instance = ProxyInstanceBuilder.NewProxyInstance<T>();
             return instance;
         }
 

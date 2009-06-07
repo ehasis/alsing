@@ -3,7 +3,7 @@
     using System;
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-    public sealed class AppliesToAttribute : Attribute
+    public class AppliesToAttribute : Attribute
     {
         public AppliesToAttribute(params Type[] mixinTypes)
         {
@@ -11,5 +11,13 @@
         }
 
         public Type[] AppliesToTypes { get; private set; }
+    }
+
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    public class AppliesToEverythingAttribute : AppliesToAttribute
+    {
+        public AppliesToEverythingAttribute() : base(typeof(AppliesToEverything))
+        {
+        }
     }
 }
