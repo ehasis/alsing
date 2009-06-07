@@ -8,39 +8,48 @@
     {
         private static void Main()
         {
-            CompositeBuilderFactory factory = new DefaultCompositeBuilderFactory();
+            // Lacking support for QI4J structural definitions
+            // just kickstart my default impl
+            var factory = new DefaultCompositeBuilderFactory();
+
+            // Create composite builder
             var carBuilder = factory.NewCompositeBuilder<Car>();
-            var manufacturerBuilder = factory.NewCompositeBuilder<Manufacturer>();
-            var modelBuilder = new DefaultObjectBuilder<Model>();
+            var manufacturerBuilder = factory.NewCompositeBuilder<Manufacturer>();                        
             var accidentBuilder = factory.NewCompositeBuilder<Accident>();
 
+            // prototype support is in place and works
             var protoManufacturer = manufacturerBuilder.StateOfComposite();
+
+            // Properties support .Value and Get/Set
+            // Set the properties of the prototype
             protoManufacturer.Country.Value = "Sweden";
             protoManufacturer.Name.Value = "Volvo";
             protoManufacturer.CarsProduced.Value = 1234;
 
+            // Create an instance based on the prototype
             var manufacturer = manufacturerBuilder.NewInstance();
 
-            Model model = modelBuilder.NewInstance();
-            model.Set("Amazon");
-
-            var protoCar = carBuilder.StateOfComposite();            
-            protoCar.Model.Set("Amazon");            
+            // Create a prototype for a car composite
+            var protoCar = carBuilder.StateOfComposite();
+            protoCar.Model.Value = "Amazon";
 
             // Associations are not available to plain composites
-            // protoCar.Manufacturer.Set(manufacturer); 
+            // protoCar.Manufacturer.Set(manufacturer); <- does not work yet
 
+            // create a car entity
             var car = carBuilder.NewInstance();
+            car.Manufacturer.Set(manufacturer);
 
-            Console.WriteLine(car.Model.Get());
-
+            // create a prototype value object
             var protoAccident = accidentBuilder.StateOfComposite();
             protoAccident.Description.Value = "Roger fell off the chair";
             protoAccident.Occured.Value = new DateTime(2009, 06, 01);
             protoAccident.Repaired.Value = new DateTime(2010, 01, 01);
 
+            // instance the value object
             var accident = accidentBuilder.NewInstance();
 
+            // Add a value to an "ManyAssociation"
             car.Accidents.Add(accident);
 
             Console.WriteLine(manufacturer.CarsProduced.Get());
