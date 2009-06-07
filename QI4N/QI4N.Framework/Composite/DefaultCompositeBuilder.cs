@@ -4,10 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+
     using Proxy;
 
     public class DefaultCompositeBuilder<T> : CompositeBuilder<T>
     {
+        private T stateFor;
 
         public T NewInstance()
         {
@@ -21,19 +23,17 @@
 
         public K StateFor<K>()
         {
-            return default(K);
+            if (Equals(this.stateFor, default(T)))
+            {
+                Type compositeType = GetMatchingComposite();
+                var builder = new ProxyInstanceBuilder();
+                var instance = builder.NewInstance<T>(compositeType);
+                ConfigureInstance(instance);
+                stateFor = instance;
+            }
+            return (K)(object)this.stateFor;
         }
 
-
-        private static Type GetMatchingComposite()
-        {
-            IEnumerable<Type> matchingComposites = from composite in CompositeTypeCache.Composites
-                                                   where typeof(T).IsAssignableFrom(composite) &&
-                                                         composite.IsInterface
-                                                   select composite;
-
-            return matchingComposites.Single();
-        }
 
         private static void ConfigureInstance(T compositeInstance)
         {
@@ -53,8 +53,6 @@
                     .GetType()
                     .GetFields(flags);
 
-            
-
             foreach (FieldInfo field in fields)
             {
                 IEnumerable<InjectionScopeAttribute> fieldAttributes = field.GetCustomAttributes(typeof(InjectionScopeAttribute), true).Cast<InjectionScopeAttribute>();
@@ -67,11 +65,20 @@
                     }
                     if (fieldAttribute is StateAttribute)
                     {
-                        
                         InjectState(mixinInstance, field, fieldAttribute);
                     }
                 }
             }
+        }
+
+        private static Type GetMatchingComposite()
+        {
+            IEnumerable<Type> matchingComposites = from composite in CompositeTypeCache.Composites
+                                                   where typeof(T).IsAssignableFrom(composite) &&
+                                                         composite.IsInterface
+                                                   select composite;
+
+            return matchingComposites.Single();
         }
 
         private static void InjectState(object mixinInstance, FieldInfo field, InjectionScopeAttribute fieldAttribute)
@@ -126,7 +133,5 @@
                 field.SetValue(mixinInstance, privateMixinInstance);
             }
         }
-
-
     }
 }
