@@ -49,8 +49,9 @@
     <Compile Include="Common\ContainsAttribute.cs" />
     <Compile Include="Common\NotNullAttribute.cs" />
     <Compile Include="Common\UseDefaultsAttribute.cs" />
+    <Compile Include="Composite\CompositeContext.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
-    <Compile Include="Composite\DefaultCompositeBuilder.cs" />
+    <Compile Include="Composite\CompositeBuilderImpl.cs" />
     <Compile Include="Composite\DefaultCompositeBuilderFactory.cs" />
     <Compile Include="Concern\ConcernOf.cs" />
     <Compile Include="Entity\Association\AbstractAssociation.cs" />
@@ -67,9 +68,10 @@
     <Compile Include="ModuleInstance.cs" />
     <Compile Include="Object\ObjectActivator.cs" />
     <Compile Include="Property\ImmutableAttribute.cs" />
+    <Compile Include="Property\PropertyExtensions.cs" />
     <Compile Include="Property\PropertyInstanceMixin.cs" />
     <Compile Include="Proxy\MethodInfoCache.cs" />
-    <Compile Include="Proxy\ProxyInstanceBuilder.cs" />
+    <Compile Include="Proxy\Proxy.cs" />
     <Compile Include="Object\DefaultObjectBuilderFactory.cs" />
     <Compile Include="Proxy\ProxyTypeBuilder.cs" />
     <Compile Include="Entity\Association\Association.cs" />

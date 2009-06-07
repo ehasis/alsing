@@ -5,5 +5,7 @@
         T NewInstance();
 
         K StateFor<K>();
+
+        T StateOfComposite();
     }
 }

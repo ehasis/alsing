@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     using System;
 
@@ -8,8 +8,8 @@
     {
         public T NewInstance()
         {
-            var builder = new ProxyInstanceBuilder();
-            var instance = builder.NewInstance<T>();
+            var builder = new Proxy.Proxy();
+            var instance = builder.NewProxyInstance<T>();
             return instance;
         }
 

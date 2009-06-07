@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     public class DefaultCompositeBuilderFactory : CompositeBuilderFactory
     {
@@ -16,7 +16,7 @@
 
         private static CompositeBuilder<T> GetBuilder<T>()
         {
-            return new DefaultCompositeBuilder<T>();
+            return new CompositeBuilderImpl<T>();
         }
     }
 }
