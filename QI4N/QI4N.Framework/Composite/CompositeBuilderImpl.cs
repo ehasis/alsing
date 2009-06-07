@@ -97,7 +97,7 @@
                 MethodInfo accessor = propertyContext.GetPropertyBinding().GetPropertyResolution().GetPropertyModel().GetAccessor();
                 if (this.propertyValues != null && this.propertyValues.ContainsKey(accessor))
                 {
-                    value = this.propertyValues[accessor].GetValue();
+                    value = this.propertyValues[accessor].Get();
                 }
                 else
                 {
@@ -157,28 +157,15 @@
                     .ToList()
                     .ForEach(mixinInstance => ConfigureMixinInstance(mixinInstance, compositeInstance));
 
-            compositeInstance
-                    .GetType()
-                    .GetAllInterfaces()
-                    .ToList()
-                    .ForEach(type => type
-                                             .GetMethods((BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
-                                             .ToList()
-                                             .ForEach(accessor => this.AssignState(accessor, compositeInstance))
-                                             );
-        }
 
-        private void AssignState(MethodInfo accessor, object compositeInstance)
-        {
-            if (this.Properties.ContainsKey(accessor))
+
+            foreach(MethodInfo accessor in Properties.Keys)
             {
-                var state = this.Properties[accessor];
-              //  var value = state.GetValue();
-
-
-                //propertyInstance.SetValue(value);
+                var state = Properties[accessor];
+                var value = state.Get();
+                var property = accessor.Invoke(compositeInstance,null) as AbstractProperty;
+                property.Set(value);
             }
- 
         }
 
         private void ConfigureMixinInstance(object mixinInstance, object compositeInstance)

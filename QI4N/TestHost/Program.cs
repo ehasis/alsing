@@ -9,32 +9,39 @@
         private static void Main()
         {
             CompositeBuilderFactory factory = new DefaultCompositeBuilderFactory();
-            
+            var carBuilder = factory.NewCompositeBuilder<Car>();
+            var manufacturerBuilder = factory.NewCompositeBuilder<Manufacturer>();
             var modelBuilder = new DefaultObjectBuilder<Model>();
+            var accidentBuilder = factory.NewCompositeBuilder<Accident>();
 
-            var manufacturer = factory.NewComposite<Manufacturer>();
-            manufacturer.Country.Set("Sweden");
-            manufacturer.CarsProduced.Set(77);
-            manufacturer.Name.Set("VOLVO");
+            var protoManufacturer = manufacturerBuilder.StateOfComposite();
+            protoManufacturer.Country.Value = "Sweden";
+            protoManufacturer.Name.Value = "Volvo";
+            protoManufacturer.CarsProduced.Value = 1234;
+
+            var manufacturer = manufacturerBuilder.NewInstance();
 
             Model model = modelBuilder.NewInstance();
             model.Set("Amazon");
 
-            var carBuilder = factory.NewCompositeBuilder<Car>();
-
-            var protoCar = carBuilder.StateOfComposite();
+            var protoCar = carBuilder.StateOfComposite();            
             protoCar.Model.Set("Amazon");            
-        //    protoCar.Manufacturer.Set(manufacturer);
+
+            // Associations are not available to plain composites
+            // protoCar.Manufacturer.Set(manufacturer); 
 
             var car = carBuilder.NewInstance();
 
-            var accident = factory.NewComposite<Accident>();
-            accident.Description.Set("Roger fell off the chair");
-            accident.Occured.Set(new DateTime(2009, 06, 01));
-            accident.Repaired.Set(new DateTime(2010, 01, 01));
-            
-            car.Accidents.Add(accident);
+            Console.WriteLine(car.Model.Get());
 
+            var protoAccident = accidentBuilder.StateOfComposite();
+            protoAccident.Description.Value = "Roger fell off the chair";
+            protoAccident.Occured.Value = new DateTime(2009, 06, 01);
+            protoAccident.Repaired.Value = new DateTime(2010, 01, 01);
+
+            var accident = accidentBuilder.NewInstance();
+
+            car.Accidents.Add(accident);
 
             Console.WriteLine(manufacturer.CarsProduced.Get());
             foreach(var a in car.Accidents)

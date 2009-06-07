@@ -1,16 +1,14 @@
 namespace QI4N.Framework
 {
-    [Mixins(typeof(PropertyInstanceMixin<>))]
-    public interface Property<T> : AbstractProperty, PropertyInfo<T>
-    {
-        T Value { get; set; }
+    using System.ComponentModel;
 
-        void Set(T value);
-
-        T Get();
-    }
 
     public interface AbstractProperty
     {
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        void Set(object value);
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        object Get();
     }
 }
