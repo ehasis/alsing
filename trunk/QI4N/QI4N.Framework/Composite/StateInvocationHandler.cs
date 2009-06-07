@@ -6,7 +6,6 @@
 
     using Proxy;
 
-    [AppliesToEverything]
     public class StateInvocationHandler : InvocationHandler
     {
         private readonly CompositeContext context;
