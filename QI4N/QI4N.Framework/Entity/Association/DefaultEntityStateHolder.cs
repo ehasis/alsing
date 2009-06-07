@@ -16,8 +16,8 @@
             if (!this.associations.ContainsKey(associationMethod))
             {
                 //lazy build properties
-                var proxyBuilder = new ProxyInstanceBuilder();
-                var association = proxyBuilder.NewInstance(associationMethod.ReturnType) as AbstractAssociation;
+                var proxyBuilder = new Proxy.Proxy();
+                var association = proxyBuilder.NewProxyInstance(associationMethod.ReturnType) as AbstractAssociation;
                 this.associations.Add(associationMethod, association);
             }
 
@@ -29,8 +29,8 @@
             if (!this.properties.ContainsKey(propertyMethod))
             {
                 //lazy build properties
-                var proxyBuilder = new ProxyInstanceBuilder();
-                var property = proxyBuilder.NewInstance(propertyMethod.ReturnType) as Property;
+                var proxyBuilder = new Proxy.Proxy();
+                var property = proxyBuilder.NewProxyInstance(propertyMethod.ReturnType) as Property;
                 this.properties.Add(propertyMethod, property);
             }
             return this.properties[propertyMethod];
