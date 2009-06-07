@@ -79,7 +79,7 @@
         {
             Type compositeType = GetMatchingComposite();
 
-            var instance = ProxyGenerator.NewProxyInstance<T>(compositeType);
+            var instance = ProxyInstanceBuilder.NewProxyInstance<T>(compositeType);
             ConfigureInstance(instance);
             return instance;
         }
@@ -120,11 +120,7 @@
 
             var handler = new StateInvocationHandler(this.context, this.moduleInstance, this.Properties);
 
-            var interfaces = new[]
-                                 {
-                                         typeof(K)
-                                 };
-            object instance = ProxyGenerator.NewProxyInstance(interfaces, handler);
+            object instance = ProxyInstanceBuilder.NewProxyInstance(typeof(K), handler);
             return (K)instance;
         }
 
@@ -134,11 +130,7 @@
 
             var handler = new StateInvocationHandler(this.context, this.moduleInstance, this.Properties);
 
-            var interfaces = new[]
-                                 {
-                                         typeof(T)
-                                 };
-            object instance = ProxyGenerator.NewProxyInstance(interfaces, handler);
+            object instance = ProxyInstanceBuilder.NewProxyInstance(typeof(T), handler);
             return (T)instance;
         }
 
@@ -209,7 +201,7 @@
 
                 //object[] propertyAttributes = property.GetCustomAttributes(typeof(InjectionScopeAttribute), true);
 
-                object fieldValue = ProxyGenerator.NewProxyInstance(field.FieldType);
+                object fieldValue = ProxyInstanceBuilder.NewProxyInstance(field.FieldType);
 
                 field.SetValue(mixinInstance, fieldValue);
             }
@@ -219,7 +211,7 @@
                 PropertyInfo property = stateAttribute.GetProperty(field, mixinInterface);
 
                 //object[] propertyAttributes = property.GetCustomAttributes(typeof(InjectionScopeAttribute), true);
-                object fieldValue = ProxyGenerator.NewProxyInstance(field.FieldType);
+                object fieldValue = ProxyInstanceBuilder.NewProxyInstance(field.FieldType);
 
                 field.SetValue(mixinInstance, fieldValue);
             }
@@ -243,7 +235,7 @@
             }
             else
             {
-                object privateMixinInstance = ProxyGenerator.NewProxyInstance(field.FieldType);
+                object privateMixinInstance = ProxyInstanceBuilder.NewProxyInstance(field.FieldType);
 
                 field.SetValue(mixinInstance, privateMixinInstance);
             }

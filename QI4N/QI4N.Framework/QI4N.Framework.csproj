@@ -72,8 +72,9 @@
     <Compile Include="Property\ImmutableAttribute.cs" />
     <Compile Include="Property\PropertyExtensions.cs" />
     <Compile Include="Property\PropertyInstanceMixin.cs" />
+    <Compile Include="Proxy\InvocationProxyTypeGenerator.cs" />
     <Compile Include="Proxy\MethodInfoCache.cs" />
-    <Compile Include="Proxy\ProxyGenerator.cs" />
+    <Compile Include="Proxy\ProxyInstanceBuilder.cs" />
     <Compile Include="Object\DefaultObjectBuilderFactory.cs" />
     <Compile Include="Proxy\ProxyTypeBuilder.cs" />
     <Compile Include="Entity\Association\Association.cs" />

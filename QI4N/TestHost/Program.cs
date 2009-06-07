@@ -22,9 +22,9 @@
 
             var carBuilder = factory.NewCompositeBuilder<Car>();
 
-            //var protoCar = carBuilder.StateOfComposite();
-            //protoCar.Model.Set("Amazon");
-            //protoCar.Manufacturer.Set(manufacturer);
+            var protoCar = carBuilder.StateOfComposite();
+            protoCar.Model.Set("Amazon");            
+       //     protoCar.Manufacturer.Set(manufacturer);
 
             var car = carBuilder.NewInstance();
 

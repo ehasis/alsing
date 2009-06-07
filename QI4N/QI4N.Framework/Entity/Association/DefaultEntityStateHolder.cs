@@ -21,7 +21,7 @@
             if (!this.associations.ContainsKey(associationMethod))
             {
                 //lazy build properties
-                var association = ProxyGenerator.NewProxyInstance(associationMethod.ReturnType) as AbstractAssociation;
+                var association = ProxyInstanceBuilder.NewProxyInstance(associationMethod.ReturnType) as AbstractAssociation;
                 this.associations.Add(associationMethod, association);
             }
 
@@ -33,7 +33,7 @@
             if (!this.properties.ContainsKey(propertyMethod))
             {
                 //lazy build properties
-                var property = ProxyGenerator.NewProxyInstance(propertyMethod.ReturnType) as Property;
+                var property = ProxyInstanceBuilder.NewProxyInstance(propertyMethod.ReturnType) as Property;
                 this.properties.Add(propertyMethod, property);
             }
             return this.properties[propertyMethod];

@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using System.Reflection;
 
+    using Proxy;
+
+    [AppliesToEverything]
     public class StateInvocationHandler : InvocationHandler
     {
         private readonly CompositeContext context;
@@ -27,8 +30,9 @@
 
                 if (!this.properties.TryGetValue(method, out propertyInstance))
                 {
-                    PropertyContext propertyContext = this.context.GetMethodDescriptor(method).GetCompositeMethodContext().GetPropertyContext();
-                    propertyInstance = propertyContext.NewInstance(this.moduleInstance, null, method.ReturnType);
+                    propertyInstance = ProxyInstanceBuilder.NewProxyInstance(method.ReturnType) as Property;
+                    //PropertyContext propertyContext = this.context.GetMethodDescriptor(method).GetCompositeMethodContext().GetPropertyContext();
+                    //propertyInstance = propertyContext.NewInstance(this.moduleInstance, null, method.ReturnType);
                     this.properties.Add(method, propertyInstance);
                 }
                 return propertyInstance;

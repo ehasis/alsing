@@ -1,12 +1,13 @@
 ﻿namespace QI4N.Framework.Proxy
 {
     using System;
+    using System.Reflection;
 
     using Activation;
 
     using Internal;
 
-    public static class ProxyGenerator
+    public static class ProxyInstanceBuilder
     {
         public static T NewProxyInstance<T>(Type type)
         {
@@ -27,9 +28,18 @@
             return NewProxyInstance<object>(type);
         }
 
-        internal static object NewProxyInstance(Type[] interfaces, StateInvocationHandler handler)
+        public static object NewProxyInstance(Type type, StateInvocationHandler handler)
         {
-            throw new NotImplementedException();
+            var proxyBuilder = new InvocationProxyTypeBuilder();
+
+            Type proxyType = proxyBuilder.BuildProxyType(type);
+            ObjectActivator<object> activator = ObjectActivator.GetActivator<object>(proxyType);
+
+            var instance = activator();
+            FieldInfo defaultHandlerField = proxyType.GetField("defaultHandler");
+            defaultHandlerField.SetValue(instance,handler);
+
+            return instance;
         }
 
         private static ObjectActivator<T> GetActivator<T>(Type type)
