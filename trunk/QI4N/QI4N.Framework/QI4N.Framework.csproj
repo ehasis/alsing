@@ -90,7 +90,7 @@
     <Compile Include="Proxy\Method.cs" />
     <Compile Include="Object\ObjectBuilder.cs" />
     <Compile Include="Object\ObjectBuilderFactory.cs" />
-    <Compile Include="Property\Property.cs" />
+    <Compile Include="Property\AbstractProperty.cs" />
     <Compile Include="Property\PropertyInfo.cs" />
     <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Service\ServiceComposite.cs" />

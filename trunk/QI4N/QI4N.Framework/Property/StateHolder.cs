@@ -1,9 +1,9 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     using System.Reflection;
 
     public interface StateHolder
     {
-        Property GetProperty(MethodInfo propertyMethod);
+        AbstractProperty GetProperty(MethodInfo propertyMethod);
     }
 }
