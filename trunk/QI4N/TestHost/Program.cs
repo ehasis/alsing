@@ -12,17 +12,21 @@
             
             var modelBuilder = new DefaultObjectBuilder<Model>();
 
-            Model model = modelBuilder.NewInstance();
-            model.Set("Amazon");
-
             var manufacturer = factory.NewComposite<Manufacturer>();
             manufacturer.Country.Set("Sweden");
             manufacturer.CarsProduced.Set(77);
             manufacturer.Name.Set("VOLVO");
 
-            var car = factory.NewComposite<Car>();
-            car.Manufacturer.Set(manufacturer);
-            car.Model.Set(model.Value);
+            Model model = modelBuilder.NewInstance();
+            model.Set("Amazon");
+
+            var carBuilder = factory.NewCompositeBuilder<Car>();
+
+            var protoCar = carBuilder.StateFor<Car>();
+            protoCar.Model.Set("Amazon");
+            protoCar.Manufacturer.Set(manufacturer);
+
+            var car = carBuilder.NewInstance();
 
             var accident = factory.NewComposite<Accident>();
             accident.Description.Set("Roger fell off the chair");
@@ -35,7 +39,8 @@
             Console.WriteLine(manufacturer.CarsProduced.Get());
             foreach(var a in car.Accidents)
             {
-                Console.WriteLine(a.Description.Value);
+                Console.WriteLine(a.Description.Get());
+                Console.WriteLine(a.GetType().Name);
             }
 
             ////       car.Model.Value = model.Value;
