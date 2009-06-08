@@ -5,8 +5,6 @@
 
     using Activation;
 
-    using Internal;
-
     public static class ProxyInstanceBuilder
     {
         public static T NewProxyInstance<T>(Type type)
@@ -28,7 +26,7 @@
             return NewProxyInstance<object>(type);
         }
 
-        public static object NewProxyInstance(Type type, StateInvocationHandler handler)
+        public static object NewProxyInstance(Type type, InvocationHandler handler)
         {
             var proxyBuilder = new InvocationProxyTypeBuilder();
 

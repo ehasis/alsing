@@ -3,6 +3,7 @@
     using System;
 
     using QI4N.Framework;
+    using QI4N.Framework.Runtime;
 
     internal class Program
     {

@@ -8,8 +8,8 @@
     <ProjectGuid>{46604E99-EE88-42DD-B56D-B396E4886CE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>QI4N.Framework</RootNamespace>
-    <AssemblyName>QI4N.Framework</AssemblyName>
+    <RootNamespace>QI4N.Framework.API</RootNamespace>
+    <AssemblyName>QI4N.Framework.API</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,20 +49,13 @@
     <Compile Include="Common\ContainsAttribute.cs" />
     <Compile Include="Common\NotNullAttribute.cs" />
     <Compile Include="Common\UseDefaultsAttribute.cs" />
-    <Compile Include="Composite\CompositeBuilderState.cs" />
-    <Compile Include="Composite\CompositeContext.cs" />
-    <Compile Include="Composite\CompositeTypeCache.cs" />
-    <Compile Include="Composite\CompositeBuilderImpl.cs" />
-    <Compile Include="Composite\DefaultCompositeBuilderFactory.cs" />
-    <Compile Include="Composite\StateInvocationHandler.cs" />
+    <Compile Include="Composite\CompositeContextT.cs" />
     <Compile Include="Concern\ConcernOf.cs" />
     <Compile Include="Entity\Association\AbstractAssociation.cs" />
     <Compile Include="Entity\Association\AssociationInfo.cs" />
     <Compile Include="Entity\Association\AssociationInstanceMixin.cs" />
-    <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />
     <Compile Include="Entity\EntityStateHolder.cs" />
     <Compile Include="Injection\Scope\ThisAttribute.cs" />
-    <Compile Include="Object\DefaultObjectBuilder.cs" />
     <Compile Include="Injection\Scope\InjectionScopeAttribute.cs" />
     <Compile Include="Injection\Scope\ServiceAttribute.cs" />
     <Compile Include="Injection\Scope\StrucutreAttribute.cs" />
@@ -75,7 +68,6 @@
     <Compile Include="Proxy\InvocationProxyTypeGenerator.cs" />
     <Compile Include="Proxy\MethodInfoCache.cs" />
     <Compile Include="Proxy\ProxyInstanceBuilder.cs" />
-    <Compile Include="Object\DefaultObjectBuilderFactory.cs" />
     <Compile Include="Proxy\ProxyTypeBuilder.cs" />
     <Compile Include="Entity\Association\Association.cs" />
     <Compile Include="Composite\Composite.cs" />
@@ -87,7 +79,6 @@
     <Compile Include="Entity\Identity.cs" />
     <Compile Include="Proxy\InvocationHandler.cs" />
     <Compile Include="Entity\Association\ManyAssociation.cs" />
-    <Compile Include="Proxy\Method.cs" />
     <Compile Include="Object\ObjectBuilder.cs" />
     <Compile Include="Object\ObjectBuilderFactory.cs" />
     <Compile Include="Property\AbstractProperty.cs" />
