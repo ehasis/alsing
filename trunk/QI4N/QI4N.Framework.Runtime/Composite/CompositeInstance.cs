@@ -5,7 +5,7 @@ using System.Text;
 
 namespace QI4N.Framework.Runtime
 {
-    public interface CompositeInstance
+    public interface CompositeInstance : InvocationHandler
     {
         object[] Mixins { get; set; }
 

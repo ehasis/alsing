@@ -4,10 +4,10 @@
     [Mixins(typeof(PropertyInstanceMixin<>))]
     public interface Property<T> : AbstractProperty, PropertyInfo<T>
     {
-        T Value { get; set; }
+        new T Value { get; set; }
 
         void Set(T value);
 
-        new T Get();
+        T Get();
     }
 }

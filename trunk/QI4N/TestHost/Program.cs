@@ -25,7 +25,7 @@
             // Set the properties of the prototype
             protoManufacturer.Country.Value = "Sweden";
             protoManufacturer.Name.Value = "Volvo";
-            protoManufacturer.CarsProduced.Value = 1234;
+            protoManufacturer.CarsProduced.Value = 1234;    
 
             // Create an instance based on the prototype
             var manufacturer = manufacturerBuilder.NewInstance();
