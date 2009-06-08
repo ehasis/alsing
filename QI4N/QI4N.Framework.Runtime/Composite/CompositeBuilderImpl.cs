@@ -94,7 +94,7 @@
                 MethodInfo accessor = propertyContext.GetPropertyBinding().GetPropertyResolution().GetPropertyModel().GetAccessor();
                 if (this.propertyValues != null && this.propertyValues.ContainsKey(accessor))
                 {
-                    value = this.propertyValues[accessor].Get();
+                    value = this.propertyValues[accessor].Value;
                 }
                 else
                 {
@@ -159,9 +159,9 @@
             foreach(MethodInfo accessor in Properties.Keys)
             {
                 var state = Properties[accessor];
-                var value = state.Get();
+                var value = state.Value;
                 var property = accessor.Invoke(compositeInstance,null) as AbstractProperty;
-                property.Set(value);
+                property.Value = value;
             }
         }
 
@@ -285,12 +285,7 @@
         MethodInfo GetAccessor();
     }
 
-    public interface PropertyContext
-    {
-        PropertyBinding GetPropertyBinding();
 
-        AbstractProperty NewInstance(ModuleInstance moduleInstance, object value, Type type);
-    }
 
     public interface PropertyBinding
     {

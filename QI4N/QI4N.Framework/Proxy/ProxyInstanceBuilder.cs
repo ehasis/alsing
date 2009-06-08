@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Proxy
+namespace QI4N.Framework.Proxy
 {
     using System;
     using System.Reflection;
@@ -48,6 +48,11 @@
             ObjectActivator<T> activator = ObjectActivator.GetActivator<T>(proxyType);
 
             return activator;
+        }
+
+        public static object GetInvocationHandler(object proxy)
+        {
+            throw new NotImplementedException();
         }
     }
 }

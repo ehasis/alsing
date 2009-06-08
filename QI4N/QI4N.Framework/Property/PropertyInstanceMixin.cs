@@ -33,14 +33,17 @@ namespace QI4N.Framework
             this.Value = value;
         }
 
-        object AbstractProperty.Get()
-        {
-            return this.Value;
-        }
 
-        void AbstractProperty.Set(object value)
+        object AbstractProperty.Value
         {
-            this.Value = (T)value;
+            get
+            {
+                return Value;
+            }
+            set
+            {
+                Value = (T)value;
+            }
         }
     }
 }
