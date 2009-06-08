@@ -111,14 +111,14 @@
             CompositeInstance compositeInstance = this.context.NewCompositeInstance(this.moduleInstance,
                                                                                     this.uses,
                                                                                     new CompositeBuilderState(properties));
-            return (T)compositeInstance.GetProxy();
+            return (T)compositeInstance.Proxy;
         }
 
         public K StateFor<K>()
         {
             // Instantiate proxy for given interface
 
-            var handler = new StateInvocationHandler(this.context, this.moduleInstance, this.Properties);
+            var handler = new StateInvocationHandler(this);
 
             object instance = ProxyInstanceBuilder.NewProxyInstance(typeof(K), handler);
             return (K)instance;
@@ -128,7 +128,7 @@
         {
             // Instantiate proxy for given composite interface
 
-            var handler = new StateInvocationHandler(this.context, this.moduleInstance, this.Properties);
+            var handler = new StateInvocationHandler(this);
 
             object instance = ProxyInstanceBuilder.NewProxyInstance(typeof(T), handler);
             return (T)instance;
@@ -242,12 +242,38 @@
                 field.SetValue(mixinInstance, privateMixinInstance);
             }
         }
+
+        public class StateInvocationHandler : InvocationHandler
+        {
+            private readonly CompositeBuilderImpl<T> owner;
+
+            public StateInvocationHandler(CompositeBuilderImpl<T> owner)
+            {
+                this.owner = owner;
+            }
+
+            public object Invoke(object proxy, MethodInfo method, object[] objects)
+            {
+                if (typeof(AbstractProperty).IsAssignableFrom(method.ReturnType))
+                {
+                    AbstractProperty propertyInstance;
+
+                    if (!this.owner.Properties.TryGetValue(method, out propertyInstance))
+                    {
+                        propertyInstance = ProxyInstanceBuilder.NewProxyInstance(method.ReturnType) as AbstractProperty;
+                        //PropertyContext propertyContext = this.context.GetMethodDescriptor(method).GetCompositeMethodContext().GetPropertyContext();
+                        //propertyInstance = propertyContext.NewInstance(this.moduleInstance, null, method.ReturnType);
+                        this.owner.Properties.Add(method, propertyInstance);
+                    }
+                    return propertyInstance;
+                }
+
+                throw new NotSupportedException("Method does not represent state: " + method.Name);
+            }
+        }
     }
 
-    public interface CompositeInstance
-    {
-        object GetProxy();
-    }
+
 
     public interface PropertyResolution
     {

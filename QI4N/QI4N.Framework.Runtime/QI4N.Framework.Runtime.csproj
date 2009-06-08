@@ -48,6 +48,7 @@
     <Compile Include="Composite\CompositeBuilderImpl.cs" />
     <Compile Include="Composite\CompositeBuilderState.cs" />
     <Compile Include="Composite\CompositeContext.cs" />
+    <Compile Include="Composite\CompositeInstance.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\DefaultCompositeBuilderFactory.cs" />
     <Compile Include="Composite\StateInvocationHandler.cs" />
