@@ -40,7 +40,7 @@
                 }
             }
 
-            this.CreateDefaultCtor();
+            this.CreateCtor();
 
             Type proxyType = this.typeBuilder.CreateType();
 
@@ -136,12 +136,17 @@
             this.assemblyBuilder = domain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
         }
 
-        private void CreateDefaultCtor()
+        private void CreateCtor()
         {
-            ConstructorBuilder ctorBuilder = this.typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[]
+            ConstructorBuilder ctorBuilder = this.typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new[]
                                                                                                                                           {
+                                                                                                                                                  typeof(InvocationHandler)
                                                                                                                                           });
+            ctorBuilder.DefineParameter(1, ParameterAttributes.None, "handler");
             ILGenerator generator = ctorBuilder.GetILGenerator();
+            generator.Emit(OpCodes.Ldarg,0);
+            generator.Emit(OpCodes.Ldarg, 1);
+            generator.Emit(OpCodes.Stfld,defaultHandlerFieldBuilder);
             generator.Emit(OpCodes.Ret);
         }
 
@@ -171,7 +176,7 @@
         {
             const string moduleName = "Alsing.Proxy";
             const string nameSpace = "Alsing.Proxy";
-            string typeName = string.Format("{0}.StateFor:{1}", nameSpace, this.compositeType.GetTypeName());
+            string typeName = string.Format("{0}.{1}", nameSpace, this.compositeType.GetTypeName());
 
             ModuleBuilder moduleBuilder = this.assemblyBuilder.DefineDynamicModule(moduleName, true);
             const TypeAttributes typeAttributes = TypeAttributes.Class | TypeAttributes.Public;
