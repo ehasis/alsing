@@ -32,6 +32,12 @@
         {
             this.stateModel = new AbstractStateModel();
             this.compositeType = compositeType;
+
+            var realCompositeType = this.GetMatchingComposite();
+
+            var builder = new InvocationProxyTypeBuilder();
+
+            proxyType = builder.BuildProxyType(realCompositeType);
         }
 
         public AbstractStateModel State
@@ -49,107 +55,9 @@
 
         public CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance uses, StateHolder stateHolder)
         {
-            Type runtimeCompositeType = this.GetMatchingComposite();
-
-            var instance = ProxyInstanceBuilder.NewProxyInstance(runtimeCompositeType) as Composite;
-            this.ConfigureInstance(instance);
-
             object[] mixins = null;
             CompositeInstance compositeInstance = new DefaultCompositeInstance(this, moduleInstance, mixins, stateHolder);
-
             return compositeInstance;
-        }
-
-        private static void InjectThis(object mixinInstance, FieldInfo field, object compositeInstance)
-        {
-            if (field.FieldType.IsAssignableFrom(compositeInstance.GetType()))
-            {
-                field.SetValue(mixinInstance, compositeInstance);
-            }
-            else
-            {
-                object privateMixinInstance = ProxyInstanceBuilder.NewProxyInstance(field.FieldType);
-
-                field.SetValue(mixinInstance, privateMixinInstance);
-            }
-        }
-
-
-        private void ConfigureInstance(object compositeInstance)
-        {
-            compositeInstance
-                    .GetType()
-                    .GetFields()
-                    .Select(f => f.GetValue(compositeInstance))
-                    .ToList()
-                    .ForEach(mixinInstance => this.ConfigureMixinInstance(mixinInstance, compositeInstance));
-
-            foreach (MethodInfo accessor in this.Properties.Keys)
-            {
-                AbstractProperty state = this.Properties[accessor];
-                object value = state.Value;
-                var property = accessor.Invoke(compositeInstance, null) as AbstractProperty;
-                if (property != null)
-                {
-                    property.Value = value;
-                }
-            }
-        }
-
-        private void ConfigureMixinInstance(object mixinInstance, object compositeInstance)
-        {
-            const BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-
-            FieldInfo[] fields = mixinInstance
-                    .GetType()
-                    .GetFields(flags);
-
-            foreach (FieldInfo field in fields)
-            {
-                IEnumerable<InjectionScopeAttribute> fieldAttributes = field.GetCustomAttributes(typeof(InjectionScopeAttribute), true).Cast<InjectionScopeAttribute>();
-
-                foreach (InjectionScopeAttribute fieldAttribute in fieldAttributes)
-                {
-                    if (fieldAttribute is ThisAttribute)
-                    {
-                        InjectThis(mixinInstance, field, compositeInstance);
-                    }
-                    if (fieldAttribute is StateAttribute)
-                    {
-                        this.InjectState(mixinInstance, field, fieldAttribute);
-                    }
-                }
-            }
-        }
-
-
-
-        private void InjectState(object mixinInstance, FieldInfo field, InjectionScopeAttribute fieldAttribute)
-        {
-            Type mixinInterface = mixinInstance.GetType().GetInterfaces().First();
-            if (typeof(AbstractProperty).IsAssignableFrom(field.FieldType))
-            {
-                var stateAttribute = fieldAttribute as StateAttribute;
-                var propertyInstance = ProxyInstanceBuilder.NewProxyInstance(field.FieldType) as AbstractProperty;
-                field.SetValue(mixinInstance, propertyInstance);
-            }
-            else if (typeof(AbstractAssociation).IsAssignableFrom(field.FieldType))
-            {
-                var stateAttribute = fieldAttribute as StateAttribute;
-                var associationInstance = ProxyInstanceBuilder.NewProxyInstance(field.FieldType) as AbstractAssociation;
-
-                field.SetValue(mixinInstance, associationInstance);
-            }
-            else if (typeof(StateHolder).IsAssignableFrom(field.FieldType))
-            {
-                //TODO: fix
-                var state = new DefaultEntityStateHolder();
-                field.SetValue(mixinInstance, state);
-            }
-            else
-            {
-                throw new Exception(string.Format("[State] can not be applied to field type '{0}'", field.FieldType.Name));
-            }
         }
 
         private Type GetMatchingComposite()
@@ -204,15 +112,18 @@
 
         public Composite NewProxy(InvocationHandler invocationHandler)
         {
-            var instance = Activator.CreateInstance(proxyClass, invocationHandler) as Composite;
-            return instance;
+            //var instance = ProxyInstanceBuilder.NewProxyInstance<Composite>(proxyType);
+            //return instance;
+            var instance = Activator.CreateInstance(this.proxyType) as Composite;
+            FieldInfo defaultHandlerField = proxyType.GetField("defaultHandler");
+            defaultHandlerField.SetValue(instance, invocationHandler);
 
-            //return Composite.class.cast( proxyClass.getConstructor( InvocationHandler.class ).newInstance( invocationHandler ) );
+            return instance;            
         }
     }
 
     public abstract class AbstractCompositeModel
     {
-        protected readonly Type proxyClass;
+        protected Type proxyType;
     }
 }
