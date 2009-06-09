@@ -112,11 +112,7 @@
 
         public Composite NewProxy(InvocationHandler invocationHandler)
         {
-            //var instance = ProxyInstanceBuilder.NewProxyInstance<Composite>(proxyType);
-            //return instance;
-            var instance = Activator.CreateInstance(this.proxyType) as Composite;
-            FieldInfo defaultHandlerField = proxyType.GetField("defaultHandler");
-            defaultHandlerField.SetValue(instance, invocationHandler);
+            var instance = Activator.CreateInstance(this.proxyType,invocationHandler) as Composite;
 
             return instance;            
         }
