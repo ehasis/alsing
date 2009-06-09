@@ -46,9 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Composite\AbstractCompositeInstance.cs" />
-    <Compile Include="Composite\CompositeBuilderImpl.cs" />
+    <Compile Include="Composite\CompositeBuilderInstance.cs" />
     <Compile Include="Composite\CompositeBuilderState.cs" />
-    <Compile Include="Composite\CompositeContext.cs" />
+    <Compile Include="Composite\CompositeModel.cs" />
     <Compile Include="Composite\CompositeInstance.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\DefaultCompositeBuilderFactory.cs" />

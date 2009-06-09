@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace QI4N.Framework.Runtime
 {
     public interface CompositeInstance : InvocationHandler
@@ -11,7 +6,7 @@ namespace QI4N.Framework.Runtime
 
         Composite Proxy { get; set; }
 
-        CompositeContext Context { get; }
+        CompositeModel Model { get; }
 
         string ToURI();
     }
