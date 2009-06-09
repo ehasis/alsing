@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Reflection;
@@ -11,13 +11,13 @@
 
         protected static readonly MethodInfo METHOD_IDENTITY;
 
-        protected CompositeContext context;
+        protected CompositeModel model;
 
         protected Composite proxy;
 
-        protected AbstractCompositeInstance(CompositeContext aContext)
+        protected AbstractCompositeInstance(CompositeModel aModel)
         {
-            this.context = aContext;
+            this.model = aModel;
         }
 
         public Composite Proxy
@@ -37,9 +37,12 @@
             return (CompositeInstance)ProxyInstanceBuilder.GetInvocationHandler(aProxy);
         }
 
-        public CompositeContext getContext()
+        public CompositeModel Model
         {
-            return this.context;
+            get
+            {
+                return this.model;
+            }
         }
 
 

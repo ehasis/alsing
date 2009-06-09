@@ -4,10 +4,10 @@
     {
         T NewInstance();
 
-        K StateFor<K>();
+        K PrototypeFor<K>();
 
-        T StateOfComposite();
+        T Prototype();
 
-        void Use(object item);
+        void Use(params object[] items);
     }
 }

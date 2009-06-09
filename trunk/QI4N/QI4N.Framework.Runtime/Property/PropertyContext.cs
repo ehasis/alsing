@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace QI4N.Framework.Runtime
+﻿namespace QI4N.Framework.Runtime
 {
+    using System;
+
     using Proxy;
 
     public class PropertyContext
@@ -16,10 +13,17 @@ namespace QI4N.Framework.Runtime
             this.propertyBinding = propertyBinding;
         }
 
-
-        public PropertyBinding GetPropertyBinding()
+        public PropertyBinding PropertyBinding
         {
-            return propertyBinding;
+            get
+            {
+                return this.propertyBinding;
+            }
+        }
+
+        public AbstractProperty newEntityInstance(ModuleInstance moduleInstance, EntityState entityState)
+        {
+            return null;
         }
 
         public AbstractProperty NewInstance(ModuleInstance moduleInstance, object value, Type propertyType)
@@ -28,9 +32,9 @@ namespace QI4N.Framework.Runtime
             {
                 Type propertyCompositeType = propertyType;
 
-                var cb = moduleInstance.GetStructureContext().GetCompositeBuilderFactory().NewCompositeBuilder(propertyCompositeType);
+                CompositeBuilder<object> cb = moduleInstance.GetStructureContext().GetCompositeBuilderFactory().NewCompositeBuilder(propertyCompositeType);
                 cb.Use(value);
-                cb.Use(propertyBinding);
+                cb.Use(this.propertyBinding);
                 var property = cb.NewInstance() as AbstractProperty;
 
                 return property;
@@ -48,82 +52,75 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public AbstractProperty newEntityInstance(ModuleInstance moduleInstance, EntityState entityState)
-        {
-            return null;
-        }
+        //        public Property newInstance( ModuleInstance moduleInstance, Object value )
+        //{
+        //    try
+        //    {
+        //        Class propertyType = propertyBinding.getPropertyResolution().getPropertyModel().getAccessor().getReturnType();
 
-    //        public Property newInstance( ModuleInstance moduleInstance, Object value )
-    //{
-    //    try
-    //    {
-    //        Class propertyType = propertyBinding.getPropertyResolution().getPropertyModel().getAccessor().getReturnType();
+        //        if( Composite.class.isAssignableFrom( propertyType ) )
+        //        {
+        //            Class<? extends Composite> propertyCompositeType = (Class<? extends Composite>) propertyType;
+        //            CompositeBuilder<? extends Composite> cb = moduleInstance.getStructureContext().getCompositeBuilderFactory().newCompositeBuilder( propertyCompositeType );
+        //            cb.use( value );
+        //            cb.use( propertyBinding );
+        //            return Property.class.cast( cb.newInstance() );
+        //        }
+        //        else
+        //        {
+        //            Property instance;
+        //            if( ImmutableProperty.class.isAssignableFrom( propertyType ) )
+        //            {
+        //                instance = new ImmutablePropertyInstance<Object>( propertyBinding, value );
+        //            }
+        //            else
+        //            {
+        //                instance = new PropertyInstance<Object>( propertyBinding, value );
+        //            }
 
-    //        if( Composite.class.isAssignableFrom( propertyType ) )
-    //        {
-    //            Class<? extends Composite> propertyCompositeType = (Class<? extends Composite>) propertyType;
-    //            CompositeBuilder<? extends Composite> cb = moduleInstance.getStructureContext().getCompositeBuilderFactory().newCompositeBuilder( propertyCompositeType );
-    //            cb.use( value );
-    //            cb.use( propertyBinding );
-    //            return Property.class.cast( cb.newInstance() );
-    //        }
-    //        else
-    //        {
-    //            Property instance;
-    //            if( ImmutableProperty.class.isAssignableFrom( propertyType ) )
-    //            {
-    //                instance = new ImmutablePropertyInstance<Object>( propertyBinding, value );
-    //            }
-    //            else
-    //            {
-    //                instance = new PropertyInstance<Object>( propertyBinding, value );
-    //            }
+        //            return instance;
+        //        }
+        //    }
+        //    catch( Exception e )
+        //    {
+        //        throw new InvalidPropertyException( "Could not instantiate property", e );
+        //    }
+        //}
 
-    //            return instance;
-    //        }
-    //    }
-    //    catch( Exception e )
-    //    {
-    //        throw new InvalidPropertyException( "Could not instantiate property", e );
-    //    }
-    //}
+        //public Property newEntityInstance( ModuleInstance moduleInstance, EntityState entityState )
+        //{
+        //    try
+        //    {
+        //        Class propertyType = propertyBinding.getPropertyResolution().getPropertyModel().getAccessor().getReturnType();
 
-    //public Property newEntityInstance( ModuleInstance moduleInstance, EntityState entityState )
-    //{
-    //    try
-    //    {
-    //        Class propertyType = propertyBinding.getPropertyResolution().getPropertyModel().getAccessor().getReturnType();
+        //        if( Composite.class.isAssignableFrom( propertyType ) )
+        //        {
+        //            Class<? extends Composite> propertyCompositeType = (Class<? extends Composite>) propertyType;
+        //            CompositeBuilder<? extends Composite> cb = moduleInstance.getStructureContext().getCompositeBuilderFactory().newCompositeBuilder( propertyCompositeType );
+        //            cb.use( entityState );
+        //            cb.use( propertyBinding );
+        //            return Property.class.cast( cb.newInstance() );
+        //        }
+        //        else
+        //        {
+        //            Property instance;
+        //            if( ImmutableProperty.class.isAssignableFrom( propertyType ) )
+        //            {
+        //                instance = new ImmutablePropertyInstance<Object>( propertyBinding, entityState.getProperty( propertyBinding.qualifiedName() ) );
+        //            }
+        //            else
+        //            {
+        //                instance = new EntityPropertyInstance<Object>( propertyBinding, entityState );
+        //            }
 
-    //        if( Composite.class.isAssignableFrom( propertyType ) )
-    //        {
-    //            Class<? extends Composite> propertyCompositeType = (Class<? extends Composite>) propertyType;
-    //            CompositeBuilder<? extends Composite> cb = moduleInstance.getStructureContext().getCompositeBuilderFactory().newCompositeBuilder( propertyCompositeType );
-    //            cb.use( entityState );
-    //            cb.use( propertyBinding );
-    //            return Property.class.cast( cb.newInstance() );
-    //        }
-    //        else
-    //        {
-    //            Property instance;
-    //            if( ImmutableProperty.class.isAssignableFrom( propertyType ) )
-    //            {
-    //                instance = new ImmutablePropertyInstance<Object>( propertyBinding, entityState.getProperty( propertyBinding.qualifiedName() ) );
-    //            }
-    //            else
-    //            {
-    //                instance = new EntityPropertyInstance<Object>( propertyBinding, entityState );
-    //            }
-
-    //            return instance;
-    //        }
-    //    }
-    //    catch( Exception e )
-    //    {
-    //        throw new InvalidPropertyException( "Could not instantiate property", e );
-    //    }
-    //}
-
-
+        //            return instance;
+        //        }
+        //    }
+        //    catch( Exception e )
+        //    {
+        //        throw new InvalidPropertyException( "Could not instantiate property", e );
+        //    }
+        //}
     }
 
     public class EntityState

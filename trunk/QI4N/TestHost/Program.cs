@@ -1,4 +1,4 @@
-﻿namespace ConsoleApplication23
+namespace ConsoleApplication23
 {
     using System;
 
@@ -19,7 +19,7 @@
             var accidentBuilder = factory.NewCompositeBuilder<Accident>();
 
             // prototype support is in place and works
-            var protoManufacturer = manufacturerBuilder.StateOfComposite();
+            var protoManufacturer = manufacturerBuilder.Prototype();
 
             // Properties support .Value and Get/Set
             // Set the properties of the prototype
@@ -31,7 +31,7 @@
             var manufacturer = manufacturerBuilder.NewInstance();
 
             // Create a prototype for a car composite
-            var protoCar = carBuilder.StateOfComposite();
+            var protoCar = carBuilder.Prototype();
             protoCar.Model.Value = "Amazon";
 
             // create a car composite based on the prototype
@@ -42,7 +42,7 @@
             Console.WriteLine(idCar.Identity.Value);
 
             // create a prototype value object
-            var protoAccident = accidentBuilder.StateOfComposite();
+            var protoAccident = accidentBuilder.Prototype();
             protoAccident.Description.Value = "Wheel fell off";
             protoAccident.Occured.Value = new DateTime(2009, 06, 01);
             protoAccident.Repaired.Value = new DateTime(2010, 01, 01);           

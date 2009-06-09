@@ -1,5 +1,7 @@
 namespace QI4N.Framework.Runtime
 {
+    using System;
+
     public class DefaultCompositeBuilderFactory : CompositeBuilderFactory
     {
         public T NewComposite<T>()
@@ -16,7 +18,12 @@ namespace QI4N.Framework.Runtime
 
         private static CompositeBuilder<T> GetBuilder<T>()
         {
-            return new CompositeBuilderImpl<T>();
+            return new CompositeBuilderInstance<T>();
+        }
+
+        public CompositeBuilder<object> NewCompositeBuilder(Type fragmentType)
+        {
+            return new CompositeBuilderInstance<object>(fragmentType);
         }
     }
 }
