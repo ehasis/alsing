@@ -7,5 +7,7 @@
         K StateFor<K>();
 
         T StateOfComposite();
+
+        void Use(object item);
     }
 }

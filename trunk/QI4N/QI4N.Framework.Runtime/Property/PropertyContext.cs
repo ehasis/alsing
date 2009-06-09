@@ -9,7 +9,7 @@ namespace QI4N.Framework.Runtime
 
     public class PropertyContext
     {
-        private PropertyBinding propertyBinding;
+        private readonly PropertyBinding propertyBinding;
 
         public PropertyContext(PropertyBinding propertyBinding)
         {
@@ -19,15 +19,33 @@ namespace QI4N.Framework.Runtime
 
         public PropertyBinding GetPropertyBinding()
         {
-            return null;
+            return propertyBinding;
         }
 
-        public AbstractProperty NewInstance(ModuleInstance moduleInstance, object value, Type type)
+        public AbstractProperty NewInstance(ModuleInstance moduleInstance, object value, Type propertyType)
         {
-            var property = ProxyInstanceBuilder.NewProxyInstance(type) as AbstractProperty;
-            property.Value = value;
+            if (typeof(Composite).IsAssignableFrom(propertyType))
+            {
+                Type propertyCompositeType = propertyType;
 
-            return property;
+                var cb = moduleInstance.GetStructureContext().GetCompositeBuilderFactory().NewCompositeBuilder(propertyCompositeType);
+                cb.Use(value);
+                cb.Use(propertyBinding);
+                var property = cb.NewInstance() as AbstractProperty;
+
+                return property;
+            }
+            else
+            {
+                var property = ProxyInstanceBuilder.NewProxyInstance(propertyType) as AbstractProperty;
+                if (property == null)
+                {
+                    throw new NotSupportedException("Type is not a property");
+                }
+                property.Value = value;
+
+                return property;
+            }
         }
 
         public AbstractProperty newEntityInstance(ModuleInstance moduleInstance, EntityState entityState)

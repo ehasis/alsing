@@ -271,6 +271,13 @@
                 throw new NotSupportedException("Method does not represent state: " + method.Name);
             }
         }
+
+
+
+        public void Use(object item)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
@@ -287,10 +294,5 @@
 
 
 
-    public interface PropertyBinding
-    {
-        PropertyResolution GetPropertyResolution();
 
-        object GetDefaultValue();
-    }
 }

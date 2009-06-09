@@ -7,7 +7,7 @@
     public class AssociationMixin : InvocationHandler
     {
         [State]
-        private EntityStateHolder associations;
+        protected EntityStateHolder associations;
 
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
