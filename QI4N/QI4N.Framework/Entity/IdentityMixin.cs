@@ -3,7 +3,7 @@
     public class IdentityMixin : Identity
     {
         [State]
-        private Property<string> identity;
+        protected Property<string> identity;
 
         public Property<string> Identity
         {

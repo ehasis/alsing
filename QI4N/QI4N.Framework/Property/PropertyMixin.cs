@@ -7,7 +7,7 @@ namespace QI4N.Framework
     public class PropertyMixin : InvocationHandler
     {
         [State]
-        private StateHolder state;
+        protected StateHolder state;
 
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
