@@ -4,28 +4,22 @@
     using System.Collections.Generic;
     using System.Reflection;
 
+    using Reflection;
+
     public class CompositeMethodsModel
     {
         private readonly IDictionary<MethodInfo, CompositeMethodModel> methods;
 
-        private AbstractMixinsModel mixinsModel;
+        private readonly AbstractMixinsModel mixinsModel;
 
-        private Type type;
+        private readonly Type compositeType;
 
-
-        /*ConstraintsModel constraintsModel,
-                 ConcernsDeclaration concernsModel,
-                 SideEffectsDeclaration sideEffectsModel,*/
-        //this.constraintsModel = constraintsModel;
-        //this.concernsModel = concernsModel;
-        //this.sideEffectsModel = sideEffectsModel;
-
-        public CompositeMethodsModel(Type type, AbstractMixinsModel mixinsModel)
+        public CompositeMethodsModel(Type compositeType, AbstractMixinsModel mixinsModel)
         {
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();
-            this.type = type;
+            this.compositeType = compositeType;
             this.mixinsModel = mixinsModel;
-            this.ImplementMixinType(type);
+            this.ImplementMixinType(compositeType);
         }
 
 
@@ -33,7 +27,7 @@
         {
             CompositeMethodModel compositeMethod;
 
-            if (this.methods.TryGetValue(method, out compositeMethod))
+            if (this.methods.TryGetValue(method, out compositeMethod) == false)
             {
                 return mixins.InvokeObject(proxy, args, method);
             }
@@ -41,9 +35,32 @@
             return compositeMethod.Invoke(proxy, args, mixins, moduleInstance);
         }
 
-        private void ImplementMixinType(Type type)
+        private void ImplementMixinType(Type mixinType)
         {
-            throw new NotImplementedException();
+            var thisDependencies = new HashSet<Type>();
+            foreach (MethodInfo method in mixinType.GetAllInterfaceMethods())
+            {
+                if (!methods.ContainsKey(method))
+                {
+                    MixinModel mixinModel = mixinsModel.ImplementMethod(method);
+                    var methodComposite = new CompositeMethodModel(method,mixinModel);
+
+                    // Implement @This references
+                    //methodComposite.addThisInjections( thisDependencies );
+                    //mixinModel.addThisInjections( thisDependencies );
+
+                    methods.Add(method, methodComposite);
+                }
+            }
+
+            // Add type to set of mixin types
+            mixinsModel.AddMixinType(mixinType);
+
+            // Implement all @This dependencies that were found
+            foreach (Type thisDependency in thisDependencies)
+            {
+                ImplementMixinType(thisDependency);
+            }
         }
     }
 }

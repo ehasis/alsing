@@ -6,7 +6,7 @@ namespace QI4N.Framework.Runtime
 
         Composite Proxy { get; set; }
 
-        CompositeModel Model { get; }
+        CompositeModel CompositeModel { get; }
 
         string ToURI();
     }

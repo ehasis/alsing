@@ -8,8 +8,8 @@
     {
         protected IDictionary<MethodInfo, AbstractProperty> propertyValues;
 
-        public CompositeModel(CompositeMethodsModel compositeMethodsModel, Type compositeType)
-                : base(compositeMethodsModel, compositeType)
+        public CompositeModel(CompositeMethodsModel compositeMethodsModel,AbstractMixinsModel mixinsModel , Type compositeType)
+                : base(compositeMethodsModel,mixinsModel, compositeType)
         {
         }
 
@@ -44,7 +44,7 @@
 
         public CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance uses, StateHolder stateHolder)
         {
-            object[] mixins = null;
+            object[] mixins = mixinsModel.NewMixinHolder();
             CompositeInstance compositeInstance = new DefaultCompositeInstance(this, moduleInstance, mixins, stateHolder);
             return compositeInstance;
         }
