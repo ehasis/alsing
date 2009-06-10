@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Composite\AbstractCompositeInstance.cs" />
+    <Compile Include="Composite\AbstractCompositeModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
     <Compile Include="Composite\CompositeBuilderInstance.cs" />
     <Compile Include="Composite\CompositeBuilderState.cs" />

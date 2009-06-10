@@ -28,7 +28,7 @@
 
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
-            throw new NotImplementedException();
+            return Model.Invoke(Mixins, this, proxy, method, args, Instance);
         }
 
         public string ToURI()
