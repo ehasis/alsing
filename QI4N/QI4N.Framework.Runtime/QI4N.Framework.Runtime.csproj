@@ -58,8 +58,9 @@
     <Compile Include="Composite\CompositeModel.cs" />
     <Compile Include="Composite\CompositeInstance.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
-    <Compile Include="Composite\DefaultCompositeBuilderFactory.cs" />
+    <Compile Include="Composite\CompositeBuilderFactoryInstance.cs" />
     <Compile Include="Composite\MixinsInstance.cs" />
+    <Compile Include="Composite\ModuleInstance.cs" />
     <Compile Include="Composite\StateInvocationHandler.cs" />
     <Compile Include="Composite\UseInstance.cs" />
     <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />
