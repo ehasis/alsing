@@ -11,7 +11,7 @@ namespace ConsoleApplication23
         {
             // Lacking support for QI4J structural definitions
             // just kickstart my default impl
-            ModuleInstance moduleInstance = new ModuleInstance();
+            var moduleInstance = new ModuleInstance();
             var factory = new CompositeBuilderFactoryInstance(moduleInstance);
 
             // Create composite builder

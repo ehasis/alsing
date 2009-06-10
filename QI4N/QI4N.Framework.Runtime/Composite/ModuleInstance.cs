@@ -6,7 +6,9 @@ namespace QI4N.Framework.Runtime
 
     public class ModuleInstance
     {
-        private Type GetMatchingComposite(Type mixinType)
+        private readonly IDictionary<Type, CompositeFinder> compositeFinders = new Dictionary<Type, CompositeFinder>();
+
+        private static Type GetMatchingComposite(Type mixinType)
         {
             IEnumerable<Type> matchingComposites = from composite in CompositeTypeCache.Composites
                                                    where mixinType.IsAssignableFrom(composite) &&
@@ -18,13 +20,28 @@ namespace QI4N.Framework.Runtime
 
         public CompositeFinder FindCompositeModel(Type mixinType)
         {
-            Type compositeType = GetMatchingComposite(mixinType);
-            var finder = new CompositeFinder
+            CompositeFinder finder;
+            if (!compositeFinders.TryGetValue(mixinType,out finder))
+            {
+                finder = new CompositeFinder
                              {
-                                     Module = this,
-                                     Model = new CompositeModel(null, compositeType)
+                                     Type = mixinType
                              };
-            return finder;
+                VisitModules(finder);
+                if (finder.Model != null)
+                {
+                    compositeFinders.Add(mixinType, finder);
+                }
+            }
+
+            return finder;            
+        }
+
+        private void VisitModules(CompositeFinder finder)
+        {
+            finder.Module = this;
+            Type compositeType = GetMatchingComposite(finder.Type);
+            finder.Model = new CompositeModel(null, compositeType);
         }
 
         public StructureContext GetStructureContext()
