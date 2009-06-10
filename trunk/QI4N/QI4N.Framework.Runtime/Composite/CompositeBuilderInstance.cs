@@ -37,15 +37,17 @@
             this.compositeModel = model;
         }
 
-        public CompositeBuilderInstance() : this(typeof(T))
-        {
-        }
+        //public CompositeBuilderInstance() : this(typeof(T))
+        //{
+        //}
 
-        public CompositeBuilderInstance(Type compositeInterface)
-        {
-            this.compositeInterface = compositeInterface;
-            this.compositeModel = new CompositeModel(compositeInterface);
-        }
+        //public CompositeBuilderInstance(Type compositeType)
+        //{
+        //    this.compositeInterface = compositeType;
+
+        //    var compositeMethodsModel = new CompositeMethodsModel(compositeType, new AbstractMixinsModel());
+        //    this.compositeModel = new CompositeModel(compositeMethodsModel,compositeType);
+        //}
 
         public IDictionary<MethodInfo, AbstractAssociation> Associations
         {
@@ -60,7 +62,13 @@
             }
         }
 
-
+        public Type CompositeType
+        {
+            get
+            {
+                return this.compositeModel.CompositeType;
+            }
+        }
 
 
         protected StateHolder State
