@@ -9,8 +9,16 @@
         protected IDictionary<MethodInfo, AbstractProperty> propertyValues;
 
         public CompositeModel(CompositeMethodsModel compositeMethodsModel, Type compositeType)
-            : base(compositeMethodsModel, compositeType)
+                : base(compositeMethodsModel, compositeType)
         {
+        }
+
+        public Type CompositeType
+        {
+            get
+            {
+                return this.compositeType;
+            }
         }
 
         public AbstractStateModel State
@@ -31,14 +39,6 @@
                 }
 
                 return this.propertyValues;
-            }
-        }
-
-        public Type CompositeType
-        {
-            get
-            {
-                return compositeType;
             }
         }
 

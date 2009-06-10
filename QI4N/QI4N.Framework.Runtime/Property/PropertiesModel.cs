@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework
+﻿namespace QI4N.Framework.Runtime
 {
     public class PropertiesModel
     {

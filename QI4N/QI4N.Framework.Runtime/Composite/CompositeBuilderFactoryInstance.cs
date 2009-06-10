@@ -1,8 +1,6 @@
-namespace QI4N.Framework
+namespace QI4N.Framework.Runtime
 {
     using System;
-
-    using Runtime;
 
     public class CompositeBuilderFactoryInstance : CompositeBuilderFactory
     {
@@ -15,53 +13,32 @@ namespace QI4N.Framework
 
         public T NewComposite<T>()
         {
-            CompositeBuilder<T> builder = GetBuilder<T>(typeof(T));
+            CompositeBuilder<T> builder = this.GetBuilder<T>(typeof(T));
             return builder.NewInstance();
         }
 
         public CompositeBuilder<T> NewCompositeBuilder<T>()
         {
-            CompositeBuilder<T> builder = GetBuilder<T>(typeof(T));
+            CompositeBuilder<T> builder = this.GetBuilder<T>(typeof(T));
             return builder;
         }
 
         public CompositeBuilder<object> NewCompositeBuilder(Type mixinType)
         {
-            CompositeBuilder<object> builder = GetBuilder<object>(mixinType);
+            CompositeBuilder<object> builder = this.GetBuilder<object>(mixinType);
             return builder;
         }
 
         private CompositeBuilder<T> GetBuilder<T>(Type mixinType)
         {
-            CompositeFinder finder = moduleInstance.FindCompositeModel( mixinType );
+            CompositeFinder finder = this.moduleInstance.FindCompositeModel(mixinType);
 
-            if( finder.Model == null )
+            if (finder.Model == null)
             {
                 throw new Exception("Composite not found");
             }
 
             return new CompositeBuilderInstance<T>(finder.Module, finder.Model);
-        }
-
-
-    }
-
-    public class CompositeFinder
-    {
-        public CompositeModel Model
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public ModuleInstance Module
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }
