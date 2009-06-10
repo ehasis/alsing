@@ -25,11 +25,9 @@
             this.compositeType = compositeType;
             this.compositeMethodsModel = compositeMethodsModel;
 
-            Type realCompositeType = this.GetMatchingComposite();
-
             var builder = new InvocationProxyTypeBuilder();
 
-            this.proxyType = builder.BuildProxyType(realCompositeType);
+            this.proxyType = builder.BuildProxyType(compositeType);
         }
 
         public object Invoke(MixinsInstance mixins, CompositeInstance compositeInstance, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
@@ -59,14 +57,6 @@
             return this.stateModel.NewState(state);
         }
 
-        private Type GetMatchingComposite()
-        {
-            IEnumerable<Type> matchingComposites = from composite in CompositeTypeCache.Composites
-                                                   where this.compositeType.IsAssignableFrom(composite) &&
-                                                         composite.IsInterface
-                                                   select composite;
 
-            return matchingComposites.Single();
-        }
     }
 }
