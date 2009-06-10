@@ -17,13 +17,15 @@
 
         protected AbstractStateModel stateModel;
 
-        protected AbstractCompositeModel(CompositeMethodsModel compositeMethodsModel, Type compositeType)
+        protected AbstractCompositeModel(CompositeMethodsModel compositeMethodsModel,AbstractMixinsModel mixinsModel, Type compositeType)
         {
             this.stateModel = new AbstractStateModel();
             this.compositeType = compositeType;
             this.compositeMethodsModel = compositeMethodsModel;
 
             var builder = new InvocationProxyTypeBuilder();
+
+            this.mixinsModel = mixinsModel;
 
             this.proxyType = builder.BuildProxyType(compositeType);
         }

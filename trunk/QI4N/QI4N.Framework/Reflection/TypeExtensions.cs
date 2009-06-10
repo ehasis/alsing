@@ -84,5 +84,16 @@ namespace QI4N.Framework.Reflection
             }
             return type.Name;
         }
+
+        public static IEnumerable<MethodInfo> GetAllInterfaceMethods(this Type self)
+        {
+            foreach(Type type in self.GetAllInterfaces())
+            {
+                foreach(MethodInfo methodInfo in type.GetMethods())
+                {
+                    yield return methodInfo;
+                }
+            }
+        }
     }
 }
