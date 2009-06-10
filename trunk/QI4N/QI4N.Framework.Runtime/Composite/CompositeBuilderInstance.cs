@@ -2,10 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
-
-    using Proxy;
 
     public class CompositeBuilderInstance<T> : CompositeBuilder<T>
     {
@@ -16,7 +13,6 @@
         protected CompositeModel compositeModel;
 
         protected ModuleInstance moduleInstance;
-
 
 
         protected CompositeInstance prototypeInstance;
@@ -115,41 +111,35 @@
             CompositeInstance compositeInstance = this.compositeModel.NewCompositeInstance(this.moduleInstance, this.uses ?? UsesInstance.NO_USES, instanceState);
 
             return (T)compositeInstance.Proxy;
-
-
         }
 
         public T Prototype()
         {
             // Instantiate proxy for given composite interface
 
-            if (prototypeInstance == null)
+            if (this.prototypeInstance == null)
             {
-                prototypeInstance = compositeModel.NewCompositeInstance(moduleInstance, Uses, State);
+                this.prototypeInstance = this.compositeModel.NewCompositeInstance(this.moduleInstance, this.Uses, this.State);
             }
 
-            return (T)prototypeInstance.Proxy;
+            return (T)this.prototypeInstance.Proxy;
         }
 
         public K PrototypeFor<K>()
         {
             // Instantiate given value type
-            if (prototypeInstance == null)
+            if (this.prototypeInstance == null)
             {
-                prototypeInstance = compositeModel.NewCompositeInstance(moduleInstance, Uses, State);
+                this.prototypeInstance = this.compositeModel.NewCompositeInstance(this.moduleInstance, this.Uses, this.State);
             }
 
-            return (K)prototypeInstance.Proxy;
+            return (K)this.prototypeInstance.Proxy;
         }
 
         public void Use(params object[] usedObjects)
         {
             this.Uses.Use(usedObjects);
         }
-
-        
-
-
     }
 
 

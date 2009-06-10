@@ -1,15 +1,15 @@
-namespace QI4N.Framework
+namespace QI4N.Framework.Runtime
 {
     using System;
 
     public class ModuleInstance
     {
-        public StructureContext GetStructureContext()
+        public CompositeFinder FindCompositeModel(Type mixinType)
         {
             throw new Exception();
         }
 
-        public CompositeFinder FindCompositeModel(Type mixinType)
+        public StructureContext GetStructureContext()
         {
             throw new Exception();
         }

@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework
+﻿namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,6 @@
     using System.Reflection;
 
     using Proxy;
-
-    using Runtime;
 
     public abstract class AbstractCompositeModel
     {

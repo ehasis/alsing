@@ -1,9 +1,7 @@
-﻿namespace QI4N.Framework
+﻿namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Reflection;
-
-    using Runtime;
 
     public class DefaultCompositeInstance : CompositeInstance, MixinsInstance
     {
