@@ -8,7 +8,8 @@
     {
         protected IDictionary<MethodInfo, AbstractProperty> propertyValues;
 
-        public CompositeModel(Type compositeType) : base(new CompositeMethodsModel(), compositeType)
+        public CompositeModel(CompositeMethodsModel compositeMethodsModel, Type compositeType)
+            : base(compositeMethodsModel, compositeType)
         {
         }
 
@@ -30,6 +31,14 @@
                 }
 
                 return this.propertyValues;
+            }
+        }
+
+        public Type CompositeType
+        {
+            get
+            {
+                return compositeType;
             }
         }
 

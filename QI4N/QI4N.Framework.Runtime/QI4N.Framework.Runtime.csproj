@@ -47,14 +47,19 @@
   <ItemGroup>
     <Compile Include="Composite\AbstractCompositeInstance.cs" />
     <Compile Include="Composite\AbstractCompositeModel.cs" />
+    <Compile Include="Composite\AbstractMixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
     <Compile Include="Composite\CompositeBuilderInstance.cs" />
     <Compile Include="Composite\CompositeBuilderState.cs" />
+    <Compile Include="Composite\CompositeMethodInstance.cs" />
+    <Compile Include="Composite\CompositeMethodModel.cs" />
+    <Compile Include="Composite\CompositeMethodsModel.cs" />
     <Compile Include="Composite\DefaultCompositeInstance.cs" />
     <Compile Include="Composite\CompositeModel.cs" />
     <Compile Include="Composite\CompositeInstance.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\DefaultCompositeBuilderFactory.cs" />
+    <Compile Include="Composite\MixinsInstance.cs" />
     <Compile Include="Composite\StateInvocationHandler.cs" />
     <Compile Include="Composite\UseInstance.cs" />
     <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />

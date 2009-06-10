@@ -34,7 +34,7 @@
             this.proxyType = builder.BuildProxyType(realCompositeType);
         }
 
-        public object Invoke(object[] mixins, CompositeInstance compositeInstance, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
+        public object Invoke(MixinsInstance mixins, CompositeInstance compositeInstance, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
         {
             return this.compositeMethodsModel.Invoke(mixins, proxy, method, args, moduleInstance);
         }
@@ -70,17 +70,5 @@
 
             return matchingComposites.Single();
         }
-    }
-
-    public class CompositeMethodsModel
-    {
-        public object Invoke(object[] mixins, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class AbstractMixinsModel
-    {
     }
 }

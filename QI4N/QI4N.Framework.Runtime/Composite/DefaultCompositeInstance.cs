@@ -5,7 +5,7 @@
 
     using Runtime;
 
-    public class DefaultCompositeInstance : CompositeInstance
+    public class DefaultCompositeInstance : CompositeInstance, MixinsInstance
     {
         public DefaultCompositeInstance(CompositeModel model, ModuleInstance instance, object[] mixins, StateHolder state)
         {
@@ -28,7 +28,17 @@
 
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
-            return Model.Invoke(Mixins, this, proxy, method, args, Instance);
+            return this.Model.Invoke(this, this, proxy, method, args, this.Instance);
+        }
+
+        public object Invoke(object composite, object[] args, CompositeMethodInstance methodInstance)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object InvokeObject(object proxy, object[] args, MethodInfo method)
+        {
+            throw new NotImplementedException();
         }
 
         public string ToURI()
