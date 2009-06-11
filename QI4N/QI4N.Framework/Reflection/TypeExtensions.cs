@@ -21,6 +21,20 @@ namespace QI4N.Framework.Reflection
             }
         }
 
+        public static IEnumerable<FieldInfo> GetAllFields(this Type type)
+        {
+            const BindingFlags flags = BindingFlags.Instance |
+                                       BindingFlags.Public |
+                                       BindingFlags.NonPublic;
+
+            FieldInfo[] ownFields = type.GetFields(flags).ToArray();
+
+            foreach (FieldInfo field in ownFields)
+            {
+                yield return field;
+            }
+        }
+
         public static IEnumerable<MethodInfo> GetAllMethods(this Type type)
         {
             const BindingFlags flags = BindingFlags.Instance |
