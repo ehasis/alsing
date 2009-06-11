@@ -18,7 +18,7 @@
             this.method = method;
         }
 
-        public object GetMixin(object[] Mixins)
+        public object GetMixin(object[] mixins)
         {
             throw new NotImplementedException();
         }

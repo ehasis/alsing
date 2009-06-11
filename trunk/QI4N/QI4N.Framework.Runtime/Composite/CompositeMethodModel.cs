@@ -1,6 +1,7 @@
 ﻿namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
 
     public class CompositeMethodModel
@@ -12,7 +13,7 @@
         public CompositeMethodModel(MethodInfo method, MixinModel model)
         {
             this.method = method;
-            this.mixinModel = model;
+            this.mixinModel = model;            
         }
 
         public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
@@ -24,6 +25,7 @@
 
         private CompositeMethodInstance GetInstance(ModuleInstance moduleInstance)
         {
+
             return newCompositeMethodInstance(moduleInstance);
         }
 

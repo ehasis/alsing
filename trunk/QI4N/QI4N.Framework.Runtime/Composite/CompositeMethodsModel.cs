@@ -10,11 +10,11 @@
     {
         private readonly IDictionary<MethodInfo, CompositeMethodModel> methods;
 
-        private readonly AbstractMixinsModel mixinsModel;
+        private readonly MixinsModel mixinsModel;
 
         private readonly Type compositeType;
 
-        public CompositeMethodsModel(Type compositeType, AbstractMixinsModel mixinsModel)
+        public CompositeMethodsModel(Type compositeType, MixinsModel mixinsModel)
         {
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();
             this.compositeType = compositeType;

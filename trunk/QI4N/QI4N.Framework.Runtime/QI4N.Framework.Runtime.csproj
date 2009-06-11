@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Composite\AbstractCompositeModel.cs" />
-    <Compile Include="Composite\AbstractMixinsModel.cs" />
+    <Compile Include="Composite\MixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
     <Compile Include="Composite\CompositeBuilderInstance.cs" />
     <Compile Include="Composite\CompositeBuilderState.cs" />
@@ -59,6 +59,7 @@
     <Compile Include="Composite\CompositeInstance.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\CompositeBuilderFactoryInstance.cs" />
+    <Compile Include="Composite\MixinModel.cs" />
     <Compile Include="Composite\MixinsInstance.cs" />
     <Compile Include="Composite\ModuleInstance.cs" />
     <Compile Include="Composite\StateInvocationHandler.cs" />
