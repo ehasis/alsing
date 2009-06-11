@@ -8,7 +8,7 @@
     {
         protected IDictionary<MethodInfo, AbstractProperty> propertyValues;
 
-        public CompositeModel(CompositeMethodsModel compositeMethodsModel,AbstractMixinsModel mixinsModel , Type compositeType)
+        public CompositeModel(CompositeMethodsModel compositeMethodsModel,MixinsModel mixinsModel , Type compositeType)
                 : base(compositeMethodsModel,mixinsModel, compositeType)
         {
         }
@@ -46,6 +46,20 @@
         {
             object[] mixins = mixinsModel.NewMixinHolder();
             CompositeInstance compositeInstance = new DefaultCompositeInstance(this, moduleInstance, mixins, stateHolder);
+
+            //try
+            //{
+                // Instantiate all mixins
+            mixinsModel.ConfigureMixins(compositeInstance, uses, stateHolder, mixins);
+
+            //}
+            //catch (InvalidCompositeException e)
+            //{
+            //    e.setFailingCompositeType(type());
+            //    e.setMessage("Invalid Cyclic Mixin usage dependency");
+            //    throw e;
+            //}
+
             return compositeInstance;
         }
     }
