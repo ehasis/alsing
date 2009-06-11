@@ -91,12 +91,12 @@
 
         private static void ConfigureMixinField(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
         {
-            MixinFieldInjectState(mixinField, mixin, stateHolder);
+            MixinFieldInjectState(mixinField, mixin,compositeInstance,uses, stateHolder);
 
-            MixinFieldInjectThis(mixinField, mixin, compositeInstance);
+            MixinFieldInjectThis(mixinField, mixin, compositeInstance, uses, stateHolder);
         }
 
-        private static void MixinFieldInjectState(FieldInfo mixinField, object mixin, StateHolder stateHolder)
+        private static void MixinFieldInjectState(FieldInfo mixinField, object mixin,CompositeInstance compositeInstance,UsesInstance uses, StateHolder stateHolder)
         {
             bool isState = mixinField.GetCustomAttributes(typeof(StateAttribute), true).Any();
 
@@ -104,11 +104,15 @@
             {
                 if (typeof(AbstractProperty).IsAssignableFrom(mixinField.FieldType))
                 {
-                    //handle state for property
+                    // TODO: create property
+                    object propertyInstance = null;
+                    mixinField.SetValue(mixin, propertyInstance);
                 }
                 else if (typeof(AbstractAssociation).IsAssignableFrom(mixinField.FieldType))
                 {
-                    //handle state for association
+                    // TODO: create association
+                    object associationInstance = null;
+                    mixinField.SetValue(mixin, associationInstance);
                 }
                 else if (typeof(StateHolder).IsAssignableFrom(mixinField.FieldType))
                 {
@@ -117,7 +121,7 @@
             }
         }
 
-        private static void MixinFieldInjectThis(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance)
+        private static void MixinFieldInjectThis(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
         {
             bool isThis = mixinField.GetCustomAttributes(typeof(ThisAttribute), true).Any();
 
