@@ -50,7 +50,7 @@
             //try
             //{
                 // Instantiate all mixins
-            mixinsModel.ConfigureMixins(compositeInstance, uses, stateHolder, mixins);
+            mixinsModel.NewMixins(compositeInstance, uses, stateHolder, mixins);
 
             //}
             //catch (InvalidCompositeException e)

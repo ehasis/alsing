@@ -27,14 +27,6 @@
             }
         }
 
-        public void ConfigureMixins(CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder, object[] mixins)
-        {
-            foreach (object mixin in mixins)
-            {
-                ConfigureMixins(mixin, compositeInstance, uses, stateHolder);
-            }
-        }
-
         public MixinModel ImplementMethod(MethodInfo method)
         {
             if (!this.methodImplementation.ContainsKey(method))
@@ -69,10 +61,32 @@
 
         public object[] NewMixinHolder()
         {
-            // TODO: linqify
-            return this.mixinImplementationTypes
-                    .Select(type => Activator.CreateInstance((Type)type, null))
-                    .ToArray();
+            return new object[this.mixinImplementationTypes.Count];
+        }
+
+        public void NewMixins(CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder, object[] mixins)
+        {
+            int i = 0;
+            foreach (Type mixinImplementationType in this.mixinImplementationTypes)
+            {
+                object mixin = Activator.CreateInstance(mixinImplementationType, null);
+                mixins[i++] = mixin;
+            }
+
+            foreach (object mixin in mixins)
+            {
+                ConfigureMixin(mixin, compositeInstance, uses, stateHolder);
+            }
+        }
+
+        private static void ConfigureMixin(object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
+        {
+            FieldInfo[] mixinFields = mixin.GetType().GetAllFields().ToArray();
+
+            foreach (FieldInfo mixinField in mixinFields)
+            {
+                ConfigureMixinField(mixinField, mixin, compositeInstance, uses, stateHolder);
+            }
         }
 
         private static void ConfigureMixinField(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
@@ -94,7 +108,7 @@
                 }
                 else if (typeof(AbstractAssociation).IsAssignableFrom(mixinField.FieldType))
                 {
-                    //handle state for property
+                    //handle state for association
                 }
                 else if (typeof(StateHolder).IsAssignableFrom(mixinField.FieldType))
                 {
@@ -110,16 +124,6 @@
             if (isThis)
             {
                 mixinField.SetValue(mixin, compositeInstance);
-            }
-        }
-
-        private void ConfigureMixins(object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
-        {
-            FieldInfo[] mixinFields = mixin.GetType().GetAllFields().ToArray();
-
-            foreach (FieldInfo mixinField in mixinFields)
-            {
-                ConfigureMixinField(mixinField, mixin, compositeInstance, uses, stateHolder);
             }
         }
     }
