@@ -5,24 +5,33 @@
     using System.Linq;
     using System.Reflection;
 
+    using Reflection;
+
     public class AbstractMixinsModel
     {
         private readonly HashSet<Type> mixinTypes = new HashSet<Type>();
 
+        private readonly HashSet<Type> mixinImplementationTypes = new HashSet<Type>();
+
         public void AddMixinType(Type mixinType)
         {
             mixinTypes.Add(mixinType);
+
+            foreach(Type mixinImplementationType in mixinType.GetMixinTypes())
+            {
+                mixinImplementationTypes.Add(mixinImplementationType);
+            }
         }
 
         public MixinModel ImplementMethod(MethodInfo method)
         {
-        //    throw new NotImplementedException();
             return new MixinModel();
         }
 
         public object[] NewMixinHolder()
         {
-            return mixinTypes
+            // TODO: linqify
+            return mixinImplementationTypes
                     .Select(type => Activator.CreateInstance(type, null))
                     .ToArray();
         }

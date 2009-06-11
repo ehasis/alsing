@@ -95,5 +95,23 @@ namespace QI4N.Framework.Reflection
                 }
             }
         }
+
+        public static Type[] GetAppliesToTypes(this Type mixinType)
+        {
+            var appliesTo = from attribs in mixinType.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
+                            from type in attribs.AppliesToTypes
+                            select type;
+
+            return appliesTo.ToArray();
+        }
+
+        public static Type[] GetMixinTypes(this Type mixinType)
+        {
+            var appliesTo = from attribs in mixinType.GetCustomAttributes(typeof(MixinsAttribute), true).Cast<MixinsAttribute>()
+                            from type in attribs.MixinTypes
+                            select type;
+
+            return appliesTo.ToArray();
+        }
     }
 }
