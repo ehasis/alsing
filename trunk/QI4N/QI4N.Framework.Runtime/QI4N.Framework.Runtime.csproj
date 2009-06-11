@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Composite\AbstractCompositeInstance.cs" />
     <Compile Include="Composite\AbstractCompositeModel.cs" />
     <Compile Include="Composite\AbstractMixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />

@@ -37,8 +37,8 @@
 
         private void ImplementMixinType(Type mixinType)
         {
-            var thisDependencies = new HashSet<Type>();
-            foreach (MethodInfo method in mixinType.GetAllInterfaceMethods())
+       //     var thisDependencies = new HashSet<Type>();
+            foreach (MethodInfo method in mixinType.GetMethods())
             {
                 if (!methods.ContainsKey(method))
                 {
@@ -54,13 +54,19 @@
             }
 
             // Add type to set of mixin types
+
             mixinsModel.AddMixinType(mixinType);
 
-            // Implement all @This dependencies that were found
-            foreach (Type thisDependency in thisDependencies)
+            foreach(Type t in mixinType.GetInterfaces())
             {
-                ImplementMixinType(thisDependency);
-            }
+                ImplementMixinType(t);
+            }   
+
+            //// Implement all @This dependencies that were found
+            //foreach (Type thisDependency in thisDependencies)
+            //{
+            //    ImplementMixinType(thisDependency);
+            //}
         }
     }
 }

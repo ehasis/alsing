@@ -47,6 +47,7 @@
 
         public Composite NewProxy(InvocationHandler invocationHandler)
         {
+            // TODO: linqify
             var instance = Activator.CreateInstance(this.proxyType, invocationHandler) as Composite;
 
             return instance;
