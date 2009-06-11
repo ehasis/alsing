@@ -27,6 +27,14 @@
             }
         }
 
+        public void ConfigureMixins(CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder, object[] mixins)
+        {
+            foreach (object mixin in mixins)
+            {
+                ConfigureMixins(mixin, compositeInstance, uses, stateHolder);
+            }
+        }
+
         public MixinModel ImplementMethod(MethodInfo method)
         {
             if (!this.methodImplementation.ContainsKey(method))
@@ -67,17 +75,52 @@
                     .ToArray();
         }
 
-        public void ConfigureMixins(CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder, object[] mixins)
+        private static void ConfigureMixinField(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
         {
-            foreach(var mixin in mixins)
+            MixinFieldInjectState(mixinField, mixin, stateHolder);
+
+            MixinFieldInjectThis(mixinField, mixin, compositeInstance);
+        }
+
+        private static void MixinFieldInjectState(FieldInfo mixinField, object mixin, StateHolder stateHolder)
+        {
+            bool isState = mixinField.GetCustomAttributes(typeof(StateAttribute), true).Any();
+
+            if (isState)
             {
-                ConfigureMixins(mixin,compositeInstance,uses,stateHolder);
+                if (typeof(AbstractProperty).IsAssignableFrom(mixinField.FieldType))
+                {
+                    //handle state for property
+                }
+                else if (typeof(AbstractAssociation).IsAssignableFrom(mixinField.FieldType))
+                {
+                    //handle state for property
+                }
+                else if (typeof(StateHolder).IsAssignableFrom(mixinField.FieldType))
+                {
+                    mixinField.SetValue(mixin, stateHolder);
+                }
+            }
+        }
+
+        private static void MixinFieldInjectThis(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance)
+        {
+            bool isThis = mixinField.GetCustomAttributes(typeof(ThisAttribute), true).Any();
+
+            if (isThis)
+            {
+                mixinField.SetValue(mixin, compositeInstance);
             }
         }
 
         private void ConfigureMixins(object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
         {
-            
+            FieldInfo[] mixinFields = mixin.GetType().GetAllFields().ToArray();
+
+            foreach (FieldInfo mixinField in mixinFields)
+            {
+                ConfigureMixinField(mixinField, mixin, compositeInstance, uses, stateHolder);
+            }
         }
     }
 }
