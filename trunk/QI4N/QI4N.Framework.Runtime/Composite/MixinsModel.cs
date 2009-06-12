@@ -44,10 +44,11 @@
 
                 if (mixinModel == null)
                 {
-                    mixinModel = new MixinModel();
-
-                    mixinModel.MixinsModel = this;
-                    mixinModel.MixinType = method.DeclaringType;
+                    mixinModel = new MixinModel
+                                     {
+                                             MixinsModel = this,
+                                             MixinType = method.DeclaringType
+                                     };
 
                     this.mixinModels.Add(mixinModel);
                 }
