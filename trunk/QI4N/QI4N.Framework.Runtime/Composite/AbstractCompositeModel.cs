@@ -3,7 +3,7 @@
     using System;
     using System.Reflection;
 
-    using Proxy;
+    using Reflection;
 
     public abstract class AbstractCompositeModel
     {

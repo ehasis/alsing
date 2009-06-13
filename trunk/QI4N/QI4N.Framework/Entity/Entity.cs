@@ -2,8 +2,6 @@
 {
     public interface Entity
     {
-        bool IsReference { get; }
-
         UnitOfWork UnitOfWork { get; }
     }
 }
