@@ -19,7 +19,18 @@
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();
             this.compositeType = compositeType;
             this.mixinsModel = mixinsModel;
-            this.ImplementMixinType(compositeType);
+            this.BuildMixinsModel(compositeType);
+            this.ImplementMixinMethods();
+        }
+
+        private void ImplementMixinMethods()
+        {
+            foreach (MethodInfo method in compositeType.GetAllInterfaceMethods())
+            {
+                MixinModel mixinModel = mixinsModel.ImplementMethod(method);
+                var compositeMethodModel = new CompositeMethodModel(method,mixinModel,mixinsModel.IndexOfMixin(mixinModel.MixinType));
+                methods.Add(method,compositeMethodModel);
+            }
         }
 
 
@@ -35,38 +46,14 @@
             return compositeMethod.Invoke(proxy, args, mixins, moduleInstance);
         }
 
-        private void ImplementMixinType(Type mixinType)
+        private void BuildMixinsModel(Type mixinType)
         {
-       //     var thisDependencies = new HashSet<Type>();
-            foreach (MethodInfo method in mixinType.GetMethods())
+            var allInterfaces = mixinType.GetAllInterfaces();
+
+            foreach(Type mixin in allInterfaces)
             {
-                if (!methods.ContainsKey(method))
-                {
-                    MixinModel mixinModel = mixinsModel.ImplementMethod(method);
-                    var methodComposite = new CompositeMethodModel(method,mixinModel);
-
-                    // Implement @This references
-                    //methodComposite.addThisInjections( thisDependencies );
-                    //mixinModel.addThisInjections( thisDependencies );
-
-                    methods.Add(method, methodComposite);
-                }
-            }
-
-            // Add type to set of mixin types
-
-            mixinsModel.AddMixinType(mixinType);
-
-            foreach(Type t in mixinType.GetInterfaces())
-            {
-                ImplementMixinType(t);
-            }   
-
-            //// Implement all @This dependencies that were found
-            //foreach (Type thisDependency in thisDependencies)
-            //{
-            //    ImplementMixinType(thisDependency);
-            //}
+                mixinsModel.AddMixinType(mixin);
+            }  
         }
     }
 }

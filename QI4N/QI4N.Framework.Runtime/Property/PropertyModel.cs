@@ -5,7 +5,14 @@
 
     using Proxy;
 
-    public class PropertyModel
+    public interface PropertyModel
+    {
+        AbstractProperty NewInstance(object value);
+
+
+    }
+
+    public class PropertyModel<T> : PropertyModel
     {
         private readonly MethodInfo accessor;
 
@@ -19,7 +26,7 @@
             return this.accessor;
         }
 
-        public AbstractProperty NewInstance<T>(object value)
+        public AbstractProperty NewInstance(object value)
         {
             var instance = new PropertyInstance<T>(null, default(T), this);
             AbstractProperty wrapper = this.WrapInstance(instance);
@@ -27,7 +34,7 @@
             return wrapper;
         }
 
-        private AbstractProperty WrapInstance<T>(PropertyInstance<T> instance)
+        private AbstractProperty WrapInstance(PropertyInstance<T> instance)
         {
             Type type = this.accessor.ReturnType;
             var handler = new PropertyHandler(instance);

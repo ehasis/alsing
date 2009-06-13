@@ -10,10 +10,13 @@
 
         private MixinModel mixinModel;
 
-        public CompositeMethodModel(MethodInfo method, MixinModel model)
+        private int mixinIndex;
+
+        public CompositeMethodModel(MethodInfo method, MixinModel model,int mixinIndex)
         {
             this.method = method;
-            this.mixinModel = model;            
+            this.mixinModel = model;
+            this.mixinIndex = mixinIndex;
         }
 
         public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
@@ -44,7 +47,7 @@
             //    invoker = sideEffectsInstance;
             //}
 
-            return new CompositeMethodInstance(invoker, mixinInvocationHandler, method);
+            return new CompositeMethodInstance(invoker, mixinInvocationHandler, method,mixinIndex);
         }
     }
 

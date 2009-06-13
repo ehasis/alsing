@@ -24,9 +24,11 @@
 
         protected PropertyModel NewPropertyModel(MethodInfo accessor, Type compositeType)
         {
-            var model = new PropertyModel(accessor);
 
-            return model;
+            //var model = new PropertyModel(accessor);
+
+            //return model;
+            return null;
         }
     }
 }
