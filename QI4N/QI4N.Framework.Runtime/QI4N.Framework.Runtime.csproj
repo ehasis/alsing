@@ -65,11 +65,15 @@
     <Compile Include="Composite\StateInvocationHandler.cs" />
     <Compile Include="Composite\UseInstance.cs" />
     <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />
+    <Compile Include="Entity\EntityPropertyInstance.cs" />
     <Compile Include="Object\DefaultObjectBuilder.cs" />
     <Compile Include="Object\DefaultObjectBuilderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Property\AbstractPropertyModel.cs" />
     <Compile Include="Property\PropertiesModel.cs" />
+    <Compile Include="Property\PropertyHandler.cs" />
+    <Compile Include="Property\PropertyInstance.cs" />
+    <Compile Include="Property\PropertyModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QI4N.Framework\QI4N.Framework.csproj">

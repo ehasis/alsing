@@ -63,7 +63,6 @@
     <Compile Include="Object\ObjectActivator.cs" />
     <Compile Include="Property\ImmutableAttribute.cs" />
     <Compile Include="Property\Property.cs" />
-    <Compile Include="Property\PropertyInstanceMixin.cs" />
     <Compile Include="Proxy\InvocationProxyTypeGenerator.cs" />
     <Compile Include="Proxy\MethodInfoCache.cs" />
     <Compile Include="Proxy\ProxyInstanceBuilder.cs" />
