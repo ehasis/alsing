@@ -2,11 +2,11 @@
 {
     public class AbstractStateModel
     {
-        protected PropertiesModel propertiesModel;
+        protected AbstractPropertiesModel propertiesModel;
 
         public AbstractStateModel()
         {
-            this.propertiesModel = new PropertiesModel();
+            this.propertiesModel = new AbstractPropertiesModel();
         }
 
         public void CheckConstraints(StateHolder instanceState)

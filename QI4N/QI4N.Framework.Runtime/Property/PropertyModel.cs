@@ -10,6 +10,11 @@
         AbstractProperty NewInstance(object value);
 
 
+        string QualifiedName { get; }
+
+        AbstractProperty NewBuilderInstance();
+
+        MethodInfo Accessor { get; }
     }
 
     public class PropertyModel<T> : PropertyModel
@@ -21,9 +26,30 @@
             this.accessor = accessor;
         }
 
+        public MethodInfo Accessor
+        {
+            get
+            {
+                return this.accessor;
+            }
+        }
+
+        public string QualifiedName
+        {
+            get
+            {
+                return this.accessor.Name;
+            }
+        }
+
         public MethodInfo GetAccessor()
         {
             return this.accessor;
+        }
+
+        public AbstractProperty NewBuilderInstance()
+        {
+            throw new NotImplementedException();
         }
 
         public AbstractProperty NewInstance(object value)
