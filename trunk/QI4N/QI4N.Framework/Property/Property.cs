@@ -1,6 +1,6 @@
 ﻿namespace QI4N.Framework
 {
-    public interface Property<T> : AbstractProperty, PropertyInfo<T>
+    public interface Property<T> : AbstractProperty, CompositePropertyInfo
     {
         new T Value { get; set; }
 

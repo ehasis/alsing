@@ -15,6 +15,8 @@
         AbstractProperty NewBuilderInstance();
 
         MethodInfo Accessor { get; }
+
+        AbstractProperty NewInitialInstance();
     }
 
     public class PropertyModel<T> : PropertyModel
@@ -49,12 +51,23 @@
 
         public AbstractProperty NewBuilderInstance()
         {
-            throw new NotImplementedException();
+            var instance = new PropertyInstance<T>(null, default(T), this);
+            AbstractProperty wrapper = this.WrapInstance(instance);
+
+            return wrapper;
+        }
+
+        public AbstractProperty NewInitialInstance()
+        {
+            var instance = new PropertyInstance<T>(null, default(T), this);
+            AbstractProperty wrapper = this.WrapInstance(instance);
+
+            return wrapper;
         }
 
         public AbstractProperty NewInstance(object value)
         {
-            var instance = new PropertyInstance<T>(null, default(T), this);
+            var instance = new PropertyInstance<T>(null, (T)value, this);
             AbstractProperty wrapper = this.WrapInstance(instance);
 
             return wrapper;
