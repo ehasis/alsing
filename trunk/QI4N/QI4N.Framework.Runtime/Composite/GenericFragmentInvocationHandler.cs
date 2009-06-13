@@ -6,7 +6,7 @@
     {
         public override object Invoke(object proxy, MethodInfo method, object[] args)
         {
-            var handler = this.fragment as InvocationHandler;
+            var handler = (InvocationHandler)this.fragment;
             return handler.Invoke(proxy, method, args);
         }
     }

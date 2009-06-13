@@ -39,7 +39,7 @@ namespace ConsoleApplication23
             var car = carBuilder.NewInstance();
             car.Manufacturer.Set(manufacturer);
 
-            var idCar = car as Identity;
+            var idCar = (Identity)car;
             Console.WriteLine(idCar.Identity.Value);
 
             // create a prototype value object
