@@ -42,10 +42,7 @@ namespace QI4N.Framework.Runtime
             finder.Module = this;
             Type compositeType = GetMatchingComposite(finder.Type);
 
-            var mixinsModel = new EntityMixinsModel(); 
-            var methodsModel = new CompositeMethodsModel(compositeType, mixinsModel);
-
-            finder.Model = new CompositeModel(methodsModel,mixinsModel, compositeType);
+            finder.Model = CompositeModel.NewModel(compositeType, null);
         }
 
         public StructureContext GetStructureContext()

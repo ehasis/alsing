@@ -1,12 +1,23 @@
 ﻿namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Collections.Generic;
 
     public class CompositeModel : AbstractCompositeModel
     {
-        public CompositeModel(CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
-                : base(compositeMethodsModel, mixinsModel, compositeType)
+        public static CompositeModel NewModel(Type compositeType, IList<Type> mixins )
         {
+            var stateModel = new AbstractStateModel();
+            var mixinsModel = new MixinsModel();
+            
+            var compositeMethodsModel = new CompositeMethodsModel(compositeType, mixinsModel);
+            return new CompositeModel(stateModel, compositeMethodsModel, mixinsModel, compositeType);
+        }
+
+        protected CompositeModel(AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
+                : base(stateModel,compositeMethodsModel, mixinsModel, compositeType)
+        {
+            
         }
 
         public Type CompositeType

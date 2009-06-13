@@ -17,9 +17,9 @@
 
         protected AbstractStateModel stateModel;
 
-        protected AbstractCompositeModel(CompositeMethodsModel compositeMethodsModel,MixinsModel mixinsModel, Type compositeType)
+        protected AbstractCompositeModel(AbstractStateModel stateModel,CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
         {
-            this.stateModel = new AbstractStateModel();
+            this.stateModel = stateModel;
             this.compositeType = compositeType;
             this.compositeMethodsModel = compositeMethodsModel;
 
