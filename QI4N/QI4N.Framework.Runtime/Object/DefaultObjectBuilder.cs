@@ -2,7 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System;
 
-    using Proxy;
+    using Reflection;
 
     public class DefaultObjectBuilder<T> : ObjectBuilder<T>
     {

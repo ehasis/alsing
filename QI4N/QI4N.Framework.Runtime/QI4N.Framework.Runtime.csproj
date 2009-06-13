@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Composite\AbstractCompositeModel.cs" />
+    <Compile Include="Composite\CompositeMixin.cs" />
     <Compile Include="Composite\MixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
     <Compile Include="Composite\CompositeBuilderInstance.cs" />
@@ -65,6 +66,9 @@
     <Compile Include="Composite\StateInvocationHandler.cs" />
     <Compile Include="Composite\UseInstance.cs" />
     <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />
+    <Compile Include="Entity\EntityInstance.cs" />
+    <Compile Include="Entity\EntityMixin.cs" />
+    <Compile Include="Entity\EntityMixinsModel.cs" />
     <Compile Include="Entity\EntityPropertyInstance.cs" />
     <Compile Include="Object\DefaultObjectBuilder.cs" />
     <Compile Include="Object\DefaultObjectBuilderFactory.cs" />

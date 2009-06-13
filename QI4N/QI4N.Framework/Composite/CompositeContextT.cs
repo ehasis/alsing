@@ -1,8 +1,8 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     using System.Reflection;
 
-    using Proxy;
+    using Reflection;
 
     public class CompositeContext<T> where T : Composite
     {
@@ -17,7 +17,7 @@
         {
             Composite composite = this.Get();
             InvocationHandler handler = new ContextInvocationhandler(this);
-            object proxy = ProxyInstanceBuilder.NewProxyInstance(composite.GetType(), handler);
+            object proxy = Proxy.NewProxyInstance(composite.GetType(), handler);
 
             return (T)proxy;
         }

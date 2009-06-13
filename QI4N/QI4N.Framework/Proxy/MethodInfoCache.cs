@@ -1,4 +1,4 @@
-namespace QI4N.Framework.Proxy
+namespace QI4N.Framework.Reflection
 {
     using System.Collections.Generic;
     using System.Reflection;

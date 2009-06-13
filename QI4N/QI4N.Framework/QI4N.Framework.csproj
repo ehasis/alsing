@@ -65,6 +65,7 @@
     <Compile Include="Property\Property.cs" />
     <Compile Include="Proxy\InvocationProxyTypeGenerator.cs" />
     <Compile Include="Proxy\MethodInfoCache.cs" />
+    <Compile Include="Proxy\Proxy.cs" />
     <Compile Include="Proxy\ProxyInstanceBuilder.cs" />
     <Compile Include="Proxy\ProxyTypeBuilder.cs" />
     <Compile Include="Entity\Association\Association.cs" />

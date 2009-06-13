@@ -3,7 +3,7 @@
     using System;
     using System.Reflection;
 
-    using Proxy;
+    using Reflection;
 
     public interface PropertyModel
     {
@@ -38,7 +38,7 @@
         {
             Type type = this.accessor.ReturnType;
             var handler = new PropertyHandler(instance);
-            var proxy = ProxyInstanceBuilder.NewProxyInstance(type, handler) as AbstractProperty;
+            var proxy = Proxy.NewProxyInstance(type, handler) as AbstractProperty;
 
             return proxy;
         }

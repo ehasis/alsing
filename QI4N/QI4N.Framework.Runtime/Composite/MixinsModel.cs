@@ -1,7 +1,6 @@
 ﻿namespace QI4N.Framework.Runtime
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -10,38 +9,44 @@
 
     public class MixinsModel
     {
-        private readonly IDictionary<MethodInfo, MixinModel> methodImplementation = new Dictionary<MethodInfo, MixinModel>();
+        protected readonly IDictionary<MethodInfo, MixinModel> methodImplementation = new Dictionary<MethodInfo, MixinModel>();
 
-        private readonly IList<Type> mixinImplementationTypes = new List<Type>();
+        protected readonly IList<Type> mixinImplementationTypes = new List<Type>();
 
-        private readonly IList<MixinModel> mixinModels = new List<MixinModel>();
+        protected readonly IList<MixinModel> mixinModels = new List<MixinModel>();
 
-        private readonly HashSet<Type> mixinTypes = new HashSet<Type>();
+   //     protected readonly HashSet<Type> mixinTypes = new HashSet<Type>();
 
-        private readonly IDictionary<Type, Type> mixinToImplementationLookup = new Dictionary<Type, Type>();
+        //    private readonly IDictionary<Type, Type> mixinToImplementationLookup = new Dictionary<Type, Type>();
+
+
+        public MixinsModel()
+        {
+            this.mixinImplementationTypes.Add(typeof(CompositeMixin));
+        }
 
         public void AddMixinType(Type mixinType)
         {
-            this.mixinTypes.Add(mixinType);
+     //       this.mixinTypes.Add(mixinType);
 
             foreach (Type mixinImplementationType in mixinType.GetMixinTypes())
             {
                 this.mixinImplementationTypes.Add(mixinImplementationType);
-                mixinToImplementationLookup.Add(mixinType,mixinImplementationType);
+                //             mixinToImplementationLookup.Add(mixinType,mixinImplementationType);
             }
         }
 
         public MixinModel ImplementMethod(MethodInfo method)
         {
             if (!this.methodImplementation.ContainsKey(method))
-            {                
+            {
                 MixinModel mixinModel = null;
 
                 mixinModel = this.TryGetExistingMixinModel(method);
 
                 if (mixinModel == null)
                 {
-                    mixinModel = GetNewMixinModel(method);
+                    mixinModel = this.GetNewMixinModel(method);
 
                     this.mixinModels.Add(mixinModel);
                 }
@@ -55,75 +60,7 @@
 
         public int IndexOfMixin(Type mixinImplementationType)
         {
-            return mixinImplementationTypes.IndexOf(mixinImplementationType);
-        }
-
-        private MixinModel GetNewMixinModel(MethodInfo method)
-        {
-            Type delegatingType = this.GetDelegatingType(method);
-
-            if (delegatingType != null)
-            {
-                var mixinModel = new MixinModel
-                                     {
-                                             MixinsModel = this,
-                                             MixinType = delegatingType
-                                     };
-
-                return mixinModel;
-            }
-
-            Type invocationType = this.GetInterceptingType(method);
-
-            if (invocationType != null)
-            {
-                var mixinModel = new MixinModel
-                {
-                    MixinsModel = this,
-                    MixinType = invocationType
-                };
-
-                return mixinModel;
-            }
-
-            return null;
-        }
-
-        private Type GetInterceptingType(MethodInfo method)
-        {
-            Type mixinImplementationType = (from fb in this.mixinImplementationTypes
-                                         where typeof(InvocationHandler).IsAssignableFrom(fb)
-                                         from a in fb.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
-                                         from t in a.AppliesToTypes
-                                         let f = Activator.CreateInstance(t, null) as AppliesToFilter
-                                         where f.AppliesTo(method, fb, null, null)
-                                         select fb).FirstOrDefault();
-
-            return mixinImplementationType;
-        }
-
-        private Type GetDelegatingType(MethodInfo method)
-        {
-            Type mixinImplementationType = (from m in this.mixinImplementationTypes
-                                            from i in m.GetInterfaces()
-                                            where i == method.DeclaringType
-                                            select m).FirstOrDefault();
-
-            return mixinImplementationType;
-        }
-
-        private MixinModel TryGetExistingMixinModel(MethodInfo method)
-        {
-            MixinModel mixinModel = null;
-            foreach (MixinModel existingModel in this.mixinModels)
-            {
-                if (existingModel.MixinType == method.DeclaringType)
-                {
-                    mixinModel = existingModel;
-                    break;
-                }
-            }
-            return mixinModel;
+            return this.mixinImplementationTypes.IndexOf(mixinImplementationType);
         }
 
         public object[] NewMixinHolder()
@@ -158,12 +95,12 @@
 
         private static void ConfigureMixinField(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
         {
-            MixinFieldInjectState(mixinField, mixin,compositeInstance,uses, stateHolder);
+            MixinFieldInjectState(mixinField, mixin, compositeInstance, uses, stateHolder);
 
             MixinFieldInjectThis(mixinField, mixin, compositeInstance, uses, stateHolder);
         }
 
-        private static void MixinFieldInjectState(FieldInfo mixinField, object mixin,CompositeInstance compositeInstance,UsesInstance uses, StateHolder stateHolder)
+        private static void MixinFieldInjectState(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
         {
             bool isState = mixinField.GetCustomAttributes(typeof(StateAttribute), true).Any();
 
@@ -194,8 +131,75 @@
 
             if (isThis)
             {
-                mixinField.SetValue(mixin, compositeInstance);
+                mixinField.SetValue(mixin, compositeInstance.Proxy);
             }
+        }
+
+        private Type FindGenericImplementation(MethodInfo method)
+        {
+            Type mixinImplementationType = (from fb in this.mixinImplementationTypes
+                                            where typeof(InvocationHandler).IsAssignableFrom(fb)
+                                            from a in fb.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
+                                            from t in a.AppliesToTypes
+                                            let f = Activator.CreateInstance(t, null) as AppliesToFilter
+                                            where f.AppliesTo(method, fb, null, null)
+                                            select fb).FirstOrDefault();
+
+            return mixinImplementationType;
+        }
+
+        private Type FindTypedImplementation(MethodInfo method)
+        {
+            Type mixinImplementationType = (from m in this.mixinImplementationTypes
+                                            from i in m.GetInterfaces()
+                                            where i == method.DeclaringType
+                                            select m).FirstOrDefault();
+
+            return mixinImplementationType;
+        }
+
+        private MixinModel GetNewMixinModel(MethodInfo method)
+        {
+            Type mixinType = this.FindTypedImplementation(method);
+
+            if (mixinType != null)
+            {
+                return this.ImplementMethodWithType(method, mixinType);
+            }
+
+            mixinType = this.FindGenericImplementation(method);
+
+            if (mixinType != null)
+            {
+                return this.ImplementMethodWithType(method, mixinType);
+            }
+
+            throw new Exception("No implementation found for method " + method.Name);
+        }
+
+        private MixinModel ImplementMethodWithType(MethodInfo method, Type mixinType)
+        {
+            var mixinModel = new MixinModel
+                                 {
+                                         MixinsModel = this,
+                                         MixinType = mixinType
+                                 };
+
+            return mixinModel;
+        }
+
+        private MixinModel TryGetExistingMixinModel(MethodInfo method)
+        {
+            MixinModel mixinModel = null;
+            foreach (MixinModel existingModel in this.mixinModels)
+            {
+                if (existingModel.MixinType == method.DeclaringType)
+                {
+                    mixinModel = existingModel;
+                    break;
+                }
+            }
+            return mixinModel;
         }
     }
 }

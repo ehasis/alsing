@@ -1,4 +1,4 @@
-namespace QI4N.Framework.Proxy
+namespace QI4N.Framework.Reflection
 {
     using System;
     using System.Reflection;
@@ -26,19 +26,7 @@ namespace QI4N.Framework.Proxy
             return NewProxyInstance<object>(type);
         }
 
-        public static object NewProxyInstance(Type type, InvocationHandler handler)
-        {
-            var proxyBuilder = new InvocationProxyTypeBuilder();
 
-            Type proxyType = proxyBuilder.BuildProxyType(type);
-            ObjectActivator<object> activator = ObjectActivator.GetActivator<object>(proxyType);
-
-            var instance = activator();
-            FieldInfo defaultHandlerField = proxyType.GetField("defaultHandler");
-            defaultHandlerField.SetValue(instance,handler);
-
-            return instance;
-        }
 
         private static ObjectActivator<T> GetActivator<T>(Type type)
         {
