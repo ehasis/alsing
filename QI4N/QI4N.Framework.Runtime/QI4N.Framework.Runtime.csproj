@@ -71,6 +71,7 @@
     <Compile Include="Entity\EntityMixin.cs" />
     <Compile Include="Entity\EntityMixinsModel.cs" />
     <Compile Include="Entity\EntityPropertyInstance.cs" />
+    <Compile Include="Entity\EntityStateModel.cs" />
     <Compile Include="Object\DefaultObjectBuilder.cs" />
     <Compile Include="Object\DefaultObjectBuilderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
