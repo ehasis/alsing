@@ -11,16 +11,19 @@
 
         private MethodInfo method;
 
-        public CompositeMethodInstance(InvocationHandler invoker, FragmentInvocationHandler handler, MethodInfo method)
+        private readonly int mixinIndex;
+
+        public CompositeMethodInstance(InvocationHandler invoker, FragmentInvocationHandler handler, MethodInfo method,int mixinIndex)
         {
             this.invoker = invoker;
             this.handler = handler;
             this.method = method;
+            this.mixinIndex = mixinIndex;
         }
 
         public object GetMixin(object[] mixins)
         {
-            throw new NotImplementedException();
+            return mixins[mixinIndex];
         }
 
         public object Invoke(object composite, object[] args, object mixin)
