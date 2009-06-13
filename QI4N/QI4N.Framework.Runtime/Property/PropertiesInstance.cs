@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Reflection;
 
-    public class PropertiesInstance
+    public class PropertiesInstance : StateHolder
     {
         private readonly IDictionary<MethodInfo, AbstractProperty> properties;
 

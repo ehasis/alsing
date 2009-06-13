@@ -1,6 +1,6 @@
 ﻿namespace QI4N.Framework
 {
-    public interface PropertyInfo<T>
+    public interface CompositePropertyInfo
     {
         bool IsMutable { get; }
 

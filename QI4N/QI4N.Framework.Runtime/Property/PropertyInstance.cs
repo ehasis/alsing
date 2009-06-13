@@ -5,11 +5,11 @@ namespace QI4N.Framework.Runtime
     [DebuggerDisplay("Value = {Value}")]
     public class PropertyInstance<T> : Property<T>
     {
-        private PropertyInfo<T> info;
+        private CompositePropertyInfo info;
 
         private PropertyModel model;
 
-        public PropertyInstance(PropertyInfo<T> info,T initialValue,PropertyModel model)
+        public PropertyInstance(CompositePropertyInfo info, T initialValue, PropertyModel model)
         {
             this.info = info;
             this.Value = initialValue;
