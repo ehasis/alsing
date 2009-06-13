@@ -5,18 +5,18 @@
 
     public class CompositeMethodInstance
     {
-        private FragmentInvocationHandler handler;
+        private FragmentInvocationHandler mixinInvoker;
 
-        private InvocationHandler invoker;
+        private readonly InvocationHandler invoker;
 
-        private MethodInfo method;
+        private readonly MethodInfo method;
 
         private readonly int mixinIndex;
 
         public CompositeMethodInstance(InvocationHandler invoker, FragmentInvocationHandler handler, MethodInfo method,int mixinIndex)
         {
             this.invoker = invoker;
-            this.handler = handler;
+            this.mixinInvoker = handler;
             this.method = method;
             this.mixinIndex = mixinIndex;
         }
@@ -28,7 +28,8 @@
 
         public object Invoke(object composite, object[] args, object mixin)
         {
-            throw new NotImplementedException();
+            mixinInvoker.SetFragment(mixin);
+            return invoker.Invoke(composite, method, args);
         }
     }
 }

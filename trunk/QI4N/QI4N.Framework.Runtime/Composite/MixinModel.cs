@@ -3,6 +3,7 @@
     using System;
     using System.Reflection;
 
+
     public class MixinModel
     {
         public Type MixinType { get; set; }
@@ -16,7 +17,12 @@
 
         public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
         {
-            return new DefaultFragmentInvocationHandler();
+            if (typeof(InvocationHandler).IsAssignableFrom(MixinType))
+            {
+                return new GenericFragmentInvocationHandler();
+            }
+
+            return new TypedFragmentInvocationHandler();
         }
     }
 }

@@ -1,18 +1,16 @@
 ﻿namespace QI4N.Framework.Runtime
 {
-    using System;
-    using System.Collections.Generic;
     using System.Reflection;
 
     public class CompositeMethodModel
     {
-        private MethodInfo method;
+        private readonly MethodInfo method;
 
-        private MixinModel mixinModel;
+        private readonly int mixinIndex;
 
-        private int mixinIndex;
+        private readonly MixinModel mixinModel;
 
-        public CompositeMethodModel(MethodInfo method, MixinModel model,int mixinIndex)
+        public CompositeMethodModel(MethodInfo method, MixinModel model, int mixinIndex)
         {
             this.method = method;
             this.mixinModel = model;
@@ -21,20 +19,19 @@
 
         public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
         {
-            CompositeMethodInstance methodInstance = GetInstance( moduleInstance );
+            CompositeMethodInstance methodInstance = this.GetInstance(moduleInstance);
 
             return mixins.Invoke(proxy, args, methodInstance);
         }
 
         private CompositeMethodInstance GetInstance(ModuleInstance moduleInstance)
         {
-
-            return newCompositeMethodInstance(moduleInstance);
+            return this.newCompositeMethodInstance(moduleInstance);
         }
 
         private CompositeMethodInstance newCompositeMethodInstance(ModuleInstance moduleInstance)
         {
-            FragmentInvocationHandler mixinInvocationHandler = mixinModel.NewInvocationHandler(method);
+            FragmentInvocationHandler mixinInvocationHandler = this.mixinModel.NewInvocationHandler(this.method);
             InvocationHandler invoker = mixinInvocationHandler;
             //if (methodConcerns.hasConcerns())
             //{
@@ -47,21 +44,23 @@
             //    invoker = sideEffectsInstance;
             //}
 
-            return new CompositeMethodInstance(invoker, mixinInvocationHandler, method,mixinIndex);
+            return new CompositeMethodInstance(invoker, mixinInvocationHandler, this.method, this.mixinIndex);
         }
     }
 
     public abstract class FragmentInvocationHandler : InvocationHandler
     {
+        protected object fragment;
+
         public abstract object Invoke(object proxy, MethodInfo method, object[] args);
-    }
 
-    public class DefaultFragmentInvocationHandler : FragmentInvocationHandler
-    {
-
-        public override object Invoke(object proxy, MethodInfo method, object[] args)
+        public void SetFragment(object fragment)
         {
-            return null;
+            this.fragment = fragment;
         }
     }
+
+
+
+
 }
