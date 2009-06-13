@@ -1,10 +1,21 @@
-namespace QI4N.Framework
+namespace QI4N.Framework.Runtime
 {
     using System.Diagnostics;
 
     [DebuggerDisplay("Value = {Value}")]
-    public class PropertyInstanceMixin<T> : Property<T>
+    public class PropertyInstance<T> : Property<T>
     {
+        private PropertyInfo<T> info;
+
+        private PropertyModel model;
+
+        public PropertyInstance(PropertyInfo<T> info,T initialValue,PropertyModel model)
+        {
+            this.info = info;
+            this.Value = initialValue;
+            this.model = model;        
+        }
+
         public bool IsComputed
         {
             get

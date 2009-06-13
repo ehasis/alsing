@@ -147,9 +147,4 @@
     {
         PropertyModel GetPropertyModel();
     }
-
-    public interface PropertyModel
-    {
-        MethodInfo GetAccessor();
-    }
 }
