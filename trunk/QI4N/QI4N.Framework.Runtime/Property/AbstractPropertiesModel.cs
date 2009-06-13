@@ -23,7 +23,7 @@
             }
         }
 
-        public PropertiesInstance NewBuilderInstance()
+        public StateHolder NewBuilderInstance()
         {
             var properties = new Dictionary<MethodInfo, AbstractProperty>();
             foreach (PropertyModel propertyModel in this.propertyModels)
