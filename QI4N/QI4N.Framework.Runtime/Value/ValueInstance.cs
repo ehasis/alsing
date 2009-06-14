@@ -29,7 +29,7 @@
                 var that = (ValueInstance)Reflection.Proxy.GetInvocationHandler(o);
                 return State.Equals(that.State);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

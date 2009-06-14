@@ -40,9 +40,7 @@
         {
             if (!this.methodImplementation.ContainsKey(method))
             {
-                MixinModel mixinModel = null;
-
-                mixinModel = this.TryGetExistingMixinModel(method);
+                MixinModel mixinModel = this.TryGetExistingMixinModel(method);
 
                 if (mixinModel == null)
                 {
