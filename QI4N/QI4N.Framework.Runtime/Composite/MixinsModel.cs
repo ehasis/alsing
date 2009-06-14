@@ -96,6 +96,18 @@
             MixinFieldInjectState(mixinField, mixin, compositeInstance, uses, stateHolder);
 
             MixinFieldInjectThis(mixinField, mixin, compositeInstance, uses, stateHolder);
+
+            MixinFieldInjectUse(mixinField, mixin, compositeInstance, uses, stateHolder);
+        }
+
+        private static void MixinFieldInjectUse(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
+        {
+            bool isUse = mixinField.GetCustomAttributes(typeof(UsesAttribute), true).Any();
+            if (isUse)
+            {
+                var obj = uses.UseForType(mixinField.FieldType);
+                mixinField.SetValue(mixin,obj);
+            }
         }
 
         private static void MixinFieldInjectState(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
