@@ -11,16 +11,15 @@ namespace ConsoleApplication23
         {
             var moduleInstance = new ModuleInstance();
             var factory = new CompositeBuilderFactoryInstance(moduleInstance);
-            var personFactory = factory.NewCompositeBuilder<Person>();
+            CompositeBuilder<Person> personFactory = factory.NewCompositeBuilder<Person>();
 
-            var person = personFactory.NewInstance();
+            Person person = personFactory.NewInstance();
 
             person.FirstName.Value = "Roger";
             person.LastName.Value = "Alsing";
             person.Weight.Value = 85;
 
             Console.ReadLine();
-
 
             //// Lacking support for QI4J structural definitions
             //// just kickstart my default impl
