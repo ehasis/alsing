@@ -13,11 +13,24 @@ namespace ConsoleApplication23
             var factory = new CompositeBuilderFactoryInstance(moduleInstance);
             CompositeBuilder<Person> personFactory = factory.NewCompositeBuilder<Person>();
 
+
+            Person protoPerson = personFactory.Prototype();
+            protoPerson.FirstName.Value = "Roger";
+            protoPerson.LastName.Value = "Alsing";
+            protoPerson.Weight.Value = 85;
+
             Person person = personFactory.NewInstance();
 
-            person.FirstName.Value = "Roger";
-            person.LastName.Value = "Alsing";
-            person.Weight.Value = 85;
+            Console.WriteLine(person.Weight.Value);
+
+            Person otherPerson = personFactory.NewInstance();
+
+            otherPerson.Weight.Value = 99;
+
+            Console.WriteLine(person.Weight.Value);
+            Console.WriteLine(otherPerson.Weight.Value);
+            
+            person.SayHi();
 
             Console.ReadLine();
 
