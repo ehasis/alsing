@@ -17,6 +17,7 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
+        [DebuggerHidden]
         public static MethodInfo GetMethod(int methodId)
         {
             return methodLookup[methodId];

@@ -16,6 +16,7 @@
         }
 
         [DebuggerStepThrough]
+        [DebuggerHidden]
         public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
         {
             if (typeof(InvocationHandler).IsAssignableFrom(this.MixinType))
