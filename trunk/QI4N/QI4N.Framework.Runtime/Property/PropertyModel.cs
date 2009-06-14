@@ -24,16 +24,17 @@
     {
         public static PropertyModel NewInstance(MethodInfo accessor)
         {
-            var f = (from g in accessor.ReturnType.GetAllInterfaces()
-                     where g.GetGenericTypeDefinition() == typeof(Property<>)
-                    select g).FirstOrDefault();
-
-            
+            Type f = (from g in accessor.ReturnType.GetAllInterfaces()
+                      where g.IsGenericType && g.GetGenericTypeDefinition() == typeof(Property<>)
+                      select g).FirstOrDefault();
 
             Type propertyContentType = f.GetGenericArguments()[0];
-            var template = typeof(PropertyModel<>);
-            var generic = template.MakeGenericType(propertyContentType);
-            var propertyModelInstance = Activator.CreateInstance(generic, new object[] { accessor }) as PropertyModel;
+            Type template = typeof(PropertyModel<>);
+            Type generic = template.MakeGenericType(propertyContentType);
+            var propertyModelInstance = Activator.CreateInstance(generic, new object[]
+                                                                              {
+                                                                                      accessor
+                                                                              }) as PropertyModel;
 
             return propertyModelInstance;
         }
