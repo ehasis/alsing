@@ -16,6 +16,9 @@
             var mixinsModel = new MixinsModel();
 
             var compositeMethodsModel = new CompositeMethodsModel(compositeType, mixinsModel);
+
+            stateModel.AddStateFor(compositeMethodsModel.Methods, compositeType);
+
             return new CompositeModel(stateModel, compositeMethodsModel, mixinsModel, compositeType);
         }
 

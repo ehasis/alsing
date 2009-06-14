@@ -9,7 +9,6 @@
     {
         AbstractProperty NewInstance(object value);
 
-
         string QualifiedName { get; }
 
         AbstractProperty NewBuilderInstance();
@@ -17,6 +16,14 @@
         MethodInfo Accessor { get; }
 
         AbstractProperty NewInitialInstance();
+    }
+
+    public static class PropertyModelFactory
+    {
+        public static PropertyModel NewInstance(Type propertyType)
+        {
+            return null;
+        }
     }
 
     public class PropertyModel<T> : PropertyModel
