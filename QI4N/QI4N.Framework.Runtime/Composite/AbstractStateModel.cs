@@ -1,8 +1,8 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
+    using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using System;
 
     public class AbstractStateModel
     {
@@ -11,6 +11,14 @@
         public AbstractStateModel()
         {
             this.propertiesModel = new AbstractPropertiesModel();
+        }
+
+        public void AddStateFor(IEnumerable<MethodInfo> methods, Type compositeType)
+        {
+            foreach (MethodInfo method in methods)
+            {
+                this.propertiesModel.AddPropertyFor(method, compositeType);
+            }
         }
 
         public void CheckConstraints(StateHolder instanceState)
@@ -30,14 +38,6 @@
         public StateHolder NewState(StateHolder state)
         {
             return this.propertiesModel.NewInstance(state);
-        }
-
-        public void AddStateFor(IEnumerable<MethodInfo> methods,Type compositeType)
-        {
-            foreach (MethodInfo method in methods)
-            {
-                propertiesModel.AddPropertyFor(method, compositeType);
-            }
         }
     }
 }

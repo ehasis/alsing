@@ -13,7 +13,7 @@ namespace QI4N.Framework.Runtime
         {
             this.info = info;
             this.Value = initialValue;
-            this.model = model;        
+            this.model = model;
         }
 
         public bool IsComputed
@@ -34,6 +34,18 @@ namespace QI4N.Framework.Runtime
 
         public T Value { get; set; }
 
+        object AbstractProperty.Value
+        {
+            get
+            {
+                return this.Value;
+            }
+            set
+            {
+                this.Value = (T)value;
+            }
+        }
+
         public T Get()
         {
             return this.Value;
@@ -42,19 +54,6 @@ namespace QI4N.Framework.Runtime
         public void Set(T value)
         {
             this.Value = value;
-        }
-
-
-        object AbstractProperty.Value
-        {
-            get
-            {
-                return Value;
-            }
-            set
-            {
-                Value = (T)value;
-            }
         }
     }
 }

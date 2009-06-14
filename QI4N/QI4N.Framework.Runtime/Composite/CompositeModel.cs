@@ -5,19 +5,18 @@
 
     public class CompositeModel : AbstractCompositeModel
     {
-        public static CompositeModel NewModel(Type compositeType, IList<Type> mixins )
+        protected CompositeModel(AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
+                : base(stateModel, compositeMethodsModel, mixinsModel, compositeType)
+        {
+        }
+
+        public static CompositeModel NewModel(Type compositeType, IList<Type> mixins)
         {
             var stateModel = new AbstractStateModel();
             var mixinsModel = new MixinsModel();
-            
+
             var compositeMethodsModel = new CompositeMethodsModel(compositeType, mixinsModel);
             return new CompositeModel(stateModel, compositeMethodsModel, mixinsModel, compositeType);
-        }
-
-        protected CompositeModel(AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
-                : base(stateModel,compositeMethodsModel, mixinsModel, compositeType)
-        {
-            
         }
 
         public CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance uses, StateHolder stateHolder)

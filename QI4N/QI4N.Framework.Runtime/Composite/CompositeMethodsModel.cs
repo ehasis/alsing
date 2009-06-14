@@ -8,11 +8,11 @@
 
     public class CompositeMethodsModel
     {
+        private readonly Type compositeType;
+
         private readonly IDictionary<MethodInfo, CompositeMethodModel> methods;
 
         private readonly MixinsModel mixinsModel;
-
-        private readonly Type compositeType;
 
         public CompositeMethodsModel(Type compositeType, MixinsModel mixinsModel)
         {
@@ -21,16 +21,6 @@
             this.mixinsModel = mixinsModel;
             this.BuildMixinsModel(compositeType);
             this.ImplementMixinMethods();
-        }
-
-        private void ImplementMixinMethods()
-        {
-            foreach (MethodInfo method in compositeType.GetAllInterfaceMethods())
-            {
-                MixinModel mixinModel = mixinsModel.ImplementMethod(method);
-                var compositeMethodModel = new CompositeMethodModel(method,mixinModel,mixinsModel.IndexOfMixin(mixinModel.MixinType));
-                methods.Add(method,compositeMethodModel);
-            }
         }
 
 
@@ -48,12 +38,22 @@
 
         private void BuildMixinsModel(Type mixinType)
         {
-            var allInterfaces = mixinType.GetAllInterfaces();
+            IEnumerable<Type> allInterfaces = mixinType.GetAllInterfaces();
 
-            foreach(Type mixin in allInterfaces)
+            foreach (Type mixin in allInterfaces)
             {
-                mixinsModel.AddMixinType(mixin);
-            }  
+                this.mixinsModel.AddMixinType(mixin);
+            }
+        }
+
+        private void ImplementMixinMethods()
+        {
+            foreach (MethodInfo method in this.compositeType.GetAllInterfaceMethods())
+            {
+                MixinModel mixinModel = this.mixinsModel.ImplementMethod(method);
+                var compositeMethodModel = new CompositeMethodModel(method, mixinModel, this.mixinsModel.IndexOfMixin(mixinModel.MixinType));
+                this.methods.Add(method, compositeMethodModel);
+            }
         }
     }
 }

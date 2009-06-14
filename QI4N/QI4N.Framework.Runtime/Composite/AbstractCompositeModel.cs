@@ -17,7 +17,7 @@
 
         protected AbstractStateModel stateModel;
 
-        protected AbstractCompositeModel(AbstractStateModel stateModel,CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
+        protected AbstractCompositeModel(AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
         {
             this.stateModel = stateModel;
             this.compositeType = compositeType;
@@ -74,6 +74,6 @@
             return this.stateModel.NewState(state);
         }
 
-    //    public abstract CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance usesInstance, StateHolder instanceState);
+        //    public abstract CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance usesInstance, StateHolder instanceState);
     }
 }
