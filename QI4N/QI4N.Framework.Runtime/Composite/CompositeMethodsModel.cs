@@ -14,6 +14,15 @@
 
         private readonly MixinsModel mixinsModel;
 
+        public IEnumerable<MethodInfo> Methods
+        {
+            get
+            {
+                foreach(var method in methods.Keys)
+                    yield return method;
+            }
+        }
+
         public CompositeMethodsModel(Type compositeType, MixinsModel mixinsModel)
         {
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();

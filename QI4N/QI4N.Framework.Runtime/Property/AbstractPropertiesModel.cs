@@ -65,10 +65,9 @@ namespace QI4N.Framework.Runtime
 
         protected PropertyModel NewPropertyModel(MethodInfo accessor, Type compositeType)
         {
-            //var model = new PropertyModel(accessor);
+            var model = PropertyModelFactory.NewInstance(accessor.ReturnType);
 
-            //return model;
-            return null;
+            return model;
         }
 
         private object CloneInitialValue(object initialValue, bool p)
