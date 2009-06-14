@@ -2,7 +2,7 @@ namespace QI4N.Framework
 {
     using System.Reflection;
 
-    using Reflection;
+    using JavaProxy;
 
     public class CompositeContext<T> where T : Composite
     {

@@ -70,7 +70,6 @@
     <Compile Include="Composite\TypedInvocationHandler.cs" />
     <Compile Include="Composite\TypeFinderT.cs" />
     <Compile Include="Composite\UseInstance.cs" />
-    <Compile Include="Entity\Association\DefaultEntityStateHolder.cs" />
     <Compile Include="Entity\EntityInstance.cs" />
     <Compile Include="Entity\EntityMixin.cs" />
     <Compile Include="Entity\EntityMixinsModel.cs" />
@@ -95,6 +94,9 @@
       <Project>{46604E99-EE88-42DD-B56D-B396E4886CE2}</Project>
       <Name>QI4N.Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entity\Association\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

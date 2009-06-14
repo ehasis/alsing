@@ -8,12 +8,17 @@ namespace QI4N.Framework.Reflection
     {
         private static readonly IList<MethodInfo> methodLookup = new List<MethodInfo>();
 
+        private static readonly object syncRoot = new object();
+
         public static int AddMethod(MethodInfo methodInfo)
         {
-            int methodId = methodLookup.Count;
-            methodLookup.Add(methodInfo);
+            lock (syncRoot)
+            {
+                int methodId = methodLookup.Count;
+                methodLookup.Add(methodInfo);
 
-            return methodId;
+                return methodId;
+            }
         }
 
         [DebuggerStepThrough]
