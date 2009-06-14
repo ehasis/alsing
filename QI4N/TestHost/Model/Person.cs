@@ -10,12 +10,27 @@
 
     public interface Person
     {
-        Property<string> FirstName { get; }
+        PersonName FirstName { get; }
 
-        Property<string> LastName { get; }
+        PersonName LastName { get; }
 
-        Property<DateTime> BirthDate { get; }
+        BirthDate BirthDate { get; }
 
-        Property<double> Weight { get; }
+        Weight Weight { get; }
+    }
+
+    public interface PersonName : Property<string>
+    {
+        
+    }
+
+    public interface BirthDate : Property<DateTime>
+    {
+        
+    }
+
+    public interface Weight : Property<double>
+    {
+        
     }
 }
