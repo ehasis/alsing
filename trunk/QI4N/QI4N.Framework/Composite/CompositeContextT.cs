@@ -17,7 +17,7 @@ namespace QI4N.Framework
         {
             Composite composite = this.Get();
             InvocationHandler handler = new ContextInvocationhandler(this);
-            object proxy = Proxy.NewProxyInstance(composite.GetType(), handler);
+            object proxy = Proxy.NewProxyInstance(handler, composite.GetType());
 
             return (T)proxy;
         }

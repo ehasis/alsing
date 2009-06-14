@@ -7,10 +7,10 @@
 
     public static class Proxy
     {
-        public static Type BuildProxyType(Type compositeType)
+        public static Type BuildProxyType(Type compositeType,params Type[] additionalTypes)
         {
             var builder = new InvocationProxyTypeBuilder();
-            Type type = builder.BuildProxyType(compositeType);
+            Type type = builder.BuildProxyType(compositeType,additionalTypes);
             return type;
         }
 
@@ -27,7 +27,7 @@
             return defaultHandlerField != null;
         }
 
-        public static object NewProxyInstance(Type type, InvocationHandler handler)
+        public static object NewProxyInstance(InvocationHandler handler, Type type)
         {
             Type proxyType = BuildProxyType(type);
             object instance = Activator.CreateInstance(proxyType, new object[]

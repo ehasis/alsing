@@ -100,16 +100,6 @@
             MixinFieldInjectUse(mixinField, mixin, compositeInstance, uses, stateHolder);
         }
 
-        private static void MixinFieldInjectUse(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
-        {
-            bool isUse = mixinField.GetCustomAttributes(typeof(UsesAttribute), true).Any();
-            if (isUse)
-            {
-                var obj = uses.UseForType(mixinField.FieldType);
-                mixinField.SetValue(mixin,obj);
-            }
-        }
-
         private static void MixinFieldInjectState(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
         {
             bool isState = mixinField.GetCustomAttributes(typeof(StateAttribute), true).Any();
@@ -141,19 +131,38 @@
 
             if (isThis)
             {
-                mixinField.SetValue(mixin, compositeInstance.Proxy);
+                //normal "This"
+                if (mixinField.FieldType.IsAssignableFrom(compositeInstance.GetType()))
+                {
+                    mixinField.SetValue(mixin, compositeInstance.Proxy);
+                }
+                //private mixin
+                else
+                {
+                    //gg
+                }
+            }
+        }
+
+        private static void MixinFieldInjectUse(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
+        {
+            bool isUse = mixinField.GetCustomAttributes(typeof(UsesAttribute), true).Any();
+            if (isUse)
+            {
+                object obj = uses.UseForType(mixinField.FieldType);
+                mixinField.SetValue(mixin, obj);
             }
         }
 
         private Type FindGenericImplementation(MethodInfo method)
         {
-            Type mixinImplementationType = (from fb in this.mixinImplementationTypes
-                                            where typeof(InvocationHandler).IsAssignableFrom(fb)
-                                            from a in fb.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
-                                            from t in a.AppliesToTypes
-                                            let f = Activator.CreateInstance(t, null) as AppliesToFilter
-                                            where f.AppliesTo(method, fb, null, null)
-                                            select fb).FirstOrDefault();
+            Type mixinImplementationType = (from mit in this.mixinImplementationTypes
+                                            where typeof(InvocationHandler).IsAssignableFrom(mit)
+                                            from appattr in mit.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
+                                            from appt in appattr.AppliesToTypes
+                                            let atf = Activator.CreateInstance(appt, null) as AppliesToFilter
+                                            where atf.AppliesTo(method, mit, null, null)
+                                            select mit).FirstOrDefault();
 
             return mixinImplementationType;
         }
