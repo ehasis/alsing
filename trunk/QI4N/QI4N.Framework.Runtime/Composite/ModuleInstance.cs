@@ -69,7 +69,7 @@ namespace QI4N.Framework.Runtime
             }
 
             // Visit layer
-            layerInstance.VisitModules(visitor, Visibility.Layer);
+         //   layerInstance.VisitModules(visitor, Visibility.Layer);
         }
 
         public StructureContext GetStructureContext()
