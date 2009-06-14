@@ -4,6 +4,8 @@
     using System.Linq;
     using System.Reflection;
 
+    using JavaProxy;
+
     using Reflection;
 
     public interface PropertyModel

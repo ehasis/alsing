@@ -8,9 +8,7 @@ namespace QI4N.Framework.Reflection
     using System.Reflection.Emit;
     using System.Threading;
 
-    using Reflection;
-
-    public class InvocationProxyTypeBuilder
+    internal class InvocationProxyTypeBuilder
     {
         private AssemblyBuilder assemblyBuilder;
 
@@ -145,9 +143,9 @@ namespace QI4N.Framework.Reflection
                                                                                                                                           });
             ctorBuilder.DefineParameter(1, ParameterAttributes.None, "handler");
             ILGenerator generator = ctorBuilder.GetILGenerator();
-            generator.Emit(OpCodes.Ldarg,0);
+            generator.Emit(OpCodes.Ldarg, 0);
             generator.Emit(OpCodes.Ldarg, 1);
-            generator.Emit(OpCodes.Stfld,defaultHandlerFieldBuilder);
+            generator.Emit(OpCodes.Stfld, this.defaultHandlerFieldBuilder);
             generator.Emit(OpCodes.Ret);
         }
 
@@ -165,8 +163,16 @@ namespace QI4N.Framework.Reflection
         private void CreateMethod(MethodInfo method)
         {
             MethodBuilder methodBuilder = this.typeBuilder.GetMethodOverrideBuilder(method);
-            methodBuilder.SetCustomAttribute(typeof(DebuggerStepThroughAttribute).GetConstructor(new Type[]{}),new byte[]{});
-            methodBuilder.SetCustomAttribute(typeof(DebuggerHiddenAttribute).GetConstructor(new Type[] { }), new byte[] { });
+            methodBuilder.SetCustomAttribute(typeof(DebuggerStepThroughAttribute).GetConstructor(new Type[]
+                                                                                                     {
+                                                                                                     }), new byte[]
+                                                                                                             {
+                                                                                                             });
+            methodBuilder.SetCustomAttribute(typeof(DebuggerHiddenAttribute).GetConstructor(new Type[]
+                                                                                                {
+                                                                                                }), new byte[]
+                                                                                                        {
+                                                                                                        });
 
             ILGenerator generator = methodBuilder.GetILGenerator();
 

@@ -10,7 +10,7 @@
 
         public static ValueInstance GetValueInstance(ValueComposite composite)
         {
-            return (ValueInstance)Reflection.Proxy.GetInvocationHandler(composite);
+            return (ValueInstance)JavaProxy.Proxy.GetInvocationHandler(composite);
         }
 
         public override bool Equals(object o)
@@ -19,14 +19,14 @@
             {
                 return true;
             }
-            if (o == null || !Reflection.Proxy.IsProxyClass(o.GetType()))
+            if (o == null || !JavaProxy.Proxy.IsProxyClass(o.GetType()))
             {
                 return false;
             }
 
             try
             {
-                var that = (ValueInstance)Reflection.Proxy.GetInvocationHandler(o);
+                var that = (ValueInstance)JavaProxy.Proxy.GetInvocationHandler(o);
                 return State.Equals(that.State);
             }
             catch (Exception)

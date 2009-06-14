@@ -4,7 +4,7 @@
     using System.Diagnostics;
     using System.Reflection;
 
-    using Reflection;
+    using JavaProxy;
 
     public abstract class AbstractCompositeModel
     {
@@ -24,11 +24,9 @@
             this.compositeType = compositeType;
             this.compositeMethodsModel = compositeMethodsModel;
 
-            var builder = new InvocationProxyTypeBuilder();
-
             this.mixinsModel = mixinsModel;
 
-            this.proxyType = builder.BuildProxyType(compositeType);
+            this.proxyType = Proxy.BuildProxyType(compositeType);
         }
 
         public Type CompositeType

@@ -2,16 +2,16 @@ namespace QI4N.Framework.Runtime
 {
     using System;
 
-    using Reflection;
+    using JavaProxy;
 
-    internal class EntityInstance
+    public class EntityInstance
     {
         public static EntityInstance GetEntityInstance(Composite composite)
         {
             return (EntityInstance)Proxy.GetInvocationHandler(composite);
         }
 
-        internal UnitOfWork UnitOfWork()
+        public UnitOfWork UnitOfWork()
         {
             throw new NotImplementedException();
         }
