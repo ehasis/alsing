@@ -8,8 +8,9 @@ namespace QI4N.Framework.Runtime
     {
         public T NewInstance()
         {
-            var instance = ProxyInstanceBuilder.NewProxyInstance<T>();
-            return instance;
+         //   var instance = ProxyInstanceBuilder.NewProxyInstance<T>();
+         //   return instance;
+            return default(T);
         }
 
         public T StateFor()

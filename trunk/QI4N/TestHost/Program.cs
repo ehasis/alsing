@@ -16,6 +16,8 @@ namespace ConsoleApplication23
             var person = personFactory.NewInstance();
 
             person.FirstName.Value = "Roger";
+            person.LastName.Value = "Alsing";
+            person.Weight.Value = 85;
 
             Console.ReadLine();
 

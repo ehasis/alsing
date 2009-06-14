@@ -1,46 +1,46 @@
-namespace QI4N.Framework.Reflection
-{
-    using System;
-    using System.Reflection;
+//namespace QI4N.Framework.Reflection
+//{
+//    using System;
+//    using System.Reflection;
 
-    using Activation;
+//    using Activation;
 
-    public static class ProxyInstanceBuilder
-    {
-        public static T NewProxyInstance<T>(Type type)
-        {
-            ObjectActivator<T> proxyActivator = GetActivator<T>(type);
+//    public static class ProxyInstanceBuilder
+//    {
+//        public static T NewProxyInstance<T>(Type type)
+//        {
+//            ObjectActivator<T> proxyActivator = GetActivator<T>(type);
 
-            T instance = proxyActivator.Invoke();
+//            T instance = proxyActivator.Invoke();
 
-            return instance;
-        }
+//            return instance;
+//        }
 
-        public static T NewProxyInstance<T>()
-        {
-            return NewProxyInstance<T>(typeof(T));
-        }
+//        public static T NewProxyInstance<T>()
+//        {
+//            return NewProxyInstance<T>(typeof(T));
+//        }
 
-        public static object NewProxyInstance(Type type)
-        {
-            return NewProxyInstance<object>(type);
-        }
+//        public static object NewProxyInstance(Type type)
+//        {
+//            return NewProxyInstance<object>(type);
+//        }
 
 
 
-        private static ObjectActivator<T> GetActivator<T>(Type type)
-        {
-            var proxyBuilder = new ProxyTypeBuilder();
+//        //private static ObjectActivator<T> GetActivator<T>(Type type)
+//        //{
+//        //    var proxyBuilder = new ProxyTypeBuilder();
 
-            Type proxyType = proxyBuilder.BuildProxyType(type);
-            ObjectActivator<T> activator = ObjectActivator.GetActivator<T>(proxyType);
+//        //    Type proxyType = proxyBuilder.BuildProxyType(type);
+//        //    ObjectActivator<T> activator = ObjectActivator.GetActivator<T>(proxyType);
 
-            return activator;
-        }
+//        //    return activator;
+//        //}
 
-        public static object GetInvocationHandler(object proxy)
-        {
-            throw new NotImplementedException();
-        }
-    }
-}
+//        public static object GetInvocationHandler(object proxy)
+//        {
+//            throw new NotImplementedException();
+//        }
+//    }
+//}

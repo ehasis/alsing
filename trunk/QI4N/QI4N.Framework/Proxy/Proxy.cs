@@ -25,11 +25,10 @@
             var proxyBuilder = new InvocationProxyTypeBuilder();
 
             Type proxyType = proxyBuilder.BuildProxyType(type);
-            ObjectActivator<object> activator = ObjectActivator.GetActivator<object>(proxyType);
-
-            object instance = activator();
-            FieldInfo defaultHandlerField = proxyType.GetField("defaultHandler");
-            defaultHandlerField.SetValue(instance, handler);
+            var instance = Activator.CreateInstance(proxyType, new object[]
+                                                                   {
+                                                                           handler
+                                                                   });
 
             return instance;
         }

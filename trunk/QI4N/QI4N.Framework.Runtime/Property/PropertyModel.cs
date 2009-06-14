@@ -20,9 +20,14 @@
 
     public static class PropertyModelFactory
     {
-        public static PropertyModel NewInstance(Type propertyType)
+        public static PropertyModel NewInstance(MethodInfo accessor)
         {
-            return null;
+            Type propertyContentType = typeof(string);
+            var template = typeof(PropertyModel<>);
+            var generic = template.MakeGenericType(propertyContentType);
+            var propertyModelInstance = Activator.CreateInstance(generic, new object[] { accessor }) as PropertyModel;
+
+            return propertyModelInstance;
         }
     }
 
