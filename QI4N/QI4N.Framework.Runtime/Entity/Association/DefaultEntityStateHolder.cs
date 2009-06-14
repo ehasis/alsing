@@ -21,8 +21,8 @@ namespace QI4N.Framework.Runtime
             if (!this.associations.ContainsKey(associationMethod))
             {
                 //lazy build properties
-                var association = ProxyInstanceBuilder.NewProxyInstance(associationMethod.ReturnType) as AbstractAssociation;
-                this.associations.Add(associationMethod, association);
+             //   var association = ProxyInstanceBuilder.NewProxyInstance(associationMethod.ReturnType) as AbstractAssociation;
+             //   this.associations.Add(associationMethod, association);
             }
 
             return this.associations[associationMethod];
@@ -33,8 +33,8 @@ namespace QI4N.Framework.Runtime
             if (!this.properties.ContainsKey(propertyMethod))
             {
                 //lazy build properties
-                var property = ProxyInstanceBuilder.NewProxyInstance(propertyMethod.ReturnType) as AbstractProperty;
-                this.properties.Add(propertyMethod, property);
+            //    var property = ProxyInstanceBuilder.NewProxyInstance(propertyMethod.ReturnType) as AbstractProperty;
+            //    this.properties.Add(propertyMethod, property);
             }
             return this.properties[propertyMethod];
         }
