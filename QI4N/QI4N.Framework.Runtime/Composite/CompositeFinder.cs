@@ -2,12 +2,11 @@
 {
     using System;
 
-    public class CompositeFinder
+    public class CompositeFinder : TypeFinder<CompositeModel>
     {
-        public CompositeModel Model { get; set; }
-
-        public ModuleInstance Module { get; set; }
-
-        public Type Type{ get; set; }
+        protected override CompositeModel FindModel(ModuleModel model, Visibility visibility)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
