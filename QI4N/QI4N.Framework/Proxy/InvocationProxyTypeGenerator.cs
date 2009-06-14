@@ -20,9 +20,12 @@ namespace QI4N.Framework.Reflection
 
         private TypeBuilder typeBuilder;
 
-        public Type BuildProxyType(Type compositeType)
+        private Type[] additionalTypes;
+
+        public Type BuildProxyType(Type compositeType,Type[] additionalTypes)
         {
             this.compositeType = compositeType;
+            this.additionalTypes = additionalTypes;
 
             this.CreateInterfaceList();
 
@@ -156,7 +159,13 @@ namespace QI4N.Framework.Reflection
 
         private void CreateInterfaceList()
         {
-            Type[] all = this.compositeType.GetAllInterfaces().ToArray();
+            Type[] allFromComposite = this.compositeType.GetAllInterfaces().ToArray();
+            var allFromAdditional = from t in additionalTypes
+                                      from tt in t.GetAllInterfaces()
+                                      select tt;
+
+            var all = allFromComposite.Union(allFromComposite).Distinct().ToArray();
+
             this.interfaces = all;
         }
 

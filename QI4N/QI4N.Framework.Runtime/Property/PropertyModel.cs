@@ -100,7 +100,7 @@
         {
             Type type = this.accessor.ReturnType;
             var handler = new PropertyHandler(instance);
-            var proxy = Proxy.NewProxyInstance(type, handler) as AbstractProperty;
+            var proxy = Proxy.NewProxyInstance(handler, type) as AbstractProperty;
 
             return proxy;
         }

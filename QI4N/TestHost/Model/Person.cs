@@ -18,7 +18,7 @@
     public class PersonBehaviorMixin : PersonBehavior
     {
         [This]
-        private Person self;
+        private PersonState self;
 
         [Uses]
         private string email;
@@ -29,7 +29,7 @@
         }
     }
 
-    public interface Person : PersonBehavior, PersonState
+    public interface Person : PersonBehavior
     {
     }
 

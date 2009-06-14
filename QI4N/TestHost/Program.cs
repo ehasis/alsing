@@ -14,21 +14,21 @@ namespace ConsoleApplication23
             CompositeBuilder<Person> personFactory = factory.NewCompositeBuilder<Person>();
 
             personFactory.Use("Roger@Alsing.com");
-            Person protoPerson = personFactory.Prototype();
+            var protoPerson = personFactory.PrototypeFor<PersonState>();
             protoPerson.FirstName.Value = "Roger";
             protoPerson.LastName.Value = "Alsing";
             protoPerson.Weight.Value = 85;
 
             Person person = personFactory.NewInstance();
 
-            Console.WriteLine(person.Weight.Value);
+        //    Console.WriteLine(person.Weight.Value);
 
             Person otherPerson = personFactory.NewInstance();
 
-            otherPerson.Weight.Value = 99;
+       //     otherPerson.Weight.Value = 99;
 
-            Console.WriteLine(person.Weight.Value);
-            Console.WriteLine(otherPerson.Weight.Value);
+       //     Console.WriteLine(person.Weight.Value);
+       //     Console.WriteLine(otherPerson.Weight.Value);
             
             person.SayHi();
 
