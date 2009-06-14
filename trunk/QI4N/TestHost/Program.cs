@@ -13,7 +13,7 @@ namespace ConsoleApplication23
             var factory = new CompositeBuilderFactoryInstance(moduleInstance);
             CompositeBuilder<Person> personFactory = factory.NewCompositeBuilder<Person>();
 
-
+            personFactory.Use("Roger@Alsing.com");
             Person protoPerson = personFactory.Prototype();
             protoPerson.FirstName.Value = "Roger";
             protoPerson.LastName.Value = "Alsing";

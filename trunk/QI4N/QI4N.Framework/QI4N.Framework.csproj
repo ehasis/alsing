@@ -59,6 +59,7 @@
     <Compile Include="Injection\Scope\InjectionScopeAttribute.cs" />
     <Compile Include="Injection\Scope\ServiceAttribute.cs" />
     <Compile Include="Injection\Scope\StrucutreAttribute.cs" />
+    <Compile Include="Injection\Scope\UsesAttribute.cs" />
     <Compile Include="Mixin\MixinsAttribute.cs" />
     <Compile Include="Object\ObjectActivator.cs" />
     <Compile Include="Property\ImmutableAttribute.cs" />

@@ -20,9 +20,12 @@
         [This]
         private Person self;
 
+        [Uses]
+        private string email;
+
         public void SayHi()
         {
-            Console.WriteLine("{0} {1} Says hello from QI4N", this.self.FirstName.Value, this.self.LastName.Value);
+            Console.WriteLine("{0} {1} Says hello from QI4N - email {2}", this.self.FirstName.Value, this.self.LastName.Value,email);
         }
     }
 
