@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
 
     using Reflection;
@@ -32,7 +33,7 @@
             this.ImplementMixinMethods();
         }
 
-
+        [DebuggerStepThrough]
         public object Invoke(MixinsInstance mixins, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
         {
             CompositeMethodModel compositeMethod;
