@@ -1,5 +1,5 @@
-ï»¿///*
-// * Copyright (c) 2007, Rickard Ã–berg. All Rights Reserved.
+///*
+// * Copyright (c) 2007, Rickard Öberg. All Rights Reserved.
 // * Copyright (c) 2008, Edward Yakop. All Rights Reserved.
 // *
 // * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@
 ///**
 // * {@code EntityPropertyInstance} represents a property whose value must be backed by an EntityState.
 // *
-// * @author Rickard Ã–berg
+// * @author Rickard Öberg
 // * @since 0.1.0
 // */
 //public class EntityPropertyInstance<T> extends AbstractPropertyInstance<T>

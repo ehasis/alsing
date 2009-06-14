@@ -15,7 +15,7 @@
 
         protected readonly IList<MixinModel> mixinModels = new List<MixinModel>();
 
-   //     protected readonly HashSet<Type> mixinTypes = new HashSet<Type>();
+        //     protected readonly HashSet<Type> mixinTypes = new HashSet<Type>();
 
         //    private readonly IDictionary<Type, Type> mixinToImplementationLookup = new Dictionary<Type, Type>();
 
@@ -27,7 +27,7 @@
 
         public void AddMixinType(Type mixinType)
         {
-     //       this.mixinTypes.Add(mixinType);
+            //       this.mixinTypes.Add(mixinType);
 
             foreach (Type mixinImplementationType in mixinType.GetMixinTypes())
             {

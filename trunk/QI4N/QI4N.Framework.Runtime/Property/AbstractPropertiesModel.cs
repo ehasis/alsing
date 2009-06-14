@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -44,7 +44,7 @@
                 properties.Add(propertyModel.Accessor, property);
             }
 
-            return new PropertiesInstance( properties );
+            return new PropertiesInstance(properties);
         }
 
         public StateHolder NewInstance(StateHolder state)
@@ -54,18 +54,13 @@
             {
                 object initialValue = state.GetProperty(propertyModel.Accessor).Value;
 
-                initialValue = CloneInitialValue(initialValue, false);
+                initialValue = this.CloneInitialValue(initialValue, false);
 
                 // Create property instance
                 AbstractProperty property = propertyModel.NewInstance(initialValue);
                 properties.Add(propertyModel.Accessor, property);
             }
-            return new PropertiesInstance( properties );
-        }
-
-        private object CloneInitialValue(object initialValue, bool p)
-        {
-            return initialValue;
+            return new PropertiesInstance(properties);
         }
 
         protected PropertyModel NewPropertyModel(MethodInfo accessor, Type compositeType)
@@ -74,6 +69,11 @@
 
             //return model;
             return null;
+        }
+
+        private object CloneInitialValue(object initialValue, bool p)
+        {
+            return initialValue;
         }
     }
 }

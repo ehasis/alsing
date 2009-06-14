@@ -3,12 +3,11 @@
     using System;
     using System.Reflection;
 
-
     public class MixinModel
     {
-        public Type MixinType { get; set; }
-
         public MixinsModel MixinsModel { get; set; }
+
+        public Type MixinType { get; set; }
 
         public object NewInstance(CompositeInstance compositeInstance, StateHolder stateHolder, UsesInstance uses)
         {
@@ -17,7 +16,7 @@
 
         public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
         {
-            if (typeof(InvocationHandler).IsAssignableFrom(MixinType))
+            if (typeof(InvocationHandler).IsAssignableFrom(this.MixinType))
             {
                 return new GenericFragmentInvocationHandler();
             }

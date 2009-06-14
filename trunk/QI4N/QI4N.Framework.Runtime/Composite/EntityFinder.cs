@@ -1,10 +1,14 @@
 ﻿namespace QI4N.Framework.Runtime
 {
+    using System;
+
     public class EntityFinder : TypeFinder<EntityModel>
     {
         protected override EntityModel FindModel(ModuleModel model, Visibility visibility)
         {
-            EntityModel m = EntityModel.NewModel(this.Type, null);
+            Type compositeType = CompositeCache.GetMatchingComposite(this.MixinType);
+
+            EntityModel m = EntityModel.NewModel(compositeType, null);
             return m;
         }
     }
