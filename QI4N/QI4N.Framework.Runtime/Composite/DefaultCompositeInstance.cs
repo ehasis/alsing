@@ -1,5 +1,6 @@
 ﻿namespace QI4N.Framework.Runtime
 {
+    using System.Diagnostics;
     using System.Reflection;
 
     public class DefaultCompositeInstance : CompositeInstance, MixinsInstance
@@ -23,11 +24,13 @@
 
         public StateHolder State { get; set; }
 
+        [DebuggerStepThrough]
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             return this.CompositeModel.Invoke(this, this, proxy, method, args, this.ModuleInstance);
         }
 
+        [DebuggerStepThrough]
         public object Invoke(object composite, object[] args, CompositeMethodInstance methodInstance)
         {
             object mixin = methodInstance.GetMixin(this.Mixins);
