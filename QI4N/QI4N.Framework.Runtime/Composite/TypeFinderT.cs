@@ -11,6 +11,8 @@
 
         public bool VisitModule(ModuleInstance moduleInstance, ModuleModel moduleModel, Visibility visibility)
         {
+            Model = FindModel(moduleModel, visibility);
+            return true;
             throw new NotImplementedException();
         }
 
