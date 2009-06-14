@@ -9,7 +9,7 @@
     {
     }
 
-    
+
     public interface PersonBehavior
     {
         void SayHi();
@@ -20,19 +20,14 @@
         [This]
         private Person self;
 
-        #region PersonBehavior Members
-
         public void SayHi()
         {
-            Console.WriteLine("{0} {1} Says hello from QI4N",self.FirstName.Value ,self.LastName.Value);
+            Console.WriteLine("{0} {1} Says hello from QI4N", this.self.FirstName.Value, this.self.LastName.Value);
         }
-
-        #endregion
     }
 
-    public interface Person : PersonBehavior , PersonState
+    public interface Person : PersonBehavior, PersonState
     {
-
     }
 
     public interface PersonState
@@ -45,18 +40,16 @@
 
         Weight Weight { get; }
     }
+
     public interface PersonName : Property<string>
     {
-        
     }
 
     public interface BirthDate : Property<DateTime>
     {
-        
     }
 
     public interface Weight : Property<double>
     {
-        
     }
 }

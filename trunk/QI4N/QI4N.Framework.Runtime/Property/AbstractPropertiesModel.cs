@@ -72,6 +72,12 @@ namespace QI4N.Framework.Runtime
 
         private object CloneInitialValue(object initialValue, bool p)
         {
+            if (initialValue is ICloneable)
+            {
+                var c = initialValue as ICloneable;
+                return c.Clone();
+            }
+
             return initialValue;
         }
     }
