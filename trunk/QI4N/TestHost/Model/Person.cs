@@ -30,12 +30,25 @@
     {
     }
 
-    public interface PersonState
+    public interface HasAddress
+    {
+        Property<string> Street { get; }
+
+        Property<string> City { get; }
+
+        Property<int> ZipCode { get; }
+    }
+
+    public interface HasName
     {
         PersonName FirstName { get; }
 
         PersonName LastName { get; }
+    }
 
+
+    public interface PersonState : HasName, HasAddress
+    {
         BirthDate BirthDate { get; }
 
         Weight Weight { get; }
