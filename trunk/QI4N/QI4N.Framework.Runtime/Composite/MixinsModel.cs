@@ -118,15 +118,15 @@
             {
                 if (typeof(AbstractProperty).IsAssignableFrom(mixinField.FieldType))
                 {
-                    // TODO: create property
-                    object propertyInstance = null;
-                    mixinField.SetValue(mixin, propertyInstance);
+                    //// TODO: create property
+                    //object propertyInstance = null;
+                    //mixinField.SetValue(mixin, propertyInstance);
                 }
                 else if (typeof(AbstractAssociation).IsAssignableFrom(mixinField.FieldType))
                 {
-                    // TODO: create association
-                    object associationInstance = null;
-                    mixinField.SetValue(mixin, associationInstance);
+                    //// TODO: create association
+                    //object associationInstance = null;
+                    //mixinField.SetValue(mixin, associationInstance);
                 }
                 else if (typeof(StateHolder).IsAssignableFrom(mixinField.FieldType))
                 {

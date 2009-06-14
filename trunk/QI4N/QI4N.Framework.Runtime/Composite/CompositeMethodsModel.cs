@@ -34,6 +34,7 @@
         }
 
         [DebuggerStepThrough]
+        [DebuggerHidden]
         public object Invoke(MixinsInstance mixins, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
         {
             CompositeMethodModel compositeMethod;

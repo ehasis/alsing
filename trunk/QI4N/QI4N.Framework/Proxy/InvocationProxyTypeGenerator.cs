@@ -2,6 +2,7 @@ namespace QI4N.Framework.Reflection
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
@@ -164,6 +165,8 @@ namespace QI4N.Framework.Reflection
         private void CreateMethod(MethodInfo method)
         {
             MethodBuilder methodBuilder = this.typeBuilder.GetMethodOverrideBuilder(method);
+            methodBuilder.SetCustomAttribute(typeof(DebuggerStepThroughAttribute).GetConstructor(new Type[]{}),new byte[]{});
+            methodBuilder.SetCustomAttribute(typeof(DebuggerHiddenAttribute).GetConstructor(new Type[] { }), new byte[] { });
 
             ILGenerator generator = methodBuilder.GetILGenerator();
 

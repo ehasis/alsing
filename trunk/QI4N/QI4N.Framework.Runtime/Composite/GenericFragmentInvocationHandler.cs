@@ -6,6 +6,7 @@
     public class GenericFragmentInvocationHandler : FragmentInvocationHandler
     {
         [DebuggerStepThrough]
+        //[DebuggerHidden]
         public override object Invoke(object proxy, MethodInfo method, object[] args)
         {
             var handler = (InvocationHandler)this.fragment;

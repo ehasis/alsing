@@ -12,6 +12,7 @@
             this.property = property;
         }
 
+      //  [DebuggerStepThrough]
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             return method.Invoke(this.property, args);
