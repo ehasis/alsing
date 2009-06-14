@@ -1,6 +1,7 @@
 ﻿namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Linq;
     using System.Reflection;
 
     using Reflection;
@@ -18,11 +19,18 @@
         AbstractProperty NewInitialInstance();
     }
 
+    //Slow reflection code, but only used when setting up the composite models
     public static class PropertyModelFactory
     {
         public static PropertyModel NewInstance(MethodInfo accessor)
         {
-            Type propertyContentType = typeof(string);
+            var f = (from g in accessor.ReturnType.GetAllInterfaces()
+                     where g.GetGenericTypeDefinition() == typeof(Property<>)
+                    select g).FirstOrDefault();
+
+            
+
+            Type propertyContentType = f.GetGenericArguments()[0];
             var template = typeof(PropertyModel<>);
             var generic = template.MakeGenericType(propertyContentType);
             var propertyModelInstance = Activator.CreateInstance(generic, new object[] { accessor }) as PropertyModel;
