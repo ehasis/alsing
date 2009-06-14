@@ -14,7 +14,6 @@
 
         protected ModuleInstance moduleInstance;
 
-
         protected CompositeInstance prototypeInstance;
 
         protected StateHolder state;
@@ -32,18 +31,6 @@
             this.moduleInstance = moduleInstance;
             this.compositeModel = model;
         }
-
-        //public CompositeBuilderInstance() : this(typeof(T))
-        //{
-        //}
-
-        //public CompositeBuilderInstance(Type compositeType)
-        //{
-        //    this.compositeInterface = compositeType;
-
-        //    var compositeMethodsModel = new CompositeMethodsModel(compositeType, new AbstractMixinsModel());
-        //    this.compositeModel = new CompositeModel(compositeMethodsModel,compositeType);
-        //}
 
         public IDictionary<MethodInfo, AbstractAssociation> Associations
         {
