@@ -4,13 +4,13 @@ namespace QI4N.Framework.Runtime
     using System.Collections.Generic;
     using System.Reflection;
 
-    public class AbstractStateModel
+    public abstract class AbstractStateModel : AbstractPropertiesModel
     {
         protected AbstractPropertiesModel propertiesModel;
 
-        public AbstractStateModel()
+        protected AbstractStateModel(AbstractPropertiesModel propertiesModel)
         {
-            this.propertiesModel = new AbstractPropertiesModel();
+            this.propertiesModel = propertiesModel;
         }
 
         public void AddStateFor(IEnumerable<MethodInfo> methods, Type compositeType)

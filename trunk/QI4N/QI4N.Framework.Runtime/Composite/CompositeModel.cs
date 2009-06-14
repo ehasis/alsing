@@ -12,7 +12,7 @@
 
         public static CompositeModel NewModel(Type compositeType, IList<Type> mixins)
         {
-            var stateModel = new AbstractStateModel();
+            var stateModel = new CompositeStateModel();
             var mixinsModel = new MixinsModel();
 
             var compositeMethodsModel = new CompositeMethodsModel(compositeType, mixinsModel);

@@ -4,7 +4,7 @@ namespace QI4N.Framework.Runtime
     using System.Collections.Generic;
     using System.Reflection;
 
-    public class AbstractPropertiesModel
+    public abstract class AbstractPropertiesModel
     {
         private readonly IDictionary<string, MethodInfo> accessors = new Dictionary<string, MethodInfo>();
 

@@ -66,6 +66,7 @@
     <Compile Include="Composite\MixinModel.cs" />
     <Compile Include="Composite\MixinsInstance.cs" />
     <Compile Include="Composite\ModuleInstance.cs" />
+    <Compile Include="Composite\StateModel.cs" />
     <Compile Include="Composite\TypedInvocationHandler.cs" />
     <Compile Include="Composite\TypeFinderT.cs" />
     <Compile Include="Composite\UseInstance.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Property\AbstractPropertyModel.cs" />
     <Compile Include="Property\AbstractPropertiesModel.cs" />
     <Compile Include="Property\PropertiesInstance.cs" />
+    <Compile Include="Property\PropertiesModel.cs" />
     <Compile Include="Property\PropertyHandler.cs" />
     <Compile Include="Property\PropertyInstance.cs" />
     <Compile Include="Property\PropertyModel.cs" />

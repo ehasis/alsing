@@ -17,5 +17,9 @@
                 throw new NotImplementedException();
             }
         }
+
+        public EntityStateModel() : base(new PropertiesModel())
+        {
+        }
     }
 }
