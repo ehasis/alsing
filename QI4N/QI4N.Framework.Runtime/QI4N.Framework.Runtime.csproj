@@ -70,6 +70,7 @@
     <Compile Include="Entity\EntityInstance.cs" />
     <Compile Include="Entity\EntityMixin.cs" />
     <Compile Include="Entity\EntityMixinsModel.cs" />
+    <Compile Include="Entity\EntityModel.cs" />
     <Compile Include="Entity\EntityPropertyInstance.cs" />
     <Compile Include="Entity\EntityStateModel.cs" />
     <Compile Include="Object\DefaultObjectBuilder.cs" />

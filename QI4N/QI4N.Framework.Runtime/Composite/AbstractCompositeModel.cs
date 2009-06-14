@@ -30,6 +30,22 @@
             this.proxyType = builder.BuildProxyType(compositeType);
         }
 
+        public Type CompositeType
+        {
+            get
+            {
+                return this.compositeType;
+            }
+        }
+
+        public AbstractStateModel State
+        {
+            get
+            {
+                return this.stateModel;
+            }
+        }
+
         public object Invoke(MixinsInstance mixins, CompositeInstance compositeInstance, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
         {
             return this.compositeMethodsModel.Invoke(mixins, proxy, method, args, moduleInstance);
@@ -57,5 +73,7 @@
         {
             return this.stateModel.NewState(state);
         }
+
+    //    public abstract CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance usesInstance, StateHolder instanceState);
     }
 }

@@ -20,22 +20,6 @@
             
         }
 
-        public Type CompositeType
-        {
-            get
-            {
-                return this.compositeType;
-            }
-        }
-
-        public AbstractStateModel State
-        {
-            get
-            {
-                return this.stateModel;
-            }
-        }
-
         public CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance uses, StateHolder stateHolder)
         {
             object[] mixins = this.mixinsModel.NewMixinHolder();
