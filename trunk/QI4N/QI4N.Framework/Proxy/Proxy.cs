@@ -1,16 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace QI4N.Framework.Reflection
+﻿namespace QI4N.Framework.Reflection
 {
+    using System;
     using System.Reflection;
 
     using Activation;
 
     public static class Proxy
     {
+        public static InvocationHandler GetInvocationHandler(object proxy)
+        {
+            FieldInfo defaultHandlerField = proxy.GetType().GetField("defaultHandler");
+            var handler = defaultHandlerField.GetValue(proxy) as InvocationHandler;
+            return handler;
+        }
+
+        public static bool IsProxyClass(Type type)
+        {
+            FieldInfo defaultHandlerField = type.GetField("defaultHandler");
+            return defaultHandlerField != null;
+        }
+
         public static object NewProxyInstance(Type type, InvocationHandler handler)
         {
             var proxyBuilder = new InvocationProxyTypeBuilder();
@@ -18,18 +27,11 @@ namespace QI4N.Framework.Reflection
             Type proxyType = proxyBuilder.BuildProxyType(type);
             ObjectActivator<object> activator = ObjectActivator.GetActivator<object>(proxyType);
 
-            var instance = activator();
+            object instance = activator();
             FieldInfo defaultHandlerField = proxyType.GetField("defaultHandler");
             defaultHandlerField.SetValue(instance, handler);
 
             return instance;
-        }
-
-        public static InvocationHandler GetInvocationHandler(Composite proxy)
-        {
-            FieldInfo defaultHandlerField = proxy.GetType().GetField("defaultHandler");
-            var handler = defaultHandlerField.GetValue(proxy) as InvocationHandler;
-            return handler;
         }
     }
 }

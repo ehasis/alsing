@@ -85,6 +85,8 @@
     <Compile Include="Property\PropertyHandler.cs" />
     <Compile Include="Property\PropertyInstance.cs" />
     <Compile Include="Property\PropertyModel.cs" />
+    <Compile Include="Service\ServiceInstance.cs" />
+    <Compile Include="Value\ValueInstance.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QI4N.Framework\QI4N.Framework.csproj">
