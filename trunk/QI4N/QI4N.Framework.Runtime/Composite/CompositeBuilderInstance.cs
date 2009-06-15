@@ -120,7 +120,7 @@
                 this.prototypeInstance = this.compositeModel.NewCompositeInstance(this.moduleInstance, this.Uses, this.State);
             }
 
-            return (K)this.prototypeInstance.Proxy;
+            return (K)this.prototypeInstance.NewProxy(typeof(K));
         }
 
         public void Use(params object[] usedObjects)

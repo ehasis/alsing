@@ -1,5 +1,6 @@
 ﻿namespace QI4N.Framework.Runtime
 {
+    using System;
     using System.Diagnostics;
     using System.Reflection;
 
@@ -49,6 +50,11 @@
         public string ToURI()
         {
             return "hello";
+        }
+
+        public object NewProxy(Type mixinType)
+        {
+            return CompositeModel.NewProxy(this, mixinType);
         }
     }
 }

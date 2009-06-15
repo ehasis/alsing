@@ -15,7 +15,7 @@
 
         protected readonly IList<MixinModel> mixinModels = new List<MixinModel>();
 
-        //     protected readonly HashSet<Type> mixinTypes = new HashSet<Type>();
+        protected readonly HashSet<Type> mixinTypes = new HashSet<Type>();
 
         //    private readonly IDictionary<Type, Type> mixinToImplementationLookup = new Dictionary<Type, Type>();
 
@@ -27,13 +27,44 @@
 
         public void AddMixinType(Type mixinType)
         {
-            //       this.mixinTypes.Add(mixinType);
+            if (this.mixinTypes.Contains(mixinType))
+            {
+                return;
+            }
+
+            this.mixinTypes.Add(mixinType);
 
             foreach (Type mixinImplementationType in mixinType.GetMixinTypes())
             {
                 this.mixinImplementationTypes.Add(mixinImplementationType);
                 //             mixinToImplementationLookup.Add(mixinType,mixinImplementationType);
             }
+        }
+
+        public void AddThisTypes()
+        {
+            int oldCount;
+
+            //recurse through mixin implementations and try to find This injections
+            do
+            {
+                oldCount = this.mixinImplementationTypes.Count;
+                var thisTypes = new List<Type>();
+                foreach (Type implementationType in this.mixinImplementationTypes)
+                {
+                    IEnumerable<Type> fieldTypes = implementationType
+                            .GetAllFields()
+                            .Where(f => f.HasAttribute(typeof(ThisAttribute)))
+                            .Select(f => f.FieldType);
+
+                    thisTypes.AddRange(fieldTypes);
+                }
+
+                foreach (Type type in thisTypes)
+                {
+                    this.AddMixinType(type);
+                }
+            } while (oldCount != this.mixinImplementationTypes.Count);
         }
 
         public MixinModel ImplementMethod(MethodInfo method)
@@ -131,16 +162,16 @@
 
             if (isThis)
             {
-                //normal "This"
-                if (mixinField.FieldType.IsAssignableFrom(compositeInstance.GetType()))
-                {
-                    mixinField.SetValue(mixin, compositeInstance.Proxy);
-                }
-                //private mixin
-                else
-                {
-                    //gg
-                }
+                ////normal "This"
+                //if (mixinField.FieldType.IsAssignableFrom(compositeInstance.GetType()))
+                //{
+                mixinField.SetValue(mixin, compositeInstance.Proxy);
+                //}
+                ////private mixin
+                //else
+                //{
+                //    //gg
+                //}
             }
         }
 
@@ -198,12 +229,7 @@
 
         private MixinModel ImplementMethodWithType(MethodInfo method, Type mixinType)
         {
-            var mixinModel = new MixinModel
-                                 {
-                                         MixinsModel = this,
-                                         MixinType = mixinType
-                                 };
-
+            var mixinModel = new MixinModel(mixinType);
             return mixinModel;
         }
 
@@ -219,6 +245,11 @@
                 }
             }
             return mixinModel;
+        }
+
+        public IEnumerable<Type> GetMixinTypes()
+        {
+            return this.mixinTypes;
         }
     }
 }

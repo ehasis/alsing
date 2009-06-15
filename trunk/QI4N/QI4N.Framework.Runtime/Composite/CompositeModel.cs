@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using JavaProxy;
+
     public class CompositeModel : AbstractCompositeModel
     {
         protected CompositeModel(AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
@@ -19,6 +21,8 @@
 
             stateModel.AddStateFor(compositeMethodsModel.Methods, compositeType);
 
+            //Type 
+
             return new CompositeModel(stateModel, compositeMethodsModel, mixinsModel, compositeType);
         }
 
@@ -30,6 +34,11 @@
             this.mixinsModel.NewMixins(compositeInstance, uses, stateHolder, mixins);
 
             return compositeInstance;
+        }
+
+        public object NewProxy(InvocationHandler handler, Type mixinType)
+        {
+            return Proxy.NewProxyInstance(handler, mixinType);
         }
     }
 }
