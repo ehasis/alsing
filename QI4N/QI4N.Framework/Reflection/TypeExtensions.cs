@@ -127,5 +127,10 @@ namespace QI4N.Framework.Reflection
 
             return appliesTo.ToArray();
         }
+
+        public static bool HasAttribute(this FieldInfo self, Type attributeType)
+        {
+            return self.GetCustomAttributes(attributeType, true).Any();
+        }
     }
 }

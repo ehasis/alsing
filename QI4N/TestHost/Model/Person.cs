@@ -29,7 +29,7 @@
         }
     }
 
-    public interface Person : PersonBehavior
+    public interface Person : PersonBehavior, PersonState
     {
     }
 
@@ -44,28 +44,28 @@
 
     public interface HasName
     {
-        PersonName FirstName { get; }
+        PersonNameProperty FirstName { get; }
 
-        PersonName LastName { get; }
+        PersonNameProperty LastName { get; }
     }
 
 
     public interface PersonState : HasName, HasAddress
     {
-        BirthDate BirthDate { get; }
+        BirthDateProperty BirthDate { get; }
 
-        Weight Weight { get; }
+        WeightProperty Weight { get; }
     }
 
-    public interface PersonName : Property<string>
+    public interface PersonNameProperty : Property<string>
     {
     }
 
-    public interface BirthDate : Property<DateTime>
+    public interface BirthDateProperty : Property<DateTime>
     {
     }
 
-    public interface Weight : Property<double>
+    public interface WeightProperty : Property<double>
     {
     }
 }

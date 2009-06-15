@@ -23,9 +23,7 @@
             this.stateModel = stateModel;
             this.compositeType = compositeType;
             this.compositeMethodsModel = compositeMethodsModel;
-
             this.mixinsModel = mixinsModel;
-
             this.proxyType = Proxy.BuildProxyType(compositeType);
         }
 
