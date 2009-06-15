@@ -5,8 +5,10 @@
 
     public class GenericFragmentInvocationHandler : FragmentInvocationHandler
     {
-        //[DebuggerStepThrough]
-        ////[DebuggerHidden]
+#if !DEBUG
+        [DebuggerStepThrough]
+        [DebuggerHidden]
+#endif
         public override object Invoke(object proxy, MethodInfo method, object[] args)
         {
             var handler = (InvocationHandler)this.fragment;

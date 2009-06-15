@@ -25,15 +25,19 @@
 
         public StateHolder State { get; set; }
 
-        //[DebuggerStepThrough]
-        //[DebuggerHidden]
+#if !DEBUG
+        [DebuggerStepThrough]
+        [DebuggerHidden]
+#endif
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             return this.CompositeModel.Invoke(this, this, proxy, method, args, this.ModuleInstance);
         }
 
-        //[DebuggerStepThrough]
-        //[DebuggerHidden]
+#if !DEBUG
+        [DebuggerStepThrough]
+        [DebuggerHidden]
+#endif
         public object Invoke(object composite, object[] args, CompositeMethodInstance methodInstance)
         {
             object mixin = methodInstance.GetMixin(this.Mixins);
