@@ -18,8 +18,8 @@
             this.mixinIndex = mixinIndex;
         }
 
-        [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerStepThrough]
+        //[DebuggerHidden]
         public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
         {
             CompositeMethodInstance methodInstance = this.GetInstance(moduleInstance);
@@ -27,15 +27,15 @@
             return mixins.Invoke(proxy, args, methodInstance);
         }
 
-        [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerStepThrough]
+        //[DebuggerHidden]
         private CompositeMethodInstance GetInstance(ModuleInstance moduleInstance)
         {
             return this.newCompositeMethodInstance(moduleInstance);
         }
 
-        [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerStepThrough]
+        //[DebuggerHidden]
         private CompositeMethodInstance newCompositeMethodInstance(ModuleInstance moduleInstance)
         {
             FragmentInvocationHandler mixinInvocationHandler = this.mixinModel.NewInvocationHandler(this.method);
@@ -61,8 +61,8 @@
 
         public abstract object Invoke(object proxy, MethodInfo method, object[] args);
 
-        [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerStepThrough]
+        //[DebuggerHidden]
         public void SetFragment(object fragment)
         {
             this.fragment = fragment;

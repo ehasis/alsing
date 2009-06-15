@@ -5,8 +5,8 @@
 
     public class TypedFragmentInvocationHandler : FragmentInvocationHandler
     {
-        [DebuggerStepThrough]
-        [DebuggerStepperBoundary]
+        //[DebuggerStepThrough]
+        //[DebuggerStepperBoundary]
         public override object Invoke(object proxy, MethodInfo method, object[] args)
         {
             return method.Invoke(this.fragment, args);

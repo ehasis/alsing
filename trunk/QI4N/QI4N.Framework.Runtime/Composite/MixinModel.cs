@@ -49,8 +49,8 @@
             throw new NotImplementedException();
         }
 
-        [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerStepThrough]
+        //[DebuggerHidden]
         public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
         {
             if (this.IsGeneric)

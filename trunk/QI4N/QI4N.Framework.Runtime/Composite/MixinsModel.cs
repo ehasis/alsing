@@ -62,7 +62,10 @@
 
                 foreach (Type type in thisTypes)
                 {
-                    this.AddMixinType(type);
+                    foreach(Type childType in type.GetAllInterfaces())
+                    {
+                        this.AddMixinType(childType);
+                    }
                 }
             } while (oldCount != this.mixinImplementationTypes.Count);
         }
@@ -162,16 +165,7 @@
 
             if (isThis)
             {
-                ////normal "This"
-                //if (mixinField.FieldType.IsAssignableFrom(compositeInstance.GetType()))
-                //{
-                mixinField.SetValue(mixin, compositeInstance.Proxy);
-                //}
-                ////private mixin
-                //else
-                //{
-                //    //gg
-                //}
+                mixinField.SetValue(mixin, compositeInstance.NewProxy(mixinField.FieldType));
             }
         }
 

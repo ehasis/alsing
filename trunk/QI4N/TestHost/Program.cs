@@ -21,14 +21,14 @@ namespace ConsoleApplication23
 
             Person person = personFactory.NewInstance();
 
-            Console.WriteLine(person.Weight.Value);
+      //      Console.WriteLine(person.Weight.Value);
 
             Person otherPerson = personFactory.NewInstance();
 
-            otherPerson.Weight.Value = 99;
+     //       otherPerson.Weight.Value = 99;
 
-            Console.WriteLine(person.Weight.Value);
-            Console.WriteLine(otherPerson.Weight.Value);
+     //       Console.WriteLine(person.Weight.Value);
+     //       Console.WriteLine(otherPerson.Weight.Value);
             
             person.SayHi();
 

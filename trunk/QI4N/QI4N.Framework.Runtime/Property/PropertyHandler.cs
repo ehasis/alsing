@@ -12,8 +12,8 @@
             this.property = property;
         }
 
-        [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerStepThrough]
+        //[DebuggerHidden]
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             return method.Invoke(this.property, args);

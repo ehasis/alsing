@@ -43,8 +43,8 @@
             }
         }
 
-        [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerStepThrough]
+        //[DebuggerHidden]
         public object Invoke(MixinsInstance mixins, CompositeInstance compositeInstance, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
         {
             return this.compositeMethodsModel.Invoke(mixins, proxy, method, args, moduleInstance);

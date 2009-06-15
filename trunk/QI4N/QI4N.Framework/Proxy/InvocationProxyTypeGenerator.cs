@@ -22,31 +22,45 @@ namespace QI4N.Framework.Reflection
 
         private Type[] additionalTypes;
 
+        private static readonly object syncRoot = new object();
+
+        private static IDictionary<Type, Type> typeCache = new Dictionary<Type, Type>();
+
         public Type BuildProxyType(Type compositeType,Type[] additionalTypes)
         {
-            this.compositeType = compositeType;
-            this.additionalTypes = additionalTypes;
-
-            this.CreateInterfaceList();
-
-            this.CreateAssemblyBuilder();
-            this.CreateTypeBuilder();
-
-            this.CreateDefaultHandlerField();
-
-            foreach (Type type in this.interfaces)
+            lock (syncRoot)
             {
-                foreach (MethodInfo method in type.GetAllMethods())
+                Type cachedProxyType;
+                if (typeCache.TryGetValue(compositeType, out cachedProxyType))
                 {
-                    this.CreateMethod(method);
+                    return cachedProxyType;
                 }
+                this.compositeType = compositeType;
+                this.additionalTypes = additionalTypes;
+
+                this.CreateInterfaceList();
+
+                this.CreateAssemblyBuilder();
+                this.CreateTypeBuilder();
+
+                this.CreateDefaultHandlerField();
+
+                foreach (Type type in this.interfaces)
+                {
+                    foreach (MethodInfo method in type.GetAllMethods())
+                    {
+                        this.CreateMethod(method);
+                    }
+                }
+
+                this.CreateCtor();
+
+                Type proxyType = this.typeBuilder.CreateType();
+
+                typeCache.Add(compositeType,proxyType);
+
+                return proxyType;                
             }
-
-            this.CreateCtor();
-
-            Type proxyType = this.typeBuilder.CreateType();
-
-            return proxyType;
         }
 
         private static void CreateInvocationHandlerMethod(MethodInfo method, ILGenerator generator, FieldBuilder fieldBuilder)
