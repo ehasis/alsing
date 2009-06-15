@@ -10,8 +10,8 @@ namespace QI4N.Framework
         [State]
         protected StateHolder state;
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
             return this.state.GetProperty(method);

@@ -13,8 +13,8 @@
             this.properties = properties;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public AbstractProperty GetProperty(MethodInfo accessor)
         {
             return this.properties[accessor];

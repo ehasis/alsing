@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Reflection;
 
     using Reflection;
@@ -15,27 +14,29 @@
 
         private readonly MixinsModel mixinsModel;
 
-        public IEnumerable<MethodInfo> Methods
-        {
-            get
-            {
-                foreach(var method in methods.Keys)
-                    yield return method;
-            }
-        }
-
         public CompositeMethodsModel(Type compositeType, MixinsModel mixinsModel)
         {
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();
             this.compositeType = compositeType;
             this.mixinsModel = mixinsModel;
-           // this.implementMixinType(compositeType);
+            // this.implementMixinType(compositeType);
             this.BuildMixinsModel(compositeType);
             this.ImplementMixinMethods();
         }
 
-        [DebuggerStepThrough]
-        [DebuggerHidden]
+        public IEnumerable<MethodInfo> Methods
+        {
+            get
+            {
+                foreach (MethodInfo method in this.methods.Keys)
+                {
+                    yield return method;
+                }
+            }
+        }
+
+        //[DebuggerStepThrough]
+        //[DebuggerHidden]
         public object Invoke(MixinsInstance mixins, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
         {
             CompositeMethodModel compositeMethod;
@@ -94,14 +95,13 @@
                 this.mixinsModel.AddMixinType(mixin);
             }
 
-            mixinsModel.AddThisTypes();
-
+            this.mixinsModel.AddThisTypes();
         }
 
         private void ImplementMixinMethods()
         {
-            var mixinTypes = mixinsModel.GetMixinTypes();
-            foreach (var mixinType in mixinTypes)
+            IEnumerable<Type> mixinTypes = this.mixinsModel.GetMixinTypes();
+            foreach (Type mixinType in mixinTypes)
             {
                 foreach (MethodInfo method in mixinType.GetMethods())
                 {

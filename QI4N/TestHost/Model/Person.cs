@@ -29,7 +29,7 @@
         }
     }
 
-    public interface Person : PersonBehavior, PersonState
+    public interface Person : PersonBehavior
     {
     }
 
