@@ -52,6 +52,7 @@
     <Compile Include="Composite\CompositeContextT.cs" />
     <Compile Include="Concern\ConcernOf.cs" />
     <Compile Include="Concern\ConcernsAttribute.cs" />
+    <Compile Include="Concern\GenericConcern.cs" />
     <Compile Include="Entity\Association\AbstractAssociation.cs" />
     <Compile Include="Entity\Association\AssociationInfo.cs" />
     <Compile Include="Entity\Association\AssociationInstanceMixin.cs" />
