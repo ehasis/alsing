@@ -1,4 +1,4 @@
-namespace QI4N.Framework.Concern
+namespace QI4N.Framework
 {
     public abstract class ConcernOf<T>
     {
