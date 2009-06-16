@@ -4,7 +4,7 @@
 
     using QI4N.Framework;
 
-    [Conserns(typeof(PersonBehaviorConcern))]
+    [Concerns(typeof(PersonBehaviorConcern), typeof(MyGenericConcern))]
     [Mixins(typeof(PersonBehaviorMixin))]
     public interface PersonComposite : Person, Composite
     {
@@ -70,6 +70,16 @@
     {
     }
 
+    public class MyGenericConcern : GenericConcern
+    {
+        public override object Invoke(object proxy, System.Reflection.MethodInfo method, object[] args)
+        {
+            Console.WriteLine("Before {0}",method.Name);
+            var res = next.Invoke(proxy, method, args);
+            Console.WriteLine("After {0}", method.Name);
+            return res;
+        }
+    }
     public class PersonBehaviorConcern : ConcernOf<PersonBehavior>, PersonBehavior
     {
         public void SayHi()
