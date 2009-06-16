@@ -8,19 +8,6 @@ namespace QI4N.Framework.Reflection
 
     public static class TypeExtensions
     {
-        public static IEnumerable<Type> GetAllInterfaces(this Type targetType)
-        {
-            if (targetType.IsInterface)
-            {
-                yield return targetType;
-            }
-
-            foreach (Type type in targetType.GetInterfaces())
-            {
-                yield return type;
-            }
-        }
-
         public static IEnumerable<FieldInfo> GetAllFields(this Type type)
         {
             const BindingFlags flags = BindingFlags.Instance |
@@ -32,6 +19,30 @@ namespace QI4N.Framework.Reflection
             foreach (FieldInfo field in ownFields)
             {
                 yield return field;
+            }
+        }
+
+        public static IEnumerable<MethodInfo> GetAllInterfaceMethods(this Type self)
+        {
+            foreach (Type type in self.GetAllInterfaces())
+            {
+                foreach (MethodInfo methodInfo in type.GetMethods())
+                {
+                    yield return methodInfo;
+                }
+            }
+        }
+
+        public static IEnumerable<Type> GetAllInterfaces(this Type targetType)
+        {
+            if (targetType.IsInterface)
+            {
+                yield return targetType;
+            }
+
+            foreach (Type type in targetType.GetInterfaces())
+            {
+                yield return type;
             }
         }
 
@@ -48,6 +59,15 @@ namespace QI4N.Framework.Reflection
             {
                 yield return method;
             }
+        }
+
+        public static Type[] GetAppliesToTypes(this Type mixinType)
+        {
+            IEnumerable<Type> appliesTo = from attribs in mixinType.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
+                                          from type in attribs.AppliesToTypes
+                                          select type;
+
+            return appliesTo.ToArray();
         }
 
         public static PropertyInfo GetInterfaceProperty(this Type interfaceType, string propertyName)
@@ -81,6 +101,15 @@ namespace QI4N.Framework.Reflection
             return methodBuilder;
         }
 
+        public static Type[] GetMixinTypes(this Type mixinType)
+        {
+            IEnumerable<Type> appliesTo = from attribs in mixinType.GetCustomAttributes(typeof(MixinsAttribute), true).Cast<MixinsAttribute>()
+                                          from type in attribs.MixinTypes
+                                          select type;
+
+            return appliesTo.ToArray();
+        }
+
         public static string GetTypeName(this Type type)
         {
             if (type.IsGenericType)
@@ -97,35 +126,6 @@ namespace QI4N.Framework.Reflection
                 return string.Format("{0}[of {1}]", typeName, args);
             }
             return type.Name;
-        }
-
-        public static IEnumerable<MethodInfo> GetAllInterfaceMethods(this Type self)
-        {
-            foreach(Type type in self.GetAllInterfaces())
-            {
-                foreach(MethodInfo methodInfo in type.GetMethods())
-                {
-                    yield return methodInfo;
-                }
-            }
-        }
-
-        public static Type[] GetAppliesToTypes(this Type mixinType)
-        {
-            var appliesTo = from attribs in mixinType.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
-                            from type in attribs.AppliesToTypes
-                            select type;
-
-            return appliesTo.ToArray();
-        }
-
-        public static Type[] GetMixinTypes(this Type mixinType)
-        {
-            var appliesTo = from attribs in mixinType.GetCustomAttributes(typeof(MixinsAttribute), true).Cast<MixinsAttribute>()
-                            from type in attribs.MixinTypes
-                            select type;
-
-            return appliesTo.ToArray();
         }
 
         public static bool HasAttribute(this FieldInfo self, Type attributeType)

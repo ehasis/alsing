@@ -1,7 +1,6 @@
 namespace QI4N.Framework
 {
     using System;
-    using System.Diagnostics;
     using System.Reflection;
 
     [AppliesTo(typeof(PropertyFilter))]
@@ -14,6 +13,7 @@ namespace QI4N.Framework
         [DebuggerStepThrough]
         [DebuggerHidden]
 #endif
+
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
             return this.state.GetProperty(method);

@@ -54,7 +54,7 @@
                 {
                     IEnumerable<Type> fieldTypes = implementationType
                             .GetAllFields()
-                            .Where(f => f.HasAttribute(typeof(ThisAttribute)))
+                            .Where(f => TypeExtensions.HasAttribute(f, typeof(ThisAttribute)))
                             .Select(f => f.FieldType);
 
                     thisTypes.AddRange(fieldTypes);
@@ -62,12 +62,17 @@
 
                 foreach (Type type in thisTypes)
                 {
-                    foreach(Type childType in type.GetAllInterfaces())
+                    foreach (Type childType in type.GetAllInterfaces())
                     {
                         this.AddMixinType(childType);
                     }
                 }
             } while (oldCount != this.mixinImplementationTypes.Count);
+        }
+
+        public IEnumerable<Type> GetMixinTypes()
+        {
+            return this.mixinTypes;
         }
 
         public MixinModel ImplementMethod(MethodInfo method)
@@ -239,11 +244,6 @@
                 }
             }
             return mixinModel;
-        }
-
-        public IEnumerable<Type> GetMixinTypes()
-        {
-            return this.mixinTypes;
         }
     }
 }

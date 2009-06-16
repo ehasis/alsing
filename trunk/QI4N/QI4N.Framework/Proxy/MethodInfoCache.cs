@@ -2,7 +2,6 @@ namespace QI4N.Framework.Reflection
 {
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Diagnostics;
 
     public static class MethodInfoCache
     {
@@ -25,6 +24,7 @@ namespace QI4N.Framework.Reflection
         [DebuggerStepThrough]
         [DebuggerHidden]
 #endif
+
         public static MethodInfo GetMethod(int methodId)
         {
             return methodLookup[methodId];

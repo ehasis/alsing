@@ -10,6 +10,12 @@ namespace QI4N.Framework.Reflection
 
     internal class InvocationProxyTypeBuilder
     {
+        private static readonly object syncRoot = new object();
+
+        private static readonly IDictionary<Type, Type> typeCache = new Dictionary<Type, Type>();
+
+        private Type[] additionalTypes;
+
         private AssemblyBuilder assemblyBuilder;
 
         private Type compositeType;
@@ -20,13 +26,7 @@ namespace QI4N.Framework.Reflection
 
         private TypeBuilder typeBuilder;
 
-        private Type[] additionalTypes;
-
-        private static readonly object syncRoot = new object();
-
-        private static IDictionary<Type, Type> typeCache = new Dictionary<Type, Type>();
-
-        public Type BuildProxyType(Type compositeType,Type[] additionalTypes)
+        public Type BuildProxyType(Type compositeType, Type[] additionalTypes)
         {
             lock (syncRoot)
             {
@@ -57,9 +57,9 @@ namespace QI4N.Framework.Reflection
 
                 Type proxyType = this.typeBuilder.CreateType();
 
-                typeCache.Add(compositeType,proxyType);
+                typeCache.Add(compositeType, proxyType);
 
-                return proxyType;                
+                return proxyType;
             }
         }
 
@@ -174,11 +174,11 @@ namespace QI4N.Framework.Reflection
         private void CreateInterfaceList()
         {
             Type[] allFromComposite = this.compositeType.GetAllInterfaces().ToArray();
-            var allFromAdditional = from t in additionalTypes
-                                      from tt in t.GetAllInterfaces()
-                                      select tt;
+            IEnumerable<Type> allFromAdditional = from t in this.additionalTypes
+                                                  from tt in t.GetAllInterfaces()
+                                                  select tt;
 
-            var all = allFromComposite.Union(allFromComposite).Distinct().ToArray();
+            Type[] all = allFromComposite.Union(allFromComposite).Distinct().ToArray();
 
             this.interfaces = all;
         }

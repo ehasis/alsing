@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
 
@@ -28,11 +27,6 @@
             this.thisMixinTypes = this.BuildThisMixinTypes();
         }
 
-        public IEnumerable<Type> GetThisMixinTypes()
-        {
-            return thisMixinTypes;
-        }
-
         public bool IsGeneric
         {
             get
@@ -44,6 +38,11 @@
 
         public Type MixinType { get; set; }
 
+        public IEnumerable<Type> GetThisMixinTypes()
+        {
+            return this.thisMixinTypes;
+        }
+
         public object NewInstance(CompositeInstance compositeInstance, StateHolder stateHolder, UsesInstance uses)
         {
             throw new NotImplementedException();
@@ -53,6 +52,7 @@
         [DebuggerStepThrough]
         [DebuggerHidden]
 #endif
+
         public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
         {
             if (this.IsGeneric)
@@ -67,12 +67,12 @@
         {
             var thisDependencies = new HashSet<Type>();
 
-            var thisTypes = MixinType
+            IEnumerable<Type> thisTypes = this.MixinType
                     .GetAllFields()
-                    .Where(f => f.HasAttribute(typeof(ThisAttribute)))
+                    .Where(f => TypeExtensions.HasAttribute(f, typeof(ThisAttribute)))
                     .Select(f => f.FieldType);
 
-            foreach(Type type in thisTypes)
+            foreach (Type type in thisTypes)
             {
                 thisDependencies.Add(type);
             }

@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -14,9 +14,9 @@
             this.usedObjects.AddRange(usedObjects);
         }
 
-        public object UseForType( Type type )
+        public object UseForType(Type type)
         {
-            foreach(var obj in usedObjects)
+            foreach (object obj in this.usedObjects)
             {
                 if (type.IsAssignableFrom(obj.GetType()))
                 {

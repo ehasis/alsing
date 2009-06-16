@@ -5,6 +5,6 @@ namespace QI4N.Framework
     [Mixins(typeof(PropertyMixin))]
     public interface Composite
     {
-        Type CompositeType{ get;}
+        Type CompositeType { get; }
     }
 }
