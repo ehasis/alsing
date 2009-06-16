@@ -4,6 +4,7 @@
 
     using QI4N.Framework;
 
+    [Conserns(typeof(PersonBehaviorConcern))]
     [Mixins(typeof(PersonBehaviorMixin))]
     public interface PersonComposite : Person, Composite
     {
@@ -17,15 +18,15 @@
 
     public class PersonBehaviorMixin : PersonBehavior
     {
-        [This]
-        private PersonState self;
-
         [Uses]
         private string email;
 
+        [This]
+        private PersonState self;
+
         public void SayHi()
         {
-            Console.WriteLine("{0} {1} Says hello from QI4N - email {2}", this.self.FirstName.Value, this.self.LastName.Value,email);
+            Console.WriteLine("{0} {1} Says hello from QI4N - email {2}", this.self.FirstName.Value, this.self.LastName.Value, this.email);
         }
     }
 
@@ -67,5 +68,15 @@
 
     public interface WeightProperty : Property<double>
     {
+    }
+
+    public class PersonBehaviorConcern : ConcernOf<PersonBehavior>, PersonBehavior
+    {
+        public void SayHi()
+        {
+            Console.WriteLine("Before say hi");
+            this.next.SayHi();
+            Console.WriteLine("After say hi");
+        }
     }
 }
