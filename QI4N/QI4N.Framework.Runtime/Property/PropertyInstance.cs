@@ -32,18 +32,7 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        private T value;
-        public T Value
-        {
-            get
-            {
-                return value;
-            }
-            set
-            {
-                this.value = value;
-            }
-        }
+        public T Value { get; set; }
 
         object AbstractProperty.Value
         {

@@ -65,7 +65,7 @@ namespace QI4N.Framework.Runtime
 
         protected PropertyModel NewPropertyModel(MethodInfo accessor, Type compositeType)
         {
-            var model = PropertyModelFactory.NewInstance(accessor);
+            PropertyModel model = PropertyModelFactory.NewInstance(accessor);
 
             return model;
         }

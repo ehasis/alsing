@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Activation
+namespace QI4N.Framework.Activation
 {
     using System;
     using System.Linq.Expressions;
@@ -8,11 +8,11 @@
 
     public static class ObjectActivator
     {
-        public static ObjectActivator<T> GetActivator<T>(Type objectType,InvocationHandler handler)
+        public static ObjectActivator<T> GetActivator<T>(Type objectType, InvocationHandler handler)
         {
-            ConstructorInfo ctor = objectType.GetConstructor(new Type[]
+            ConstructorInfo ctor = objectType.GetConstructor(new[]
                                                                  {
-                                                                     typeof(InvocationHandler)
+                                                                         typeof(InvocationHandler)
                                                                  });
             NewExpression newExp = Expression.New(ctor);
             LambdaExpression lambda = Expression.Lambda(typeof(ObjectActivator<T>), newExp);

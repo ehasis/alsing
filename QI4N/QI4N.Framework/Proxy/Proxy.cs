@@ -7,10 +7,10 @@
 
     public static class Proxy
     {
-        public static Type BuildProxyType(Type compositeType,params Type[] additionalTypes)
+        public static Type BuildProxyType(Type compositeType, params Type[] additionalTypes)
         {
             var builder = new InvocationProxyTypeBuilder();
-            Type type = builder.BuildProxyType(compositeType,additionalTypes);
+            Type type = builder.BuildProxyType(compositeType, additionalTypes);
             return type;
         }
 

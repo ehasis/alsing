@@ -1,7 +1,6 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Reflection;
 
     public class PropertiesInstance : StateHolder
@@ -17,6 +16,7 @@
         [DebuggerStepThrough]
         [DebuggerHidden]
 #endif
+
         public AbstractProperty GetProperty(MethodInfo accessor)
         {
             return this.properties[accessor];

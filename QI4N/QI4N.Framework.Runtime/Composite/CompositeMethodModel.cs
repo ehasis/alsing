@@ -1,6 +1,5 @@
 ﻿namespace QI4N.Framework.Runtime
 {
-    using System.Diagnostics;
     using System.Reflection;
 
     public class CompositeMethodModel
@@ -22,6 +21,7 @@
         [DebuggerStepThrough]
         [DebuggerHidden]
 #endif
+
         public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
         {
             CompositeMethodInstance methodInstance = this.GetInstance(moduleInstance);
@@ -33,6 +33,7 @@
         [DebuggerStepThrough]
         [DebuggerHidden]
 #endif
+
         private CompositeMethodInstance GetInstance(ModuleInstance moduleInstance)
         {
             return this.newCompositeMethodInstance(moduleInstance);
@@ -42,6 +43,7 @@
         [DebuggerStepThrough]
         [DebuggerHidden]
 #endif
+
         private CompositeMethodInstance newCompositeMethodInstance(ModuleInstance moduleInstance)
         {
             FragmentInvocationHandler mixinInvocationHandler = this.mixinModel.NewInvocationHandler(this.method);
@@ -71,6 +73,7 @@
         [DebuggerStepThrough]
         [DebuggerHidden]
 #endif
+
         public void SetFragment(object fragment)
         {
             this.fragment = fragment;

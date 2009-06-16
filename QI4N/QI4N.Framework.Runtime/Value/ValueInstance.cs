@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
 
@@ -27,7 +27,7 @@
             try
             {
                 var that = (ValueInstance)JavaProxy.Proxy.GetInvocationHandler(o);
-                return State.Equals(that.State);
+                return this.State.Equals(that.State);
             }
             catch (Exception)
             {
@@ -37,7 +37,7 @@
 
         public override int GetHashCode()
         {
-            return State.GetHashCode();
+            return this.State.GetHashCode();
         }
     }
 }
