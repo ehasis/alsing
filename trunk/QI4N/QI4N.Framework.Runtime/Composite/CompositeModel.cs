@@ -72,9 +72,9 @@ namespace QI4N.Framework.Runtime
 
     public class MetaInfo
     {
-        internal object Get(Type type)
+        public object Get(Type type)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
