@@ -156,28 +156,5 @@ namespace QI4N.Framework.Runtime
         }
     }
 
-    public class ConcernsDeclaration
-    {
-        public ConcernsDeclaration(IList<ConcernDeclaration> concerns)
-        {
-            throw new NotImplementedException();
-        }
 
-        public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
-        {
-            var methodConcernModels = new List<MethodConcernModel>();
-            var model = new MethodConcernsModel(method, methodConcernModels);
-            return model;
-        }
-
-        public static void ConcernDeclarations(Type mixinType, List<ConcernDeclaration> concerns)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void ConcernDeclarations(IEnumerable<object> concerns, List<ConcernDeclaration> list)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

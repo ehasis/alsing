@@ -49,6 +49,7 @@
     <Compile Include="Composite\AbstractModifierModel.cs" />
     <Compile Include="Composite\CompositeCache.cs" />
     <Compile Include="Composite\CompositeMixin.cs" />
+    <Compile Include="Composite\ConcernsDeclaration.cs" />
     <Compile Include="Composite\EntityFinder.cs" />
     <Compile Include="Composite\FragmentInvocationHandler.cs" />
     <Compile Include="Composite\GenericFragmentInvocationHandler.cs" />
