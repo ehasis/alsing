@@ -26,7 +26,7 @@ namespace QI4N.Framework.Runtime
             bool immutable = metaInfo.Get( typeof(ImmutableAttribute) ) != null;
             var propertiesModel = new PropertiesModel( constraintsModel, propertyDeclarations, immutable );
             var stateModel = new StateModel( propertiesModel );
-            var mixinsModel = new AbstractMixinsModel( compositeType, mixins );
+            var mixinsModel = new MixinsModel( compositeType, mixins );
 
             var concerns = new List<ConcernDeclaration>();
             ConcernsDeclaration.ConcernDeclarations( assemblyConcerns, concerns );
@@ -45,7 +45,7 @@ namespace QI4N.Framework.Runtime
             object[] mixins = this.mixinsModel.NewMixinHolder();
             CompositeInstance compositeInstance = new DefaultCompositeInstance(this, moduleInstance, mixins, stateHolder);
 
-            this.mixinsModel.NewMixins(compositeInstance, uses, stateHolder, mixins);
+            ((MixinsModel)this.mixinsModel).NewMixins(compositeInstance, uses, stateHolder, mixins);
 
             return compositeInstance;
         }
