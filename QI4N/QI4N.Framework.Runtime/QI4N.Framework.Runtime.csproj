@@ -69,6 +69,7 @@
     <Compile Include="Composite\MixinModel.cs" />
     <Compile Include="Composite\MixinsInstance.cs" />
     <Compile Include="Composite\ModuleInstance.cs" />
+    <Compile Include="Composite\ProxyReferenceInvocationHandler.cs" />
     <Compile Include="Composite\StateModel.cs" />
     <Compile Include="Composite\TypedInvocationHandler.cs" />
     <Compile Include="Composite\TypeFinderT.cs" />

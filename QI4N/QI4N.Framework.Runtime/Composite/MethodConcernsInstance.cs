@@ -28,7 +28,7 @@
 
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
-            this.proxyHandler.SetProxy(proxy);
+            this.proxyHandler.Proxy = proxy;
             try
             {
                 return this.firstConcern.Invoke(proxy, method, args);
