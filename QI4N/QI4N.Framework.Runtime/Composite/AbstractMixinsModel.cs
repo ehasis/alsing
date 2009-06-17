@@ -7,7 +7,7 @@
 
     using Reflection;
 
-    public class MixinsModel
+    public class AbstractMixinsModel
     {
         protected readonly IDictionary<MethodInfo, MixinModel> methodImplementation = new Dictionary<MethodInfo, MixinModel>();
 
@@ -19,14 +19,11 @@
 
         public IDictionary<MethodInfo,int> MethodIndex = new Dictionary<MethodInfo, int>();
 
-        public MixinsModel()
-        {
-            this.mixinImplementationTypes.Add(typeof(CompositeMixin));
-        }
 
-        public MixinsModel(Type type, IEnumerable<Type> mixins)
+
+        public AbstractMixinsModel(Type type, IEnumerable<Type> mixins)
         {
-            
+            this.mixinImplementationTypes.Add(typeof(CompositeMixin)); 
         }
 
         public void AddMixinType(Type mixinType)

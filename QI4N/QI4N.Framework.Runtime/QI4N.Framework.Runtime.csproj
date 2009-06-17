@@ -59,7 +59,7 @@
     <Compile Include="Composite\MethodSideEffectModel.cs" />
     <Compile Include="Composite\MethodSideEffectsInstance.cs" />
     <Compile Include="Composite\MethodSideEffectsModel.cs" />
-    <Compile Include="Composite\MixinsModel.cs" />
+    <Compile Include="Composite\AbstractMixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
     <Compile Include="Composite\CompositeBuilderInstance.cs" />
     <Compile Include="Composite\CompositeBuilderState.cs" />

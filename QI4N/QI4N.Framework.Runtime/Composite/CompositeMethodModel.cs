@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System.Reflection;
 
@@ -12,14 +12,14 @@
 
         private readonly MethodSideEffectsModel methodSideEffects;
 
-        private readonly MixinsModel mixins;
+        private readonly AbstractMixinsModel mixins;
 
 
         public CompositeMethodModel(MethodInfo method,
                                     MethodConstraintsModel methodConstraintsModel,
                                     MethodConcernsModel methodConcernsModel,
                                     MethodSideEffectsModel methodSideEffectsModel,
-                                    MixinsModel mixinsModel)
+                                    AbstractMixinsModel mixinsModel)
         {
             this.method = method;
             this.mixins = mixinsModel;

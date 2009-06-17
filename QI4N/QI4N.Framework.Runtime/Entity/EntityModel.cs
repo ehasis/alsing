@@ -5,7 +5,7 @@ namespace QI4N.Framework.Runtime
 
     public class EntityModel : AbstractCompositeModel
     {
-        public EntityModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, MixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel) : base(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel)
+        public EntityModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel) : base(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel)
         {
         }
 

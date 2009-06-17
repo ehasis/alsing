@@ -11,13 +11,13 @@
 
         protected Type compositeType;
 
-        protected MixinsModel mixinsModel;
+        protected AbstractMixinsModel mixinsModel;
 
         protected Type proxyType;
 
         protected AbstractStateModel stateModel;
 
-        protected AbstractCompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, MixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
+        protected AbstractCompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
         {
             this.stateModel = stateModel;
             this.compositeType = compositeType;

@@ -9,7 +9,7 @@ namespace QI4N.Framework.Runtime
     public class CompositeModel : AbstractCompositeModel
     {
 
-        public CompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, MixinsModel mixinsModel, StateModel stateModel, CompositeMethodsModel compositeMethodsModel)
+        public CompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, StateModel stateModel, CompositeMethodsModel compositeMethodsModel)
             : base(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel)
         {
 
@@ -26,7 +26,7 @@ namespace QI4N.Framework.Runtime
             bool immutable = metaInfo.Get( typeof(ImmutableAttribute) ) != null;
             var propertiesModel = new PropertiesModel( constraintsModel, propertyDeclarations, immutable );
             var stateModel = new StateModel( propertiesModel );
-            var mixinsModel = new MixinsModel( compositeType, mixins );
+            var mixinsModel = new AbstractMixinsModel( compositeType, mixins );
 
             var concerns = new List<ConcernDeclaration>();
             ConcernsDeclaration.ConcernDeclarations( assemblyConcerns, concerns );

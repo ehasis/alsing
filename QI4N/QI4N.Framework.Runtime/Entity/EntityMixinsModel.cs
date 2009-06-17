@@ -1,8 +1,8 @@
 ﻿namespace QI4N.Framework.Runtime
 {
-    public class EntityMixinsModel : MixinsModel
+    public class EntityMixinsModel : AbstractMixinsModel
     {
-        public EntityMixinsModel()
+        public EntityMixinsModel() : base(null,null)
         {
             this.mixinImplementationTypes.Add(typeof(EntityMixin));
         }
