@@ -63,16 +63,16 @@
         {
             FragmentInvocationHandler mixinInvocationHandler = this.mixins.NewInvocationHandler(this.method);
             InvocationHandler invoker = mixinInvocationHandler;
-            if (this.methodConcerns.HasConcerns)
-            {
-                MethodConcernsInstance concernsInstance = this.methodConcerns.NewInstance(moduleInstance, mixinInvocationHandler);
-                invoker = concernsInstance;
-            }
-            if (this.methodSideEffects.HasSideEffects)
-            {
-                MethodSideEffectsInstance sideEffectsInstance = this.methodSideEffects.NewInstance(moduleInstance, invoker);
-                invoker = sideEffectsInstance;
-            }
+            //if (this.methodConcerns.HasConcerns)
+            //{
+            //    MethodConcernsInstance concernsInstance = this.methodConcerns.NewInstance(moduleInstance, mixinInvocationHandler);
+            //    invoker = concernsInstance;
+            //}
+            //if (this.methodSideEffects.HasSideEffects)
+            //{
+            //    MethodSideEffectsInstance sideEffectsInstance = this.methodSideEffects.NewInstance(moduleInstance, invoker);
+            //    invoker = sideEffectsInstance;
+            //}
 
             return new CompositeMethodInstance(invoker, mixinInvocationHandler, method, mixins.MethodIndex[method]);
         }
