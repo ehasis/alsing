@@ -12,9 +12,9 @@
 
         private readonly SideEffectInvocationHandlerResult resultInvocationHandler;
 
-        private readonly List<InvocationHandler> sideEffects;
+        private readonly IList<InvocationHandler> sideEffects;
 
-        public MethodSideEffectsInstance(List<InvocationHandler> sideEffects, SideEffectInvocationHandlerResult resultInvocationHandler, ProxyReferenceInvocationHandler proxyHandler, InvocationHandler invoker)
+        public MethodSideEffectsInstance(IList<InvocationHandler> sideEffects, SideEffectInvocationHandlerResult resultInvocationHandler, ProxyReferenceInvocationHandler proxyHandler, InvocationHandler invoker)
         {
             this.sideEffects = sideEffects;
             this.resultInvocationHandler = resultInvocationHandler;
