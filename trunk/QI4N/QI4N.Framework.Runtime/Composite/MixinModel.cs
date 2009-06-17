@@ -2,10 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
 
     using Reflection;
 
+    [DebuggerDisplay("MixinType {MixinType}")]
     public class MixinModel
     {
         private readonly HashSet<Type> thisMixinTypes;
