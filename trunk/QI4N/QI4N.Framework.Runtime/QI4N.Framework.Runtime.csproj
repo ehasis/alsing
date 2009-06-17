@@ -70,7 +70,7 @@
     <Compile Include="Composite\CompositeModel.cs" />
     <Compile Include="Composite\CompositeInstance.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
-    <Compile Include="Composite\CompositeBuilderFactoryInstance.cs" />
+    <Compile Include="Composite\TransientBuilderFactoryInstance.cs" />
     <Compile Include="Composite\MixinModel.cs" />
     <Compile Include="Composite\MixinsInstance.cs" />
     <Compile Include="Composite\ModuleInstance.cs" />

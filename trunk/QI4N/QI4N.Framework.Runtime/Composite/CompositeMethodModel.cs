@@ -7,22 +7,29 @@
     {
         private readonly MethodInfo method;
 
-        private readonly int mixinIndex;
+        //private readonly int mixinIndex;
 
-        private readonly MixinModel mixinModel;
+        private readonly MixinsModel mixins;
 
-        private MethodConcernsModel methodConcerns;
+        private readonly MethodConcernsModel methodConcerns;
 
-        private MethodConstraintsModel methodConstraints;
+        private readonly MethodConstraintsModel methodConstraints;
 
-        private MethodSideEffectsModel methodSideEffects;
+        private readonly MethodSideEffectsModel methodSideEffects;
 
 
-        public CompositeMethodModel(MethodInfo method, MixinModel model, int mixinIndex)
+        public CompositeMethodModel(MethodInfo method,
+                             MethodConstraintsModel methodConstraintsModel,
+                             MethodConcernsModel methodConcernsModel,
+                             MethodSideEffectsModel methodSideEffectsModel,
+                             MixinsModel mixinsModel)
         {
             this.method = method;
-            this.mixinModel = model;
-            this.mixinIndex = mixinIndex;
+            mixins = mixinsModel;
+            methodConcerns = methodConcernsModel;
+            methodSideEffects = methodSideEffectsModel;
+            methodConstraints = methodConstraintsModel;
+        //    this.mixinIndex = mixinIndex;
         }
 
 #if !DEBUG
@@ -54,7 +61,7 @@
 
         private CompositeMethodInstance NewCompositeMethodInstance(ModuleInstance moduleInstance)
         {
-            FragmentInvocationHandler mixinInvocationHandler = this.mixinModel.NewInvocationHandler(this.method);
+            FragmentInvocationHandler mixinInvocationHandler = this.mixins.NewInvocationHandler(this.method);
             InvocationHandler invoker = mixinInvocationHandler;
             if (this.methodConcerns.HasConcerns)
             {
@@ -67,7 +74,7 @@
                 invoker = sideEffectsInstance;
             }
 
-            return new CompositeMethodInstance(invoker, mixinInvocationHandler, this.method, this.mixinIndex);
+            return new CompositeMethodInstance(invoker, mixinInvocationHandler, method, mixins.MethodIndex[method]);
         }
     }
 }

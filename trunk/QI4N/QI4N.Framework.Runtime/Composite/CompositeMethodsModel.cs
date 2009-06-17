@@ -109,7 +109,11 @@
                 foreach (MethodInfo method in mixinType.GetMethods())
                 {
                     MixinModel mixinModel = this.mixinsModel.ImplementMethod(method);
-                    var compositeMethodModel = new CompositeMethodModel(method, mixinModel, this.mixinsModel.IndexOfMixin(mixinModel.MixinType));
+                    MethodConstraintsModel methodConstraintsModel = null;
+                    MethodConcernsModel methodConcernsModel = null;
+                    MethodSideEffectsModel methodSideEffectModel = null;
+
+                    var compositeMethodModel = new CompositeMethodModel(method,methodConstraintsModel,methodConcernsModel,methodSideEffectModel, mixinsModel);
                     this.methods.Add(method, compositeMethodModel);
                 }
             }
