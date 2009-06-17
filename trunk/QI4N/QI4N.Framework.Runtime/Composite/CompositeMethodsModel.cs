@@ -14,13 +14,13 @@ namespace QI4N.Framework.Runtime
 
         private readonly IDictionary<MethodInfo, CompositeMethodModel> methods;
 
-        private readonly MixinsModel mixinsModel;
+        private readonly AbstractMixinsModel mixinsModel;
 
         private readonly SideEffectsDeclaration sideEffectsModel;
 
         private readonly ConstraintsModel constraintsModel;
 
-        public CompositeMethodsModel(Type compositeType, ConstraintsModel constraintsModel, ConcernsDeclaration concernsModel, SideEffectsDeclaration sideEffectsModel, MixinsModel mixinsModel)
+        public CompositeMethodsModel(Type compositeType, ConstraintsModel constraintsModel, ConcernsDeclaration concernsModel, SideEffectsDeclaration sideEffectsModel, AbstractMixinsModel mixinsModel)
         {
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();
             this.compositeType = compositeType;
