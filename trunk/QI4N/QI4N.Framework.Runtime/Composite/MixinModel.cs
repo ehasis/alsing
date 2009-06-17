@@ -84,12 +84,16 @@
 
         public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
         {
-            throw new NotImplementedException();
+            var methodConcernModels = new List<MethodConcernModel>();
+            var model = new MethodConcernsModel(method, methodConcernModels);
+            return model;
         }
 
-        internal MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
+        public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
         {
-            throw new NotImplementedException();
+            var methodSideEffectsModels = new List<MethodSideEffectModel>();
+            var model = new MethodSideEffectsModel(method, methodSideEffectsModels);
+            return model;
         }
     }
 }

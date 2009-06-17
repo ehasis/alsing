@@ -141,7 +141,9 @@
     {
         public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
         {
-            throw new NotImplementedException();
+            var methodSideEffectModels = new List<MethodSideEffectModel>();
+            var model = new MethodSideEffectsModel(method,methodSideEffectModels);
+            return model;
         }
     }
 
@@ -149,7 +151,9 @@
     {
         public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
         {
-            throw new NotImplementedException();
+            var methodConcernModels = new List<MethodConcernModel>();
+            var model = new MethodConcernsModel(method, methodConcernModels);
+            return model;
         }
     }
 }
