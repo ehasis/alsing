@@ -16,8 +16,10 @@ namespace QI4N.Framework.Runtime
         {
             var stateModel = new CompositeStateModel();
             var mixinsModel = new MixinsModel();
+            var concernsDeclaration = new ConcernsDeclaration();
+            var sideEffectsDeclaration = new SideEffectsDeclaration();
 
-            var compositeMethodsModel = new CompositeMethodsModel(compositeType, mixinsModel);
+            var compositeMethodsModel = new CompositeMethodsModel(compositeType, concernsDeclaration,sideEffectsDeclaration, mixinsModel);
 
             stateModel.AddStateFor(compositeMethodsModel.Methods, compositeType);
 

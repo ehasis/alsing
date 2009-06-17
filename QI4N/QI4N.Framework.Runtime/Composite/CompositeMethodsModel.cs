@@ -10,16 +10,21 @@
     {
         private readonly Type compositeType;
 
+        private readonly ConcernsDeclaration concernsModel;
+
         private readonly IDictionary<MethodInfo, CompositeMethodModel> methods;
 
         private readonly MixinsModel mixinsModel;
 
-        public CompositeMethodsModel(Type compositeType, MixinsModel mixinsModel)
+        private readonly SideEffectsDeclaration sideEffectsModel;
+
+        public CompositeMethodsModel(Type compositeType, ConcernsDeclaration concernsModel, SideEffectsDeclaration sideEffectsModel, MixinsModel mixinsModel)
         {
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();
             this.compositeType = compositeType;
+            this.concernsModel = concernsModel;
+            this.sideEffectsModel = sideEffectsModel;
             this.mixinsModel = mixinsModel;
-            // this.implementMixinType(compositeType);
             this.BuildMixinsModel(compositeType);
             this.ImplementMixinMethods();
         }
@@ -50,6 +55,11 @@
             }
 
             return compositeMethod.Invoke(proxy, args, mixins, moduleInstance);
+        }
+
+        public override string ToString()
+        {
+            return this.compositeType.ToString();
         }
 
         //public void implementMixinType(Type mixinType)
@@ -109,14 +119,37 @@
                 foreach (MethodInfo method in mixinType.GetMethods())
                 {
                     MixinModel mixinModel = this.mixinsModel.ImplementMethod(method);
-                    MethodConstraintsModel methodConstraintsModel = null;
-                    MethodConcernsModel methodConcernsModel = null;
-                    MethodSideEffectsModel methodSideEffectModel = null;
 
-                    var compositeMethodModel = new CompositeMethodModel(method,methodConstraintsModel,methodConcernsModel,methodSideEffectModel, mixinsModel);
+                    MethodConcernsModel methodConcernsModel = this.concernsModel.ConcernsFor(method, mixinType);
+                    MethodConcernsModel mixinMethodConcernsModel = mixinModel.ConcernsFor(method, mixinType);
+                    methodConcernsModel = methodConcernsModel.CombineWith(mixinMethodConcernsModel);
+
+                    MethodSideEffectsModel methodSideEffectsModel = this.sideEffectsModel.SideEffectsFor(method, mixinType);
+                    MethodSideEffectsModel mixinMethodSideEffectsModel = mixinModel.SideEffectsFor(method, mixinType);
+                    methodSideEffectsModel = methodSideEffectsModel.CombineWith(mixinMethodSideEffectsModel);
+
+                    MethodConstraintsModel methodConstraintsModel = null; //new MethodConstraintsModel(method, constraintsModel);
+
+                    var compositeMethodModel = new CompositeMethodModel(method, methodConstraintsModel, methodConcernsModel, methodSideEffectsModel, this.mixinsModel);
                     this.methods.Add(method, compositeMethodModel);
                 }
             }
+        }
+    }
+
+    public class SideEffectsDeclaration
+    {
+        public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ConcernsDeclaration
+    {
+        public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

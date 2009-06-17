@@ -74,6 +74,17 @@
         //    combinedModels.addAll( mixinMethodConcernsModel.concernsForMethod );
         //    return new MethodConcernsModel( method, combinedModels );
         //}
+
+        public MethodConcernsModel CombineWith(MethodConcernsModel that)
+        {
+            var methodConcernModels = new List<MethodConcernModel>();
+            methodConcernModels.AddRange(this.concernsForMethod);
+            methodConcernModels.AddRange(that.concernsForMethod);
+
+            var newModel = new MethodConcernsModel(this.Method, methodConcernModels);
+
+            return newModel;
+        }
     }
 
     public class MethodConcernModel
