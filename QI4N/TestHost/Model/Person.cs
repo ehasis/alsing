@@ -25,9 +25,12 @@
 
     public class OinkOinkMixin : OinkOink
     {
+        [This]
+        private PersonState state;
+
         public void Oink()
         {
-            Console.WriteLine("OinkOink");
+            Console.WriteLine("OinkOink {0}",state.FirstName.Value);
         }
     }
 

@@ -1,5 +1,9 @@
-﻿namespace QI4N.Framework.Runtime
+﻿using QI4N.Framework;
+
+namespace QI4N.Framework.Runtime
 {
+    using System;
+    using System.Collections.Generic;
     using System.Reflection;
 
     public class CompositeMethodModel
@@ -9,6 +13,13 @@
         private readonly int mixinIndex;
 
         private readonly MixinModel mixinModel;
+
+        private MethodConstraintsModel methodConstraints;
+
+        private MethodConcernsModel methodConcerns;
+
+        private MethodSideEffectsModel methodSideEffects;
+
 
         public CompositeMethodModel(MethodInfo method, MixinModel model, int mixinIndex)
         {
@@ -36,7 +47,7 @@
 
         private CompositeMethodInstance GetInstance(ModuleInstance moduleInstance)
         {
-            return this.newCompositeMethodInstance(moduleInstance);
+            return this.NewCompositeMethodInstance(moduleInstance);
         }
 
 #if !DEBUG
@@ -44,39 +55,86 @@
         [DebuggerHidden]
 #endif
 
-        private CompositeMethodInstance newCompositeMethodInstance(ModuleInstance moduleInstance)
+        private CompositeMethodInstance NewCompositeMethodInstance(ModuleInstance moduleInstance)
         {
             FragmentInvocationHandler mixinInvocationHandler = this.mixinModel.NewInvocationHandler(this.method);
             InvocationHandler invoker = mixinInvocationHandler;
-            //if (methodConcerns.hasConcerns())
-            //{
-            //    MethodConcernsInstance concernsInstance = methodConcerns.newInstance(moduleInstance, mixinInvocationHandler);
-            //    invoker = concernsInstance;
-            //}
-            //if (methodSideEffects.hasSideEffects())
-            //{
-            //    MethodSideEffectsInstance sideEffectsInstance = methodSideEffects.newInstance(moduleInstance, invoker);
-            //    invoker = sideEffectsInstance;
-            //}
+            if (methodConcerns.HasConcerns)
+            {
+                MethodConcernsInstance concernsInstance = methodConcerns.NewInstance(moduleInstance, mixinInvocationHandler);
+                invoker = concernsInstance;
+            }
+            if (methodSideEffects.HasSideEffects)
+            {
+                MethodSideEffectsInstance sideEffectsInstance = methodSideEffects.NewInstance(moduleInstance, invoker);
+                invoker = sideEffectsInstance;
+            }
 
             return new CompositeMethodInstance(invoker, mixinInvocationHandler, this.method, this.mixinIndex);
         }
     }
 
-    public abstract class FragmentInvocationHandler : InvocationHandler
+
+
+    public class ProxyReferenceInvocationHandler
     {
-        protected object fragment;
 
-        public abstract object Invoke(object proxy, MethodInfo method, object[] args);
-
-#if !DEBUG
-        [DebuggerStepThrough]
-        [DebuggerHidden]
-#endif
-
-        public void SetFragment(object fragment)
+        internal void SetProxy(object proxy)
         {
-            this.fragment = fragment;
+ 	        throw new System.NotImplementedException();
+        }
+
+        public void ClearProxy()
+        {
+            throw new NotImplementedException();
         }
     }
+
+    public class SideEffectInvocationHandlerResult
+    {
+        public void SetResult(object result, Exception exception)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
+    public class MethodSideEffectsModel
+    {
+        public bool HasSideEffects
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        internal MethodSideEffectsInstance NewInstance(ModuleInstance moduleInstance, InvocationHandler invoker)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class MethodConcernsModel
+    {
+        public bool HasConcerns
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public MethodConcernsInstance NewInstance(ModuleInstance moduleInstance, FragmentInvocationHandler mixinInvocationHandler)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class MethodConstraintsModel
+    {
+    }
+
+    
 }
