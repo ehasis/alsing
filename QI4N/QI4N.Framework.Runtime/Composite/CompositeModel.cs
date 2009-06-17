@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -38,7 +38,7 @@
 
         public object NewProxy(InvocationHandler handler, Type mixinType)
         {
-            return Proxy.NewProxyInstance(handler, mixinType);
+            return Proxy.NewProxyInstance(mixinType, handler);
         }
     }
 }

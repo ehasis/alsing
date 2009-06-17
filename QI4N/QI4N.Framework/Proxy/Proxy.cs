@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.JavaProxy
+namespace QI4N.Framework.JavaProxy
 {
     using System;
     using System.Reflection;
@@ -27,7 +27,7 @@
             return defaultHandlerField != null;
         }
 
-        public static object NewProxyInstance(InvocationHandler handler, Type type)
+        public static object NewProxyInstance(Type type, InvocationHandler handler)
         {
             Type proxyType = BuildProxyType(type);
             object instance = Activator.CreateInstance(proxyType, new object[]

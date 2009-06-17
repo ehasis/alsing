@@ -2,24 +2,11 @@
 {
     using System;
 
-    public class MethodSideEffectModel
+    public class MethodSideEffectModel : AbstractModifierModel
     {
-        public MethodSideEffectModel(Type clazz)
+        public MethodSideEffectModel(Type type)
+                : base(type)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool IsGeneric
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public object NewInstance(ModuleInstance instance, SideEffectInvocationHandlerResult result, ProxyReferenceInvocationHandler handler)
-        {
-            throw new NotImplementedException();
         }
     }
 }
