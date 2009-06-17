@@ -1,9 +1,6 @@
-﻿using QI4N.Framework;
-
-namespace QI4N.Framework.Runtime
+﻿namespace QI4N.Framework.Runtime
 {
     using System;
-    using System.Collections.Generic;
     using System.Reflection;
 
     public class CompositeMethodModel
@@ -14,9 +11,9 @@ namespace QI4N.Framework.Runtime
 
         private readonly MixinModel mixinModel;
 
-        private MethodConstraintsModel methodConstraints;
-
         private MethodConcernsModel methodConcerns;
+
+        private MethodConstraintsModel methodConstraints;
 
         private MethodSideEffectsModel methodSideEffects;
 
@@ -59,34 +56,18 @@ namespace QI4N.Framework.Runtime
         {
             FragmentInvocationHandler mixinInvocationHandler = this.mixinModel.NewInvocationHandler(this.method);
             InvocationHandler invoker = mixinInvocationHandler;
-            if (methodConcerns.HasConcerns)
+            if (this.methodConcerns.HasConcerns)
             {
-                MethodConcernsInstance concernsInstance = methodConcerns.NewInstance(moduleInstance, mixinInvocationHandler);
+                MethodConcernsInstance concernsInstance = this.methodConcerns.NewInstance(moduleInstance, mixinInvocationHandler);
                 invoker = concernsInstance;
             }
-            if (methodSideEffects.HasSideEffects)
+            if (this.methodSideEffects.HasSideEffects)
             {
-                MethodSideEffectsInstance sideEffectsInstance = methodSideEffects.NewInstance(moduleInstance, invoker);
+                MethodSideEffectsInstance sideEffectsInstance = this.methodSideEffects.NewInstance(moduleInstance, invoker);
                 invoker = sideEffectsInstance;
             }
 
             return new CompositeMethodInstance(invoker, mixinInvocationHandler, this.method, this.mixinIndex);
-        }
-    }
-
-
-
-    public class ProxyReferenceInvocationHandler
-    {
-
-        internal void SetProxy(object proxy)
-        {
- 	        throw new System.NotImplementedException();
-        }
-
-        public void ClearProxy()
-        {
-            throw new NotImplementedException();
         }
     }
 
@@ -97,7 +78,6 @@ namespace QI4N.Framework.Runtime
             throw new NotImplementedException();
         }
     }
-
 
 
     public class MethodSideEffectsModel
@@ -112,7 +92,7 @@ namespace QI4N.Framework.Runtime
 
         internal MethodSideEffectsInstance NewInstance(ModuleInstance moduleInstance, InvocationHandler invoker)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 
@@ -128,13 +108,11 @@ namespace QI4N.Framework.Runtime
 
         public MethodConcernsInstance NewInstance(ModuleInstance moduleInstance, FragmentInvocationHandler mixinInvocationHandler)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 
     public class MethodConstraintsModel
     {
     }
-
-    
 }

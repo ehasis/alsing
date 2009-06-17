@@ -54,7 +54,7 @@
 
         private void InvokeSideEffects(object proxy, MethodInfo method, object[] args, object result, Exception exception)
         {
-            this.proxyHandler.SetProxy(proxy);
+            this.proxyHandler.Proxy = proxy;
             this.resultInvocationHandler.SetResult(result, exception);
 
             try
