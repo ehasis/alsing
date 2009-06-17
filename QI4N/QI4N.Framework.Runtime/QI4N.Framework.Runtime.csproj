@@ -49,6 +49,7 @@
     <Compile Include="Composite\AbstractModifierModel.cs" />
     <Compile Include="Composite\CompositeCache.cs" />
     <Compile Include="Composite\CompositeMixin.cs" />
+    <Compile Include="Composite\CompositesModel.cs" />
     <Compile Include="Composite\ConcernsDeclaration.cs" />
     <Compile Include="Composite\ConstraintsModel.cs" />
     <Compile Include="Composite\EntityFinder.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Composite\CompositeInstance.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\MixinsModel.cs" />
+    <Compile Include="Composite\ModuleModel.cs" />
     <Compile Include="Composite\TransientBuilderFactoryInstance.cs" />
     <Compile Include="Composite\MixinModel.cs" />
     <Compile Include="Composite\MixinsInstance.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Composite\TypedInvocationHandler.cs" />
     <Compile Include="Composite\TypeFinderT.cs" />
     <Compile Include="Composite\UseInstance.cs" />
+    <Compile Include="Composite\Visibility.cs" />
     <Compile Include="Entity\EntityInstance.cs" />
     <Compile Include="Entity\EntityMixin.cs" />
     <Compile Include="Entity\EntityMixinsModel.cs" />

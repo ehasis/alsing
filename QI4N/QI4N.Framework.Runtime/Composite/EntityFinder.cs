@@ -18,13 +18,9 @@
         bool VisitModule(ModuleInstance moduleInstance, ModuleModel moduleModel, Visibility visibility);
     }
 
-    public class ModuleModel
-    {
-    }
+ 
 
-    public enum Visibility
-    {
-        Module,
-        Layer
-    }
+
+
+
 }
