@@ -90,27 +90,12 @@
             }
         }
 
-        internal MethodSideEffectsInstance NewInstance(ModuleInstance moduleInstance, InvocationHandler invoker)
+        public MethodSideEffectsInstance NewInstance(ModuleInstance moduleInstance, InvocationHandler invoker)
         {
             throw new NotImplementedException();
         }
     }
 
-    public class MethodConcernsModel
-    {
-        public bool HasConcerns
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public MethodConcernsInstance NewInstance(ModuleInstance moduleInstance, FragmentInvocationHandler mixinInvocationHandler)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
     public class MethodConstraintsModel
     {

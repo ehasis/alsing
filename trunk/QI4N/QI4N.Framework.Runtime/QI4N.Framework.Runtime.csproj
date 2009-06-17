@@ -52,6 +52,7 @@
     <Compile Include="Composite\FragmentInvocationHandler.cs" />
     <Compile Include="Composite\GenericFragmentInvocationHandler.cs" />
     <Compile Include="Composite\MethodConcernsInstance.cs" />
+    <Compile Include="Composite\MethodConcernsModel.cs" />
     <Compile Include="Composite\MethodSideEffectsInstance.cs" />
     <Compile Include="Composite\MixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
