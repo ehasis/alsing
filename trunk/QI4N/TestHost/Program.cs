@@ -11,7 +11,7 @@ namespace ConsoleApplication23
         {
             var moduleInstance = new ModuleInstance();
             var factory = new CompositeBuilderFactoryInstance(moduleInstance);
-            CompositeBuilder<Person> personFactory = factory.NewCompositeBuilder<Person>();
+            TransientBuilder<Person> personFactory = factory.NewTransientBuilder<Person>();
 
             personFactory.Use("Roger@Alsing.com");
             var protoPerson = personFactory.PrototypeFor<PersonState>();

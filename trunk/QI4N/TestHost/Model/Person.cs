@@ -7,7 +7,7 @@
 
     [Concerns(typeof(PersonBehaviorConcern), typeof(MyGenericConcern))]
     [Mixins(typeof(PersonBehaviorMixin))]
-    public interface PersonComposite : Person, Composite
+    public interface PersonComposite : Person, TransientComposite
     {
     }
 

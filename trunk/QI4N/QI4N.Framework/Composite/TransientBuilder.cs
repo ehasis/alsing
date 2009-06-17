@@ -1,6 +1,6 @@
 ﻿namespace QI4N.Framework
 {
-    public interface CompositeBuilder<T>
+    public interface TransientBuilder<T>
     {
         T NewInstance();
 

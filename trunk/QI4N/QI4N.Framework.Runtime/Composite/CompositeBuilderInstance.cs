@@ -1,10 +1,10 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
     using System.Reflection;
 
-    public class CompositeBuilderInstance<T> : CompositeBuilder<T>
+    public class CompositeBuilderInstance<T> : TransientBuilder<T>
     {
         protected IDictionary<MethodInfo, AbstractAssociation> associationValues;
 

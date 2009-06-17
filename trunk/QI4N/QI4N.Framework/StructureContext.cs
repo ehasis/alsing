@@ -1,7 +1,7 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     public interface StructureContext
     {
-        CompositeBuilderFactory GetCompositeBuilderFactory();
+        TransientBuilderFactory GetCompositeBuilderFactory();
     }
 }
