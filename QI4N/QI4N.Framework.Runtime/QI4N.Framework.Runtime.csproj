@@ -50,9 +50,11 @@
     <Compile Include="Composite\CompositeCache.cs" />
     <Compile Include="Composite\CompositeMixin.cs" />
     <Compile Include="Composite\ConcernsDeclaration.cs" />
+    <Compile Include="Composite\ConstraintsModel.cs" />
     <Compile Include="Composite\EntityFinder.cs" />
     <Compile Include="Composite\FragmentInvocationHandler.cs" />
     <Compile Include="Composite\GenericFragmentInvocationHandler.cs" />
+    <Compile Include="Composite\MetaInfo.cs" />
     <Compile Include="Composite\MethodConcernsInstance.cs" />
     <Compile Include="Composite\MethodConcernsModel.cs" />
     <Compile Include="Composite\MethodConstraintModel.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Property\AbstractPropertiesModel.cs" />
     <Compile Include="Property\PropertiesInstance.cs" />
     <Compile Include="Property\PropertiesModel.cs" />
+    <Compile Include="Property\PropertyDeclarations.cs" />
     <Compile Include="Property\PropertyHandler.cs" />
     <Compile Include="Property\PropertyInstance.cs" />
     <Compile Include="Property\PropertyModel.cs" />
