@@ -7,18 +7,18 @@
     {
         protected override CompositeModel FindModel(ModuleModel model, Visibility visibility)
         {
-            //return model.composites().getCompositeModelFor(type, visibility);
+            return model.Composites.GetCompositeModelFor(this.MixinType, visibility);
 
-            Type compositeType = CompositeCache.GetMatchingComposite(this.MixinType);
+            //Type compositeType = CompositeCache.GetMatchingComposite(this.MixinType);
 
-            var metaInfo = new MetaInfo();
-            PropertyDeclarations propertyDeclarations = null;
-            var assemblyConcerns = new List<object>();
-            var sideEffectsDeclaration = new List<object>();
-            var mixins = new List<Type>();
+            //var metaInfo = new MetaInfo();
+            //PropertyDeclarations propertyDeclarations = null;
+            //var assemblyConcerns = new List<object>();
+            //var sideEffectsDeclaration = new List<object>();
+            //var mixins = new List<Type>();
 
-            CompositeModel m = CompositeModel.NewModel(compositeType,visibility,metaInfo,propertyDeclarations,assemblyConcerns,sideEffectsDeclaration,mixins);
-            return m;
+            //CompositeModel m = CompositeModel.NewModel(compositeType,visibility,metaInfo,propertyDeclarations,assemblyConcerns,sideEffectsDeclaration,mixins);
+            //return m;
         }
     }
 }
