@@ -17,7 +17,7 @@
 
         protected AbstractStateModel stateModel;
 
-        protected AbstractCompositeModel(AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
+        protected AbstractCompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, MixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
         {
             this.stateModel = stateModel;
             this.compositeType = compositeType;
@@ -25,6 +25,7 @@
             this.mixinsModel = mixinsModel;
             this.proxyType = Proxy.BuildProxyType(compositeType);
         }
+
 
         public Type CompositeType
         {

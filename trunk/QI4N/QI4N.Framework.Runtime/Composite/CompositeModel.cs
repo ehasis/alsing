@@ -2,30 +2,42 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
 
     using JavaProxy;
 
     public class CompositeModel : AbstractCompositeModel
     {
-        protected CompositeModel(AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel, MixinsModel mixinsModel, Type compositeType)
-                : base(stateModel, compositeMethodsModel, mixinsModel, compositeType)
+
+        public CompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, MixinsModel mixinsModel, StateModel stateModel, CompositeMethodsModel compositeMethodsModel)
+            : base(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel)
         {
+
         }
 
-        public static CompositeModel NewModel(Type compositeType, IList<Type> mixins)
+        public static CompositeModel NewModel(Type compositeType,
+                                              Visibility visibility,
+                                              MetaInfo metaInfo,
+                                              PropertyDeclarations propertyDeclarations,
+                                              IEnumerable<object> assemblyConcerns,
+                                              IEnumerable<object> sideEffects, IList<Type> mixins)
         {
-            var stateModel = new CompositeStateModel();
-            var mixinsModel = new MixinsModel();
-            var concernsDeclaration = new ConcernsDeclaration();
-            var sideEffectsDeclaration = new SideEffectsDeclaration();
+            var constraintsModel = new ConstraintsModel( compositeType );
+            bool immutable = metaInfo.Get( typeof(ImmutableAttribute) ) != null;
+            var propertiesModel = new PropertiesModel( constraintsModel, propertyDeclarations, immutable );
+            var stateModel = new StateModel( propertiesModel );
+            var mixinsModel = new MixinsModel( compositeType, mixins );
 
-            var compositeMethodsModel = new CompositeMethodsModel(compositeType, concernsDeclaration,sideEffectsDeclaration, mixinsModel);
+            var concerns = new List<ConcernDeclaration>();
+            ConcernsDeclaration.ConcernDeclarations( assemblyConcerns, concerns );
+            ConcernsDeclaration.ConcernDeclarations( compositeType, concerns );
+            var concernsModel = new ConcernsDeclaration( concerns );
 
-            stateModel.AddStateFor(compositeMethodsModel.Methods, compositeType);
+            var sideEffectsModel = new SideEffectsDeclaration( compositeType, sideEffects );
+            var compositeMethodsModel = new CompositeMethodsModel( compositeType, constraintsModel, concernsModel, sideEffectsModel, mixinsModel );
+            stateModel.AddStateFor( compositeMethodsModel.Methods, compositeType);
 
-            //Type 
-
-            return new CompositeModel(stateModel, compositeMethodsModel, mixinsModel, compositeType);
+            return new CompositeModel(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel );
         }
 
         public CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance uses, StateHolder stateHolder)
@@ -41,6 +53,28 @@ namespace QI4N.Framework.Runtime
         public object NewProxy(InvocationHandler handler, Type mixinType)
         {
             return Proxy.NewProxyInstance(mixinType, handler);
+        }
+    }
+
+    public class ConstraintsModel
+    {
+        public ConstraintsModel(Type type)
+        {
+        }
+    }
+
+    public interface PropertyDeclarations
+    {
+        MetaInfo GetMetaInfo(MethodInfo accessor);
+
+        object GetInitialValue(MethodInfo accessor);
+    }
+
+    public class MetaInfo
+    {
+        internal object Get(Type type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

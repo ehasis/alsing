@@ -24,6 +24,11 @@
             this.mixinImplementationTypes.Add(typeof(CompositeMixin));
         }
 
+        public MixinsModel(Type type, IEnumerable<Type> mixins)
+        {
+            
+        }
+
         public void AddMixinType(Type mixinType)
         {
             if (this.mixinTypes.Contains(mixinType))

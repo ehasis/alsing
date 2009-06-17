@@ -132,5 +132,10 @@ namespace QI4N.Framework.Reflection
         {
             return self.GetCustomAttributes(attributeType, true).Any();
         }
+
+        public static bool HasAttribute(this Type self, Type attributeType)
+        {
+            return self.GetCustomAttributes(attributeType, true).Any();
+        }
     }
 }
