@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -18,16 +18,20 @@
 
         private readonly SideEffectsDeclaration sideEffectsModel;
 
-        public CompositeMethodsModel(Type compositeType, ConcernsDeclaration concernsModel, SideEffectsDeclaration sideEffectsModel, MixinsModel mixinsModel)
+        private readonly ConstraintsModel constraintsModel;
+
+        public CompositeMethodsModel(Type compositeType, ConstraintsModel constraintsModel, ConcernsDeclaration concernsModel, SideEffectsDeclaration sideEffectsModel, MixinsModel mixinsModel)
         {
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();
             this.compositeType = compositeType;
             this.concernsModel = concernsModel;
             this.sideEffectsModel = sideEffectsModel;
             this.mixinsModel = mixinsModel;
+            this.constraintsModel = constraintsModel;
             this.BuildMixinsModel(compositeType);
             this.ImplementMixinMethods();
         }
+
 
         public IEnumerable<MethodInfo> Methods
         {
@@ -139,6 +143,11 @@
 
     public class SideEffectsDeclaration
     {
+        public SideEffectsDeclaration(Type type, IEnumerable<object> objects)
+        {
+            
+        }
+
         public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
         {
             var methodSideEffectModels = new List<MethodSideEffectModel>();
@@ -149,11 +158,26 @@
 
     public class ConcernsDeclaration
     {
+        public ConcernsDeclaration(IList<ConcernDeclaration> concerns)
+        {
+            throw new NotImplementedException();
+        }
+
         public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
         {
             var methodConcernModels = new List<MethodConcernModel>();
             var model = new MethodConcernsModel(method, methodConcernModels);
             return model;
+        }
+
+        public static void ConcernDeclarations(Type mixinType, List<ConcernDeclaration> concerns)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void ConcernDeclarations(IEnumerable<object> concerns, List<ConcernDeclaration> list)
+        {
+            throw new NotImplementedException();
         }
     }
 }

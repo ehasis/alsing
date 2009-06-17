@@ -12,6 +12,8 @@
     public class MixinModel
     {
         private readonly HashSet<Type> thisMixinTypes;
+        private readonly ConcernsDeclaration concernsDeclaration;
+        private readonly SideEffectsDeclaration sideEffectsDeclaration;
 
         public MixinModel(Type mixinType)
         {
@@ -21,10 +23,10 @@
             //injectedFieldsModel = new InjectedFieldsModel( mixinClass );
             //injectedMethodsModel = new InjectedMethodsModel( mixinClass );
 
-            //List<ConcernDeclaration> concerns = new ArrayList<ConcernDeclaration>();
-            //ConcernsDeclaration.concernDeclarations( mixinClass, concerns );
-            //concernsDeclaration = new ConcernsDeclaration( concerns );
-            //sideEffectsDeclaration = new SideEffectsDeclaration( mixinClass, Collections.<Class<?>>emptyList() );
+            var concerns = new List<ConcernDeclaration>();
+            ConcernsDeclaration.ConcernDeclarations(mixinType, concerns);
+            concernsDeclaration = new ConcernsDeclaration( concerns );
+            sideEffectsDeclaration = new SideEffectsDeclaration( mixinType, Enumerable.Empty<object>() );
 
             this.thisMixinTypes = this.BuildThisMixinTypes();
         }
@@ -84,9 +86,7 @@
 
         public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
         {
-            var methodConcernModels = new List<MethodConcernModel>();
-            var model = new MethodConcernsModel(method, methodConcernModels);
-            return model;
+            return concernsDeclaration.ConcernsFor(method, type);
         }
 
         public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
@@ -95,5 +95,9 @@
             var model = new MethodSideEffectsModel(method, methodSideEffectsModels);
             return model;
         }
+    }
+
+    public class ConcernDeclaration
+    {
     }
 }

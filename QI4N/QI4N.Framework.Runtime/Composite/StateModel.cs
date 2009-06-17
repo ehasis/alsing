@@ -1,9 +1,9 @@
 namespace QI4N.Framework.Runtime
 {
-    public class CompositeStateModel : AbstractStateModel
+    public class StateModel : AbstractStateModel
     {
-        public CompositeStateModel()
-                : base(new PropertiesModel())
+        public StateModel(PropertiesModel propertiesModel)
+                : base(propertiesModel)
         {
         }
     }
