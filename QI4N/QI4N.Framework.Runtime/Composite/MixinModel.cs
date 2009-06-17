@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
 
     using Reflection;
 
@@ -53,9 +52,9 @@
         [DebuggerHidden]
 #endif
 
-        public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
+        public FragmentInvocationHandler NewInvocationHandler(Type methodType)
         {
-            if (this.IsGeneric)
+            if (typeof(InvocationHandler).IsAssignableFrom(this.MixinType) && !methodType.IsAssignableFrom(this.MixinType))
             {
                 return new GenericFragmentInvocationHandler();
             }
@@ -69,7 +68,7 @@
 
             IEnumerable<Type> thisTypes = this.MixinType
                     .GetAllFields()
-                    .Where(f => TypeExtensions.HasAttribute(f, typeof(ThisAttribute)))
+                    .Where(f => f.HasAttribute(typeof(ThisAttribute)))
                     .Select(f => f.FieldType);
 
             foreach (Type type in thisTypes)

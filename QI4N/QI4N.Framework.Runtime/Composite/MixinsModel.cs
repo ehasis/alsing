@@ -17,6 +17,10 @@
 
         protected readonly HashSet<Type> mixinTypes = new HashSet<Type>();
 
+        public IDictionary<MethodInfo,int> MethodIndex = new Dictionary<MethodInfo, int>();
+
+    //    protected readonly HashSet<MixinDeclaration> mixins = new HashSet<MixinDeclaration>();
+
         //    private readonly IDictionary<Type, Type> mixinToImplementationLookup = new Dictionary<Type, Type>();
 
 
@@ -77,19 +81,22 @@
 
         public MixinModel ImplementMethod(MethodInfo method)
         {
-            if (!this.methodImplementation.ContainsKey(method))
+            if (!methodImplementation.ContainsKey(method))
             {
-                MixinModel mixinModel = this.TryGetExistingMixinModel(method);
-
-                if (mixinModel == null)
+                Type mixinType = FindTypedImplementation(method);
+                if (mixinType != null)
                 {
-                    mixinModel = this.GetNewMixinModel(method);
-
-                    this.mixinModels.Add(mixinModel);
+                    return ImplementMethodWithType(method, mixinType);
                 }
 
-                this.methodImplementation.Add(method, mixinModel);
-                return mixinModel;
+                // Check generic implementations
+                mixinType = FindGenericImplementation(method);
+                if (mixinType != null)
+                {
+                    return ImplementMethodWithType(method, mixinType);
+                }
+
+                throw new Exception("No implementation found for method " + method.Name);
             }
 
             return this.methodImplementation[method];
@@ -207,43 +214,40 @@
             return mixinImplementationType;
         }
 
-        private MixinModel GetNewMixinModel(MethodInfo method)
-        {
-            Type mixinType = this.FindTypedImplementation(method);
-
-            if (mixinType != null)
-            {
-                return this.ImplementMethodWithType(method, mixinType);
-            }
-
-            mixinType = this.FindGenericImplementation(method);
-
-            if (mixinType != null)
-            {
-                return this.ImplementMethodWithType(method, mixinType);
-            }
-
-            throw new Exception("No implementation found for method " + method.Name);
-        }
-
         private MixinModel ImplementMethodWithType(MethodInfo method, Type mixinType)
         {
-            var mixinModel = new MixinModel(mixinType);
-            return mixinModel;
-        }
+            MixinModel foundMixinModel = null;
 
-        private MixinModel TryGetExistingMixinModel(MethodInfo method)
-        {
-            MixinModel mixinModel = null;
-            foreach (MixinModel existingModel in this.mixinModels)
+            foreach( MixinModel mixinModel in mixinModels )
             {
-                if (existingModel.MixinType == method.DeclaringType)
+                if (mixinModel.MixinType.Equals(mixinType))
                 {
-                    mixinModel = existingModel;
+                    foundMixinModel = mixinModel;
                     break;
                 }
             }
-            return mixinModel;
+
+            if( foundMixinModel == null )
+            {
+                foundMixinModel = new MixinModel(mixinType);
+                mixinModels.Add( foundMixinModel );
+            }
+
+            methodImplementation.Add( method, foundMixinModel );
+            MethodIndex.Add(method,mixinModels.IndexOf(foundMixinModel));
+
+            return foundMixinModel;
+        }
+
+        public MixinModel MixinFor(MethodInfo method)
+        {
+            int integer = MethodIndex[method];
+            return mixinModels[integer];
+        }
+
+        public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
+        {
+            return MixinFor(method).NewInvocationHandler(method.DeclaringType);
         }
     }
 }

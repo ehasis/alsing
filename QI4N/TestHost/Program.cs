@@ -10,7 +10,7 @@ namespace ConsoleApplication23
         private static void Main()
         {
             var moduleInstance = new ModuleInstance();
-            var factory = new CompositeBuilderFactoryInstance(moduleInstance);
+            var factory = new TransientBuilderFactoryInstance(moduleInstance);
             TransientBuilder<Person> personFactory = factory.NewTransientBuilder<Person>();
 
             personFactory.Use("Roger@Alsing.com");
