@@ -78,26 +78,4 @@
             throw new NotImplementedException();
         }
     }
-
-
-    public class MethodSideEffectsModel
-    {
-        public bool HasSideEffects
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public MethodSideEffectsInstance NewInstance(ModuleInstance moduleInstance, InvocationHandler invoker)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
-    public class MethodConstraintsModel
-    {
-    }
 }

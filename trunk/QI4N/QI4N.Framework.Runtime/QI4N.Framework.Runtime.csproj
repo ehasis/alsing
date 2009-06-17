@@ -53,7 +53,10 @@
     <Compile Include="Composite\GenericFragmentInvocationHandler.cs" />
     <Compile Include="Composite\MethodConcernsInstance.cs" />
     <Compile Include="Composite\MethodConcernsModel.cs" />
+    <Compile Include="Composite\MethodConstraintModel.cs" />
+    <Compile Include="Composite\MethodSideEffectModel.cs" />
     <Compile Include="Composite\MethodSideEffectsInstance.cs" />
+    <Compile Include="Composite\MethodSideEffectsModel.cs" />
     <Compile Include="Composite\MixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
     <Compile Include="Composite\CompositeBuilderInstance.cs" />
