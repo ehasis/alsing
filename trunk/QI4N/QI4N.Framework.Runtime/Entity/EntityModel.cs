@@ -13,8 +13,10 @@ namespace QI4N.Framework.Runtime
         {
             var stateModel = new EntityStateModel();
             var mixinsModel = new EntityMixinsModel();
+            var concernsDeclaration = new ConcernsDeclaration();
+            var sideEffectsDeclaration = new SideEffectsDeclaration();
 
-            var compositeMethodsModel = new CompositeMethodsModel(compositeType, mixinsModel);
+            var compositeMethodsModel = new CompositeMethodsModel(compositeType,concernsDeclaration,sideEffectsDeclaration, mixinsModel);
             return new EntityModel(stateModel, compositeMethodsModel, mixinsModel, compositeType);
         }
     }

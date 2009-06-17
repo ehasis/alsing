@@ -19,11 +19,6 @@
 
         public IDictionary<MethodInfo,int> MethodIndex = new Dictionary<MethodInfo, int>();
 
-    //    protected readonly HashSet<MixinDeclaration> mixins = new HashSet<MixinDeclaration>();
-
-        //    private readonly IDictionary<Type, Type> mixinToImplementationLookup = new Dictionary<Type, Type>();
-
-
         public MixinsModel()
         {
             this.mixinImplementationTypes.Add(typeof(CompositeMixin));
@@ -41,7 +36,6 @@
             foreach (Type mixinImplementationType in mixinType.GetMixinTypes())
             {
                 this.mixinImplementationTypes.Add(mixinImplementationType);
-                //             mixinToImplementationLookup.Add(mixinType,mixinImplementationType);
             }
         }
 
@@ -58,7 +52,7 @@
                 {
                     IEnumerable<Type> fieldTypes = implementationType
                             .GetAllFields()
-                            .Where(f => TypeExtensions.HasAttribute(f, typeof(ThisAttribute)))
+                            .Where(f => f.HasAttribute(typeof(ThisAttribute)))
                             .Select(f => f.FieldType);
 
                     thisTypes.AddRange(fieldTypes);

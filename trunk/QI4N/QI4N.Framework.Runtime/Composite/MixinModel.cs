@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Reflection;
 
     using Reflection;
 
@@ -79,6 +80,16 @@
             }
 
             return thisDependencies;
+        }
+
+        public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

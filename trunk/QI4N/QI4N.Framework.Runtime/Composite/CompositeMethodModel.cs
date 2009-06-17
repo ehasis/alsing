@@ -1,15 +1,10 @@
 ﻿namespace QI4N.Framework.Runtime
 {
-    using System;
     using System.Reflection;
 
     public class CompositeMethodModel
     {
         private readonly MethodInfo method;
-
-        //private readonly int mixinIndex;
-
-        private readonly MixinsModel mixins;
 
         private readonly MethodConcernsModel methodConcerns;
 
@@ -17,19 +12,20 @@
 
         private readonly MethodSideEffectsModel methodSideEffects;
 
+        private readonly MixinsModel mixins;
+
 
         public CompositeMethodModel(MethodInfo method,
-                             MethodConstraintsModel methodConstraintsModel,
-                             MethodConcernsModel methodConcernsModel,
-                             MethodSideEffectsModel methodSideEffectsModel,
-                             MixinsModel mixinsModel)
+                                    MethodConstraintsModel methodConstraintsModel,
+                                    MethodConcernsModel methodConcernsModel,
+                                    MethodSideEffectsModel methodSideEffectsModel,
+                                    MixinsModel mixinsModel)
         {
             this.method = method;
-            mixins = mixinsModel;
-            methodConcerns = methodConcernsModel;
-            methodSideEffects = methodSideEffectsModel;
-            methodConstraints = methodConstraintsModel;
-        //    this.mixinIndex = mixinIndex;
+            this.mixins = mixinsModel;
+            this.methodConcerns = methodConcernsModel;
+            this.methodSideEffects = methodSideEffectsModel;
+            this.methodConstraints = methodConstraintsModel;
         }
 
 #if !DEBUG
@@ -61,20 +57,22 @@
 
         private CompositeMethodInstance NewCompositeMethodInstance(ModuleInstance moduleInstance)
         {
+            //methodConstraints.
+
             FragmentInvocationHandler mixinInvocationHandler = this.mixins.NewInvocationHandler(this.method);
             InvocationHandler invoker = mixinInvocationHandler;
-            //if (this.methodConcerns.HasConcerns)
-            //{
-            //    MethodConcernsInstance concernsInstance = this.methodConcerns.NewInstance(moduleInstance, mixinInvocationHandler);
-            //    invoker = concernsInstance;
-            //}
-            //if (this.methodSideEffects.HasSideEffects)
-            //{
-            //    MethodSideEffectsInstance sideEffectsInstance = this.methodSideEffects.NewInstance(moduleInstance, invoker);
-            //    invoker = sideEffectsInstance;
-            //}
+            if (this.methodConcerns.HasConcerns)
+            {
+                MethodConcernsInstance concernsInstance = this.methodConcerns.NewInstance(moduleInstance, mixinInvocationHandler);
+                invoker = concernsInstance;
+            }
+            if (this.methodSideEffects.HasSideEffects)
+            {
+                MethodSideEffectsInstance sideEffectsInstance = this.methodSideEffects.NewInstance(moduleInstance, invoker);
+                invoker = sideEffectsInstance;
+            }
 
-            return new CompositeMethodInstance(invoker, mixinInvocationHandler, method, mixins.MethodIndex[method]);
+            return new CompositeMethodInstance(invoker, mixinInvocationHandler, this.method, this.mixins.MethodIndex[this.method]);
         }
     }
 }

@@ -83,5 +83,16 @@
 
             return new MethodSideEffectsModel(method, sideEffects);
         }
+
+        public MethodSideEffectsModel CombineWith(MethodSideEffectsModel that)
+        {
+            var methodSideEffectModels = new List<MethodSideEffectModel>();
+            methodSideEffectModels.AddRange(this.sideEffectModels);
+            methodSideEffectModels.AddRange(that.sideEffectModels);
+
+            var newModel = new MethodSideEffectsModel(this.Method, methodSideEffectModels);
+
+            return newModel;
+        }
     }
 }
