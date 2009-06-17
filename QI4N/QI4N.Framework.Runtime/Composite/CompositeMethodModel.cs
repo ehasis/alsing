@@ -70,12 +70,4 @@
             return new CompositeMethodInstance(invoker, mixinInvocationHandler, this.method, this.mixinIndex);
         }
     }
-
-    public class SideEffectInvocationHandlerResult
-    {
-        public void SetResult(object result, Exception exception)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

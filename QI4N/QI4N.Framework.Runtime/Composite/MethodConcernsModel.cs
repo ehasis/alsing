@@ -18,7 +18,7 @@
         {
             get
             {
-                return this.concernsForMethod.Count != 0;
+                return this.concernsForMethod != null && this.concernsForMethod.Count != 0;
             }
         }
 
