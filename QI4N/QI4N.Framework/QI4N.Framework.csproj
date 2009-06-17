@@ -50,6 +50,7 @@
     <Compile Include="Common\NotNullAttribute.cs" />
     <Compile Include="Common\UseDefaultsAttribute.cs" />
     <Compile Include="Composite\CompositeContextT.cs" />
+    <Compile Include="Composite\TransientComposite.cs" />
     <Compile Include="Concern\ConcernOf.cs" />
     <Compile Include="Concern\ConcernsAttribute.cs" />
     <Compile Include="Concern\GenericConcern.cs" />
@@ -71,8 +72,8 @@
     <Compile Include="Proxy\Proxy.cs" />
     <Compile Include="Entity\Association\Association.cs" />
     <Compile Include="Composite\Composite.cs" />
-    <Compile Include="Composite\CompositeBuilder.cs" />
-    <Compile Include="Composite\CompositeBuilderFactory.cs" />
+    <Compile Include="Composite\TransientBuilder.cs" />
+    <Compile Include="Composite\TransientBuilderFactory.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\EntityBuilder.cs" />
     <Compile Include="Entity\EntityComposite.cs" />

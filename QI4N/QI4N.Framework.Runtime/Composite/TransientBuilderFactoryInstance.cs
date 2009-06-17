@@ -2,34 +2,34 @@ namespace QI4N.Framework.Runtime
 {
     using System;
 
-    public class CompositeBuilderFactoryInstance : CompositeBuilderFactory
+    public class TransientBuilderFactoryInstance : TransientBuilderFactory
     {
         private readonly ModuleInstance moduleInstance;
 
-        public CompositeBuilderFactoryInstance(ModuleInstance moduleInstance)
+        public TransientBuilderFactoryInstance(ModuleInstance moduleInstance)
         {
             this.moduleInstance = moduleInstance;
         }
 
-        public T NewComposite<T>()
+        public T NewTransient<T>()
         {
-            CompositeBuilder<T> builder = this.GetBuilder<T>(typeof(T));
+            TransientBuilder<T> builder = this.GetBuilder<T>(typeof(T));
             return builder.NewInstance();
         }
 
-        public CompositeBuilder<T> NewCompositeBuilder<T>()
+        public TransientBuilder<T> NewTransientBuilder<T>()
         {
-            CompositeBuilder<T> builder = this.GetBuilder<T>(typeof(T));
+            TransientBuilder<T> builder = this.GetBuilder<T>(typeof(T));
             return builder;
         }
 
-        public CompositeBuilder<object> NewCompositeBuilder(Type mixinType)
+        public TransientBuilder<object> NewTransientBuilder(Type mixinType)
         {
-            CompositeBuilder<object> builder = this.GetBuilder<object>(mixinType);
+            TransientBuilder<object> builder = this.GetBuilder<object>(mixinType);
             return builder;
         }
 
-        private CompositeBuilder<T> GetBuilder<T>(Type mixinType)
+        private TransientBuilder<T> GetBuilder<T>(Type mixinType)
         {
             CompositeFinder finder = this.moduleInstance.FindCompositeModel(mixinType);
 

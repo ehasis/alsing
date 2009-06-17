@@ -6,9 +6,9 @@ namespace QI4N.Framework
 
     public class CompositeContext<T> where T : Composite
     {
-        private readonly CompositeBuilder<T> builder;
+        private readonly TransientBuilder<T> builder;
 
-        public CompositeContext(CompositeBuilder<T> builder)
+        public CompositeContext(TransientBuilder<T> builder)
         {
             this.builder = builder;
         }
