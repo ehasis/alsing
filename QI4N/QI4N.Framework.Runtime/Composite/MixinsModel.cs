@@ -109,15 +109,15 @@
 
         public object[] NewMixinHolder()
         {
-            return new object[this.mixinImplementationTypes.Count];
+            return new object[this.mixinModels.Count];
         }
 
         public void NewMixins(CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder, object[] mixins)
         {
             int i = 0;
-            foreach (Type mixinImplementationType in this.mixinImplementationTypes)
+            foreach (MixinModel mixinModel in this.mixinModels)
             {
-                object mixin = Activator.CreateInstance(mixinImplementationType, null);
+                object mixin = Activator.CreateInstance(mixinModel.MixinType, null);
                 mixins[i++] = mixin;
             }
 
