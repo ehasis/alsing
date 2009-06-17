@@ -17,13 +17,28 @@
 
         protected AbstractStateModel stateModel;
 
+        private Visibility visibility;
+
+        private MetaInfo metaInfo;
+
         protected AbstractCompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
         {
-            this.stateModel = stateModel;
             this.compositeType = compositeType;
-            this.compositeMethodsModel = compositeMethodsModel;
+            this.visibility = visibility;
+            this.metaInfo = metaInfo;
+            this.stateModel = stateModel;
+
+            // Create proxy class
+            this.proxyType = CreateProxyType(compositeType);
+
             this.mixinsModel = mixinsModel;
-            this.proxyType = Proxy.BuildProxyType(compositeType);
+
+            this.compositeMethodsModel = compositeMethodsModel;
+        }
+
+        private static Type CreateProxyType(Type compositeType)
+        {
+            return Proxy.BuildProxyType(compositeType);
         }
 
 
