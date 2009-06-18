@@ -143,11 +143,21 @@
         {
             throw new NotImplementedException();
         }
+
+        public ImportedServicesModel NewInstance(ModuleInstance instance)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ServicesModel
     {
         public void VisitModel(ModelVisitor visitor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ServicesModel NewInstance(ModuleInstance instance)
         {
             throw new NotImplementedException();
         }

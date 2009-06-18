@@ -91,6 +91,7 @@
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkFactory.cs" />
     <Compile Include="Value\Value.cs" />
+    <Compile Include="Value\ValueBuilderFactory.cs" />
     <Compile Include="Value\ValueComposite.cs" />
     <Compile Include="Common\AppliesToFilter.cs" />
     <Compile Include="Entity\Association\AssociationMixin.cs" />
