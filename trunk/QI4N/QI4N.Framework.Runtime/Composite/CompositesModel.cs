@@ -8,5 +8,10 @@
         {
             return null;
         }
+
+        public void VisitModel(ModelVisitor visitor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

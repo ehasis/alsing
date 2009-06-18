@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace QI4N.Framework.Runtime
+﻿namespace QI4N.Framework.Runtime
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
 
     using Reflection;
 
-    class MixinsModel : AbstractMixinsModel
+    internal class MixinsModel : AbstractMixinsModel
     {
         public MixinsModel(Type compositeType, IList<Type> assemblyMixins)
-            : base(compositeType, assemblyMixins)
+                : base(compositeType, assemblyMixins)
         {
-
         }
 
         public void NewMixins(CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder, object[] mixins)

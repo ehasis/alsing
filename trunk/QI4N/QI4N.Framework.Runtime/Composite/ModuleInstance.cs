@@ -5,13 +5,38 @@ namespace QI4N.Framework.Runtime
 
     public class ModuleInstance : Module
     {
-        private readonly IDictionary<Type, CompositeFinder> compositeFinders = new Dictionary<Type, CompositeFinder>();
+        private readonly IDictionary<Type, CompositeFinder> compositeFinders;
 
-        private readonly IDictionary<Type, EntityFinder> entityFinders = new Dictionary<Type, EntityFinder>();
+        private readonly IDictionary<Type, EntityFinder> entityFinders;
 
         private LayerInstance layerInstance;
 
         private ModuleModel moduleModel;
+
+        public ModuleInstance(ModuleModel moduleModel, LayerInstance layerInstance, CompositesModel compositesModel,
+                           EntitiesModel entitiesModel, ObjectsModel objectsModel, ValuesModel valuesModel,
+                           ServicesModel servicesModel, ImportedServicesModel importedServicesModel)
+        {
+            this.moduleModel = moduleModel;
+            this.layerInstance = layerInstance;
+            composites = new CompositesInstance(compositesModel, this);
+            entities = new EntitiesInstance(entitiesModel, this);
+            objects = new ObjectsInstance(objectsModel, this);
+            values = new ValuesInstance(valuesModel, this);
+            services = servicesModel.newInstance(this);
+            importedServices = importedServicesModel.newInstance(this);
+
+            compositeBuilderFactory = new CompositeBuilderFactoryInstance();
+            objectBuilderFactory = new ObjectBuilderFactoryInstance();
+            valueBuilderFactory = new ValueBuilderFactoryInstance();
+            unitOfWorkFactory = new UnitOfWorkFactoryInstance();
+            serviceFinder = new ServiceFinderInstance();
+
+            entityFinders = new Dictionary<Type, EntityFinder>();
+            compositeFinders = new Dictionary<Type, CompositeFinder>();
+            objectFinders = new Dictionary<Type, ObjectFinder>();
+            valueFinders = new Dictionary<Type, ValueFinder>();
+        }
 
 
         public CompositeFinder FindCompositeModel(Type mixinType)

@@ -12,13 +12,13 @@ namespace QI4N.Framework.Runtime
 
         private readonly ConcernsDeclaration concernsModel;
 
+        private readonly ConstraintsModel constraintsModel;
+
         private readonly IDictionary<MethodInfo, CompositeMethodModel> methods;
 
         private readonly AbstractMixinsModel mixinsModel;
 
         private readonly SideEffectsDeclaration sideEffectsModel;
-
-        private readonly ConstraintsModel constraintsModel;
 
         public CompositeMethodsModel(Type compositeType, ConstraintsModel constraintsModel, ConcernsDeclaration concernsModel, SideEffectsDeclaration sideEffectsModel, AbstractMixinsModel mixinsModel)
         {
@@ -140,21 +140,4 @@ namespace QI4N.Framework.Runtime
             }
         }
     }
-
-    public class SideEffectsDeclaration
-    {
-        public SideEffectsDeclaration(Type type, IEnumerable<object> objects)
-        {
-            
-        }
-
-        public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
-        {
-            var methodSideEffectModels = new List<MethodSideEffectModel>();
-            var model = new MethodSideEffectsModel(method,methodSideEffectModels);
-            return model;
-        }
-    }
-
-
 }
