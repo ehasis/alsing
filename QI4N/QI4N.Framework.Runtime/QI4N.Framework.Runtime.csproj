@@ -76,6 +76,7 @@
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\MixinsModel.cs" />
     <Compile Include="Composite\ModuleModel.cs" />
+    <Compile Include="Composite\SideEffectsDeclaration.cs" />
     <Compile Include="Composite\TransientBuilderFactoryInstance.cs" />
     <Compile Include="Composite\MixinModel.cs" />
     <Compile Include="Composite\MixinsInstance.cs" />
