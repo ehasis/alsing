@@ -5,6 +5,8 @@ namespace QI4N.Framework.Runtime
 
     public class ModuleInstance : Module
     {
+        private readonly TransientBuilderFactory compositeBuilderFactory;
+
         private readonly IDictionary<Type, CompositeFinder> compositeFinders;
 
         private readonly CompositesInstance composites;
@@ -13,31 +15,30 @@ namespace QI4N.Framework.Runtime
 
         private readonly IDictionary<Type, EntityFinder> entityFinders;
 
+
         private readonly ImportedServicesModel importedServices;
 
         private readonly LayerInstance layerInstance;
 
         private readonly ModuleModel moduleModel;
 
+        private readonly ObjectBuilderFactory objectBuilderFactory;
+
         private readonly IDictionary<Type, ObjectFinder> objectFinders;
 
         private readonly ObjectsInstance objects;
 
+        private readonly ServiceFinderInstance serviceFinder;
+
         private readonly ServicesModel services;
+
+        private readonly UnitOfWorkFactoryInstance unitOfWorkFactory;
+
+        private readonly ValueBuilderFactory valueBuilderFactory;
 
         private readonly IDictionary<Type, ValueFinder> valueFinders;
 
         private readonly ValuesInstance values;
-
-        private TransientBuilderFactory compositeBuilderFactory;
-
-        private ObjectBuilderFactory objectBuilderFactory;
-
-        private ServiceFinderInstance serviceFinder;
-
-        private UnitOfWorkFactoryInstance unitOfWorkFactory;
-
-        private ValueBuilderFactory valueBuilderFactory;
 
 
         public ModuleInstance(ModuleModel moduleModel, LayerInstance layerInstance, CompositesModel compositesModel,
@@ -118,7 +119,7 @@ namespace QI4N.Framework.Runtime
             }
 
             // Visit layer
-            //   layerInstance.VisitModules(visitor, Visibility.Layer);
+            this.layerInstance.VisitModules(visitor, Visibility.Layer);
         }
     }
 
