@@ -7,35 +7,62 @@ namespace QI4N.Framework.Runtime
     {
         private readonly IDictionary<Type, CompositeFinder> compositeFinders;
 
+        private readonly CompositesInstance composites;
+
+        private readonly EntitiesInstance entities;
+
         private readonly IDictionary<Type, EntityFinder> entityFinders;
 
-        private LayerInstance layerInstance;
+        private readonly ImportedServicesModel importedServices;
 
-        private ModuleModel moduleModel;
+        private readonly LayerInstance layerInstance;
+
+        private readonly ModuleModel moduleModel;
+
+        private readonly IDictionary<Type, ObjectFinder> objectFinders;
+
+        private readonly ObjectsInstance objects;
+
+        private readonly ServicesModel services;
+
+        private readonly IDictionary<Type, ValueFinder> valueFinders;
+
+        private readonly ValuesInstance values;
+
+        private TransientBuilderFactory compositeBuilderFactory;
+
+        private ObjectBuilderFactory objectBuilderFactory;
+
+        private ServiceFinderInstance serviceFinder;
+
+        private UnitOfWorkFactoryInstance unitOfWorkFactory;
+
+        private ValueBuilderFactory valueBuilderFactory;
+
 
         public ModuleInstance(ModuleModel moduleModel, LayerInstance layerInstance, CompositesModel compositesModel,
-                           EntitiesModel entitiesModel, ObjectsModel objectsModel, ValuesModel valuesModel,
-                           ServicesModel servicesModel, ImportedServicesModel importedServicesModel)
+                              EntitiesModel entitiesModel, ObjectsModel objectsModel, ValuesModel valuesModel,
+                              ServicesModel servicesModel, ImportedServicesModel importedServicesModel)
         {
             this.moduleModel = moduleModel;
             this.layerInstance = layerInstance;
-            composites = new CompositesInstance(compositesModel, this);
-            entities = new EntitiesInstance(entitiesModel, this);
-            objects = new ObjectsInstance(objectsModel, this);
-            values = new ValuesInstance(valuesModel, this);
-            services = servicesModel.newInstance(this);
-            importedServices = importedServicesModel.newInstance(this);
+            this.composites = new CompositesInstance(compositesModel, this);
+            this.entities = new EntitiesInstance(entitiesModel, this);
+            this.objects = new ObjectsInstance(objectsModel, this);
+            this.values = new ValuesInstance(valuesModel, this);
+            this.services = servicesModel.NewInstance(this);
+            this.importedServices = importedServicesModel.NewInstance(this);
 
-            compositeBuilderFactory = new CompositeBuilderFactoryInstance();
-            objectBuilderFactory = new ObjectBuilderFactoryInstance();
-            valueBuilderFactory = new ValueBuilderFactoryInstance();
-            unitOfWorkFactory = new UnitOfWorkFactoryInstance();
-            serviceFinder = new ServiceFinderInstance();
+            this.compositeBuilderFactory = new TransientBuilderFactoryInstance(this);
+            this.objectBuilderFactory = new ObjectBuilderFactoryInstance();
+            this.valueBuilderFactory = new ValueBuilderFactoryInstance();
+            this.unitOfWorkFactory = new UnitOfWorkFactoryInstance();
+            this.serviceFinder = new ServiceFinderInstance();
 
-            entityFinders = new Dictionary<Type, EntityFinder>();
-            compositeFinders = new Dictionary<Type, CompositeFinder>();
-            objectFinders = new Dictionary<Type, ObjectFinder>();
-            valueFinders = new Dictionary<Type, ValueFinder>();
+            this.entityFinders = new Dictionary<Type, EntityFinder>();
+            this.compositeFinders = new Dictionary<Type, CompositeFinder>();
+            this.objectFinders = new Dictionary<Type, ObjectFinder>();
+            this.valueFinders = new Dictionary<Type, ValueFinder>();
         }
 
 
@@ -95,9 +122,69 @@ namespace QI4N.Framework.Runtime
         }
     }
 
+    public class ObjectBuilderFactoryInstance : ObjectBuilderFactory
+    {
+        public ObjectBuilder<T> NewObjectBuilder<T>()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ValueBuilderFactoryInstance : ValueBuilderFactory
+    {
+    }
+
+    public class UnitOfWorkFactoryInstance
+    {
+    }
+
+    public class ServiceFinderInstance
+    {
+    }
+
+    public class ValueFinder
+    {
+    }
+
+    public class ObjectFinder
+    {
+    }
+
+    public class ValuesInstance
+    {
+        public ValuesInstance(ValuesModel model, ModuleInstance instance)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ObjectsInstance
+    {
+        public ObjectsInstance(ObjectsModel model, ModuleInstance instance)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class EntitiesInstance
+    {
+        public EntitiesInstance(EntitiesModel model, ModuleInstance instance)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class CompositesInstance
+    {
+        public CompositesInstance(CompositesModel model, ModuleInstance instance)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class LayerInstance
     {
-        internal void VisitModules(ModuleVisitor visitor, Visibility visibility)
+        public void VisitModules(ModuleVisitor visitor, Visibility visibility)
         {
             throw new NotImplementedException();
         }
