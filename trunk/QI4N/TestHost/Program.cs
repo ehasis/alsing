@@ -3,36 +3,60 @@ namespace ConsoleApplication23
     using System;
 
     using QI4N.Framework;
+    using QI4N.Framework.Bootstrap;
     using QI4N.Framework.Runtime;
 
     internal class Program
     {
         private static void Main()
         {
-            var moduleInstance = new ModuleInstance();
-            var factory = new TransientBuilderFactoryInstance(moduleInstance);
-            TransientBuilder<Person> personFactory = factory.NewTransientBuilder<Person>();
+            Qi4nRuntime qi4j;
 
-            personFactory.Use("Roger@Alsing.com");
-            var protoPerson = personFactory.PrototypeFor<PersonState>();
-            protoPerson.FirstName.Value = "Roger";
-            protoPerson.LastName.Value = "Alsing";
-            protoPerson.Weight.Value = 85;
+            ApplicationAssembly app = qi4j.NewApplicationAssembly();
 
-            Person person = personFactory.NewInstance();
+            LayerAssembly runtimeLayer = CreateRuntimeLayer(app);
+            LayerAssembly designerLayer = CreateDesignerLayer(app);
+            LayerAssembly domainLayer = CreateDomainLayer(app);
+            LayerAssembly messagingLayer = CreateMessagingLayer(app);
+            LayerAssembly persistenceLayer = CreatePersistenceLayer(app);
 
-      //      Console.WriteLine(person.Weight.Value);
+            // declare structure between layers
+            domainLayer.Uses(messagingLayer);
+            domainLayer.Uses(persistenceLayer);
+            designerLayer.Uses(persistenceLayer);
+            designerLayer.Uses(domainLayer);
+            runtimeLayer.Uses(domainLayer);
 
-            Person otherPerson = personFactory.NewInstance();
+            // Instantiate the Application Model.
+            application = qi4j.NewApplication(app);
 
-     //       otherPerson.Weight.Value = 99;
 
-     //       Console.WriteLine(person.Weight.Value);
-     //       Console.WriteLine(otherPerson.Weight.Value);
+
+
+     //       var moduleInstance = new ModuleInstance();
+     //       var factory = new TransientBuilderFactoryInstance(moduleInstance);
+     //       TransientBuilder<Person> personFactory = factory.NewTransientBuilder<Person>();
+
+     //       personFactory.Use("Roger@Alsing.com");
+     //       var protoPerson = personFactory.PrototypeFor<PersonState>();
+     //       protoPerson.FirstName.Value = "Roger";
+     //       protoPerson.LastName.Value = "Alsing";
+     //       protoPerson.Weight.Value = 85;
+
+     //       Person person = personFactory.NewInstance();
+
+     // //      Console.WriteLine(person.Weight.Value);
+
+     //       Person otherPerson = personFactory.NewInstance();
+
+     ////       otherPerson.Weight.Value = 99;
+
+     ////       Console.WriteLine(person.Weight.Value);
+     ////       Console.WriteLine(otherPerson.Weight.Value);
             
-            person.SayHi();
+     //       person.SayHi();
 
-            Console.ReadLine();
+     //       Console.ReadLine();
 
             //// Lacking support for QI4J structural definitions
             //// just kickstart my default impl
@@ -101,6 +125,50 @@ namespace ConsoleApplication23
 
             ////manufacturer.Country.Value = "hej";  
             ////car.Manufacturer.Value = manufacturer;
+        }
+
+        private static LayerAssembly CreatePersistenceLayer(ApplicationAssembly app)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static LayerAssembly CreateMessagingLayer(ApplicationAssembly app)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static LayerAssembly CreateDomainLayer(ApplicationAssembly app)
+        {
+            LayerAssembly layer = app.NewLayerAssembly();
+
+            ModuleAssembly peopleModule = CreatePeopleModule(layer);
+            return layer;
+
+
+        }
+
+        private static ModuleAssembly CreatePeopleModule(LayerAssembly layer)
+        {
+            ModuleAssembly module = layer.NewModuleAssembly();
+    
+            module.AddEntity<CarEntity>();
+            module.AddService<ManufacturerRepositoryService>().VisibleIn( Visibility.Layer );
+            module.AddValue<AccidentValue>();
+            module.AddTransient<PersonComposite>();
+
+            return module;
+
+
+        }
+
+        private static LayerAssembly CreateDesignerLayer(ApplicationAssembly app)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static LayerAssembly CreateRuntimeLayer(ApplicationAssembly app)
+        {
+            throw new NotImplementedException();
         }
     }
 }

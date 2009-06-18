@@ -55,6 +55,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QI4N.Framework.Bootstrap\QI4N.Framework.Bootstrap.csproj">
+      <Project>{C6ACF8F0-5F35-40CC-B4D2-C0C782A3C133}</Project>
+      <Name>QI4N.Framework.Bootstrap</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QI4N.Framework.Runtime\QI4N.Framework.Runtime.csproj">
       <Project>{3A3108B6-75C3-400A-BF52-F8F1B9B74D48}</Project>
       <Name>QI4N.Framework.Runtime</Name>
