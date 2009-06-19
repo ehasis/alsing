@@ -1,7 +1,5 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
-    using System;
-
     using Bootstrap;
 
     public class ApplicationAssemblyFactory
@@ -10,7 +8,5 @@
         {
             return new ApplicationAssemblyImpl();
         }
-
-
     }
 }

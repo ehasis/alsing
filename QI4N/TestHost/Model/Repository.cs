@@ -1,5 +1,6 @@
-﻿namespace ConsoleApplication23
+namespace ConsoleApplication23
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using QI4N.Framework;
@@ -23,17 +24,17 @@
 
         public Manufacturer FindByIdentity(string identity)
         {
-            UnitOfWork uow = uowf.CurrentUnitOfWork;
-            return uow.Find<Manufacturer>(identity);            
+            UnitOfWork uow = this.uowf.CurrentUnitOfWork;
+            return uow.Find<Manufacturer>(identity);
         }
 
         public Manufacturer FindByName(string name)
         {
-            UnitOfWork uow = uowf.CurrentUnitOfWork;
+            UnitOfWork uow = this.uowf.CurrentUnitOfWork;
 
-            var result = from m in uow.NewQuery<Manufacturer>()
-                         where m.Name.Value == name
-                         select m;
+            IEnumerable<Manufacturer> result = from m in uow.NewQuery<Manufacturer>()
+                                               where m.Name.Value == name
+                                               select m;
 
             return result.FirstOrDefault();
         }

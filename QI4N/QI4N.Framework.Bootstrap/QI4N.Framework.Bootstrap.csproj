@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="CompositeDeclarations\AbstractCompositeDeclaration.cs" />
     <Compile Include="ApplicationAssembly.cs" />
-    <Compile Include="ApplicationAssemblyFactory.cs" />
     <Compile Include="AssemblyVisitor.cs" />
     <Compile Include="CompositeDeclarations\EntityDeclaration.cs" />
     <Compile Include="LayerAssembly.cs" />
@@ -61,10 +60,6 @@
     <Compile Include="CompositeDeclarations\ValueDeclaration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QI4N.Framework.Runtime\QI4N.Framework.Runtime.csproj">
-      <Project>{3A3108B6-75C3-400A-BF52-F8F1B9B74D48}</Project>
-      <Name>QI4N.Framework.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="..\QI4N.Framework\QI4N.Framework.csproj">
       <Project>{46604E99-EE88-42DD-B56D-B396E4886CE2}</Project>
       <Name>QI4N.Framework</Name>
