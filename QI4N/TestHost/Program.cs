@@ -44,11 +44,11 @@ namespace ConsoleApplication23
         private static ModuleAssembly CreatePeopleModule(LayerAssembly layer)
         {
             ModuleAssembly module = layer.NewModuleAssembly();
-    
-            module.AddEntity<CarEntity>();
-            module.AddService<ManufacturerRepositoryService>().VisibleIn( Visibility.Layer );
-            module.AddValue<AccidentValue>();
-            module.AddTransient<PersonComposite>();
+
+            module.AddEntities(typeof(Car)).VisibleIn(Visibility.Layer);
+            module.AddServices(typeof(ManufacturerRepositoryService)).VisibleIn( Visibility.Layer );
+            module.AddValues(typeof(AccidentValue));
+            module.AddTransients(typeof(PersonComposite));
 
             return module;
 

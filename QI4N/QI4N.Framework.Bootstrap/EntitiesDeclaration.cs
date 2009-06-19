@@ -7,5 +7,9 @@ namespace QI4N.Framework.Bootstrap
 {
     public class EntitiesDeclaration
     {
+        public void VisibleIn(QI4N.Framework.Runtime.Visibility visibility)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

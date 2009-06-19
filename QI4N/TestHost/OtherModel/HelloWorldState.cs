@@ -31,6 +31,6 @@
     [Mixins(typeof(HelloWorldBehaviorMixin))]
     public interface HelloWorldComposite : HelloWorldState,HelloWorldBehavior, Composite
     {
-        string Say();
+  
     }
 }
