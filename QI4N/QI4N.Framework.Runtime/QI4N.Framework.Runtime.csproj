@@ -62,6 +62,7 @@
     <Compile Include="Composite\CompositeCache.cs" />
     <Compile Include="Composite\CompositeMixin.cs" />
     <Compile Include="Composite\CompositesModel.cs" />
+    <Compile Include="Composite\ConcernDeclaration.cs" />
     <Compile Include="Composite\ConcernsDeclaration.cs" />
     <Compile Include="Composite\ConstraintsModel.cs" />
     <Compile Include="Composite\EntityFinder.cs" />
