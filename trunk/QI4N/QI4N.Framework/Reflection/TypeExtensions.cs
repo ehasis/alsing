@@ -137,5 +137,21 @@ namespace QI4N.Framework.Reflection
         {
             return self.GetCustomAttributes(attributeType, true).Any();
         }
+
+        public static bool HasAttribute(this MethodInfo self, Type attributeType)
+        {
+            return self.GetCustomAttributes(attributeType, true).Any();
+        }
+
+        public static T GetAttribute<T>(this Type self) where T : Attribute
+        {
+            var attrib = self.GetCustomAttributes(typeof(T), true).FirstOrDefault() as T;
+            return attrib;
+        }
+
+        public static object NewInstance(this Type self)
+        {
+            return Activator.CreateInstance(self, null);
+        }
     }
 }
