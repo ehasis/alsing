@@ -5,12 +5,11 @@ namespace QI4N.Framework.Runtime
     public class TypedFragmentInvocationHandler : FragmentInvocationHandler
     {
         public TypedFragmentInvocationHandler()
-        {            
+        {
         }
 
         public TypedFragmentInvocationHandler(object concern) : base(concern)
         {
-            
         }
 
 #if !DEBUG

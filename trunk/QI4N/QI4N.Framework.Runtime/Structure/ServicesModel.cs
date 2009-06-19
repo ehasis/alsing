@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace QI4N.Framework.Runtime
+﻿namespace QI4N.Framework.Runtime
 {
+    using System;
+
     public class ServicesModel
     {
-        public void VisitModel(ModelVisitor visitor)
+        public ServicesModel NewInstance(ModuleInstance instance)
         {
             throw new NotImplementedException();
         }
 
-        public ServicesModel NewInstance(ModuleInstance instance)
+        public void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();
         }

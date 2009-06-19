@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -35,25 +35,6 @@
         //}
 
         // Context
-        public MethodSideEffectsInstance NewInstance(ModuleInstance moduleInstance, InvocationHandler invoker)
-        {
-            var proxyHandler = new ProxyReferenceInvocationHandler();
-            var result = new SideEffectInvocationHandlerResult();
-            var sideEffects = new List<InvocationHandler>(this.sideEffectModels.Count);
-            foreach (MethodSideEffectModel sideEffectModel in this.sideEffectModels)
-            {
-                object sideEffect = sideEffectModel.NewInstance(moduleInstance, result, proxyHandler);
-                if (sideEffectModel.IsGeneric)
-                {
-                    sideEffects.Add((InvocationHandler)sideEffect);
-                }
-                else
-                {
-                    sideEffects.Add(new TypedFragmentInvocationHandler(sideEffect));
-                }
-            }
-            return new MethodSideEffectsInstance(sideEffects, result, proxyHandler, invoker);
-        }
 
 
         //public void visitModel( ModelVisitor modelVisitor )
@@ -93,6 +74,26 @@
             var newModel = new MethodSideEffectsModel(this.Method, methodSideEffectModels);
 
             return newModel;
+        }
+
+        public MethodSideEffectsInstance NewInstance(ModuleInstance moduleInstance, InvocationHandler invoker)
+        {
+            var proxyHandler = new ProxyReferenceInvocationHandler();
+            var result = new SideEffectInvocationHandlerResult();
+            var sideEffects = new List<InvocationHandler>(this.sideEffectModels.Count);
+            foreach (MethodSideEffectModel sideEffectModel in this.sideEffectModels)
+            {
+                object sideEffect = sideEffectModel.NewInstance(moduleInstance, result, proxyHandler);
+                if (sideEffectModel.IsGeneric)
+                {
+                    sideEffects.Add((InvocationHandler)sideEffect);
+                }
+                else
+                {
+                    sideEffects.Add(new TypedFragmentInvocationHandler(sideEffect));
+                }
+            }
+            return new MethodSideEffectsInstance(sideEffects, result, proxyHandler, invoker);
         }
     }
 }

@@ -6,14 +6,15 @@ namespace QI4N.Framework.Runtime
     public class MetaInfo
     {
         private readonly Dictionary<Type, object> items = new Dictionary<Type, object>();
+
         public object Get(Type type)
         {
-            return items[type];
+            return this.items[type];
         }
 
         public void Set(object info)
         {
-            items.Add(info.GetType(),info);
+            this.items.Add(info.GetType(), info);
         }
     }
 }

@@ -4,24 +4,31 @@
 
     public class ModuleModel
     {
-        private LayerModel layerModel;
         private readonly CompositesModel compositesModel;
+
         private readonly EntitiesModel entitiesModel;
-        private readonly ObjectsModel objectsModel;
-        private readonly ValuesModel valuesModel;
-        private readonly ServicesModel servicesModel;
+
         private readonly ImportedServicesModel importedServicesModel;
 
-        private readonly string name;
         private readonly MetaInfo metaInfo;
 
+        private readonly string name;
+
+        private readonly ObjectsModel objectsModel;
+
+        private readonly ServicesModel servicesModel;
+
+        private readonly ValuesModel valuesModel;
+
+        private LayerModel layerModel;
+
         public ModuleModel(string name,
-                        MetaInfo metaInfo, CompositesModel compositesModel,
-                        EntitiesModel entitiesModel,
-                        ObjectsModel objectsModel,
-                        ValuesModel valuesModel,
-                        ServicesModel servicesModel,
-                        ImportedServicesModel importedServicesModel)
+                           MetaInfo metaInfo, CompositesModel compositesModel,
+                           EntitiesModel entitiesModel,
+                           ObjectsModel objectsModel,
+                           ValuesModel valuesModel,
+                           ServicesModel servicesModel,
+                           ImportedServicesModel importedServicesModel)
         {
             this.name = name;
             this.metaInfo = metaInfo;
@@ -42,51 +49,11 @@
             }
         }
 
-        public String Name
-        {
-            get
-            {
-                return name;
-            }
-        }
-
-        public MetaInfo MetaInfo
-        {
-            get
-            {
-                return metaInfo;
-            }
-        }
-
         public EntitiesModel entities
         {
             get
             {
-                return entitiesModel;
-            }
-        }
-
-        public ObjectsModel Objects
-        {
-            get
-            {
-                return objectsModel;
-            }
-        }
-
-        public ValuesModel Values
-        {
-            get
-            {
-                return valuesModel;
-            }
-        }
-
-        public ServicesModel Services
-        {
-            get
-            {
-                return servicesModel;
+                return this.entitiesModel;
             }
         }
 
@@ -94,20 +61,65 @@
         {
             get
             {
-                return importedServicesModel;
+                return this.importedServicesModel;
             }
+        }
+
+        public MetaInfo MetaInfo
+        {
+            get
+            {
+                return this.metaInfo;
+            }
+        }
+
+        public String Name
+        {
+            get
+            {
+                return this.name;
+            }
+        }
+
+        public ObjectsModel Objects
+        {
+            get
+            {
+                return this.objectsModel;
+            }
+        }
+
+        public ServicesModel Services
+        {
+            get
+            {
+                return this.servicesModel;
+            }
+        }
+
+        public ValuesModel Values
+        {
+            get
+            {
+                return this.valuesModel;
+            }
+        }
+
+        public ModuleInstance NewInstance(LayerInstance layerInstance)
+        {
+            return new ModuleInstance(this, layerInstance, this.compositesModel, this.entitiesModel, this.objectsModel, this.valuesModel, this.servicesModel, this.importedServicesModel);
         }
 
         public void VisitModel(ModelVisitor modelVisitor)
         {
             modelVisitor.Visit(this);
 
-            compositesModel.VisitModel(modelVisitor);
-            entitiesModel.VisitModel(modelVisitor);
-            servicesModel.VisitModel(modelVisitor);
-            importedServicesModel.VisitModel(modelVisitor);
-            objectsModel.VisitModel(modelVisitor);
-            valuesModel.VisitModel(modelVisitor);
+            this.compositesModel.VisitModel(modelVisitor);
+            this.entitiesModel.VisitModel(modelVisitor);
+            this.servicesModel.VisitModel(modelVisitor);
+            this.importedServicesModel.VisitModel(modelVisitor);
+            this.objectsModel.VisitModel(modelVisitor);
+            this.valuesModel.VisitModel(modelVisitor);
         }
 
         public void VisitModules(ModuleVisitor visitor)
@@ -119,14 +131,10 @@
             }
 
             // Visit layer
-            layerModel.VisitModules(visitor, Visibility.Layer);
+            this.layerModel.VisitModules(visitor, Visibility.Layer);
         }
 
         // Context
-        public ModuleInstance NewInstance(LayerInstance layerInstance)
-        {
-            return new ModuleInstance(this, layerInstance, compositesModel, entitiesModel, objectsModel, valuesModel, servicesModel, importedServicesModel);
-        }
     }
 
     public class ModelVisitor
@@ -139,24 +147,14 @@
 
     public class ImportedServicesModel
     {
-        public void VisitModel(ModelVisitor visitor)
-        {
-            throw new NotImplementedException();
-        }
-
         public ImportedServicesModel NewInstance(ModuleInstance instance)
         {
             throw new NotImplementedException();
         }
+
+        public void VisitModel(ModelVisitor visitor)
+        {
+            throw new NotImplementedException();
+        }
     }
-
-
-
-
-
-
-
-
-
-
 }

@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime.Structure
+﻿namespace QI4N.Framework.Runtime
 {
     using System;
 
