@@ -1,6 +1,7 @@
 ﻿namespace QI4N.Framework.Bootstrap
 {
     using System;
+    using System.Collections.Generic;
 
     public interface ModuleAssembly
     {
@@ -10,7 +11,7 @@
 
         ValueDeclaration AddValues(params Type[] types);
 
-        TransientDeclaration AddTransients(params Type[] types);
+        TransientDeclaration AddTransients(params Type[] compositeTypes);
     }
 
     public class ModuleAssemblyImpl : ModuleAssembly
@@ -18,6 +19,8 @@
         private LayerAssembly layerAssembly;
 
         private string name;
+
+        private readonly IList<TransientDeclaration> transientDeclarations = new List<TransientDeclaration>();
 
         public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name)
         {
@@ -44,9 +47,19 @@
             throw new NotImplementedException();
         }
 
-        public TransientDeclaration AddTransients(params Type[] types)
+        public TransientDeclaration AddTransients(params Type[] compositeTypes)
         {
-            throw new NotImplementedException();
+            foreach (Type compositeType in compositeTypes)
+            {
+                if (!typeof(TransientComposite).IsAssignableFrom(compositeType))
+                {
+                    throw new Exception("Type is not a transient composite " + compositeType.Name);
+                }
+            }
+
+            TransientDeclarationImpl transientDeclaration = new TransientDeclarationImpl(compositeTypes);
+            transientDeclarations.Add(transientDeclaration);
+            return transientDeclaration;
         }
 
         #endregion
