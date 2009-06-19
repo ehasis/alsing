@@ -4,13 +4,13 @@
 
     public interface ModuleAssembly
     {
-        EntitiesDeclaration AddEntity<T>() where T : EntityComposite;
+        EntitiesDeclaration AddEntities(params Type[] types);
 
-        ServiceDeclaration AddService<T>() where T : ServiceComposite;
+        ServiceDeclaration AddServices(params Type[] types);
 
-        ValueDeclaration AddValue<T>() where T : ValueComposite;
+        ValueDeclaration AddValues(params Type[] types);
 
-        TransientDeclaration AddTransient<T>() where T : TransientComposite;
+        TransientDeclaration AddTransients(params Type[] types);
     }
 
     public class ModuleAssemblyImpl : ModuleAssembly
@@ -25,25 +25,31 @@
             this.name = name;
         }
 
-        public EntitiesDeclaration AddEntity<T>() where T : EntityComposite
+
+
+        #region ModuleAssembly Members
+
+        public EntitiesDeclaration AddEntities(params Type[] types)
         {
             throw new NotImplementedException();
         }
 
-        public ServiceDeclaration AddService<T>() where T : ServiceComposite
+        public ServiceDeclaration AddServices(params Type[] types)
         {
             throw new NotImplementedException();
         }
 
-        public TransientDeclaration AddTransient<T>() where T : TransientComposite
-        {
-            return null;
-        }
-
-        public ValueDeclaration AddValue<T>() where T : ValueComposite
+        public ValueDeclaration AddValues(params Type[] types)
         {
             throw new NotImplementedException();
         }
+
+        public TransientDeclaration AddTransients(params Type[] types)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         public void Visit(AssemblyVisitor visitor)
         {
