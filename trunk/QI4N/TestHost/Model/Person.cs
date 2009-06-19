@@ -30,7 +30,7 @@
 
         public void Oink()
         {
-            Console.WriteLine("OinkOink {0}",state.FirstName.Value);
+            Console.WriteLine("OinkOink {0}", this.state.FirstName.Value);
         }
     }
 
@@ -40,16 +40,16 @@
         private string email;
 
         [This]
-        private PersonState self;
+        private OinkOink oink;
 
         [This]
-        private OinkOink oink;
+        private PersonState self;
 
         public void SayHi()
         {
             Console.WriteLine("{0} {1} Says hello from QI4N - email {2}", this.self.FirstName.Value, this.self.LastName.Value, this.email);
 
-            oink.Oink();
+            this.oink.Oink();
         }
     }
 
@@ -111,6 +111,19 @@
             Console.WriteLine("Before say hi");
             this.next.SayHi();
             Console.WriteLine("After say hi");
+        }
+    }
+
+    public interface RandomFoo
+    {
+        void Foo();
+    }
+
+    public class RandomFooMixin : RandomFoo
+    {
+        public void Foo()
+        {
+            Console.WriteLine("FOO FOO");
         }
     }
 }
