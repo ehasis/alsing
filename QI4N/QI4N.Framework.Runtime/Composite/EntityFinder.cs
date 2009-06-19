@@ -17,10 +17,4 @@
     {
         bool VisitModule(ModuleInstance moduleInstance, ModuleModel moduleModel, Visibility visibility);
     }
-
- 
-
-
-
-
 }

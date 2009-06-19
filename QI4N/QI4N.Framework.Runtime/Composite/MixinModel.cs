@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -11,9 +11,11 @@
     [DebuggerDisplay("MixinType {MixinType}")]
     public class MixinModel
     {
-        private readonly HashSet<Type> thisMixinTypes;
         private readonly ConcernsDeclaration concernsDeclaration;
+
         private readonly SideEffectsDeclaration sideEffectsDeclaration;
+
+        private readonly HashSet<Type> thisMixinTypes;
 
         public MixinModel(Type mixinType)
         {
@@ -25,8 +27,8 @@
 
             var concerns = new List<ConcernDeclaration>();
             ConcernsDeclaration.ConcernDeclarations(mixinType, concerns);
-            concernsDeclaration = new ConcernsDeclaration( concerns );
-            sideEffectsDeclaration = new SideEffectsDeclaration( mixinType, Enumerable.Empty<object>() );
+            this.concernsDeclaration = new ConcernsDeclaration(concerns);
+            this.sideEffectsDeclaration = new SideEffectsDeclaration(mixinType, Enumerable.Empty<object>());
 
             this.thisMixinTypes = this.BuildThisMixinTypes();
         }
@@ -41,6 +43,11 @@
 
 
         public Type MixinType { get; set; }
+
+        public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
+        {
+            return this.concernsDeclaration.ConcernsFor(method, type);
+        }
 
         public IEnumerable<Type> GetThisMixinTypes()
         {
@@ -67,6 +74,13 @@
             return new TypedFragmentInvocationHandler();
         }
 
+        public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
+        {
+            var methodSideEffectsModels = new List<MethodSideEffectModel>();
+            var model = new MethodSideEffectsModel(method, methodSideEffectsModels);
+            return model;
+        }
+
         private HashSet<Type> BuildThisMixinTypes()
         {
             var thisDependencies = new HashSet<Type>();
@@ -82,18 +96,6 @@
             }
 
             return thisDependencies;
-        }
-
-        public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
-        {
-            return concernsDeclaration.ConcernsFor(method, type);
-        }
-
-        public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
-        {
-            var methodSideEffectsModels = new List<MethodSideEffectModel>();
-            var model = new MethodSideEffectsModel(method, methodSideEffectsModels);
-            return model;
         }
     }
 

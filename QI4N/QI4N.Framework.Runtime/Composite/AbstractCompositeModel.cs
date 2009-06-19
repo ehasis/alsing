@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Reflection;
@@ -17,9 +17,9 @@
 
         protected AbstractStateModel stateModel;
 
-        private Visibility visibility;
-
         private MetaInfo metaInfo;
+
+        private Visibility visibility;
 
         protected AbstractCompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
         {
@@ -34,11 +34,6 @@
             this.mixinsModel = mixinsModel;
 
             this.compositeMethodsModel = compositeMethodsModel;
-        }
-
-        private static Type CreateProxyType(Type compositeType)
-        {
-            return Proxy.BuildProxyType(compositeType);
         }
 
 
@@ -89,6 +84,11 @@
         public StateHolder NewState(StateHolder state)
         {
             return this.stateModel.NewState(state);
+        }
+
+        private static Type CreateProxyType(Type compositeType)
+        {
+            return Proxy.BuildProxyType(compositeType);
         }
 
         //    public abstract CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance usesInstance, StateHolder instanceState);

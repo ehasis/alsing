@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -9,6 +9,8 @@
 
     public abstract class AbstractMixinsModel
     {
+        public IDictionary<MethodInfo, int> MethodIndex = new Dictionary<MethodInfo, int>();
+
         protected readonly IDictionary<MethodInfo, MixinModel> methodImplementation = new Dictionary<MethodInfo, MixinModel>();
 
         protected readonly IList<Type> mixinImplementationTypes = new List<Type>();
@@ -17,12 +19,10 @@
 
         protected readonly HashSet<Type> mixinTypes = new HashSet<Type>();
 
-        public IDictionary<MethodInfo,int> MethodIndex = new Dictionary<MethodInfo, int>();
-
 
         protected AbstractMixinsModel(Type type, IEnumerable<Type> mixins)
         {
-            this.mixinImplementationTypes.Add(typeof(CompositeMixin)); 
+            this.mixinImplementationTypes.Add(typeof(CompositeMixin));
         }
 
         public void AddMixinType(Type mixinType)
@@ -53,7 +53,7 @@
                 {
                     IEnumerable<Type> fieldTypes = implementationType
                             .GetAllFields()
-                            .Where(f => f.HasAttribute(typeof(ThisAttribute)))
+                            .Where(f => TypeExtensions.HasAttribute((FieldInfo)f, typeof(ThisAttribute)))
                             .Select(f => f.FieldType);
 
                     thisTypes.AddRange(fieldTypes);
@@ -76,19 +76,19 @@
 
         public MixinModel ImplementMethod(MethodInfo method)
         {
-            if (!methodImplementation.ContainsKey(method))
+            if (!this.methodImplementation.ContainsKey(method))
             {
-                Type mixinType = FindTypedImplementation(method);
+                Type mixinType = this.FindTypedImplementation(method);
                 if (mixinType != null)
                 {
-                    return ImplementMethodWithType(method, mixinType);
+                    return this.ImplementMethodWithType(method, mixinType);
                 }
 
                 // Check generic implementations
-                mixinType = FindGenericImplementation(method);
+                mixinType = this.FindGenericImplementation(method);
                 if (mixinType != null)
                 {
-                    return ImplementMethodWithType(method, mixinType);
+                    return this.ImplementMethodWithType(method, mixinType);
                 }
 
                 throw new Exception("No implementation found for method " + method.Name);
@@ -102,14 +102,22 @@
             return this.mixinImplementationTypes.IndexOf(mixinImplementationType);
         }
 
+        public MixinModel MixinFor(MethodInfo method)
+        {
+            int integer = this.MethodIndex[method];
+            return this.mixinModels[integer];
+        }
+
+        public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
+        {
+            return this.MixinFor(method).NewInvocationHandler(method.DeclaringType);
+        }
+
         public object[] NewMixinHolder()
         {
             return new object[this.mixinModels.Count];
         }
 
-
-
-        
 
         private Type FindGenericImplementation(MethodInfo method)
         {
@@ -138,7 +146,7 @@
         {
             MixinModel foundMixinModel = null;
 
-            foreach( MixinModel mixinModel in mixinModels )
+            foreach (MixinModel mixinModel in this.mixinModels)
             {
                 if (mixinModel.MixinType.Equals(mixinType))
                 {
@@ -147,27 +155,16 @@
                 }
             }
 
-            if( foundMixinModel == null )
+            if (foundMixinModel == null)
             {
                 foundMixinModel = new MixinModel(mixinType);
-                mixinModels.Add( foundMixinModel );
+                this.mixinModels.Add(foundMixinModel);
             }
 
-            methodImplementation.Add( method, foundMixinModel );
-            MethodIndex.Add(method,mixinModels.IndexOf(foundMixinModel));
+            this.methodImplementation.Add(method, foundMixinModel);
+            this.MethodIndex.Add(method, this.mixinModels.IndexOf(foundMixinModel));
 
             return foundMixinModel;
-        }
-
-        public MixinModel MixinFor(MethodInfo method)
-        {
-            int integer = MethodIndex[method];
-            return mixinModels[integer];
-        }
-
-        public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
-        {
-            return MixinFor(method).NewInvocationHandler(method.DeclaringType);
         }
     }
 }

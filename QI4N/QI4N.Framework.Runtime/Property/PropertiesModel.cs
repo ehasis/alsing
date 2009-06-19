@@ -4,7 +4,6 @@ namespace QI4N.Framework.Runtime
     {
         public PropertiesModel(ConstraintsModel model, PropertyDeclarations declarations, bool immutable)
         {
-
         }
     }
 }

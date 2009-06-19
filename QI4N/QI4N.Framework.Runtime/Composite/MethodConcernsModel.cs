@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -23,30 +23,6 @@
         }
 
         public MethodInfo Method { get; private set; }
-
-        public MethodConcernsInstance NewInstance(ModuleInstance moduleInstance, FragmentInvocationHandler mixinInvocationHandler)
-        {
-            var proxyHandler = new ProxyReferenceInvocationHandler();
-            Object nextConcern = mixinInvocationHandler;
-            for (int i = this.concernsForMethod.Count - 1; i >= 0; i--)
-            {
-                MethodConcernModel concernModel = this.concernsForMethod[i];
-
-                nextConcern = concernModel.NewInstance(moduleInstance, nextConcern, proxyHandler);
-            }
-
-            InvocationHandler firstConcern;
-            if (nextConcern is InvocationHandler )
-            {
-                firstConcern = (InvocationHandler)nextConcern;
-            }
-            else
-            {
-                firstConcern = new TypedFragmentInvocationHandler(nextConcern);
-            }
-
-            return new MethodConcernsInstance(firstConcern, mixinInvocationHandler, proxyHandler);
-        }
 
         //// Binding
         //public void bind( Resolution resolution ) throws BindingException
@@ -84,6 +60,30 @@
             var newModel = new MethodConcernsModel(this.Method, methodConcernModels);
 
             return newModel;
+        }
+
+        public MethodConcernsInstance NewInstance(ModuleInstance moduleInstance, FragmentInvocationHandler mixinInvocationHandler)
+        {
+            var proxyHandler = new ProxyReferenceInvocationHandler();
+            Object nextConcern = mixinInvocationHandler;
+            for (int i = this.concernsForMethod.Count - 1; i >= 0; i--)
+            {
+                MethodConcernModel concernModel = this.concernsForMethod[i];
+
+                nextConcern = concernModel.NewInstance(moduleInstance, nextConcern, proxyHandler);
+            }
+
+            InvocationHandler firstConcern;
+            if (nextConcern is InvocationHandler)
+            {
+                firstConcern = (InvocationHandler)nextConcern;
+            }
+            else
+            {
+                firstConcern = new TypedFragmentInvocationHandler(nextConcern);
+            }
+
+            return new MethodConcernsInstance(firstConcern, mixinInvocationHandler, proxyHandler);
         }
     }
 
