@@ -2,15 +2,11 @@
 {
     using System;
 
-    public interface ValueDeclaration : AbstractCompositeDeclaration<ValueDeclaration>
+    public interface ValueDeclaration : AbstractCompositeDeclaration<ValueDeclaration,ValueComposite>
     {
     }
 
-    public class ValueDeclarationImpl : AbstractCompositeDeclarationImpl<ValueDeclaration>, ValueDeclaration
+    public class ValueDeclarationImpl : AbstractCompositeDeclarationImpl<ValueDeclaration,ValueComposite>, ValueDeclaration
     {
-        public ValueDeclarationImpl(Type[] types)
-            : base(types)
-        {
-        }
     }
 }

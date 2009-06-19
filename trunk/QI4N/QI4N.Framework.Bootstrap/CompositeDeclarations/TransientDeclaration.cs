@@ -2,15 +2,11 @@
 {
     using System;
 
-    public interface TransientDeclaration : AbstractCompositeDeclaration<TransientDeclaration>
+    public interface TransientDeclaration : AbstractCompositeDeclaration<TransientDeclaration,TransientComposite>
     {
     }
 
-    public class TransientDeclarationImpl : AbstractCompositeDeclarationImpl<TransientDeclaration>, TransientDeclaration
+    public class TransientDeclarationImpl : AbstractCompositeDeclarationImpl<TransientDeclaration,TransientComposite>, TransientDeclaration
     {
-        public TransientDeclarationImpl(Type[] types)
-            : base(types)
-        {
-        }
     }
 }

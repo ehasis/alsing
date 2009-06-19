@@ -2,14 +2,11 @@
 {
     using System;
 
-    public interface EntityDeclaration : AbstractCompositeDeclaration<EntityDeclaration>
+    public interface EntityDeclaration : AbstractCompositeDeclaration<EntityDeclaration,EntityComposite>
     {
     }
 
-    public class EntityDeclarationImpl : AbstractCompositeDeclarationImpl<EntityDeclaration>, EntityDeclaration
+    public class EntityDeclarationImpl : AbstractCompositeDeclarationImpl<EntityDeclaration,EntityComposite>, EntityDeclaration
     {
-        public EntityDeclarationImpl(Type[] types) : base(types)
-        {
-        }
     }
 }

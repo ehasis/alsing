@@ -2,14 +2,11 @@
 {
     using System;
 
-    public interface ServiceDeclaration : AbstractCompositeDeclaration<ServiceDeclaration>
+    public interface ServiceDeclaration : AbstractCompositeDeclaration<ServiceDeclaration,ServiceComposite>
     {
     }
 
-    public class ServiceDeclarationImpl : AbstractCompositeDeclarationImpl<ServiceDeclaration>, ServiceDeclaration
+    public class ServiceDeclarationImpl : AbstractCompositeDeclarationImpl<ServiceDeclaration,ServiceComposite>, ServiceDeclaration
     {
-        public ServiceDeclarationImpl(Type[] types) : base(types)
-        {
-        }
     }
 }

@@ -5,18 +5,20 @@
 
     using Runtime;
 
-    public interface AbstractCompositeDeclaration<T>
+    public interface AbstractCompositeDeclaration<T,CT>
     {
         T VisibleIn(Visibility visibility);
 
-        T WithConcerns(params Type[] concerns);
+        T WithConcern<K>();
 
-        T WithSideEffects(params Type[] sideEffects);
+        T WithSideEffect<K>();
 
-        T WithMixins(params Type[] mixins);
+        T WithMixin<K>();
+
+        T Include<K>() where K : CT ;
     }
 
-    public abstract class AbstractCompositeDeclarationImpl<T> : AbstractCompositeDeclaration<T> where T : AbstractCompositeDeclaration<T>
+    public abstract class AbstractCompositeDeclarationImpl<T,CT> : AbstractCompositeDeclaration<T,CT> where T : AbstractCompositeDeclaration<T,CT>
     {
         private readonly List<Type> concerns = new List<Type>();
 
@@ -28,21 +30,12 @@
 
         private MetaInfo metaInfo = new MetaInfo();
 
-        private Type[] types;
+        private readonly List<Type> compositeTypes = new List<Type>();
 
         private Visibility visibility;
 
-        protected AbstractCompositeDeclarationImpl(Type[] types)
+        protected AbstractCompositeDeclarationImpl()
         {
-            //foreach (Type compositeType in types)
-            //{
-            //    if (!typeof(TransientComposite).IsAssignableFrom(compositeType))
-            //    {
-            //        throw new Exception("Type is not a transient composite " + compositeType.Name);
-            //    }
-            //}
-
-            this.types = types;
             this.asT = (T)(object)this;
         }
 
@@ -52,21 +45,27 @@
             return this.asT;
         }
 
-        public T WithConcerns(params Type[] concerns)
+        public T WithConcern<K>()
         {
-            this.concerns.AddRange(concerns);
+            this.concerns.Add(typeof(K));
             return this.asT;
         }
 
-        public T WithMixins(params Type[] mixins)
+        public T WithMixin<K>()
         {
-            this.mixins.AddRange(mixins);
+            this.mixins.Add(typeof(K));
             return this.asT;
         }
 
-        public T WithSideEffects(params Type[] sideEffects)
+        public T Include<K>() where K : CT
         {
-            this.sideEffects.AddRange(sideEffects);
+            compositeTypes.Add(typeof(K));
+            return this.asT;
+        }
+
+        public T WithSideEffect<K>()
+        {
+            this.sideEffects.Add(typeof(K));
             return this.asT;
         }
     }

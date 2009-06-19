@@ -45,10 +45,23 @@ namespace ConsoleApplication23
         {
             ModuleAssembly module = layer.NewModuleAssembly();
 
-            module.AddEntities(typeof(CarEntity)).VisibleIn(Visibility.Layer);
-            module.AddServices(typeof(ManufacturerRepositoryService)).VisibleIn( Visibility.Layer );
-            module.AddValues(typeof(AccidentValue));
-            module.AddTransients(typeof(PersonComposite)).WithMixins(typeof(RandomFooMixin));
+            module
+                .AddEntities()
+                .Include<CarEntity>()
+                .VisibleIn(Visibility.Layer);
+            
+            module
+                .AddServices()
+                .Include<ManufacturerRepositoryService>()
+                .VisibleIn( Visibility.Layer );
+            
+            module
+                .AddValues();
+            
+            module
+                .AddTransients()
+                .Include<PersonComposite>()
+                .WithMixin<RandomFooMixin>();
 
             return module;
 
