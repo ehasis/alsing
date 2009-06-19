@@ -5,13 +5,13 @@
 
     public interface ModuleAssembly
     {
-        EntityDeclaration AddEntities(params Type[] compositeTypes);
+        EntityDeclaration AddEntities();
 
-        ServiceDeclaration AddServices(params Type[] compositeTypes);
+        ServiceDeclaration AddServices();
 
-        ValueDeclaration AddValues(params Type[] compositeTypes);
+        ValueDeclaration AddValues();
 
-        TransientDeclaration AddTransients(params Type[] compositeTypes);
+        TransientDeclaration AddTransients();
     }
 
     public class ModuleAssemblyImpl : ModuleAssembly
@@ -34,30 +34,30 @@
             this.name = name;
         }
 
-        public EntityDeclaration AddEntities(params Type[] compositeTypes)
+        public EntityDeclaration AddEntities()
         {
-            var declaration = new EntityDeclarationImpl(compositeTypes);
+            var declaration = new EntityDeclarationImpl();
             this.entityDeclarations.Add(declaration);
             return declaration;
         }
 
-        public ServiceDeclaration AddServices(params Type[] compositeTypes)
+        public ServiceDeclaration AddServices()
         {
-            var declaration = new ServiceDeclarationImpl(compositeTypes);
+            var declaration = new ServiceDeclarationImpl();
             this.serviceDeclarations.Add(declaration);
             return declaration;
         }
 
-        public TransientDeclaration AddTransients(params Type[] compositeTypes)
+        public TransientDeclaration AddTransients()
         {
-            var declaration = new TransientDeclarationImpl(compositeTypes);
+            var declaration = new TransientDeclarationImpl();
             this.transientDeclarations.Add(declaration);
             return declaration;
         }
 
-        public ValueDeclaration AddValues(params Type[] compositeTypes)
+        public ValueDeclaration AddValues()
         {
-            var declaration = new ValueDeclarationImpl(compositeTypes);
+            var declaration = new ValueDeclarationImpl();
             this.valueDeclarations.Add(declaration);
             return declaration;
         }
