@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     public interface ModuleAssembly
     {
@@ -12,8 +13,11 @@
         ValueDeclaration AddValues();
 
         TransientDeclaration AddTransients();
+
+        string Name { get; }
     }
 
+    [DebuggerDisplay("Name {Name}")]
     public class ModuleAssemblyImpl : ModuleAssembly
     {
         private readonly IList<EntityDeclaration> entityDeclarations = new List<EntityDeclaration>();
@@ -27,6 +31,14 @@
         private LayerAssembly layerAssembly;
 
         private string name;
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
 
         public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name)
         {

@@ -5,6 +5,7 @@
     using System.Linq;
 
     using Runtime;
+    using System.Diagnostics;
 
     public interface LayerAssembly
     {
@@ -23,13 +24,16 @@
         void Visit(AssemblyVisitor visitor);
 
         ModuleAssembly NewModuleAssembly();
+
+
     }
 
+    [DebuggerDisplay("Name: {Name}")]
     public class LayerAssemblyImpl : LayerAssembly
     {
         private readonly ApplicationAssembly applicationAssembly;
         private readonly List<ModuleAssemblyImpl> moduleAssemblies;
-        private HashSet<LayerAssembly> uses;
+        private readonly HashSet<LayerAssembly> uses;
 
         private string name;
         private readonly MetaInfo metaInfo = new MetaInfo();
@@ -43,7 +47,7 @@
             uses = new HashSet<LayerAssembly>();
         }
 
-        public ModuleAssembly NewModuleAssembly( String name )
+        public ModuleAssembly NewModuleAssembly( string name )
         {
             var moduleAssembly = new ModuleAssemblyImpl( this, name );
             moduleAssemblies.Add( moduleAssembly );

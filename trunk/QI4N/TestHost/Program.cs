@@ -21,19 +21,10 @@ namespace ConsoleApplication23
 
         }
 
-        private static LayerAssembly CreatePersistenceLayer(ApplicationAssembly app)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static LayerAssembly CreateMessagingLayer(ApplicationAssembly app)
-        {
-            throw new NotImplementedException();
-        }
 
         private static LayerAssembly CreateDomainLayer(ApplicationAssembly app)
         {
-            LayerAssembly layer = app.NewLayerAssembly();
+            LayerAssembly layer = app.NewLayerAssembly("DomainLayer");
 
             ModuleAssembly peopleModule = CreatePeopleModule(layer);
             return layer;
@@ -43,7 +34,7 @@ namespace ConsoleApplication23
 
         private static ModuleAssembly CreatePeopleModule(LayerAssembly layer)
         {
-            ModuleAssembly module = layer.NewModuleAssembly();
+            ModuleAssembly module = layer.NewModuleAssembly("PeopleModule");
 
             module
                 .AddEntities()
