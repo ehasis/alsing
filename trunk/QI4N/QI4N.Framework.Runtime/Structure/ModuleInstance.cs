@@ -146,45 +146,14 @@ namespace QI4N.Framework.Runtime
     {
     }
 
-    public class ValuesInstance
-    {
-        public ValuesInstance(ValuesModel model, ModuleInstance instance)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    public class ObjectsInstance
-    {
-        public ObjectsInstance(ObjectsModel model, ModuleInstance instance)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    public class EntitiesInstance
-    {
-        public EntitiesInstance(EntitiesModel model, ModuleInstance instance)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    public class CompositesInstance
-    {
-        public CompositesInstance(CompositesModel model, ModuleInstance instance)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    public class LayerInstance
-    {
-        public void VisitModules(ModuleVisitor visitor, Visibility visibility)
-        {
-            throw new NotImplementedException();
-        }
-    }
+
+
+
+
 
     public interface Module
     {

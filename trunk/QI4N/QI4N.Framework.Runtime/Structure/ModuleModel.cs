@@ -10,10 +10,10 @@
         private readonly ObjectsModel objectsModel;
         private readonly ValuesModel valuesModel;
         private readonly ServicesModel servicesModel;
-        private ImportedServicesModel importedServicesModel;
+        private readonly ImportedServicesModel importedServicesModel;
 
         private readonly string name;
-        private MetaInfo metaInfo;
+        private readonly MetaInfo metaInfo;
 
         public ModuleModel(string name,
                         MetaInfo metaInfo, CompositesModel compositesModel,
@@ -150,48 +150,13 @@
         }
     }
 
-    public class ServicesModel
-    {
-        public void VisitModel(ModelVisitor visitor)
-        {
-            throw new NotImplementedException();
-        }
 
-        public ServicesModel NewInstance(ModuleInstance instance)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    public class ValuesModel
-    {
-        public void VisitModel(ModelVisitor visitor)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    public class ObjectsModel
-    {
-        public void VisitModel(ModelVisitor visitor)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    public class EntitiesModel
-    {
-        public void VisitModel(ModelVisitor visitor)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    public class LayerModel
-    {
-        public void VisitModules(ModuleVisitor visitor, Visibility visibility)
-        {
-            throw new NotImplementedException();
-        }
-    }
+
+
+
+
 }
