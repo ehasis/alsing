@@ -15,9 +15,14 @@
 
     public class ModuleAssemblyImpl : ModuleAssembly
     {
-        public ModuleAssemblyImpl(LayerAssemblyImpl impl, string name)
+        private LayerAssembly layerAssembly;
+
+        private string name;
+
+        public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name)
         {
-            throw new NotImplementedException();
+            this.layerAssembly = layerAssembly;
+            this.name = name;
         }
 
         public EntitiesDeclaration AddEntity<T>() where T : EntityComposite
@@ -32,7 +37,7 @@
 
         public TransientDeclaration AddTransient<T>() where T : TransientComposite
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public ValueDeclaration AddValue<T>() where T : ValueComposite
