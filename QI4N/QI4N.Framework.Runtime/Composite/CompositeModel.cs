@@ -3,6 +3,8 @@ namespace QI4N.Framework.Runtime
     using System;
     using System.Collections.Generic;
 
+    using Bootstrap;
+
     using JavaProxy;
 
     public class CompositeModel : AbstractCompositeModel

@@ -54,6 +54,7 @@
     <Compile Include="LayerAssembly.cs" />
     <Compile Include="ModuleAssembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyDeclarations.cs" />
     <Compile Include="Qi4nRuntime.cs" />
     <Compile Include="CompositeDeclarations\ServiceDeclaration.cs" />
     <Compile Include="CompositeDeclarations\TransientDeclaration.cs" />
