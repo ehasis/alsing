@@ -5,14 +5,14 @@ namespace QI4N.Framework
 
     public interface AppliesToFilter
     {
-        bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type modifierClass);
+        bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass);
     }
 
     public class AppliesToEverything : AppliesToFilter
     {
         public static readonly AppliesToFilter Instance = new AppliesToEverything();
 
-        public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type modifierClass)
+        public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
         {
             return true;
         }

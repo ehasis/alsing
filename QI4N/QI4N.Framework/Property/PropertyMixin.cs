@@ -22,7 +22,7 @@ namespace QI4N.Framework
 
     public class PropertyFilter : AppliesToFilter
     {
-        public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type modifierClass)
+        public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
         {
             return typeof(AbstractProperty).IsAssignableFrom(method.ReturnType);
         }

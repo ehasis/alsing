@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     using System;
     using System.Reflection;
@@ -17,7 +17,7 @@
 
     public class AssociationFilter : AppliesToFilter
     {
-        public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type modifierClass)
+        public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
         {
             return typeof(AbstractAssociation).IsAssignableFrom(method.ReturnType);
         }

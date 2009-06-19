@@ -55,7 +55,10 @@
     <Compile Include="Bootstrap\TransientDeclaration.cs" />
     <Compile Include="Bootstrap\ValueDeclaration.cs" />
     <Compile Include="Composite\AbstractCompositeModel.cs" />
+    <Compile Include="Composite\AbstractModifierDeclaration.cs" />
     <Compile Include="Composite\AbstractModifierModel.cs" />
+    <Compile Include="Composite\AndAppliesToFilter.cs" />
+    <Compile Include="Composite\AnnotationAppliesToFilter.cs" />
     <Compile Include="Composite\CompositeCache.cs" />
     <Compile Include="Composite\CompositeMixin.cs" />
     <Compile Include="Composite\CompositesModel.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="Composite\EntityFinder.cs" />
     <Compile Include="Composite\FragmentInvocationHandler.cs" />
     <Compile Include="Composite\GenericFragmentInvocationHandler.cs" />
+    <Compile Include="Composite\ImplementsMethodAppliesToFilter.cs" />
     <Compile Include="Composite\MethodConcernsInstance.cs" />
     <Compile Include="Composite\MethodConcernsModel.cs" />
     <Compile Include="Composite\MethodConstraintModel.cs" />
@@ -84,6 +88,8 @@
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\MixinsModel.cs" />
     <Compile Include="Composite\CompositesInstance.cs" />
+    <Compile Include="Composite\TypeCheckAppliesToFilter.cs" />
+    <Compile Include="Composite\TypedModifierAppliesToFilter.cs" />
     <Compile Include="Entity\EntitiesInstance.cs" />
     <Compile Include="Entity\EntitiesModel.cs" />
     <Compile Include="Structure\ApplicationInstance.cs" />
