@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using Bootstrap;
+
     public class CompositeFinder : TypeFinder<CompositeModel>
     {
         protected override CompositeModel FindModel(ModuleModel model, Visibility visibility)

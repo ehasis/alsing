@@ -115,7 +115,6 @@
     <Compile Include="Property\AbstractPropertiesModel.cs" />
     <Compile Include="Property\PropertiesInstance.cs" />
     <Compile Include="Property\PropertiesModel.cs" />
-    <Compile Include="Property\PropertyDeclarations.cs" />
     <Compile Include="Property\PropertyHandler.cs" />
     <Compile Include="Property\PropertyInstance.cs" />
     <Compile Include="Property\PropertyModel.cs" />
