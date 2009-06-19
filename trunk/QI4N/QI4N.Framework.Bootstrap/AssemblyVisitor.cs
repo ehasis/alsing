@@ -7,5 +7,9 @@ namespace QI4N.Framework.Bootstrap
 {
     public class AssemblyVisitor
     {
+        public void VisitLayer(LayerAssembly impl)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -11,7 +11,7 @@
     {
         public LayerAssembly NewLayerAssembly()
         {
-            throw new NotImplementedException();
+            return new LayerAssemblyImpl(this,"");
         }
     }
 }

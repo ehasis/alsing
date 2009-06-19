@@ -15,6 +15,11 @@
 
     public class ModuleAssemblyImpl : ModuleAssembly
     {
+        public ModuleAssemblyImpl(LayerAssemblyImpl impl, string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public EntitiesDeclaration AddEntity<T>() where T : EntityComposite
         {
             throw new NotImplementedException();
@@ -31,6 +36,11 @@
         }
 
         public ValueDeclaration AddValue<T>() where T : ValueComposite
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Visit(AssemblyVisitor visitor)
         {
             throw new NotImplementedException();
         }
