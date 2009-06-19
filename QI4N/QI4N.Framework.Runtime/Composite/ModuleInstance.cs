@@ -105,11 +105,6 @@ namespace QI4N.Framework.Runtime
             return finder;
         }
 
-        public StructureContext GetStructureContext()
-        {
-            throw new Exception();
-        }
-
         public void VisitModules(ModuleVisitor visitor)
         {
             // Visit this module

@@ -87,7 +87,6 @@
     <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Service\ServiceComposite.cs" />
     <Compile Include="Property\StateHolder.cs" />
-    <Compile Include="StructureContext.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkFactory.cs" />
     <Compile Include="Value\Value.cs" />
