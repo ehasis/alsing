@@ -48,7 +48,7 @@ namespace ConsoleApplication23
             module.AddEntities(typeof(CarEntity)).VisibleIn(Visibility.Layer);
             module.AddServices(typeof(ManufacturerRepositoryService)).VisibleIn( Visibility.Layer );
             module.AddValues(typeof(AccidentValue));
-            module.AddTransients(typeof(PersonComposite)).WithMixins(typeof(RandomMixin));
+            module.AddTransients(typeof(PersonComposite)).WithMixins(typeof(RandomFooMixin));
 
             return module;
 
