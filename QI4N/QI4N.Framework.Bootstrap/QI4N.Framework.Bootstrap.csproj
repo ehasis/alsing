@@ -47,9 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationAssembly.cs" />
+    <Compile Include="ApplicationAssemblyFactory.cs" />
+    <Compile Include="AssemblyVisitor.cs" />
+    <Compile Include="EntitiesDeclaration.cs" />
     <Compile Include="LayerAssembly.cs" />
+    <Compile Include="ModuleAssembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Qi4nRuntime.cs" />
+    <Compile Include="ServiceDeclaration.cs" />
+    <Compile Include="TransientDeclaration.cs" />
+    <Compile Include="ValueDeclaration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QI4N.Framework.Runtime\QI4N.Framework.Runtime.csproj">
