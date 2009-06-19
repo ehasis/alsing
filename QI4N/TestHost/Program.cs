@@ -47,6 +47,8 @@ namespace ConsoleApplication23
 
             LayerAssembly domainLayer = CreateDomainLayer(app);
 
+            
+            
             // Instantiate the Application Model.
         }
     }

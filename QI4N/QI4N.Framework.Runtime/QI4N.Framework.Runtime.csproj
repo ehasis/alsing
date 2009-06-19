@@ -75,12 +75,17 @@
     <Compile Include="Composite\CompositeInstance.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\MixinsModel.cs" />
-    <Compile Include="Composite\ModuleModel.cs" />
+    <Compile Include="Structure\CompositesInstance.cs" />
+    <Compile Include="Structure\EntitiesInstance.cs" />
+    <Compile Include="Structure\EntitiesModel.cs" />
+    <Compile Include="Structure\LayerInstance.cs" />
+    <Compile Include="Structure\LayerModel.cs" />
+    <Compile Include="Structure\ModuleModel.cs" />
     <Compile Include="Composite\SideEffectsDeclaration.cs" />
     <Compile Include="Composite\TransientBuilderFactoryInstance.cs" />
     <Compile Include="Composite\MixinModel.cs" />
     <Compile Include="Composite\MixinsInstance.cs" />
-    <Compile Include="Composite\ModuleInstance.cs" />
+    <Compile Include="Structure\ModuleInstance.cs" />
     <Compile Include="Composite\ProxyReferenceInvocationHandler.cs" />
     <Compile Include="Composite\SideEffectInvocationHandlerResult.cs" />
     <Compile Include="Composite\StateModel.cs" />
@@ -106,6 +111,11 @@
     <Compile Include="Property\PropertyInstance.cs" />
     <Compile Include="Property\PropertyModel.cs" />
     <Compile Include="Service\ServiceInstance.cs" />
+    <Compile Include="Structure\ObjectsInstance.cs" />
+    <Compile Include="Structure\ObjectsModel.cs" />
+    <Compile Include="Structure\ServicesModel.cs" />
+    <Compile Include="Structure\ValuesInstance.cs" />
+    <Compile Include="Structure\ValuesModel.cs" />
     <Compile Include="Value\ValueInstance.cs" />
   </ItemGroup>
   <ItemGroup>
