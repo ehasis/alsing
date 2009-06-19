@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+﻿namespace QI4N.Framework
 {
     public enum Visibility
     {
