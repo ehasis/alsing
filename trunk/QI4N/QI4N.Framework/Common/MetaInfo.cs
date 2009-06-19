@@ -1,4 +1,4 @@
-namespace QI4N.Framework.Runtime
+namespace QI4N.Framework
 {
     using System;
     using System.Collections.Generic;

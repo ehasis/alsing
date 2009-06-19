@@ -3,7 +3,8 @@
     using System;
     using System.Collections.Generic;
 
-    using Runtime;
+    using Bootstrap;
+
 
     public abstract class AbstractCompositeDeclarationImpl<T, CT> : AbstractCompositeDeclaration<T, CT> where T : AbstractCompositeDeclaration<T, CT>
     {

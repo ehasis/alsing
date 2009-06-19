@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using Bootstrap;
+
     public class ApplicationAssemblyImpl : ApplicationAssembly
     {
         private readonly IList<LayerAssembly> layers = new List<LayerAssembly>();
