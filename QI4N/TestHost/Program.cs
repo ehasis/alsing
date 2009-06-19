@@ -45,10 +45,10 @@ namespace ConsoleApplication23
         {
             ModuleAssembly module = layer.NewModuleAssembly();
 
-            module.AddEntities(typeof(Car)).VisibleIn(Visibility.Layer);
+            module.AddEntities(typeof(CarEntity)).VisibleIn(Visibility.Layer);
             module.AddServices(typeof(ManufacturerRepositoryService)).VisibleIn( Visibility.Layer );
             module.AddValues(typeof(AccidentValue));
-            module.AddTransients(typeof(PersonComposite));
+            module.AddTransients(typeof(PersonComposite)).WithMixins(typeof(RandomMixin));
 
             return module;
 

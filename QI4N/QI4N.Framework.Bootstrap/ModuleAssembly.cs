@@ -5,22 +5,28 @@
 
     public interface ModuleAssembly
     {
-        EntitiesDeclaration AddEntities(params Type[] types);
+        EntityDeclaration AddEntities(params Type[] compositeTypes);
 
-        ServiceDeclaration AddServices(params Type[] types);
+        ServiceDeclaration AddServices(params Type[] compositeTypes);
 
-        ValueDeclaration AddValues(params Type[] types);
+        ValueDeclaration AddValues(params Type[] compositeTypes);
 
         TransientDeclaration AddTransients(params Type[] compositeTypes);
     }
 
     public class ModuleAssemblyImpl : ModuleAssembly
     {
+        private readonly IList<EntityDeclaration> entityDeclarations = new List<EntityDeclaration>();
+
+        private readonly IList<ServiceDeclaration> serviceDeclarations = new List<ServiceDeclaration>();
+
+        private readonly IList<TransientDeclaration> transientDeclarations = new List<TransientDeclaration>();
+
+        private readonly IList<ValueDeclaration> valueDeclarations = new List<ValueDeclaration>();
+
         private LayerAssembly layerAssembly;
 
         private string name;
-
-        private readonly IList<TransientDeclaration> transientDeclarations = new List<TransientDeclaration>();
 
         public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name)
         {
@@ -28,41 +34,33 @@
             this.name = name;
         }
 
-
-
-        #region ModuleAssembly Members
-
-        public EntitiesDeclaration AddEntities(params Type[] types)
+        public EntityDeclaration AddEntities(params Type[] compositeTypes)
         {
-            throw new NotImplementedException();
+            var declaration = new EntityDeclarationImpl(compositeTypes);
+            this.entityDeclarations.Add(declaration);
+            return declaration;
         }
 
-        public ServiceDeclaration AddServices(params Type[] types)
+        public ServiceDeclaration AddServices(params Type[] compositeTypes)
         {
-            throw new NotImplementedException();
-        }
-
-        public ValueDeclaration AddValues(params Type[] types)
-        {
-            throw new NotImplementedException();
+            var declaration = new ServiceDeclarationImpl(compositeTypes);
+            this.serviceDeclarations.Add(declaration);
+            return declaration;
         }
 
         public TransientDeclaration AddTransients(params Type[] compositeTypes)
         {
-            foreach (Type compositeType in compositeTypes)
-            {
-                if (!typeof(TransientComposite).IsAssignableFrom(compositeType))
-                {
-                    throw new Exception("Type is not a transient composite " + compositeType.Name);
-                }
-            }
-
-            TransientDeclarationImpl transientDeclaration = new TransientDeclarationImpl(compositeTypes);
-            transientDeclarations.Add(transientDeclaration);
-            return transientDeclaration;
+            var declaration = new TransientDeclarationImpl(compositeTypes);
+            this.transientDeclarations.Add(declaration);
+            return declaration;
         }
 
-        #endregion
+        public ValueDeclaration AddValues(params Type[] compositeTypes)
+        {
+            var declaration = new ValueDeclarationImpl(compositeTypes);
+            this.valueDeclarations.Add(declaration);
+            return declaration;
+        }
 
         public void Visit(AssemblyVisitor visitor)
         {
