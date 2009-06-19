@@ -86,6 +86,8 @@
     <Compile Include="Composite\CompositesInstance.cs" />
     <Compile Include="Entity\EntitiesInstance.cs" />
     <Compile Include="Entity\EntitiesModel.cs" />
+    <Compile Include="Structure\ApplicationInstance.cs" />
+    <Compile Include="Structure\ApplicationModel.cs" />
     <Compile Include="Structure\LayerInstance.cs" />
     <Compile Include="Structure\LayerModel.cs" />
     <Compile Include="Structure\ModuleModel.cs" />

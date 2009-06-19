@@ -48,6 +48,10 @@ namespace ConsoleApplication23
 
             LayerAssembly domainLayer = CreateDomainLayer(app);
 
+            ApplicationModel applicationModel = ApplicationModel.NewModel(app);
+
+            ApplicationInstance applicationInstance = applicationModel.NewInstance();
+
             // Instantiate the Application Model.
         }
     }
