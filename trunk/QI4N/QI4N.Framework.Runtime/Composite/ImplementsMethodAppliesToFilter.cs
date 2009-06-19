@@ -7,9 +7,18 @@
     {
         public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
         {
-            //modifierClass.GetInterfaceMap(method.DeclaringType);
+            InterfaceMapping map = fragmentClass.GetInterfaceMap(method.DeclaringType);
 
-            //return !Modifier.isAbstract(fragmentClass.getMethod(method.getName(), method.getParameterTypes()).getModifiers());
+            for (int i = 0; i < map.InterfaceMethods.Length; i++)
+            {
+                if (map.InterfaceMethods[i] == method)
+                {
+                    MethodInfo targetMethod = map.TargetMethods[i];
+
+                    return targetMethod.IsAbstract;
+                }
+            }
+
             return false;
         }
     }

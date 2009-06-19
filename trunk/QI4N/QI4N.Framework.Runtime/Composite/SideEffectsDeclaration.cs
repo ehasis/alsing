@@ -4,17 +4,97 @@
     using System.Collections.Generic;
     using System.Reflection;
 
+    using Reflection;
+
     public class SideEffectsDeclaration
     {
-        public SideEffectsDeclaration(Type type, IEnumerable<object> objects)
+        private readonly List<SideEffectDeclaration> sideEffectDeclarations = new List<SideEffectDeclaration>();
+
+        private Dictionary<MethodInfo, MethodSideEffectsModel> methodSideEffects = new Dictionary<MethodInfo, MethodSideEffectsModel>();
+
+        public SideEffectsDeclaration(Type type, IEnumerable<object> sideEffects)
         {
+            List<Type> types = this.AsSideEffectsTargetTypes(type);
+
+            foreach (Type aType in types)
+            {
+                this.AddSideEffectDeclaration(aType);
+            }
+
+            // Add sideeffects from assembly
+            foreach (Type sideEffect in sideEffects)
+            {
+                this.sideEffectDeclarations.Add(new SideEffectDeclaration(sideEffect, null));
+            }
         }
 
-        public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type mixinType)
+        public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type compositeType)
         {
-            var methodSideEffectModels = new List<MethodSideEffectModel>();
-            var model = new MethodSideEffectsModel(method, methodSideEffectModels);
-            return model;
+            if (methodSideEffects.ContainsKey(method))
+            {
+                return methodSideEffects[method];
+            }
+
+            List<Type> matchingSideEffects = MatchingSideEffectClasses( method, compositeType );
+            MethodSideEffectsModel methodConcerns = MethodSideEffectsModel.CreateForMethod( method, matchingSideEffects );
+            methodSideEffects.Add( method, methodConcerns );
+            return methodConcerns;
+        }
+
+        private List<Type> MatchingSideEffectClasses(MethodInfo method, Type compositeType)
+        {
+            var result = new List<Type>();
+
+            foreach (SideEffectDeclaration sideEffectDeclaration in sideEffectDeclarations)
+            {
+                if (sideEffectDeclaration.AppliesTo(method, compositeType))
+                {
+                    result.Add(sideEffectDeclaration.ModifierClass);
+                }
+            }
+            return result;
+        }
+
+        private void AddSideEffectDeclaration(Type type)
+        {
+            if (type.IsClass)
+            {
+                Type clazz = type;
+                var annotation = type.GetAttribute<SideEffectsAttribute>();
+                if (annotation != null)
+                {
+                    Type[] sideEffectClasses = annotation.SideEffectTypes;
+                    foreach (Type sideEffectClass in sideEffectClasses)
+                    {
+                        this.sideEffectDeclarations.Add(new SideEffectDeclaration(sideEffectClass, clazz));
+                    }
+                }
+            }
+        }
+
+        private List<Type> AsSideEffectsTargetTypes(Type type)
+        {
+            // Find side-effect declarations
+            if (type.IsInterface)
+            {
+                return GenericInterfacesOf(type);
+            }
+            else
+            {
+                return Singleton(type);
+            }
+        }
+    }
+
+    public class SideEffectsAttribute : Attribute
+    {
+        public Type[] SideEffectTypes;
+    }
+
+    public class SideEffectDeclaration : AbstractModifierDeclaration
+    {
+        public SideEffectDeclaration(Type modifierClass, Type declaredIn) : base(modifierClass, declaredIn)
+        {
         }
     }
 }

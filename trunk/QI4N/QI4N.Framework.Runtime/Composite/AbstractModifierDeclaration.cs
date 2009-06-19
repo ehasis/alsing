@@ -13,6 +13,14 @@
 
         private AppliesToFilter appliesToFilter;
 
+        public Type ModifierClass
+        {
+            get
+            {
+                return modifierClass;
+            }
+        }
+
         public AbstractModifierDeclaration(Type modifierClass, Type declaredIn)
         {
             this.modifierClass = modifierClass;
