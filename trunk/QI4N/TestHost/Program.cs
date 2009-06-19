@@ -11,6 +11,7 @@ namespace ConsoleApplication23
             LayerAssembly layer = app.NewLayerAssembly("DomainLayer");
 
             ModuleAssembly peopleModule = CreatePeopleModule(layer);
+
             return layer;
         }
 
@@ -47,8 +48,6 @@ namespace ConsoleApplication23
 
             LayerAssembly domainLayer = CreateDomainLayer(app);
 
-            
-            
             // Instantiate the Application Model.
         }
     }

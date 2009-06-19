@@ -1,6 +1,7 @@
-﻿using QI4N.Framework;
 namespace ConsoleApplication23
 {
+    using QI4N.Framework;
+
     public interface CarEntityFactory
     {
         Car Create(Manufacturer manufacturer, string model);

@@ -47,8 +47,10 @@
   <ItemGroup>
     <Compile Include="Common\AppliesToAttribute.cs" />
     <Compile Include="Common\ContainsAttribute.cs" />
+    <Compile Include="Common\MetaInfo.cs" />
     <Compile Include="Common\NotNullAttribute.cs" />
     <Compile Include="Common\UseDefaultsAttribute.cs" />
+    <Compile Include="Common\Visibility.cs" />
     <Compile Include="Composite\CompositeContextT.cs" />
     <Compile Include="Composite\TransientComposite.cs" />
     <Compile Include="Concern\ConcernOf.cs" />

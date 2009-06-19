@@ -45,6 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrap\AbstractCompositeDeclaration.cs" />
+    <Compile Include="Bootstrap\ApplicationAssembly.cs" />
+    <Compile Include="Bootstrap\ApplicationAssemblyFactory.cs" />
+    <Compile Include="Bootstrap\EntityDeclaration.cs" />
+    <Compile Include="Bootstrap\LayerAssembly.cs" />
+    <Compile Include="Bootstrap\ModuleAssembly.cs" />
+    <Compile Include="Bootstrap\ServiceDeclaration.cs" />
+    <Compile Include="Bootstrap\TransientDeclaration.cs" />
+    <Compile Include="Bootstrap\ValueDeclaration.cs" />
     <Compile Include="Composite\AbstractCompositeModel.cs" />
     <Compile Include="Composite\AbstractModifierModel.cs" />
     <Compile Include="Composite\CompositeCache.cs" />
@@ -55,7 +64,6 @@
     <Compile Include="Composite\EntityFinder.cs" />
     <Compile Include="Composite\FragmentInvocationHandler.cs" />
     <Compile Include="Composite\GenericFragmentInvocationHandler.cs" />
-    <Compile Include="Composite\MetaInfo.cs" />
     <Compile Include="Composite\MethodConcernsInstance.cs" />
     <Compile Include="Composite\MethodConcernsModel.cs" />
     <Compile Include="Composite\MethodConstraintModel.cs" />
@@ -75,9 +83,9 @@
     <Compile Include="Composite\CompositeInstance.cs" />
     <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\MixinsModel.cs" />
-    <Compile Include="Structure\CompositesInstance.cs" />
-    <Compile Include="Structure\EntitiesInstance.cs" />
-    <Compile Include="Structure\EntitiesModel.cs" />
+    <Compile Include="Composite\CompositesInstance.cs" />
+    <Compile Include="Entity\EntitiesInstance.cs" />
+    <Compile Include="Entity\EntitiesModel.cs" />
     <Compile Include="Structure\LayerInstance.cs" />
     <Compile Include="Structure\LayerModel.cs" />
     <Compile Include="Structure\ModuleModel.cs" />
@@ -92,7 +100,6 @@
     <Compile Include="Composite\TypedInvocationHandler.cs" />
     <Compile Include="Composite\TypeFinderT.cs" />
     <Compile Include="Composite\UseInstance.cs" />
-    <Compile Include="Composite\Visibility.cs" />
     <Compile Include="Entity\EntityInstance.cs" />
     <Compile Include="Entity\EntityMixin.cs" />
     <Compile Include="Entity\EntityMixinsModel.cs" />
@@ -111,14 +118,18 @@
     <Compile Include="Property\PropertyInstance.cs" />
     <Compile Include="Property\PropertyModel.cs" />
     <Compile Include="Service\ServiceInstance.cs" />
-    <Compile Include="Structure\ObjectsInstance.cs" />
-    <Compile Include="Structure\ObjectsModel.cs" />
-    <Compile Include="Structure\ServicesModel.cs" />
-    <Compile Include="Structure\ValuesInstance.cs" />
-    <Compile Include="Structure\ValuesModel.cs" />
+    <Compile Include="Object\ObjectsInstance.cs" />
+    <Compile Include="Object\ObjectsModel.cs" />
+    <Compile Include="Service\ServicesModel.cs" />
+    <Compile Include="Value\ValuesInstance.cs" />
+    <Compile Include="Value\ValuesModel.cs" />
     <Compile Include="Value\ValueInstance.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QI4N.Framework.Bootstrap\QI4N.Framework.Bootstrap.csproj">
+      <Project>{C6ACF8F0-5F35-40CC-B4D2-C0C782A3C133}</Project>
+      <Name>QI4N.Framework.Bootstrap</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QI4N.Framework\QI4N.Framework.csproj">
       <Project>{46604E99-EE88-42DD-B56D-B396E4886CE2}</Project>
       <Name>QI4N.Framework</Name>

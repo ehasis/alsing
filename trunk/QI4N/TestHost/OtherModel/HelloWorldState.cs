@@ -1,4 +1,4 @@
-﻿namespace ConsoleApplication23.OtherModel
+namespace ConsoleApplication23.OtherModel
 {
     using System;
 
@@ -29,8 +29,7 @@
     }
 
     [Mixins(typeof(HelloWorldBehaviorMixin))]
-    public interface HelloWorldComposite : HelloWorldState,HelloWorldBehavior, Composite
+    public interface HelloWorldComposite : HelloWorldState, HelloWorldBehavior, Composite
     {
-  
     }
 }
