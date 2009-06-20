@@ -169,7 +169,7 @@ namespace QI4N.Framework.Runtime
 
         public ImportedServicesModel NewInstance(ModuleInstance instance)
         {
-            throw new NotImplementedException();
+            return new ImportedServicesModel();
         }
 
         public void VisitModel(ModelVisitor visitor)

@@ -51,6 +51,11 @@
         {
             var layerInstance = new LayerInstance();
 
+            foreach (ModuleModel module in layer.moduleModels)
+            {
+                var moduleInstance = module.NewInstance(layerInstance);
+            }
+
             return layerInstance;
         }
     }

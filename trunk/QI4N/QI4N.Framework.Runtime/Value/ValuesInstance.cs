@@ -6,7 +6,7 @@
     {
         public ValuesInstance(ValuesModel model, ModuleInstance instance)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }
