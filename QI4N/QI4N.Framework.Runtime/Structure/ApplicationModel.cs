@@ -1,14 +1,36 @@
 ﻿namespace QI4N.Framework.Runtime
 {
-    using System;
+    using System.Collections.Generic;
 
     using Bootstrap;
 
     public class ApplicationModel
     {
+        private string name;
+        private MetaInfo metaInfo;
+        private IList<LayerModel> layers;
+
+        private ApplicationModel(string name,MetaInfo metaInfo, IList<LayerModel> layers)
+        {
+            this.name = name;
+            this.metaInfo = metaInfo;
+            this.layers = layers;
+        }
+
         public static ApplicationModel NewModel(ApplicationAssembly application)
         {
-            return new ApplicationModel();
+            var layerModels = new List<LayerModel>();
+
+            foreach (LayerAssembly layer in application.Layers)
+            {
+                LayerModel layerModel = LayerModel.NewModel(layer);
+
+                layerModels.Add(layerModel);
+            }
+
+            var app = new ApplicationModel(application.Name,application.MetaInfo,layerModels);
+
+            return app;
         }
 
         public ApplicationInstance NewInstance()

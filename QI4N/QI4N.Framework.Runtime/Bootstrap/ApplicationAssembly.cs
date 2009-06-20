@@ -8,6 +8,18 @@
     {
         private readonly IList<LayerAssembly> layers = new List<LayerAssembly>();
 
+        public IList<LayerAssembly> Layers
+        {
+            get
+            {
+                return this.layers;
+            }
+        }
+
+        public MetaInfo MetaInfo { get; set; }
+
+        public string Name { get; set; }
+
         public LayerAssembly NewLayerAssembly()
         {
             return this.NewLayerAssembly("");
