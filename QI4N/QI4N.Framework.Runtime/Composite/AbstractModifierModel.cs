@@ -44,7 +44,7 @@
 
             //TODO: fix this
             var field = modifierType.GetAllFields().Where(f => f.Name == "next").FirstOrDefault();
-            field.SetValue(concern,next);
+            field.SetValue(concern, this.WrapNext(next));
             ////this.injectedFieldsModel.Inject(injectionContext, mixin);
             ////this.injectedMethodsModel.Inject(injectionContext, mixin);
 

@@ -33,11 +33,12 @@ namespace ConsoleApplication23
 
             module
                     .AddValues();
+                    //.Include<AccidentValue>();
 
             module
                     .AddTransients()
                     .Include<PersonComposite>()
-                    .WithConcern<MyGenericConcern>()
+                    .WithConcern<PersonBehaviorConcern>()
                     .WithMixin<RandomFooMixin>();
 
             return module;
