@@ -7,6 +7,7 @@ namespace QI4N.Framework
     {
         private readonly Dictionary<Type, object> items = new Dictionary<Type, object>();
 
+        private readonly IList<Type> ignored = new List<Type>();
         public MetaInfo()
         {
         }
@@ -17,7 +18,9 @@ namespace QI4N.Framework
 
         public object Get(Type type)
         {
-            return this.items[type];
+            object value;
+            items.TryGetValue(type, out value);
+            return value;
         }
 
         public void Set(object info)
@@ -27,7 +30,14 @@ namespace QI4N.Framework
 
         public MetaInfo WithAnnotations(Type compositeType)
         {
-            return null;
+            foreach( Attribute attribute in compositeType.GetCustomAttributes(true))
+            {
+                if (!ignored.Contains(attribute.GetType()))
+                {
+                    Set(attribute);
+                }
+            }
+            return this;
         }
     }
 }
