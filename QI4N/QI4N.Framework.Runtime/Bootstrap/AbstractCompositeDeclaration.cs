@@ -26,18 +26,18 @@ namespace QI4N.Framework.Runtime
             this.asT = (T)(object)this;
         }
 
-        public T Include<K>() where K : CT
-        {
-            this.compositeTypes.Add(typeof(K));
-            return this.asT;
-        }
-
         public IList<Type> CompositeTypes
         {
             get
             {
                 return this.compositeTypes;
             }
+        }
+
+        public T Include<K>() where K : CT
+        {
+            this.compositeTypes.Add(typeof(K));
+            return this.asT;
         }
 
         public T VisibleIn(Visibility visibility)

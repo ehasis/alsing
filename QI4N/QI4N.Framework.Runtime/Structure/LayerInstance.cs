@@ -1,16 +1,15 @@
 namespace QI4N.Framework.Runtime
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     public class LayerInstance
     {
-        private ApplicationInstance applicationInstance;
-
         private readonly LayerModel model;
 
         private readonly IList<ModuleInstance> moduleInstances;
+
+        private ApplicationInstance applicationInstance;
 
         private UsedLayersInstance usedLayersInstance;
 
@@ -31,19 +30,17 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public void VisitModules(ModuleVisitor visitor, Visibility visibility)
-        {
-            
-        }
-
         public ModuleInstance FindModule(string moduleName)
         {
-            var moduleInstance = moduleInstances
-                                    .Where(l => l.Model.Name == moduleName)
-                                    .FirstOrDefault();
-
+            ModuleInstance moduleInstance = this.moduleInstances
+                    .Where(l => l.Model.Name == moduleName)
+                    .FirstOrDefault();
 
             return moduleInstance;
+        }
+
+        public void VisitModules(ModuleVisitor visitor, Visibility visibility)
+        {
         }
     }
 }

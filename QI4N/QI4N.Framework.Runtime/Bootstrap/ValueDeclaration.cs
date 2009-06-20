@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@
             {
                 ValueModel valueModel = ValueModel.NewModel(compositeType,
                                                             this.visibility,
-                                                            new MetaInfo(metaInfo).WithAnnotations(compositeType),
+                                                            new MetaInfo(this.metaInfo).WithAnnotations(compositeType),
                                                             propertyDecs,
                                                             this.concerns,
                                                             this.sideEffects,

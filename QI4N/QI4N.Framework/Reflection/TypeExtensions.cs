@@ -70,6 +70,12 @@ namespace QI4N.Framework.Reflection
             return appliesTo.ToArray();
         }
 
+        public static T GetAttribute<T>(this Type self) where T : Attribute
+        {
+            var attrib = self.GetCustomAttributes(typeof(T), true).FirstOrDefault() as T;
+            return attrib;
+        }
+
         public static PropertyInfo GetInterfaceProperty(this Type interfaceType, string propertyName)
         {
             PropertyInfo propertyInfo = (
@@ -141,12 +147,6 @@ namespace QI4N.Framework.Reflection
         public static bool HasAttribute(this MethodInfo self, Type attributeType)
         {
             return self.GetCustomAttributes(attributeType, true).Any();
-        }
-
-        public static T GetAttribute<T>(this Type self) where T : Attribute
-        {
-            var attrib = self.GetCustomAttributes(typeof(T), true).FirstOrDefault() as T;
-            return attrib;
         }
 
         public static object NewInstance(this Type self)

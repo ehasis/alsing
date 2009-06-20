@@ -1,13 +1,13 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System.Collections.Generic;
     using System.Linq;
 
     public class ApplicationInstance
     {
-        private ApplicationModel applicationModel;
-
         private readonly List<LayerInstance> layerInstances;
+
+        private ApplicationModel applicationModel;
 
 
         public ApplicationInstance(ApplicationModel applicationModel, List<LayerInstance> layers)
@@ -16,24 +16,25 @@
             this.layerInstances = layers;
         }
 
-        public LayerInstance FindLayer( string layerName )
+        public LayerInstance FindLayer(string layerName)
         {
-            var layerInstance = layerInstances
+            LayerInstance layerInstance = this.layerInstances
                     .Where(l => l.Model.Name == layerName)
                     .FirstOrDefault();
-
 
             return layerInstance;
         }
 
         public ModuleInstance FindModule(string layerName, string moduleName)
         {
-            var layer = FindLayer(layerName);
+            LayerInstance layer = this.FindLayer(layerName);
 
             if (layer == null)
+            {
                 return null;
+            }
 
-            var module = layer.FindModule(moduleName);
+            ModuleInstance module = layer.FindModule(moduleName);
 
             return module;
         }

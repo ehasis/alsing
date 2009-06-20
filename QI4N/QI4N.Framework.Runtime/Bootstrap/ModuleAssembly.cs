@@ -3,7 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
+    using System.Reflection;
+
     using Bootstrap;
 
     [DebuggerDisplay("Name {Name}")]
@@ -12,6 +13,8 @@
         private readonly IList<EntityDeclaration> entityDeclarations = new List<EntityDeclaration>();
 
         private readonly MetaInfo metaInfo;
+
+        private readonly MetaInfoDeclaration metaInfoDeclaration = new MetaInfoDeclaration();
 
         private readonly string name;
 
@@ -22,8 +25,6 @@
         private readonly List<ValueDeclaration> valueDeclarations = new List<ValueDeclaration>();
 
         private LayerAssembly layerAssembly;
-
-        private readonly MetaInfoDeclaration metaInfoDeclaration = new MetaInfoDeclaration();
 
         public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name, MetaInfo metaInfo)
         {
@@ -108,11 +109,6 @@
             return declaration;
         }
 
-        public void Visit(AssemblyVisitor visitor)
-        {
-            throw new NotImplementedException();
-        }
-
         public ModuleModel AssembleModule()
         {
             var compositeModels = new List<CompositeModel>();
@@ -122,38 +118,37 @@
             var serviceModels = new List<ServiceModel>();
             var importedServiceModels = new List<ImportedServiceModel>();
 
-            if (name == null)
+            if (this.name == null)
             {
                 throw new Exception("Module must have name set");
             }
 
-            var moduleModel = new ModuleModel(name,
-                                                       metaInfo, new CompositesModel(compositeModels),
-                                                       new EntitiesModel(entityModels),
-                                                       new ObjectsModel(objectModels),
-                                                       new ValuesModel(valueModels),
-                                                       new ServicesModel(serviceModels),
-                                                       new ImportedServicesModel(importedServiceModels));
+            var moduleModel = new ModuleModel(this.name,
+                                              this.metaInfo, new CompositesModel(compositeModels),
+                                              new EntitiesModel(entityModels),
+                                              new ObjectsModel(objectModels),
+                                              new ValuesModel(valueModels),
+                                              new ServicesModel(serviceModels),
+                                              new ImportedServicesModel(importedServiceModels));
 
-
-            foreach (TransientDeclarationImpl transientDeclaration in transientDeclarations)
+            foreach (TransientDeclarationImpl transientDeclaration in this.transientDeclarations)
             {
-                transientDeclaration.AddTransients(compositeModels, metaInfoDeclaration);
+                transientDeclaration.AddTransients(compositeModels, this.metaInfoDeclaration);
             }
 
-            foreach (ValueDeclarationImpl valueDeclaration in valueDeclarations)
+            foreach (ValueDeclarationImpl valueDeclaration in this.valueDeclarations)
             {
-                valueDeclaration.AddValues(valueModels, metaInfoDeclaration);
+                valueDeclaration.AddValues(valueModels, this.metaInfoDeclaration);
             }
 
-            foreach (EntityDeclarationImpl entityDeclaration in entityDeclarations)
+            foreach (EntityDeclarationImpl entityDeclaration in this.entityDeclarations)
             {
-                entityDeclaration.AddEntities(entityModels, metaInfoDeclaration);
+                entityDeclaration.AddEntities(entityModels, this.metaInfoDeclaration);
             }
 
-            foreach (ServiceDeclarationImpl serviceDeclaration in serviceDeclarations)
+            foreach (ServiceDeclarationImpl serviceDeclaration in this.serviceDeclarations)
             {
-                serviceDeclaration.AddServices(entityModels, metaInfoDeclaration);
+                serviceDeclaration.AddServices(entityModels, this.metaInfoDeclaration);
             }
 
             return moduleModel;
@@ -211,26 +206,25 @@
             //        objectModels.add( objectModel );
             //    }
             //}
+        }
 
-
+        public void Visit(AssemblyVisitor visitor)
+        {
+            throw new NotImplementedException();
         }
     }
 
     public class MetaInfoDeclaration : PropertyDeclarations
     {
-        #region PropertyDeclarations Members
-
-        public MetaInfo GetMetaInfo(System.Reflection.MethodInfo accessor)
+        public object GetInitialValue(MethodInfo accessor)
         {
             throw new NotImplementedException();
         }
 
-        public object GetInitialValue(System.Reflection.MethodInfo accessor)
+        public MetaInfo GetMetaInfo(MethodInfo accessor)
         {
             throw new NotImplementedException();
         }
-
-        #endregion
     }
 
     public class ImportedServiceModel

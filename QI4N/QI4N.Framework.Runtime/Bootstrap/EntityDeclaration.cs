@@ -1,6 +1,5 @@
 namespace QI4N.Framework.Runtime
 {
-    using System;
     using System.Collections.Generic;
 
     using Bootstrap;
@@ -9,7 +8,6 @@ namespace QI4N.Framework.Runtime
     {
         public void AddEntities(List<EntityModel> models, PropertyDeclarations info)
         {
-
         }
     }
 }

@@ -50,28 +50,27 @@
             return layerModel;
         }
 
-        public void VisitModules(ModuleVisitor visitor, Visibility visibility)
-        {
-            throw new NotImplementedException();
-        }
-
         public LayerInstance NewInstance(ApplicationInstance applicationInstance, UsedLayersInstance usedLayerInstance)
         {
             var moduleInstances = new List<ModuleInstance>();
             var layerInstance = new LayerInstance(this, applicationInstance, moduleInstances, usedLayerInstance);
-            
+
             foreach (ModuleModel module in this.modules)
             {
-                var moduleInstance = module.NewInstance(layerInstance);
+                ModuleInstance moduleInstance = module.NewInstance(layerInstance);
                 moduleInstances.Add(moduleInstance);
             }
 
             return layerInstance;
         }
+
+        public void VisitModules(ModuleVisitor visitor, Visibility visibility)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class UsedLayersInstance
     {
-
     }
 }
