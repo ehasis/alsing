@@ -89,6 +89,10 @@
     <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Service\ServiceComposite.cs" />
     <Compile Include="Property\StateHolder.cs" />
+    <Compile Include="SideEffect\GenericSideEffect.cs" />
+    <Compile Include="SideEffect\SideEffectFor.cs" />
+    <Compile Include="SideEffect\SideEffectOf.cs" />
+    <Compile Include="SideEffect\SideEffectsAttribute.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkFactory.cs" />
     <Compile Include="Value\Value.cs" />
