@@ -15,9 +15,9 @@
 
             var metaInfo = new MetaInfo();
             PropertyDeclarations propertyDeclarations = null;
-            var assemblyConcerns = new List<object>();
+            var assemblyConcerns = new List<Type>();
 
-            var sideEffectsDeclaration = new List<object>();
+            var sideEffectsDeclaration = new List<Type>();
             var mixins = new List<Type>();
 
             CompositeModel m = CompositeModel.NewModel(compositeType, visibility, metaInfo, propertyDeclarations, assemblyConcerns, sideEffectsDeclaration, mixins);

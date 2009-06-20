@@ -18,8 +18,8 @@ namespace QI4N.Framework.Runtime
                                               Visibility visibility,
                                               MetaInfo metaInfo,
                                               PropertyDeclarations propertyDeclarations,
-                                              IEnumerable<object> assemblyConcerns,
-                                              IEnumerable<object> sideEffects, IList<Type> mixins)
+                                              IEnumerable<Type> assemblyConcerns,
+                                              IEnumerable<Type> sideEffects, IList<Type> mixins)
         {
             var constraintsModel = new ConstraintsModel(compositeType);
             bool immutable = metaInfo.Get(typeof(ImmutableAttribute)) != null;
