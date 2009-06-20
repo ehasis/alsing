@@ -7,20 +7,20 @@
 
     public class LayerModel
     {
-        private MetaInfo metaInfo;
+        private readonly MetaInfo metaInfo;
 
-        private List<ModuleModel> moduleModels;
+        private readonly List<ModuleModel> modules;
 
-        private string name;
+        private readonly string name;
 
-        private List<LayerModel> usedLayers;
+        private readonly List<LayerModel> usedLayers;
 
-        private LayerModel(string name, MetaInfo metaInfo, List<LayerModel> usedLayers, List<ModuleModel> moduleModels)
+        private LayerModel(string name, MetaInfo metaInfo, List<LayerModel> usedLayers, List<ModuleModel> modules)
         {
             this.name = name;
             this.metaInfo = metaInfo;
             this.usedLayers = usedLayers;
-            this.moduleModels = moduleModels;
+            this.modules = modules;
         }
 
         public static LayerModel NewModel(LayerAssembly layer)
@@ -47,16 +47,23 @@
             throw new NotImplementedException();
         }
 
-        public LayerInstance NewInstance(LayerModel layer)
+        public LayerInstance NewInstance(ApplicationInstance applicationInstance, UsedLayersInstance usedLayerInstance)
         {
-            var layerInstance = new LayerInstance();
-
-            foreach (ModuleModel module in layer.moduleModels)
+            var moduleInstances = new List<ModuleInstance>();
+            var layerInstance = new LayerInstance(this, applicationInstance, moduleInstances, usedLayerInstance);
+            
+            foreach (ModuleModel module in this.modules)
             {
                 var moduleInstance = module.NewInstance(layerInstance);
+                moduleInstances.Add(moduleInstance);
             }
 
             return layerInstance;
         }
+    }
+
+    public class UsedLayersInstance
+    {
+
     }
 }

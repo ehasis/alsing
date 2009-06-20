@@ -6,7 +6,7 @@
 
     public class ApplicationModel
     {
-        private IList<LayerModel> layers;
+        private readonly IList<LayerModel> layers;
 
         private MetaInfo metaInfo;
 
@@ -38,14 +38,15 @@
         public ApplicationInstance NewInstance()
         {
             var layerInstances = new List<LayerInstance>();
-
+            var applicationInstance = new ApplicationInstance(this, layerInstances);
+            
             foreach(var layer in layers)
             {
-                var layerInstance = layer.NewInstance(layer);
+                var layerInstance = layer.NewInstance(applicationInstance,null);
                 layerInstances.Add(layerInstance);
             }
 
-            return new ApplicationInstance(this, layerInstances);
+            return applicationInstance;
         }
     }
 }
