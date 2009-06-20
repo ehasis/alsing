@@ -13,5 +13,10 @@
         {
             throw new NotImplementedException();
         }
+
+        internal static ServicesModel NewModel(QI4N.Framework.Bootstrap.ModuleAssembly module)
+        {
+            return new ServicesModel();
+        }
     }
 }

@@ -8,5 +8,10 @@
         {
             throw new NotImplementedException();
         }
+
+        public static ValuesModel NewModel(QI4N.Framework.Bootstrap.ModuleAssembly module)
+        {
+            return new ValuesModel();
+        }
     }
 }
