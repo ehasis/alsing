@@ -21,10 +21,13 @@
 
         private LayerAssembly layerAssembly;
 
-        public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name)
+        private readonly MetaInfo metaInfo;
+
+        public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name,MetaInfo metaInfo)
         {
             this.layerAssembly = layerAssembly;
             this.name = name;
+            this.metaInfo = metaInfo;
         }
 
         public string Name
@@ -32,6 +35,14 @@
             get
             {
                 return this.name;
+            }
+        }
+
+        public MetaInfo MetaInfo
+        {
+            get
+            {
+                return metaInfo;
             }
         }
 

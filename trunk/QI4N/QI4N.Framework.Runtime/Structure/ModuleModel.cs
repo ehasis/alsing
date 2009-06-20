@@ -1,6 +1,8 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
+
+    using Bootstrap;
 
     public class ModuleModel
     {
@@ -135,6 +137,18 @@
         }
 
         // Context
+        public static ModuleModel NewModel(ModuleAssembly module)
+        {
+            CompositesModel compositesModel = null;
+            EntitiesModel entitiesModel = null;
+            ObjectsModel objectsModel = null;
+            ValuesModel valuesModel = null;
+            ServicesModel servicesModel = null;
+            ImportedServicesModel importedServicesModel = null;
+
+            var moduleModel = new ModuleModel(module.Name, module.MetaInfo, compositesModel, entitiesModel, objectsModel, valuesModel, servicesModel, importedServicesModel);
+            return moduleModel;
+        }
     }
 
     public class ModelVisitor

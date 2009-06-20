@@ -14,7 +14,7 @@
 
         public SideEffectsDeclaration(Type type, IEnumerable<object> sideEffects)
         {
-            List<Type> types = this.AsSideEffectsTargetTypes(type);
+            List<Type> types = AsSideEffectsTargetTypes(type);
 
             foreach (Type aType in types)
             {
@@ -72,7 +72,7 @@
             }
         }
 
-        private List<Type> AsSideEffectsTargetTypes(Type type)
+        private static List<Type> AsSideEffectsTargetTypes(Type type)
         {
             // Find side-effect declarations
             if (type.IsInterface)
@@ -80,11 +80,9 @@
                 //TODO: What?
                 return GenericInterfacesOf(type);
             }
-            else
-            {
-                //TODO: What?
-                return Singleton(type);
-            }
+
+            //TODO: What?
+            return Singleton(type);
         }
 
         private static List<Type> Singleton(Type type)

@@ -11,5 +11,7 @@
         TransientDeclaration AddTransients();
 
         string Name { get; }
+
+        MetaInfo MetaInfo { get; }
     }
 }

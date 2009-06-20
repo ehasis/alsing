@@ -14,7 +14,7 @@
 
         private readonly MetaInfo metaInfo = new MetaInfo();
 
-        private readonly List<ModuleAssemblyImpl> moduleAssemblies;
+        private readonly List<ModuleAssembly> moduleAssemblies;
 
         private readonly HashSet<LayerAssembly> uses;
 
@@ -25,7 +25,7 @@
             this.applicationAssembly = applicationAssembly;
             this.name = name;
 
-            this.moduleAssemblies = new List<ModuleAssemblyImpl>();
+            this.moduleAssemblies = new List<ModuleAssembly>();
             this.uses = new HashSet<LayerAssembly>();
         }
 
@@ -46,6 +46,14 @@
             }
         }
 
+        public IList<ModuleAssembly> Modules
+        {
+            get
+            {
+                return this.moduleAssemblies;
+            }
+        }
+
 
         public string Name
         {
@@ -57,7 +65,7 @@
 
         public ModuleAssembly NewModuleAssembly(string name)
         {
-            var moduleAssembly = new ModuleAssemblyImpl(this, name);
+            var moduleAssembly = new ModuleAssemblyImpl(this, name,metaInfo);
             this.moduleAssemblies.Add(moduleAssembly);
             return moduleAssembly;
         }
