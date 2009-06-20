@@ -2,16 +2,18 @@
 {
     using System;
 
+    using Bootstrap;
+
     public class ValuesModel
     {
+        public static ValuesModel NewModel(ModuleAssembly module)
+        {
+            return new ValuesModel();
+        }
+
         public void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();
-        }
-
-        public static ValuesModel NewModel(QI4N.Framework.Bootstrap.ModuleAssembly module)
-        {
-            return new ValuesModel();
         }
     }
 }

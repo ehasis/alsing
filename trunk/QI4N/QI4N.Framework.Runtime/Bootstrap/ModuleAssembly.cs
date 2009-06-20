@@ -11,6 +11,8 @@
     {
         private readonly IList<EntityDeclaration> entityDeclarations = new List<EntityDeclaration>();
 
+        private readonly MetaInfo metaInfo;
+
         private readonly string name;
 
         private readonly IList<ServiceDeclaration> serviceDeclarations = new List<ServiceDeclaration>();
@@ -21,20 +23,18 @@
 
         private LayerAssembly layerAssembly;
 
-        private readonly MetaInfo metaInfo;
-
-        public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name,MetaInfo metaInfo)
+        public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name, MetaInfo metaInfo)
         {
             this.layerAssembly = layerAssembly;
             this.name = name;
             this.metaInfo = metaInfo;
         }
 
-        public string Name
+        public IList<EntityDeclaration> EntityDeclarations
         {
             get
             {
-                return this.name;
+                return this.entityDeclarations;
             }
         }
 
@@ -42,23 +42,15 @@
         {
             get
             {
-                return metaInfo;
+                return this.metaInfo;
             }
         }
 
-        public IList<TransientDeclaration> TransientDeclarations
+        public string Name
         {
             get
             {
-                return transientDeclarations;
-            }
-        }
-
-        public IList<ValueDeclaration> ValueDeclarations
-        {
-            get
-            {
-                return this.valueDeclarations;
+                return this.name;
             }
         }
 
@@ -70,11 +62,19 @@
             }
         }
 
-        public IList<EntityDeclaration> EntityDeclarations
+        public IList<TransientDeclaration> TransientDeclarations
         {
             get
             {
-                return this.entityDeclarations;
+                return this.transientDeclarations;
+            }
+        }
+
+        public IList<ValueDeclaration> ValueDeclarations
+        {
+            get
+            {
+                return this.valueDeclarations;
             }
         }
 

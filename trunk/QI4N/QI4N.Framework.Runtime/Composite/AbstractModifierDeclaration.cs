@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Reflection;
@@ -13,19 +13,19 @@
 
         private AppliesToFilter appliesToFilter;
 
-        public Type ModifierClass
-        {
-            get
-            {
-                return modifierClass;
-            }
-        }
-
         public AbstractModifierDeclaration(Type modifierClass, Type declaredIn)
         {
             this.modifierClass = modifierClass;
             this.declaredIn = declaredIn;
             this.CreateAppliesToFilter(modifierClass);
+        }
+
+        public Type ModifierClass
+        {
+            get
+            {
+                return this.modifierClass;
+            }
         }
 
         public bool AppliesTo(MethodInfo method, Type compositeType)
@@ -93,14 +93,4 @@
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
 }
