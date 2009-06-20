@@ -1,5 +1,7 @@
 namespace ConsoleApplication23
 {
+    using System;
+
     using QI4N.Framework;
     using QI4N.Framework.Bootstrap;
     using QI4N.Framework.Runtime;
@@ -69,6 +71,9 @@ namespace ConsoleApplication23
             personState.LastName.Value = "Alsing";
 
             Person person = personBuilder.NewInstance();
+            person.SayHi();
+
+            Console.ReadLine();
         }
     }
 }
