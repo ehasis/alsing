@@ -10,7 +10,7 @@
     {
         private readonly List<SideEffectDeclaration> sideEffectDeclarations = new List<SideEffectDeclaration>();
 
-        private Dictionary<MethodInfo, MethodSideEffectsModel> methodSideEffects = new Dictionary<MethodInfo, MethodSideEffectsModel>();
+        private readonly Dictionary<MethodInfo, MethodSideEffectsModel> methodSideEffects = new Dictionary<MethodInfo, MethodSideEffectsModel>();
 
         public SideEffectsDeclaration(Type type, IEnumerable<object> sideEffects)
         {
@@ -77,12 +77,24 @@
             // Find side-effect declarations
             if (type.IsInterface)
             {
+                //TODO: What?
                 return GenericInterfacesOf(type);
             }
             else
             {
+                //TODO: What?
                 return Singleton(type);
             }
+        }
+
+        private static List<Type> Singleton(Type type)
+        {
+            return new List<Type>();
+        }
+
+        private static List<Type> GenericInterfacesOf(Type type)
+        {
+            return new List<Type>();
         }
     }
 
