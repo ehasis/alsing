@@ -29,6 +29,10 @@
         public ModuleInstance FindModule(string layerName, string moduleName)
         {
             var layer = FindLayer(layerName);
+
+            if (layer == null)
+                return null;
+
             var module = layer.FindModule(moduleName);
 
             return module;
