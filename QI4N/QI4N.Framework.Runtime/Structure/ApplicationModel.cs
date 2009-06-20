@@ -37,7 +37,15 @@
 
         public ApplicationInstance NewInstance()
         {
-            return new ApplicationInstance(this);
+            var layerInstances = new List<LayerInstance>();
+
+            foreach(var layer in layers)
+            {
+                var layerInstance = layer.NewInstance(layer);
+                layerInstances.Add(layerInstance);
+            }
+
+            return new ApplicationInstance(this, layerInstances);
         }
     }
 }
