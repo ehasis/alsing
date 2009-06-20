@@ -7,9 +7,9 @@ namespace QI4N.Framework.Runtime
 
     public class EntityDeclarationImpl : AbstractCompositeDeclarationImpl<EntityDeclaration, EntityComposite>, EntityDeclaration
     {
-        public void AddEntities(List<EntityModel> models, MetaInfo info)
+        public void AddEntities(List<EntityModel> models, PropertyDeclarations info)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

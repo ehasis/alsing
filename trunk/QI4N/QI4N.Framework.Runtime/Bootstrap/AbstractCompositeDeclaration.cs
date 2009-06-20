@@ -7,19 +7,19 @@ namespace QI4N.Framework.Runtime
 
     public abstract class AbstractCompositeDeclarationImpl<T, CT> : AbstractCompositeDeclaration<T, CT> where T : AbstractCompositeDeclaration<T, CT>
     {
-        private readonly T asT;
+        protected readonly T asT;
 
-        private readonly List<Type> compositeTypes = new List<Type>();
+        protected readonly List<Type> compositeTypes = new List<Type>();
 
-        private readonly List<Type> concerns = new List<Type>();
+        protected readonly List<Type> concerns = new List<Type>();
 
-        private readonly List<Type> mixins = new List<Type>();
+        protected readonly List<Type> mixins = new List<Type>();
 
-        private readonly List<Type> sideEffects = new List<Type>();
+        protected readonly List<Type> sideEffects = new List<Type>();
 
-        private MetaInfo metaInfo = new MetaInfo();
+        protected MetaInfo metaInfo = new MetaInfo();
 
-        private Visibility visibility;
+        protected Visibility visibility;
 
         protected AbstractCompositeDeclarationImpl()
         {
@@ -32,7 +32,7 @@ namespace QI4N.Framework.Runtime
             return this.asT;
         }
 
-        public IList<Type> Includes
+        public IList<Type> CompositeTypes
         {
             get
             {

@@ -23,6 +23,8 @@
 
         private LayerAssembly layerAssembly;
 
+        private readonly MetaInfoDeclaration metaInfoDeclaration = new MetaInfoDeclaration();
+
         public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name, MetaInfo metaInfo)
         {
             this.layerAssembly = layerAssembly;
@@ -136,22 +138,22 @@
 
             foreach (TransientDeclarationImpl transientDeclaration in transientDeclarations)
             {
-                transientDeclaration.AddTransients(compositeModels, metaInfo);
+                transientDeclaration.AddTransients(compositeModels, metaInfoDeclaration);
             }
 
             foreach (ValueDeclarationImpl valueDeclaration in valueDeclarations)
             {
-                valueDeclaration.AddValues(valueModels, metaInfo);
+                valueDeclaration.AddValues(valueModels, metaInfoDeclaration);
             }
 
             foreach (EntityDeclarationImpl entityDeclaration in entityDeclarations)
             {
-                entityDeclaration.AddEntities(entityModels, metaInfo);
+                entityDeclaration.AddEntities(entityModels, metaInfoDeclaration);
             }
 
             foreach (ServiceDeclarationImpl serviceDeclaration in serviceDeclarations)
             {
-                serviceDeclaration.AddServices(entityModels, metaInfo);
+                serviceDeclaration.AddServices(entityModels, metaInfoDeclaration);
             }
 
             return moduleModel;
@@ -214,6 +216,23 @@
         }
     }
 
+    public class MetaInfoDeclaration : PropertyDeclarations
+    {
+        #region PropertyDeclarations Members
+
+        public MetaInfo GetMetaInfo(System.Reflection.MethodInfo accessor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetInitialValue(System.Reflection.MethodInfo accessor)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
     public class ImportedServiceModel
     {
     }
@@ -224,6 +243,10 @@
 
     public class ValueModel
     {
+        public static ValueModel NewModel(Type type, Visibility visibility, MetaInfo info, PropertyDeclarations decs, List<Type> concerns, List<Type> effects, List<Type> mixins)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ObjectModel

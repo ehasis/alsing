@@ -4,7 +4,7 @@
 
     public class ServiceDeclarationImpl : AbstractCompositeDeclarationImpl<ServiceDeclaration, ServiceComposite>, ServiceDeclaration
     {
-        internal void AddServices(System.Collections.Generic.List<EntityModel> entityModels, MetaInfo metaInfo)
+        public void AddServices(System.Collections.Generic.List<EntityModel> entityModels, PropertyDeclarations metaInfo)
         {
             throw new System.NotImplementedException();
         }

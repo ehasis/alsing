@@ -15,6 +15,6 @@ namespace QI4N.Framework.Bootstrap
 
         T Include<K>() where K : CT;
 
-        IList<Type> Includes { get; }
+        IList<Type> CompositeTypes { get; }
     }
 }

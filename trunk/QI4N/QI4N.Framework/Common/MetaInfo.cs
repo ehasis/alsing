@@ -7,6 +7,15 @@ namespace QI4N.Framework
     {
         private readonly Dictionary<Type, object> items = new Dictionary<Type, object>();
 
+        public MetaInfo()
+        {
+        }
+
+        public MetaInfo(MetaInfo info)
+        {
+
+        }
+
         public object Get(Type type)
         {
             return this.items[type];
@@ -15,6 +24,11 @@ namespace QI4N.Framework
         public void Set(object info)
         {
             this.items.Add(info.GetType(), info);
+        }
+
+        public MetaInfo WithAnnotations(Type compositeType)
+        {
+            return null;
         }
     }
 }
