@@ -3,8 +3,6 @@ namespace QI4N.Framework.Runtime
     using System;
     using System.Collections.Generic;
 
-    using Bootstrap;
-
     public class ModuleModel
     {
         private readonly CompositesModel compositesModel;
@@ -157,12 +155,12 @@ namespace QI4N.Framework.Runtime
             this.importedServiceModels = importedServiceModels;
         }
 
-        public void VisitModel(ModelVisitor visitor)
+        public ImportedServicesInstance NewInstance(ModuleInstance instance)
         {
             throw new NotImplementedException();
         }
 
-        public ImportedServicesInstance NewInstance(ModuleInstance instance)
+        public void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();
         }

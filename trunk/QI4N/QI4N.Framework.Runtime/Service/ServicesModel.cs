@@ -3,8 +3,6 @@ namespace QI4N.Framework.Runtime
     using System;
     using System.Collections.Generic;
 
-    using Bootstrap;
-
     public class ServicesModel
     {
         private List<ServiceModel> serviceModels;
@@ -15,13 +13,12 @@ namespace QI4N.Framework.Runtime
         }
 
 
-
-        public void VisitModel(ModelVisitor visitor)
+        public ServicesInstance NewInstance(ModuleInstance moduleInstance)
         {
             throw new NotImplementedException();
         }
 
-        public ServicesInstance NewInstance(ModuleInstance moduleInstance)
+        public void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();
         }

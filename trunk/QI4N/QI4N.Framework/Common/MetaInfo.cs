@@ -13,7 +13,6 @@ namespace QI4N.Framework
 
         public MetaInfo(MetaInfo info)
         {
-
         }
 
         public object Get(Type type)

@@ -17,9 +17,9 @@ namespace QI4N.Framework.Runtime
 
         protected AbstractStateModel stateModel;
 
-        private MetaInfo metaInfo;
-
         private readonly Visibility visibility;
+
+        private MetaInfo metaInfo;
 
         protected AbstractCompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
         {

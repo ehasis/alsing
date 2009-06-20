@@ -39,10 +39,10 @@
         {
             var layerInstances = new List<LayerInstance>();
             var applicationInstance = new ApplicationInstance(this, layerInstances);
-            
-            foreach(var layer in layers)
+
+            foreach (LayerModel layer in this.layers)
             {
-                var layerInstance = layer.NewInstance(applicationInstance,null);
+                LayerInstance layerInstance = layer.NewInstance(applicationInstance, null);
                 layerInstances.Add(layerInstance);
             }
 
