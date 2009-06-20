@@ -20,7 +20,7 @@ namespace QI4N.Framework.Runtime
 
         private readonly LayerInstance layerInstance;
 
-        private readonly ModuleModel moduleModel;
+        private readonly ModuleModel model;
 
         private readonly ObjectBuilderFactory objectBuilderFactory;
 
@@ -45,7 +45,7 @@ namespace QI4N.Framework.Runtime
                               EntitiesModel entitiesModel, ObjectsModel objectsModel, ValuesModel valuesModel,
                               ServicesModel servicesModel, ImportedServicesModel importedServicesModel)
         {
-            this.moduleModel = moduleModel;
+            this.model = moduleModel;
             this.layerInstance = layerInstance;
             this.composites = new CompositesInstance(compositesModel, this);
             this.entities = new EntitiesInstance(entitiesModel, this);
@@ -64,6 +64,14 @@ namespace QI4N.Framework.Runtime
             this.compositeFinders = new Dictionary<Type, CompositeFinder>();
             this.objectFinders = new Dictionary<Type, ObjectFinder>();
             this.valueFinders = new Dictionary<Type, ValueFinder>();
+        }
+
+        public ModuleModel Model
+        {
+            get
+            {
+                return this.model;
+            }
         }
 
 
@@ -108,7 +116,7 @@ namespace QI4N.Framework.Runtime
         public void VisitModules(ModuleVisitor visitor)
         {
             // Visit this module
-            if (!visitor.VisitModule(this, this.moduleModel, Visibility.Module))
+            if (!visitor.VisitModule(this, this.Model, Visibility.Module))
             {
                 return;
             }
