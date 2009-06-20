@@ -23,6 +23,14 @@
             this.modules = modules;
         }
 
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+        }
+
         public static LayerModel NewModel(LayerAssembly layer)
         {
             var moduleModels = new List<ModuleModel>();

@@ -52,7 +52,25 @@ namespace ConsoleApplication23
 
             ApplicationInstance applicationInstance = applicationModel.NewInstance();
 
-            // Instantiate the Application Model.
+
+            Run(applicationInstance);
+        }
+
+        private static void Run(ApplicationInstance applicationInstance)
+        {
+            var domainLayer = applicationInstance.FindLayer("DomainLayer");
+            var peopleModule = applicationInstance.FindModule("DomainLayer","PeopleModule");
+
+            var factory = new TransientBuilderFactoryInstance(peopleModule);
+
+            var personBuilder = factory.NewTransientBuilder<Person>();
+
+            var personState = personBuilder.PrototypeFor<PersonState>();
+            personState.FirstName.Value = "Roger";
+            personState.LastName.Value = "Alsing";
+
+            var person = personBuilder.NewInstance();
+
         }
     }
 }
