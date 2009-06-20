@@ -16,7 +16,7 @@ namespace QI4N.Framework.Runtime
         private readonly IDictionary<Type, EntityFinder> entityFinders;
 
 
-        private readonly ImportedServicesModel importedServices;
+        private readonly ImportedServicesInstance importedServices;
 
         private readonly LayerInstance layerInstance;
 
@@ -30,7 +30,7 @@ namespace QI4N.Framework.Runtime
 
         private readonly ServiceFinderInstance serviceFinder;
 
-        private readonly ServicesModel services;
+        private readonly ServicesInstance services;
 
         private readonly UnitOfWorkFactoryInstance unitOfWorkFactory;
 
@@ -124,6 +124,14 @@ namespace QI4N.Framework.Runtime
             // Visit layer
             this.layerInstance.VisitModules(visitor, Visibility.Layer);
         }
+    }
+
+    public class ImportedServicesInstance 
+    {
+    }
+
+    public class ServicesInstance
+    {
     }
 
     public class ObjectBuilderFactoryInstance : ObjectBuilderFactory

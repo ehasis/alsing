@@ -1,15 +1,19 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Collections.Generic;
 
     using Bootstrap;
 
     public class ValuesModel
     {
-        public static ValuesModel NewModel(ModuleAssembly module)
+        private List<ValueModel> valueModels;
+
+        public ValuesModel(List<ValueModel> valueModels)
         {
-            return new ValuesModel();
+            this.valueModels = valueModels;
         }
+
 
         public void VisitModel(ModelVisitor visitor)
         {

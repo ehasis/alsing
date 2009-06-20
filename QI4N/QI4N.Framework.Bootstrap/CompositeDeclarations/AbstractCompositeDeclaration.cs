@@ -1,5 +1,8 @@
 namespace QI4N.Framework.Bootstrap
 {
+    using System;
+    using System.Collections.Generic;
+
     public interface AbstractCompositeDeclaration<T, CT>
     {
         T VisibleIn(Visibility visibility);
@@ -11,5 +14,7 @@ namespace QI4N.Framework.Bootstrap
         T WithMixin<K>();
 
         T Include<K>() where K : CT;
+
+        IList<Type> Includes { get; }
     }
 }

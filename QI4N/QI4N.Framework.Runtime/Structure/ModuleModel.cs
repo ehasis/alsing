@@ -1,6 +1,7 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Collections.Generic;
 
     using Bootstrap;
 
@@ -107,19 +108,6 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public static ModuleModel NewModel(ModuleAssembly module)
-        {
-            CompositesModel compositesModel = CompositesModel.NewModel(module);
-            EntitiesModel entitiesModel = EntitiesModel.NewModel(module);
-            ObjectsModel objectsModel = ObjectsModel.NewModel(module);
-            ValuesModel valuesModel = ValuesModel.NewModel(module);
-            ServicesModel servicesModel = ServicesModel.NewModel(module);
-            ImportedServicesModel importedServicesModel = ImportedServicesModel.NewModel(module);
-
-            var moduleModel = new ModuleModel(module.Name, module.MetaInfo, compositesModel, entitiesModel, objectsModel, valuesModel, servicesModel, importedServicesModel);
-            return moduleModel;
-        }
-
         public ModuleInstance NewInstance(LayerInstance layerInstance)
         {
             return new ModuleInstance(this, layerInstance, this.compositesModel, this.entitiesModel, this.objectsModel, this.valuesModel, this.servicesModel, this.importedServicesModel);
@@ -162,17 +150,19 @@ namespace QI4N.Framework.Runtime
 
     public class ImportedServicesModel
     {
-        public static ImportedServicesModel NewModel(ModuleAssembly module)
-        {
-            return new ImportedServicesModel();
-        }
+        private List<ImportedServiceModel> importedServiceModels;
 
-        public ImportedServicesModel NewInstance(ModuleInstance instance)
+        public ImportedServicesModel(List<ImportedServiceModel> importedServiceModels)
         {
-            return new ImportedServicesModel();
+            this.importedServiceModels = importedServiceModels;
         }
 
         public void VisitModel(ModelVisitor visitor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ImportedServicesInstance NewInstance(ModuleInstance instance)
         {
             throw new NotImplementedException();
         }

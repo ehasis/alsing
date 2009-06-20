@@ -35,9 +35,9 @@
         {
             var moduleModels = new List<ModuleModel>();
 
-            foreach (ModuleAssembly module in layer.Modules)
+            foreach (ModuleAssemblyImpl module in layer.Modules)
             {
-                ModuleModel moduleModel = ModuleModel.NewModel(module);
+                ModuleModel moduleModel = module.AssembleModule();
                 moduleModels.Add(moduleModel);
             }
 

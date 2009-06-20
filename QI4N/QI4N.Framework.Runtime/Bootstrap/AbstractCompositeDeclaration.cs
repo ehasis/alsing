@@ -32,6 +32,14 @@ namespace QI4N.Framework.Runtime
             return this.asT;
         }
 
+        public IList<Type> Includes
+        {
+            get
+            {
+                return this.compositeTypes;
+            }
+        }
+
         public T VisibleIn(Visibility visibility)
         {
             this.visibility = visibility;

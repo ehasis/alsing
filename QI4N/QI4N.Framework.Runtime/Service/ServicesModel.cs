@@ -1,24 +1,29 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Collections.Generic;
 
     using Bootstrap;
 
     public class ServicesModel
     {
-        public ServicesModel NewInstance(ModuleInstance instance)
+        private List<ServiceModel> serviceModels;
+
+        public ServicesModel(List<ServiceModel> serviceModels)
         {
-          return new ServicesModel();
+            this.serviceModels = serviceModels;
         }
+
+
 
         public void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();
         }
 
-        internal static ServicesModel NewModel(ModuleAssembly module)
+        public ServicesInstance NewInstance(ModuleInstance moduleInstance)
         {
-            return new ServicesModel();
+            throw new NotImplementedException();
         }
     }
 }
