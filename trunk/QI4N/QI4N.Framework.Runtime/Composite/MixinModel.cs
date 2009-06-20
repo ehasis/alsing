@@ -28,7 +28,7 @@ namespace QI4N.Framework.Runtime
             var concerns = new List<ConcernDeclaration>();
             ConcernsDeclaration.ConcernDeclarations(mixinType, concerns);
             this.concernsDeclaration = new ConcernsDeclaration(concerns);
-            this.sideEffectsDeclaration = new SideEffectsDeclaration(mixinType, Enumerable.Empty<object>());
+            this.sideEffectsDeclaration = new SideEffectsDeclaration(mixinType, Enumerable.Empty<Type>());
 
             this.thisMixinTypes = this.BuildThisMixinTypes();
         }

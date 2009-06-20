@@ -65,7 +65,7 @@ namespace QI4N.Framework.Runtime
         public MethodConcernsInstance NewInstance(ModuleInstance moduleInstance, FragmentInvocationHandler mixinInvocationHandler)
         {
             var proxyHandler = new ProxyReferenceInvocationHandler();
-            Object nextConcern = mixinInvocationHandler;
+            object nextConcern = mixinInvocationHandler;
             for (int i = this.concernsForMethod.Count - 1; i >= 0; i--)
             {
                 MethodConcernModel concernModel = this.concernsForMethod[i];
@@ -87,11 +87,10 @@ namespace QI4N.Framework.Runtime
         }
     }
 
-    public class MethodConcernModel
+    public class MethodConcernModel : AbstractModifierModel
     {
-        public object NewInstance(ModuleInstance moduleInstance, object nextConcern, ProxyReferenceInvocationHandler proxyHandler)
+        public MethodConcernModel(Type modifierType) : base(modifierType)
         {
-            throw new NotImplementedException();
         }
     }
 }

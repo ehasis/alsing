@@ -15,8 +15,8 @@
                                                             this.visibility,
                                                             new MetaInfo(this.metaInfo).WithAnnotations(compositeType),
                                                             propertyDecs,
-                                                            this.concerns.Cast<object>(),
-                                                            this.sideEffects.Cast<object>(),
+                                                            this.concerns,
+                                                            this.sideEffects,
                                                             this.mixins);
                 compositeModels.Add(compositeModel);
             }

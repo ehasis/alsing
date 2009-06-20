@@ -12,7 +12,7 @@ namespace QI4N.Framework.Runtime
 
         private readonly List<SideEffectDeclaration> sideEffectDeclarations = new List<SideEffectDeclaration>();
 
-        public SideEffectsDeclaration(Type type, IEnumerable<object> sideEffects)
+        public SideEffectsDeclaration(Type type, IEnumerable<Type> sideEffects)
         {
             List<Type> types = AsSideEffectsTargetTypes(type);
 
