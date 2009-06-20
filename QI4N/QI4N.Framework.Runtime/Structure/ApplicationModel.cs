@@ -6,11 +6,13 @@
 
     public class ApplicationModel
     {
-        private string name;
-        private MetaInfo metaInfo;
         private IList<LayerModel> layers;
 
-        private ApplicationModel(string name,MetaInfo metaInfo, IList<LayerModel> layers)
+        private MetaInfo metaInfo;
+
+        private string name;
+
+        private ApplicationModel(string name, MetaInfo metaInfo, IList<LayerModel> layers)
         {
             this.name = name;
             this.metaInfo = metaInfo;
@@ -28,7 +30,7 @@
                 layerModels.Add(layerModel);
             }
 
-            var app = new ApplicationModel(application.Name,application.MetaInfo,layerModels);
+            var app = new ApplicationModel(application.Name, application.MetaInfo, layerModels);
 
             return app;
         }

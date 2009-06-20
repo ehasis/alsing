@@ -2,6 +2,8 @@
 {
     using System;
 
+    using Bootstrap;
+
     public class ServicesModel
     {
         public ServicesModel NewInstance(ModuleInstance instance)
@@ -14,7 +16,7 @@
             throw new NotImplementedException();
         }
 
-        internal static ServicesModel NewModel(QI4N.Framework.Bootstrap.ModuleAssembly module)
+        internal static ServicesModel NewModel(ModuleAssembly module)
         {
             return new ServicesModel();
         }

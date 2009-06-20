@@ -1,7 +1,5 @@
-﻿namespace QI4N.Framework.Bootstrap
+namespace QI4N.Framework.Bootstrap
 {
-    using Runtime;
-
     public interface AbstractCompositeDeclaration<T, CT>
     {
         T VisibleIn(Visibility visibility);

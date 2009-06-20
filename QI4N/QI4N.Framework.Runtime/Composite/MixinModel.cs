@@ -98,5 +98,4 @@ namespace QI4N.Framework.Runtime
             return thisDependencies;
         }
     }
-
 }

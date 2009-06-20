@@ -65,7 +65,7 @@
 
         public ModuleAssembly NewModuleAssembly(string name)
         {
-            var moduleAssembly = new ModuleAssemblyImpl(this, name,metaInfo);
+            var moduleAssembly = new ModuleAssemblyImpl(this, name, this.metaInfo);
             this.moduleAssemblies.Add(moduleAssembly);
             return moduleAssembly;
         }

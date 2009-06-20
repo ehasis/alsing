@@ -1,10 +1,9 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
 
     using Bootstrap;
-
 
     public abstract class AbstractCompositeDeclarationImpl<T, CT> : AbstractCompositeDeclaration<T, CT> where T : AbstractCompositeDeclaration<T, CT>
     {

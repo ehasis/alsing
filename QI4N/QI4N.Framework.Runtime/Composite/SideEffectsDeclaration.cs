@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -8,9 +8,9 @@
 
     public class SideEffectsDeclaration
     {
-        private readonly List<SideEffectDeclaration> sideEffectDeclarations = new List<SideEffectDeclaration>();
-
         private readonly Dictionary<MethodInfo, MethodSideEffectsModel> methodSideEffects = new Dictionary<MethodInfo, MethodSideEffectsModel>();
+
+        private readonly List<SideEffectDeclaration> sideEffectDeclarations = new List<SideEffectDeclaration>();
 
         public SideEffectsDeclaration(Type type, IEnumerable<object> sideEffects)
         {
@@ -30,29 +30,38 @@
 
         public MethodSideEffectsModel SideEffectsFor(MethodInfo method, Type compositeType)
         {
-            if (methodSideEffects.ContainsKey(method))
+            if (this.methodSideEffects.ContainsKey(method))
             {
-                return methodSideEffects[method];
+                return this.methodSideEffects[method];
             }
 
-            List<Type> matchingSideEffects = MatchingSideEffectClasses( method, compositeType );
-            MethodSideEffectsModel methodConcerns = MethodSideEffectsModel.CreateForMethod( method, matchingSideEffects );
-            methodSideEffects.Add( method, methodConcerns );
+            List<Type> matchingSideEffects = this.MatchingSideEffectClasses(method, compositeType);
+            MethodSideEffectsModel methodConcerns = MethodSideEffectsModel.CreateForMethod(method, matchingSideEffects);
+            this.methodSideEffects.Add(method, methodConcerns);
             return methodConcerns;
         }
 
-        private List<Type> MatchingSideEffectClasses(MethodInfo method, Type compositeType)
+        private static List<Type> AsSideEffectsTargetTypes(Type type)
         {
-            var result = new List<Type>();
-
-            foreach (SideEffectDeclaration sideEffectDeclaration in sideEffectDeclarations)
+            // Find side-effect declarations
+            if (type.IsInterface)
             {
-                if (sideEffectDeclaration.AppliesTo(method, compositeType))
-                {
-                    result.Add(sideEffectDeclaration.ModifierClass);
-                }
+                //TODO: What?
+                return GenericInterfacesOf(type);
             }
-            return result;
+
+            //TODO: What?
+            return Singleton(type);
+        }
+
+        private static List<Type> GenericInterfacesOf(Type type)
+        {
+            return new List<Type>();
+        }
+
+        private static List<Type> Singleton(Type type)
+        {
+            return new List<Type>();
         }
 
         private void AddSideEffectDeclaration(Type type)
@@ -72,27 +81,18 @@
             }
         }
 
-        private static List<Type> AsSideEffectsTargetTypes(Type type)
+        private List<Type> MatchingSideEffectClasses(MethodInfo method, Type compositeType)
         {
-            // Find side-effect declarations
-            if (type.IsInterface)
+            var result = new List<Type>();
+
+            foreach (SideEffectDeclaration sideEffectDeclaration in this.sideEffectDeclarations)
             {
-                //TODO: What?
-                return GenericInterfacesOf(type);
+                if (sideEffectDeclaration.AppliesTo(method, compositeType))
+                {
+                    result.Add(sideEffectDeclaration.ModifierClass);
+                }
             }
-
-            //TODO: What?
-            return Singleton(type);
-        }
-
-        private static List<Type> Singleton(Type type)
-        {
-            return new List<Type>();
-        }
-
-        private static List<Type> GenericInterfacesOf(Type type)
-        {
-            return new List<Type>();
+            return result;
         }
     }
 

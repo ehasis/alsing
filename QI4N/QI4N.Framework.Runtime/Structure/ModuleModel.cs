@@ -107,6 +107,19 @@ namespace QI4N.Framework.Runtime
             }
         }
 
+        public static ModuleModel NewModel(ModuleAssembly module)
+        {
+            CompositesModel compositesModel = CompositesModel.NewModel(module);
+            EntitiesModel entitiesModel = EntitiesModel.NewModel(module);
+            ObjectsModel objectsModel = ObjectsModel.NewModel(module);
+            ValuesModel valuesModel = ValuesModel.NewModel(module);
+            ServicesModel servicesModel = ServicesModel.NewModel(module);
+            ImportedServicesModel importedServicesModel = ImportedServicesModel.NewModel(module);
+
+            var moduleModel = new ModuleModel(module.Name, module.MetaInfo, compositesModel, entitiesModel, objectsModel, valuesModel, servicesModel, importedServicesModel);
+            return moduleModel;
+        }
+
         public ModuleInstance NewInstance(LayerInstance layerInstance)
         {
             return new ModuleInstance(this, layerInstance, this.compositesModel, this.entitiesModel, this.objectsModel, this.valuesModel, this.servicesModel, this.importedServicesModel);
@@ -137,18 +150,6 @@ namespace QI4N.Framework.Runtime
         }
 
         // Context
-        public static ModuleModel NewModel(ModuleAssembly module)
-        {
-            CompositesModel compositesModel = CompositesModel.NewModel(module);
-            EntitiesModel entitiesModel = EntitiesModel.NewModel(module);
-            ObjectsModel objectsModel = ObjectsModel.NewModel(module);
-            ValuesModel valuesModel = ValuesModel.NewModel(module);
-            ServicesModel servicesModel = ServicesModel.NewModel(module);
-            ImportedServicesModel importedServicesModel = ImportedServicesModel.NewModel(module);
-
-            var moduleModel = new ModuleModel(module.Name, module.MetaInfo, compositesModel, entitiesModel, objectsModel, valuesModel, servicesModel, importedServicesModel);
-            return moduleModel;
-        }
     }
 
     public class ModelVisitor
@@ -161,6 +162,11 @@ namespace QI4N.Framework.Runtime
 
     public class ImportedServicesModel
     {
+        public static ImportedServicesModel NewModel(ModuleAssembly module)
+        {
+            return new ImportedServicesModel();
+        }
+
         public ImportedServicesModel NewInstance(ModuleInstance instance)
         {
             throw new NotImplementedException();
@@ -169,11 +175,6 @@ namespace QI4N.Framework.Runtime
         public void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();
-        }
-
-        public static ImportedServicesModel NewModel(ModuleAssembly module)
-        {
-            return new ImportedServicesModel();
         }
     }
 }
