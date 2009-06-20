@@ -7,9 +7,19 @@
 
     public class ValueDeclarationImpl : AbstractCompositeDeclarationImpl<ValueDeclaration, ValueComposite>, ValueDeclaration
     {
-        public void AddValues(List<ValueModel> compositeModels, MetaInfo metaInfo)
+        public void AddValues(List<ValueModel> values, PropertyDeclarations propertyDecs)
         {
-            throw new NotImplementedException();
+            foreach (Type compositeType in this.CompositeTypes)
+            {
+                ValueModel valueModel = ValueModel.NewModel(compositeType,
+                                                            this.visibility,
+                                                            new MetaInfo(metaInfo).WithAnnotations(compositeType),
+                                                            propertyDecs,
+                                                            this.concerns,
+                                                            this.sideEffects,
+                                                            this.mixins);
+                values.Add(valueModel);
+            }
         }
     }
 }
