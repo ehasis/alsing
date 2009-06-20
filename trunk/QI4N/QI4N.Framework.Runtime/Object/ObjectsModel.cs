@@ -1,15 +1,14 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
-
-    using Bootstrap;
+    using System.Collections.Generic;
 
     public class ObjectsModel
     {
-        public static ObjectsModel NewModel(ModuleAssembly module)
+        public ObjectsModel(List<ObjectModel> models)
         {
-            return new ObjectsModel();
         }
+
 
         public void VisitModel(ModelVisitor visitor)
         {

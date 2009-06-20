@@ -53,5 +53,10 @@ namespace QI4N.Framework.Runtime
         {
             return Proxy.NewProxyInstance(mixinType, handler);
         }
+
+        public void VisitModel(ModelVisitor visitor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
