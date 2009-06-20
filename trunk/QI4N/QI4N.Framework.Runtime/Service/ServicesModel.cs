@@ -15,7 +15,7 @@ namespace QI4N.Framework.Runtime
 
         public ServicesInstance NewInstance(ModuleInstance moduleInstance)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public void VisitModel(ModelVisitor visitor)

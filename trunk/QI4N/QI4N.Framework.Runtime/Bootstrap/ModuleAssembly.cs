@@ -148,7 +148,7 @@
 
             foreach (ServiceDeclarationImpl serviceDeclaration in this.serviceDeclarations)
             {
-                serviceDeclaration.AddServices(entityModels, this.metaInfoDeclaration);
+                serviceDeclaration.AddServices(serviceModels, this.metaInfoDeclaration);
             }
 
             return moduleModel;
