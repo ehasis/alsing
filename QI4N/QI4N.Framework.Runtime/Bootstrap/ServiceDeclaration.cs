@@ -7,9 +7,9 @@ namespace QI4N.Framework.Runtime
 
     public class ServiceDeclarationImpl : AbstractCompositeDeclarationImpl<ServiceDeclaration, ServiceComposite>, ServiceDeclaration
     {
-        public void AddServices(List<EntityModel> entityModels, PropertyDeclarations metaInfo)
+        public void AddServices(List<ServiceModel> serviceModels, PropertyDeclarations propertyDecs)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
