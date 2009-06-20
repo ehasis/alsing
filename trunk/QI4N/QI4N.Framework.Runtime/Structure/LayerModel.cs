@@ -46,5 +46,12 @@
         {
             throw new NotImplementedException();
         }
+
+        public LayerInstance NewInstance(LayerModel layer)
+        {
+            var layerInstance = new LayerInstance();
+
+            return layerInstance;
+        }
     }
 }
