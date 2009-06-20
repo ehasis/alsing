@@ -2,8 +2,15 @@
 {
     using System;
 
+    using Bootstrap;
+
     public class ObjectsModel
     {
+        public static ObjectsModel NewModel(ModuleAssembly module)
+        {
+            return new ObjectsModel();
+        }
+
         public void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();

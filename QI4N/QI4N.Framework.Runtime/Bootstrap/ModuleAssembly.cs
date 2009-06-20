@@ -46,17 +46,49 @@
             }
         }
 
+        public IList<TransientDeclaration> TransientDeclarations
+        {
+            get
+            {
+                return transientDeclarations;
+            }
+        }
+
+        public IList<ValueDeclaration> ValueDeclarations
+        {
+            get
+            {
+                return this.valueDeclarations;
+            }
+        }
+
+        public IList<ServiceDeclaration> ServiceDeclarations
+        {
+            get
+            {
+                return this.serviceDeclarations;
+            }
+        }
+
+        public IList<EntityDeclaration> EntityDeclarations
+        {
+            get
+            {
+                return this.entityDeclarations;
+            }
+        }
+
         public EntityDeclaration AddEntities()
         {
             var declaration = new EntityDeclarationImpl();
-            this.entityDeclarations.Add(declaration);
+            this.EntityDeclarations.Add(declaration);
             return declaration;
         }
 
         public ServiceDeclaration AddServices()
         {
             var declaration = new ServiceDeclarationImpl();
-            this.serviceDeclarations.Add(declaration);
+            this.ServiceDeclarations.Add(declaration);
             return declaration;
         }
 
@@ -70,7 +102,7 @@
         public ValueDeclaration AddValues()
         {
             var declaration = new ValueDeclarationImpl();
-            this.valueDeclarations.Add(declaration);
+            this.ValueDeclarations.Add(declaration);
             return declaration;
         }
 
