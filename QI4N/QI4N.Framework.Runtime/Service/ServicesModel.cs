@@ -8,7 +8,7 @@
     {
         public ServicesModel NewInstance(ModuleInstance instance)
         {
-            throw new NotImplementedException();
+          return new ServicesModel();
         }
 
         public void VisitModel(ModelVisitor visitor)

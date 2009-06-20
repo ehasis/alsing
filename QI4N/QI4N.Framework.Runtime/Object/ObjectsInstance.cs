@@ -6,7 +6,7 @@
     {
         public ObjectsInstance(ObjectsModel model, ModuleInstance instance)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }

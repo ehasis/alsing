@@ -6,7 +6,7 @@
     {
         public CompositesInstance(CompositesModel model, ModuleInstance instance)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

@@ -6,7 +6,7 @@
     {
         public EntitiesInstance(EntitiesModel model, ModuleInstance instance)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }
