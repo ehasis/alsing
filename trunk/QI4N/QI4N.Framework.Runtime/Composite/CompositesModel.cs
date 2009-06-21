@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
 
-    using Bootstrap;
-
     public class CompositesModel
     {
         private readonly IList<CompositeModel> compositeModels;
@@ -12,19 +10,6 @@
         public CompositesModel(IList<CompositeModel> compositeModels)
         {
             this.compositeModels = compositeModels;
-        }
-
-        public static CompositesModel NewModel(ModuleAssembly module)
-        {
-            var compositeModels = new List<CompositeModel>();
-            foreach (TransientDeclaration transients in module.TransientDeclarations)
-            {
-                CompositeModel compositeModel = null;
-                compositeModels.Add(compositeModel);
-            }
-
-            var model = new CompositesModel(compositeModels);
-            return model;
         }
 
         public CompositeModel GetCompositeModelFor(Type mixinType, Visibility visibility)

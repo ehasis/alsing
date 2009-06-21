@@ -134,27 +134,15 @@ namespace QI4N.Framework.Runtime
     {
     }
 
-    public class ObjectBuilderFactoryInstance : ObjectBuilderFactory
-    {
-        public ObjectBuilder<T> NewObjectBuilder<T>()
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    public class ValueBuilderFactoryInstance : ValueBuilderFactory
-    {
-    }
+
+
 
     public class UnitOfWorkFactoryInstance
     {
     }
 
     public class ServiceFinderInstance
-    {
-    }
-
-    public class ValueFinder
     {
     }
 
