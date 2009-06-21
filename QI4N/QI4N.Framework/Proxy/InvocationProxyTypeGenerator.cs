@@ -53,6 +53,17 @@ namespace QI4N.Framework.Reflection
                     }
                 }
 
+                MethodInfo getHashCodeMethod = typeof(object).GetMethod("GetHashCode");
+                MethodInfo toStringMethod = typeof(object).GetMethod("ToString");
+                MethodInfo equalsMethod = typeof(object).GetMethod("Equals",BindingFlags.Public|BindingFlags.Instance);
+
+                this.CreateMethod(getHashCodeMethod);
+                this.CreateMethod(toStringMethod);
+                this.CreateMethod(equalsMethod);
+
+        
+
+
                 this.CreateCtor();
 
                 Type proxyType = this.typeBuilder.CreateType();

@@ -47,9 +47,7 @@ namespace QI4N.Framework.Runtime
 
         public object InvokeObject(object proxy, object[] args, MethodInfo method)
         {
-            //this is a method that does not belong to a mixin
-            //e.g. equals, tostring, gethashcode
-            return this.Invoke(this, method, args);
+            return method.Invoke(this, args);
         }
 
         public object NewProxy(Type mixinType)
@@ -60,6 +58,11 @@ namespace QI4N.Framework.Runtime
         public string ToURI()
         {
             return "hello";
+        }
+
+        public override string ToString()
+        {
+            return "I am the Composite Instance";
         }
     }
 }

@@ -10,6 +10,7 @@
     public class ConcernsDeclaration
     {
         private readonly IList<ConcernDeclaration> concerns;
+
         private readonly Dictionary<MethodInfo, MethodConcernsModel> methodConcernsModels = new Dictionary<MethodInfo, MethodConcernsModel>();
 
         public ConcernsDeclaration(IList<ConcernDeclaration> concerns)
@@ -22,21 +23,10 @@
             // Find concern declarations
             var types = new List<Type>(mixinType.GetAllInterfaces());
 
-            foreach( Type aType in types )
+            foreach (Type aType in types)
             {
-                AddConcernDeclarations( aType, concerns );
+                AddConcernDeclarations(aType, concerns);
             }
-        }
-
-        private static void AddConcernDeclarations(Type type, List<ConcernDeclaration> concerns)
-        {
-            var attributes = type.GetAttributes<ConcernsAttribute>();
-            
-            var types = from attribute in attributes
-                        from concernType in attribute.ConcernTypes
-                        select new ConcernDeclaration(concernType, type);
-            
-            concerns.AddRange(types);
         }
 
         public static void ConcernDeclarations(IEnumerable<Type> concernTypes, IList<ConcernDeclaration> concerns)
@@ -50,10 +40,10 @@
 
         public MethodConcernsModel ConcernsFor(MethodInfo method, Type type)
         {
-            if (!methodConcernsModels.ContainsKey(method))
+            if (!this.methodConcernsModels.ContainsKey(method))
             {
                 var concernsForMethod = new List<MethodConcernModel>();
-                foreach (ConcernDeclaration concern in concerns)
+                foreach (ConcernDeclaration concern in this.concerns)
                 {
                     if (concern.AppliesTo(method, type))
                     {
@@ -63,11 +53,22 @@
                 }
 
                 var methodConcerns = new MethodConcernsModel(method, concernsForMethod);
-                methodConcernsModels.Add(method, methodConcerns);
+                this.methodConcernsModels.Add(method, methodConcerns);
                 return methodConcerns;
             }
 
             return this.methodConcernsModels[method];
+        }
+
+        private static void AddConcernDeclarations(Type type, List<ConcernDeclaration> concerns)
+        {
+            IEnumerable<ConcernsAttribute> attributes = type.GetAttributes<ConcernsAttribute>();
+
+            IEnumerable<ConcernDeclaration> types = from attribute in attributes
+                                                    from concernType in attribute.ConcernTypes
+                                                    select new ConcernDeclaration(concernType, type);
+
+            concerns.AddRange(types);
         }
     }
 }

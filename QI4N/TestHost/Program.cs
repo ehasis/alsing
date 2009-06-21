@@ -33,7 +33,7 @@ namespace ConsoleApplication23
 
             module
                     .AddValues();
-                    //.Include<AccidentValue>();
+            //.Include<AccidentValue>();
 
             module
                     .AddTransients()
@@ -76,7 +76,7 @@ namespace ConsoleApplication23
 
             Person person = personBuilder.NewInstance();
             person.SayHi();
-
+            Console.WriteLine(person.ToString());
             Console.ReadLine();
         }
     }
