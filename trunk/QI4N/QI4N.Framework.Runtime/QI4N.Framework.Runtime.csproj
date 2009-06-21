@@ -131,7 +131,9 @@
     <Compile Include="Object\ObjectsModel.cs" />
     <Compile Include="Service\ServicesModel.cs" />
     <Compile Include="Value\ValueBuilderFactoryInstance.cs" />
+    <Compile Include="Value\ValueBuilderInstance.cs" />
     <Compile Include="Value\ValueFinder.cs" />
+    <Compile Include="Value\ValueModel.cs" />
     <Compile Include="Value\ValuesInstance.cs" />
     <Compile Include="Value\ValuesModel.cs" />
     <Compile Include="Value\ValueInstance.cs" />

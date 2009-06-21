@@ -32,8 +32,8 @@ namespace ConsoleApplication23
                     .VisibleIn(Visibility.Layer);
 
             module
-                    .AddValues();
-            //.Include<AccidentValue>();
+                    .AddValues()
+            .Include<AccidentValue>();
 
             module
                     .AddTransients()
@@ -77,6 +77,13 @@ namespace ConsoleApplication23
             Person person = personBuilder.NewInstance();
             person.SayHi();
             Console.WriteLine(person.ToString());
+
+
+            var valueFactory = new ValueBuilderFactoryInstance(peopleModule);
+            ValueBuilder<Accident> aa = null;
+            
+
+
             Console.ReadLine();
         }
     }

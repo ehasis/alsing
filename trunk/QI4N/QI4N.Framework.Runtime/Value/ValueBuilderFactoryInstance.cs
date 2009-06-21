@@ -4,19 +4,43 @@
 
     public class ValueBuilderFactoryInstance : ValueBuilderFactory
     {
+        private readonly ModuleInstance moduleInstance;
+
+        public ValueBuilderFactoryInstance(ModuleInstance moduleInstance)
+        {
+            this.moduleInstance = moduleInstance;
+        }
+
         public T NewValue<T>()
         {
-            throw new NotImplementedException();
+            ValueBuilder<T> builder = this.GetBuilder<T>(typeof(T));
+            return builder.NewInstance();
         }
 
-        public TransientBuilder<T> NewValueBuilder<T>()
+        public ValueBuilder<T> NewValueBuilder<T>()
         {
-            throw new NotImplementedException();
+            ValueBuilder<T> builder = this.GetBuilder<T>(typeof(T));
+            return builder;
         }
 
-        public TransientBuilder<object> NewValueBuilder(Type fragmentType)
+        public ValueBuilder<object> NewValueBuilder(Type mixinType)
         {
-            throw new NotImplementedException();
+            ValueBuilder<object> builder = this.GetBuilder<object>(mixinType);
+            return builder;
+        }
+
+        private ValueBuilder<T> GetBuilder<T>(Type mixinType)
+        {
+            CompositeFinder finder = this.moduleInstance.FindCompositeModel(mixinType);
+
+            if (finder.Model == null)
+            {
+                throw new Exception("Composite not found");
+            }
+
+            return new ValueBuilderInstance<T>(finder.Module, finder.Model);
         }
     }
+
+    
 }
