@@ -2,7 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
+
+    using Reflection;
 
     public class ConcernsDeclaration
     {
@@ -16,6 +19,24 @@
 
         public static void ConcernDeclarations(Type mixinType, List<ConcernDeclaration> concerns)
         {
+            // Find concern declarations
+            var types = new List<Type>(mixinType.GetAllInterfaces());
+
+            foreach( Type aType in types )
+            {
+                AddConcernDeclarations( aType, concerns );
+            }
+        }
+
+        private static void AddConcernDeclarations(Type type, List<ConcernDeclaration> concerns)
+        {
+            var attributes = type.GetAttributes<ConcernsAttribute>();
+            
+            var types = from attribute in attributes
+                        from concernType in attribute.ConcernTypes
+                        select new ConcernDeclaration(concernType, type);
+            
+            concerns.AddRange(types);
         }
 
         public static void ConcernDeclarations(IEnumerable<Type> concernTypes, IList<ConcernDeclaration> concerns)

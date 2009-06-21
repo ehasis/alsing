@@ -38,9 +38,9 @@ namespace ConsoleApplication23
             module
                     .AddTransients()
                     .Include<PersonComposite>()
-                    .WithConcern<PersonBehaviorConcern>()
-                    .WithConcern<MyGenericConcern>()
-                    .WithSideEffect<MySideEffect>()
+                    //.WithConcern<PersonBehaviorConcern>()
+                    //.WithConcern<MyGenericConcern>()
+                    //.WithSideEffect<MySideEffect>()
                     .WithMixin<RandomFooMixin>();
 
             return module;

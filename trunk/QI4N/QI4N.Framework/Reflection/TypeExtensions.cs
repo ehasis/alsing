@@ -76,6 +76,16 @@ namespace QI4N.Framework.Reflection
             return attrib;
         }
 
+        public static IEnumerable<T> GetAttributes<T>(this Type self) where T : Attribute
+        {
+            IEnumerable<T> attribs = self.GetCustomAttributes(typeof(T), true).Cast<T>();
+
+            foreach (T attrib in attribs)
+            {
+                yield return attrib;
+            }
+        }
+
         public static PropertyInfo GetInterfaceProperty(this Type interfaceType, string propertyName)
         {
             PropertyInfo propertyInfo = (
