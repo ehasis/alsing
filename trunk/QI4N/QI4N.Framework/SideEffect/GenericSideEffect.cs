@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.API
+﻿namespace QI4N.Framework
 {
     using System.Reflection;
 

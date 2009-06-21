@@ -40,6 +40,7 @@ namespace ConsoleApplication23
                     .Include<PersonComposite>()
                     .WithConcern<PersonBehaviorConcern>()
                     .WithConcern<MyGenericConcern>()
+                    .WithSideEffect<MySideEffect>()
                     .WithMixin<RandomFooMixin>();
 
             return module;
