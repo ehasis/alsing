@@ -124,6 +124,25 @@ namespace QI4N.Framework.Runtime
             // Visit layer
             this.layerInstance.VisitModules(visitor, Visibility.Layer);
         }
+
+        public ValueFinder FindValueModel(Type mixinType)
+        {
+            ValueFinder finder;
+            if (!this.valueFinders.TryGetValue(mixinType, out finder))
+            {
+                finder = new ValueFinder
+                {
+                    MixinType = mixinType
+                };
+                this.VisitModules(finder);
+                if (finder.Model != null)
+                {
+                    this.valueFinders.Add(mixinType, finder);
+                }
+            }
+
+            return finder;
+        }
     }
 
     public class ImportedServicesInstance

@@ -80,8 +80,9 @@ namespace ConsoleApplication23
 
 
             var valueFactory = new ValueBuilderFactoryInstance(peopleModule);
-            ValueBuilder<Accident> aa = null;
-            
+            var accidentBuilder = valueFactory.NewValueBuilder<Accident>();
+
+            var accident = accidentBuilder.NewInstance();
 
 
             Console.ReadLine();

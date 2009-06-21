@@ -7,7 +7,7 @@ namespace QI4N.Framework.Runtime
 {
     public class ValueBuilderInstance<T> : ValueBuilder<T>
     {
-        public ValueBuilderInstance(ModuleInstance module, CompositeModel model)
+        public ValueBuilderInstance(ModuleInstance module, ValueModel model)
         {
             throw new NotImplementedException();
         }

@@ -12,14 +12,26 @@
         {
         }
 
-        public static ValueModel NewModel(Type type, Visibility visibility, MetaInfo info, PropertyDeclarations decs, List<Type> concerns, List<Type> effects, List<Type> mixins)
+        public static ValueModel NewModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, PropertyDeclarations propertyDeclarations, List<Type> assemblyConcerns, List<Type> sideEffects, List<Type> mixins)
         {
-            throw new NotImplementedException();
+            var constraintsModel = new ConstraintsModel(compositeType);
+            bool immutable = metaInfo.Get(typeof(ImmutableAttribute)) != null;
+            var propertiesModel = new PropertiesModel(constraintsModel, propertyDeclarations, immutable);
+            var stateModel = new StateModel(propertiesModel);
+            var mixinsModel = new MixinsModel(compositeType, mixins);
+
+            var concerns = new List<ConcernDeclaration>();
+            ConcernsDeclaration.ConcernDeclarations(assemblyConcerns, concerns);
+            ConcernsDeclaration.ConcernDeclarations(compositeType, concerns);
+            var concernsModel = new ConcernsDeclaration(concerns);
+
+            var sideEffectsModel = new SideEffectsDeclaration(compositeType, sideEffects);
+            var compositeMethodsModel = new CompositeMethodsModel(compositeType, constraintsModel, concernsModel, sideEffectsModel, mixinsModel);
+            stateModel.AddStateFor(compositeMethodsModel.Methods, compositeType);
+
+            return new ValueModel(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel);
+
         }
 
-        public static ValueModel NewModel(Type type, Visibility visibility)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
