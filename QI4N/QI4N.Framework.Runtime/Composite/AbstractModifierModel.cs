@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Reflection;
 
     using JavaProxy;
 
@@ -36,14 +37,14 @@
         // Context
         public object NewInstance(ModuleInstance moduleInstance, object next, ProxyReferenceInvocationHandler proxyHandler)
         {
-          //  var injectionContext = new InjectionContext(moduleInstance, this.WrapNext(next), proxyHandler);
-            
-          //  object mixin = this.constructorsModel.NewInstance(injectionContext);
+            //  var injectionContext = new InjectionContext(moduleInstance, this.WrapNext(next), proxyHandler);
+
+            //  object mixin = this.constructorsModel.NewInstance(injectionContext);
 
             object concern = this.modifierType.NewInstance();
 
             //TODO: fix this
-            var field = modifierType.GetAllFields().Where(f => f.Name == "next").FirstOrDefault();
+            FieldInfo field = this.modifierType.GetAllFields().Where(f => f.Name == "next").FirstOrDefault();
             field.SetValue(concern, this.WrapNext(next));
             ////this.injectedFieldsModel.Inject(injectionContext, mixin);
             ////this.injectedMethodsModel.Inject(injectionContext, mixin);
@@ -82,7 +83,6 @@
     {
         public ConstructorsModel(Type type)
         {
-
         }
 
         public object NewInstance(InjectionContext injectionContext)

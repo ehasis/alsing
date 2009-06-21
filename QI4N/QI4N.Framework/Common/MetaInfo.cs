@@ -5,9 +5,10 @@ namespace QI4N.Framework
 
     public class MetaInfo
     {
+        private readonly IList<Type> ignored = new List<Type>();
+
         private readonly Dictionary<Type, object> items = new Dictionary<Type, object>();
 
-        private readonly IList<Type> ignored = new List<Type>();
         public MetaInfo()
         {
         }
@@ -19,7 +20,7 @@ namespace QI4N.Framework
         public object Get(Type type)
         {
             object value;
-            items.TryGetValue(type, out value);
+            this.items.TryGetValue(type, out value);
             return value;
         }
 
@@ -30,11 +31,11 @@ namespace QI4N.Framework
 
         public MetaInfo WithAnnotations(Type compositeType)
         {
-            foreach( Attribute attribute in compositeType.GetCustomAttributes(true))
+            foreach (Attribute attribute in compositeType.GetCustomAttributes(true))
             {
-                if (!ignored.Contains(attribute.GetType()))
+                if (!this.ignored.Contains(attribute.GetType()))
                 {
-                    Set(attribute);
+                    this.Set(attribute);
                 }
             }
             return this;
