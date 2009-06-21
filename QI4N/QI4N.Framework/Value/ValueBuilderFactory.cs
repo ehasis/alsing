@@ -6,8 +6,8 @@ namespace QI4N.Framework
     {
         T NewValue<T>();
 
-        TransientBuilder<T> NewValueBuilder<T>();
+        ValueBuilder<T> NewValueBuilder<T>();
 
-        TransientBuilder<object> NewValueBuilder(Type fragmentType);
+        ValueBuilder<object> NewValueBuilder(Type fragmentType);
     }
 }

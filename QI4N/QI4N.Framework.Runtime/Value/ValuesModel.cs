@@ -17,6 +17,19 @@ namespace QI4N.Framework.Runtime
             throw new NotImplementedException();
         }
 
+        public Type GetTypeForName(String type)
+        {
+            foreach (ValueModel valueModel in this.valueModels)
+            {
+                if (valueModel.CompositeType.Name == type)
+                {
+                    return valueModel.CompositeType;
+                }
+            }
+
+            return null;
+        }
+
         public ValueModel GetValueModelFor(Type mixinType, Visibility visibility)
         {
             ValueModel foundModel = null;

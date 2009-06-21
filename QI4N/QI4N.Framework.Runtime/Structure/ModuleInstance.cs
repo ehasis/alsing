@@ -56,7 +56,7 @@ namespace QI4N.Framework.Runtime
 
             this.compositeBuilderFactory = new TransientBuilderFactoryInstance(this);
             this.objectBuilderFactory = new ObjectBuilderFactoryInstance();
-            this.valueBuilderFactory = new ValueBuilderFactoryInstance();
+            this.valueBuilderFactory = new ValueBuilderFactoryInstance(this);
             this.unitOfWorkFactory = new UnitOfWorkFactoryInstance();
             this.serviceFinder = new ServiceFinderInstance();
 
