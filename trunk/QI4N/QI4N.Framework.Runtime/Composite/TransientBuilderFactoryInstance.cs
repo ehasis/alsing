@@ -38,7 +38,7 @@ namespace QI4N.Framework.Runtime
                 throw new Exception("Composite not found");
             }
 
-            return new CompositeBuilderInstance<T>(finder.Module, finder.Model);
+            return new TransientBuilderInstance<T>(finder.Module, finder.Model);
         }
     }
 }

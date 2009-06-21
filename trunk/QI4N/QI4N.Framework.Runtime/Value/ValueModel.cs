@@ -33,5 +33,15 @@
 
         }
 
+
+        public CompositeInstance NewValueInstance(ModuleInstance moduleInstance, UsesInstance uses, StateHolder stateHolder)
+        {
+            object[] mixins = this.mixinsModel.NewMixinHolder();
+            CompositeInstance compositeInstance = new ValueInstance(this, moduleInstance, mixins, stateHolder);
+
+            ((MixinsModel)this.mixinsModel).NewMixins(compositeInstance, uses, stateHolder, mixins);
+
+            return compositeInstance;
+        }
     }
 }

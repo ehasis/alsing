@@ -76,7 +76,7 @@
     <Compile Include="Composite\MethodSideEffectsModel.cs" />
     <Compile Include="Composite\AbstractMixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
-    <Compile Include="Composite\CompositeBuilderInstance.cs" />
+    <Compile Include="Composite\TransientBuilderInstance.cs" />
     <Compile Include="Composite\CompositeBuilderState.cs" />
     <Compile Include="Composite\CompositeFinder.cs" />
     <Compile Include="Composite\CompositeMethodInstance.cs" />

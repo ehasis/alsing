@@ -1,13 +1,9 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
-    using System.Collections.Generic;
-    using System.Reflection;
 
-    public class CompositeBuilderInstance<T> : TransientBuilder<T>
+    public class TransientBuilderInstance<T> : TransientBuilder<T>
     {
-        protected IDictionary<MethodInfo, AbstractAssociation> associationValues;
-
         protected Type compositeInterface;
 
         protected CompositeModel compositeModel;
@@ -20,29 +16,16 @@ namespace QI4N.Framework.Runtime
 
         protected UsesInstance uses;
 
-        public CompositeBuilderInstance(ModuleInstance moduleInstance, CompositeModel model, UsesInstance uses)
+        public TransientBuilderInstance(ModuleInstance moduleInstance, CompositeModel model, UsesInstance uses)
                 : this(moduleInstance, model)
         {
             this.uses = uses;
         }
 
-        public CompositeBuilderInstance(ModuleInstance moduleInstance, CompositeModel model)
+        public TransientBuilderInstance(ModuleInstance moduleInstance, CompositeModel model)
         {
             this.moduleInstance = moduleInstance;
             this.compositeModel = model;
-        }
-
-        public IDictionary<MethodInfo, AbstractAssociation> Associations
-        {
-            get
-            {
-                if (this.associationValues == null)
-                {
-                    this.associationValues = new Dictionary<MethodInfo, AbstractAssociation>();
-                }
-
-                return this.associationValues;
-            }
         }
 
         public Type CompositeType

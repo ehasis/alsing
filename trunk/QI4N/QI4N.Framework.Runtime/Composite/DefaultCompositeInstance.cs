@@ -5,7 +5,7 @@ namespace QI4N.Framework.Runtime
 
     public class DefaultCompositeInstance : CompositeInstance, MixinsInstance
     {
-        public DefaultCompositeInstance(CompositeModel compositeModel, ModuleInstance moduleInstance, object[] mixins, StateHolder state)
+        public DefaultCompositeInstance(AbstractCompositeModel compositeModel, ModuleInstance moduleInstance, object[] mixins, StateHolder state)
         {
             this.CompositeModel = compositeModel;
             this.ModuleInstance = moduleInstance;
@@ -14,7 +14,7 @@ namespace QI4N.Framework.Runtime
             this.Proxy = compositeModel.NewProxy(this);
         }
 
-        public CompositeModel CompositeModel { get; set; }
+        public AbstractCompositeModel CompositeModel { get; set; }
 
         public object[] Mixins { get; set; }
 
