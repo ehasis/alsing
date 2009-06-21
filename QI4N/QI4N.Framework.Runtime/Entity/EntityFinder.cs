@@ -6,10 +6,7 @@
     {
         protected override EntityModel FindModel(ModuleModel model, Visibility visibility)
         {
-            Type compositeType = CompositeCache.GetMatchingComposite(this.MixinType);
-
-            EntityModel m = EntityModel.NewModel(compositeType, null);
-            return m;
+            return null;
         }
     }
 

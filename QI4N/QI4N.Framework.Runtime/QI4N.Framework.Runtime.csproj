@@ -59,7 +59,6 @@
     <Compile Include="Composite\AbstractModifierModel.cs" />
     <Compile Include="Composite\AndAppliesToFilter.cs" />
     <Compile Include="Composite\AnnotationAppliesToFilter.cs" />
-    <Compile Include="Composite\CompositeCache.cs" />
     <Compile Include="Composite\CompositeMixin.cs" />
     <Compile Include="Composite\CompositesModel.cs" />
     <Compile Include="Composite\ConcernDeclaration.cs" />

@@ -31,7 +31,7 @@
 
         private ValueBuilder<T> GetBuilder<T>(Type mixinType)
         {
-            CompositeFinder finder = this.moduleInstance.FindCompositeModel(mixinType);
+            ValueFinder finder = this.moduleInstance.FindValueModel(mixinType);
 
             if (finder.Model == null)
             {
