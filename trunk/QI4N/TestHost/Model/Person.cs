@@ -6,12 +6,13 @@
     using QI4N.Framework;
 
     [Concerns(typeof(PersonBehaviorConcern), typeof(MyGenericConcern))]
+    [SideEffects(typeof(MySideEffect))]
     [Mixins(typeof(PersonBehaviorMixin))]
     public interface PersonComposite : Person, TransientComposite
     {
     }
 
-    [SideEffects(typeof(MySideEffect))]
+  //  [SideEffects(typeof(MySideEffect))]
     public interface PersonBehavior
     {
         void SayHi();

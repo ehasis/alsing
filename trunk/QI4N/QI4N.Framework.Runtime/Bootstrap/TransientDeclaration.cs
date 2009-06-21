@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+
     using Bootstrap;
 
     public class TransientDeclarationImpl : AbstractCompositeDeclarationImpl<TransientDeclaration, TransientComposite>, TransientDeclaration
@@ -12,12 +12,12 @@
             foreach (Type compositeType in this.CompositeTypes)
             {
                 CompositeModel compositeModel = CompositeModel.NewModel(compositeType,
-                                                            this.visibility,
-                                                            new MetaInfo(this.metaInfo).WithAnnotations(compositeType),
-                                                            propertyDecs,
-                                                            this.concerns,
-                                                            this.sideEffects,
-                                                            this.mixins);
+                                                                        this.visibility,
+                                                                        new MetaInfo(this.metaInfo).WithAnnotations(compositeType),
+                                                                        propertyDecs,
+                                                                        this.concerns,
+                                                                        this.sideEffects,
+                                                                        this.mixins);
                 compositeModels.Add(compositeModel);
             }
         }

@@ -45,35 +45,15 @@ namespace QI4N.Framework.Runtime
         private static List<Type> AsSideEffectsTargetTypes(Type type)
         {
             return type.GetAllInterfaces().ToList();
-            //// Find side-effect declarations
-            //if (type.IsInterface)
-            //{
-            //    //TODO: What?
-            //    return GenericInterfacesOf(type);
-            //}
-
-            ////TODO: What?
-            //return Singleton(type);
-        }
-
-        private static List<Type> GenericInterfacesOf(Type type)
-        {
-            return new List<Type>();
-        }
-
-        private static List<Type> Singleton(Type type)
-        {
-            return new List<Type>();
         }
 
         private void AddSideEffectDeclaration(Type type)
         {
-            var sideEffects = from sideEffectAttribute in type.GetAttributes<Framework.SideEffectsAttribute>()
-                                  from sideEffectType in sideEffectAttribute.SideEffectTypes
-                                  select new SideEffectDeclaration(sideEffectType, type);
+            IEnumerable<SideEffectDeclaration> sideEffects = from sideEffectAttribute in type.GetAttributes<SideEffectsAttribute>()
+                                                             from sideEffectType in sideEffectAttribute.SideEffectTypes
+                                                             select new SideEffectDeclaration(sideEffectType, type);
 
             this.sideEffectDeclarations.AddRange(sideEffects);
-            
         }
 
         private List<Type> MatchingSideEffectClasses(MethodInfo method, Type compositeType)
@@ -90,7 +70,6 @@ namespace QI4N.Framework.Runtime
             return result;
         }
     }
-
 
 
     public class SideEffectDeclaration : AbstractModifierDeclaration
