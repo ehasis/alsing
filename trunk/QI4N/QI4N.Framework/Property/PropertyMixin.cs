@@ -2,7 +2,6 @@ namespace QI4N.Framework
 {
     using System;
     using System.Reflection;
-    using System.Diagnostics;
 
     [AppliesTo(typeof(PropertyFilter))]
     public class PropertyMixin : InvocationHandler

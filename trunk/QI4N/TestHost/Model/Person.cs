@@ -4,7 +4,6 @@
     using System.Reflection;
 
     using QI4N.Framework;
-    using QI4N.Framework;
 
     [Concerns(typeof(PersonBehaviorConcern), typeof(MyGenericConcern))]
     [Mixins(typeof(PersonBehaviorMixin))]
@@ -12,7 +11,7 @@
     {
     }
 
-
+    [SideEffects(typeof(MySideEffect))]
     public interface PersonBehavior
     {
         void SayHi();
@@ -128,7 +127,7 @@
         }
     }
 
-    public class MySideEffect : SideEffectOf<PersonBehavior>,PersonBehavior
+    public class MySideEffect : SideEffectOf<PersonBehavior>, PersonBehavior
     {
         public void SayHi()
         {

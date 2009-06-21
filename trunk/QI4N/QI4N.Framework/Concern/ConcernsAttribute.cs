@@ -12,8 +12,7 @@
         public Type[] ConcernTypes { get; private set; }
     }
 
-    public class ConcernForAttribute :  Attribute
+    public class ConcernForAttribute : Attribute
     {
-        
     }
 }
