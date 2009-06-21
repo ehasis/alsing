@@ -65,7 +65,7 @@
     <Compile Include="Composite\ConcernDeclaration.cs" />
     <Compile Include="Composite\ConcernsDeclaration.cs" />
     <Compile Include="Composite\ConstraintsModel.cs" />
-    <Compile Include="Composite\EntityFinder.cs" />
+    <Compile Include="Entity\EntityFinder.cs" />
     <Compile Include="Composite\FragmentInvocationHandler.cs" />
     <Compile Include="Composite\GenericFragmentInvocationHandler.cs" />
     <Compile Include="Composite\ImplementsMethodAppliesToFilter.cs" />
@@ -93,6 +93,7 @@
     <Compile Include="Composite\TypedModifierAppliesToFilter.cs" />
     <Compile Include="Entity\EntitiesInstance.cs" />
     <Compile Include="Entity\EntitiesModel.cs" />
+    <Compile Include="Object\ObjectBuilderFactoryInstance.cs" />
     <Compile Include="Structure\ApplicationInstance.cs" />
     <Compile Include="Structure\ApplicationModel.cs" />
     <Compile Include="Structure\LayerInstance.cs" />
@@ -129,6 +130,8 @@
     <Compile Include="Object\ObjectsInstance.cs" />
     <Compile Include="Object\ObjectsModel.cs" />
     <Compile Include="Service\ServicesModel.cs" />
+    <Compile Include="Value\ValueBuilderFactoryInstance.cs" />
+    <Compile Include="Value\ValueFinder.cs" />
     <Compile Include="Value\ValuesInstance.cs" />
     <Compile Include="Value\ValuesModel.cs" />
     <Compile Include="Value\ValueInstance.cs" />

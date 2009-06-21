@@ -17,5 +17,10 @@ namespace QI4N.Framework.Runtime
         {
             throw new NotImplementedException();
         }
+
+        public ValueModel GetValueModelFor(Type MixinType, Visibility visibility)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
