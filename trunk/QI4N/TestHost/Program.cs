@@ -83,7 +83,8 @@ namespace ConsoleApplication23
             var accidentBuilder = valueFactory.NewValueBuilder<Accident>();
 
             var accident = accidentBuilder.NewInstance();
-
+            accident.Description.Value = "hej du glade";
+            accident.Occured.Value = new DateTime(2009, 01, 01);
 
             Console.ReadLine();
         }
