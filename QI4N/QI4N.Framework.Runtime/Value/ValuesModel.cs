@@ -35,7 +35,7 @@ namespace QI4N.Framework.Runtime
             ValueModel foundModel = null;
             foreach (ValueModel composite in this.valueModels)
             {
-                if (typeof(Value).IsAssignableFrom(mixinType))
+                if (typeof(ValueComposite).IsAssignableFrom(mixinType))
                 {
                     if (mixinType == composite.CompositeType && composite.Visibility == visibility)
                     {

@@ -4,7 +4,8 @@ namespace QI4N.Framework.Runtime
 
     public class ValueInstance : DefaultCompositeInstance
     {
-        public ValueInstance(CompositeModel compositeModel, ModuleInstance moduleInstance, object[] mixins, StateHolder state) : base(compositeModel, moduleInstance, mixins, state)
+        public ValueInstance(ValueModel valueModel, ModuleInstance moduleInstance, object[] mixins, StateHolder state)
+            : base(valueModel, moduleInstance, mixins, state)
         {
         }
 

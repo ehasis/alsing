@@ -17,7 +17,7 @@
             CompositeModel foundModel = null;
             foreach (CompositeModel composite in this.compositeModels)
             {
-                if (typeof(Composite).IsAssignableFrom(mixinType))
+                if (typeof(TransientComposite).IsAssignableFrom(mixinType))
                 {
                     if (mixinType == composite.CompositeType && composite.Visibility == visibility)
                     {
