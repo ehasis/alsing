@@ -2,7 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System;
 
-    public class ValueInstance : AbstractCompositeInstance
+    public sealed class ValueInstance : AbstractCompositeInstance
     {
         public ValueInstance(ValueModel valueModel, ModuleInstance moduleInstance, object[] mixins, StateHolder state)
             : base(valueModel, moduleInstance, mixins, state)

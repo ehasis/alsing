@@ -5,7 +5,7 @@ namespace QI4N.Framework.Runtime
 
     public class UsesInstance
     {
-        public static readonly UsesInstance NO_USES = new UsesInstance();
+        public static readonly UsesInstance NoUses = new UsesInstance();
 
         protected List<object> usedObjects = new List<object>();
 

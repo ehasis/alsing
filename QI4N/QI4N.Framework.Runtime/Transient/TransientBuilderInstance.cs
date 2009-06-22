@@ -2,11 +2,11 @@ namespace QI4N.Framework.Runtime
 {
     using System;
 
-    public class TransientBuilderInstance<T> : TransientBuilder<T>
+    public sealed class TransientBuilderInstance<T> : TransientBuilder<T>
     {
         protected Type compositeInterface;
 
-        protected CompositeModel compositeModel;
+        protected TransientModel transientModel;
 
         protected ModuleInstance moduleInstance;
 
@@ -16,23 +16,23 @@ namespace QI4N.Framework.Runtime
 
         protected UsesInstance uses;
 
-        public TransientBuilderInstance(ModuleInstance moduleInstance, CompositeModel model, UsesInstance uses)
+        public TransientBuilderInstance(ModuleInstance moduleInstance, TransientModel model, UsesInstance uses)
                 : this(moduleInstance, model)
         {
             this.uses = uses;
         }
 
-        public TransientBuilderInstance(ModuleInstance moduleInstance, CompositeModel model)
+        public TransientBuilderInstance(ModuleInstance moduleInstance, TransientModel model)
         {
             this.moduleInstance = moduleInstance;
-            this.compositeModel = model;
+            this.transientModel = model;
         }
 
         public Type CompositeType
         {
             get
             {
-                return this.compositeModel.CompositeType;
+                return this.transientModel.CompositeType;
             }
         }
 
@@ -43,7 +43,7 @@ namespace QI4N.Framework.Runtime
             {
                 if (this.state == null)
                 {
-                    this.state = this.compositeModel.NewBuilderState();
+                    this.state = this.transientModel.NewBuilderState();
                 }
                 return this.state;
             }
@@ -69,16 +69,16 @@ namespace QI4N.Framework.Runtime
 
             if (this.state == null)
             {
-                instanceState = this.compositeModel.NewInitialState();
+                instanceState = this.transientModel.NewInitialState();
             }
             else
             {
-                instanceState = this.compositeModel.NewState(this.state);
+                instanceState = this.transientModel.NewState(this.state);
             }
 
-            this.compositeModel.State.CheckConstraints(instanceState);
+            this.transientModel.State.CheckConstraints(instanceState);
 
-            CompositeInstance compositeInstance = this.compositeModel.NewCompositeInstance(this.moduleInstance, this.uses ?? UsesInstance.NO_USES, instanceState);
+            CompositeInstance compositeInstance = this.transientModel.NewCompositeInstance(this.moduleInstance, this.uses ?? UsesInstance.NoUses, instanceState);
 
             return (T)compositeInstance.Proxy;
         }
@@ -89,7 +89,7 @@ namespace QI4N.Framework.Runtime
 
             if (this.prototypeInstance == null)
             {
-                this.prototypeInstance = this.compositeModel.NewCompositeInstance(this.moduleInstance, this.Uses, this.State);
+                this.prototypeInstance = this.transientModel.NewCompositeInstance(this.moduleInstance, this.Uses, this.State);
             }
 
             return (T)this.prototypeInstance.Proxy;
@@ -100,7 +100,7 @@ namespace QI4N.Framework.Runtime
             // Instantiate given value type
             if (this.prototypeInstance == null)
             {
-                this.prototypeInstance = this.compositeModel.NewCompositeInstance(this.moduleInstance, this.Uses, this.State);
+                this.prototypeInstance = this.transientModel.NewCompositeInstance(this.moduleInstance, this.Uses, this.State);
             }
 
             return (K)this.prototypeInstance.NewProxy(typeof(K));

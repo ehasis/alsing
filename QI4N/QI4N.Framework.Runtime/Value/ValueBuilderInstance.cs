@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ValueBuilderInstance<T> : ValueBuilder<T>
+    public sealed class ValueBuilderInstance<T> : ValueBuilder<T>
     {
         protected Type compositeInterface;
 
@@ -78,7 +78,7 @@
 
             this.valueModel.State.CheckConstraints(instanceState);
 
-            CompositeInstance compositeInstance = this.valueModel.NewValueInstance(this.moduleInstance, this.uses ?? UsesInstance.NO_USES, instanceState);
+            CompositeInstance compositeInstance = this.valueModel.NewValueInstance(this.moduleInstance, this.uses ?? UsesInstance.NoUses, instanceState);
 
             return (T)compositeInstance.Proxy;
         }

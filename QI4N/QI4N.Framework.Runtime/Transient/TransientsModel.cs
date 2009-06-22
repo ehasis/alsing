@@ -3,19 +3,19 @@
     using System;
     using System.Collections.Generic;
 
-    public class CompositesModel
+    public sealed class TransientsModel
     {
-        private readonly IList<CompositeModel> compositeModels;
+        private readonly IList<TransientModel> compositeModels;
 
-        public CompositesModel(IList<CompositeModel> compositeModels)
+        public TransientsModel(IList<TransientModel> compositeModels)
         {
             this.compositeModels = compositeModels;
         }
 
-        public CompositeModel GetCompositeModelFor(Type mixinType, Visibility visibility)
+        public TransientModel GetCompositeModelFor(Type mixinType, Visibility visibility)
         {
-            CompositeModel foundModel = null;
-            foreach (CompositeModel composite in this.compositeModels)
+            TransientModel foundModel = null;
+            foreach (TransientModel composite in this.compositeModels)
             {
                 if (typeof(TransientComposite).IsAssignableFrom(mixinType))
                 {
@@ -47,7 +47,7 @@
 
         public Type GetTypeForName(String type)
         {
-            foreach (CompositeModel compositeModel in this.compositeModels)
+            foreach (TransientModel compositeModel in this.compositeModels)
             {
                 if (compositeModel.CompositeType.Name == type)
                 {
@@ -60,7 +60,7 @@
 
         public void VisitModel(ModelVisitor visitor)
         {
-            foreach (CompositeModel compositeModel in this.compositeModels)
+            foreach (TransientModel compositeModel in this.compositeModels)
             {
                 compositeModel.VisitModel(visitor);
             }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace QI4N.Framework.Runtime
 {
-    public class ValueFinder : TypeFinder<ValueModel>
+    public sealed class ValueFinder : TypeFinder<ValueModel>
     {
         protected override ValueModel FindModel(ModuleModel model, Visibility visibility)
         {

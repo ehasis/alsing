@@ -7,9 +7,9 @@ namespace QI4N.Framework.Runtime
     {
         private readonly TransientBuilderFactory compositeBuilderFactory;
 
-        private readonly IDictionary<Type, CompositeFinder> compositeFinders;
+        private readonly IDictionary<Type, TransientFinder> compositeFinders;
 
-        private readonly CompositesInstance composites;
+        private readonly TransientsInstance transients;
 
         private readonly EntitiesInstance entities;
 
@@ -41,13 +41,13 @@ namespace QI4N.Framework.Runtime
         private readonly ValuesInstance values;
 
 
-        public ModuleInstance(ModuleModel moduleModel, LayerInstance layerInstance, CompositesModel compositesModel,
+        public ModuleInstance(ModuleModel moduleModel, LayerInstance layerInstance, TransientsModel transientsModel,
                               EntitiesModel entitiesModel, ObjectsModel objectsModel, ValuesModel valuesModel,
                               ServicesModel servicesModel, ImportedServicesModel importedServicesModel)
         {
             this.model = moduleModel;
             this.layerInstance = layerInstance;
-            this.composites = new CompositesInstance(compositesModel, this);
+            this.transients = new TransientsInstance(transientsModel, this);
             this.entities = new EntitiesInstance(entitiesModel, this);
             this.objects = new ObjectsInstance(objectsModel, this);
             this.values = new ValuesInstance(valuesModel, this);
@@ -61,7 +61,7 @@ namespace QI4N.Framework.Runtime
             this.serviceFinder = new ServiceFinderInstance();
 
             this.entityFinders = new Dictionary<Type, EntityFinder>();
-            this.compositeFinders = new Dictionary<Type, CompositeFinder>();
+            this.compositeFinders = new Dictionary<Type, TransientFinder>();
             this.objectFinders = new Dictionary<Type, ObjectFinder>();
             this.valueFinders = new Dictionary<Type, ValueFinder>();
         }
@@ -75,12 +75,12 @@ namespace QI4N.Framework.Runtime
         }
 
 
-        public CompositeFinder FindCompositeModel(Type mixinType)
+        public TransientFinder FindCompositeModel(Type mixinType)
         {
-            CompositeFinder finder;
+            TransientFinder finder;
             if (!this.compositeFinders.TryGetValue(mixinType, out finder))
             {
-                finder = new CompositeFinder
+                finder = new TransientFinder
                              {
                                      MixinType = mixinType
                              };

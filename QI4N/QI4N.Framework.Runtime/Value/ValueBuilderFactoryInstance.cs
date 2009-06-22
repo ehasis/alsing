@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ValueBuilderFactoryInstance : ValueBuilderFactory
+    public sealed class ValueBuilderFactoryInstance : ValueBuilderFactory
     {
         private readonly ModuleInstance moduleInstance;
 

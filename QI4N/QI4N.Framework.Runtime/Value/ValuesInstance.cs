@@ -1,6 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
-    public class ValuesInstance
+    public sealed class ValuesInstance
     {
         public ValuesInstance(ValuesModel model, ModuleInstance instance)
         {
