@@ -214,26 +214,13 @@
         }
     }
 
-    public class MetaInfoDeclaration : PropertyDeclarations
-    {
-        public object GetInitialValue(MethodInfo accessor)
-        {
-            throw new NotImplementedException();
-        }
 
-        public MetaInfo GetMetaInfo(MethodInfo accessor)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
     public class ImportedServiceModel
     {
     }
 
-    public class ServiceModel
-    {
-    }
+
 
 
 
