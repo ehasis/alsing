@@ -21,9 +21,9 @@ namespace QI4N.Framework.Runtime
                                               IEnumerable<Type> assemblyConcerns,
                                               IEnumerable<Type> sideEffects, IList<Type> mixins)
         {
-            var constraintsModel = new ConstraintsModel(compositeType);
+            var constraintsModel = new TransientConstraintsModel(compositeType);
             bool immutable = metaInfo.Get(typeof(ImmutableAttribute)) != null;
-            var propertiesModel = new PropertiesModel(constraintsModel, propertyDeclarations, immutable);
+            var propertiesModel = new TransientPropertiesModel(constraintsModel, propertyDeclarations, immutable);
             var stateModel = new TransientStateModel(propertiesModel);
             var mixinsModel = new MixinsModel(compositeType, mixins);
 

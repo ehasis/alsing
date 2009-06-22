@@ -66,17 +66,17 @@
     <Compile Include="Transient\TransientsModel.cs" />
     <Compile Include="Concern\ConcernDeclaration.cs" />
     <Compile Include="Concern\ConcernsDeclaration.cs" />
-    <Compile Include="Composite\ConstraintsModel.cs" />
+    <Compile Include="Transient\TransientConstraintsModel.cs" />
     <Compile Include="Entity\EntityFinder.cs" />
     <Compile Include="Invocation\FragmentInvocationHandler.cs" />
     <Compile Include="Invocation\GenericFragmentInvocationHandler.cs" />
     <Compile Include="Composite\ImplementsMethodAppliesToFilter.cs" />
     <Compile Include="Concern\MethodConcernsInstance.cs" />
     <Compile Include="Concern\MethodConcernsModel.cs" />
-    <Compile Include="Composite\MethodConstraintModel.cs" />
-    <Compile Include="Composite\MethodSideEffectModel.cs" />
-    <Compile Include="Composite\MethodSideEffectsInstance.cs" />
-    <Compile Include="Composite\MethodSideEffectsModel.cs" />
+    <Compile Include="Constraint\MethodConstraintModel.cs" />
+    <Compile Include="SideEffect\MethodSideEffectModel.cs" />
+    <Compile Include="SideEffect\MethodSideEffectsInstance.cs" />
+    <Compile Include="SideEffect\MethodSideEffectsModel.cs" />
     <Compile Include="Mixin\AbstractMixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
     <Compile Include="Transient\TransientBuilderInstance.cs" />
@@ -100,13 +100,13 @@
     <Compile Include="Structure\LayerInstance.cs" />
     <Compile Include="Structure\LayerModel.cs" />
     <Compile Include="Structure\ModuleModel.cs" />
-    <Compile Include="Composite\SideEffectsDeclaration.cs" />
+    <Compile Include="SideEffect\SideEffectsDeclaration.cs" />
     <Compile Include="Transient\TransientBuilderFactoryInstance.cs" />
     <Compile Include="Mixin\MixinModel.cs" />
     <Compile Include="Mixin\MixinsInstance.cs" />
     <Compile Include="Structure\ModuleInstance.cs" />
-    <Compile Include="Composite\ProxyReferenceInvocationHandler.cs" />
-    <Compile Include="Composite\SideEffectInvocationHandlerResult.cs" />
+    <Compile Include="Invocation\ProxyReferenceInvocationHandler.cs" />
+    <Compile Include="SideEffect\SideEffectInvocationHandlerResult.cs" />
     <Compile Include="Transient\TransientStateModel.cs" />
     <Compile Include="Invocation\TypedFragmentInvocationHandler.cs" />
     <Compile Include="Composite\TypeFinderT.cs" />
@@ -123,7 +123,7 @@
     <Compile Include="Property\AbstractPropertyModel.cs" />
     <Compile Include="Property\AbstractPropertiesModel.cs" />
     <Compile Include="Property\PropertiesInstance.cs" />
-    <Compile Include="Property\PropertiesModel.cs" />
+    <Compile Include="Transient\TransientPropertiesModel.cs" />
     <Compile Include="Property\PropertyHandler.cs" />
     <Compile Include="Property\PropertyInstance.cs" />
     <Compile Include="Property\PropertyModel.cs" />
@@ -133,11 +133,14 @@
     <Compile Include="Service\ServicesModel.cs" />
     <Compile Include="Value\ValueBuilderFactoryInstance.cs" />
     <Compile Include="Value\ValueBuilderInstance.cs" />
+    <Compile Include="Value\ValueConstraintsModel.cs" />
     <Compile Include="Value\ValueFinder.cs" />
     <Compile Include="Value\ValueModel.cs" />
+    <Compile Include="Value\ValuePropertiesModel.cs" />
     <Compile Include="Value\ValuesInstance.cs" />
     <Compile Include="Value\ValuesModel.cs" />
     <Compile Include="Value\ValueInstance.cs" />
+    <Compile Include="Value\ValueStateModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QI4N.Framework.Bootstrap\QI4N.Framework.Bootstrap.csproj">

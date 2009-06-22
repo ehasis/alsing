@@ -14,10 +14,10 @@
 
         public static ValueModel NewModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, PropertyDeclarations propertyDeclarations, List<Type> assemblyConcerns, List<Type> sideEffects, List<Type> mixins)
         {
-            var constraintsModel = new ConstraintsModel(compositeType);
+            var constraintsModel = new TransientConstraintsModel(compositeType);
             bool immutable = metaInfo.Get(typeof(ImmutableAttribute)) != null;
-            var propertiesModel = new PropertiesModel(constraintsModel, propertyDeclarations, immutable);
-            var stateModel = new TransientStateModel(propertiesModel);
+            var propertiesModel = new ValuePropertiesModel(constraintsModel, propertyDeclarations, immutable);
+            var stateModel = new ValueStateModel(propertiesModel);
             var mixinsModel = new MixinsModel(compositeType, mixins);
 
             var concerns = new List<ConcernDeclaration>();
