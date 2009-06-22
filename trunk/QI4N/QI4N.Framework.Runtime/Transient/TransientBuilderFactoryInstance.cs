@@ -2,7 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System;
 
-    public class TransientBuilderFactoryInstance : TransientBuilderFactory
+    public sealed class TransientBuilderFactoryInstance : TransientBuilderFactory
     {
         private readonly ModuleInstance moduleInstance;
 
@@ -31,7 +31,7 @@ namespace QI4N.Framework.Runtime
 
         private TransientBuilder<T> GetBuilder<T>(Type mixinType)
         {
-            CompositeFinder finder = this.moduleInstance.FindCompositeModel(mixinType);
+            TransientFinder finder = this.moduleInstance.FindCompositeModel(mixinType);
 
             if (finder.Model == null)
             {

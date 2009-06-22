@@ -5,7 +5,7 @@ namespace QI4N.Framework.Runtime
 
     public class ModuleModel
     {
-        private readonly CompositesModel compositesModel;
+        private readonly TransientsModel transientsModel;
 
         private readonly EntitiesModel entitiesModel;
 
@@ -24,7 +24,7 @@ namespace QI4N.Framework.Runtime
         private LayerModel layerModel;
 
         public ModuleModel(string name,
-                           MetaInfo metaInfo, CompositesModel compositesModel,
+                           MetaInfo metaInfo, TransientsModel transientsModel,
                            EntitiesModel entitiesModel,
                            ObjectsModel objectsModel,
                            ValuesModel valuesModel,
@@ -33,7 +33,7 @@ namespace QI4N.Framework.Runtime
         {
             this.name = name;
             this.metaInfo = metaInfo;
-            this.compositesModel = compositesModel;
+            this.transientsModel = transientsModel;
             this.entitiesModel = entitiesModel;
             this.objectsModel = objectsModel;
             this.valuesModel = valuesModel;
@@ -42,11 +42,11 @@ namespace QI4N.Framework.Runtime
         }
 
 
-        public CompositesModel Composites
+        public TransientsModel Transients
         {
             get
             {
-                return this.compositesModel;
+                return this.transientsModel;
             }
         }
 
@@ -108,14 +108,14 @@ namespace QI4N.Framework.Runtime
 
         public ModuleInstance NewInstance(LayerInstance layerInstance)
         {
-            return new ModuleInstance(this, layerInstance, this.compositesModel, this.entitiesModel, this.objectsModel, this.valuesModel, this.servicesModel, this.importedServicesModel);
+            return new ModuleInstance(this, layerInstance, this.transientsModel, this.entitiesModel, this.objectsModel, this.valuesModel, this.servicesModel, this.importedServicesModel);
         }
 
         public void VisitModel(ModelVisitor modelVisitor)
         {
             modelVisitor.Visit(this);
 
-            this.compositesModel.VisitModel(modelVisitor);
+            this.transientsModel.VisitModel(modelVisitor);
             this.entitiesModel.VisitModel(modelVisitor);
             this.servicesModel.VisitModel(modelVisitor);
             this.importedServicesModel.VisitModel(modelVisitor);

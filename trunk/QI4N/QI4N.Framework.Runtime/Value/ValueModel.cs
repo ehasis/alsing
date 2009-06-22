@@ -5,7 +5,7 @@
 
     using Bootstrap;
 
-    public class ValueModel : AbstractCompositeModel
+    public sealed class ValueModel : AbstractCompositeModel
     {
         public ValueModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
                 : base(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel)

@@ -7,14 +7,14 @@ namespace QI4N.Framework.Runtime
 
     using JavaProxy;
 
-    public class CompositeModel : AbstractCompositeModel
+    public sealed class TransientModel : AbstractCompositeModel
     {
-        public CompositeModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, StateModel stateModel, CompositeMethodsModel compositeMethodsModel)
+        public TransientModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, StateModel stateModel, CompositeMethodsModel compositeMethodsModel)
                 : base(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel)
         {
         }
 
-        public static CompositeModel NewModel(Type compositeType,
+        public static TransientModel NewModel(Type compositeType,
                                               Visibility visibility,
                                               MetaInfo metaInfo,
                                               PropertyDeclarations propertyDeclarations,
@@ -36,13 +36,13 @@ namespace QI4N.Framework.Runtime
             var compositeMethodsModel = new CompositeMethodsModel(compositeType, constraintsModel, concernsModel, sideEffectsModel, mixinsModel);
             stateModel.AddStateFor(compositeMethodsModel.Methods, compositeType);
 
-            return new CompositeModel(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel);
+            return new TransientModel(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel);
         }
 
         public CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance uses, StateHolder stateHolder)
         {
             object[] mixins = this.mixinsModel.NewMixinHolder();
-            CompositeInstance compositeInstance = new DefaultCompositeInstance(this, moduleInstance, mixins, stateHolder);
+            CompositeInstance compositeInstance = new TransientInstance(this, moduleInstance, mixins, stateHolder);
 
             ((MixinsModel)this.mixinsModel).NewMixins(compositeInstance, uses, stateHolder, mixins);
 

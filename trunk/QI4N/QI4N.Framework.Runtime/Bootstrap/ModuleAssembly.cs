@@ -111,7 +111,7 @@
 
         public ModuleModel AssembleModule()
         {
-            var compositeModels = new List<CompositeModel>();
+            var compositeModels = new List<TransientModel>();
             var entityModels = new List<EntityModel>();
             var objectModels = new List<ObjectModel>();
             var valueModels = new List<ValueModel>();
@@ -124,7 +124,7 @@
             }
 
             var moduleModel = new ModuleModel(this.name,
-                                              this.metaInfo, new CompositesModel(compositeModels),
+                                              this.metaInfo, new TransientsModel(compositeModels),
                                               new EntitiesModel(entityModels),
                                               new ObjectsModel(objectModels),
                                               new ValuesModel(valueModels),

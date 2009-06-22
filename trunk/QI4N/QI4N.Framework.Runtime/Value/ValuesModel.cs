@@ -3,7 +3,7 @@ namespace QI4N.Framework.Runtime
     using System;
     using System.Collections.Generic;
 
-    public class ValuesModel
+    public sealed class ValuesModel
     {
         private readonly List<ValueModel> valueModels;
 
