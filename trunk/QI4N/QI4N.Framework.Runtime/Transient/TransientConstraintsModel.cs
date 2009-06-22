@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class ConstraintsModel
+    public class TransientConstraintsModel
     {
-        public ConstraintsModel(Type type)
+        public TransientConstraintsModel(Type type)
         {
         }
     }

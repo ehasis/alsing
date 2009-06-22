@@ -5,7 +5,7 @@ namespace QI4N.Framework.Runtime
 
     public class EntityStateModel : AbstractStateModel
     {
-        public EntityStateModel(PropertiesModel propertiesModel)
+        public EntityStateModel(TransientPropertiesModel propertiesModel)
                 : base(propertiesModel)
         {
         }
