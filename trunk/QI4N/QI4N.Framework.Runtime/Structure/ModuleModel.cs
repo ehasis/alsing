@@ -5,8 +5,6 @@ namespace QI4N.Framework.Runtime
 
     public class ModuleModel
     {
-        private readonly TransientsModel transientsModel;
-
         private readonly EntitiesModel entitiesModel;
 
         private readonly ImportedServicesModel importedServicesModel;
@@ -18,6 +16,8 @@ namespace QI4N.Framework.Runtime
         private readonly ObjectsModel objectsModel;
 
         private readonly ServicesModel servicesModel;
+
+        private readonly TransientsModel transientsModel;
 
         private readonly ValuesModel valuesModel;
 
@@ -41,14 +41,6 @@ namespace QI4N.Framework.Runtime
             this.importedServicesModel = importedServicesModel;
         }
 
-
-        public TransientsModel Transients
-        {
-            get
-            {
-                return this.transientsModel;
-            }
-        }
 
         public EntitiesModel entities
         {
@@ -95,6 +87,14 @@ namespace QI4N.Framework.Runtime
             get
             {
                 return this.servicesModel;
+            }
+        }
+
+        public TransientsModel Transients
+        {
+            get
+            {
+                return this.transientsModel;
             }
         }
 

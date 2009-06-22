@@ -4,11 +4,11 @@ namespace QI4N.Framework.Runtime
 
     public sealed class TransientBuilderInstance<T> : TransientBuilder<T>
     {
+        protected readonly ModuleInstance moduleInstance;
+
+        protected readonly TransientModel transientModel;
+
         protected Type compositeInterface;
-
-        protected TransientModel transientModel;
-
-        protected ModuleInstance moduleInstance;
 
         protected CompositeInstance prototypeInstance;
 

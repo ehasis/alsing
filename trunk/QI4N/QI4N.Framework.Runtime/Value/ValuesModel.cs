@@ -12,11 +12,6 @@ namespace QI4N.Framework.Runtime
             this.valueModels = valueModels;
         }
 
-        public void VisitModel(ModelVisitor visitor)
-        {
-            throw new NotImplementedException();
-        }
-
         public Type GetTypeForName(String type)
         {
             foreach (ValueModel valueModel in this.valueModels)
@@ -61,6 +56,11 @@ namespace QI4N.Framework.Runtime
             }
 
             return foundModel;
+        }
+
+        public void VisitModel(ModelVisitor visitor)
+        {
+            throw new NotImplementedException();
         }
     }
 }

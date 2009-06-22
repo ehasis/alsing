@@ -4,11 +4,11 @@
 
     public sealed class ValueBuilderInstance<T> : ValueBuilder<T>
     {
+        protected readonly ModuleInstance moduleInstance;
+
+        protected readonly ValueModel valueModel;
+
         protected Type compositeInterface;
-
-        protected ValueModel valueModel;
-
-        protected ModuleInstance moduleInstance;
 
         protected CompositeInstance prototypeInstance;
 

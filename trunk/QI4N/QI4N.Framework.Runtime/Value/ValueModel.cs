@@ -30,7 +30,6 @@
             stateModel.AddStateFor(compositeMethodsModel.Methods, compositeType);
 
             return new ValueModel(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel);
-
         }
 
 
