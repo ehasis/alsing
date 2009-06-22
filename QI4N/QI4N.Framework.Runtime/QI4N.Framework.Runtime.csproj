@@ -109,7 +109,7 @@
     <Compile Include="SideEffect\SideEffectInvocationHandlerResult.cs" />
     <Compile Include="Transient\TransientStateModel.cs" />
     <Compile Include="Invocation\TypedFragmentInvocationHandler.cs" />
-    <Compile Include="Composite\TypeFinderT.cs" />
+    <Compile Include="Composite\AbstractTypeFinder.cs" />
     <Compile Include="Composite\UseInstance.cs" />
     <Compile Include="Entity\EntityInstance.cs" />
     <Compile Include="Entity\EntityMixin.cs" />

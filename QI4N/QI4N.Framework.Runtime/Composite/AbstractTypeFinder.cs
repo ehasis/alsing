@@ -2,7 +2,7 @@
 {
     using System;
 
-    public abstract class TypeFinder<T> : ModuleVisitor where T : AbstractCompositeModel
+    public abstract class AbstractTypeFinder<T> : ModuleVisitor where T : AbstractCompositeModel
     {
         public Type MixinType { get; set; }
 
