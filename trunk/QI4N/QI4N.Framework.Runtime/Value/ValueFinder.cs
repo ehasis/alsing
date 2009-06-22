@@ -1,6 +1,6 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
-    public sealed class ValueFinder : TypeFinder<ValueModel>
+    public sealed class ValueFinder : AbstractTypeFinder<ValueModel>
     {
         protected override ValueModel FindModel(ModuleModel model, Visibility visibility)
         {

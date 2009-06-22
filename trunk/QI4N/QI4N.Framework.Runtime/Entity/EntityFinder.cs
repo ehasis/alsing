@@ -1,6 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
-    public class EntityFinder : TypeFinder<EntityModel>
+    public class EntityFinder : AbstractTypeFinder<EntityModel>
     {
         protected override EntityModel FindModel(ModuleModel model, Visibility visibility)
         {
