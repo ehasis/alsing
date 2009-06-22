@@ -9,7 +9,7 @@ namespace QI4N.Framework.Runtime
 
     public sealed class TransientModel : AbstractCompositeModel
     {
-        public TransientModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, StateModel stateModel, CompositeMethodsModel compositeMethodsModel)
+        public TransientModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
                 : base(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel)
         {
         }
@@ -24,7 +24,7 @@ namespace QI4N.Framework.Runtime
             var constraintsModel = new ConstraintsModel(compositeType);
             bool immutable = metaInfo.Get(typeof(ImmutableAttribute)) != null;
             var propertiesModel = new PropertiesModel(constraintsModel, propertyDeclarations, immutable);
-            var stateModel = new StateModel(propertiesModel);
+            var stateModel = new TransientStateModel(propertiesModel);
             var mixinsModel = new MixinsModel(compositeType, mixins);
 
             var concerns = new List<ConcernDeclaration>();

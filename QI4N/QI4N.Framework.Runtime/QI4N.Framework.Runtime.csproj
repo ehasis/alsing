@@ -85,7 +85,6 @@
     <Compile Include="Transient\TransientInstance.cs" />
     <Compile Include="Transient\TransientModel.cs" />
     <Compile Include="Composite\CompositeInstance.cs" />
-    <Compile Include="Composite\CompositeTypeCache.cs" />
     <Compile Include="Composite\MixinsModel.cs" />
     <Compile Include="Transient\TransientsInstance.cs" />
     <Compile Include="Composite\TypeCheckAppliesToFilter.cs" />
@@ -106,7 +105,7 @@
     <Compile Include="Structure\ModuleInstance.cs" />
     <Compile Include="Composite\ProxyReferenceInvocationHandler.cs" />
     <Compile Include="Composite\SideEffectInvocationHandlerResult.cs" />
-    <Compile Include="Composite\StateModel.cs" />
+    <Compile Include="Transient\TransientStateModel.cs" />
     <Compile Include="Invocation\TypedFragmentInvocationHandler.cs" />
     <Compile Include="Composite\TypeFinderT.cs" />
     <Compile Include="Composite\UseInstance.cs" />

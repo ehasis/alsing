@@ -17,7 +17,7 @@
             var constraintsModel = new ConstraintsModel(compositeType);
             bool immutable = metaInfo.Get(typeof(ImmutableAttribute)) != null;
             var propertiesModel = new PropertiesModel(constraintsModel, propertyDeclarations, immutable);
-            var stateModel = new StateModel(propertiesModel);
+            var stateModel = new TransientStateModel(propertiesModel);
             var mixinsModel = new MixinsModel(compositeType, mixins);
 
             var concerns = new List<ConcernDeclaration>();
