@@ -5,7 +5,7 @@ namespace QI4N.Framework.Runtime
 
     using Reflection;
 
-    public class AbstractModifierDeclaration
+    public abstract class AbstractModifierDeclaration
     {
         private readonly Type declaredIn;
 
@@ -13,7 +13,7 @@ namespace QI4N.Framework.Runtime
 
         private AppliesToFilter appliesToFilter;
 
-        public AbstractModifierDeclaration(Type modifierClass, Type declaredIn)
+        protected AbstractModifierDeclaration(Type modifierClass, Type declaredIn)
         {
             this.modifierClass = modifierClass;
             this.declaredIn = declaredIn;
