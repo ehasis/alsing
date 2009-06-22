@@ -91,9 +91,9 @@ namespace QI4N.Framework.Runtime
 
         public object NewProxy(InvocationHandler invocationHandler, Type mixinType)
         {
-            var mixinProxyType = CreateProxyType(mixinType);
+            Type mixinProxyType = CreateProxyType(mixinType);
 
-            var instance = Activator.CreateInstance(mixinProxyType, invocationHandler);
+            object instance = Activator.CreateInstance(mixinProxyType, invocationHandler);
 
             return instance;
         }

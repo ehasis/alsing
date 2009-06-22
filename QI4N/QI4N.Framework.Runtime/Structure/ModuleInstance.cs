@@ -9,8 +9,6 @@ namespace QI4N.Framework.Runtime
 
         private readonly IDictionary<Type, TransientFinder> compositeFinders;
 
-        private readonly TransientsInstance transients;
-
         private readonly EntitiesInstance entities;
 
         private readonly IDictionary<Type, EntityFinder> entityFinders;
@@ -31,6 +29,8 @@ namespace QI4N.Framework.Runtime
         private readonly ServiceFinderInstance serviceFinder;
 
         private readonly ServicesInstance services;
+
+        private readonly TransientsInstance transients;
 
         private readonly UnitOfWorkFactoryInstance unitOfWorkFactory;
 
@@ -113,6 +113,25 @@ namespace QI4N.Framework.Runtime
             return finder;
         }
 
+        public ValueFinder FindValueModel(Type mixinType)
+        {
+            ValueFinder finder;
+            if (!this.valueFinders.TryGetValue(mixinType, out finder))
+            {
+                finder = new ValueFinder
+                             {
+                                     MixinType = mixinType
+                             };
+                this.VisitModules(finder);
+                if (finder.Model != null)
+                {
+                    this.valueFinders.Add(mixinType, finder);
+                }
+            }
+
+            return finder;
+        }
+
         public void VisitModules(ModuleVisitor visitor)
         {
             // Visit this module
@@ -124,25 +143,6 @@ namespace QI4N.Framework.Runtime
             // Visit layer
             this.layerInstance.VisitModules(visitor, Visibility.Layer);
         }
-
-        public ValueFinder FindValueModel(Type mixinType)
-        {
-            ValueFinder finder;
-            if (!this.valueFinders.TryGetValue(mixinType, out finder))
-            {
-                finder = new ValueFinder
-                {
-                    MixinType = mixinType
-                };
-                this.VisitModules(finder);
-                if (finder.Model != null)
-                {
-                    this.valueFinders.Add(mixinType, finder);
-                }
-            }
-
-            return finder;
-        }
     }
 
     public class ImportedServicesInstance
@@ -152,9 +152,6 @@ namespace QI4N.Framework.Runtime
     public class ServicesInstance
     {
     }
-
-
-
 
 
     public class UnitOfWorkFactoryInstance

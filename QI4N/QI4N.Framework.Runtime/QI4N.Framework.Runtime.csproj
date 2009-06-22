@@ -66,8 +66,8 @@
     <Compile Include="Composite\ConcernsDeclaration.cs" />
     <Compile Include="Composite\ConstraintsModel.cs" />
     <Compile Include="Entity\EntityFinder.cs" />
-    <Compile Include="Composite\FragmentInvocationHandler.cs" />
-    <Compile Include="Composite\GenericFragmentInvocationHandler.cs" />
+    <Compile Include="Invocation\FragmentInvocationHandler.cs" />
+    <Compile Include="Invocation\GenericFragmentInvocationHandler.cs" />
     <Compile Include="Composite\ImplementsMethodAppliesToFilter.cs" />
     <Compile Include="Composite\MethodConcernsInstance.cs" />
     <Compile Include="Composite\MethodConcernsModel.cs" />
@@ -78,7 +78,6 @@
     <Compile Include="Composite\AbstractMixinsModel.cs" />
     <Compile Include="Composite\AbstractStateModel.cs" />
     <Compile Include="Transient\TransientBuilderInstance.cs" />
-    <Compile Include="Composite\CompositeBuilderState.cs" />
     <Compile Include="Transient\TransientFinder.cs" />
     <Compile Include="Composite\CompositeMethodInstance.cs" />
     <Compile Include="Composite\CompositeMethodModel.cs" />
@@ -108,7 +107,7 @@
     <Compile Include="Composite\ProxyReferenceInvocationHandler.cs" />
     <Compile Include="Composite\SideEffectInvocationHandlerResult.cs" />
     <Compile Include="Composite\StateModel.cs" />
-    <Compile Include="Composite\TypedInvocationHandler.cs" />
+    <Compile Include="Invocation\TypedFragmentInvocationHandler.cs" />
     <Compile Include="Composite\TypeFinderT.cs" />
     <Compile Include="Composite\UseInstance.cs" />
     <Compile Include="Entity\EntityInstance.cs" />

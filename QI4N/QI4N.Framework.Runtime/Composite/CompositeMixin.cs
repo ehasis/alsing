@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal class CompositeMixin : Composite
+    public class CompositeMixin : Composite
     {
         public Type CompositeType
         {

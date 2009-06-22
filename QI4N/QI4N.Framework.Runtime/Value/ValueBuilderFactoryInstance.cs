@@ -41,6 +41,4 @@
             return new ValueBuilderInstance<T>(finder.Module, finder.Model);
         }
     }
-
-    
 }
