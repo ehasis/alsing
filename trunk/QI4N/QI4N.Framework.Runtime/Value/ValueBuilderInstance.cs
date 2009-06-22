@@ -4,17 +4,15 @@
 
     public sealed class ValueBuilderInstance<T> : ValueBuilder<T>
     {
-        protected readonly ModuleInstance moduleInstance;
+        private readonly ModuleInstance moduleInstance;
 
-        protected readonly ValueModel valueModel;
+        private readonly ValueModel valueModel;
 
-        protected Type compositeInterface;
+        private CompositeInstance prototypeInstance;
 
-        protected CompositeInstance prototypeInstance;
+        private StateHolder state;
 
-        protected StateHolder state;
-
-        protected UsesInstance uses;
+        private UsesInstance uses;
 
         public ValueBuilderInstance(ModuleInstance moduleInstance, ValueModel model, UsesInstance uses)
                 : this(moduleInstance, model)
@@ -37,7 +35,7 @@
         }
 
 
-        protected StateHolder State
+        private StateHolder State
         {
             get
             {
@@ -49,7 +47,7 @@
             }
         }
 
-        protected UsesInstance Uses
+        private UsesInstance Uses
         {
             get
             {
@@ -65,16 +63,7 @@
 
         public T NewInstance()
         {
-            StateHolder instanceState;
-
-            if (this.state == null)
-            {
-                instanceState = this.valueModel.NewInitialState();
-            }
-            else
-            {
-                instanceState = this.valueModel.NewState(this.state);
-            }
+            StateHolder instanceState = this.state == null ? this.valueModel.NewInitialState() : this.valueModel.NewState(this.state);
 
             this.valueModel.State.CheckConstraints(instanceState);
 
