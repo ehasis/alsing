@@ -33,7 +33,8 @@ namespace ConsoleApplication23
 
             module
                     .AddValues()
-            .Include<AccidentValue>();
+                    .WithConcern<MyGenericConcern>()
+                    .Include<AccidentValue>();
 
             module
                     .AddTransients()
@@ -63,7 +64,6 @@ namespace ConsoleApplication23
 
         private static void Run(ApplicationInstance applicationInstance)
         {
-            LayerInstance domainLayer = applicationInstance.FindLayer("DomainLayer");
             ModuleInstance peopleModule = applicationInstance.FindModule("DomainLayer", "PeopleModule");
 
             var factory = new TransientBuilderFactoryInstance(peopleModule);
@@ -82,9 +82,12 @@ namespace ConsoleApplication23
             var valueFactory = new ValueBuilderFactoryInstance(peopleModule);
             var accidentBuilder = valueFactory.NewValueBuilder<Accident>();
 
+            var accidentState = accidentBuilder.Prototype();
+            accidentState.Description.Value = "hej du glade";
+            accidentState.Occured.Value = new DateTime(2009, 01, 01);
+
             var accident = accidentBuilder.NewInstance();
-            accident.Description.Value = "hej du glade";
-            accident.Occured.Value = new DateTime(2009, 01, 01);
+
 
             Console.ReadLine();
         }

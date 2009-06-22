@@ -52,6 +52,7 @@
     <Compile Include="AssemblyVisitor.cs" />
     <Compile Include="CompositeDeclarations\EntityDeclaration.cs" />
     <Compile Include="LayerAssembly.cs" />
+    <Compile Include="MetaInfoDeclaration.cs" />
     <Compile Include="ModuleAssembly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyDeclarations.cs" />

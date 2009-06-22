@@ -54,6 +54,7 @@
     <Compile Include="Bootstrap\ServiceDeclaration.cs" />
     <Compile Include="Bootstrap\TransientDeclaration.cs" />
     <Compile Include="Bootstrap\ValueDeclaration.cs" />
+    <Compile Include="Composite\AbstractCompositeInstance.cs" />
     <Compile Include="Composite\AbstractCompositeModel.cs" />
     <Compile Include="Composite\AbstractModifierDeclaration.cs" />
     <Compile Include="Composite\AbstractModifierModel.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Entity\EntitiesInstance.cs" />
     <Compile Include="Entity\EntitiesModel.cs" />
     <Compile Include="Object\ObjectBuilderFactoryInstance.cs" />
+    <Compile Include="Service\ServiceModel.cs" />
     <Compile Include="Structure\ApplicationInstance.cs" />
     <Compile Include="Structure\ApplicationModel.cs" />
     <Compile Include="Structure\LayerInstance.cs" />

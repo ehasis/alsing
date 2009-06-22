@@ -91,7 +91,7 @@ namespace QI4N.Framework.Runtime
 
         public object NewProxy(InvocationHandler invocationHandler, Type mixinType)
         {
-            var mixinProxyType = Proxy.BuildProxyType(mixinType);
+            var mixinProxyType = CreateProxyType(mixinType);
 
             var instance = Activator.CreateInstance(mixinProxyType, invocationHandler);
 
@@ -103,9 +103,9 @@ namespace QI4N.Framework.Runtime
             return this.stateModel.NewState(state);
         }
 
-        private static Type CreateProxyType(Type compositeType)
+        private static Type CreateProxyType(Type type)
         {
-            return Proxy.BuildProxyType(compositeType);
+            return Proxy.BuildProxyType(type);
         }
 
         //    public abstract CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance usesInstance, StateHolder instanceState);
