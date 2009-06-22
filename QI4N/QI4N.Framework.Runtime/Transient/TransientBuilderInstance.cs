@@ -4,17 +4,15 @@ namespace QI4N.Framework.Runtime
 
     public sealed class TransientBuilderInstance<T> : TransientBuilder<T>
     {
-        protected readonly ModuleInstance moduleInstance;
+        private readonly ModuleInstance moduleInstance;
 
-        protected readonly TransientModel transientModel;
+        private readonly TransientModel transientModel;
 
-        protected Type compositeInterface;
+        private CompositeInstance prototypeInstance;
 
-        protected CompositeInstance prototypeInstance;
+        private StateHolder state;
 
-        protected StateHolder state;
-
-        protected UsesInstance uses;
+        private UsesInstance uses;
 
         public TransientBuilderInstance(ModuleInstance moduleInstance, TransientModel model, UsesInstance uses)
                 : this(moduleInstance, model)
@@ -37,7 +35,7 @@ namespace QI4N.Framework.Runtime
         }
 
 
-        protected StateHolder State
+        private StateHolder State
         {
             get
             {
@@ -49,7 +47,7 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        protected UsesInstance Uses
+        private UsesInstance Uses
         {
             get
             {
@@ -65,16 +63,7 @@ namespace QI4N.Framework.Runtime
 
         public T NewInstance()
         {
-            StateHolder instanceState;
-
-            if (this.state == null)
-            {
-                instanceState = this.transientModel.NewInitialState();
-            }
-            else
-            {
-                instanceState = this.transientModel.NewState(this.state);
-            }
+            StateHolder instanceState = this.state == null ? this.transientModel.NewInitialState() : this.transientModel.NewState(this.state);
 
             this.transientModel.State.CheckConstraints(instanceState);
 
