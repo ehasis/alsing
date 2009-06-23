@@ -40,6 +40,19 @@ namespace QI4N.Framework.Runtime
 
             return propertyModelInstance;
         }
+
+        public static PropertyModel NewInstance(PropertyInfo accessor)
+        {
+            Type propertyContentType = accessor.PropertyType;
+            Type template = typeof(PropertyModel<>);
+            Type generic = template.MakeGenericType(propertyContentType);
+            var propertyModelInstance = Activator.CreateInstance(generic, new object[]
+                                                                              {
+                                                                                      accessor
+                                                                              }) as PropertyModel;
+
+            return propertyModelInstance;
+        }
     }
 
     public class PropertyModel<T> : PropertyModel
