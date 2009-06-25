@@ -142,7 +142,7 @@ namespace QI4N.Framework.Runtime
                     MethodSideEffectsModel mixinMethodSideEffectsModel = mixinModel.SideEffectsFor(method, mixinType);
                     methodSideEffectsModel = methodSideEffectsModel.CombineWith(mixinMethodSideEffectsModel);
 
-                    MethodConstraintsModel methodConstraintsModel = null; //new MethodConstraintsModel(method, constraintsModel);
+                    var methodConstraintsModel = new MethodConstraintsModel(method, constraintsModel);
 
                     var compositeMethodModel = new CompositeMethodModel(method, methodConstraintsModel, methodConcernsModel, methodSideEffectsModel, this.mixinsModel);
                     this.methods.Add(method, compositeMethodModel);
