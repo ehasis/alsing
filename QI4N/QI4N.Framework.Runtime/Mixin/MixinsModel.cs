@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -54,7 +54,7 @@
 
             if (isState)
             {
-                if (typeof(AbstractProperty).IsAssignableFrom(mixinField.FieldType))
+                if (typeof(Property).IsAssignableFrom(mixinField.FieldType))
                 {
                     //// TODO: create property
                     //object propertyInstance = null;

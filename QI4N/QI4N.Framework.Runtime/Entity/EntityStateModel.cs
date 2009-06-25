@@ -17,7 +17,7 @@ namespace QI4N.Framework.Runtime
                 throw new NotImplementedException();
             }
 
-            public AbstractProperty GetProperty(MethodInfo propertyMethod)
+            public Property GetProperty(MethodInfo propertyMethod)
             {
                 throw new NotImplementedException();
             }

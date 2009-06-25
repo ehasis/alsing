@@ -16,10 +16,10 @@ namespace QI4N.Framework.Runtime
 
         public StateHolder NewBuilderInstance()
         {
-            var properties = new Dictionary<PropertyInfo, AbstractProperty>();
+            var properties = new Dictionary<PropertyInfo, Property>();
             foreach (PropertyModel propertyModel in this.propertyModels)
             {
-                AbstractProperty property = propertyModel.NewBuilderInstance();
+                Property property = propertyModel.NewBuilderInstance();
                 properties.Add(propertyModel.PropertyInfo, property);
             }
 
@@ -28,10 +28,10 @@ namespace QI4N.Framework.Runtime
 
         public StateHolder NewInitialInstance()
         {
-            var properties = new Dictionary<PropertyInfo, AbstractProperty>();
+            var properties = new Dictionary<PropertyInfo, Property>();
             foreach (PropertyModel propertyModel in this.propertyModels)
             {
-                AbstractProperty property = propertyModel.NewInitialInstance();
+                Property property = propertyModel.NewInitialInstance();
                 properties.Add(propertyModel.PropertyInfo, property);
             }
 
@@ -40,7 +40,7 @@ namespace QI4N.Framework.Runtime
 
         public StateHolder NewInstance(StateHolder state)
         {
-            var properties = new Dictionary<PropertyInfo, AbstractProperty>();
+            var properties = new Dictionary<PropertyInfo, Property>();
             foreach (PropertyModel propertyModel in this.propertyModels)
             {
                 object initialValue = state.GetProperty(propertyModel.GetMethod).Value;
@@ -48,7 +48,7 @@ namespace QI4N.Framework.Runtime
                 initialValue = CloneInitialValue(initialValue, false);
 
                 // Create property instance
-                AbstractProperty property = propertyModel.NewInstance(initialValue);
+                Property property = propertyModel.NewInstance(initialValue);
                 properties.Add(propertyModel.PropertyInfo, property);
             }
             return new PropertiesInstance(properties);

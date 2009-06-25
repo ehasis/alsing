@@ -68,7 +68,6 @@
     <Compile Include="Mixin\MixinsAttribute.cs" />
     <Compile Include="Object\ObjectActivator.cs" />
     <Compile Include="Property\ImmutableAttribute.cs" />
-    <Compile Include="Property\Property.cs" />
     <Compile Include="Property\PropertySetterMixin.cs" />
     <Compile Include="Proxy\InvocationProxyTypeGenerator.cs" />
     <Compile Include="Proxy\MethodInfoCache.cs" />
@@ -85,7 +84,7 @@
     <Compile Include="Entity\Association\ManyAssociation.cs" />
     <Compile Include="Object\ObjectBuilder.cs" />
     <Compile Include="Object\ObjectBuilderFactory.cs" />
-    <Compile Include="Property\AbstractProperty.cs" />
+    <Compile Include="Property\Property.cs" />
     <Compile Include="Property\PropertyInfo.cs" />
     <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Service\ServiceComposite.cs" />

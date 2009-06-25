@@ -4,11 +4,11 @@ namespace QI4N.Framework.Runtime
 
     public interface PropertyModel
     {
-        AbstractProperty NewInstance(object value);
+        Property NewInstance(object value);
 
         string QualifiedName { get; }
 
-        AbstractProperty NewBuilderInstance();
+        Property NewBuilderInstance();
 
         MethodInfo GetMethod { get; }
 
@@ -16,18 +16,8 @@ namespace QI4N.Framework.Runtime
 
         PropertyInfo PropertyInfo { get; }
 
-        AbstractProperty NewInitialInstance();
+        Property NewInitialInstance();
     }
-
-    ////Slow reflection code, but only used when setting up the composite models
-    //public static class PropertyModelFactory
-    //{
-    //    public static PropertyModel NewInstance(PropertyInfo propertyInfo)
-    //    {
-    //        var propertyModelInstance = new PropertyModelImpl(propertyInfo);
-    //        return propertyModelInstance;
-    //    }
-    //}
 
     public class PropertyModelImpl : PropertyModel
     {
@@ -76,19 +66,19 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public AbstractProperty NewBuilderInstance()
+        public Property NewBuilderInstance()
         {
             var instance = new PropertyInstance(null, null, this);
             return instance;
         }
 
-        public AbstractProperty NewInitialInstance()
+        public Property NewInitialInstance()
         {
             var instance = new PropertyInstance(null, null, this);
             return instance;
         }
 
-        public AbstractProperty NewInstance(object value)
+        public Property NewInstance(object value)
         {
             var instance = new PropertyInstance(null, value, this);
             return instance;

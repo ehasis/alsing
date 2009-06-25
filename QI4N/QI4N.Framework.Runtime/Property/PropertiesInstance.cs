@@ -5,11 +5,11 @@ namespace QI4N.Framework.Runtime
 
     public class PropertiesInstance : StateHolder
     {
-        private readonly IDictionary<MethodInfo, AbstractProperty> properties;
+        private readonly IDictionary<MethodInfo, Property> properties;
 
-        public PropertiesInstance(IDictionary<PropertyInfo, AbstractProperty> properties)
+        public PropertiesInstance(IDictionary<PropertyInfo, Property> properties)
         {
-            this.properties = new Dictionary<MethodInfo, AbstractProperty>();
+            this.properties = new Dictionary<MethodInfo, Property>();
             foreach(var entry in properties)
             {
                 //add both getter and setter to lookup
@@ -30,7 +30,7 @@ namespace QI4N.Framework.Runtime
         [DebuggerHidden]
 #endif
 
-        public AbstractProperty GetProperty(MethodInfo accessor)
+        public Property GetProperty(MethodInfo accessor)
         {
             return this.properties[accessor];
         }
