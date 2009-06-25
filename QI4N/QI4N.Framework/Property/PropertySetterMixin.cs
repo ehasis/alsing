@@ -3,7 +3,7 @@
     using System;
     using System.Reflection;
 
-    [AppliesTo(typeof(PropertySetterFilter))]
+    [AppliesTo(typeof(AppliesToSetProperty))]
     public class PropertySetterMixin : InvocationHandler
     {
         [State]
@@ -20,17 +20,6 @@
 
             property.Value = args[0];
             return null;
-        }
-    }
-
-    public class PropertySetterFilter : AppliesToFilter
-    {
-        public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
-        {
-            if (method.Name.StartsWith("set_") && method.IsSpecialName)
-                return true;
-
-            return false;
         }
     }
 }
