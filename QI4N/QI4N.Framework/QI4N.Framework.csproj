@@ -69,6 +69,7 @@
     <Compile Include="Object\ObjectActivator.cs" />
     <Compile Include="Property\ImmutableAttribute.cs" />
     <Compile Include="Property\Property.cs" />
+    <Compile Include="Property\PropertySetterMixin.cs" />
     <Compile Include="Proxy\InvocationProxyTypeGenerator.cs" />
     <Compile Include="Proxy\MethodInfoCache.cs" />
     <Compile Include="Proxy\Proxy.cs" />
@@ -104,7 +105,7 @@
     <Compile Include="Entity\EntityBuilderMixin.cs" />
     <Compile Include="Entity\IdentityMixin.cs" />
     <Compile Include="Entity\Association\ManyAssociationInstanceMixin.cs" />
-    <Compile Include="Property\PropertyMixin.cs" />
+    <Compile Include="Property\PropertyGetterMixin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Injection\Scope\StateAttribute.cs" />
   </ItemGroup>

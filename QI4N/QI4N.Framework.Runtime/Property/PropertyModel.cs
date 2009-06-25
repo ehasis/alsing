@@ -16,7 +16,9 @@ namespace QI4N.Framework.Runtime
 
         AbstractProperty NewBuilderInstance();
 
-        MethodInfo Accessor { get; }
+        MethodInfo GetMethod { get; }
+        MethodInfo SetMethod { get; }
+        PropertyInfo PropertyInfo { get; }
 
         AbstractProperty NewInitialInstance();
     }
@@ -24,31 +26,31 @@ namespace QI4N.Framework.Runtime
     //Slow reflection code, but only used when setting up the composite models
     public static class PropertyModelFactory
     {
-        public static PropertyModel NewInstance(MethodInfo accessor)
-        {
-            Type f = (from g in accessor.ReturnType.GetAllInterfaces()
-                      where g.IsGenericType && g.GetGenericTypeDefinition() == typeof(Property<>)
-                      select g).FirstOrDefault();
+        //public static PropertyModel NewInstance(MethodInfo accessor)
+        //{
+        //    Type f = (from g in accessor.ReturnType.GetAllInterfaces()
+        //              where g.IsGenericType && g.GetGenericTypeDefinition() == typeof(Property<>)
+        //              select g).FirstOrDefault();
 
-            Type propertyContentType = f.GetGenericArguments()[0];
+        //    Type propertyContentType = f.GetGenericArguments()[0];
+        //    Type template = typeof(PropertyModel<>);
+        //    Type generic = template.MakeGenericType(propertyContentType);
+        //    var propertyModelInstance = Activator.CreateInstance(generic, new object[]
+        //                                                                      {
+        //                                                                              accessor
+        //                                                                      }) as PropertyModel;
+
+        //    return propertyModelInstance;
+        //}
+
+        public static PropertyModel NewInstance(PropertyInfo propertyInfo)
+        {
+            Type propertyContentType = propertyInfo.PropertyType;
             Type template = typeof(PropertyModel<>);
             Type generic = template.MakeGenericType(propertyContentType);
             var propertyModelInstance = Activator.CreateInstance(generic, new object[]
                                                                               {
-                                                                                      accessor
-                                                                              }) as PropertyModel;
-
-            return propertyModelInstance;
-        }
-
-        public static PropertyModel NewInstance(PropertyInfo accessor)
-        {
-            Type propertyContentType = accessor.PropertyType;
-            Type template = typeof(PropertyModel<>);
-            Type generic = template.MakeGenericType(propertyContentType);
-            var propertyModelInstance = Activator.CreateInstance(generic, new object[]
-                                                                              {
-                                                                                      accessor
+                                                                                      propertyInfo
                                                                               }) as PropertyModel;
 
             return propertyModelInstance;
@@ -57,18 +59,38 @@ namespace QI4N.Framework.Runtime
 
     public class PropertyModel<T> : PropertyModel
     {
-        private readonly MethodInfo accessor;
+        private readonly MethodInfo getMethod;
+        private readonly MethodInfo setMethod;
 
-        public PropertyModel(MethodInfo accessor)
+        private readonly PropertyInfo propertyInfo;
+
+        public PropertyModel(PropertyInfo propertyInfo)
         {
-            this.accessor = accessor;
+            this.getMethod = propertyInfo.GetGetMethod(true);
+            this.setMethod = propertyInfo.GetSetMethod(true);
+            this.propertyInfo = propertyInfo;
         }
 
-        public MethodInfo Accessor
+        public PropertyInfo PropertyInfo
         {
             get
             {
-                return this.accessor;
+                return propertyInfo;
+            }
+        }
+        public MethodInfo GetMethod
+        {
+            get
+            {
+                return this.getMethod;
+            }
+        }
+
+        public MethodInfo SetMethod
+        {
+            get
+            {
+                return this.setMethod;
             }
         }
 
@@ -76,46 +98,26 @@ namespace QI4N.Framework.Runtime
         {
             get
             {
-                return this.accessor.Name;
+                return this.propertyInfo.Name;
             }
-        }
-
-        public MethodInfo GetAccessor()
-        {
-            return this.accessor;
         }
 
         public AbstractProperty NewBuilderInstance()
         {
             var instance = new PropertyInstance<T>(null, default(T), this);
-            AbstractProperty wrapper = this.WrapInstance(instance);
-
-            return wrapper;
+            return instance;
         }
 
         public AbstractProperty NewInitialInstance()
         {
             var instance = new PropertyInstance<T>(null, default(T), this);
-            AbstractProperty wrapper = this.WrapInstance(instance);
-
-            return wrapper;
+            return instance;
         }
 
         public AbstractProperty NewInstance(object value)
         {
             var instance = new PropertyInstance<T>(null, (T)value, this);
-            AbstractProperty wrapper = this.WrapInstance(instance);
-
-            return wrapper;
-        }
-
-        private AbstractProperty WrapInstance(PropertyInstance<T> instance)
-        {
-            Type type = this.accessor.ReturnType;
-            var handler = new PropertyHandler(instance);
-            var proxy = Proxy.NewProxyInstance(type, handler) as AbstractProperty;
-
-            return proxy;
+            return instance;
         }
     }
 }

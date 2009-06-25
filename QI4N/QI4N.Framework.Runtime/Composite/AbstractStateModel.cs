@@ -13,11 +13,11 @@ namespace QI4N.Framework.Runtime
             this.propertiesModel = propertiesModel;
         }
 
-        public void AddStateFor(IEnumerable<MethodInfo> methods, Type compositeType)
+        public void AddStateFor(IEnumerable<PropertyInfo> properties, Type compositeType)
         {
-            foreach (MethodInfo method in methods)
+            foreach (PropertyInfo propertyInfo in properties)
             {
-                this.propertiesModel.AddPropertyFor(method, compositeType);
+                this.propertiesModel.AddPropertyFor(propertyInfo, compositeType);
             }
         }
 

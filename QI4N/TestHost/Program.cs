@@ -71,8 +71,8 @@ namespace ConsoleApplication23
             TransientBuilder<Person> personBuilder = factory.NewTransientBuilder<Person>();
 
             var personState = personBuilder.PrototypeFor<PersonState>();
-            personState.FirstName.Value = "Roger";
-            personState.LastName.Value = "Alsing";
+            personState.FirstName = "Roger";
+            personState.LastName = "Alsing";
 
             Person person = personBuilder.NewInstance();
             person.SayHi();
@@ -83,8 +83,8 @@ namespace ConsoleApplication23
             var accidentBuilder = valueFactory.NewValueBuilder<Accident>();
 
             var accidentState = accidentBuilder.Prototype();
-            accidentState.Description.Value = "hej du glade";
-            accidentState.Occured.Value = new DateTime(2009, 01, 01);
+            accidentState.Description = "hej du glade";
+            accidentState.Occured = new DateTime(2009, 01, 01);
 
             var accident = accidentBuilder.NewInstance();
 
