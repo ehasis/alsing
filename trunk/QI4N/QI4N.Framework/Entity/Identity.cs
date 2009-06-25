@@ -4,6 +4,6 @@
     public interface Identity
     {
         [Immutable]
-        Property<string> Identity { get; }
+        string Identity { get; }
     }
 }

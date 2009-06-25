@@ -26,7 +26,7 @@ namespace ConsoleApplication23
             Car prototype = builder.StateFor();
 
             prototype.Manufacturer.Set(manufacturer);
-            prototype.Model.Set(model);
+            prototype.Model = model;
 
             return builder.NewInstance();
         }
