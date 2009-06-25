@@ -4,6 +4,6 @@ namespace QI4N.Framework
 
     public interface StateHolder
     {
-        AbstractProperty GetProperty(MethodInfo propertyMethod);
+        Property GetProperty(MethodInfo propertyMethod);
     }
 }

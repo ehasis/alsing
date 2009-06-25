@@ -16,7 +16,7 @@
 
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
-            AbstractProperty property = this.state.GetProperty(method);
+            Property property = this.state.GetProperty(method);
 
             property.Value = args[0];
             return null;
