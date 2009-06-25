@@ -49,12 +49,7 @@ namespace QI4N.Framework.Runtime
             return compositeInstance;
         }
 
-        public object NewProxy(InvocationHandler handler, Type mixinType)
-        {
-            return Proxy.NewProxyInstance(mixinType, handler);
-        }
-
-        public void VisitModel(ModelVisitor visitor)
+        public static void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();
         }
