@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -62,7 +62,7 @@
         {
             foreach (TransientModel compositeModel in this.compositeModels)
             {
-                compositeModel.VisitModel(visitor);
+                TransientModel.VisitModel(visitor);
             }
         }
     }
