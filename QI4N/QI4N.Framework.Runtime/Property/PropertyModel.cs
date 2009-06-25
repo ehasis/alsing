@@ -1,12 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
-    using System;
-    using System.Linq;
     using System.Reflection;
-
-    using JavaProxy;
-
-    using Reflection;
 
     public interface PropertyModel
     {
@@ -17,67 +11,39 @@ namespace QI4N.Framework.Runtime
         AbstractProperty NewBuilderInstance();
 
         MethodInfo GetMethod { get; }
+
         MethodInfo SetMethod { get; }
+
         PropertyInfo PropertyInfo { get; }
 
         AbstractProperty NewInitialInstance();
     }
 
-    //Slow reflection code, but only used when setting up the composite models
-    public static class PropertyModelFactory
-    {
-        //public static PropertyModel NewInstance(MethodInfo accessor)
-        //{
-        //    Type f = (from g in accessor.ReturnType.GetAllInterfaces()
-        //              where g.IsGenericType && g.GetGenericTypeDefinition() == typeof(Property<>)
-        //              select g).FirstOrDefault();
+    ////Slow reflection code, but only used when setting up the composite models
+    //public static class PropertyModelFactory
+    //{
+    //    public static PropertyModel NewInstance(PropertyInfo propertyInfo)
+    //    {
+    //        var propertyModelInstance = new PropertyModelImpl(propertyInfo);
+    //        return propertyModelInstance;
+    //    }
+    //}
 
-        //    Type propertyContentType = f.GetGenericArguments()[0];
-        //    Type template = typeof(PropertyModel<>);
-        //    Type generic = template.MakeGenericType(propertyContentType);
-        //    var propertyModelInstance = Activator.CreateInstance(generic, new object[]
-        //                                                                      {
-        //                                                                              accessor
-        //                                                                      }) as PropertyModel;
-
-        //    return propertyModelInstance;
-        //}
-
-        public static PropertyModel NewInstance(PropertyInfo propertyInfo)
-        {
-            Type propertyContentType = propertyInfo.PropertyType;
-            Type template = typeof(PropertyModel<>);
-            Type generic = template.MakeGenericType(propertyContentType);
-            var propertyModelInstance = Activator.CreateInstance(generic, new object[]
-                                                                              {
-                                                                                      propertyInfo
-                                                                              }) as PropertyModel;
-
-            return propertyModelInstance;
-        }
-    }
-
-    public class PropertyModel<T> : PropertyModel
+    public class PropertyModelImpl : PropertyModel
     {
         private readonly MethodInfo getMethod;
-        private readonly MethodInfo setMethod;
 
         private readonly PropertyInfo propertyInfo;
 
-        public PropertyModel(PropertyInfo propertyInfo)
+        private readonly MethodInfo setMethod;
+
+        public PropertyModelImpl(PropertyInfo propertyInfo)
         {
             this.getMethod = propertyInfo.GetGetMethod(true);
             this.setMethod = propertyInfo.GetSetMethod(true);
             this.propertyInfo = propertyInfo;
         }
 
-        public PropertyInfo PropertyInfo
-        {
-            get
-            {
-                return propertyInfo;
-            }
-        }
         public MethodInfo GetMethod
         {
             get
@@ -86,11 +52,11 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public MethodInfo SetMethod
+        public PropertyInfo PropertyInfo
         {
             get
             {
-                return this.setMethod;
+                return this.propertyInfo;
             }
         }
 
@@ -102,21 +68,29 @@ namespace QI4N.Framework.Runtime
             }
         }
 
+        public MethodInfo SetMethod
+        {
+            get
+            {
+                return this.setMethod;
+            }
+        }
+
         public AbstractProperty NewBuilderInstance()
         {
-            var instance = new PropertyInstance<T>(null, default(T), this);
+            var instance = new PropertyInstance(null, null, this);
             return instance;
         }
 
         public AbstractProperty NewInitialInstance()
         {
-            var instance = new PropertyInstance<T>(null, default(T), this);
+            var instance = new PropertyInstance(null, null, this);
             return instance;
         }
 
         public AbstractProperty NewInstance(object value)
         {
-            var instance = new PropertyInstance<T>(null, (T)value, this);
+            var instance = new PropertyInstance(null, value, this);
             return instance;
         }
     }

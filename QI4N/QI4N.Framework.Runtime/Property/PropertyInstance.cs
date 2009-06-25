@@ -3,13 +3,13 @@ namespace QI4N.Framework.Runtime
     using System.Diagnostics;
 
     [DebuggerDisplay("Value = {Value}")]
-    public class PropertyInstance<T> : Property<T>
+    public class PropertyInstance: Property
     {
         private CompositePropertyInfo info;
 
         private PropertyModel model;
 
-        public PropertyInstance(CompositePropertyInfo info, T initialValue, PropertyModel model)
+        public PropertyInstance(CompositePropertyInfo info, object initialValue, PropertyModel model)
         {
             this.info = info;
             this.Value = initialValue;
@@ -32,28 +32,6 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public T Value { get; set; }
-
-        object AbstractProperty.Value
-        {
-            get
-            {
-                return this.Value;
-            }
-            set
-            {
-                this.Value = (T)value;
-            }
-        }
-
-        public T Get()
-        {
-            return this.Value;
-        }
-
-        public void Set(T value)
-        {
-            this.Value = value;
-        }
+        public object Value { get; set; }        
     }
 }

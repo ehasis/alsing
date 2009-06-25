@@ -6,9 +6,9 @@ namespace ConsoleApplication23.OtherModel
 
     public interface HelloWorldState
     {
-        Property<string> Name { get; }
+        string Name { get; }
 
-        Property<string> Phrase { get; }
+        string Phrase { get; }
     }
 
     public interface HelloWorldBehavior
@@ -24,7 +24,7 @@ namespace ConsoleApplication23.OtherModel
 
         public String Say()
         {
-            return this.state.Phrase.Value + " " + this.state.Name.Value;
+            return this.state.Phrase + " " + this.state.Name;
         }
     }
 

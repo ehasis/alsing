@@ -55,9 +55,9 @@ namespace QI4N.Framework.Runtime
         }
 
 
-        protected static PropertyModel NewPropertyModel(PropertyInfo accessor, Type compositeType)
+        protected static PropertyModel NewPropertyModel(PropertyInfo propertyInfo, Type compositeType)
         {
-            PropertyModel model = PropertyModelFactory.NewInstance(accessor);
+            PropertyModel model = new PropertyModelImpl(propertyInfo);
 
             return model;
         }

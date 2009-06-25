@@ -3,9 +3,9 @@
     public class IdentityMixin : Identity
     {
         [State]
-        protected Property<string> identity;
+        protected string identity;
 
-        public Property<string> Identity
+        public string Identity
         {
             get
             {

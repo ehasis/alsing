@@ -33,7 +33,7 @@ namespace ConsoleApplication23
             UnitOfWork uow = this.uowf.CurrentUnitOfWork;
 
             IEnumerable<Manufacturer> result = from m in uow.NewQuery<Manufacturer>()
-                                               where m.Name.Value == name
+                                               where m.Name == name
                                                select m;
 
             return result.FirstOrDefault();

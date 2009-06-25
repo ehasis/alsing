@@ -10,36 +10,21 @@
         Association<Manufacturer> Manufacturer { get; }
 
         [Immutable]
-        Model Model { get; }
+        string Model { get; set; }
 
         AccidentHistory Accidents { get; }
     }
 
-    public interface Model : Property<String>
-    {
-    }
-
     public interface Manufacturer
     {
-        Name Name { get; }
+        string Name { get; }
 
-        Country Country { get; }
+        string Country { get; }
 
         [UseDefaults]
-        Quantity CarsProduced { get; }
+        int CarsProduced { get; }
     }
 
-    public interface Quantity : Property<long>
-    {
-    }
-
-    public interface Name : Property<string>
-    {
-    }
-
-    public interface Country : Property<string>
-    {
-    }
 
     public interface AccidentHistory : ManyAssociation<Accident>
     {
