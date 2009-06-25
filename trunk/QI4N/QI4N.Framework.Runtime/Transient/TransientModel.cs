@@ -34,7 +34,7 @@ namespace QI4N.Framework.Runtime
 
             var sideEffectsModel = new SideEffectsDeclaration(compositeType, sideEffects);
             var compositeMethodsModel = new CompositeMethodsModel(compositeType, constraintsModel, concernsModel, sideEffectsModel, mixinsModel);
-            stateModel.AddStateFor(compositeMethodsModel.Methods, compositeType);
+            stateModel.AddStateFor(compositeMethodsModel.Properties, compositeType);
 
             return new TransientModel(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel);
         }

@@ -31,7 +31,7 @@
 
         public void Oink()
         {
-            Console.WriteLine("OinkOink {0}", this.state.FirstName.Value);
+            Console.WriteLine("OinkOink {0}", this.state.FirstName);
         }
     }
 
@@ -48,7 +48,7 @@
 
         public void SayHi()
         {
-            Console.WriteLine("{0} {1} Says hello from QI4N - email {2}", this.self.FirstName.Value, this.self.LastName.Value, this.email);
+            Console.WriteLine("{0} {1} Says hello from QI4N - email {2}", this.self.FirstName, this.self.LastName, this.email);
 
             this.oink.Oink();
         }
@@ -60,39 +60,28 @@
 
     public interface HasAddress
     {
-        Property<string> Street { get; }
+        string Street { get; set; }
 
-        Property<string> City { get; }
+        string City { get; set; }
 
-        Property<int> ZipCode { get; }
+        int ZipCode { get; set; }
     }
 
     public interface HasName
     {
-        PersonNameProperty FirstName { get; }
+        string FirstName { get; set; }
 
-        PersonNameProperty LastName { get; }
+        string LastName { get; set; }
     }
 
 
     public interface PersonState : HasName, HasAddress
     {
-        BirthDateProperty BirthDate { get; }
+        DateTime BirthDate { get; set; }
 
-        WeightProperty Weight { get; }
+        double Weight { get; set; }
     }
 
-    public interface PersonNameProperty : Property<string>
-    {
-    }
-
-    public interface BirthDateProperty : Property<DateTime>
-    {
-    }
-
-    public interface WeightProperty : Property<double>
-    {
-    }
 
     public class MyGenericConcern : GenericConcern
     {

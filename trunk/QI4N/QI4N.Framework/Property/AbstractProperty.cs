@@ -4,7 +4,7 @@ namespace QI4N.Framework
 
     public interface AbstractProperty
     {
-        [EditorBrowsable(EditorBrowsableState.Never)]
+   //     [EditorBrowsable(EditorBrowsableState.Never)]
         object Value { get; set; }
     }
 }

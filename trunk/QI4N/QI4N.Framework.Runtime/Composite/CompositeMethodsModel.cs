@@ -16,6 +16,8 @@ namespace QI4N.Framework.Runtime
 
         private readonly IDictionary<MethodInfo, CompositeMethodModel> methods;
 
+        private readonly IList<PropertyInfo> properties;
+
         private readonly AbstractMixinsModel mixinsModel;
 
         private readonly SideEffectsDeclaration sideEffectsModel;
@@ -23,6 +25,7 @@ namespace QI4N.Framework.Runtime
         public CompositeMethodsModel(Type compositeType, TransientConstraintsModel constraintsModel, ConcernsDeclaration concernsModel, SideEffectsDeclaration sideEffectsModel, AbstractMixinsModel mixinsModel)
         {
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();
+            this.properties = new List<PropertyInfo>();
             this.compositeType = compositeType;
             this.concernsModel = concernsModel;
             this.sideEffectsModel = sideEffectsModel;
@@ -32,6 +35,13 @@ namespace QI4N.Framework.Runtime
             this.ImplementMixinMethods();
         }
 
+        public IEnumerable<PropertyInfo> Properties
+        {
+            get
+            {
+                return this.properties;
+            }
+        }
 
         public IEnumerable<MethodInfo> Methods
         {
@@ -136,6 +146,11 @@ namespace QI4N.Framework.Runtime
 
                     var compositeMethodModel = new CompositeMethodModel(method, methodConstraintsModel, methodConcernsModel, methodSideEffectsModel, this.mixinsModel);
                     this.methods.Add(method, compositeMethodModel);
+                }
+
+                foreach (PropertyInfo property in mixinType.GetProperties())
+                {
+                    this.properties.Add(property);
                 }
             }
         }

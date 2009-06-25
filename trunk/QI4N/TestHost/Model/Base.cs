@@ -47,18 +47,11 @@
 
     public interface Accident : Value
     {
-        Description Description { get; }
+        string Description { get; set; }
 
-        PointInTime Occured { get; }
+        DateTime Occured { get; set; }
 
-        PointInTime Repaired { get; }
+        DateTime Repaired { get; set; }
     }
 
-    public interface Description : Property<string>
-    {
-    }
-
-    public interface PointInTime : Property<DateTime>
-    {
-    }
 }

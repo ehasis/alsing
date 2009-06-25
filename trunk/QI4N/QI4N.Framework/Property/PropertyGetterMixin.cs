@@ -3,8 +3,8 @@ namespace QI4N.Framework
     using System;
     using System.Reflection;
 
-    [AppliesTo(typeof(PropertyFilter))]
-    public class PropertyMixin : InvocationHandler
+    [AppliesTo(typeof(PropertyGetterFilter))]
+    public class PropertyGetterMixin : InvocationHandler
     {
         [State]
         protected StateHolder state;
@@ -16,15 +16,19 @@ namespace QI4N.Framework
 
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
-            return this.state.GetProperty(method);
+            var property = this.state.GetProperty(method);
+            return property.Value;
         }
     }
 
-    public class PropertyFilter : AppliesToFilter
+    public class PropertyGetterFilter : AppliesToFilter
     {
         public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
         {
-            return typeof(AbstractProperty).IsAssignableFrom(method.ReturnType);
+            if (method.Name.StartsWith("get_") && method.IsSpecialName)
+                return true;
+
+            return false;
         }
     }
 }
