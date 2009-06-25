@@ -17,7 +17,8 @@ namespace QI4N.Framework
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
             var property = this.state.GetProperty(method);
-            return property.Value;
+            var propertyValue = property.Value;
+            return propertyValue;
         }
     }
 
