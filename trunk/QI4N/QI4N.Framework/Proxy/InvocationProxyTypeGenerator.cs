@@ -57,14 +57,11 @@ namespace QI4N.Framework.Reflection
 
                 MethodInfo getHashCodeMethod = typeof(object).GetMethod("GetHashCode");
                 MethodInfo toStringMethod = typeof(object).GetMethod("ToString");
-                MethodInfo equalsMethod = typeof(object).GetMethod("Equals",BindingFlags.Public|BindingFlags.Instance);
+                MethodInfo equalsMethod = typeof(object).GetMethod("Equals", BindingFlags.Public | BindingFlags.Instance);
 
                 this.CreateMethod(getHashCodeMethod);
                 this.CreateMethod(toStringMethod);
                 this.CreateMethod(equalsMethod);
-
-        
-
 
                 this.CreateCtor();
 
@@ -86,7 +83,7 @@ namespace QI4N.Framework.Reflection
             int methodId = MethodInfoCache.AddMethod(method);
 
             ParameterInfo[] paramInfos = method.GetParameters();
-            IEnumerable<Type> paramTypes = paramInfos.Select<ParameterInfo,Type> (GetParameterType);
+            IEnumerable<Type> paramTypes = paramInfos.Select<ParameterInfo, Type>(GetParameterType);
             int paramCount = method.GetParameters().Length;
 
             // Build parameter object array
@@ -203,7 +200,7 @@ namespace QI4N.Framework.Reflection
         [DebuggerHidden]
         private void CreateInterfaceList()
         {
-            var allFromComposite = this.compositeType.GetAllInterfaces();
+            IEnumerable<Type> allFromComposite = this.compositeType.GetAllInterfaces();
             IEnumerable<Type> allFromAdditional = from t in this.additionalTypes
                                                   from tt in t.GetAllInterfaces()
                                                   select tt;

@@ -3,6 +3,7 @@
     public abstract class SideEffectOf
     {
     }
+
     public abstract class SideEffectOf<T> : SideEffectOf
     {
         [SideEffectFor]

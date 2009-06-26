@@ -1,10 +1,16 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
+    using System;
     using System.Reflection;
 
     public class ServiceReferenceInstance<T> : ServiceReference<T>
     {
         public ServiceModel ServiceModel;
+
+        public CompositeInstance GetInstance()
+        {
+            throw new NotImplementedException();
+        }
 
         public class ServiceInvocationHandler : InvocationHandler
         {
@@ -21,15 +27,10 @@
                 {
                     return this.owner.ServiceModel.ToString();
                 }
-                CompositeInstance instance = owner.GetInstance();
+                CompositeInstance instance = this.owner.GetInstance();
 
                 return instance.Invoke(proxy, method, args);
             }
-        }
-
-        public CompositeInstance GetInstance()
-        {
-            throw new System.NotImplementedException();
         }
     }
 
