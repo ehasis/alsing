@@ -35,12 +35,13 @@ namespace ConsoleApplication23
             module
                     .AddValues()
                     .Include<AddressValue>();
-            //        .WithConcern<MyGenericConcern>();
 
             module
                     .AddTransients()
                     .Include<CustomerTransient>()
-                    .WithConcern<GenericTracingConcern>();
+                    .WithConcern<GenericTracingConcern>()
+                    .WithConcern<SayHelloConcern>()
+                    .WithSideEffect<SayHelloSideEffect>();
 
             return module;
         }

@@ -52,6 +52,7 @@
     <Compile Include="Experimental\PrivateBehavior.cs" />
     <Compile Include="Experimental\SayHelloBehavior.cs" />
     <Compile Include="Experimental\SayHelloConcern.cs" />
+    <Compile Include="Experimental\SayHelloSideEffect.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

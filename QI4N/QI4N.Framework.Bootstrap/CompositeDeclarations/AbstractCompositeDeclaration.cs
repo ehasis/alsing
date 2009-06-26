@@ -7,9 +7,9 @@ namespace QI4N.Framework.Bootstrap
     {
         T VisibleIn(Visibility visibility);
 
-        T WithConcern<K>();
+        T WithConcern<K>() where K : ConcernOf;
 
-        T WithSideEffect<K>();
+        T WithSideEffect<K>() where K : SideEffectOf;
 
         T WithMixin<K>();
 
