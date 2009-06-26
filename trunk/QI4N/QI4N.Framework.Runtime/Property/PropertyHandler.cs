@@ -11,10 +11,10 @@
 //            this.property = property;
 //        }
 
-//#if !DEBUG
+//
 //        [DebuggerStepThrough]
 //        [DebuggerHidden]
-//#endif
+//
 
 //        public object Invoke(object proxy, MethodInfo method, object[] args)
 //        {

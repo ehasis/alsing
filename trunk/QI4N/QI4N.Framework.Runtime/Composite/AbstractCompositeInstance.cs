@@ -1,6 +1,7 @@
 ﻿namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Diagnostics;
     using System.Reflection;
 
     public abstract class AbstractCompositeInstance : CompositeInstance, MixinsInstance
@@ -24,20 +25,20 @@
 
         public StateHolder State { get; set; }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             return this.CompositeModel.Invoke(this, this, proxy, method, args, this.ModuleInstance);
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public object Invoke(object composite, object[] args, CompositeMethodInstance methodInstance)
         {

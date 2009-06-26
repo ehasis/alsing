@@ -1,6 +1,7 @@
 ﻿namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
 
@@ -26,8 +27,10 @@
             //this.injectedMethodsModel = new InjectedMethodsModel(modifierType);
         }
 
+
         public bool IsGeneric
         {
+            [DebuggerStepThrough]
             get
             {
                 return typeof(InvocationHandler).IsAssignableFrom(this.modifierType);
@@ -35,6 +38,8 @@
         }
 
         // Context
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public object NewInstance(ModuleInstance moduleInstance, object next, ProxyReferenceInvocationHandler proxyHandler)
         {
             //  var injectionContext = new InjectionContext(moduleInstance, this.WrapNext(next), proxyHandler);
@@ -44,7 +49,17 @@
             object concern = this.modifierType.NewInstance();
 
             //TODO: fix this
-            FieldInfo field = this.modifierType.GetAllFields().Where(f => f.Name == "next").FirstOrDefault();
+            FieldInfo[] fields = this.modifierType.GetAllFields();
+
+
+            FieldInfo field = null;
+            foreach(FieldInfo t in fields)
+            {
+                if (t.Name == "next")
+                    field = t;
+            }
+
+
             field.SetValue(concern, this.WrapNext(next));
             ////this.injectedFieldsModel.Inject(injectionContext, mixin);
             ////this.injectedMethodsModel.Inject(injectionContext, mixin);
@@ -60,6 +75,8 @@
         //    this.injectedMethodsModel.visitModel(modelVisitor);
         //}
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         private object WrapNext(object next)
         {
             if (this.IsGeneric)

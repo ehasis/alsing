@@ -2,6 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
 
     using Reflection;
@@ -54,10 +55,10 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public object Invoke(MixinsInstance mixins, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
         {

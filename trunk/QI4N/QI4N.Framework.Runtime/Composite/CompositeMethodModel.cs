@@ -1,5 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
+    using System.Diagnostics;
     using System.Reflection;
 
     public class CompositeMethodModel
@@ -28,10 +29,10 @@ namespace QI4N.Framework.Runtime
             this.methodConstraints = methodConstraintsModel;
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
         {
@@ -40,20 +41,20 @@ namespace QI4N.Framework.Runtime
             return mixins.Invoke(proxy, args, methodInstance);
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         private CompositeMethodInstance GetInstance(ModuleInstance moduleInstance)
         {
             return this.NewCompositeMethodInstance(moduleInstance);
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         private CompositeMethodInstance NewCompositeMethodInstance(ModuleInstance moduleInstance)
         {

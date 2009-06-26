@@ -1,5 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
+    using System.Diagnostics;
     using System.Reflection;
 
     public class CompositeMethodInstance
@@ -12,10 +13,10 @@ namespace QI4N.Framework.Runtime
 
         private readonly FragmentInvocationHandler mixinInvoker;
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public CompositeMethodInstance(InvocationHandler invoker, FragmentInvocationHandler handler, MethodInfo method, int mixinIndex)
         {
@@ -25,20 +26,20 @@ namespace QI4N.Framework.Runtime
             this.mixinIndex = mixinIndex;
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public object GetMixin(object[] mixins)
         {
             return mixins[this.mixinIndex];
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public object Invoke(object composite, object[] args, object mixin)
         {

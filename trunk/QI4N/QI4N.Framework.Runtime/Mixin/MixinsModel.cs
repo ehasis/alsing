@@ -31,7 +31,7 @@ namespace QI4N.Framework.Runtime
 
         private static void ConfigureMixin(object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
         {
-            FieldInfo[] mixinFields = mixin.GetType().GetAllFields().ToArray();
+            IEnumerable<FieldInfo> mixinFields = TypeExtensions.GetAllFields(mixin.GetType());
 
             foreach (FieldInfo mixinField in mixinFields)
             {

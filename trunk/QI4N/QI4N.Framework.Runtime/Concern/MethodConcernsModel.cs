@@ -2,6 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
 
     public class MethodConcernsModel
@@ -14,8 +15,11 @@ namespace QI4N.Framework.Runtime
             this.concernsForMethod = concernsForMethod;
         }
 
+        
+        [DebuggerHidden]
         public bool HasConcerns
         {
+            [DebuggerStepThrough]
             get
             {
                 return this.concernsForMethod != null && this.concernsForMethod.Count != 0;
@@ -62,6 +66,8 @@ namespace QI4N.Framework.Runtime
             return newModel;
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public MethodConcernsInstance NewInstance(ModuleInstance moduleInstance, FragmentInvocationHandler mixinInvocationHandler)
         {
             var proxyHandler = new ProxyReferenceInvocationHandler();

@@ -2,6 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
 
     public class MethodSideEffectsModel
@@ -16,6 +17,8 @@ namespace QI4N.Framework.Runtime
 
         public bool HasSideEffects
         {
+            [DebuggerStepThrough]
+            [DebuggerHidden]
             get
             {
                 return this.sideEffectModels != null && this.sideEffectModels.Count != 0;
@@ -76,6 +79,8 @@ namespace QI4N.Framework.Runtime
             return newModel;
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public MethodSideEffectsInstance NewInstance(ModuleInstance moduleInstance, InvocationHandler invoker)
         {
             var proxyHandler = new ProxyReferenceInvocationHandler();
