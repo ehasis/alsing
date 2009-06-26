@@ -83,6 +83,8 @@ namespace ConsoleApplication23
 
             customer.Print();
 
+            customer.SayHello();
+
             Console.ReadLine();
         }
     }

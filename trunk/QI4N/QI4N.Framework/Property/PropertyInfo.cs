@@ -5,5 +5,7 @@
         bool IsMutable { get; }
 
         bool IsComputed { get; }
+
+        string QualifiedName { get; }
     }
 }
