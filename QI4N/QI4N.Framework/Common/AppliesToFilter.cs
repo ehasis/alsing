@@ -23,7 +23,9 @@ namespace QI4N.Framework
         public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
         {
             if (method.Name.StartsWith("get_") && method.IsSpecialName && method.GetParameters().Length == 0)
+            {
                 return true;
+            }
 
             return false;
         }
@@ -34,7 +36,9 @@ namespace QI4N.Framework
         public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
         {
             if (method.Name.StartsWith("set_") && method.IsSpecialName && method.GetParameters().Length == 1)
+            {
                 return true;
+            }
 
             return false;
         }

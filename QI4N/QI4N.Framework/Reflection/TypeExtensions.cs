@@ -10,7 +10,7 @@ namespace QI4N.Framework.Reflection
     public static class TypeExtensions
     {
         [DebuggerStepThrough]
-        [DebuggerHidden]     
+        [DebuggerHidden]
         public static FieldInfo[] GetAllFields(this Type type)
         {
             const BindingFlags flags = BindingFlags.Instance |
@@ -42,7 +42,7 @@ namespace QI4N.Framework.Reflection
             {
                 types.Add(targetType);
             }
-            
+
             types.AddRange(targetType.GetInterfaces());
             return types;
         }
@@ -57,7 +57,7 @@ namespace QI4N.Framework.Reflection
 
             MethodInfo[] ownMethods = type.GetMethods(flags);
 
-            return ownMethods;            
+            return ownMethods;
         }
 
         public static Type[] GetAppliesToTypes(this Type mixinType)
@@ -108,7 +108,7 @@ namespace QI4N.Framework.Reflection
             string methodName = string.Format("{1} in {0}", method.DeclaringType.Name, method.Name);
             Type[] parameters = method
                     .GetParameters()
-                    .Select<ParameterInfo,Type>(SelectParameterType)
+                    .Select<ParameterInfo, Type>(SelectParameterType)
                     .ToArray();
 
             MethodBuilder methodBuilder = typeBuilder
@@ -116,13 +116,6 @@ namespace QI4N.Framework.Reflection
 
             typeBuilder.DefineMethodOverride(methodBuilder, method);
             return methodBuilder;
-        }
-
-        [DebuggerStepThrough]
-        [DebuggerHidden]
-        private static Type SelectParameterType(ParameterInfo param)
-        {
-            return param.ParameterType;
         }
 
         public static Type[] GetMixinTypes(this Type mixinType)
@@ -174,6 +167,13 @@ namespace QI4N.Framework.Reflection
         public static object NewInstance(this Type self)
         {
             return Activator.CreateInstance(self, null);
+        }
+
+        [DebuggerStepThrough]
+        [DebuggerHidden]
+        private static Type SelectParameterType(ParameterInfo param)
+        {
+            return param.ParameterType;
         }
     }
 }

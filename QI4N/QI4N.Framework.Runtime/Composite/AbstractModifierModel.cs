@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Linq;
     using System.Reflection;
 
     using JavaProxy;
@@ -51,14 +50,14 @@
             //TODO: fix this
             FieldInfo[] fields = this.modifierType.GetAllFields();
 
-
             FieldInfo field = null;
-            foreach(FieldInfo t in fields)
+            foreach (FieldInfo t in fields)
             {
                 if (t.Name == "next")
+                {
                     field = t;
+                }
             }
-
 
             field.SetValue(concern, this.WrapNext(next));
             ////this.injectedFieldsModel.Inject(injectionContext, mixin);

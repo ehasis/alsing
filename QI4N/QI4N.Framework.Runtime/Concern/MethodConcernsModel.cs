@@ -15,7 +15,7 @@ namespace QI4N.Framework.Runtime
             this.concernsForMethod = concernsForMethod;
         }
 
-        
+
         [DebuggerHidden]
         public bool HasConcerns
         {

@@ -17,9 +17,9 @@ namespace QI4N.Framework.Runtime
 
         private readonly IDictionary<MethodInfo, CompositeMethodModel> methods;
 
-        private readonly IList<PropertyInfo> properties;
-
         private readonly AbstractMixinsModel mixinsModel;
+
+        private readonly IList<PropertyInfo> properties;
 
         private readonly SideEffectsDeclaration sideEffectsModel;
 
@@ -36,14 +36,6 @@ namespace QI4N.Framework.Runtime
             this.ImplementMixinMethods();
         }
 
-        public IEnumerable<PropertyInfo> Properties
-        {
-            get
-            {
-                return this.properties;
-            }
-        }
-
         public IEnumerable<MethodInfo> Methods
         {
             get
@@ -55,11 +47,17 @@ namespace QI4N.Framework.Runtime
             }
         }
 
+        public IEnumerable<PropertyInfo> Properties
+        {
+            get
+            {
+                return this.properties;
+            }
+        }
+
 
         [DebuggerStepThrough]
         [DebuggerHidden]
-
-
         public object Invoke(MixinsInstance mixins, object proxy, MethodInfo method, object[] args, ModuleInstance moduleInstance)
         {
             CompositeMethodModel compositeMethod;
@@ -143,7 +141,7 @@ namespace QI4N.Framework.Runtime
                     MethodSideEffectsModel mixinMethodSideEffectsModel = mixinModel.SideEffectsFor(method, mixinType);
                     methodSideEffectsModel = methodSideEffectsModel.CombineWith(mixinMethodSideEffectsModel);
 
-                    var methodConstraintsModel = new MethodConstraintsModel(method, constraintsModel);
+                    var methodConstraintsModel = new MethodConstraintsModel(method, this.constraintsModel);
 
                     var compositeMethodModel = new CompositeMethodModel(method, methodConstraintsModel, methodConcernsModel, methodSideEffectsModel, this.mixinsModel);
                     this.methods.Add(method, compositeMethodModel);

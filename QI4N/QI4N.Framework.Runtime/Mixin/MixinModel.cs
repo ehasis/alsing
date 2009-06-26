@@ -62,8 +62,6 @@ namespace QI4N.Framework.Runtime
 
         [DebuggerStepThrough]
         [DebuggerHidden]
-
-
         public FragmentInvocationHandler NewInvocationHandler(Type methodType)
         {
             if (typeof(InvocationHandler).IsAssignableFrom(this.MixinType) && !methodType.IsAssignableFrom(this.MixinType))
@@ -85,7 +83,7 @@ namespace QI4N.Framework.Runtime
         {
             var thisDependencies = new HashSet<Type>();
 
-            IEnumerable<Type> thisTypes = TypeExtensions.GetAllFields(this.MixinType)
+            IEnumerable<Type> thisTypes = this.MixinType.GetAllFields()
                     .Where(f => f.HasAttribute(typeof(ThisAttribute)))
                     .Select(f => f.FieldType);
 
