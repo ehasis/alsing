@@ -3,11 +3,12 @@ namespace QI4N.Framework.Runtime
     using System.Diagnostics;
 
     [DebuggerDisplay("Value = {Value}")]
-    public class PropertyInstance: Property
+    public class PropertyInstance : Property
     {
+        private readonly PropertyModel model;
+
         private CompositePropertyInfo info;
 
-        private PropertyModel model;
 
         public PropertyInstance(CompositePropertyInfo info, object initialValue, PropertyModel model)
         {
@@ -32,6 +33,14 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public object Value { get; set; }        
+        public string QualifiedName
+        {
+            get
+            {
+                return this.model.QualifiedName;
+            }
+        }
+
+        public object Value { get; set; }
     }
 }
