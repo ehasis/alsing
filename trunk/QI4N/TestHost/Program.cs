@@ -2,6 +2,8 @@ namespace ConsoleApplication23
 {
     using System;
 
+    using Experimental;
+
     using QI4N.Framework;
     using QI4N.Framework.Bootstrap;
     using QI4N.Framework.Runtime;
@@ -12,37 +14,32 @@ namespace ConsoleApplication23
         {
             LayerAssembly layer = app.NewLayerAssembly("DomainLayer");
 
-            ModuleAssembly peopleModule = CreatePeopleModule(layer);
+            ModuleAssembly experimentalModule = CreateExperimentalModule(layer);
 
             return layer;
         }
 
-        private static ModuleAssembly CreatePeopleModule(LayerAssembly layer)
+        private static ModuleAssembly CreateExperimentalModule(LayerAssembly layer)
         {
-            ModuleAssembly module = layer.NewModuleAssembly("PeopleModule");
+            ModuleAssembly module = layer.NewModuleAssembly("ExperimentalModule");
 
             module
                     .AddEntities()
-                    .Include<CarEntity>()
                     .VisibleIn(Visibility.Layer);
 
             module
                     .AddServices()
-                    .Include<ManufacturerRepositoryService>()
+                 //   .Include<ManufacturerRepositoryService>()
                     .VisibleIn(Visibility.Layer);
 
             module
                     .AddValues()
-                    .WithConcern<MyGenericConcern>()
-                    .Include<AccidentValue>();
+                    .Include<AddressValue>();
+            //        .WithConcern<MyGenericConcern>();
 
             module
                     .AddTransients()
-                    .Include<PersonComposite>()
-                    //.WithConcern<PersonBehaviorConcern>()
-                    //.WithConcern<MyGenericConcern>()
-                    //.WithSideEffect<MySideEffect>()
-                    .WithMixin<RandomFooMixin>();
+                    .Include<CustomerTransient>();
 
             return module;
         }
@@ -64,30 +61,27 @@ namespace ConsoleApplication23
 
         private static void Run(ApplicationInstance applicationInstance)
         {
-            ModuleInstance peopleModule = applicationInstance.FindModule("DomainLayer", "PeopleModule");
+            ModuleInstance peopleModule = applicationInstance.FindModule("DomainLayer", "ExperimentalModule");
 
             var factory = new TransientBuilderFactoryInstance(peopleModule);
+            var addressFactory = new ValueBuilderFactoryInstance(peopleModule);
 
-            TransientBuilder<Person> personBuilder = factory.NewTransientBuilder<Person>();
+            var customerBuilder = factory.NewTransientBuilder<Customer>();
+            var addressBuilder = addressFactory.NewValueBuilder<Address>();
 
-            var personState = personBuilder.PrototypeFor<PersonState>();
-            personState.FirstName = "Roger";
-            personState.LastName = "Alsing";
+            var protoAddress = addressBuilder.Prototype();
+            protoAddress.City = "Foo City";
+            protoAddress.StreetName = "Acme road 123";
+            protoAddress.ZipCode = "888-555";
 
-            Person person = personBuilder.NewInstance();
-            person.SayHi();
-            Console.WriteLine(person.ToString());
+            var protoCustomer = customerBuilder.PrototypeFor<Customer>();
+            protoCustomer.Name = "Acme Inc";
+            protoCustomer.Email = "Roger.Alsing@Precio.se";
+            protoCustomer.Address = addressBuilder.NewInstance();
 
+            var customer = customerBuilder.NewInstance();
 
-            var valueFactory = new ValueBuilderFactoryInstance(peopleModule);
-            var accidentBuilder = valueFactory.NewValueBuilder<Accident>();
-
-            var accidentState = accidentBuilder.Prototype();
-            accidentState.Description = "hej du glade";
-            accidentState.Occured = new DateTime(2009, 01, 01);
-
-            var accident = accidentBuilder.NewInstance();
-
+            customer.Print();
 
             Console.ReadLine();
         }

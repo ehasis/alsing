@@ -76,14 +76,7 @@ namespace QI4N.Framework.Runtime
                         filter = new TypeCheckAppliesToFilter(appliesToClass);
                     }
 
-                    if (this.appliesToFilter == null)
-                    {
-                        this.appliesToFilter = filter;
-                    }
-                    else
-                    {
-                        this.appliesToFilter = new AndAppliesToFilter(this.appliesToFilter, filter);
-                    }
+                    this.appliesToFilter = this.appliesToFilter == null ? filter : new AndAppliesToFilter(this.appliesToFilter, filter);
                 }
             }
 

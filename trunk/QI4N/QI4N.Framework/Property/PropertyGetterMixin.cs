@@ -1,9 +1,8 @@
 namespace QI4N.Framework
 {
-    using System;
     using System.Reflection;
 
-    [AppliesTo(typeof(AppliesToGetProperty))]
+    [AppliesTo(typeof(GetPropertyFilter))]
     public class PropertyGetterMixin : InvocationHandler
     {
         [State]
@@ -16,8 +15,8 @@ namespace QI4N.Framework
 
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
-            var property = this.state.GetProperty(method);
-            var propertyValue = property.Value;
+            Property property = this.state.GetProperty(method);
+            object propertyValue = property.Value;
             return propertyValue;
         }
     }

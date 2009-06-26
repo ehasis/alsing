@@ -1,9 +1,8 @@
 ﻿namespace QI4N.Framework
 {
-    using System;
     using System.Reflection;
 
-    [AppliesTo(typeof(AppliesToSetProperty))]
+    [AppliesTo(typeof(SetPropertyFilter))]
     public class PropertySetterMixin : InvocationHandler
     {
         [State]
@@ -16,9 +15,10 @@
 
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
+            object value = args[0];
             Property property = this.state.GetProperty(method);
 
-            property.Value = args[0];
+            property.Value = value;
             return null;
         }
     }

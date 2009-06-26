@@ -1,6 +1,7 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
 
     public class EntityStateModel : AbstractStateModel
@@ -20,6 +21,11 @@ namespace QI4N.Framework.Runtime
             public Property GetProperty(MethodInfo propertyMethod)
             {
                 throw new NotImplementedException();
+            }
+
+            public IEnumerable<Property> GetProperties()
+            {
+                throw new System.NotImplementedException();
             }
         }
     }
