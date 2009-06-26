@@ -39,7 +39,8 @@ namespace ConsoleApplication23
 
             module
                     .AddTransients()
-                    .Include<CustomerTransient>();
+                    .Include<CustomerTransient>()
+                    .WithConcern<GenericTracingConcern>();
 
             return module;
         }
