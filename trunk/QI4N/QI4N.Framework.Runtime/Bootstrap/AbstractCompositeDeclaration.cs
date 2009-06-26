@@ -46,7 +46,7 @@ namespace QI4N.Framework.Runtime
             return this.asT;
         }
 
-        public T WithConcern<K>()
+        public T WithConcern<K>() where K : ConcernOf
         {
             this.concerns.Add(typeof(K));
             return this.asT;
@@ -58,7 +58,7 @@ namespace QI4N.Framework.Runtime
             return this.asT;
         }
 
-        public T WithSideEffect<K>()
+        public T WithSideEffect<K>() where K : SideEffectOf
         {
             this.sideEffects.Add(typeof(K));
             return this.asT;

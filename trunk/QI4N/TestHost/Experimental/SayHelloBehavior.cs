@@ -4,14 +4,14 @@
 
     using QI4N.Framework;
 
-    [Mixins(typeof(SayHelloMixin))]
-    [Concerns(typeof(SayHelloConcern))]
+    [Mixins(typeof(SayHelloBehaviorMixin))]
+
     public interface SayHelloBehavior
     {
         void SayHello();
     }
 
-    public class SayHelloMixin : SayHelloBehavior
+    public class SayHelloBehaviorMixin : SayHelloBehavior
     {
         [This]
         private SomePrivateBehavior privateMixin;
@@ -21,10 +21,8 @@
 
         public void SayHello()
         {
-            Console.WriteLine();
             Console.WriteLine("{0} says hello", this.state.Name);
             this.privateMixin.PrivateHello();
-            Console.WriteLine();
         }
     }
 }

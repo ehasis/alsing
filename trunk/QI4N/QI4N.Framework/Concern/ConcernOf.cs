@@ -1,6 +1,12 @@
 namespace QI4N.Framework
 {
-    public abstract class ConcernOf<T>
+    //Marker
+    public abstract class ConcernOf
+    {
+        
+    }
+
+    public abstract class ConcernOf<T> : ConcernOf
     {
         [ConcernFor]
         protected T next;
