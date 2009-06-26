@@ -45,12 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Base.cs" />
-    <Compile Include="Model\Entity.cs" />
-    <Compile Include="Model\Factory.cs" />
-    <Compile Include="Model\Person.cs" />
-    <Compile Include="Model\Repository.cs" />
-    <Compile Include="OtherModel\HelloWorldState.cs" />
+    <Compile Include="Experimental\Customer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -18,7 +18,7 @@ namespace QI4N.Framework
         }
     }
 
-    public class AppliesToGetProperty : AppliesToFilter
+    public class GetPropertyFilter : AppliesToFilter
     {
         public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
         {
@@ -29,7 +29,7 @@ namespace QI4N.Framework
         }
     }
 
-    public class AppliesToSetProperty : AppliesToFilter
+    public class SetPropertyFilter : AppliesToFilter
     {
         public bool AppliesTo(MethodInfo method, Type mixin, Type compositeType, Type fragmentClass)
         {
