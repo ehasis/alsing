@@ -2,13 +2,16 @@ namespace QI4N.Framework.Reflection
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
 
     public static class TypeExtensions
     {
-        public static IEnumerable<FieldInfo> GetAllFields(this Type type)
+        [DebuggerStepThrough]
+        [DebuggerHidden]     
+        public static FieldInfo[] GetAllFields(this Type type)
         {
             const BindingFlags flags = BindingFlags.Instance |
                                        BindingFlags.Public |
@@ -16,10 +19,7 @@ namespace QI4N.Framework.Reflection
 
             FieldInfo[] ownFields = type.GetFields(flags).ToArray();
 
-            foreach (FieldInfo field in ownFields)
-            {
-                yield return field;
-            }
+            return ownFields;
         }
 
         public static IEnumerable<MethodInfo> GetAllInterfaceMethods(this Type self)
@@ -33,32 +33,31 @@ namespace QI4N.Framework.Reflection
             }
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public static IEnumerable<Type> GetAllInterfaces(this Type targetType)
         {
+            var types = new List<Type>();
             if (targetType.IsInterface)
             {
-                yield return targetType;
+                types.Add(targetType);
             }
-
-            foreach (Type type in targetType.GetInterfaces())
-            {
-                yield return type;
-            }
+            
+            types.AddRange(targetType.GetInterfaces());
+            return types;
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public static IEnumerable<MethodInfo> GetAllMethods(this Type type)
         {
             const BindingFlags flags = BindingFlags.Instance |
                                        BindingFlags.Public |
                                        BindingFlags.NonPublic;
 
-            MethodInfo[] ownMethods = type.GetMethods(flags)
-                    .ToArray();
+            MethodInfo[] ownMethods = type.GetMethods(flags);
 
-            foreach (MethodInfo method in ownMethods)
-            {
-                yield return method;
-            }
+            return ownMethods;            
         }
 
         public static Type[] GetAppliesToTypes(this Type mixinType)
@@ -96,6 +95,8 @@ namespace QI4N.Framework.Reflection
             return propertyInfo;
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public static MethodBuilder GetMethodOverrideBuilder(this TypeBuilder typeBuilder, MethodInfo method)
         {
             const MethodAttributes methodAttributes = MethodAttributes.NewSlot |
@@ -107,7 +108,7 @@ namespace QI4N.Framework.Reflection
             string methodName = string.Format("{1} in {0}", method.DeclaringType.Name, method.Name);
             Type[] parameters = method
                     .GetParameters()
-                    .Select(p => p.ParameterType)
+                    .Select<ParameterInfo,Type>(SelectParameterType)
                     .ToArray();
 
             MethodBuilder methodBuilder = typeBuilder
@@ -115,6 +116,13 @@ namespace QI4N.Framework.Reflection
 
             typeBuilder.DefineMethodOverride(methodBuilder, method);
             return methodBuilder;
+        }
+
+        [DebuggerStepThrough]
+        [DebuggerHidden]
+        private static Type SelectParameterType(ParameterInfo param)
+        {
+            return param.ParameterType;
         }
 
         public static Type[] GetMixinTypes(this Type mixinType)
@@ -126,6 +134,8 @@ namespace QI4N.Framework.Reflection
             return appliesTo.ToArray();
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public static string GetTypeName(this Type type)
         {
             if (type.IsGenericType)
@@ -159,6 +169,8 @@ namespace QI4N.Framework.Reflection
             return self.GetCustomAttributes(attributeType, true).Any();
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public static object NewInstance(this Type self)
         {
             return Activator.CreateInstance(self, null);

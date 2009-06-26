@@ -1,5 +1,6 @@
 ﻿namespace QI4N.Framework
 {
+    using System.Diagnostics;
     using System.Reflection;
 
     [AppliesTo(typeof(SetPropertyFilter))]
@@ -8,10 +9,10 @@
         [State]
         protected StateHolder state;
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {

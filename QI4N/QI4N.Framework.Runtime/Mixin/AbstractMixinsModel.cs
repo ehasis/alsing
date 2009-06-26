@@ -2,6 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
 
@@ -51,9 +52,8 @@ namespace QI4N.Framework.Runtime
                 var thisTypes = new List<Type>();
                 foreach (Type implementationType in this.mixinImplementationTypes)
                 {
-                    IEnumerable<Type> fieldTypes = implementationType
-                            .GetAllFields()
-                            .Where(f => TypeExtensions.HasAttribute((FieldInfo)(((((f))))), typeof(ThisAttribute)))
+                    IEnumerable<Type> fieldTypes = TypeExtensions.GetAllFields(implementationType)
+                            .Where(f => f.HasAttribute(typeof(ThisAttribute)))
                             .Select(f => f.FieldType);
 
                     thisTypes.AddRange(fieldTypes);
@@ -102,12 +102,16 @@ namespace QI4N.Framework.Runtime
             return this.mixinImplementationTypes.IndexOf(mixinImplementationType);
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public MixinModel MixinFor(MethodInfo method)
         {
             int integer = this.MethodIndex[method];
             return this.mixinModels[integer];
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
         {
             return this.MixinFor(method).NewInvocationHandler(method.DeclaringType);

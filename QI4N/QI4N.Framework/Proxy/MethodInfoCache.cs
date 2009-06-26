@@ -1,6 +1,7 @@
 namespace QI4N.Framework.Reflection
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
 
     public static class MethodInfoCache
@@ -9,6 +10,8 @@ namespace QI4N.Framework.Reflection
 
         private static readonly object syncRoot = new object();
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public static int AddMethod(MethodInfo methodInfo)
         {
             lock (syncRoot)
@@ -20,10 +23,10 @@ namespace QI4N.Framework.Reflection
             }
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public static MethodInfo GetMethod(int methodId)
         {

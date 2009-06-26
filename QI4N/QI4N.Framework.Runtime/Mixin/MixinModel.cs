@@ -59,10 +59,10 @@ namespace QI4N.Framework.Runtime
             throw new NotImplementedException();
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public FragmentInvocationHandler NewInvocationHandler(Type methodType)
         {
@@ -85,8 +85,7 @@ namespace QI4N.Framework.Runtime
         {
             var thisDependencies = new HashSet<Type>();
 
-            IEnumerable<Type> thisTypes = this.MixinType
-                    .GetAllFields()
+            IEnumerable<Type> thisTypes = TypeExtensions.GetAllFields(this.MixinType)
                     .Where(f => f.HasAttribute(typeof(ThisAttribute)))
                     .Select(f => f.FieldType);
 

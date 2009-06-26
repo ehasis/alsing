@@ -1,6 +1,7 @@
 namespace QI4N.Framework.Runtime
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
 
@@ -31,10 +32,10 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-#if !DEBUG
+
         [DebuggerStepThrough]
         [DebuggerHidden]
-#endif
+
 
         public Property GetProperty(MethodInfo accessor)
         {

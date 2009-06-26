@@ -1,12 +1,15 @@
 namespace QI4N.Framework.JavaProxy
 {
     using System;
+    using System.Diagnostics;
     using System.Reflection;
 
     using Reflection;
 
     public static class Proxy
     {
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public static Type BuildProxyType(Type compositeType, params Type[] additionalTypes)
         {
             var builder = new InvocationProxyTypeBuilder();
@@ -27,6 +30,8 @@ namespace QI4N.Framework.JavaProxy
             return defaultHandlerField != null;
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public static object NewProxyInstance(Type type, InvocationHandler handler)
         {
             Type proxyType = BuildProxyType(type);

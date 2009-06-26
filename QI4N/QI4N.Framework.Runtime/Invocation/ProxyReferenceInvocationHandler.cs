@@ -1,12 +1,15 @@
 ﻿namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Diagnostics;
     using System.Reflection;
 
     public class ProxyReferenceInvocationHandler : InvocationHandler
     {
         public object Proxy { get; set; }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public void ClearProxy()
         {
             this.Proxy = null;
