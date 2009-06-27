@@ -44,7 +44,14 @@ namespace QI4N.Framework.Runtime
 
         private static List<Type> AsSideEffectsTargetTypes(Type type)
         {
-            return type.GetAllInterfaces().ToList();
+            if (type.IsInterface)
+            {
+                return type.GetAllInterfaces().ToList();
+            }
+            return new List<Type>
+                       {
+                               type
+                       };
         }
 
         private void AddSideEffectDeclaration(Type type)
