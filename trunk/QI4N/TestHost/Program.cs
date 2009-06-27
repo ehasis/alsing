@@ -29,7 +29,7 @@ namespace ConsoleApplication23
 
             module
                     .AddServices()
-                 //   .Include<ManufacturerRepositoryService>()
+                    //   .Include<ManufacturerRepositoryService>()
                     .VisibleIn(Visibility.Layer);
 
             module
@@ -68,10 +68,10 @@ namespace ConsoleApplication23
             var factory = new TransientBuilderFactoryInstance(peopleModule);
             var addressFactory = new ValueBuilderFactoryInstance(peopleModule);
 
-            var customerBuilder = factory.NewTransientBuilder<Customer>();
-            var addressBuilder = addressFactory.NewValueBuilder<Address>();
+            TransientBuilder<Customer> customerBuilder = factory.NewTransientBuilder<Customer>();
+            ValueBuilder<Address> addressBuilder = addressFactory.NewValueBuilder<Address>();
 
-            var protoAddress = addressBuilder.Prototype();
+            Address protoAddress = addressBuilder.Prototype();
             protoAddress.City = "Foo City";
             protoAddress.StreetName = "Acme road 123";
             protoAddress.ZipCode = "888-555";
@@ -81,7 +81,7 @@ namespace ConsoleApplication23
             protoCustomer.Email = "Roger.Alsing@Precio.se";
             protoCustomer.Address = addressBuilder.NewInstance();
 
-            var customer = customerBuilder.NewInstance();
+            Customer customer = customerBuilder.NewInstance();
 
             customer.Print();
 

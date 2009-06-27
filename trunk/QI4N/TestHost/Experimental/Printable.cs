@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ConsoleApplication23.Experimental
+﻿namespace ConsoleApplication23.Experimental
 {
+    using System;
+    using System.Linq;
+
     using QI4N.Framework;
 
     [Mixins(typeof(PrintableMixin))]
