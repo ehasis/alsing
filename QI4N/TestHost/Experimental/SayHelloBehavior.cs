@@ -5,6 +5,7 @@
     using QI4N.Framework;
 
     [Mixins(typeof(SayHelloBehaviorMixin))]
+    [Concerns(typeof(SayHelloConcern))]
     public interface SayHelloBehavior
     {
         void SayHello();
