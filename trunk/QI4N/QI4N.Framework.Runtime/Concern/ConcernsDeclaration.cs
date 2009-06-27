@@ -21,7 +21,17 @@
         public static void ConcernDeclarations(Type mixinType, List<ConcernDeclaration> concerns)
         {
             // Find concern declarations
-            var types = new List<Type>(mixinType.GetAllInterfaces());
+            var types = new List<Type>();
+            
+            if (mixinType.IsClass)
+            {
+                types.Add(mixinType);
+            }
+            else
+            {
+                types.AddRange(mixinType.GetAllInterfaces());
+            }
+                
 
             foreach (Type aType in types)
             {
