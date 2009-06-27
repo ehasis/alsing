@@ -9,7 +9,7 @@
     {
         public override object Invoke(object proxy, MethodInfo method, object[] args)
         {
-            var color = Console.ForegroundColor;
+            ConsoleColor color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("Entering method {0}", method.Name);
             Console.ForegroundColor = color;
@@ -18,9 +18,13 @@
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
             if (method.ReturnType != typeof(void))
+            {
                 Console.WriteLine("Exiting method {0} with result '{1}'", method.Name, res);
+            }
             else
+            {
                 Console.WriteLine("Exiting method {0}", method.Name);
+            }
             Console.ForegroundColor = color;
 
             return res;

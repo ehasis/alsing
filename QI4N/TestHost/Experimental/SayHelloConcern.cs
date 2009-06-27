@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ConsoleApplication23.Experimental
+﻿namespace ConsoleApplication23.Experimental
 {
+    using System;
+
     using QI4N.Framework;
 
-    public class SayHelloConcern : ConcernOf<SayHelloBehavior> , SayHelloBehavior
+    public class SayHelloConcern : ConcernOf<SayHelloBehavior>, SayHelloBehavior
     {
-        #region SayHelloBehavior Members
-
         public void SayHello()
         {
             Console.WriteLine("This is the SayHello Concern speaking");
-            next.SayHello();            
+            this.next.SayHello();
         }
-
-        #endregion
     }
 }

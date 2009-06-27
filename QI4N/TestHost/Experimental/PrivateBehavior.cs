@@ -4,7 +4,7 @@
 
     using QI4N.Framework;
 
-    [Mixins(typeof(SomePrivateBehaviorMixin))]    
+    [Mixins(typeof(SomePrivateBehaviorMixin))]
     public interface SomePrivateBehavior
     {
         void PrivateHello();

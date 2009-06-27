@@ -5,8 +5,6 @@ namespace QI4N.Framework.Runtime
 
     using Bootstrap;
 
-    using JavaProxy;
-
     public sealed class TransientModel : AbstractCompositeModel
     {
         public TransientModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
@@ -39,6 +37,11 @@ namespace QI4N.Framework.Runtime
             return new TransientModel(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel);
         }
 
+        public static void VisitModel(ModelVisitor visitor)
+        {
+            throw new NotImplementedException();
+        }
+
         public CompositeInstance NewCompositeInstance(ModuleInstance moduleInstance, UsesInstance uses, StateHolder stateHolder)
         {
             object[] mixins = this.mixinsModel.NewMixinHolder();
@@ -47,11 +50,6 @@ namespace QI4N.Framework.Runtime
             ((MixinsModel)this.mixinsModel).NewMixins(compositeInstance, uses, stateHolder, mixins);
 
             return compositeInstance;
-        }
-
-        public static void VisitModel(ModelVisitor visitor)
-        {
-            throw new NotImplementedException();
         }
     }
 }
