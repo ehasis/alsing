@@ -87,7 +87,11 @@ namespace ConsoleApplication23
 
             customer.SayHello();
 
-            customer.Address.City = "Should explode";
+            //customer.Address.City = "Should explode";
+
+            var otherAddress = addressBuilder.NewInstance();
+
+            bool areEqual = customer.Address.Equals(otherAddress);
 
             Console.ReadLine();
         }

@@ -58,5 +58,20 @@
         {
             return string.Format("{0} r/o", this.target);
         }
+
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as ImmutablePropertyFacade);
+        }
+
+        public bool Equals(ImmutablePropertyFacade that)
+        {
+            return Equals(this.Value, that.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return target.GetHashCode();
+        }
     }
 }
