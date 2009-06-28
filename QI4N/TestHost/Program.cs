@@ -93,6 +93,9 @@ namespace ConsoleApplication23
 
             bool areEqual = customer.Address.Equals(otherAddress);
 
+            if (areEqual)
+                Console.WriteLine("customer.Address and otherAddress are equal");
+
             Console.ReadLine();
         }
     }
