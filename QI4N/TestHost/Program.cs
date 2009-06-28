@@ -87,6 +87,8 @@ namespace ConsoleApplication23
 
             customer.SayHello();
 
+            customer.Address.City = "Should explode";
+
             Console.ReadLine();
         }
     }
