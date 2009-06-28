@@ -8,13 +8,13 @@ namespace QI4N.Framework.Runtime
 
     public abstract class AbstractPropertiesModel
     {
-        private readonly AbstractConstraintsModel constraintsModel;
+        protected readonly AbstractConstraintsModel constraintsModel;
 
-        private readonly PropertyDeclarations propertyDeclarations;
+        protected readonly PropertyDeclarations propertyDeclarations;
 
-        private readonly bool immutable;
+        protected readonly bool immutable;
 
-        private readonly IList<PropertyModel> propertyModels = new List<PropertyModel>();
+        protected readonly IList<PropertyModel> propertyModels = new List<PropertyModel>();
 
         protected AbstractPropertiesModel(AbstractConstraintsModel constraintsModel, PropertyDeclarations propertyDeclarations, bool immutable)
         {
@@ -58,7 +58,8 @@ namespace QI4N.Framework.Runtime
             var properties = new Dictionary<PropertyInfo, Property>();
             foreach (PropertyModel propertyModel in this.propertyModels)
             {
-                object initialValue = state.GetProperty(propertyModel.GetMethod).Value;
+                var originalProperty = state.GetProperty(propertyModel.PropertyInfo);
+                object initialValue = originalProperty.Value;
 
                 initialValue = CloneInitialValue(initialValue, false);
 

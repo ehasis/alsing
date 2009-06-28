@@ -2,45 +2,29 @@ namespace QI4N.Framework.Runtime
 {
     using System.Reflection;
 
-    public interface PropertyModel
+    //public interface PropertyModel
+    //{
+    //    Property NewInstance(object value);
+
+    //    string QualifiedName { get; }
+
+    //    Property NewBuilderInstance();
+
+    //    MethodInfo GetMethod { get; }
+
+    //    MethodInfo SetMethod { get; }
+
+    //    PropertyInfo PropertyInfo { get; }
+
+    //    Property NewInitialInstance();
+    //}
+
+    public class PropertyModel : AbstractPropertyModel
     {
-        Property NewInstance(object value);
-
-        string QualifiedName { get; }
-
-        Property NewBuilderInstance();
-
-        MethodInfo GetMethod { get; }
-
-        MethodInfo SetMethod { get; }
-
-        PropertyInfo PropertyInfo { get; }
-
-        Property NewInitialInstance();
-    }
-
-    public class PropertyModelImpl : PropertyModel
-    {
-        private readonly MethodInfo getMethod;
-
-        private readonly PropertyInfo propertyInfo;
-
-        private readonly MethodInfo setMethod;
-
-        public PropertyModelImpl(PropertyInfo propertyInfo)
+        public PropertyModel(PropertyInfo propertyInfo, bool immutable, object initialValue) : base (propertyInfo,immutable,initialValue)
         {
-            this.getMethod = propertyInfo.GetGetMethod(true);
-            this.setMethod = propertyInfo.GetSetMethod(true);
-            this.propertyInfo = propertyInfo;
         }
 
-        public MethodInfo GetMethod
-        {
-            get
-            {
-                return this.getMethod;
-            }
-        }
 
         public PropertyInfo PropertyInfo
         {
@@ -58,14 +42,6 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public MethodInfo SetMethod
-        {
-            get
-            {
-                return this.setMethod;
-            }
-        }
-
         public Property NewBuilderInstance()
         {
             var instance = new PropertyInstance(null, null, this);
@@ -80,6 +56,8 @@ namespace QI4N.Framework.Runtime
 
         public Property NewInstance(object value)
         {
+            
+
             var instance = new PropertyInstance(null, value, this);
             return instance;
         }

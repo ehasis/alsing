@@ -5,14 +5,14 @@
 
     public class MetaInfoDeclaration : PropertyDeclarations
     {
-        public object GetInitialValue(MethodInfo accessor)
+        public object GetInitialValue(PropertyInfo accessor)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
-        public MetaInfo GetMetaInfo(MethodInfo accessor)
+        public MetaInfo GetMetaInfo(PropertyInfo accessor)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

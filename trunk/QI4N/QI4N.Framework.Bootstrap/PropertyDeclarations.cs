@@ -4,8 +4,8 @@
 
     public interface PropertyDeclarations
     {
-        MetaInfo GetMetaInfo(MethodInfo accessor);
+        MetaInfo GetMetaInfo(PropertyInfo accessor);
 
-        object GetInitialValue(MethodInfo accessor);
+        object GetInitialValue(PropertyInfo accessor);
     }
 }

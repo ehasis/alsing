@@ -8,12 +8,12 @@ namespace QI4N.Framework.Runtime
     {
         private readonly IDictionary<MethodInfo, Property> methodToPropertyMap;
 
-        private readonly IList<Property> properties;
+        private readonly IDictionary<PropertyInfo, Property> propertyInfoToPropertyMap;
 
         public PropertiesInstance(IDictionary<PropertyInfo, Property> properties)
         {
             this.methodToPropertyMap = new Dictionary<MethodInfo, Property>();
-            this.properties = new List<Property>();
+            this.propertyInfoToPropertyMap = new Dictionary<PropertyInfo, Property>();
             foreach (var entry in properties)
             {
                 //add both getter and setter to lookup
@@ -31,14 +31,19 @@ namespace QI4N.Framework.Runtime
                     this.methodToPropertyMap.Add(setter, entry.Value);
                 }
 
-                this.properties.Add(entry.Value);
+                this.propertyInfoToPropertyMap.Add(entry.Key, entry.Value);
             }
         }
 
 
+        public Property GetProperty(PropertyInfo propertyInfo)
+        {
+            return propertyInfoToPropertyMap[propertyInfo];
+        }
+
         public IEnumerable<Property> GetProperties()
         {
-            return this.properties;
+            return this.propertyInfoToPropertyMap.Values;
         }
 
         [DebuggerStepThrough]
