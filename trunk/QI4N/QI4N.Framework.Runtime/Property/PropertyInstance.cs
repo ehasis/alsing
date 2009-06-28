@@ -47,5 +47,21 @@ namespace QI4N.Framework.Runtime
         {
             return string.Format("{0}", Value);
         }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as PropertyInstance);
+        }
+
+
+        public bool Equals(PropertyInstance obj)
+        {
+            return Equals(obj.Value, this.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return (this.Value != null ? this.Value.GetHashCode() : 0);
+        }
     }
 }

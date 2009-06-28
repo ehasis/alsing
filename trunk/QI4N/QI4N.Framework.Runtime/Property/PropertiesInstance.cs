@@ -2,6 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Reflection;
 
     public class PropertiesInstance : StateHolder
@@ -9,6 +10,7 @@ namespace QI4N.Framework.Runtime
         private readonly IDictionary<MethodInfo, Property> methodToPropertyMap;
 
         private readonly IDictionary<PropertyInfo, Property> propertyInfoToPropertyMap;
+
 
         public PropertiesInstance(IDictionary<PropertyInfo, Property> properties)
         {
@@ -51,6 +53,32 @@ namespace QI4N.Framework.Runtime
         public Property GetProperty(MethodInfo accessor)
         {
             return this.methodToPropertyMap[accessor];
+        }
+
+        public override bool Equals(object o)
+        {
+            if (this == o)
+            {
+                return true;
+            }
+            if (o == null || this.GetType() != o.GetType())
+            {
+                return false;
+            }
+
+            var that = (PropertiesInstance)o;
+
+            if (!propertyInfoToPropertyMap.Values.SequenceEqual(that.propertyInfoToPropertyMap.Values))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return propertyInfoToPropertyMap.GetHashCode();
         }
     }
 }
