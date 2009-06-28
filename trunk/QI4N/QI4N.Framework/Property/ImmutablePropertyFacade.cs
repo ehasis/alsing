@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data;
+    using System.Diagnostics;
 
     public class ImmutablePropertyFacade : Property
     {
@@ -32,19 +33,23 @@
         {
             get
             {
-                throw new NotImplementedException();
+                return target.QualifiedName;
             }
         }
 
         public object Value
         {
+            [DebuggerStepThrough]
+            [DebuggerHidden]
             get
             {
                 return this.target.Value;
             }
+            [DebuggerStepThrough]
+            [DebuggerHidden]
             set
             {
-                string message = string.Format("Property {0} is immutable", this.QualifiedName);
+                string message = string.Format("Property '{0}' is immutable", this.QualifiedName);
                 throw new ReadOnlyException(message);
             }
         }

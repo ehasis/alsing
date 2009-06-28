@@ -3,9 +3,16 @@ namespace QI4N.Framework
     using System;
     using System.Collections.Generic;
 
+    using Reflection;
+
     public class MetaInfo
     {
-        private readonly IList<Type> ignored = new List<Type>();
+        private static readonly IList<Type> ignored = new List<Type>
+                                                          {
+                                                              typeof(MixinsAttribute),
+                                                              typeof(ConcernsAttribute),
+                                                              typeof(SideEffectsAttribute)
+                                                          };
 
         private readonly Dictionary<Type, object> items = new Dictionary<Type, object>();
 
@@ -31,11 +38,14 @@ namespace QI4N.Framework
 
         public MetaInfo WithAnnotations(Type compositeType)
         {
-            foreach (Attribute attribute in compositeType.GetCustomAttributes(true))
+            foreach (var type in compositeType.GetAllInterfaces())
             {
-                if (!this.ignored.Contains(attribute.GetType()))
+                foreach (Attribute attribute in type.GetCustomAttributes(true))
                 {
-                    this.Set(attribute);
+                    if (!ignored.Contains(attribute.GetType()))
+                    {
+                        this.Set(attribute);
+                    }
                 }
             }
             return this;
