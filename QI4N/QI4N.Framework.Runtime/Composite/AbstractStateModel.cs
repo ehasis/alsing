@@ -4,7 +4,7 @@ namespace QI4N.Framework.Runtime
     using System.Collections.Generic;
     using System.Reflection;
 
-    public abstract class AbstractStateModel : AbstractPropertiesModel
+    public abstract class AbstractStateModel 
     {
         protected AbstractPropertiesModel propertiesModel;
 

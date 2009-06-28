@@ -2,10 +2,14 @@
 {
     using System;
 
-    public class TransientConstraintsModel
+    public class TransientConstraintsModel : AbstractConstraintsModel
     {
         public TransientConstraintsModel(Type type)
         {
         }
+    }
+
+    public class AbstractConstraintsModel
+    {
     }
 }

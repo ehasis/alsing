@@ -13,7 +13,7 @@ namespace QI4N.Framework.Runtime
 
         private readonly ConcernsDeclaration concernsModel;
 
-        private readonly TransientConstraintsModel constraintsModel;
+        private readonly AbstractConstraintsModel constraintsModel;
 
         private readonly IDictionary<MethodInfo, CompositeMethodModel> methods;
 
@@ -23,7 +23,7 @@ namespace QI4N.Framework.Runtime
 
         private readonly SideEffectsDeclaration sideEffectsModel;
 
-        public CompositeMethodsModel(Type compositeType, TransientConstraintsModel constraintsModel, ConcernsDeclaration concernsModel, SideEffectsDeclaration sideEffectsModel, AbstractMixinsModel mixinsModel)
+        public CompositeMethodsModel(Type compositeType, AbstractConstraintsModel constraintsModel, ConcernsDeclaration concernsModel, SideEffectsDeclaration sideEffectsModel, AbstractMixinsModel mixinsModel)
         {
             this.methods = new Dictionary<MethodInfo, CompositeMethodModel>();
             this.properties = new List<PropertyInfo>();
