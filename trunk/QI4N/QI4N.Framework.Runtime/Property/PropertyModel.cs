@@ -57,8 +57,13 @@ namespace QI4N.Framework.Runtime
         public Property NewInstance(object value)
         {
             
+            Property instance = new PropertyInstance(null, value, this);
 
-            var instance = new PropertyInstance(null, value, this);
+            if (immutable)
+            {
+                instance = new ImmutablePropertyFacade(instance);
+                
+            }
             return instance;
         }
     }
