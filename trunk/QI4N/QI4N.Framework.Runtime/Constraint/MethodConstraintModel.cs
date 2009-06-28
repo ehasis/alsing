@@ -4,7 +4,7 @@ namespace QI4N.Framework.Runtime
 
     public class MethodConstraintsModel
     {
-        public MethodConstraintsModel(MethodInfo method, TransientConstraintsModel model)
+        public MethodConstraintsModel(MethodInfo method, AbstractConstraintsModel model)
         {
         }
     }

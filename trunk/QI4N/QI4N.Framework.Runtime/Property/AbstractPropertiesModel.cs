@@ -4,9 +4,24 @@ namespace QI4N.Framework.Runtime
     using System.Collections.Generic;
     using System.Reflection;
 
+    using Bootstrap;
+
     public abstract class AbstractPropertiesModel
     {
+        private readonly AbstractConstraintsModel constraintsModel;
+
+        private readonly PropertyDeclarations propertyDeclarations;
+
+        private readonly bool immutable;
+
         private readonly IList<PropertyModel> propertyModels = new List<PropertyModel>();
+
+        protected AbstractPropertiesModel(AbstractConstraintsModel constraintsModel, PropertyDeclarations propertyDeclarations, bool immutable)
+        {
+            this.constraintsModel = constraintsModel;
+            this.propertyDeclarations = propertyDeclarations;
+            this.immutable = immutable;
+        }
 
         public void AddPropertyFor(PropertyInfo propertyInfo, Type compositeType)
         {
@@ -55,12 +70,8 @@ namespace QI4N.Framework.Runtime
         }
 
 
-        protected static PropertyModel NewPropertyModel(PropertyInfo propertyInfo, Type compositeType)
-        {
-            PropertyModel model = new PropertyModelImpl(propertyInfo);
+        protected abstract PropertyModel NewPropertyModel(PropertyInfo propertyInfo, Type compositeType);
 
-            return model;
-        }
 
         private static object CloneInitialValue(object initialValue, bool immutable)
         {

@@ -1,6 +1,11 @@
-namespace QI4N.Framework.Runtime.Value
+namespace QI4N.Framework.Runtime
 {
-    internal class ValueConstraintsModel
+    using System;
+
+    public class ValueConstraintsModel : AbstractConstraintsModel
     {
+        public ValueConstraintsModel(Type type)
+        {
+        }
     }
 }
