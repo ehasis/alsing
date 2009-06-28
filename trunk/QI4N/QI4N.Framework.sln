@@ -9,7 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QI4N.Framework.Runtime", "Q
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QI4N.Framework.Bootstrap", "QI4N.Framework.Bootstrap\QI4N.Framework.Bootstrap.csproj", "{C6ACF8F0-5F35-40CC-B4D2-C0C782A3C133}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QI4N.Framework.Runtime.Tests", "QI4N.Framework.Runtime.Tests\QI4N.Framework.Runtime.Tests.csproj", "{437D244E-3F7D-492D-B78D-87D7CD5EFFC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{44720430-8F0B-4570-ADAC-458EAFE2BF27}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		QI4N.Framework.vsmdi = QI4N.Framework.vsmdi
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = QI4N.Framework.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -31,6 +42,10 @@ Global
 		{C6ACF8F0-5F35-40CC-B4D2-C0C782A3C133}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6ACF8F0-5F35-40CC-B4D2-C0C782A3C133}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6ACF8F0-5F35-40CC-B4D2-C0C782A3C133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437D244E-3F7D-492D-B78D-87D7CD5EFFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437D244E-3F7D-492D-B78D-87D7CD5EFFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437D244E-3F7D-492D-B78D-87D7CD5EFFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437D244E-3F7D-492D-B78D-87D7CD5EFFC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
