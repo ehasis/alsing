@@ -7,6 +7,8 @@ namespace QI4N.Framework
     {
         Property GetProperty(MethodInfo propertyMethod);
 
+        Property GetProperty(PropertyInfo propertyMethod);
+
         IEnumerable<Property> GetProperties();
     }
 }

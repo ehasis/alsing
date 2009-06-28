@@ -15,7 +15,10 @@ namespace QI4N.Framework.Runtime
 
         protected override PropertyModel NewPropertyModel(PropertyInfo propertyInfo, Type compositeType)
         {
-            PropertyModel model = new PropertyModelImpl(propertyInfo);
+            object initialValue = propertyDeclarations.GetInitialValue(propertyInfo);
+            bool immutable = this.immutable; // || this.metaInfo.Get( typeof(ImmutableAttribute)) != null;
+
+            var model = new PropertyModel(propertyInfo, immutable, initialValue);
 
             return model;
         }
