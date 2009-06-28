@@ -124,7 +124,6 @@
     <Compile Include="Property\AbstractPropertiesModel.cs" />
     <Compile Include="Property\PropertiesInstance.cs" />
     <Compile Include="Transient\TransientPropertiesModel.cs" />
-    <Compile Include="Property\PropertyHandler.cs" />
     <Compile Include="Property\PropertyInstance.cs" />
     <Compile Include="Property\PropertyModel.cs" />
     <Compile Include="Service\ServiceInstance.cs" />

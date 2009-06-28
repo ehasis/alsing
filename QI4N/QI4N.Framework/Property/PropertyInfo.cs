@@ -1,8 +1,8 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     public interface CompositePropertyInfo
     {
-        bool IsMutable { get; }
+        bool IsImmutable { get; }
 
         bool IsComputed { get; }
 

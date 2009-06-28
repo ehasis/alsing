@@ -51,6 +51,7 @@
     <Compile Include="Common\NotNullAttribute.cs" />
     <Compile Include="Common\UseDefaultsAttribute.cs" />
     <Compile Include="Common\Visibility.cs" />
+    <Compile Include="Property\ImmutablePropertyFacade.cs" />
     <Compile Include="Transient\TransientComposite.cs" />
     <Compile Include="Concern\ConcernOf.cs" />
     <Compile Include="Concern\ConcernsAttribute.cs" />

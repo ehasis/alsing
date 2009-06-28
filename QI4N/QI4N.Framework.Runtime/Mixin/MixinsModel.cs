@@ -79,7 +79,14 @@ namespace QI4N.Framework.Runtime
 
             if (isThis)
             {
-                mixinField.SetValue(mixin, compositeInstance.NewProxy(mixinField.FieldType));
+                if (mixinField.FieldType.IsAssignableFrom(compositeInstance.GetType()))
+                {
+                    mixinField.SetValue(mixin, compositeInstance);
+                }
+                else
+                {
+                    mixinField.SetValue(mixin, compositeInstance.NewProxy(mixinField.FieldType));
+                }                
             }
         }
 

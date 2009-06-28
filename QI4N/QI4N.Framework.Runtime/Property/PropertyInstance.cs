@@ -25,11 +25,11 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public bool IsMutable
+        public bool IsImmutable
         {
             get
             {
-                return true;
+                return false;
             }
         }
 
@@ -42,5 +42,10 @@ namespace QI4N.Framework.Runtime
         }
 
         public object Value { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}", Value);
+        }
     }
 }
