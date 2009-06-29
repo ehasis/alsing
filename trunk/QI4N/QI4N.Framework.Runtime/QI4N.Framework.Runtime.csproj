@@ -61,6 +61,7 @@
     <Compile Include="Composite\Filter\AndAppliesToFilter.cs" />
     <Compile Include="Composite\Filter\AnnotationAppliesToFilter.cs" />
     <Compile Include="Composite\CompositeMixin.cs" />
+    <Compile Include="Service\ImportedServiceInstance.cs" />
     <Compile Include="Service\ServiceInvocationHandler.cs" />
     <Compile Include="Service\ServiceReferenceInstance.cs" />
     <Compile Include="Transient\TransientsModel.cs" />
