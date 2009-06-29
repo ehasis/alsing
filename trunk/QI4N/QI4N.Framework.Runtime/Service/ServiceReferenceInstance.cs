@@ -3,9 +3,43 @@ namespace QI4N.Framework.Runtime
     using System;
     using System.Reflection;
 
-    public class ServiceReferenceInstance<T> : ServiceReference<T>
+    public class ServiceReferenceInstance : ServiceReference
     {
         public ServiceModel ServiceModel;
+
+        public ServiceReferenceInstance(ServiceModel model, ModuleInstance instance)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Identity
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool IsActive
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public MetaInfo MetaInfo
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public object Get()
+        {
+            throw new NotImplementedException();
+        }
 
         public CompositeInstance GetInstance()
         {
@@ -14,9 +48,9 @@ namespace QI4N.Framework.Runtime
 
         public class ServiceInvocationHandler : InvocationHandler
         {
-            private readonly ServiceReferenceInstance<T> owner;
+            private readonly ServiceReferenceInstance owner;
 
-            public ServiceInvocationHandler(ServiceReferenceInstance<T> instance)
+            public ServiceInvocationHandler(ServiceReferenceInstance instance)
             {
                 this.owner = instance;
             }
@@ -32,9 +66,5 @@ namespace QI4N.Framework.Runtime
                 return instance.Invoke(proxy, method, args);
             }
         }
-    }
-
-    public interface ServiceReference<T>
-    {
     }
 }

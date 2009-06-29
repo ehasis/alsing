@@ -5,7 +5,7 @@ namespace QI4N.Framework.Runtime
 
     public sealed class ServicesModel
     {
-        private List<ServiceModel> serviceModels;
+        private readonly List<ServiceModel> serviceModels;
 
         public ServicesModel(List<ServiceModel> serviceModels)
         {
@@ -15,7 +15,14 @@ namespace QI4N.Framework.Runtime
 
         public ServicesInstance NewInstance(ModuleInstance moduleInstance)
         {
-            return null;
+            var serviceReferences = new List<ServiceReference>();
+            foreach( ServiceModel serviceModel in serviceModels )
+            {
+                var serviceReferenceInstance = new ServiceReferenceInstance(serviceModel, moduleInstance);
+                serviceReferences.Add( serviceReferenceInstance );
+            }
+
+            return new ServicesInstance( this, serviceReferences );
         }
 
         public void VisitModel(ModelVisitor visitor)
