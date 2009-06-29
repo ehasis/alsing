@@ -7,7 +7,7 @@
 
     public sealed class ValueModel : AbstractCompositeModel
     {
-        public ValueModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
+        private ValueModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel)
                 : base(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel)
         {
         }
