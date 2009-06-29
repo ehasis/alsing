@@ -24,11 +24,16 @@ namespace QI4N.Framework
         {
         }
 
-        public object Get(Type type)
+        private object Get(Type type)
         {
             object value;
             this.items.TryGetValue(type, out value);
             return value;
+        }
+
+        public object Get<T>()
+        {
+            return this.Get(typeof(T));
         }
 
         public void Set(object info)
