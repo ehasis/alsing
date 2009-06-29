@@ -1,13 +1,13 @@
 ﻿namespace QI4N.Framework.Runtime
 {
-    public class ImportedServiceInstance<T>
+    public class ImportedServiceInstance
     {
         private readonly ServiceImporter importer;
 
-        private readonly T instance;
+        private readonly object instance;
 
 
-        public ImportedServiceInstance(T instance, ServiceImporter importer)
+        public ImportedServiceInstance(object instance, ServiceImporter importer)
         {
             this.importer = importer;
             this.instance = instance;
@@ -29,7 +29,7 @@
             }
         }
 
-        public T Instance
+        public object Instance
         {
             get
             {
