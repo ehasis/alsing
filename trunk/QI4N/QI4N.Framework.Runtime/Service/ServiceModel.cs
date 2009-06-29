@@ -13,7 +13,7 @@
 
         private readonly string moduleName;
 
-        public ServiceModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel, string moduleName, string identity, bool instantiateOnStartup)
+        private ServiceModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, AbstractMixinsModel mixinsModel, AbstractStateModel stateModel, CompositeMethodsModel compositeMethodsModel, string moduleName, string identity, bool instantiateOnStartup)
                 : base(compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel)
         {
             this.moduleName = moduleName;
