@@ -54,6 +54,7 @@
     <Compile Include="Property\ImmutablePropertyFacade.cs" />
     <Compile Include="Service\ImportedServiceDescriptor.cs" />
     <Compile Include="Service\ServiceImporter.cs" />
+    <Compile Include="Service\ServiceReference.cs" />
     <Compile Include="Transient\TransientComposite.cs" />
     <Compile Include="Concern\ConcernOf.cs" />
     <Compile Include="Concern\ConcernsAttribute.cs" />

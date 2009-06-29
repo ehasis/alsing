@@ -151,6 +151,10 @@ namespace QI4N.Framework.Runtime
 
     public class ServicesInstance
     {
+        public ServicesInstance(ServicesModel model, List<ServiceReference> references)
+        {
+
+        }
     }
 
 
