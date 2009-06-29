@@ -58,7 +58,7 @@
         {
             PropertyDeclarations propertyDeclarations = new MetaInfoDeclaration();
             var constraintsModel = new ServiceConstraintsModel(compositeType);
-            bool immutable = metaInfo.Get(typeof(ImmutableAttribute)) != null;
+            bool immutable = metaInfo.Get<ImmutableAttribute>() != null;
             var propertiesModel = new ServicePropertiesModel(constraintsModel, propertyDeclarations, immutable);
             var stateModel = new ServiceStateModel(propertiesModel);
             var mixinsModel = new MixinsModel(compositeType, mixins);
