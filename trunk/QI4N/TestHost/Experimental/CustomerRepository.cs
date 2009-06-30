@@ -32,9 +32,9 @@
         {
             UnitOfWork uow = this.uowf.CurrentUnitOfWork;
 
-            IEnumerable<Customer> result = from m in uow.NewQuery<Customer>()
-                                           where m.Name == name
-                                           select m;
+            IEnumerable<Customer> result = from customer in uow.NewQuery<Customer>()
+                                           where customer.Name == name
+                                           select customer;
 
             return result.FirstOrDefault();
         }
