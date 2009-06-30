@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Experimental\Address.cs" />
     <Compile Include="Experimental\Customer.cs" />
+    <Compile Include="Experimental\CustomerRepository.cs" />
     <Compile Include="Experimental\GenericTracingConcern.cs" />
     <Compile Include="Experimental\Printable.cs" />
     <Compile Include="Experimental\PrivateBehavior.cs" />

@@ -29,7 +29,7 @@ namespace ConsoleApplication23
 
             module
                     .AddServices()
-                    //   .Include<ManufacturerRepositoryService>()
+                    .Include<CustomerRepositoryService>()
                     .VisibleIn(Visibility.Layer);
 
             module
