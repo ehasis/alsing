@@ -22,7 +22,7 @@ namespace QI4N.Framework.Runtime
         {
             foreach (Type serviceType in this.CompositeTypes)
             {
-                String id = this.identity ?? GenerateId(serviceModels, serviceType);
+                string id = this.identity ?? GenerateId(serviceModels, serviceType);
 
                 ServiceModel serviceModel = ServiceModel.NewModel(serviceType,
                                                                   this.visibility,

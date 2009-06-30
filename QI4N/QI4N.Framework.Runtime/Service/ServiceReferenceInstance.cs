@@ -9,7 +9,7 @@ namespace QI4N.Framework.Runtime
 
         public ServiceReferenceInstance(ServiceModel model, ModuleInstance instance)
         {
-            throw new NotImplementedException();
+
         }
 
         public string Identity
