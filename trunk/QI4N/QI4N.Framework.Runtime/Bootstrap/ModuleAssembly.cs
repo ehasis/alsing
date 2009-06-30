@@ -89,7 +89,7 @@
 
         public ServiceDeclaration AddServices()
         {
-            var declaration = new ServiceDeclarationImpl();
+            var declaration = new ServiceDeclarationImpl(this);
             this.ServiceDeclarations.Add(declaration);
             return declaration;
         }
