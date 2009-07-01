@@ -59,9 +59,16 @@
     <Compile Include="Composite\AbstractConstraintsModel.cs" />
     <Compile Include="Composite\AbstractModifierDeclaration.cs" />
     <Compile Include="Composite\AbstractModifierModel.cs" />
+    <Compile Include="Composite\ConstraintInstance.cs" />
     <Compile Include="Composite\Filter\AndAppliesToFilter.cs" />
     <Compile Include="Composite\Filter\AnnotationAppliesToFilter.cs" />
     <Compile Include="Composite\CompositeMixin.cs" />
+    <Compile Include="Constraint\AbstractConstraintModel.cs" />
+    <Compile Include="Constraint\Constraint.cs" />
+    <Compile Include="Constraint\ConstraintViolation.cs" />
+    <Compile Include="Constraint\MethodConstraintsInstance.cs" />
+    <Compile Include="Constraint\ParameterConstraintViolationException.cs" />
+    <Compile Include="Constraint\ValueConstraintsInstance.cs" />
     <Compile Include="Service\ImportedServiceInstance.cs" />
     <Compile Include="Service\ServiceConstraintsModel.cs" />
     <Compile Include="Service\ServicePropertiesModel.cs" />

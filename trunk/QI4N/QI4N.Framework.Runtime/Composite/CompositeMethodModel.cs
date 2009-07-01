@@ -15,6 +15,7 @@ namespace QI4N.Framework.Runtime
 
         private readonly AbstractMixinsModel mixins;
 
+        private readonly MethodConstraintsInstance methodConstraintsInstance;
 
         public CompositeMethodModel(MethodInfo method,
                                     MethodConstraintsModel methodConstraintsModel,
@@ -27,6 +28,7 @@ namespace QI4N.Framework.Runtime
             this.methodConcerns = methodConcernsModel;
             this.methodSideEffects = methodSideEffectsModel;
             this.methodConstraints = methodConstraintsModel;
+            this.methodConstraintsInstance = this.methodConstraints.NewInstance();
         }
 
 
@@ -34,7 +36,7 @@ namespace QI4N.Framework.Runtime
         [DebuggerHidden]
         public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
         {
-        //    methodConstraintsInstance.checkValid(composite, args);
+            methodConstraintsInstance.CheckValid(proxy, args);
 
             CompositeMethodInstance methodInstance = this.GetInstance(moduleInstance);
 
