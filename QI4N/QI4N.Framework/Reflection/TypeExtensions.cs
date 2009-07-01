@@ -69,20 +69,16 @@ namespace QI4N.Framework.Reflection
             return appliesTo.ToArray();
         }
 
-        public static T GetAttribute<T>(this Type self) where T : Attribute
+        public static T GetAttribute<T>(this ICustomAttributeProvider self) where T : Attribute
         {
             var attrib = self.GetCustomAttributes(typeof(T), true).FirstOrDefault() as T;
             return attrib;
         }
 
-        public static IEnumerable<T> GetAttributes<T>(this Type self) where T : Attribute
+        public static IEnumerable<T> GetAttributes<T>(this ICustomAttributeProvider self) where T : Attribute
         {
             IEnumerable<T> attribs = self.GetCustomAttributes(typeof(T), true).Cast<T>();
-
-            foreach (T attrib in attribs)
-            {
-                yield return attrib;
-            }
+            return attribs;
         }
 
         public static PropertyInfo GetInterfaceProperty(this Type interfaceType, string propertyName)
@@ -147,20 +143,17 @@ namespace QI4N.Framework.Reflection
             return type.Name;
         }
 
-        public static bool HasAttribute(this FieldInfo self, Type attributeType)
+        public static bool HasAttribute<T>(this ICustomAttributeProvider self) where T : Attribute
+        {
+            return self.GetCustomAttributes(typeof(T), true).Any();
+        }
+
+        public static bool HasAttribute(this ICustomAttributeProvider self, Type attributeType)
         {
             return self.GetCustomAttributes(attributeType, true).Any();
         }
 
-        public static bool HasAttribute(this Type self, Type attributeType)
-        {
-            return self.GetCustomAttributes(attributeType, true).Any();
-        }
 
-        public static bool HasAttribute(this MethodInfo self, Type attributeType)
-        {
-            return self.GetCustomAttributes(attributeType, true).Any();
-        }
 
         [DebuggerStepThrough]
         [DebuggerHidden]

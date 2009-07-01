@@ -8,7 +8,7 @@ namespace QI4N.Framework.Runtime
 
     public abstract class AbstractPropertiesModel
     {
-        protected readonly AbstractConstraintsModel constraintsModel;
+        protected readonly ConstraintsModel constraintsModel;
 
         protected readonly PropertyDeclarations propertyDeclarations;
 
@@ -16,7 +16,7 @@ namespace QI4N.Framework.Runtime
 
         protected readonly IList<PropertyModel> propertyModels = new List<PropertyModel>();
 
-        protected AbstractPropertiesModel(AbstractConstraintsModel constraintsModel, PropertyDeclarations propertyDeclarations, bool immutable)
+        protected AbstractPropertiesModel(ConstraintsModel constraintsModel, PropertyDeclarations propertyDeclarations, bool immutable)
         {
             this.constraintsModel = constraintsModel;
             this.propertyDeclarations = propertyDeclarations;

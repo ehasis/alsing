@@ -1,16 +1,18 @@
-namespace QI4N.Framework.Runtime
-{
-    using System;
+//namespace QI4N.Framework.Runtime
+//{
+//    using System;
 
-    public class ValueConstraintsModel : AbstractConstraintsModel
-    {
-        public ValueConstraintsModel(Type type)
-        {
-        }
+//    public class ValueConstraintsModel : ConstraintsModel
+//    {
+//        public bool IsConstrained;
 
-        public ValueConstraintsInstance NewInstance()
-        {
-            throw new NotImplementedException();
-        }
-    }
-}
+//        public ValueConstraintsModel(Type type)
+//        {
+//        }
+
+//        public ValueConstraintsInstance NewInstance()
+//        {
+//            throw new NotImplementedException();
+//        }
+//    }
+//}

@@ -14,7 +14,7 @@
 
         public static ValueModel NewModel(Type compositeType, Visibility visibility, MetaInfo metaInfo, PropertyDeclarations propertyDeclarations, List<Type> assemblyConcerns, List<Type> sideEffects, List<Type> mixins)
         {
-            var constraintsModel = new ValueConstraintsModel(compositeType);
+            var constraintsModel = new ConstraintsModel(compositeType);
             bool immutable = metaInfo.Get<ImmutableAttribute>() != null;
             var propertiesModel = new ValuePropertiesModel(constraintsModel, propertyDeclarations, immutable);
             var stateModel = new ValueStateModel(propertiesModel);

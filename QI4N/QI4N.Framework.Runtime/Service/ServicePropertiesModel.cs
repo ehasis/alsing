@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Reflection;
@@ -7,7 +7,7 @@
 
     public class ServicePropertiesModel : AbstractPropertiesModel
     {
-        public ServicePropertiesModel(AbstractConstraintsModel constraintsModel, PropertyDeclarations declarations, bool immutable)
+        public ServicePropertiesModel(ConstraintsModel constraintsModel, PropertyDeclarations declarations, bool immutable)
                 : base(constraintsModel, declarations, immutable)
         {
         }

@@ -8,7 +8,7 @@ namespace QI4N.Framework.Runtime
 
     public class ValuePropertiesModel : AbstractPropertiesModel
     {
-        public ValuePropertiesModel(ValueConstraintsModel constraintsModel, PropertyDeclarations propertyDeclarations, bool immutable)
+        public ValuePropertiesModel(ConstraintsModel constraintsModel, PropertyDeclarations propertyDeclarations, bool immutable)
             : base(constraintsModel,propertyDeclarations,immutable)
         {
         }
