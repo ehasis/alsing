@@ -28,8 +28,9 @@
         {
             IEnumerable<ConstraintAttribute> constraintAnnotations = parameterInfo.GetAttributes<ConstraintAttribute>();
             var constraintModels = new List<AbstractConstraintModel>();
-            foreach (ConstraintAttribute constraintAnnotation in constraintAnnotations)
+            foreach (ConstraintAttribute constraintAttribute in constraintAnnotations)
             {
+                constraintModels.Add(new ConstraintModel(constraintAttribute));
             }
 
             return new ValueConstraintsModel(constraintModels, name, optional);

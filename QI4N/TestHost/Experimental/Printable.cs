@@ -11,7 +11,7 @@ namespace ConsoleApplication23.Experimental
     {
         void Print();
 
-        void Print(string propertyPath);
+        void Print([NotNull] string propertyPath);
     }
 
     public class PrintableMixin : Printable
