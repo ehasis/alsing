@@ -23,9 +23,7 @@ namespace QI4N.Framework.Runtime
             foreach (ParameterInfo parameterInfo in methodParameters)
             {
                 bool optional = parameterInfo.HasAttribute<OptionalAttribute>();
-                var nameAttribute = parameterInfo.GetAttribute<NameAttribute>();
-                //TODO: just used for java? lack of name meta info in packages?
-                string name = nameAttribute != null ? nameAttribute.Value : parameterInfo.Name;
+                string name = parameterInfo.Name;
 
                 ValueConstraintsModel parameterConstraintsModel = constraintsModel.ConstraintsFor(parameterInfo, name, optional);
                 if (parameterConstraintsModel.IsConstrained)
