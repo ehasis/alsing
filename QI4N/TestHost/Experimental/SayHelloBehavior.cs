@@ -9,6 +9,8 @@
     public interface SayHelloBehavior
     {
         void SayHello();
+
+        void SayHelloTo([NotNull]string name);
     }
 
     public class SayHelloBehaviorMixin : SayHelloBehavior
@@ -23,6 +25,11 @@
         {
             Console.WriteLine("{0} says hello", this.state.Name);
             this.privateMixin.PrivateHello();
+        }
+
+        public void SayHelloTo(string name)
+        {
+            Console.WriteLine("{0} says hello to {1}", this.state.Name,name);
         }
     }
 }
