@@ -96,6 +96,8 @@ namespace ConsoleApplication23
             if (areEqual)
                 Console.WriteLine("customer.Address and otherAddress are equal");
 
+
+
             Console.ReadLine();
         }
     }

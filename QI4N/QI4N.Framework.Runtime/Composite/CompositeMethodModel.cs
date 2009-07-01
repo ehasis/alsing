@@ -34,6 +34,8 @@ namespace QI4N.Framework.Runtime
         [DebuggerHidden]
         public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
         {
+        //    methodConstraintsInstance.checkValid(composite, args);
+
             CompositeMethodInstance methodInstance = this.GetInstance(moduleInstance);
 
             return mixins.Invoke(proxy, args, methodInstance);
@@ -52,10 +54,9 @@ namespace QI4N.Framework.Runtime
         [DebuggerHidden]
         private CompositeMethodInstance NewCompositeMethodInstance(ModuleInstance moduleInstance)
         {
-            //methodConstraints.
-
             FragmentInvocationHandler mixinInvocationHandler = this.mixins.NewInvocationHandler(this.method);
             InvocationHandler invoker = mixinInvocationHandler;
+
             if (this.methodConcerns.HasConcerns)
             {
                 MethodConcernsInstance concernsInstance = this.methodConcerns.NewInstance(moduleInstance, mixinInvocationHandler);

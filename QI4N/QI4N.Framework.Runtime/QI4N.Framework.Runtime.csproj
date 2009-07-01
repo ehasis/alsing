@@ -67,6 +67,7 @@
     <Compile Include="Service\ServicePropertiesModel.cs" />
     <Compile Include="Service\ServiceReferenceInstance.cs" />
     <Compile Include="Service\ServiceStateModel.cs" />
+    <Compile Include="Structure\Binder.cs" />
     <Compile Include="Transient\TransientsModel.cs" />
     <Compile Include="Concern\ConcernDeclaration.cs" />
     <Compile Include="Concern\ConcernsDeclaration.cs" />
