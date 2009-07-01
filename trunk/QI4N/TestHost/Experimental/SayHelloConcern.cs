@@ -11,5 +11,15 @@
             Console.WriteLine("This is the SayHello Concern speaking");
             this.next.SayHello();
         }
+
+        #region SayHelloBehavior Members
+
+
+        public void SayHelloTo(string name)
+        {
+            this.next.SayHelloTo(name);
+        }
+
+        #endregion
     }
 }

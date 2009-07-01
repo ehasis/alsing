@@ -39,12 +39,14 @@
             {
                 if (value == null)
                 {
-                    //    violations = new List<ConstraintViolation>();
-                    //    violations.Add(new ConstraintViolation(this.name, OPTIONAL, null));
+                    violations = new List<ConstraintViolation>
+                                     {
+                                             new ConstraintViolation(this.name, null, null)
+                                     };
                 }
             }
 
-            if (violations == null && value != null)
+            if (violations == null)
             {
                 foreach (ConstraintInstance constraint in this.constraints)
                 {
