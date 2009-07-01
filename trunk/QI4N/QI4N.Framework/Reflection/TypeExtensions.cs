@@ -154,7 +154,6 @@ namespace QI4N.Framework.Reflection
         }
 
 
-
         [DebuggerStepThrough]
         [DebuggerHidden]
         public static object NewInstance(this Type self)

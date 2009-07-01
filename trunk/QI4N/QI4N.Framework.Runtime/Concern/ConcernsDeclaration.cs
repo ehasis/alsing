@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -22,7 +22,7 @@
         {
             // Find concern declarations
             var types = new List<Type>();
-            
+
             if (mixinType.IsClass)
             {
                 types.Add(mixinType);
@@ -31,7 +31,6 @@
             {
                 types.AddRange(mixinType.GetAllInterfaces());
             }
-                
 
             foreach (Type aType in types)
             {

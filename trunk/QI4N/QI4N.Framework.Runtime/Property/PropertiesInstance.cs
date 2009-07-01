@@ -38,23 +38,6 @@ namespace QI4N.Framework.Runtime
         }
 
 
-        public Property GetProperty(PropertyInfo propertyInfo)
-        {
-            return propertyInfoToPropertyMap[propertyInfo];
-        }
-
-        public IEnumerable<Property> GetProperties()
-        {
-            return this.propertyInfoToPropertyMap.Values;
-        }
-
-        [DebuggerStepThrough]
-        [DebuggerHidden]
-        public Property GetProperty(MethodInfo accessor)
-        {
-            return this.methodToPropertyMap[accessor];
-        }
-
         public override bool Equals(object o)
         {
             if (this == o)
@@ -68,7 +51,7 @@ namespace QI4N.Framework.Runtime
 
             var that = (PropertiesInstance)o;
 
-            if (!propertyInfoToPropertyMap.Values.SequenceEqual(that.propertyInfoToPropertyMap.Values))
+            if (!this.propertyInfoToPropertyMap.Values.SequenceEqual(that.propertyInfoToPropertyMap.Values))
             {
                 return false;
             }
@@ -78,7 +61,24 @@ namespace QI4N.Framework.Runtime
 
         public override int GetHashCode()
         {
-            return propertyInfoToPropertyMap.GetHashCode();
+            return this.propertyInfoToPropertyMap.GetHashCode();
+        }
+
+        public IEnumerable<Property> GetProperties()
+        {
+            return this.propertyInfoToPropertyMap.Values;
+        }
+
+        public Property GetProperty(PropertyInfo propertyInfo)
+        {
+            return this.propertyInfoToPropertyMap[propertyInfo];
+        }
+
+        [DebuggerStepThrough]
+        [DebuggerHidden]
+        public Property GetProperty(MethodInfo accessor)
+        {
+            return this.methodToPropertyMap[accessor];
         }
     }
 }

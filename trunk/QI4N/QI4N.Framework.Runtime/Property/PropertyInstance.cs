@@ -43,14 +43,9 @@ namespace QI4N.Framework.Runtime
 
         public object Value { get; set; }
 
-        public override string ToString()
-        {
-            return string.Format("{0}", Value);
-        }
-
         public override bool Equals(object obj)
         {
-            return Equals(obj as PropertyInstance);
+            return this.Equals(obj as PropertyInstance);
         }
 
 
@@ -62,6 +57,11 @@ namespace QI4N.Framework.Runtime
         public override int GetHashCode()
         {
             return (this.Value != null ? this.Value.GetHashCode() : 0);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}", this.Value);
         }
     }
 }

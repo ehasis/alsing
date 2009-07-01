@@ -16,13 +16,13 @@ namespace QI4N.Framework.Runtime
         public ServicesInstance NewInstance(ModuleInstance moduleInstance)
         {
             var serviceReferences = new List<ServiceReference>();
-            foreach( ServiceModel serviceModel in serviceModels )
+            foreach (ServiceModel serviceModel in this.serviceModels)
             {
                 var serviceReferenceInstance = new ServiceReferenceInstance(serviceModel, moduleInstance);
-                serviceReferences.Add( serviceReferenceInstance );
+                serviceReferences.Add(serviceReferenceInstance);
             }
 
-            return new ServicesInstance( this, serviceReferences );
+            return new ServicesInstance(this, serviceReferences);
         }
 
         public void VisitModel(ModelVisitor visitor)

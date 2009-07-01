@@ -9,9 +9,9 @@ namespace QI4N.Framework
     {
         private static readonly IList<Type> ignored = new List<Type>
                                                           {
-                                                              typeof(MixinsAttribute),
-                                                              typeof(ConcernsAttribute),
-                                                              typeof(SideEffectsAttribute)
+                                                                  typeof(MixinsAttribute),
+                                                                  typeof(ConcernsAttribute),
+                                                                  typeof(SideEffectsAttribute)
                                                           };
 
         private readonly Dictionary<Type, object> items = new Dictionary<Type, object>();
@@ -22,13 +22,6 @@ namespace QI4N.Framework
 
         public MetaInfo(MetaInfo info)
         {
-        }
-
-        private object Get(Type type)
-        {
-            object value;
-            this.items.TryGetValue(type, out value);
-            return value;
         }
 
         public object Get<T>()
@@ -43,7 +36,7 @@ namespace QI4N.Framework
 
         public MetaInfo WithAnnotations(Type compositeType)
         {
-            foreach (var type in compositeType.GetAllInterfaces())
+            foreach (Type type in compositeType.GetAllInterfaces())
             {
                 foreach (Attribute attribute in type.GetCustomAttributes(true))
                 {
@@ -54,6 +47,13 @@ namespace QI4N.Framework
                 }
             }
             return this;
+        }
+
+        private object Get(Type type)
+        {
+            object value;
+            this.items.TryGetValue(type, out value);
+            return value;
         }
     }
 }

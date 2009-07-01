@@ -18,12 +18,12 @@ namespace QI4N.Framework.Runtime
                 throw new NotImplementedException();
             }
 
-            public Property GetProperty(PropertyInfo propertyMethod)
+            public IEnumerable<Property> GetProperties()
             {
-                throw new System.NotImplementedException();
+                throw new NotImplementedException();
             }
 
-            public IEnumerable<Property> GetProperties()
+            public Property GetProperty(PropertyInfo propertyMethod)
             {
                 throw new NotImplementedException();
             }
