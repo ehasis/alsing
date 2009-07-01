@@ -1,12 +1,15 @@
 ﻿namespace ConsoleApplication23.Experimental
 {
     using System;
+    using System.Diagnostics;
     using System.Reflection;
 
     using QI4N.Framework;
 
     public class GenericTracingConcern : GenericConcern
     {
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public override object Invoke(object proxy, MethodInfo method, object[] args)
         {
             ConsoleColor color = Console.ForegroundColor;
