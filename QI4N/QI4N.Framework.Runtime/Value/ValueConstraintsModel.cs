@@ -7,5 +7,10 @@ namespace QI4N.Framework.Runtime
         public ValueConstraintsModel(Type type)
         {
         }
+
+        public ValueConstraintsInstance NewInstance()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
