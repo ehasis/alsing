@@ -1,7 +1,11 @@
 ﻿namespace QI4N.Framework.Runtime
 {
+    using System.Diagnostics;
+
     public class ConstraintViolation
     {
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public ConstraintViolation(string name, ConstraintAttribute constraint, object value)
         {
             this.Name = name;

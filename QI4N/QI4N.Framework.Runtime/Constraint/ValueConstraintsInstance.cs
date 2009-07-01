@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     public class ValueConstraintsInstance
     {
@@ -23,6 +24,8 @@
             }
         }
 
+        [DebuggerStepThrough]
+        [DebuggerHidden]
         public List<ConstraintViolation> CheckConstraints(object value)
         {
             List<ConstraintViolation> violations = null;
