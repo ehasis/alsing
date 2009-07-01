@@ -6,6 +6,7 @@
     {
         [DebuggerStepThrough]
         [DebuggerHidden]
+        [DebuggerStepperBoundary]
         public bool IsValid(ConstraintAttribute annotation, object value)
         {
             return annotation.IsValid(value);
