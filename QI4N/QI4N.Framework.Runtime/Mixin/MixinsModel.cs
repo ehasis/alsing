@@ -86,7 +86,7 @@ namespace QI4N.Framework.Runtime
                 else
                 {
                     mixinField.SetValue(mixin, compositeInstance.NewProxy(mixinField.FieldType));
-                }                
+                }
             }
         }
 

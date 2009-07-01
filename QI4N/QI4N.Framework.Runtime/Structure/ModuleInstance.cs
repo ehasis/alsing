@@ -153,7 +153,6 @@ namespace QI4N.Framework.Runtime
     {
         public ServicesInstance(ServicesModel model, List<ServiceReference> references)
         {
-
         }
     }
 

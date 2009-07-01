@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     public class ImportedServiceInstance
     {
@@ -21,19 +21,19 @@
             }
         }
 
-        public bool IsActive
-        {
-            get
-            {
-                return this.importer.IsActive(instance);
-            }
-        }
-
         public object Instance
         {
             get
             {
-                return instance;
+                return this.instance;
+            }
+        }
+
+        public bool IsActive
+        {
+            get
+            {
+                return this.importer.IsActive(this.instance);
             }
         }
     }

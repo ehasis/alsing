@@ -48,9 +48,12 @@
     <Compile Include="Common\AppliesToAttribute.cs" />
     <Compile Include="Common\ContainsAttribute.cs" />
     <Compile Include="Common\MetaInfo.cs" />
-    <Compile Include="Common\NotNullAttribute.cs" />
+    <Compile Include="Constraint\ConstraintAttribute.cs" />
+    <Compile Include="Constraint\NameAttribute.cs" />
+    <Compile Include="Constraint\NotNullAttribute.cs" />
     <Compile Include="Common\UseDefaultsAttribute.cs" />
     <Compile Include="Common\Visibility.cs" />
+    <Compile Include="Constraint\OptionalAttribute.cs" />
     <Compile Include="Property\ImmutablePropertyFacade.cs" />
     <Compile Include="Service\ImportedServiceDescriptor.cs" />
     <Compile Include="Service\ServiceImporter.cs" />

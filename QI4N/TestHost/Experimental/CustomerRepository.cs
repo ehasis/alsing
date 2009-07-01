@@ -22,13 +22,13 @@
         [Structure]
         private UnitOfWorkFactory uowf;
 
-        public Customer FindByIdentity(string identity)
+        public Customer FindByIdentity([NotNull] string identity)
         {
             UnitOfWork uow = this.uowf.CurrentUnitOfWork;
             return uow.Find<Customer>(identity);
         }
 
-        public Customer FindByName(string name)
+        public Customer FindByName( [NotNull] string name)
         {
             UnitOfWork uow = this.uowf.CurrentUnitOfWork;
 

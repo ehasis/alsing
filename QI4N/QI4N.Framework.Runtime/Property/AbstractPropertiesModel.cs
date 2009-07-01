@@ -10,9 +10,9 @@ namespace QI4N.Framework.Runtime
     {
         protected readonly ConstraintsModel constraintsModel;
 
-        protected readonly PropertyDeclarations propertyDeclarations;
-
         protected readonly bool immutable;
+
+        protected readonly PropertyDeclarations propertyDeclarations;
 
         protected readonly IList<PropertyModel> propertyModels = new List<PropertyModel>();
 
@@ -25,7 +25,7 @@ namespace QI4N.Framework.Runtime
 
         public void AddPropertyFor(PropertyInfo propertyInfo, Type compositeType)
         {
-            PropertyModel propertyModel = NewPropertyModel(propertyInfo, compositeType);
+            PropertyModel propertyModel = this.NewPropertyModel(propertyInfo, compositeType);
             this.propertyModels.Add(propertyModel);
         }
 
@@ -58,7 +58,7 @@ namespace QI4N.Framework.Runtime
             var properties = new Dictionary<PropertyInfo, Property>();
             foreach (PropertyModel propertyModel in this.propertyModels)
             {
-                var originalProperty = state.GetProperty(propertyModel.PropertyInfo);
+                Property originalProperty = state.GetProperty(propertyModel.PropertyInfo);
                 object initialValue = originalProperty.Value;
 
                 initialValue = CloneInitialValue(initialValue, false);

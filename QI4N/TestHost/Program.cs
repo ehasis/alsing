@@ -40,7 +40,7 @@ namespace ConsoleApplication23
                     .AddTransients()
                     .Include<CustomerTransient>()
                     .WithConcern<GenericTracingConcern>()
-                  //  .WithConcern<SayHelloConcern>()
+                    //  .WithConcern<SayHelloConcern>()
                     .WithSideEffect<SayHelloSideEffect>();
 
             return module;
@@ -89,14 +89,14 @@ namespace ConsoleApplication23
 
             //customer.Address.City = "Should explode";
 
-            var otherAddress = addressBuilder.NewInstance();
+            Address otherAddress = addressBuilder.NewInstance();
 
             bool areEqual = customer.Address.Equals(otherAddress);
 
             if (areEqual)
+            {
                 Console.WriteLine("customer.Address and otherAddress are equal");
-
-
+            }
 
             Console.ReadLine();
         }

@@ -1,6 +1,5 @@
-﻿namespace QI4N.Framework.Bootstrap
+namespace QI4N.Framework.Bootstrap
 {
-    using System;
     using System.Reflection;
 
     public class MetaInfoDeclaration : PropertyDeclarations

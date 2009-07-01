@@ -1,14 +1,14 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System.Reflection;
 
     public class AbstractPropertyModel
     {
-        protected readonly PropertyInfo propertyInfo;
-
         protected readonly bool immutable;
 
         protected readonly object initialValue;
+
+        protected readonly PropertyInfo propertyInfo;
 
         public AbstractPropertyModel(PropertyInfo propertyInfo, bool immutable, object initialValue)
         {

@@ -8,17 +8,16 @@ namespace QI4N.Framework.Runtime
     public class TransientPropertiesModel : AbstractPropertiesModel
     {
         public TransientPropertiesModel(ConstraintsModel constraintsModel, PropertyDeclarations declarations, bool immutable)
-            : base(constraintsModel, declarations, immutable)
+                : base(constraintsModel, declarations, immutable)
         {
-
         }
 
         protected override PropertyModel NewPropertyModel(PropertyInfo propertyInfo, Type compositeType)
         {
-            object initialValue = propertyDeclarations.GetInitialValue(propertyInfo);
+            object initialValue = this.propertyDeclarations.GetInitialValue(propertyInfo);
             bool immutable = this.immutable; // || this.metaInfo.Get( typeof(ImmutableAttribute)) != null;
 
-            var model = new PropertyModel(propertyInfo,immutable,initialValue);
+            var model = new PropertyModel(propertyInfo, immutable, initialValue);
 
             return model;
 
@@ -35,7 +34,6 @@ namespace QI4N.Framework.Runtime
             //boolean immutable = this.immutable || metaInfo.get( Immutable.class ) != null;
             //PropertyModel propertyModel = new PropertyModel( method, immutable, valueConstraintsInstance, metaInfo, initialValue );
             //return propertyModel;
-
         }
     }
 }

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace QI4N.Framework.Runtime
+﻿namespace QI4N.Framework.Runtime
 {
+    using System;
+    using System.Collections.Generic;
+
     public class ValueConstraintsModel
     {
         private readonly List<AbstractConstraintModel> constraintModels;
+
         private readonly string name;
+
         private readonly bool optional;
 
         public ValueConstraintsModel(List<AbstractConstraintModel> constraintModels, String name, bool optional)
@@ -18,22 +18,22 @@ namespace QI4N.Framework.Runtime
             this.optional = optional;
         }
 
-        public ValueConstraintsInstance newInstance()
-        {
-            return new ValueConstraintsInstance(constraintModels, name, optional);
-        }
-
         public bool IsConstrained
         {
             get
             {
-                if (constraintModels.Count != 0)
+                if (this.constraintModels.Count != 0)
                 {
                     return true;
                 }
 
-                return !optional;
+                return !this.optional;
             }
+        }
+
+        public ValueConstraintsInstance newInstance()
+        {
+            return new ValueConstraintsInstance(this.constraintModels, this.name, this.optional);
         }
 
         //public void visitModel(ModelVisitor modelVisitor)
@@ -45,7 +45,7 @@ namespace QI4N.Framework.Runtime
         //}
         public ValueConstraintsInstance NewInstance()
         {
-            return new ValueConstraintsInstance(constraintModels, name, optional);
+            return new ValueConstraintsInstance(this.constraintModels, this.name, this.optional);
         }
     }
 }

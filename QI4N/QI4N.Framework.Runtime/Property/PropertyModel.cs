@@ -21,7 +21,7 @@ namespace QI4N.Framework.Runtime
 
     public class PropertyModel : AbstractPropertyModel
     {
-        public PropertyModel(PropertyInfo propertyInfo, bool immutable, object initialValue) : base (propertyInfo,immutable,initialValue)
+        public PropertyModel(PropertyInfo propertyInfo, bool immutable, object initialValue) : base(propertyInfo, immutable, initialValue)
         {
         }
 
@@ -56,13 +56,11 @@ namespace QI4N.Framework.Runtime
 
         public Property NewInstance(object value)
         {
-            
             Property instance = new PropertyInstance(null, value, this);
 
-            if (immutable)
+            if (this.immutable)
             {
                 instance = new ImmutablePropertyFacade(instance);
-                
             }
             return instance;
         }

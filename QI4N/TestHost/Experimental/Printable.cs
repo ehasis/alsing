@@ -1,4 +1,4 @@
-﻿namespace ConsoleApplication23.Experimental
+namespace ConsoleApplication23.Experimental
 {
     using System;
     using System.Linq;
@@ -24,7 +24,7 @@
 
         public void Print()
         {
-            var c = target as CompositeInstance;
+            var c = this.target as CompositeInstance;
 
             string targetName = string.Format("{0}.", c.Proxy.GetType().Name);
             this.Print(targetName);
@@ -42,7 +42,7 @@
                 }
                 else
                 {
-                    Console.WriteLine("{0}{1} = '{2}'",propertyPath, property.QualifiedName, property);
+                    Console.WriteLine("{0}{1} = '{2}'", propertyPath, property.QualifiedName, property);
                 }
             }
         }

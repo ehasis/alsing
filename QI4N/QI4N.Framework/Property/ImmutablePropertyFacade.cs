@@ -1,6 +1,5 @@
 ﻿namespace QI4N.Framework
 {
-    using System;
     using System.Data;
     using System.Diagnostics;
 
@@ -33,7 +32,7 @@
         {
             get
             {
-                return target.QualifiedName;
+                return this.target.QualifiedName;
             }
         }
 
@@ -54,11 +53,6 @@
             }
         }
 
-        public override string ToString()
-        {
-            return string.Format("{0} r/o", this.target);
-        }
-
         public override bool Equals(object obj)
         {
             return this.Equals(obj as ImmutablePropertyFacade);
@@ -71,7 +65,12 @@
 
         public override int GetHashCode()
         {
-            return target.GetHashCode();
+            return this.target.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} r/o", this.target);
         }
     }
 }
