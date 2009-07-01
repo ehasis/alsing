@@ -95,17 +95,6 @@
         }
     }
 
-    public class ConstructorsModel
-    {
-        public ConstructorsModel(Type type)
-        {
-        }
-
-        public object NewInstance(InjectionContext injectionContext)
-        {
-            return null;
-        }
-    }
 
     public class InjectionContext
     {

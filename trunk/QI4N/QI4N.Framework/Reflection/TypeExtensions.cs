@@ -60,14 +60,14 @@ namespace QI4N.Framework.Reflection
             return ownMethods;
         }
 
-        public static Type[] GetAppliesToTypes(this Type mixinType)
-        {
-            IEnumerable<Type> appliesTo = from attribs in mixinType.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
-                                          from type in attribs.AppliesToTypes
-                                          select type;
+        //public static Type[] GetAppliesToTypes(this Type mixinType)
+        //{
+        //    IEnumerable<Type> appliesTo = from attribs in mixinType.GetCustomAttributes(typeof(AppliesToAttribute), true).Cast<AppliesToAttribute>()
+        //                                  from type in attribs.AppliesToTypes
+        //                                  select type;
 
-            return appliesTo.ToArray();
-        }
+        //    return appliesTo.ToArray();
+        //}
 
         public static T GetAttribute<T>(this ICustomAttributeProvider self) where T : Attribute
         {
