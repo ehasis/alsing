@@ -7,7 +7,7 @@ namespace QI4N.Framework.Runtime
 
     public class TransientPropertiesModel : AbstractPropertiesModel
     {
-        public TransientPropertiesModel(AbstractConstraintsModel constraintsModel, PropertyDeclarations declarations, bool immutable)
+        public TransientPropertiesModel(ConstraintsModel constraintsModel, PropertyDeclarations declarations, bool immutable)
             : base(constraintsModel, declarations, immutable)
         {
 

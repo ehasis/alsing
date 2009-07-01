@@ -57,7 +57,7 @@
                                             bool instantiateOnStartup)
         {
             PropertyDeclarations propertyDeclarations = new MetaInfoDeclaration();
-            var constraintsModel = new ServiceConstraintsModel(compositeType);
+            var constraintsModel = new ConstraintsModel(compositeType);
             bool immutable = metaInfo.Get<ImmutableAttribute>() != null;
             var propertiesModel = new ServicePropertiesModel(constraintsModel, propertyDeclarations, immutable);
             var stateModel = new ServiceStateModel(propertiesModel);
