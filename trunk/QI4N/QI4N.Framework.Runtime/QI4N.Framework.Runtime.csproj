@@ -67,6 +67,7 @@
     <Compile Include="Constraint\AbstractConstraintModel.cs" />
     <Compile Include="Constraint\Constraint.cs" />
     <Compile Include="Constraint\ConstraintDeclaration.cs" />
+    <Compile Include="Constraint\ConstraintModel.cs" />
     <Compile Include="Constraint\ConstraintViolation.cs" />
     <Compile Include="Constraint\MethodConstraintsInstance.cs" />
     <Compile Include="Constraint\ParameterConstraintViolationException.cs" />
