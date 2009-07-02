@@ -10,7 +10,7 @@
     {
         void SayHello();
 
-        void SayHelloTo([NotNull] string name);
+        void SayHelloTo(string name);
     }
 
     public class SayHelloBehaviorMixin : SayHelloBehavior

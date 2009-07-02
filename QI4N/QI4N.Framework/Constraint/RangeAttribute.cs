@@ -14,6 +14,11 @@
             this.max = max;
         }
 
+        public override string GetConstraintName()
+        {
+            return string.Format("Range '{0}'-'{1}'", this.min, this.max);
+        }
+
         public override bool IsValid(object value)
         {
             var cMin = this.min as IComparable;
