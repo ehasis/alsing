@@ -98,7 +98,7 @@ namespace ConsoleApplication23
                 Console.WriteLine("customer.Address and otherAddress are equal");
             }
 
-            customer.SayHelloTo("f");
+            customer.SayHelloTo(null);
 
             Console.ReadLine();
         }
