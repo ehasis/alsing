@@ -10,7 +10,7 @@
 
         public string GetConstraintName()
         {
-            return "Not optional";
+            return "Not optional, missing [Optional] attribute?";
         }
     }
 }
