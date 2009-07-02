@@ -16,7 +16,7 @@
         {
             this.name = name;
             this.optional = optional;
-            this.constraints = new List<ConstraintInstance>();
+            this.constraints = new List<ConstraintInstance>(constraintModels.Count);
             foreach (AbstractConstraintModel constraintModel in constraintModels)
             {
                 ConstraintInstance instance = constraintModel.NewInstance();

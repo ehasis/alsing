@@ -57,6 +57,7 @@
     <Compile Include="Constraint\OptionalAttribute.cs" />
     <Compile Include="Constraint\RangeAttribute.cs" />
     <Compile Include="Property\ImmutablePropertyFacade.cs" />
+    <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Service\ImportedServiceDescriptor.cs" />
     <Compile Include="Service\ServiceImporter.cs" />
     <Compile Include="Service\ServiceReference.cs" />
@@ -94,7 +95,6 @@
     <Compile Include="Object\ObjectBuilderFactory.cs" />
     <Compile Include="Property\Property.cs" />
     <Compile Include="Property\PropertyInfo.cs" />
-    <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Service\ServiceComposite.cs" />
     <Compile Include="Property\StateHolder.cs" />
     <Compile Include="SideEffect\GenericSideEffect.cs" />
