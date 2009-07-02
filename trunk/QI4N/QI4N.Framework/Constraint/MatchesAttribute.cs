@@ -11,6 +11,11 @@
             this.pattern = pattern;
         }
 
+        public override string GetConstraintName()
+        {
+            return string.Format("Matches '{0}'", this.pattern);
+        }
+
         public override bool IsValid(object value)
         {
             string strValue = string.Format("{0}", value);

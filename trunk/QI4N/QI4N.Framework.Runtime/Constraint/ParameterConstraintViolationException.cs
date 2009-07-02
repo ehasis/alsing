@@ -21,7 +21,7 @@
             string message = string.Format("{0}.{1} caused parameter constraint violations", composite.GetType().Name, method.Name);
             foreach(var violation in violations)
             {
-                string violationMessage = string.Format("Parameter: '{0}' Value: '{1}' Constraint: '{2}'",violation.Name,violation.Value ?? "{null}",violation.Constraint);
+                string violationMessage = string.Format("Parameter: '{0}' Value: '{1}' Constraint: '{2}'",violation.Name,violation.Value ?? "{null}",violation.Constraint.GetConstraintName());
                 message += Environment.NewLine + violationMessage;
             }
             return message;

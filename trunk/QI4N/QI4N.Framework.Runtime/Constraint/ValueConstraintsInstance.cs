@@ -44,7 +44,7 @@
                 {
                     violations = new List<ConstraintViolation>
                                      {
-                                             new ConstraintViolation(this.name, null, null)
+                                             new ConstraintViolation(this.name, NotOptionalConstraint.Instance, null)
                                      };
                 }
             }
