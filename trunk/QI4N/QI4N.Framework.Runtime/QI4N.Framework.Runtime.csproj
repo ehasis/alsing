@@ -81,8 +81,13 @@
     <Compile Include="Injection\InjectedMethodsModel.cs" />
     <Compile Include="Injection\InjectedObjectBuilder.cs" />
     <Compile Include="Injection\InjectionContext.cs" />
+    <Compile Include="Injection\Providers\AbstractModifierProvider.cs" />
     <Compile Include="Injection\Providers\InjectionProvider.cs" />
+    <Compile Include="Injection\Providers\InjectionProviderLookup.cs" />
+    <Compile Include="Injection\Providers\StateInjectionProvider.cs" />
     <Compile Include="Injection\Providers\StructureInjectionProvider.cs" />
+    <Compile Include="Injection\Providers\ThisInjectionProvider.cs" />
+    <Compile Include="Injection\Providers\UsesInjectionProvider.cs" />
     <Compile Include="Service\ImportedServiceInstance.cs" />
     <Compile Include="Service\ServicePropertiesModel.cs" />
     <Compile Include="Service\ServiceReferenceInstance.cs" />
