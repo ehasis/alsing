@@ -8,35 +8,35 @@
         {
             if (typeof(TransientBuilderFactory).IsAssignableFrom(fieldType))
             {
-                return context.ModuleInstance.TransientBuilderFactory;
+                return context.Module.TransientBuilderFactory;
             }
             if (typeof(ObjectBuilderFactory).IsAssignableFrom(fieldType))
             {
-                return context.ModuleInstance.ObjectBuilderFactory;
+                return context.Module.ObjectBuilderFactory;
             }
             if (typeof(ValueBuilderFactory).IsAssignableFrom(fieldType))
             {
-                return context.ModuleInstance.ValueBuilderFactory;
+                return context.Module.ValueBuilderFactory;
             }
             if (typeof(UnitOfWorkFactory).IsAssignableFrom(fieldType))
             {
-                return context.ModuleInstance.UnitOfWorkFactory;
+                return context.Module.UnitOfWorkFactory;
             }
             if (typeof(ServiceFinder).IsAssignableFrom(fieldType))
             {
-                return context.ModuleInstance.ServiceFinder;
+                return context.Module.ServiceFinder;
             }
             if (typeof(Module).IsAssignableFrom(fieldType))
             {
-                return context.ModuleInstance;
+                return context.Module;
             }
             if (typeof(Layer).IsAssignableFrom(fieldType))
             {
-                return context.ModuleInstance.LayerInstance;
+                return context.Module.Layer;
             }
             if (typeof(Application).IsAssignableFrom(fieldType))
             {
-                return context.ModuleInstance.LayerInstance.ApplicationInstance;
+                return context.Module.Layer.Application;
             }
             //else if( typeof( Qi4j).IsAssignableFrom(fieldType) ) || typeof( Qi4jSPI).IsAssignableFrom(fieldType) )
             //{

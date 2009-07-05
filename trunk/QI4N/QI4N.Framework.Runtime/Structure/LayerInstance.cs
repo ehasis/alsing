@@ -12,13 +12,13 @@ namespace QI4N.Framework.Runtime
         public LayerInstance(LayerModel model, ApplicationInstance applicationInstance, IList<ModuleInstance> moduleInstances, UsedLayersInstance usedLayersInstance)
         {
             this.Model = model;
-            this.ApplicationInstance = applicationInstance;
+            this.Application = applicationInstance;
             this.moduleInstances = moduleInstances;
             this.usedLayersInstance = usedLayersInstance;
             //   this.moduleActivator = new Activator();
         }
 
-        public ApplicationInstance ApplicationInstance { get;private set; }
+        public Application Application{ get;private set; }
 
         public MetaInfo MetaInfo
         {
@@ -38,7 +38,7 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public ModuleInstance FindModule(string moduleName)
+        public Module FindModule(string moduleName)
         {
             ModuleInstance moduleInstance = this.moduleInstances
                     .Where(l => l.Model.Name == moduleName)

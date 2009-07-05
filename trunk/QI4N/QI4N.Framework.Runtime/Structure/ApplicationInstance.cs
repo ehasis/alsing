@@ -16,7 +16,7 @@ namespace QI4N.Framework.Runtime
             this.layerInstances = layers;
         }
 
-        public LayerInstance FindLayer(string layerName)
+        public Layer FindLayer(string layerName)
         {
             LayerInstance layerInstance = this.layerInstances
                     .Where(l => l.Model.Name == layerName)
@@ -25,16 +25,16 @@ namespace QI4N.Framework.Runtime
             return layerInstance;
         }
 
-        public ModuleInstance FindModule(string layerName, string moduleName)
+        public Module FindModule(string layerName, string moduleName)
         {
-            LayerInstance layer = this.FindLayer(layerName);
+            Layer layer = this.FindLayer(layerName);
 
             if (layer == null)
             {
                 return null;
             }
 
-            ModuleInstance module = layer.FindModule(moduleName);
+            Module module = layer.FindModule(moduleName);
 
             return module;
         }
@@ -60,16 +60,6 @@ namespace QI4N.Framework.Runtime
             {
                 return model.MetaInfo;
             }
-        }
-
-        Layer Application.FindLayer(string layerName)
-        {
-            return this.FindLayer(layerName);
-        }
-
-        Module Application.FindModule(string layerName, string moduleName)
-        {
-            return this.FindModule(layerName, moduleName);
         }
 
         #endregion
