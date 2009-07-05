@@ -5,8 +5,6 @@ namespace QI4N.Framework.Runtime
 
     public class ModuleInstance : Module
     {
-        private readonly TransientBuilderFactory compositeBuilderFactory;
-
         private readonly IDictionary<Type, TransientFinder> compositeFinders;
 
         private readonly EntitiesInstance entities;
@@ -29,6 +27,8 @@ namespace QI4N.Framework.Runtime
         private readonly ServiceFinderInstance serviceFinder;
 
         private readonly ServicesInstance services;
+
+        private readonly TransientBuilderFactory transientBuilderFactory;
 
         private readonly TransientsInstance transients;
 
@@ -54,7 +54,7 @@ namespace QI4N.Framework.Runtime
             this.services = servicesModel.NewInstance(this);
             this.importedServices = importedServicesModel.NewInstance(this);
 
-            this.compositeBuilderFactory = new TransientBuilderFactoryInstance(this);
+            this.transientBuilderFactory = new TransientBuilderFactoryInstance(this);
             this.objectBuilderFactory = new ObjectBuilderFactoryInstance();
             this.valueBuilderFactory = new ValueBuilderFactoryInstance(this);
             this.unitOfWorkFactory = new UnitOfWorkFactoryInstance();
@@ -71,6 +71,38 @@ namespace QI4N.Framework.Runtime
             get
             {
                 return this.model;
+            }
+        }
+
+        public ObjectBuilderFactory ObjectBuilderFactory
+        {
+            get
+            {
+                return this.objectBuilderFactory;
+            }
+        }
+
+        public TransientBuilderFactory TransientBuilderFactory
+        {
+            get
+            {
+                return this.transientBuilderFactory;
+            }
+        }
+
+        public UnitOfWorkFactoryInstance UnitOfWorkFactory
+        {
+            get
+            {
+                return this.unitOfWorkFactory;
+            }
+        }
+
+        public ValueBuilderFactory ValueBuilderFactory
+        {
+            get
+            {
+                return this.valueBuilderFactory;
             }
         }
 

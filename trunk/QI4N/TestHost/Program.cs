@@ -63,13 +63,10 @@ namespace ConsoleApplication23
 
         private static void Run(ApplicationInstance applicationInstance)
         {
-            ModuleInstance peopleModule = applicationInstance.FindModule("DomainLayer", "ExperimentalModule");
+            ModuleInstance experimentalModule = applicationInstance.FindModule("DomainLayer", "ExperimentalModule");
 
-            var factory = new TransientBuilderFactoryInstance(peopleModule);
-            var addressFactory = new ValueBuilderFactoryInstance(peopleModule);
-
-            TransientBuilder<Customer> customerBuilder = factory.NewTransientBuilder<Customer>();
-            ValueBuilder<Address> addressBuilder = addressFactory.NewValueBuilder<Address>();
+            TransientBuilder<Customer> customerBuilder = experimentalModule.TransientBuilderFactory.NewTransientBuilder<Customer>();
+            ValueBuilder<Address> addressBuilder = experimentalModule.ValueBuilderFactory.NewValueBuilder<Address>();
 
             Address protoAddress = addressBuilder.Prototype();
             protoAddress.City = "Foo City";
