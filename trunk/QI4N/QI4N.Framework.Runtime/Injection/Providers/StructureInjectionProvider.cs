@@ -6,39 +6,39 @@
     {
         public object ProvideInjection(InjectionContext context, InjectionAttribute attribute, Type fieldType)
         {
-            if (typeof(TransientBuilderFactory).IsAssignableFrom(fieldType))
+            if (fieldType == typeof(TransientBuilderFactory))
             {
                 return context.Module.TransientBuilderFactory;
             }
-            if (typeof(ObjectBuilderFactory).IsAssignableFrom(fieldType))
+            if (fieldType == typeof(ObjectBuilderFactory))
             {
                 return context.Module.ObjectBuilderFactory;
             }
-            if (typeof(ValueBuilderFactory).IsAssignableFrom(fieldType))
+            if (fieldType == typeof(ValueBuilderFactory))
             {
                 return context.Module.ValueBuilderFactory;
             }
-            if (typeof(UnitOfWorkFactory).IsAssignableFrom(fieldType))
+            if (fieldType == typeof(UnitOfWorkFactory))
             {
                 return context.Module.UnitOfWorkFactory;
             }
-            if (typeof(ServiceFinder).IsAssignableFrom(fieldType))
+            if (fieldType == typeof(ServiceFinder))
             {
                 return context.Module.ServiceFinder;
             }
-            if (typeof(Module).IsAssignableFrom(fieldType))
+            if (fieldType == typeof(Module))
             {
                 return context.Module;
             }
-            if (typeof(Layer).IsAssignableFrom(fieldType))
+            if (fieldType == typeof(Layer))
             {
                 return context.Module.Layer;
             }
-            if (typeof(Application).IsAssignableFrom(fieldType))
+            if (fieldType == typeof(Application))
             {
                 return context.Module.Layer.Application;
             }
-            //else if( typeof( Qi4j).IsAssignableFrom(fieldType) ) || typeof( Qi4jSPI).IsAssignableFrom(fieldType) )
+            //else if( typeof( Qi4j) ) || typeof( Qi4jSPI) )
             //{
             //    return context.ModuleInstance.layerInstance().applicationInstance().runtime();
             //}
