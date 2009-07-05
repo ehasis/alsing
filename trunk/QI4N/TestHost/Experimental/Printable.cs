@@ -4,7 +4,6 @@ namespace ConsoleApplication23.Experimental
     using System.Linq;
 
     using QI4N.Framework;
-    using QI4N.Framework.Runtime;
 
     [Mixins(typeof(PrintableMixin))]
     public interface Printable
@@ -24,9 +23,9 @@ namespace ConsoleApplication23.Experimental
 
         public void Print()
         {
-        //    var c = this.target as CompositeInstance;
+            //    var c = this.target as CompositeInstance;
 
-            string targetName = string.Format("{0}.", target.GetType().Name);
+            string targetName = string.Format("{0}.", this.target.GetType().Name);
             this.Print(targetName);
         }
 

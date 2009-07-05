@@ -12,14 +12,9 @@ namespace ConsoleApplication23.Experimental
             this.next.SayHello();
         }
 
-        #region SayHelloBehavior Members
-
-
         public void SayHelloTo(string name)
         {
             this.next.SayHelloTo(name);
         }
-
-        #endregion
     }
 }

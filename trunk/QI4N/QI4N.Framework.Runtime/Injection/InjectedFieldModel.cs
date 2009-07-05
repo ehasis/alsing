@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System.Reflection;
 
@@ -8,7 +8,7 @@
     {
         public InjectedFieldModel(FieldInfo injectedField, InjectionAttribute injectionAttribute)
         {
-            this.InjectedField = new Field( injectedField);
+            this.InjectedField = new Field(injectedField);
             this.InjectionAttribute = injectionAttribute;
         }
 
@@ -32,20 +32,19 @@
             }
             if (this.InjectionAttribute is StateAttribute)
             {
-                if (typeof(StateHolder).IsAssignableFrom( InjectedField.FieldType))
+                if (typeof(StateHolder).IsAssignableFrom(this.InjectedField.FieldType))
                 {
                     value = context.State;
                 }
             }
             if (this.InjectionAttribute is ThisAttribute)
             {
-                value =  context.CompositeInstance.NewProxy(InjectedField.FieldType);
+                value = context.CompositeInstance.NewProxy(this.InjectedField.FieldType);
             }
             if (this.InjectionAttribute is UsesAttribute)
             {
-                value = context.Uses.UseForType(InjectedField.FieldType);
+                value = context.Uses.UseForType(this.InjectedField.FieldType);
             }
-            
 
             this.InjectedField.SetValue(instance, value);
         }

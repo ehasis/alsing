@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace QI4N.Framework.API.Reflection
 {
+    using System;
     using System.Reflection;
 
     public class Method
@@ -23,13 +19,13 @@ namespace QI4N.Framework.API.Reflection
         {
             get
             {
-                return methodInfo.ReturnType;
+                return this.methodInfo.ReturnType;
             }
         }
 
-        public object Invoke(object instance,object[] args)
+        public object Invoke(object instance, object[] args)
         {
-            return methodInfo.Invoke(instance, args);
+            return this.methodInfo.Invoke(instance, args);
         }
     }
 }

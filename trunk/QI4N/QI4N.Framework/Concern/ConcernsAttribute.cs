@@ -11,6 +11,4 @@ namespace QI4N.Framework
 
         public Type[] ConcernTypes { get; private set; }
     }
-
-
 }

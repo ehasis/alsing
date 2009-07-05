@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Diagnostics;
@@ -15,7 +15,7 @@
         {
             this.modifierType = modifierType;
 
-            injectedObjectBuilder = new InjectedObjectBuilder(modifierType);
+            this.injectedObjectBuilder = new InjectedObjectBuilder(modifierType);
         }
 
 
@@ -34,7 +34,7 @@
         public object NewInstance(ModuleInstance moduleInstance, object next, ProxyReferenceInvocationHandler proxyHandler)
         {
             var injectionContext = new InjectionContext(moduleInstance, this.WrapNext(next), proxyHandler);
-            object mixin = injectedObjectBuilder.NewInstance(injectionContext);
+            object mixin = this.injectedObjectBuilder.NewInstance(injectionContext);
             return mixin;
         }
 

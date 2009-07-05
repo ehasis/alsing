@@ -29,7 +29,7 @@ namespace ConsoleApplication23.Experimental
 
         public void SayHelloTo(string name)
         {
-            Console.WriteLine("{0} says hello to {1}", this.state.Name,name);
+            Console.WriteLine("{0} says hello to {1}", this.state.Name, name);
         }
     }
 }

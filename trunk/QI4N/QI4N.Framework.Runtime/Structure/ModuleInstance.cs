@@ -11,7 +11,6 @@ namespace QI4N.Framework.Runtime
 
         private readonly IDictionary<Type, EntityFinder> entityFinders;
 
-
         private readonly ImportedServicesInstance importedServices;
 
         private readonly LayerInstance layerInstance;
@@ -66,6 +65,22 @@ namespace QI4N.Framework.Runtime
             this.valueFinders = new Dictionary<Type, ValueFinder>();
         }
 
+        public LayerInstance LayerInstance
+        {
+            get
+            {
+                return this.layerInstance;
+            }
+        }
+
+        public MetaInfo MetaInfo
+        {
+            get
+            {
+                return this.model.MetaInfo;
+            }
+        }
+
         public ModuleModel Model
         {
             get
@@ -74,11 +89,28 @@ namespace QI4N.Framework.Runtime
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                return this.model.Name;
+            }
+        }
+
+
         public ObjectBuilderFactory ObjectBuilderFactory
         {
             get
             {
                 return this.objectBuilderFactory;
+            }
+        }
+
+        public ServiceFinder ServiceFinder
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 
@@ -90,7 +122,7 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public UnitOfWorkFactoryInstance UnitOfWorkFactory
+        public UnitOfWorkFactory UnitOfWorkFactory
         {
             get
             {
@@ -173,7 +205,7 @@ namespace QI4N.Framework.Runtime
             }
 
             // Visit layer
-            this.layerInstance.VisitModules(visitor, Visibility.Layer);
+            this.LayerInstance.VisitModules(visitor, Visibility.Layer);
         }
     }
 
@@ -189,8 +221,15 @@ namespace QI4N.Framework.Runtime
     }
 
 
-    public class UnitOfWorkFactoryInstance
+    public class UnitOfWorkFactoryInstance : UnitOfWorkFactory
     {
+        public UnitOfWork CurrentUnitOfWork
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 
     public class ServiceFinderInstance
@@ -198,11 +237,6 @@ namespace QI4N.Framework.Runtime
     }
 
     public class ObjectFinder
-    {
-    }
-
-
-    public interface Module
     {
     }
 }
