@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
 
     using Reflection;
@@ -22,6 +23,8 @@
             }
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public void Inject(InjectionContext context, object instance)
         {
             foreach (InjectedFieldModel field in this.fields)

@@ -1,6 +1,7 @@
 ﻿namespace QI4N.Framework.API.Reflection
 {
     using System;
+    using System.Diagnostics;
     using System.Reflection;
 
     //should be optimized to IL generation later on instad of reflection
@@ -15,6 +16,8 @@
 
         public Type FieldType
         {
+            [DebuggerStepThrough]
+            //[DebuggerHidden]
             get
             {
                 return this.fieldInfo.FieldType;
@@ -26,6 +29,8 @@
             return this.fieldInfo.GetValue(instance);
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public void SetValue(object instance, object value)
         {
             this.fieldInfo.SetValue(instance, value);

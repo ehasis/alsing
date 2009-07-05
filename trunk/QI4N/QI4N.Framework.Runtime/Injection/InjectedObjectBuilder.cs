@@ -1,6 +1,7 @@
 ﻿namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Diagnostics;
 
     public class InjectedObjectBuilder
     {
@@ -17,6 +18,8 @@
             this.injectedMethodsModel = new InjectedMethodsModel(typeToBuild);
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public object NewInstance(InjectionContext context)
         {
             object instance = this.constructorsModel.NewInstance(context);

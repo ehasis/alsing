@@ -1,8 +1,12 @@
 namespace QI4N.Framework.Runtime
 {
+    using System.Diagnostics;
+
     public class InjectionContext
     {
         // For mixins
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public InjectionContext(CompositeInstance compositeInstance, UsesInstance uses, StateHolder state)
         {
             this.CompositeInstance = compositeInstance;
@@ -14,6 +18,8 @@ namespace QI4N.Framework.Runtime
         }
 
         // For concerns and side-effects
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public InjectionContext(ModuleInstance moduleInstance, object next, ProxyReferenceInvocationHandler proxyHandler)
         {
             this.CompositeInstance = null;
