@@ -7,20 +7,15 @@
 
     public class AbstractModifierModel
     {
-        private readonly ConstructorsModel constructorsModel;
-
-        private readonly InjectedFieldsModel injectedFieldsModel;
-
-        private readonly InjectedMethodsModel injectedMethodsModel;
+        private readonly InjectedObjectBuilder injectedObjectBuilder;
 
         private readonly Type modifierType;
 
         public AbstractModifierModel(Type modifierType)
         {
             this.modifierType = modifierType;
-            this.constructorsModel = new ConstructorsModel(modifierType);
-            this.injectedFieldsModel = new InjectedFieldsModel(modifierType);
-            this.injectedMethodsModel = new InjectedMethodsModel(modifierType);
+
+            injectedObjectBuilder = new InjectedObjectBuilder(modifierType);
         }
 
 
@@ -39,12 +34,7 @@
         public object NewInstance(ModuleInstance moduleInstance, object next, ProxyReferenceInvocationHandler proxyHandler)
         {
             var injectionContext = new InjectionContext(moduleInstance, this.WrapNext(next), proxyHandler);
-
-            object mixin = this.constructorsModel.NewInstance(injectionContext);
-
-            this.injectedFieldsModel.Inject(injectionContext, mixin);
-            this.injectedMethodsModel.Inject(injectionContext, mixin);
-
+            object mixin = injectedObjectBuilder.NewInstance(injectionContext);
             return mixin;
         }
 

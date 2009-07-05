@@ -79,6 +79,7 @@
     <Compile Include="Injection\InjectedFieldModel.cs" />
     <Compile Include="Injection\InjectedFieldsModel.cs" />
     <Compile Include="Injection\InjectedMethodsModel.cs" />
+    <Compile Include="Injection\InjectedObjectBuilder.cs" />
     <Compile Include="Injection\InjectionContext.cs" />
     <Compile Include="Service\ImportedServiceInstance.cs" />
     <Compile Include="Service\ServicePropertiesModel.cs" />
