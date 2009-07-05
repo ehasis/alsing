@@ -39,7 +39,10 @@
             {
                 value =  context.CompositeInstance.NewProxy(InjectedField.FieldType);
             }
-
+            if (this.InjectionAttribute is UsesAttribute)
+            {
+                value = context.Uses.UseForType(InjectedField.FieldType);
+            }
             
 
             this.InjectedField.SetValue(instance, value);
