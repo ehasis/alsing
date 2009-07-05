@@ -1,14 +1,13 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
-    using System.Collections.Generic;
 
     public class ModuleModel
     {
-        private LayerModel layerModel;
+        private readonly LayerModel layerModel;
 
         public ModuleModel(string name,
-                           MetaInfo metaInfo, 
+                           MetaInfo metaInfo,
                            TransientsModel transientsModel,
                            EntitiesModel entitiesModel,
                            ObjectsModel objectsModel,
@@ -24,6 +23,7 @@ namespace QI4N.Framework.Runtime
             this.Values = valuesModel;
             this.Services = servicesModel;
             this.ImportedServicesModel = importedServicesModel;
+            layerModel = null;
         }
 
 
@@ -78,26 +78,6 @@ namespace QI4N.Framework.Runtime
     public class ModelVisitor
     {
         public void Visit(ModuleModel model)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class ImportedServicesModel
-    {
-        private List<ImportedServiceModel> importedServiceModels;
-
-        public ImportedServicesModel(List<ImportedServiceModel> importedServiceModels)
-        {
-            this.importedServiceModels = importedServiceModels;
-        }
-
-        public ImportedServicesInstance NewInstance(ModuleInstance instance)
-        {
-            return null;
-        }
-
-        public void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();
         }

@@ -13,6 +13,30 @@ namespace QI4N.Framework.Runtime
         }
 
 
+        public ServiceModel GetServiceFor(Type type, Visibility visibility)
+        {
+            foreach (ServiceModel serviceModel in this.serviceModels)
+            {
+                if (serviceModel.IsServiceFor(type, visibility))
+                {
+                    return serviceModel;
+                }
+            }
+
+            return null;
+        }
+
+        public void GetServicesFor(Type type, Visibility visibility, List<ServiceModel> models)
+        {
+            foreach (ServiceModel serviceModel in this.serviceModels)
+            {
+                if (serviceModel.IsServiceFor(type, visibility))
+                {
+                    models.Add(serviceModel);
+                }
+            }
+        }
+
         public ServicesInstance NewInstance(ModuleInstance moduleInstance)
         {
             var serviceReferences = new List<ServiceReference>();

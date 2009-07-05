@@ -89,8 +89,11 @@
     <Compile Include="Injection\Providers\ThisInjectionProvider.cs" />
     <Compile Include="Injection\Providers\UsesInjectionProvider.cs" />
     <Compile Include="Service\ImportedServiceInstance.cs" />
+    <Compile Include="Service\ImportedServiceReferenceInstance.cs" />
+    <Compile Include="Service\ImportedServicesInstance.cs" />
     <Compile Include="Service\ServicePropertiesModel.cs" />
     <Compile Include="Service\ServiceReferenceInstance.cs" />
+    <Compile Include="Service\ServicesInstance.cs" />
     <Compile Include="Service\ServiceStateModel.cs" />
     <Compile Include="Structure\Binder.cs" />
     <Compile Include="Structure\UnitOfWorkFactoryInstance.cs" />
