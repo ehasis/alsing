@@ -24,9 +24,9 @@ namespace ConsoleApplication23.Experimental
 
         public void Print()
         {
-            var c = this.target as CompositeInstance;
+        //    var c = this.target as CompositeInstance;
 
-            string targetName = string.Format("{0}.", c.Proxy.GetType().Name);
+            string targetName = string.Format("{0}.", target.GetType().Name);
             this.Print(targetName);
         }
 

@@ -28,6 +28,19 @@
             {
                 value = context.Next;
             }
+            if (this.InjectionAttribute is StateAttribute)
+            {
+                if (typeof(StateHolder).IsAssignableFrom( InjectedField.FieldType))
+                {
+                    value = context.State;
+                }
+            }
+            if (this.InjectionAttribute is ThisAttribute)
+            {
+                value =  context.CompositeInstance.NewProxy(InjectedField.FieldType);
+            }
+
+            
 
             this.InjectedField.SetValue(instance, value);
         }

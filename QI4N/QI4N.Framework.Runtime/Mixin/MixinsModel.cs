@@ -2,10 +2,6 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using Reflection;
 
     internal class MixinsModel : AbstractMixinsModel
     {
@@ -19,85 +15,38 @@ namespace QI4N.Framework.Runtime
             int i = 0;
             foreach (MixinModel mixinModel in this.mixinModels)
             {
-                object mixin = Activator.CreateInstance(mixinModel.MixinType, null);
+                object mixin = mixinModel.NewInstance(compositeInstance, stateHolder, uses);
                 mixins[i++] = mixin;
             }
-
-            foreach (object mixin in mixins)
-            {
-                ConfigureMixin(mixin, compositeInstance, uses, stateHolder);
-            }
         }
 
-        private static void ConfigureMixin(object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
-        {
-            IEnumerable<FieldInfo> mixinFields = mixin.GetType().GetAllFields();
 
-            foreach (FieldInfo mixinField in mixinFields)
-            {
-                ConfigureMixinField(mixinField, mixin, compositeInstance, uses, stateHolder);
-            }
-        }
+        //private static void MixinFieldInjectThis(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
+        //{
+        //    bool isThis = mixinField.GetCustomAttributes(typeof(ThisAttribute), true).Any();
 
-        private static void ConfigureMixinField(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
-        {
-            MixinFieldInjectState(mixinField, mixin, compositeInstance, uses, stateHolder);
+        //    if (isThis)
+        //    {
 
-            MixinFieldInjectThis(mixinField, mixin, compositeInstance, uses, stateHolder);
+        //        if (mixinField.FieldType.IsAssignableFrom(compositeInstance.GetType()))
+        //        {
+        //            mixinField.SetValue(mixin, compositeInstance);
+        //        }
+        //        else
+        //        {
+        //            mixinField.SetValue(mixin, compositeInstance.NewProxy(mixinField.FieldType));
+        //        }
+        //    }
+        //}
 
-            MixinFieldInjectUse(mixinField, mixin, compositeInstance, uses, stateHolder);
-        }
-
-        private static void MixinFieldInjectState(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
-        {
-            bool isState = mixinField.GetCustomAttributes(typeof(StateAttribute), true).Any();
-
-            if (isState)
-            {
-                if (typeof(Property).IsAssignableFrom(mixinField.FieldType))
-                {
-                    //// TODO: create property
-                    //object propertyInstance = null;
-                    //mixinField.SetValue(mixin, propertyInstance);
-                }
-                else if (typeof(AbstractAssociation).IsAssignableFrom(mixinField.FieldType))
-                {
-                    //// TODO: create association
-                    //object associationInstance = null;
-                    //mixinField.SetValue(mixin, associationInstance);
-                }
-                else if (typeof(StateHolder).IsAssignableFrom(mixinField.FieldType))
-                {
-                    mixinField.SetValue(mixin, stateHolder);
-                }
-            }
-        }
-
-        private static void MixinFieldInjectThis(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
-        {
-            bool isThis = mixinField.GetCustomAttributes(typeof(ThisAttribute), true).Any();
-
-            if (isThis)
-            {
-                if (mixinField.FieldType.IsAssignableFrom(compositeInstance.GetType()))
-                {
-                    mixinField.SetValue(mixin, compositeInstance);
-                }
-                else
-                {
-                    mixinField.SetValue(mixin, compositeInstance.NewProxy(mixinField.FieldType));
-                }
-            }
-        }
-
-        private static void MixinFieldInjectUse(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
-        {
-            bool isUse = mixinField.GetCustomAttributes(typeof(UsesAttribute), true).Any();
-            if (isUse)
-            {
-                object obj = uses.UseForType(mixinField.FieldType);
-                mixinField.SetValue(mixin, obj);
-            }
-        }
+        //private static void MixinFieldInjectUse(FieldInfo mixinField, object mixin, CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder)
+        //{
+        //    bool isUse = mixinField.GetCustomAttributes(typeof(UsesAttribute), true).Any();
+        //    if (isUse)
+        //    {
+        //        object obj = uses.UseForType(mixinField.FieldType);
+        //        mixinField.SetValue(mixin, obj);
+        //    }
+        //}
     }
 }
