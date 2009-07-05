@@ -5,19 +5,13 @@ namespace QI4N.Framework.Runtime
 
     public class ModuleInstance : Module
     {
-        private readonly IDictionary<Type, TransientFinder> compositeFinders;
+        private readonly IDictionary<Type, TransientFinder> transientFinders;
 
         private readonly EntitiesInstance entities;
 
         private readonly IDictionary<Type, EntityFinder> entityFinders;
 
         private readonly ImportedServicesInstance importedServices;
-
-        private readonly LayerInstance layerInstance;
-
-        private readonly ModuleModel model;
-
-        private readonly ObjectBuilderFactory objectBuilderFactory;
 
         private readonly IDictionary<Type, ObjectFinder> objectFinders;
 
@@ -27,13 +21,7 @@ namespace QI4N.Framework.Runtime
 
         private readonly ServicesInstance services;
 
-        private readonly TransientBuilderFactory transientBuilderFactory;
-
         private readonly TransientsInstance transients;
-
-        private readonly UnitOfWorkFactoryInstance unitOfWorkFactory;
-
-        private readonly ValueBuilderFactory valueBuilderFactory;
 
         private readonly IDictionary<Type, ValueFinder> valueFinders;
 
@@ -44,8 +32,8 @@ namespace QI4N.Framework.Runtime
                               EntitiesModel entitiesModel, ObjectsModel objectsModel, ValuesModel valuesModel,
                               ServicesModel servicesModel, ImportedServicesModel importedServicesModel)
         {
-            this.model = moduleModel;
-            this.layerInstance = layerInstance;
+            this.Model = moduleModel;
+            this.LayerInstance = layerInstance;
             this.transients = new TransientsInstance(transientsModel, this);
             this.entities = new EntitiesInstance(entitiesModel, this);
             this.objects = new ObjectsInstance(objectsModel, this);
@@ -53,58 +41,40 @@ namespace QI4N.Framework.Runtime
             this.services = servicesModel.NewInstance(this);
             this.importedServices = importedServicesModel.NewInstance(this);
 
-            this.transientBuilderFactory = new TransientBuilderFactoryInstance(this);
-            this.objectBuilderFactory = new ObjectBuilderFactoryInstance();
-            this.valueBuilderFactory = new ValueBuilderFactoryInstance(this);
-            this.unitOfWorkFactory = new UnitOfWorkFactoryInstance();
+            this.TransientBuilderFactory = new TransientBuilderFactoryInstance(this);
+            this.ObjectBuilderFactory = new ObjectBuilderFactoryInstance();
+            this.ValueBuilderFactory = new ValueBuilderFactoryInstance(this);
+            this.UnitOfWorkFactory = new UnitOfWorkFactoryInstance();
             this.serviceFinder = new ServiceFinderInstance();
 
             this.entityFinders = new Dictionary<Type, EntityFinder>();
-            this.compositeFinders = new Dictionary<Type, TransientFinder>();
+            this.transientFinders = new Dictionary<Type, TransientFinder>();
             this.objectFinders = new Dictionary<Type, ObjectFinder>();
             this.valueFinders = new Dictionary<Type, ValueFinder>();
         }
 
-        public LayerInstance LayerInstance
-        {
-            get
-            {
-                return this.layerInstance;
-            }
-        }
+        public LayerInstance LayerInstance { get; private set; }
 
         public MetaInfo MetaInfo
         {
             get
             {
-                return this.model.MetaInfo;
+                return this.Model.MetaInfo;
             }
         }
 
-        public ModuleModel Model
-        {
-            get
-            {
-                return this.model;
-            }
-        }
+        public ModuleModel Model { get; private set; }
 
         public string Name
         {
             get
             {
-                return this.model.Name;
+                return this.Model.Name;
             }
         }
 
 
-        public ObjectBuilderFactory ObjectBuilderFactory
-        {
-            get
-            {
-                return this.objectBuilderFactory;
-            }
-        }
+        public ObjectBuilderFactory ObjectBuilderFactory { get; private set; }
 
         public ServiceFinder ServiceFinder
         {
@@ -114,35 +84,17 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public TransientBuilderFactory TransientBuilderFactory
-        {
-            get
-            {
-                return this.transientBuilderFactory;
-            }
-        }
+        public TransientBuilderFactory TransientBuilderFactory { get; private set; }
 
-        public UnitOfWorkFactory UnitOfWorkFactory
-        {
-            get
-            {
-                return this.unitOfWorkFactory;
-            }
-        }
+        public UnitOfWorkFactory UnitOfWorkFactory { get; private set; }
 
-        public ValueBuilderFactory ValueBuilderFactory
-        {
-            get
-            {
-                return this.valueBuilderFactory;
-            }
-        }
+        public ValueBuilderFactory ValueBuilderFactory { get; private set; }
 
 
         public TransientFinder FindCompositeModel(Type mixinType)
         {
             TransientFinder finder;
-            if (!this.compositeFinders.TryGetValue(mixinType, out finder))
+            if (!this.transientFinders.TryGetValue(mixinType, out finder))
             {
                 finder = new TransientFinder
                              {
@@ -151,7 +103,7 @@ namespace QI4N.Framework.Runtime
                 this.VisitModules(finder);
                 if (finder.Model != null)
                 {
-                    this.compositeFinders.Add(mixinType, finder);
+                    this.transientFinders.Add(mixinType, finder);
                 }
             }
 

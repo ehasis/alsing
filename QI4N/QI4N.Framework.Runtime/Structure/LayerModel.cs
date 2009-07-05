@@ -7,37 +7,21 @@ namespace QI4N.Framework.Runtime
 
     public class LayerModel
     {
-        private readonly MetaInfo metaInfo;
-
         private readonly List<ModuleModel> modules;
-
-        private readonly string name;
 
         private readonly List<LayerModel> usedLayers;
 
         private LayerModel(string name, MetaInfo metaInfo, List<LayerModel> usedLayers, List<ModuleModel> modules)
         {
-            this.name = name;
-            this.metaInfo = metaInfo;
+            this.Name = name;
+            this.MetaInfo = metaInfo;
             this.usedLayers = usedLayers;
             this.modules = modules;
         }
 
-        public MetaInfo MetaInfo
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public MetaInfo MetaInfo { get; private set; }
 
-        public string Name
-        {
-            get
-            {
-                return this.name;
-            }
-        }
+        public string Name { get; private set; }
 
         public static LayerModel NewModel(LayerAssembly layer)
         {
