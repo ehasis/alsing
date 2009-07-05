@@ -39,6 +39,7 @@ namespace ConsoleApplication23
             module
                     .AddTransients()
                     .Include<CustomerTransient>()
+                    .Include<ContactTransient>()
                     .WithConcern<GenericTracingConcern>()
                     //  .WithConcern<SayHelloConcern>()
                     .WithSideEffect<SayHelloSideEffect>();
