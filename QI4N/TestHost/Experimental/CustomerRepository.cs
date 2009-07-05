@@ -20,15 +20,18 @@ namespace ConsoleApplication23.Experimental
     public class CustomerRepositoryMixin : CustomerRepository
     {
         [Structure]
+        private TransientBuilderFactory transientBuilderFactory;
+
+        [Structure]
         private UnitOfWorkFactory uowf;
 
-        public Customer FindByIdentity( string identity)
+        public Customer FindByIdentity(string identity)
         {
             UnitOfWork uow = this.uowf.CurrentUnitOfWork;
             return uow.Find<Customer>(identity);
         }
 
-        public Customer FindByName( string name)
+        public Customer FindByName(string name)
         {
             UnitOfWork uow = this.uowf.CurrentUnitOfWork;
 
@@ -37,6 +40,11 @@ namespace ConsoleApplication23.Experimental
                                            select customer;
 
             return result.FirstOrDefault();
+        }
+
+        public Customer NewCustomer(string name)
+        {
+            return null;
         }
     }
 }

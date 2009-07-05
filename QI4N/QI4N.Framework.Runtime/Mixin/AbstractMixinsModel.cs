@@ -53,7 +53,7 @@ namespace QI4N.Framework.Runtime
                 foreach (Type implementationType in this.mixinImplementationTypes)
                 {
                     IEnumerable<Type> fieldTypes = implementationType.GetAllFields()
-                            .Where(f => f.HasAttribute<ThisAttribute>())
+                            .Where(f => TypeExtensions.HasAttribute<ThisAttribute>(f))
                             .Select(f => f.FieldType);
 
                     thisTypes.AddRange(fieldTypes);

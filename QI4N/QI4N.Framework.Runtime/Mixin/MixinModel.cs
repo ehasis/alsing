@@ -13,17 +13,17 @@ namespace QI4N.Framework.Runtime
     {
         private readonly ConcernsDeclaration concernsDeclaration;
 
+        private readonly InjectedObjectBuilder injectedObjectBuilder;
+
         private readonly SideEffectsDeclaration sideEffectsDeclaration;
 
         private readonly IEnumerable<Type> thisMixinTypes;
-
-        private readonly InjectedObjectBuilder injectedObjectBuilder;
 
         public MixinModel(Type mixinType)
         {
             this.MixinType = mixinType;
 
-            injectedObjectBuilder = new InjectedObjectBuilder(mixinType);
+            this.injectedObjectBuilder = new InjectedObjectBuilder(mixinType);
 
             var concerns = new List<ConcernDeclaration>();
             ConcernsDeclaration.ConcernDeclarations(mixinType, concerns);
@@ -56,13 +56,13 @@ namespace QI4N.Framework.Runtime
 
         public object NewInstance(CompositeInstance compositeInstance, StateHolder stateHolder)
         {
-            return NewInstance(compositeInstance, stateHolder, UsesInstance.NoUses);
+            return this.NewInstance(compositeInstance, stateHolder, UsesInstance.NoUses);
         }
 
         public object NewInstance(CompositeInstance compositeInstance, StateHolder stateHolder, UsesInstance uses)
         {
             var injectionContext = new InjectionContext(compositeInstance, uses, stateHolder);
-            object mixin = injectedObjectBuilder.NewInstance(injectionContext);
+            object mixin = this.injectedObjectBuilder.NewInstance(injectionContext);
             return mixin;
         }
 

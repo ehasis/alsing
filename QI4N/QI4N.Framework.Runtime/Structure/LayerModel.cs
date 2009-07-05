@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -21,6 +21,14 @@
             this.metaInfo = metaInfo;
             this.usedLayers = usedLayers;
             this.modules = modules;
+        }
+
+        public MetaInfo MetaInfo
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public string Name
