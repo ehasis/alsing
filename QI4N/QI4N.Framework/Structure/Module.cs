@@ -1,5 +1,7 @@
 namespace QI4N.Framework
 {
+    using System.Collections.Generic;
+
     public interface Module
     {
         string Name { get; }
@@ -19,5 +21,7 @@ namespace QI4N.Framework
 
     public interface ServiceFinder
     {
+        ServiceReference FindService<T>();
+        IEnumerable<ServiceReference> FindServices<T>();
     }
 }

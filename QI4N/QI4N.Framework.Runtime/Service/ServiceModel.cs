@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -73,6 +73,20 @@
 
             return new ServiceModel(
                     compositeType, visibility, metaInfo, mixinsModel, stateModel, compositeMethodsModel, moduleName, identity, instantiateOnStartup);
+        }
+
+        public bool IsServiceFor(Type serviceType, Visibility visibility)
+        {
+            // Check visibility
+            if (visibility != Visibility)
+            {
+                return false;
+            }
+
+
+            // Plain class check
+
+            return serviceType.IsAssignableFrom(this.compositeType);
         }
     }
 }

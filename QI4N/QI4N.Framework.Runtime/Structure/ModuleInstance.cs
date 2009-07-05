@@ -1,6 +1,7 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
 
     public class ModuleInstance : Module
@@ -29,7 +30,7 @@ namespace QI4N.Framework.Runtime
             this.ObjectBuilderFactory = new ObjectBuilderFactoryInstance();
             this.ValueBuilderFactory = new ValueBuilderFactoryInstance(this);
             this.UnitOfWorkFactory = new UnitOfWorkFactoryInstance();
-            this.ServiceFinder = new ServiceFinderInstance();
+            this.ServiceFinder = new ServiceFinderInstance(this);
 
             this.entityFinders = new Dictionary<Type, EntityFinder>();
             this.transientFinders = new Dictionary<Type, TransientFinder>();
@@ -151,24 +152,155 @@ namespace QI4N.Framework.Runtime
             // Visit layer
             this.LayerInstance.VisitModules(visitor, Visibility.Layer);
         }
-    }
 
-    public class ImportedServicesInstance
-    {
-    }
-
-    public class ServicesInstance
-    {
-        public ServicesInstance(ServicesModel model, List<ServiceReference> references)
+        public ServiceReference GetServiceFor(Type type, Visibility visibility)
         {
+            ServiceReference service = 
+                this.Services.GetServiceFor(type, visibility) 
+                ?? this.ImportedServices.GetServiceFor(type, visibility);
+
+            return service;
+        }
+
+        public void GetServicesFor(Type type, Visibility visibility, List<ServiceReference> serviceReferences)
+        {
+            Services.GetServicesFor(type, visibility, serviceReferences);
+            ImportedServices.GetServicesFor(type, visibility, serviceReferences);
         }
     }
 
 
 
+    public class ServicesInstance
+    {
+        private readonly ServicesModel servicesModel;
+
+        private readonly List<ServiceReference> serviceReferences;
+
+        private readonly Dictionary<string, ServiceReference> mapIdentityServiceReference = new Dictionary<string, ServiceReference>();
+        public ServicesInstance(ServicesModel servicesModel, List<ServiceReference> serviceReferences)
+        {
+            this.servicesModel = servicesModel;
+            this.serviceReferences = serviceReferences;
+
+            foreach (ServiceReference serviceReference in serviceReferences)
+            {
+                mapIdentityServiceReference.Add(serviceReference.Identity, serviceReference);
+            }
+        }
+
+        internal ServiceReference GetServiceFor(Type type, Visibility visibility)
+        {
+            ServiceModel serviceModel = servicesModel.GetServiceFor(type, visibility);
+
+            ServiceReference serviceRef = null;
+            if (serviceModel != null)
+            {
+                serviceRef = mapIdentityServiceReference[serviceModel.Identity];
+            }
+
+            return serviceRef;
+        }
+
+        internal void GetServicesFor(Type type, Visibility visibility, List<ServiceReference> serviceReferences)
+        {
+            var serviceModels = new List<ServiceModel>();
+            servicesModel.GetServicesFor( type, visibility, serviceModels );
+            foreach( ServiceModel serviceModel in serviceModels )
+            {
+                serviceReferences.Add( mapIdentityServiceReference[serviceModel.Identity ] );
+            }
+        }
+    }
+
 
     public class ServiceFinderInstance : ServiceFinder
     {
+        private readonly ModuleInstance owner;
+
+        readonly Dictionary<Type, ServiceReference> service = new Dictionary<Type, ServiceReference>();
+
+        readonly Dictionary<Type, IEnumerable<ServiceReference>> services = new Dictionary<Type, IEnumerable<ServiceReference>>();
+
+
+        public ServiceFinderInstance(ModuleInstance owner)
+        {
+            this.owner = owner;
+        }
+
+        public ServiceReference FindService<T>()
+        {
+            Type serviceType = typeof(T);
+
+            ServiceReference serviceReference;           
+            if(!service.TryGetValue(serviceType,out serviceReference))
+            {
+                var finder = new ServiceReferenceFinder
+                                 {
+                                         Type = serviceType
+                                 };
+
+                owner.VisitModules( finder );
+                serviceReference = finder.Service;
+                if( serviceReference != null )
+                {
+                    service.Add( serviceType, serviceReference );
+                }
+            }
+
+            return serviceReference;
+        }
+
+        public IEnumerable<ServiceReference> FindServices<T>()
+        {
+            Type serviceType = typeof(T);
+            IEnumerable<ServiceReference> iterable;
+            if (!services.TryGetValue(serviceType,out iterable))
+            {
+                var finder = new ServiceReferencesFinder
+                                 {
+                                         Type = serviceType
+                                 };
+
+                owner.VisitModules(finder);
+                iterable = finder.Services;
+                services.Add( serviceType, iterable );
+            }
+
+            return iterable;
+        }
+    }
+
+    internal class ServiceReferenceFinder : ModuleVisitor
+    {
+        #region ModuleVisitor Members
+
+        public ServiceReference Service { get; set; }
+
+        public Type Type { get; set; }
+
+        public bool VisitModule(ModuleInstance moduleInstance, ModuleModel moduleModel, Visibility visibility)
+        {
+            Service = moduleInstance.GetServiceFor(Type, visibility);
+
+            return Service == null;
+        }
+
+        #endregion
+    }
+
+    public class ServiceReferencesFinder : ModuleVisitor
+    {
+        public List<ServiceReference> Services;
+
+        public Type Type { get; set; }
+
+        public bool VisitModule(ModuleInstance moduleInstance, ModuleModel moduleModel, Visibility visibility)
+        {
+            moduleInstance.GetServicesFor(Type, visibility, Services);
+
+            return true;
+        }
     }
 
     public class ObjectFinder

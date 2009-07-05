@@ -5,17 +5,19 @@ namespace QI4N.Framework.Runtime
 
     public class ServiceReferenceInstance : ServiceReference
     {
-        public ServiceModel ServiceModel;
+        private readonly ModuleInstance moduleInstance;
 
-        public ServiceReferenceInstance(ServiceModel model, ModuleInstance instance)
+        public ServiceReferenceInstance(ServiceModel serviceModel, ModuleInstance moduleInstance)
         {
+            this.ServiceModel = serviceModel;
+            this.moduleInstance = moduleInstance;
         }
 
         public string Identity
         {
             get
             {
-                throw new NotImplementedException();
+                return this.ServiceModel.Identity;
             }
         }
 
@@ -34,6 +36,8 @@ namespace QI4N.Framework.Runtime
                 throw new NotImplementedException();
             }
         }
+
+        public ServiceModel ServiceModel { get; private set; }
 
         public object Get()
         {
