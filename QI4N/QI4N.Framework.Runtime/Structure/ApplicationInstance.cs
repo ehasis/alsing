@@ -3,16 +3,16 @@ namespace QI4N.Framework.Runtime
     using System.Collections.Generic;
     using System.Linq;
 
-    public class ApplicationInstance
+    public class ApplicationInstance : Application
     {
         private readonly List<LayerInstance> layerInstances;
 
-        private ApplicationModel applicationModel;
+        private readonly ApplicationModel model;
 
 
         public ApplicationInstance(ApplicationModel applicationModel, List<LayerInstance> layers)
         {
-            this.applicationModel = applicationModel;
+            this.model = applicationModel;
             this.layerInstances = layers;
         }
 
@@ -38,5 +38,40 @@ namespace QI4N.Framework.Runtime
 
             return module;
         }
+
+        #region Application Members
+
+        public string Name
+        {
+            get 
+            {
+                return model.Name; 
+            }
+        }
+
+        public ApplicationMode Mode
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
+        public MetaInfo MetaInfo
+        {
+            get 
+            {
+                return model.MetaInfo;
+            }
+        }
+
+        Layer Application.FindLayer(string layerName)
+        {
+            return this.FindLayer(layerName);
+        }
+
+        Module Application.FindModule(string layerName, string moduleName)
+        {
+            return this.FindModule(layerName, moduleName);
+        }
+
+        #endregion
     }
 }

@@ -8,16 +8,16 @@
     {
         private readonly IList<LayerModel> layers;
 
-        private MetaInfo metaInfo;
-
-        private string name;
-
         private ApplicationModel(string name, MetaInfo metaInfo, IList<LayerModel> layers)
         {
-            this.name = name;
-            this.metaInfo = metaInfo;
+            this.Name = name;
+            this.MetaInfo = metaInfo;
             this.layers = layers;
         }
+
+        public string Name { get; set; }
+
+        public MetaInfo MetaInfo { get; set; }
 
         public static ApplicationModel NewModel(ApplicationAssembly application)
         {
