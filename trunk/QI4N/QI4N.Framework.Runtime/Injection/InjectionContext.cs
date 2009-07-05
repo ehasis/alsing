@@ -6,7 +6,7 @@ namespace QI4N.Framework.Runtime
         public InjectionContext(CompositeInstance compositeInstance, UsesInstance uses, StateHolder state)
         {
             this.CompositeInstance = compositeInstance;
-            this.Module = compositeInstance.ModuleInstance;
+            this.ModuleInstance = compositeInstance.ModuleInstance;
             this.Uses = uses;
             this.State = state;
             this.Next = null;
@@ -17,7 +17,7 @@ namespace QI4N.Framework.Runtime
         public InjectionContext(ModuleInstance moduleInstance, object next, ProxyReferenceInvocationHandler proxyHandler)
         {
             this.CompositeInstance = null;
-            this.Module = moduleInstance;
+            this.ModuleInstance = moduleInstance;
             this.Uses = null;
             this.Next = next;
             this.State = null;
@@ -26,7 +26,7 @@ namespace QI4N.Framework.Runtime
 
         public CompositeInstance CompositeInstance { get; private set; }
 
-        public Module Module { get; private set; }
+        public ModuleInstance ModuleInstance { get; private set; }
 
         public object Next { get; private set; }
 

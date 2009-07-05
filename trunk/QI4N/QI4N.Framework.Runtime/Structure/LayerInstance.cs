@@ -7,18 +7,16 @@ namespace QI4N.Framework.Runtime
     {
         private readonly IList<ModuleInstance> moduleInstances;
 
-        private UsedLayersInstance usedLayersInstance;
-
         public LayerInstance(LayerModel model, ApplicationInstance applicationInstance, IList<ModuleInstance> moduleInstances, UsedLayersInstance usedLayersInstance)
         {
             this.Model = model;
-            this.Application = applicationInstance;
+            this.ApplicationInstance = applicationInstance;
             this.moduleInstances = moduleInstances;
-            this.usedLayersInstance = usedLayersInstance;
+            this.UsedLayersInstance = usedLayersInstance;
             //   this.moduleActivator = new Activator();
         }
 
-        public Application Application{ get;private set; }
+        public ApplicationInstance ApplicationInstance{ get;private set; }
 
         public MetaInfo MetaInfo
         {
@@ -37,6 +35,8 @@ namespace QI4N.Framework.Runtime
                 return this.Model.Name;
             }
         }
+
+        public UsedLayersInstance UsedLayersInstance { get;private set; }
 
         public Module FindModule(string moduleName)
         {
