@@ -48,9 +48,9 @@ namespace QI4N.Framework.Runtime
             sb.Append("{ ");
             foreach(Property property in State.GetProperties())
             {
-                sb.Append(" {");
-                sb.AppendFormat("{0}='{1}'", property.QualifiedName, property.Value);
-                sb.Append("} ");
+                sb.Append(" ");
+                sb.AppendFormat("{0}='{1}'", property.QualifiedName, property.Value ?? "{null}");
+                sb.Append(" ");
             }
             
             sb.Append(" }");
