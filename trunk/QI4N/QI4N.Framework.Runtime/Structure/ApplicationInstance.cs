@@ -1,5 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -14,6 +15,30 @@ namespace QI4N.Framework.Runtime
         {
             this.model = applicationModel;
             this.layerInstances = layers;
+        }
+
+        public MetaInfo MetaInfo
+        {
+            get
+            {
+                return this.model.MetaInfo;
+            }
+        }
+
+        public ApplicationMode Mode
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return this.model.Name;
+            }
         }
 
         public Layer FindLayer(string layerName)
@@ -38,30 +63,5 @@ namespace QI4N.Framework.Runtime
 
             return module;
         }
-
-        #region Application Members
-
-        public string Name
-        {
-            get 
-            {
-                return model.Name; 
-            }
-        }
-
-        public ApplicationMode Mode
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public MetaInfo MetaInfo
-        {
-            get 
-            {
-                return model.MetaInfo;
-            }
-        }
-
-        #endregion
     }
 }
