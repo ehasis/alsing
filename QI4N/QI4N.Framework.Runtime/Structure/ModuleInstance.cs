@@ -173,16 +173,7 @@ namespace QI4N.Framework.Runtime
     }
 
 
-    public class UnitOfWorkFactoryInstance : UnitOfWorkFactory
-    {
-        public UnitOfWork CurrentUnitOfWork
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-    }
+
 
     public class ServiceFinderInstance : ServiceFinder
     {
