@@ -6,7 +6,7 @@ namespace QI4N.Framework
     using Reflection;
 
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited = false, AllowMultiple = true)]
-    public sealed class StateAttribute : InjectionScopeAttribute
+    public sealed class StateAttribute : InjectionAttribute
     {
         public StateAttribute()
         {

@@ -12,9 +12,9 @@
     {
         private readonly ConstructorsModel constructorsModel;
 
-        //private readonly InjectedFieldsModel injectedFieldsModel;
+        private readonly InjectedFieldsModel injectedFieldsModel;
 
-        //private readonly InjectedMethodsModel injectedMethodsModel;
+        private readonly InjectedMethodsModel injectedMethodsModel;
 
         private readonly Type modifierType;
 
@@ -22,8 +22,8 @@
         {
             this.modifierType = modifierType;
             this.constructorsModel = new ConstructorsModel(modifierType);
-            //this.injectedFieldsModel = new InjectedFieldsModel(modifierType);
-            //this.injectedMethodsModel = new InjectedMethodsModel(modifierType);
+            this.injectedFieldsModel = new InjectedFieldsModel(modifierType);
+            this.injectedMethodsModel = new InjectedMethodsModel(modifierType);
         }
 
 
@@ -38,32 +38,16 @@
 
         // Context
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public object NewInstance(ModuleInstance moduleInstance, object next, ProxyReferenceInvocationHandler proxyHandler)
         {
-            //  var injectionContext = new InjectionContext(moduleInstance, this.WrapNext(next), proxyHandler);
+            var injectionContext = new InjectionContext(moduleInstance, this.WrapNext(next), proxyHandler);
 
-            //  object mixin = this.constructorsModel.NewInstance(injectionContext);
+            object mixin = this.constructorsModel.NewInstance(injectionContext);
 
-            object concern = this.modifierType.NewInstance();
+            this.injectedFieldsModel.Inject(injectionContext, mixin);
+            this.injectedMethodsModel.Inject(injectionContext, mixin);
 
-            //TODO: fix this
-            FieldInfo[] fields = this.modifierType.GetAllFields();
-
-            FieldInfo field = null;
-            foreach (FieldInfo t in fields)
-            {
-                if (t.Name == "next")
-                {
-                    field = t;
-                }
-            }
-
-            field.SetValue(concern, this.WrapNext(next));
-            ////this.injectedFieldsModel.Inject(injectionContext, mixin);
-            ////this.injectedMethodsModel.Inject(injectionContext, mixin);
-
-            object mixin = concern;
             return mixin;
         }
 
@@ -75,7 +59,7 @@
         //}
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private object WrapNext(object next)
         {
             if (this.IsGeneric)

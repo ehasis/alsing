@@ -13,7 +13,7 @@
         private readonly ProxyReferenceInvocationHandler proxyHandler;
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public MethodConcernsInstance(InvocationHandler firstConcern, FragmentInvocationHandler mixinInvocationHandler, ProxyReferenceInvocationHandler proxyHandler)
         {
             this.firstConcern = firstConcern;
@@ -25,7 +25,7 @@
         public bool IsEmpty
         {
             [DebuggerStepThrough]
-            [DebuggerHidden]
+            //[DebuggerHidden]
             get
             {
                 return this.firstConcern == this.mixinInvocationHandler;
@@ -33,7 +33,7 @@
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             this.proxyHandler.Proxy = proxy;

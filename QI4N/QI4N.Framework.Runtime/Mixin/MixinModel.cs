@@ -61,7 +61,7 @@ namespace QI4N.Framework.Runtime
 
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public FragmentInvocationHandler NewInvocationHandler(Type methodType)
         {
             if (typeof(InvocationHandler).IsAssignableFrom(this.MixinType) && !methodType.IsAssignableFrom(this.MixinType))

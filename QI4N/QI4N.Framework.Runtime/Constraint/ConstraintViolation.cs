@@ -5,7 +5,7 @@
     public class ConstraintViolation
     {
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public ConstraintViolation(string name, ConstraintSource constraint, object value)
         {
             this.Name = name;

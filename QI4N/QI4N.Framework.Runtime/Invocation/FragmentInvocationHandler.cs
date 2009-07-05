@@ -8,25 +8,25 @@ namespace QI4N.Framework.Runtime
         protected object fragment;
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         protected FragmentInvocationHandler()
         {
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         protected FragmentInvocationHandler(object fragment)
         {
             this.fragment = fragment;
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public abstract object Invoke(object proxy, MethodInfo method, object[] args);
 
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public void SetFragment(object fragment)
         {
             this.fragment = fragment;

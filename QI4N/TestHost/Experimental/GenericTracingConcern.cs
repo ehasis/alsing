@@ -9,7 +9,7 @@
     public class GenericTracingConcern : GenericConcern
     {
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public override object Invoke(object proxy, MethodInfo method, object[] args)
         {
             ConsoleColor color = Console.ForegroundColor;

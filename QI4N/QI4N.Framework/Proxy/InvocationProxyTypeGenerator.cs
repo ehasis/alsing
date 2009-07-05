@@ -27,7 +27,7 @@ namespace QI4N.Framework.Reflection
         private TypeBuilder typeBuilder;
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public Type BuildProxyType(Type compositeType, Type[] additionalTypes)
         {
             lock (syncRoot)
@@ -74,7 +74,7 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private static void CreateInvocationHandlerMethod(MethodInfo method, ILGenerator generator, FieldBuilder fieldBuilder)
         {
             MethodInfo invokeMethod = typeof(InvocationHandler).GetMethod("Invoke");
@@ -153,14 +153,14 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private static Type GetParameterType(ParameterInfo param)
         {
             return param.ParameterType;
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private void CreateAssemblyBuilder()
         {
             AppDomain domain = Thread.GetDomain();
@@ -174,7 +174,7 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private void CreateCtor()
         {
             ConstructorBuilder ctorBuilder = this.typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new[]
@@ -190,14 +190,14 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private void CreateDefaultHandlerField()
         {
             this.defaultHandlerFieldBuilder = this.typeBuilder.DefineField("defaultHandler", typeof(InvocationHandler), FieldAttributes.Public);
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private void CreateInterfaceList()
         {
             IEnumerable<Type> allFromComposite = this.compositeType.GetAllInterfaces();
@@ -211,7 +211,7 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private void CreateMethod(MethodInfo method)
         {
             MethodBuilder methodBuilder = this.typeBuilder.GetMethodOverrideBuilder(method);
@@ -234,7 +234,7 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private void CreateTypeBuilder()
         {
             const string moduleName = "Alsing.Proxy";

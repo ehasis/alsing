@@ -103,7 +103,7 @@ namespace QI4N.Framework.Runtime
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public MixinModel MixinFor(MethodInfo method)
         {
             int integer = this.MethodIndex[method];
@@ -111,7 +111,7 @@ namespace QI4N.Framework.Runtime
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
         {
             return this.MixinFor(method).NewInvocationHandler(method.DeclaringType);

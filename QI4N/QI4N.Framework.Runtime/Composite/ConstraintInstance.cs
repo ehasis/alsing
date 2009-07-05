@@ -16,7 +16,7 @@
 
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public bool IsValid(object value)
         {
             return this.constraint.IsValid(this.Annotation, value);

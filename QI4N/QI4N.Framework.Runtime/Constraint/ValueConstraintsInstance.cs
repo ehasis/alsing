@@ -25,7 +25,7 @@
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public List<ConstraintViolation> CheckConstraints(object value)
         {
             List<ConstraintViolation> violations = null;
