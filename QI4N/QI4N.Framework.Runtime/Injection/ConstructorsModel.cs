@@ -1,6 +1,7 @@
 ﻿namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Diagnostics;
     using System.Reflection;
 
     public class ConstructorsModel
@@ -15,6 +16,8 @@
             this.constructors = type.GetConstructors();
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public object NewInstance(InjectionContext injectionContext)
         {
             return Activator.CreateInstance(this.type, null);

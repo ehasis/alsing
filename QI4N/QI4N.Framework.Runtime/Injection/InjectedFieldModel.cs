@@ -1,5 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
+    using System.Diagnostics;
     using System.Reflection;
 
     using API.Reflection;
@@ -19,6 +20,8 @@ namespace QI4N.Framework.Runtime
             this.injectionProvider = InjectionProviderLookup.ProviderFor(injectionAttribute);
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public void Inject(InjectionContext context, object instance)
         {
             object value = this.injectionProvider.ProvideInjection(context, this.injectionAttribute, this.injectedField.FieldType);

@@ -89,6 +89,7 @@ namespace ConsoleApplication23
 
             Address otherAddress = addressBuilder.NewInstance();
 
+
             bool areEqual = customer.Address.Equals(otherAddress);
 
             if (areEqual)
