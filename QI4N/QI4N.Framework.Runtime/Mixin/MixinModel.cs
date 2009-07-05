@@ -15,21 +15,15 @@ namespace QI4N.Framework.Runtime
 
         private readonly SideEffectsDeclaration sideEffectsDeclaration;
 
-        private readonly HashSet<Type> thisMixinTypes;
+        private readonly IEnumerable<Type> thisMixinTypes;
 
-        private readonly ConstructorsModel constructorsModel;
-
-        private readonly InjectedFieldsModel injectedFieldsModel;
-
-        private readonly InjectedMethodsModel injectedMethodsModel;
+        private readonly InjectedObjectBuilder injectedObjectBuilder;
 
         public MixinModel(Type mixinType)
         {
             this.MixinType = mixinType;
 
-            constructorsModel = new ConstructorsModel(mixinType);
-            injectedFieldsModel = new InjectedFieldsModel(mixinType);
-            injectedMethodsModel = new InjectedMethodsModel(mixinType);
+            injectedObjectBuilder = new InjectedObjectBuilder(mixinType);
 
             var concerns = new List<ConcernDeclaration>();
             ConcernsDeclaration.ConcernDeclarations(mixinType, concerns);
@@ -68,9 +62,7 @@ namespace QI4N.Framework.Runtime
         public object NewInstance(CompositeInstance compositeInstance, StateHolder stateHolder, UsesInstance uses)
         {
             var injectionContext = new InjectionContext(compositeInstance, uses, stateHolder);
-            object mixin = constructorsModel.NewInstance(injectionContext);
-            injectedFieldsModel.Inject(injectionContext, mixin);
-            injectedMethodsModel.Inject(injectionContext, mixin);
+            object mixin = injectedObjectBuilder.NewInstance(injectionContext);
             return mixin;
         }
 
@@ -94,20 +86,14 @@ namespace QI4N.Framework.Runtime
             return model;
         }
 
-        private HashSet<Type> BuildThisMixinTypes()
+        private IEnumerable<Type> BuildThisMixinTypes()
         {
-            var thisDependencies = new HashSet<Type>();
-
             IEnumerable<Type> thisTypes = this.MixinType.GetAllFields()
                     .Where(f => f.HasAttribute(typeof(ThisAttribute)))
-                    .Select(f => f.FieldType);
+                    .Select(f => f.FieldType)
+                    .Distinct();
 
-            foreach (Type type in thisTypes)
-            {
-                thisDependencies.Add(type);
-            }
-
-            return thisDependencies;
+            return thisTypes;
         }
     }
 }
