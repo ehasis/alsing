@@ -15,8 +15,6 @@ namespace QI4N.Framework
         UnitOfWorkFactory UnitOfWorkFactory { get; }
 
         ServiceFinder ServiceFinder { get; }
-
-        Layer Layer { get; }
     }
 
     public interface ServiceFinder

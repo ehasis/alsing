@@ -8,12 +8,9 @@ namespace QI4N.Framework.Runtime
     {
         private readonly List<LayerInstance> layerInstances;
 
-        private readonly ApplicationModel model;
-
-
         public ApplicationInstance(ApplicationModel applicationModel, List<LayerInstance> layers)
         {
-            this.model = applicationModel;
+            this.Model = applicationModel;
             this.layerInstances = layers;
         }
 
@@ -21,7 +18,7 @@ namespace QI4N.Framework.Runtime
         {
             get
             {
-                return this.model.MetaInfo;
+                return this.Model.MetaInfo;
             }
         }
 
@@ -33,11 +30,13 @@ namespace QI4N.Framework.Runtime
             }
         }
 
+        public ApplicationModel Model { get; private set; }
+
         public string Name
         {
             get
             {
-                return this.model.Name;
+                return this.Model.Name;
             }
         }
 

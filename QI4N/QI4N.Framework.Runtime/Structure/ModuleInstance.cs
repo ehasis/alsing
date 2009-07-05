@@ -43,7 +43,7 @@ namespace QI4N.Framework.Runtime
 
         public ImportedServicesInstance ImportedServices { get; private set; }
 
-        public Layer Layer
+        public LayerInstance LayerInstance
         {
             get
             {

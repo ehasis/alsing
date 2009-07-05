@@ -8,35 +8,35 @@
         {
             if (fieldType == typeof(TransientBuilderFactory))
             {
-                return context.Module.TransientBuilderFactory;
+                return context.ModuleInstance.TransientBuilderFactory;
             }
             if (fieldType == typeof(ObjectBuilderFactory))
             {
-                return context.Module.ObjectBuilderFactory;
+                return context.ModuleInstance.ObjectBuilderFactory;
             }
             if (fieldType == typeof(ValueBuilderFactory))
             {
-                return context.Module.ValueBuilderFactory;
+                return context.ModuleInstance.ValueBuilderFactory;
             }
             if (fieldType == typeof(UnitOfWorkFactory))
             {
-                return context.Module.UnitOfWorkFactory;
+                return context.ModuleInstance.UnitOfWorkFactory;
             }
             if (fieldType == typeof(ServiceFinder))
             {
-                return context.Module.ServiceFinder;
+                return context.ModuleInstance.ServiceFinder;
             }
-            if (fieldType == typeof(Module))
+            if (fieldType == typeof(ModuleInstance))
             {
-                return context.Module;
+                return context.ModuleInstance;
             }
             if (fieldType == typeof(Layer))
             {
-                return context.Module.Layer;
+                return context.ModuleInstance.LayerInstance;
             }
             if (fieldType == typeof(Application))
             {
-                return context.Module.Layer.Application;
+                return context.ModuleInstance.LayerInstance.ApplicationInstance;
             }
             //else if( typeof( Qi4j) ) || typeof( Qi4jSPI) )
             //{
