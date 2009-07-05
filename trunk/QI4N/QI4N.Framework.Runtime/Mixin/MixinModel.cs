@@ -17,13 +17,19 @@ namespace QI4N.Framework.Runtime
 
         private readonly HashSet<Type> thisMixinTypes;
 
+        private readonly ConstructorsModel constructorsModel;
+
+        private readonly InjectedFieldsModel injectedFieldsModel;
+
+        private readonly InjectedMethodsModel injectedMethodsModel;
+
         public MixinModel(Type mixinType)
         {
             this.MixinType = mixinType;
 
-            //constructorsModel = new ConstructorsModel( mixinClass );
-            //injectedFieldsModel = new InjectedFieldsModel( mixinClass );
-            //injectedMethodsModel = new InjectedMethodsModel( mixinClass );
+            constructorsModel = new ConstructorsModel(mixinType);
+            injectedFieldsModel = new InjectedFieldsModel(mixinType);
+            injectedMethodsModel = new InjectedMethodsModel(mixinType);
 
             var concerns = new List<ConcernDeclaration>();
             ConcernsDeclaration.ConcernDeclarations(mixinType, concerns);
@@ -54,9 +60,18 @@ namespace QI4N.Framework.Runtime
             return this.thisMixinTypes;
         }
 
+        public object NewInstance(CompositeInstance compositeInstance, StateHolder stateHolder)
+        {
+            return NewInstance(compositeInstance, stateHolder, UsesInstance.NoUses);
+        }
+
         public object NewInstance(CompositeInstance compositeInstance, StateHolder stateHolder, UsesInstance uses)
         {
-            throw new NotImplementedException();
+            var injectionContext = new InjectionContext(compositeInstance, uses, stateHolder);
+            object mixin = constructorsModel.NewInstance(injectionContext);
+            injectedFieldsModel.Inject(injectionContext, mixin);
+            injectedMethodsModel.Inject(injectionContext, mixin);
+            return mixin;
         }
 
 

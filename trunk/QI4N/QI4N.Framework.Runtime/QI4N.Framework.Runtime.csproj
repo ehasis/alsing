@@ -60,8 +60,8 @@
     <Compile Include="Composite\AbstractModifierDeclaration.cs" />
     <Compile Include="Composite\AbstractModifierModel.cs" />
     <Compile Include="Composite\ConstraintInstance.cs" />
-    <Compile Include="Composite\ConstructorModel.cs" />
-    <Compile Include="Composite\ConstructorsModel.cs" />
+    <Compile Include="Injection\ConstructorModel.cs" />
+    <Compile Include="Injection\ConstructorsModel.cs" />
     <Compile Include="Composite\Filter\AndAppliesToFilter.cs" />
     <Compile Include="Composite\Filter\AnnotationAppliesToFilter.cs" />
     <Compile Include="Composite\CompositeMixin.cs" />
