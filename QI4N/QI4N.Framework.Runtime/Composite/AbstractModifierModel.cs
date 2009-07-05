@@ -96,28 +96,5 @@
     }
 
 
-    public class InjectionContext
-    {
-        private CompositeInstance compositeInstance;
 
-        private ModuleInstance moduleInstance;
-
-        private object next;
-
-        private ProxyReferenceInvocationHandler proxyHandler;
-
-        private StateHolder state;
-
-        private object uses;
-
-        public InjectionContext(ModuleInstance moduleInstance, object next, ProxyReferenceInvocationHandler proxyHandler)
-        {
-            this.compositeInstance = null;
-            this.moduleInstance = moduleInstance;
-            this.uses = null;
-            this.next = next;
-            this.state = null;
-            this.proxyHandler = proxyHandler;
-        }
-    }
 }

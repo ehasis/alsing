@@ -75,6 +75,7 @@
     <Compile Include="Constraint\MethodConstraintsInstance.cs" />
     <Compile Include="Constraint\ParameterConstraintViolationException.cs" />
     <Compile Include="Constraint\ValueConstraintsInstance.cs" />
+    <Compile Include="Injection\InjectionContext.cs" />
     <Compile Include="Service\ImportedServiceInstance.cs" />
     <Compile Include="Service\ServicePropertiesModel.cs" />
     <Compile Include="Service\ServiceReferenceInstance.cs" />
