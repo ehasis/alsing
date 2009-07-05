@@ -1,6 +1,7 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Text;
 
     public sealed class ValueInstance : AbstractCompositeInstance
     {
@@ -39,6 +40,22 @@ namespace QI4N.Framework.Runtime
         public override int GetHashCode()
         {
             return this.State.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("{ ");
+            foreach(Property property in State.GetProperties())
+            {
+                sb.Append(" {");
+                sb.AppendFormat("{0}='{1}'", property.QualifiedName, property.Value);
+                sb.Append("} ");
+            }
+            
+            sb.Append(" }");
+
+            return sb.ToString();
         }
     }
 }
