@@ -2,11 +2,8 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Reflection;
 
     using JavaProxy;
-
-    using Reflection;
 
     public class AbstractModifierModel
     {
@@ -78,7 +75,4 @@
             return next;
         }
     }
-
-
-
 }
