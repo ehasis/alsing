@@ -11,7 +11,7 @@ namespace QI4N.Framework.Reflection
         private static readonly object syncRoot = new object();
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public static int AddMethod(MethodInfo methodInfo)
         {
             lock (syncRoot)
@@ -25,7 +25,7 @@ namespace QI4N.Framework.Reflection
 
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public static MethodInfo GetMethod(int methodId)
         {
             return methodLookup[methodId];

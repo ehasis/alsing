@@ -16,7 +16,7 @@ namespace QI4N.Framework.Runtime
         }
 
 
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public bool HasConcerns
         {
             [DebuggerStepThrough]
@@ -67,7 +67,7 @@ namespace QI4N.Framework.Runtime
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public MethodConcernsInstance NewInstance(ModuleInstance moduleInstance, FragmentInvocationHandler mixinInvocationHandler)
         {
             var proxyHandler = new ProxyReferenceInvocationHandler();

@@ -9,7 +9,7 @@
         public object Proxy { get; set; }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public void ClearProxy()
         {
             this.Proxy = null;

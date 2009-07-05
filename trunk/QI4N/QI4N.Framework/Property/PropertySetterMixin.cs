@@ -11,7 +11,7 @@
 
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
             object value = args[0];

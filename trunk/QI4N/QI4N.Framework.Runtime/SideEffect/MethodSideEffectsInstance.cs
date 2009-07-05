@@ -16,7 +16,7 @@
         private readonly IList<InvocationHandler> sideEffects;
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public MethodSideEffectsInstance(IList<InvocationHandler> sideEffects, SideEffectInvocationHandlerResult resultInvocationHandler, ProxyReferenceInvocationHandler proxyHandler, InvocationHandler invoker)
         {
             this.sideEffects = sideEffects;
@@ -26,7 +26,7 @@
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             try
@@ -43,7 +43,7 @@
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private static void InvokeSideEffect(object proxy, MethodInfo method, object[] args, Exception originalException, InvocationHandler sideEffect)
         {
             try
@@ -60,7 +60,7 @@
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private void InvokeSideEffects(object proxy, MethodInfo method, object[] args, object result, Exception exception)
         {
             this.proxyHandler.Proxy = proxy;

@@ -5,7 +5,7 @@
     public class Constraint
     {
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         [DebuggerNonUserCode]
         public bool IsValid(ConstraintAttribute annotation, object value)
         {

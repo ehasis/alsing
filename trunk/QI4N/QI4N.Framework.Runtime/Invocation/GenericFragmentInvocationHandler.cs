@@ -6,7 +6,7 @@ namespace QI4N.Framework.Runtime
     public class GenericFragmentInvocationHandler : FragmentInvocationHandler
     {
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public override object Invoke(object proxy, MethodInfo method, object[] args)
         {
             var handler = (InvocationHandler)this.fragment;

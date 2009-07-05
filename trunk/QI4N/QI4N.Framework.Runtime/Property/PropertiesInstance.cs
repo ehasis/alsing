@@ -75,7 +75,7 @@ namespace QI4N.Framework.Runtime
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public Property GetProperty(MethodInfo accessor)
         {
             return this.methodToPropertyMap[accessor];

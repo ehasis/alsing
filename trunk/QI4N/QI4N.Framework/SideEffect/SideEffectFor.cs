@@ -2,7 +2,5 @@
 {
     using System;
 
-    public class SideEffectFor : Attribute
-    {
-    }
+
 }

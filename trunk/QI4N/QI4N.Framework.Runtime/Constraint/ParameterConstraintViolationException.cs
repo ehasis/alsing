@@ -8,14 +8,14 @@
     public class ParameterConstraintViolationException : Exception
     {
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public ParameterConstraintViolationException(Composite composite, MethodInfo method, IEnumerable<ConstraintViolation> violations):base(GetMessage(composite,method,violations))
         {
             
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private static string GetMessage(Composite composite, MethodInfo method, IEnumerable<ConstraintViolation> violations)
         {
             string message = string.Format("{0}.{1} caused parameter constraint violations", composite.GetType().Name, method.Name);

@@ -33,7 +33,7 @@ namespace QI4N.Framework.Runtime
 
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
         {
             this.methodConstraintsInstance.CheckValid(proxy, args);
@@ -45,7 +45,7 @@ namespace QI4N.Framework.Runtime
 
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private CompositeMethodInstance GetInstance(ModuleInstance moduleInstance)
         {
             return this.NewCompositeMethodInstance(moduleInstance);
@@ -53,7 +53,7 @@ namespace QI4N.Framework.Runtime
 
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private CompositeMethodInstance NewCompositeMethodInstance(ModuleInstance moduleInstance)
         {
             FragmentInvocationHandler mixinInvocationHandler = this.mixins.NewInvocationHandler(this.method);

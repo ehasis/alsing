@@ -10,7 +10,7 @@ namespace QI4N.Framework.Reflection
     public static class TypeExtensions
     {
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public static FieldInfo[] GetAllFields(this Type type)
         {
             const BindingFlags flags = BindingFlags.Instance |
@@ -34,7 +34,7 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public static IEnumerable<Type> GetAllInterfaces(this Type targetType)
         {
             var types = new List<Type>();
@@ -48,7 +48,7 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public static IEnumerable<MethodInfo> GetAllMethods(this Type type)
         {
             const BindingFlags flags = BindingFlags.Instance |
@@ -92,7 +92,7 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public static MethodBuilder GetMethodOverrideBuilder(this TypeBuilder typeBuilder, MethodInfo method)
         {
             const MethodAttributes methodAttributes = MethodAttributes.NewSlot |
@@ -124,7 +124,7 @@ namespace QI4N.Framework.Reflection
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public static string GetTypeName(this Type type)
         {
             if (type.IsGenericType)
@@ -155,14 +155,14 @@ namespace QI4N.Framework.Reflection
 
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         public static object NewInstance(this Type self)
         {
             return Activator.CreateInstance(self, null);
         }
 
         [DebuggerStepThrough]
-        [DebuggerHidden]
+        //[DebuggerHidden]
         private static Type SelectParameterType(ParameterInfo param)
         {
             return param.ParameterType;

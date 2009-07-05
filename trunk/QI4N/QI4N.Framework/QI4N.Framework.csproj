@@ -56,6 +56,8 @@
     <Compile Include="Constraint\NotOptionalConstraint.cs" />
     <Compile Include="Constraint\OptionalAttribute.cs" />
     <Compile Include="Constraint\RangeAttribute.cs" />
+    <Compile Include="Injection\Scope\ConcernForAttribute.cs" />
+    <Compile Include="Injection\Scope\SideEffectForAttribute.cs" />
     <Compile Include="Property\ImmutablePropertyFacade.cs" />
     <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Service\ImportedServiceDescriptor.cs" />
@@ -70,7 +72,7 @@
     <Compile Include="Entity\Association\AssociationInstanceMixin.cs" />
     <Compile Include="Entity\EntityStateHolder.cs" />
     <Compile Include="Injection\Scope\ThisAttribute.cs" />
-    <Compile Include="Injection\Scope\InjectionScopeAttribute.cs" />
+    <Compile Include="Injection\Scope\InjectionAttribute.cs" />
     <Compile Include="Injection\Scope\ServiceAttribute.cs" />
     <Compile Include="Injection\Scope\StrucutreAttribute.cs" />
     <Compile Include="Injection\Scope\UsesAttribute.cs" />
