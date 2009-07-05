@@ -9,7 +9,7 @@ namespace QI4N.Framework.Runtime
 
         protected List<object> usedObjects = new List<object>();
 
-        public void Use(object[] usedObjects)
+        public void Use(params object[] usedObjects)
         {
             this.usedObjects.AddRange(usedObjects);
         }
