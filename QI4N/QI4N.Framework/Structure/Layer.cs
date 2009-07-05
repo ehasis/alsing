@@ -5,5 +5,9 @@ namespace QI4N.Framework
         string Name { get; }
 
         MetaInfo MetaInfo { get; }
+
+        Module FindModule(string moduleName);
+
+        Application Application { get; }
     }
 }

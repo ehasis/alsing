@@ -5,122 +5,59 @@ namespace QI4N.Framework.Runtime
 
     public class ModuleModel
     {
-        private readonly EntitiesModel entitiesModel;
-
-        private readonly ImportedServicesModel importedServicesModel;
-
-        private readonly MetaInfo metaInfo;
-
-        private readonly string name;
-
-        private readonly ObjectsModel objectsModel;
-
-        private readonly ServicesModel servicesModel;
-
-        private readonly TransientsModel transientsModel;
-
-        private readonly ValuesModel valuesModel;
-
         private LayerModel layerModel;
 
         public ModuleModel(string name,
-                           MetaInfo metaInfo, TransientsModel transientsModel,
+                           MetaInfo metaInfo, 
+                           TransientsModel transientsModel,
                            EntitiesModel entitiesModel,
                            ObjectsModel objectsModel,
                            ValuesModel valuesModel,
                            ServicesModel servicesModel,
                            ImportedServicesModel importedServicesModel)
         {
-            this.name = name;
-            this.metaInfo = metaInfo;
-            this.transientsModel = transientsModel;
-            this.entitiesModel = entitiesModel;
-            this.objectsModel = objectsModel;
-            this.valuesModel = valuesModel;
-            this.servicesModel = servicesModel;
-            this.importedServicesModel = importedServicesModel;
+            this.Name = name;
+            this.MetaInfo = metaInfo;
+            this.Transients = transientsModel;
+            this.entities = entitiesModel;
+            this.Objects = objectsModel;
+            this.Values = valuesModel;
+            this.Services = servicesModel;
+            this.ImportedServicesModel = importedServicesModel;
         }
 
 
-        public EntitiesModel entities
-        {
-            get
-            {
-                return this.entitiesModel;
-            }
-        }
+        public EntitiesModel entities { get; private set; }
 
-        public ImportedServicesModel ImportedServicesModel
-        {
-            get
-            {
-                return this.importedServicesModel;
-            }
-        }
+        public ImportedServicesModel ImportedServicesModel { get; private set; }
 
-        public MetaInfo MetaInfo
-        {
-            get
-            {
-                return this.metaInfo;
-            }
-        }
+        public MetaInfo MetaInfo { get; private set; }
 
-        public String Name
-        {
-            get
-            {
-                return this.name;
-            }
-        }
+        public string Name { get; private set; }
 
-        public ObjectsModel Objects
-        {
-            get
-            {
-                return this.objectsModel;
-            }
-        }
+        public ObjectsModel Objects { get; private set; }
 
-        public ServicesModel Services
-        {
-            get
-            {
-                return this.servicesModel;
-            }
-        }
+        public ServicesModel Services { get; private set; }
 
-        public TransientsModel Transients
-        {
-            get
-            {
-                return this.transientsModel;
-            }
-        }
+        public TransientsModel Transients { get; private set; }
 
-        public ValuesModel Values
-        {
-            get
-            {
-                return this.valuesModel;
-            }
-        }
+        public ValuesModel Values { get; private set; }
 
         public ModuleInstance NewInstance(LayerInstance layerInstance)
         {
-            return new ModuleInstance(this, layerInstance, this.transientsModel, this.entitiesModel, this.objectsModel, this.valuesModel, this.servicesModel, this.importedServicesModel);
+            return new ModuleInstance(this, layerInstance, this.Transients, this.entities, this.Objects, this.Values, this.Services, this.ImportedServicesModel);
         }
 
         public void VisitModel(ModelVisitor modelVisitor)
         {
             modelVisitor.Visit(this);
 
-            this.transientsModel.VisitModel(modelVisitor);
-            this.entitiesModel.VisitModel(modelVisitor);
-            this.servicesModel.VisitModel(modelVisitor);
-            this.importedServicesModel.VisitModel(modelVisitor);
-            this.objectsModel.VisitModel(modelVisitor);
-            this.valuesModel.VisitModel(modelVisitor);
+            this.Transients.VisitModel(modelVisitor);
+            this.entities.VisitModel(modelVisitor);
+            this.Services.VisitModel(modelVisitor);
+            this.ImportedServicesModel.VisitModel(modelVisitor);
+            this.Objects.VisitModel(modelVisitor);
+            this.Values.VisitModel(modelVisitor);
         }
 
         public void VisitModules(ModuleVisitor visitor)
