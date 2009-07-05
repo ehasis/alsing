@@ -87,7 +87,7 @@ namespace ConsoleApplication23
 
             customer.SayHello();
 
-            //customer.Address.City = "Should explode";
+            //customer.Address.City = "abc"; //should throw, immutable object
 
             Address otherAddress = addressBuilder.NewInstance();
 
@@ -98,7 +98,7 @@ namespace ConsoleApplication23
                 Console.WriteLine("customer.Address and otherAddress are equal");
             }
 
-            //customer.SayHelloTo(null); //should explode , name is not optional
+            //customer.SayHelloTo(null); //should throw, name is not optional
 
             customer.SayHelloTo("Roger");
 
