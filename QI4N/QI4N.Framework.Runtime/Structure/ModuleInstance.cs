@@ -7,8 +7,6 @@ namespace QI4N.Framework.Runtime
     {
         private readonly IDictionary<Type, EntityFinder> entityFinders;
 
-        private readonly LayerInstance layer;
-
         private readonly IDictionary<Type, TransientFinder> transientFinders;
 
         private readonly IDictionary<Type, ValueFinder> valueFinders;
@@ -19,7 +17,7 @@ namespace QI4N.Framework.Runtime
                               ServicesModel servicesModel, ImportedServicesModel importedServicesModel)
         {
             this.Model = moduleModel;
-            this.layer = layerInstance;
+            this.LayerInstance = layerInstance;
             this.Transients = new TransientsInstance(transientsModel, this);
             this.Entities = new EntitiesInstance(entitiesModel, this);
             this.Objects = new ObjectsInstance(objectsModel, this);
@@ -43,13 +41,7 @@ namespace QI4N.Framework.Runtime
 
         public ImportedServicesInstance ImportedServices { get; private set; }
 
-        public LayerInstance LayerInstance
-        {
-            get
-            {
-                return this.layer;
-            }
-        }
+        public LayerInstance LayerInstance { get; private set; }
 
         public MetaInfo MetaInfo
         {
@@ -157,7 +149,7 @@ namespace QI4N.Framework.Runtime
             }
 
             // Visit layer
-            this.layer.VisitModules(visitor, Visibility.Layer);
+            this.LayerInstance.VisitModules(visitor, Visibility.Layer);
         }
     }
 
