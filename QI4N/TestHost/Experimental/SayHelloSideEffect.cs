@@ -1,4 +1,4 @@
-﻿namespace ConsoleApplication23.Experimental
+namespace ConsoleApplication23.Experimental
 {
     using System;
 

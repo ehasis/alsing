@@ -40,13 +40,13 @@
         {
             [DebuggerStepThrough]
             //[DebuggerHidden]
-            get
+                    get
             {
                 return this.target.Value;
             }
             [DebuggerStepThrough]
             //[DebuggerHidden]
-            set
+                    set
             {
                 string message = string.Format("Property '{0}' is immutable", this.QualifiedName);
                 throw new ReadOnlyException(message);

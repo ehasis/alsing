@@ -1,26 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace QI4N.Framework.Runtime
+﻿namespace QI4N.Framework.Runtime
 {
+    using System;
+
     public class DependencyModel
     {
         // Model
-        private readonly InjectionAttribute injectionAnnotation;
-        private readonly Type injectionType;
+
         private readonly Type injectedClass;
-        private readonly Type rawInjectionClass;
+
+        private readonly InjectionAttribute injectionAnnotation;
+
         private readonly Type injectionClass;
+
+        private readonly Type injectionType;
+
         private readonly bool optional;
+
+        private readonly Type rawInjectionClass;
 
         // Binding
         //private InjectionProvider injectionProvider;
 
         public DependencyModel(InjectionAttribute attribute, Type injectionType, Type injectedType, bool optional)
         {
-            this.injectionAnnotation = injectionAnnotation;
+            this.injectionAnnotation = this.injectionAnnotation;
             this.injectedClass = injectedType;
             this.injectionType = injectionType;
             this.optional = optional;
@@ -28,7 +31,12 @@ namespace QI4N.Framework.Runtime
             this.injectionClass = injectionType; //ExtractRawInjectionClass(injectionType);
         }
 
-        private static Type ExtractRawInjectionClass( Type injectionType)
+        public object Inject(InjectionContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static Type ExtractRawInjectionClass(Type injectionType)
         {
             // Calculate raw injection type
             if (injectionType.IsClass)
@@ -46,11 +54,6 @@ namespace QI4N.Framework.Runtime
             //throw new IllegalArgumentException( "Could not extract the rawInjectionClass of " + injectedClass + " and " + injectionType );
 
             throw new Exception("Not implemented");
-        }
-
-        public object Inject(InjectionContext context)
-        {
-            throw new NotImplementedException();
         }
     }
 }

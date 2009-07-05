@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Diagnostics;
@@ -26,7 +26,7 @@
         {
             [DebuggerStepThrough]
             //[DebuggerHidden]
-            get
+                    get
             {
                 return this.firstConcern == this.mixinInvocationHandler;
             }

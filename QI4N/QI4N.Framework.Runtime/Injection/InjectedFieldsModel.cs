@@ -24,7 +24,7 @@
 
         public void Inject(InjectionContext context, object instance)
         {
-            foreach (InjectedFieldModel field in fields)
+            foreach (InjectedFieldModel field in this.fields)
             {
                 field.Inject(context, instance);
             }
@@ -32,8 +32,8 @@
 
         private void AddModel(Type fragmentClass, FieldInfo field, InjectionAttribute injectionAttribute)
         {
-          //  bool optional = field.HasAttribute<OptionalAttribute>() || injectionAttribute.IsOptional();
-          //  var dependencyModel = new DependencyModel(injectionAttribute, field.FieldType, fragmentClass, optional);
+            //  bool optional = field.HasAttribute<OptionalAttribute>() || injectionAttribute.IsOptional();
+            //  var dependencyModel = new DependencyModel(injectionAttribute, field.FieldType, fragmentClass, optional);
             var injectedFieldModel = new InjectedFieldModel(field, injectionAttribute);
             this.fields.Add(injectedFieldModel);
         }

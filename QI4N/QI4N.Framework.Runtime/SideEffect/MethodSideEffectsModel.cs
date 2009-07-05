@@ -19,7 +19,7 @@ namespace QI4N.Framework.Runtime
         {
             [DebuggerStepThrough]
             //[DebuggerHidden]
-            get
+                    get
             {
                 return this.sideEffectModels != null && this.sideEffectModels.Count != 0;
             }
