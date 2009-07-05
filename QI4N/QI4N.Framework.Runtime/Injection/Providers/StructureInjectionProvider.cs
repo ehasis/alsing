@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class StructureInjectionProvider
+    public class StructureInjectionProvider : InjectionProvider
     {
         public object ProvideInjection(InjectionContext context, InjectionAttribute attribute, Type fieldType)
         {

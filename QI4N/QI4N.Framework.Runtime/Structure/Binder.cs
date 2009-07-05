@@ -9,18 +9,6 @@
 
     public class Resolution
     {
-        private readonly ApplicationModel application;
-
-        private readonly FieldInfo field;
-
-        private readonly LayerModel layer;
-
-        private readonly CompositeMethodModel method;
-
-        private readonly ModuleModel module;
-
-        private readonly ObjectDescriptor objectDescriptor;
-
         public Resolution(ApplicationModel application,
                           LayerModel layer,
                           ModuleModel module,
@@ -28,61 +16,25 @@
                           CompositeMethodModel method,
                           FieldInfo field)
         {
-            this.application = application;
-            this.layer = layer;
-            this.module = module;
-            this.objectDescriptor = objectDescriptor;
-            this.method = method;
-            this.field = field;
+            this.Application = application;
+            this.Layer = layer;
+            this.Module = module;
+            this.ObjectDescriptor = objectDescriptor;
+            this.Method = method;
+            this.Field = field;
         }
 
-        public ApplicationModel Application
-        {
-            get
-            {
-                return this.application;
-            }
-        }
+        public ApplicationModel Application { get; private set; }
 
-        public FieldInfo Field
-        {
-            get
-            {
-                return this.field;
-            }
-        }
+        public FieldInfo Field { get; private set; }
 
-        public LayerModel Layer
-        {
-            get
-            {
-                return this.layer;
-            }
-        }
+        public LayerModel Layer { get; private set; }
 
-        public CompositeMethodModel Method
-        {
-            get
-            {
-                return this.method;
-            }
-        }
+        public CompositeMethodModel Method { get; private set; }
 
-        public ModuleModel Module
-        {
-            get
-            {
-                return this.module;
-            }
-        }
+        public ModuleModel Module { get; private set; }
 
-        public ObjectDescriptor ObjectDescriptor
-        {
-            get
-            {
-                return this.objectDescriptor;
-            }
-        }
+        public ObjectDescriptor ObjectDescriptor { get; private set; }
 
 
         public Resolution ForField(FieldInfo injectedField)
