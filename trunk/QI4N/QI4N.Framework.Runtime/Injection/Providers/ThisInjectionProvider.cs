@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal class ThisInjectionProvider : InjectionProvider
+    public class ThisInjectionProvider : InjectionProvider
     {
         public object ProvideInjection(InjectionContext context, InjectionAttribute attribute, Type fieldType)
         {

@@ -2,11 +2,27 @@
 {
     using System;
 
-    internal class UsesInjectionProvider : InjectionProvider
+    public class UsesInjectionProvider : InjectionProvider
     {
         public object ProvideInjection(InjectionContext context, InjectionAttribute attribute, Type fieldType)
         {
-            throw new NotImplementedException();
+            object obj = context.Uses.UseForType(fieldType);
+
+            if (obj != null)
+                return obj;
+
+            ModuleInstance moduleInstance = context.ModuleInstance;
+
+            var compositeFinder = moduleInstance.FindCompositeModel(fieldType);
+            if (compositeFinder.Model != null)
+            {
+                obj = compositeFinder.Model.NewCompositeInstance(moduleInstance, context.Uses, context.State);
+                context.Uses.Use(obj);
+                return obj;
+            }
+
+
+            return null;
         }
     }
 }

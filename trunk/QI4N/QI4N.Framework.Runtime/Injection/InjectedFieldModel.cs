@@ -16,7 +16,6 @@ namespace QI4N.Framework.Runtime
         {
             this.injectedField = new Field(injectedField);
             this.injectionAttribute = injectionAttribute;
-
             this.injectionProvider = InjectionProviderLookup.ProviderFor(injectionAttribute);
         }
 
