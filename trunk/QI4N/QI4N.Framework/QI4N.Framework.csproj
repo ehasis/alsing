@@ -59,6 +59,7 @@
     <Compile Include="Injection\Scope\ConcernForAttribute.cs" />
     <Compile Include="Injection\Scope\SideEffectForAttribute.cs" />
     <Compile Include="Property\ImmutablePropertyFacade.cs" />
+    <Compile Include="Reflection\Field.cs" />
     <Compile Include="Reflection\TypeExtensions.cs" />
     <Compile Include="Service\ImportedServiceDescriptor.cs" />
     <Compile Include="Service\ServiceImporter.cs" />

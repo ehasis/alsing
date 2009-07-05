@@ -2,15 +2,17 @@
 {
     using System.Reflection;
 
+    using API.Reflection;
+
     public class InjectedFieldModel
     {
         public InjectedFieldModel(FieldInfo injectedField, InjectionAttribute injectionAttribute)
         {
-            this.InjectedField = injectedField;
+            this.InjectedField = new Field( injectedField);
             this.InjectionAttribute = injectionAttribute;
         }
 
-        public FieldInfo InjectedField { get; private set; }
+        public Field InjectedField { get; private set; }
 
         public InjectionAttribute InjectionAttribute { get; private set; }
 
