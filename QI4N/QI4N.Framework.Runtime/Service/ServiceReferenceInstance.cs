@@ -8,7 +8,11 @@ namespace QI4N.Framework.Runtime
     {
         private readonly ModuleInstance moduleInstance;
 
-        private object serviceProxy;
+        private readonly object serviceProxy;
+
+        private ServiceInstance instance;
+
+        private object syncroot = new object();
 
         public ServiceReferenceInstance(ServiceModel serviceModel, ModuleInstance moduleInstance)
         {
@@ -56,7 +60,15 @@ namespace QI4N.Framework.Runtime
 
         public CompositeInstance GetInstance()
         {
-            throw new NotImplementedException();
+            lock (syncroot)
+            {
+                if (instance == null)
+                {
+                    instance = ServiceModel.NewInstance(this.moduleInstance);
+                }
+            }
+
+            return instance;
         }
 
         public class ServiceInvocationHandler : InvocationHandler

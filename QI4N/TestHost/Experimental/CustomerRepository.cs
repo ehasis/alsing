@@ -45,8 +45,10 @@ namespace ConsoleApplication23.Experimental
         }
 
         public Customer NewCustomer(string name)
-        {
-            return null;
+        {            
+            var customer = transientBuilderFactory.NewTransient<Customer>();
+            customer.Name = name;
+            return customer;
         }
     }
 }
