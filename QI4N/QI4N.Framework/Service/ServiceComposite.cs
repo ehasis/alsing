@@ -1,6 +1,6 @@
 ﻿namespace QI4N.Framework
 {
-    public interface ServiceComposite : Composite
+    public interface ServiceComposite : Composite , Identity
     {
     }
 }

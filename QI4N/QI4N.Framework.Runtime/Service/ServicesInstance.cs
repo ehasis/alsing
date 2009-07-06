@@ -22,7 +22,7 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        internal ServiceReference GetServiceFor(Type type, Visibility visibility)
+        public ServiceReference GetServiceFor(Type type, Visibility visibility)
         {
             ServiceModel serviceModel = this.servicesModel.GetServiceFor(type, visibility);
 
@@ -35,7 +35,7 @@ namespace QI4N.Framework.Runtime
             return serviceRef;
         }
 
-        internal void GetServicesFor(Type type, Visibility visibility, List<ServiceReference> serviceReferences)
+        public void GetServicesFor(Type type, Visibility visibility, List<ServiceReference> serviceReferences)
         {
             var serviceModels = new List<ServiceModel>();
             this.servicesModel.GetServicesFor(type, visibility, serviceModels);

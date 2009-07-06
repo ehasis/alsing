@@ -22,7 +22,7 @@ namespace ConsoleApplication23.Experimental
     public class CustomerRepositoryMixin : CustomerRepository
     {
         [Structure]
-        private TransientBuilderFactory transientBuilderFactory;
+        private TransientBuilderFactory tbf;
 
         [Structure]
         private UnitOfWorkFactory uowf;
@@ -45,8 +45,8 @@ namespace ConsoleApplication23.Experimental
         }
 
         public Customer NewCustomer(string name)
-        {            
-            var customer = transientBuilderFactory.NewTransient<Customer>();
+        {
+            var customer = tbf.NewTransient<Customer>();
             customer.Name = name;
             return customer;
         }
