@@ -30,6 +30,7 @@ namespace ConsoleApplication23
             module
                     .AddServices()
                     .Include<CustomerRepositoryService>()
+                    .WithConcern<GenericTracingConcern>()
                     .VisibleIn(Visibility.Module);
 
             module
