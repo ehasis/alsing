@@ -21,9 +21,12 @@ namespace QI4N.Framework.Runtime
         protected readonly HashSet<Type> mixinTypes = new HashSet<Type>();
 
 
-        protected AbstractMixinsModel(Type type, IEnumerable<Type> mixins)
+        protected AbstractMixinsModel(Type type, IEnumerable<Type> assemblyMixins)
         {
             this.mixinImplementationTypes.Add(typeof(CompositeMixin));
+
+            foreach (Type assemblyMixin in assemblyMixins)
+                this.mixinImplementationTypes.Add(assemblyMixin);
         }
 
         public void AddMixinType(Type mixinType)
