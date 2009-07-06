@@ -7,10 +7,19 @@ namespace QI4N.Framework.Runtime
     {
         private readonly ModuleInstance moduleInstance;
 
+        private object serviceProxy;
+
         public ServiceReferenceInstance(ServiceModel serviceModel, ModuleInstance moduleInstance)
         {
             this.ServiceModel = serviceModel;
             this.moduleInstance = moduleInstance;
+
+            serviceProxy = this.NewProxy();
+        }
+
+        public object NewProxy()
+        {
+            return ServiceModel.NewProxy(new ServiceInvocationHandler(this));
         }
 
         public string Identity
@@ -41,7 +50,7 @@ namespace QI4N.Framework.Runtime
 
         public object Get()
         {
-            throw new NotImplementedException();
+            return serviceProxy;
         }
 
         public CompositeInstance GetInstance()

@@ -99,7 +99,12 @@ namespace ConsoleApplication23
 
             //customer.SayHelloTo(null); //should throw, name is not optional
 
-            var customerRepo = experimentalModule.ServiceFinder.FindService<CustomerRepository>();
+            var customerRepo = experimentalModule
+                .ServiceFinder
+                .FindService<CustomerRepository>()
+                .Get() as CustomerRepository;
+
+            
 
             customer.SayHelloTo("Roger");
 
