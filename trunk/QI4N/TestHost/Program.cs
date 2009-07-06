@@ -105,7 +105,12 @@ namespace ConsoleApplication23
                 .FindService<CustomerRepository>()
                 .Get();
 
+            var id = customerRepo as Identity;
+            Console.WriteLine(id.Identity);
+
             var x = customerRepo.NewCustomer("arne");
+
+
 
             customer.SayHelloTo("Roger");
 

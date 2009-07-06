@@ -93,9 +93,8 @@ namespace QI4N.Framework.Runtime
         //[DebuggerHidden]
         public ServiceInstance NewInstance(ModuleInstance module)
         {
-            StateHolder stateHolder = null; //
             object[] mixins = this.mixinsModel.NewMixinHolder();
-            var serviceInstance = new ServiceInstance(this, module, mixins, stateHolder);
+            var serviceInstance = new ServiceInstance(this, module, mixins);
 
             var uses = new UsesInstance();
             uses.Use(this);
@@ -103,7 +102,7 @@ namespace QI4N.Framework.Runtime
             // Instantiate all mixins
             ((MixinsModel)this.mixinsModel).NewMixins(serviceInstance,
                                                       uses,
-                                                      stateHolder,
+                                                      null,
                                                       mixins);
 
             return serviceInstance;

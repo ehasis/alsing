@@ -6,8 +6,8 @@
     {
         [DebuggerStepThrough]
         //[DebuggerHidden]
-        public ServiceInstance(ServiceModel compositeModel, ModuleInstance moduleInstance, object[] mixins, StateHolder state)
-                : base(compositeModel, moduleInstance, mixins, state)
+        public ServiceInstance(ServiceModel compositeModel, ModuleInstance moduleInstance, object[] mixins)
+                : base(compositeModel, moduleInstance, mixins, null)
         {
         }
     }

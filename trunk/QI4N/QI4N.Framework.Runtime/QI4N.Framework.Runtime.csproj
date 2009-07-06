@@ -94,6 +94,7 @@
     <Compile Include="Service\ImportedServiceReferenceInstance.cs" />
     <Compile Include="Service\ImportedServicesInstance.cs" />
     <Compile Include="Service\ServiceFinderInstance.cs" />
+    <Compile Include="Service\ServiceInvocationHandler.cs" />
     <Compile Include="Service\ServicePropertiesModel.cs" />
     <Compile Include="Service\ServiceReferenceFinder.cs" />
     <Compile Include="Service\ServiceReferenceInstance.cs" />
