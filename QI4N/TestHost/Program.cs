@@ -103,7 +103,7 @@ namespace ConsoleApplication23
             var customerRepo = experimentalModule
                 .ServiceFinder
                 .FindService<CustomerRepository>()
-                .Get() as CustomerRepository;
+                .Get();
 
             var x = customerRepo.NewCustomer("arne");
 
