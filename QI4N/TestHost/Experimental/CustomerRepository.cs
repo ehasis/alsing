@@ -10,6 +10,8 @@ namespace ConsoleApplication23.Experimental
         Customer FindByIdentity(string identity);
 
         Customer FindByName(string name);
+
+        Customer NewCustomer(string name);
     }
 
     [Mixins(typeof(CustomerRepositoryMixin))]

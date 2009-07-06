@@ -104,7 +104,7 @@ namespace ConsoleApplication23
                 .FindService<CustomerRepository>()
                 .Get() as CustomerRepository;
 
-            
+            var x = customerRepo.NewCustomer("arne");
 
             customer.SayHelloTo("Roger");
 
