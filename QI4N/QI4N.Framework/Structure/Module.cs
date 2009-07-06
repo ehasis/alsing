@@ -1,6 +1,8 @@
 namespace QI4N.Framework
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public interface Module
     {
@@ -21,8 +23,25 @@ namespace QI4N.Framework
 
     public interface ServiceFinder
     {
-        ServiceReference<T> FindService<T>();
+        ServiceReference FindService(Type serviceType);
 
-        IEnumerable<ServiceReference<T>> FindServices<T>();
+        IEnumerable<ServiceReference> FindServices(Type serviceType);
     }
+
+    public static class ServiceFinderExtensions
+    {
+        public static ServiceReference<T> FindService<T>(this ServiceFinder self)
+        {
+            ServiceReference serviceReference = self.FindService(typeof(T));
+            return new ServiceReferenceFacade<T>(serviceReference);
+        }
+
+        public static IEnumerable<ServiceReference<T>> FindServices<T>(this ServiceFinder self)
+        {
+            var services = self.FindServices(typeof(T));
+
+            return services.Select<ServiceReference,ServiceReference<T>>(sr => new ServiceReferenceFacade<T>(sr));
+        }
+    }
+    
 }

@@ -65,6 +65,7 @@
     <Compile Include="Service\ImportedServiceDescriptor.cs" />
     <Compile Include="Service\ServiceImporter.cs" />
     <Compile Include="Service\ServiceReference.cs" />
+    <Compile Include="Service\ServiceReferenceFacade.cs" />
     <Compile Include="Structure\Application.cs" />
     <Compile Include="Structure\Layer.cs" />
     <Compile Include="Structure\Module.cs" />
