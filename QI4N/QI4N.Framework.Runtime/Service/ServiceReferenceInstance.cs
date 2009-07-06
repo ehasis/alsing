@@ -12,7 +12,7 @@ namespace QI4N.Framework.Runtime
 
         private ServiceInstance instance;
 
-        private object syncroot = new object();
+        private readonly object syncroot = new object();
 
         public ServiceReferenceInstance(ServiceModel serviceModel, ModuleInstance moduleInstance)
         {

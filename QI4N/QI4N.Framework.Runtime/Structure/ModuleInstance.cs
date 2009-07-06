@@ -3,6 +3,7 @@ namespace QI4N.Framework.Runtime
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class ModuleInstance : Module
     {
@@ -227,7 +228,7 @@ namespace QI4N.Framework.Runtime
                 services.Add( serviceType, iterable );
             }
 
-            return iterable;
+            return iterable;//.Cast<ServiceReference<T>>();
         }
     }
 
