@@ -175,63 +175,7 @@ namespace QI4N.Framework.Runtime
     
 
 
-    public class ServiceFinderInstance : ServiceFinder
-    {
-        private readonly ModuleInstance owner;
-
-        readonly Dictionary<Type, ServiceReference> service = new Dictionary<Type, ServiceReference>();
-
-        readonly Dictionary<Type, IEnumerable<ServiceReference>> services = new Dictionary<Type, IEnumerable<ServiceReference>>();
-
-
-        public ServiceFinderInstance(ModuleInstance owner)
-        {
-            this.owner = owner;
-        }
-
-        public ServiceReference FindService<T>()
-        {
-            Type serviceType = typeof(T);
-
-            ServiceReference serviceReference;           
-            if(!service.TryGetValue(serviceType,out serviceReference))
-            {
-                var finder = new ServiceReferenceFinder
-                                 {
-                                         Type = serviceType
-                                 };
-
-                owner.VisitModules( finder );
-                serviceReference = finder.Service;
-                if( serviceReference != null )
-                {
-                    service.Add( serviceType, serviceReference );
-                }
-            }
-
-            return serviceReference;
-        }
-
-        public IEnumerable<ServiceReference> FindServices<T>()
-        {
-            Type serviceType = typeof(T);
-            IEnumerable<ServiceReference> iterable;
-            if (!services.TryGetValue(serviceType,out iterable))
-            {
-                var finder = new ServiceReferencesFinder
-                                 {
-                                         Type = serviceType
-                                 };
-
-                owner.VisitModules(finder);
-                iterable = finder.Services;
-                services.Add( serviceType, iterable );
-            }
-
-            return iterable;//.Cast<ServiceReference<T>>();
-        }
-    }
-
+    
     internal class ServiceReferenceFinder : ModuleVisitor
     {
         #region ModuleVisitor Members

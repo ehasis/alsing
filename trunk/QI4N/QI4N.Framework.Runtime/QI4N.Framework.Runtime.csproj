@@ -92,7 +92,9 @@
     <Compile Include="Service\ImportedServiceModel.cs" />
     <Compile Include="Service\ImportedServiceReferenceInstance.cs" />
     <Compile Include="Service\ImportedServicesInstance.cs" />
+    <Compile Include="Service\ServiceFinderInstance.cs" />
     <Compile Include="Service\ServicePropertiesModel.cs" />
+    <Compile Include="Service\ServiceReferenceFacade.cs" />
     <Compile Include="Service\ServiceReferenceInstance.cs" />
     <Compile Include="Service\ImportedServicesModel.cs" />
     <Compile Include="Service\ServicesInstance.cs" />
