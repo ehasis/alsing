@@ -30,5 +30,15 @@
         {
             throw new NotImplementedException();
         }
+
+        public ImportedServiceModel GetServiceFor(Type type, Visibility visibility)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetServicesFor(Type type, Visibility visibility, List<ImportedServiceModel> models)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
