@@ -1,44 +1,49 @@
-﻿namespace QI4N.Framework.Runtime
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace QI4N.Framework.Runtime
 {
-    using System;
-    using System.Collections.Generic;
-
-    public class ImportedServicesModel
+    public class ServicesInstance
     {
-        private readonly List<ImportedServiceModel> importedServiceModels;
+        private readonly ServicesModel servicesModel;
 
-        private List<ImportedServiceReferenceInstance> serviceReferences;
+        private readonly List<ServiceReference> serviceReferences;
 
-        public ImportedServicesModel(List<ImportedServiceModel> importedServiceModels)
+        private readonly Dictionary<string, ServiceReference> mapIdentityServiceReference = new Dictionary<string, ServiceReference>();
+        public ServicesInstance(ServicesModel servicesModel, List<ServiceReference> serviceReferences)
         {
-            this.importedServiceModels = importedServiceModels;
+            this.servicesModel = servicesModel;
+            this.serviceReferences = serviceReferences;
+
+            foreach (ServiceReference serviceReference in serviceReferences)
+            {
+                mapIdentityServiceReference.Add(serviceReference.Identity, serviceReference);
+            }
         }
 
-        public ImportedServicesInstance NewInstance(ModuleInstance module)
+        internal ServiceReference GetServiceFor(Type type, Visibility visibility)
         {
-            this.serviceReferences = new List<ImportedServiceReferenceInstance>();
-            foreach (ImportedServiceModel serviceModel in this.importedServiceModels)
+            ServiceModel serviceModel = servicesModel.GetServiceFor(type, visibility);
+
+            ServiceReference serviceRef = null;
+            if (serviceModel != null)
             {
-                var serviceReferenceInstance = new ImportedServiceReferenceInstance(serviceModel, module);
-                this.serviceReferences.Add(serviceReferenceInstance);
+                serviceRef = mapIdentityServiceReference[serviceModel.Identity];
             }
 
-            return new ImportedServicesInstance(this, this.serviceReferences);
+            return serviceRef;
         }
 
-        public void VisitModel(ModelVisitor visitor)
+        internal void GetServicesFor(Type type, Visibility visibility, List<ServiceReference> serviceReferences)
         {
-            throw new NotImplementedException();
-        }
-
-        public ImportedServiceModel GetServiceFor(Type type, Visibility visibility)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GetServicesFor(Type type, Visibility visibility, List<ImportedServiceModel> models)
-        {
-            throw new NotImplementedException();
+            var serviceModels = new List<ServiceModel>();
+            servicesModel.GetServicesFor(type, visibility, serviceModels);
+            foreach (ServiceModel serviceModel in serviceModels)
+            {
+                serviceReferences.Add(mapIdentityServiceReference[serviceModel.Identity]);
+            }
         }
     }
 }

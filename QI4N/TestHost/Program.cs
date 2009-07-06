@@ -30,7 +30,7 @@ namespace ConsoleApplication23
             module
                     .AddServices()
                     .Include<CustomerRepositoryService>()
-                    .VisibleIn(Visibility.Layer);
+                    .VisibleIn(Visibility.Module);
 
             module
                     .AddValues()
