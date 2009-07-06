@@ -9,6 +9,7 @@
 
         static InjectionProviderLookup()
         {
+            lookup.Add(typeof(ServiceAttribute), new ServiceInjectionProvider());
             lookup.Add(typeof(ThisAttribute), new ThisInjectionProvider());
             lookup.Add(typeof(UsesAttribute), new UsesInjectionProvider());
             lookup.Add(typeof(StructureAttribute), new StructureInjectionProvider());
