@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     public class ServiceFinderInstance : ServiceFinder
     {
@@ -18,10 +17,8 @@
             this.owner = owner;
         }
 
-        public ServiceReference<T> FindService<T>()
+        public ServiceReference FindService(Type serviceType)
         {
-            Type serviceType = typeof(T);
-
             ServiceReference serviceReference;
             if (!this.service.TryGetValue(serviceType, out serviceReference))
             {
@@ -34,17 +31,16 @@
                 serviceReference = finder.Service;
                 if (serviceReference != null)
                 {
-                    serviceReference = new ServiceReferenceFacade<T>(serviceReference);
+                    //   serviceReference = new ServiceReferenceFacade<T>(serviceReference);
                     this.service.Add(serviceType, serviceReference);
                 }
             }
 
-            return (ServiceReference<T>)serviceReference;
+            return serviceReference;
         }
 
-        public IEnumerable<ServiceReference<T>> FindServices<T>()
+        public IEnumerable<ServiceReference> FindServices(Type serviceType)
         {
-            Type serviceType = typeof(T);
             IEnumerable<ServiceReference> iterable;
             if (!this.services.TryGetValue(serviceType, out iterable))
             {
@@ -58,7 +54,7 @@
                 this.services.Add(serviceType, iterable);
             }
 
-            return iterable.Select<ServiceReference, ServiceReference<T>>(sr => new ServiceReferenceFacade<T>(sr)); //.Cast<ServiceReference<T>>();
+            return iterable;
         }
     }
 }

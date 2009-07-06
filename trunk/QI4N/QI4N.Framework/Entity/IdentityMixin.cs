@@ -2,7 +2,6 @@
 {
     public class IdentityMixin : Identity
     {
-        [State]
         protected string identity;
 
         public string Identity

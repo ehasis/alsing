@@ -94,7 +94,6 @@
     <Compile Include="Service\ImportedServicesInstance.cs" />
     <Compile Include="Service\ServiceFinderInstance.cs" />
     <Compile Include="Service\ServicePropertiesModel.cs" />
-    <Compile Include="Service\ServiceReferenceFacade.cs" />
     <Compile Include="Service\ServiceReferenceFinder.cs" />
     <Compile Include="Service\ServiceReferenceInstance.cs" />
     <Compile Include="Service\ImportedServicesModel.cs" />
@@ -169,6 +168,7 @@
     <Compile Include="Object\ObjectsInstance.cs" />
     <Compile Include="Object\ObjectsModel.cs" />
     <Compile Include="Service\ServicesModel.cs" />
+    <Compile Include="UnitOfWork\UnitOfWorkInstance.cs" />
     <Compile Include="Value\ValueBuilderFactoryInstance.cs" />
     <Compile Include="Value\ValueBuilderInstance.cs" />
     <Compile Include="Value\ValueConstraintsModel.cs" />
