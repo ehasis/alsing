@@ -88,5 +88,23 @@ namespace QI4N.Framework.Runtime
 
             return serviceType.IsAssignableFrom(this.compositeType);
         }
+
+        public ServiceInstance NewInstance(ModuleInstance module)
+        {
+            StateHolder stateHolder = null;//
+            var mixins = mixinsModel.NewMixinHolder();
+            var serviceInstance = new ServiceInstance( this, module, mixins, stateHolder );
+
+            var uses = new UsesInstance();
+            uses.Use( this );
+
+            // Instantiate all mixins
+            ((MixinsModel)mixinsModel).NewMixins(serviceInstance,
+                                                     uses,
+                                                     stateHolder,
+                                                     mixins );
+
+            return serviceInstance;
+        }
     }
 }
