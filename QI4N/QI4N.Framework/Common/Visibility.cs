@@ -3,6 +3,7 @@
     public enum Visibility
     {
         Module,
-        Layer
+        Layer,
+        Application
     }
 }

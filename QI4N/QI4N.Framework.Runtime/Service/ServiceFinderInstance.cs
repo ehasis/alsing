@@ -58,7 +58,7 @@
                 this.services.Add(serviceType, iterable);
             }
 
-            return iterable.Select<ServiceReference,ServiceReference<T>> (sr => new ServiceReferenceFacade<T>(sr)) ; //.Cast<ServiceReference<T>>();
+            return iterable.Select<ServiceReference, ServiceReference<T>>(sr => new ServiceReferenceFacade<T>(sr)); //.Cast<ServiceReference<T>>();
         }
     }
 }

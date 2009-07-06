@@ -79,11 +79,10 @@ namespace QI4N.Framework.Runtime
         public bool IsServiceFor(Type serviceType, Visibility visibility)
         {
             // Check visibility
-            if (visibility != Visibility)
+            if (visibility != this.Visibility)
             {
                 return false;
             }
-
 
             // Plain class check
 
@@ -94,18 +93,18 @@ namespace QI4N.Framework.Runtime
         //[DebuggerHidden]
         public ServiceInstance NewInstance(ModuleInstance module)
         {
-            StateHolder stateHolder = null;//
-            var mixins = mixinsModel.NewMixinHolder();
-            var serviceInstance = new ServiceInstance( this, module, mixins, stateHolder );
+            StateHolder stateHolder = null; //
+            object[] mixins = this.mixinsModel.NewMixinHolder();
+            var serviceInstance = new ServiceInstance(this, module, mixins, stateHolder);
 
             var uses = new UsesInstance();
-            uses.Use( this );
+            uses.Use(this);
 
             // Instantiate all mixins
-            ((MixinsModel)mixinsModel).NewMixins(serviceInstance,
-                                                     uses,
-                                                     stateHolder,
-                                                     mixins );
+            ((MixinsModel)this.mixinsModel).NewMixins(serviceInstance,
+                                                      uses,
+                                                      stateHolder,
+                                                      mixins);
 
             return serviceInstance;
         }

@@ -11,6 +11,8 @@ namespace QI4N.Framework.Runtime
     {
         private readonly IList<EntityDeclaration> entityDeclarations = new List<EntityDeclaration>();
 
+        private readonly LayerAssembly layerAssembly;
+
         private readonly MetaInfo metaInfo;
 
         private readonly MetaInfoDeclaration metaInfoDeclaration = new MetaInfoDeclaration();
@@ -22,8 +24,6 @@ namespace QI4N.Framework.Runtime
         private readonly List<TransientDeclaration> transientDeclarations = new List<TransientDeclaration>();
 
         private readonly List<ValueDeclaration> valueDeclarations = new List<ValueDeclaration>();
-
-        private readonly LayerAssembly layerAssembly;
 
         public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name, MetaInfo metaInfo)
         {
@@ -212,9 +212,6 @@ namespace QI4N.Framework.Runtime
             throw new NotImplementedException();
         }
     }
-
-
-
 
 
     public class ObjectModel

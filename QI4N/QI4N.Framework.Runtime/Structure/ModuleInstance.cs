@@ -1,9 +1,7 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
 
     public class ModuleInstance : Module
     {
@@ -142,6 +140,21 @@ namespace QI4N.Framework.Runtime
             return finder;
         }
 
+        public ServiceReference GetServiceFor(Type type, Visibility visibility)
+        {
+            ServiceReference service =
+                    this.Services.GetServiceFor(type, visibility)
+                    ?? this.ImportedServices.GetServiceFor(type, visibility);
+
+            return service;
+        }
+
+        public void GetServicesFor(Type type, Visibility visibility, List<ServiceReference> serviceReferences)
+        {
+            this.Services.GetServicesFor(type, visibility, serviceReferences);
+            this.ImportedServices.GetServicesFor(type, visibility, serviceReferences);
+        }
+
         public void VisitModules(ModuleVisitor visitor)
         {
             // Visit this module
@@ -153,60 +166,8 @@ namespace QI4N.Framework.Runtime
             // Visit layer
             this.LayerInstance.VisitModules(visitor, Visibility.Layer);
         }
-
-        public ServiceReference GetServiceFor(Type type, Visibility visibility)
-        {
-            ServiceReference service = 
-                this.Services.GetServiceFor(type, visibility) 
-                ?? this.ImportedServices.GetServiceFor(type, visibility);
-
-            return service;
-        }
-
-        public void GetServicesFor(Type type, Visibility visibility, List<ServiceReference> serviceReferences)
-        {
-            Services.GetServicesFor(type, visibility, serviceReferences);
-            ImportedServices.GetServicesFor(type, visibility, serviceReferences);
-        }
     }
 
-
-
-    
-
-
-    
-    internal class ServiceReferenceFinder : ModuleVisitor
-    {
-        #region ModuleVisitor Members
-
-        public ServiceReference Service { get; set; }
-
-        public Type Type { get; set; }
-
-        public bool VisitModule(ModuleInstance moduleInstance, ModuleModel moduleModel, Visibility visibility)
-        {
-            Service = moduleInstance.GetServiceFor(Type, visibility);
-
-            return Service == null;
-        }
-
-        #endregion
-    }
-
-    public class ServiceReferencesFinder : ModuleVisitor
-    {
-        public List<ServiceReference> Services;
-
-        public Type Type { get; set; }
-
-        public bool VisitModule(ModuleInstance moduleInstance, ModuleModel moduleModel, Visibility visibility)
-        {
-            moduleInstance.GetServicesFor(Type, visibility, Services);
-
-            return true;
-        }
-    }
 
     public class ObjectFinder
     {

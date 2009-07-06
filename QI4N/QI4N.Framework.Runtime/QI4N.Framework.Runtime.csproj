@@ -95,8 +95,10 @@
     <Compile Include="Service\ServiceFinderInstance.cs" />
     <Compile Include="Service\ServicePropertiesModel.cs" />
     <Compile Include="Service\ServiceReferenceFacade.cs" />
+    <Compile Include="Service\ServiceReferenceFinder.cs" />
     <Compile Include="Service\ServiceReferenceInstance.cs" />
     <Compile Include="Service\ImportedServicesModel.cs" />
+    <Compile Include="Service\ServiceReferencesFinder.cs" />
     <Compile Include="Service\ServicesInstance.cs" />
     <Compile Include="Service\ServiceStateModel.cs" />
     <Compile Include="Structure\Binder.cs" />

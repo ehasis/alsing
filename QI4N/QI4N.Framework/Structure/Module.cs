@@ -22,6 +22,7 @@ namespace QI4N.Framework
     public interface ServiceFinder
     {
         ServiceReference<T> FindService<T>();
+
         IEnumerable<ServiceReference<T>> FindServices<T>();
     }
 }

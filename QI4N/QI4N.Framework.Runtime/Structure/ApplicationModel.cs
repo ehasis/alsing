@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System.Collections.Generic;
 
@@ -15,9 +15,9 @@
             this.layers = layers;
         }
 
-        public string Name { get; set; }
-
         public MetaInfo MetaInfo { get; set; }
+
+        public string Name { get; set; }
 
         public static ApplicationModel NewModel(ApplicationAssembly application)
         {
