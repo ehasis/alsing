@@ -1,6 +1,7 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
+    using System.Diagnostics;
     using System.Reflection;
 
     public class ServiceReferenceInstance : ServiceReference
@@ -67,6 +68,8 @@ namespace QI4N.Framework.Runtime
                 this.owner = instance;
             }
 
+            [DebuggerStepThrough]
+            //[DebuggerHidden]
             public object Invoke(object proxy, MethodInfo method, object[] args)
             {
                 if (method.Name == "ToString")
