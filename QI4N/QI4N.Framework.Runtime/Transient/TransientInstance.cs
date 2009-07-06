@@ -6,9 +6,6 @@ namespace QI4N.Framework.Runtime
         {
         }
 
-        public override string ToString()
-        {
-            return "I am the Composite Instance";
-        }
+
     }
 }

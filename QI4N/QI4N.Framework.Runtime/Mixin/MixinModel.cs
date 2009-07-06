@@ -59,6 +59,8 @@ namespace QI4N.Framework.Runtime
             return this.NewInstance(compositeInstance, stateHolder, UsesInstance.NoUses);
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public object NewInstance(CompositeInstance compositeInstance, StateHolder stateHolder, UsesInstance uses)
         {
             var injectionContext = new InjectionContext(compositeInstance, uses, stateHolder);

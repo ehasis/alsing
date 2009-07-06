@@ -2,6 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     internal class MixinsModel : AbstractMixinsModel
     {
@@ -10,6 +11,8 @@ namespace QI4N.Framework.Runtime
         {
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public void NewMixins(CompositeInstance compositeInstance, UsesInstance uses, StateHolder stateHolder, object[] mixins)
         {
             int i = 0;
