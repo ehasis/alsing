@@ -10,21 +10,16 @@ namespace QI4N.Framework.Runtime
 
         private readonly object serviceProxy;
 
-        private ServiceInstance instance;
-
         private readonly object syncroot = new object();
+
+        private ServiceInstance instance;
 
         public ServiceReferenceInstance(ServiceModel serviceModel, ModuleInstance moduleInstance)
         {
             this.ServiceModel = serviceModel;
             this.moduleInstance = moduleInstance;
 
-            serviceProxy = this.NewProxy();
-        }
-
-        public object NewProxy()
-        {
-            return ServiceModel.NewProxy(new ServiceInvocationHandler(this));
+            this.serviceProxy = this.NewProxy();
         }
 
         public string Identity
@@ -55,22 +50,27 @@ namespace QI4N.Framework.Runtime
 
         public object Get()
         {
-            return serviceProxy;
+            return this.serviceProxy;
         }
 
         [DebuggerStepThrough]
         //[DebuggerHidden]
         public CompositeInstance GetInstance()
         {
-            lock (syncroot)
+            lock (this.syncroot)
             {
-                if (instance == null)
+                if (this.instance == null)
                 {
-                    instance = ServiceModel.NewInstance(this.moduleInstance);
+                    this.instance = this.ServiceModel.NewInstance(this.moduleInstance);
                 }
             }
 
-            return instance;
+            return this.instance;
+        }
+
+        public object NewProxy()
+        {
+            return this.ServiceModel.NewProxy(new ServiceInvocationHandler(this));
         }
 
         public class ServiceInvocationHandler : InvocationHandler

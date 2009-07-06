@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.API.Reflection
+namespace QI4N.Framework.API.Reflection
 {
     using System;
     using System.Diagnostics;

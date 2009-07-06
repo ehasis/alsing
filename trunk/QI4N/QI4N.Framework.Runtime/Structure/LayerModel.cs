@@ -64,5 +64,9 @@ namespace QI4N.Framework.Runtime
 
     public class UsedLayersInstance
     {
+        public bool VisitModules(ModuleVisitor visitor)
+        {
+            return false;
+        }
     }
 }

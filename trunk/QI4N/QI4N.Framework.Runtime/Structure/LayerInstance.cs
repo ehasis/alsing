@@ -16,7 +16,7 @@ namespace QI4N.Framework.Runtime
             //   this.moduleActivator = new Activator();
         }
 
-        public ApplicationInstance ApplicationInstance{ get;private set; }
+        public ApplicationInstance ApplicationInstance { get; private set; }
 
         public MetaInfo MetaInfo
         {
@@ -36,7 +36,7 @@ namespace QI4N.Framework.Runtime
             }
         }
 
-        public UsedLayersInstance UsedLayersInstance { get;private set; }
+        public UsedLayersInstance UsedLayersInstance { get; private set; }
 
         public Module FindModule(string moduleName)
         {
@@ -47,8 +47,30 @@ namespace QI4N.Framework.Runtime
             return moduleInstance;
         }
 
-        public void VisitModules(ModuleVisitor visitor, Visibility visibility)
+        public bool VisitModules(ModuleVisitor visitor, Visibility visibility)
         {
+            // Visit modules in this layer
+            foreach (ModuleInstance moduleInstance in moduleInstances)
+            {
+                if (!visitor.VisitModule(moduleInstance, moduleInstance.Model, visibility))
+                {
+                    return false;
+                }
+            }
+
+            if (visibility == Visibility.Layer)
+            {
+                // Visit modules in this layer
+                if (!VisitModules(visitor, Visibility.Application))
+                {
+                    return false;
+                }
+
+                // Visit modules in used layers
+                return UsedLayersInstance.VisitModules(visitor);
+            }
+
+            return true;
         }
     }
 }

@@ -46,13 +46,13 @@ namespace QI4N.Framework.Runtime
         {
             var sb = new StringBuilder();
             sb.Append("{ ");
-            foreach(Property property in State.GetProperties())
+            foreach (Property property in this.State.GetProperties())
             {
                 sb.Append(" ");
                 sb.AppendFormat("{0}='{1}'", property.QualifiedName, property.Value ?? "{null}");
                 sb.Append(" ");
             }
-            
+
             sb.Append(" }");
 
             return sb.ToString();

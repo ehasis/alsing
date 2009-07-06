@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +12,30 @@
         public ImportedServicesModel(List<ImportedServiceModel> importedServiceModels)
         {
             this.importedServiceModels = importedServiceModels;
+        }
+
+        public ImportedServiceModel GetServiceFor(Type type, Visibility visibility)
+        {
+            foreach (ImportedServiceModel serviceModel in this.importedServiceModels)
+            {
+                if (serviceModel.IsServiceFor(type, visibility))
+                {
+                    return serviceModel;
+                }
+            }
+
+            return null;
+        }
+
+        public void GetServicesFor(Type type, Visibility visibility, List<ImportedServiceModel> serviceModels)
+        {
+            foreach (ImportedServiceModel importedServiceModel in this.importedServiceModels)
+            {
+                if (importedServiceModel.IsServiceFor(type, visibility))
+                {
+                    serviceModels.Add(importedServiceModel);
+                }
+            }
         }
 
         public ImportedServicesInstance NewInstance(ModuleInstance module)
@@ -29,30 +53,6 @@
         public void VisitModel(ModelVisitor visitor)
         {
             throw new NotImplementedException();
-        }
-
-        public ImportedServiceModel GetServiceFor(Type type, Visibility visibility)
-        {
-            foreach (ImportedServiceModel serviceModel in importedServiceModels)
-            {
-                if (serviceModel.IsServiceFor(type, visibility))
-                {
-                    return serviceModel;
-                }
-            }
-
-            return null;
-        }
-
-        public void GetServicesFor(Type type, Visibility visibility, List<ImportedServiceModel> serviceModels)
-        {
-            foreach (ImportedServiceModel importedServiceModel in importedServiceModels )
-            {
-                if (importedServiceModel.IsServiceFor(type, visibility))
-                {
-                    serviceModels.Add(importedServiceModel);
-                }
-            }
         }
     }
 }

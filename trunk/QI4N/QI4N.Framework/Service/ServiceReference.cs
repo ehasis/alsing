@@ -1,6 +1,5 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
-
     public interface ServiceReference
     {
         string Identity { get; }
@@ -11,6 +10,7 @@
 
         object Get();
     }
+
     public interface ServiceReference<T> : ServiceReference
     {
         new T Get();

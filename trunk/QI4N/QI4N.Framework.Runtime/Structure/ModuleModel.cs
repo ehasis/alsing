@@ -23,7 +23,7 @@ namespace QI4N.Framework.Runtime
             this.Values = valuesModel;
             this.Services = servicesModel;
             this.ImportedServicesModel = importedServicesModel;
-            layerModel = null;
+            this.layerModel = null;
         }
 
 

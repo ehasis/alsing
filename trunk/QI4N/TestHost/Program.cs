@@ -25,13 +25,13 @@ namespace ConsoleApplication23
 
             module
                     .AddEntities()
-                    .VisibleIn(Visibility.Layer);
+                    .VisibleIn(Visibility.Module);
 
             module
                     .AddServices()
                     .Include<CustomerRepositoryService>()
                     .WithConcern<GenericTracingConcern>()
-                    .VisibleIn(Visibility.Module);
+                    .VisibleIn(Visibility.Layer);
 
             module
                     .AddValues()
