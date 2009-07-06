@@ -23,7 +23,7 @@ namespace QI4N.Framework.Runtime
 
         private readonly List<ValueDeclaration> valueDeclarations = new List<ValueDeclaration>();
 
-        private LayerAssembly layerAssembly;
+        private readonly LayerAssembly layerAssembly;
 
         public ModuleAssemblyImpl(LayerAssembly layerAssembly, string name, MetaInfo metaInfo)
         {
