@@ -1,4 +1,4 @@
-namespace QI4N.Framework.Injection.Scope
+namespace QI4N.Framework
 {
     public sealed class ServiceAttribute : InjectionAttribute
     {
