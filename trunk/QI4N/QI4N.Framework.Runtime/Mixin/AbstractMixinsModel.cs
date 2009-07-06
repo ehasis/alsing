@@ -117,6 +117,8 @@ namespace QI4N.Framework.Runtime
             return this.MixinFor(method).NewInvocationHandler(method.DeclaringType);
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public object[] NewMixinHolder()
         {
             return new object[this.mixinModels.Count];

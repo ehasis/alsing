@@ -2,6 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     using Bootstrap;
 
@@ -89,6 +90,8 @@ namespace QI4N.Framework.Runtime
             return serviceType.IsAssignableFrom(this.compositeType);
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public ServiceInstance NewInstance(ModuleInstance module)
         {
             StateHolder stateHolder = null;//

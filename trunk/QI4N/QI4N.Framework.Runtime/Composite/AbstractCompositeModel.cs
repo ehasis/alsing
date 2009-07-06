@@ -80,6 +80,8 @@ namespace QI4N.Framework.Runtime
             return this.stateModel.NewInitialState();
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public Composite NewProxy(InvocationHandler invocationHandler)
         {
             // TODO: linqify

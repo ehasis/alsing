@@ -6,6 +6,8 @@
 
     public abstract class AbstractCompositeInstance : CompositeInstance, MixinsInstance
     {
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         protected AbstractCompositeInstance(AbstractCompositeModel compositeModel, ModuleInstance moduleInstance, object[] mixins, StateHolder state)
         {
             this.CompositeModel = compositeModel;
@@ -42,6 +44,8 @@
             return methodInstance.Invoke(composite, args, mixin);
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public object InvokeObject(object proxy, object[] args, MethodInfo method)
         {
             return method.Invoke(this, args);

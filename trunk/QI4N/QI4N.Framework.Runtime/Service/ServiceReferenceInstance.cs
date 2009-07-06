@@ -58,6 +58,8 @@ namespace QI4N.Framework.Runtime
             return serviceProxy;
         }
 
+        [DebuggerStepThrough]
+        //[DebuggerHidden]
         public CompositeInstance GetInstance()
         {
             lock (syncroot)
