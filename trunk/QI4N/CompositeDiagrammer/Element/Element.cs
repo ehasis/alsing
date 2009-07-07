@@ -1,6 +1,6 @@
 ﻿namespace CompositeDiagrammer
 {
-    public interface Element 
+    public interface Element : Renderable
     {
     }
 }
