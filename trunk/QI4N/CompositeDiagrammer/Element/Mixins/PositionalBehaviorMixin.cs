@@ -2,7 +2,7 @@
 {
     using QI4N.Framework;
 
-    public class PositionalBehaviorMixin : PositionalBehavior
+    public class PositionalBehaviorMixin : Positional
     {
         [This]
         protected PositionalState state;

@@ -2,7 +2,7 @@
 {
     using QI4N.Framework;
 
-    public class RotatableBehaviorMixin : RotatableBehavior
+    public class RotatableBehaviorMixin : Rotatable
     {
         [This]
         private RotatableState state;
