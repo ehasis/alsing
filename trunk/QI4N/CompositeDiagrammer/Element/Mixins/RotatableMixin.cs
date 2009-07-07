@@ -1,8 +1,8 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
-    public class RotatableBehaviorMixin : Rotatable
+    public class RotatableMixin : Rotatable
     {
         [This]
         private RotatableState state;

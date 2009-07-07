@@ -1,8 +1,8 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
-    public class PositionalBehaviorMixin : Positional
+    public class PositionalMixin : Positional
     {
         [This]
         protected PositionalState state;

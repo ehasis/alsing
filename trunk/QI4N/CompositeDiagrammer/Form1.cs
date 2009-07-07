@@ -1,8 +1,8 @@
 ﻿namespace CompositeDiagrammer
 {
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
-    using Element;
 
     using QI4N.Framework;
     using QI4N.Framework.Bootstrap;
@@ -15,6 +15,8 @@
             this.InitializeComponent();
         }
 
+
+        private IList<Element> elements = new List<Element>();
         private void Form1_Load(object sender, System.EventArgs e)
         {
             var f = new ApplicationAssemblyFactory();
@@ -31,7 +33,9 @@
 
 
             var rectangle = shapeModule.TransientBuilderFactory.NewTransient<Rectangle>();
-            rectangle.Move(10,10);
+            rectangle.SetBounds(100,100,200,200);
+         
+            elements.Add(rectangle);
         }
 
         private static LayerAssembly CreateDomainLayer(ApplicationAssembly app)
@@ -57,6 +61,11 @@
                     ;
 
             return module;
+        }
+
+        private void viewPort1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

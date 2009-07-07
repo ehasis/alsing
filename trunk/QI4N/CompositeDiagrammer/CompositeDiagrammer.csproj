@@ -48,20 +48,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ViewPort.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ViewPort.designer.cs">
+      <DependentUpon>ViewPort.cs</DependentUpon>
+    </Compile>
     <Compile Include="Element\Concrete\Description.cs" />
     <Compile Include="Element\Concrete\Ellipse.cs" />
     <Compile Include="Element\Concrete\Group.cs" />
     <Compile Include="Element\Concrete\Rectangle.cs" />
     <Compile Include="Element\Element.cs" />
     <Compile Include="Element\Textual.cs" />
-    <Compile Include="Element\Mixins\ElementContainerBehaviorMixin.cs" />
-    <Compile Include="Element\Mixins\TextualBehaviorMixin.cs" />
-    <Compile Include="Element\Mixins\PositionalBehaviorMixin.cs" />
-    <Compile Include="Element\Mixins\RotatableBehaviorMixin.cs" />
+    <Compile Include="Element\Mixins\ElementContainerMixin.cs" />
+    <Compile Include="Element\Mixins\TextualMixin.cs" />
+    <Compile Include="Element\Mixins\PositionalMixin.cs" />
+    <Compile Include="Element\Mixins\RotatableMixin.cs" />
     <Compile Include="Element\Rotatable.cs" />
-    <Compile Include="Element\HasBorder.cs" />
+    <Compile Include="Element\Bordered.cs" />
     <Compile Include="Element\Positional.cs" />
-    <Compile Include="Element\HasFilling.cs" />
+    <Compile Include="Element\Filled.cs" />
     <Compile Include="Element\HasShape.cs" />
     <Compile Include="Element\ElementContainer.cs" />
     <Compile Include="Form1.cs">
@@ -72,6 +78,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ViewPort.resx">
+      <DependentUpon>ViewPort.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

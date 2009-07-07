@@ -1,8 +1,8 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
-    public class ElementContainerBehaviorMixin : ElementContainer
+    public class ElementContainerMixin : ElementContainer
     {
         [This]
         private ElementContainerState state;

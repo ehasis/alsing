@@ -1,8 +1,8 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
-    public interface Rectangle : Element, Positional, Rotatable, HasBorder, HasFilling
+    public interface Rectangle : Element, Positional, Rotatable, Bordered, Filled
     {
     }
 

@@ -1,8 +1,8 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
-    public class TextualBehaviorMixin : Textual
+    public class TextualMixin : Textual
     {
         [This]
         private TextualState state;

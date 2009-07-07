@@ -1,6 +1,6 @@
 ﻿namespace CompositeDiagrammer
 {
-    public interface HasShape
+    public interface Filled
     {
     }
 }
