@@ -9,6 +9,14 @@ namespace QI4N.Framework.Reflection
 
     public static class TypeExtensions
     {
+
+        public static object GetDefaultValue(this Type self)
+        {
+            Array a = Array.CreateInstance(self, 1);
+            var defaultValue = a.GetValue(0);
+            return defaultValue;
+        }
+
         [DebuggerStepThrough]
         //[DebuggerHidden]
         public static FieldInfo[] GetAllFields(this Type type)
