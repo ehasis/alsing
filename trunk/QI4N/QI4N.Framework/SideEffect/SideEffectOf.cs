@@ -7,6 +7,6 @@
     public abstract class SideEffectOf<T> : SideEffectOf
     {
         [SideEffectFor]
-        protected T next;
+        protected T result;
     }
 }
