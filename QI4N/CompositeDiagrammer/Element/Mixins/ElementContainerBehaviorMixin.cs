@@ -2,7 +2,7 @@
 {
     using QI4N.Framework;
 
-    public class ElementContainerBehaviorMixin : ElementContainerBehavior
+    public class ElementContainerBehaviorMixin : ElementContainer
     {
         [This]
         private ElementContainerState state;

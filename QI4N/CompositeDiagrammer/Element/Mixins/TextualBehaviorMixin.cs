@@ -2,7 +2,7 @@
 {
     using QI4N.Framework;
 
-    public class TextualBehaviorMixin : TextualBehavior
+    public class TextualBehaviorMixin : Textual
     {
         [This]
         private TextualState state;

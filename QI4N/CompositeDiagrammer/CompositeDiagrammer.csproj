@@ -72,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -92,6 +95,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QI4N.Framework.Bootstrap\QI4N.Framework.Bootstrap.csproj">
+      <Project>{C6ACF8F0-5F35-40CC-B4D2-C0C782A3C133}</Project>
+      <Name>QI4N.Framework.Bootstrap</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QI4N.Framework.Runtime\QI4N.Framework.Runtime.csproj">
+      <Project>{3A3108B6-75C3-400A-BF52-F8F1B9B74D48}</Project>
+      <Name>QI4N.Framework.Runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QI4N.Framework\QI4N.Framework.csproj">
       <Project>{46604E99-EE88-42DD-B56D-B396E4886CE2}</Project>
       <Name>QI4N.Framework</Name>
