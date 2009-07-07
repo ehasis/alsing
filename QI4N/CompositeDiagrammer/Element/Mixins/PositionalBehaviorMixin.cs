@@ -1,13 +1,45 @@
-﻿namespace CompositeDiagrammer.Element.Mixins
+﻿namespace CompositeDiagrammer.Element
 {
     using QI4N.Framework;
 
     public class PositionalBehaviorMixin : PositionalBehavior
     {
         [This]
-        private PositionalState state;
+        protected PositionalState state;
 
-        private int Bottom
+        protected int Left
+        {
+            get
+            {
+                return state.Left;
+            }
+        }
+
+        protected int Top
+        {
+            get
+            {
+                return state.Top;
+            }
+        }
+
+        protected int Width
+        {
+            get
+            {
+                return state.Width;
+            }
+        }
+
+        protected int Height
+        {
+            get
+            {
+                return state.Height;
+            }
+        }
+
+        protected int Bottom
         {
             get
             {
@@ -15,7 +47,7 @@
             }
         }
 
-        private int CenterX
+        protected int CenterX
         {
             get
             {
@@ -23,7 +55,7 @@
             }
         }
 
-        private int CenterY
+        protected int CenterY
         {
             get
             {
@@ -31,7 +63,7 @@
             }
         }
 
-        private int Right
+        protected int Right
         {
             get
             {
@@ -45,6 +77,11 @@
             this.SetSize(with, height);
         }
 
+        public void Move(int offsetX, int offsetY)
+        {
+            SetLocation(this.Left + offsetX,this.Top + offsetY);
+        }
+
         public void SetLocation(int left, int top)
         {
             this.state.Left = left;
@@ -55,6 +92,6 @@
         {
             this.state.Width = width;
             this.state.Height = height;
-        }
+        }        
     }
 }

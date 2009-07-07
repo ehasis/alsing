@@ -1,11 +1,11 @@
-﻿namespace CompositeDiagrammer.Element.Mixins
+﻿namespace CompositeDiagrammer.Element
 {
     using QI4N.Framework;
 
-    public class HasTextBehaviorMixin : HasTextBehavior
+    public class TextualBehaviorMixin : TextualBehavior
     {
         [This]
-        private HasTextState state;
+        private TextualState state;
 
         public void SetText(string text)
         {
