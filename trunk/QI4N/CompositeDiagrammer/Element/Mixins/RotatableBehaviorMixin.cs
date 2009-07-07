@@ -1,4 +1,4 @@
-﻿namespace CompositeDiagrammer.Element.Mixins
+﻿namespace CompositeDiagrammer.Element
 {
     using QI4N.Framework;
 

@@ -53,9 +53,9 @@
     <Compile Include="Element\Concrete\Group.cs" />
     <Compile Include="Element\Concrete\Rectangle.cs" />
     <Compile Include="Element\Element.cs" />
-    <Compile Include="Element\HasText.cs" />
+    <Compile Include="Element\Textual.cs" />
     <Compile Include="Element\Mixins\ElementContainerBehaviorMixin.cs" />
-    <Compile Include="Element\Mixins\HasTextBehaviorMixin.cs" />
+    <Compile Include="Element\Mixins\TextualBehaviorMixin.cs" />
     <Compile Include="Element\Mixins\PositionalBehaviorMixin.cs" />
     <Compile Include="Element\Mixins\RotatableBehaviorMixin.cs" />
     <Compile Include="Element\Rotatable.cs" />
