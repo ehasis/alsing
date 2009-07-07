@@ -1,19 +1,15 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
-    public interface Textual :  TextualBehavior
+    [Mixins(typeof(TextualMixin))]
+    public interface Textual 
     {
+        void SetText(string text);
     }
 
     public interface TextualState
     {
         string Text { get; set; }
-    }
-
-    [Mixins(typeof(TextualBehaviorMixin))]
-    public interface TextualBehavior
-    {
-        void SetText(string text);
     }
 }

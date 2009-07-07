@@ -1,4 +1,4 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     public interface Element 
     {

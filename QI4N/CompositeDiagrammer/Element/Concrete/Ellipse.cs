@@ -1,8 +1,8 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
-    public interface Ellipse : Element, Positional, Rotatable, HasBorder, HasFilling
+    public interface Ellipse : Element, Positional, Rotatable, Bordered, Filled
     {
     }
 

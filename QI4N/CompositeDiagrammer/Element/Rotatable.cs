@@ -1,19 +1,14 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
-    public interface Rotatable :  RotatableBehavior
+    [Mixins(typeof(RotatableMixin))]
+    public interface Rotatable
     {
     }
 
     public interface RotatableState
     {
         double Angle { get; set; }
-    }
-
-    [Mixins(typeof(RotatableBehaviorMixin))]
-    public interface RotatableBehavior
-    {
-        void Rotate(double angle);
     }
 }

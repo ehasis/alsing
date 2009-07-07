@@ -1,23 +1,19 @@
-﻿namespace CompositeDiagrammer.Element
+﻿namespace CompositeDiagrammer
 {
     using System.Collections.Generic;
 
     using QI4N.Framework;
 
-    public interface ElementContainer : ElementContainerBehavior
+    [Mixins(typeof(ElementContainerMixin))]
+    public interface ElementContainer 
     {
+        void AddChild(Element child);
+
+        void RemoveChild(Element child);
     }
 
     public interface ElementContainerState
     {
         IList<Element> Children { get; set; }
-    }
-
-    [Mixins(typeof(ElementContainerBehaviorMixin))]
-    public interface ElementContainerBehavior
-    {
-        void AddChild(Element child);
-
-        void RemoveChild(Element child);
     }
 }
