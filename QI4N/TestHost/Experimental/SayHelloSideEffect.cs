@@ -9,12 +9,12 @@ namespace ConsoleApplication23.Experimental
         public void SayHello()
         {
             Console.WriteLine("This is the SayHello SideEffect");
-            this.next.SayHello();
+            this.result.SayHello();
         }
 
         public void SayHelloTo(string name)
         {
-            this.next.SayHelloTo(name);
+            this.result.SayHelloTo(name);
         }
     }
 }
