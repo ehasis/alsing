@@ -6,6 +6,10 @@
     {
         public object ProvideInjection(InjectionContext context, InjectionAttribute attribute, Type fieldType)
         {
+            if (fieldType == typeof(object))
+            {
+                return context.CompositeInstance.Proxy;
+            }
             return context.CompositeInstance.NewProxy(fieldType);
         }
     }
