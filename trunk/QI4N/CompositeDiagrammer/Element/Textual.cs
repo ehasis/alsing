@@ -12,4 +12,15 @@ namespace CompositeDiagrammer
     {
         string Text { get; set; }
     }
+
+    public class TextualMixin : Textual
+    {
+        [This]
+        private TextualState state;
+
+        public void SetText(string text)
+        {
+            this.state.Text = text;
+        }
+    }
 }
