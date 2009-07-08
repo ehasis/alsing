@@ -1,30 +1,23 @@
 ﻿namespace CompositeDiagrammer
 {
     using System.Drawing;
+    using System.Drawing.Drawing2D;
 
     using QI4N.Framework;
+    using System.ComponentModel;
 
     [Mixins(typeof(BorderedMixin))]
     public interface Bordered 
     {
-        void RenderBorder(RenderInfo renderInfo);
+        void RenderBorder(RenderInfo renderInfo, GraphicsPath path);
     }
 
     public interface BorderedState
     {
-        BorderInfo BorderInfo { get; set; }
-    }
+        [DefaultValue(3f)]
+        float With { get; set; }
 
-    public class BorderInfo
-    {
-        public BorderInfo()
-        {
-            BorderSize = 3;
-            BorderColor = Color.Black;
-        }
-
-        public float BorderSize { get; set; }
-
-        public Color BorderColor { get; set; }
+        [DefaultValue(typeof(Color), "0x000000")]
+        Color Color { get; set; }
     }
 }
