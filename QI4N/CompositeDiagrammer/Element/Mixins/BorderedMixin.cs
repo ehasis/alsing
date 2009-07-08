@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CompositeDiagrammer
+﻿namespace CompositeDiagrammer
 {
     using System.Drawing;
+    using System.Drawing.Drawing2D;
 
     using QI4N.Framework;
 
     public class BorderedMixin : Bordered
     {
         [This]
-        private BorderedState state;
+        private Shape shape;
 
         [This]
-        private Shape shape;
+        private BorderedState border;
 
         public void RenderBorder(RenderInfo renderInfo)
         {
-            using(var pen = new Pen(Color.Black,3))
-            using(var path = shape.GetPath())
+            using (var pen = new Pen(Color.Black, 3))
             {
-                renderInfo.Graphics.DrawPath(pen, path);
+                using (GraphicsPath path = this.shape.GetPath())
+                {
+                    renderInfo.Graphics.DrawPath(pen, path);
+                }
             }
         }
     }
