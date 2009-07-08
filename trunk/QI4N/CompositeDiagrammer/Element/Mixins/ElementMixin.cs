@@ -2,7 +2,7 @@
 {
     using QI4N.Framework;
 
-    public class RenderableMixin : Renderable
+    public class ElementMixin : Element
     {
         [This]
         private object self;

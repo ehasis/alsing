@@ -62,8 +62,7 @@
     <Compile Include="Element\Mixins\AbstractShapeMixin.cs" />
     <Compile Include="Element\Mixins\BorderedMixin.cs" />
     <Compile Include="Element\Mixins\FilledMixin.cs" />
-    <Compile Include="Element\Mixins\RenderableMixin.cs" />
-    <Compile Include="Element\Renderable.cs" />
+    <Compile Include="Element\Mixins\ElementMixin.cs" />
     <Compile Include="Element\Textual.cs" />
     <Compile Include="Element\Mixins\ElementContainerMixin.cs" />
     <Compile Include="Element\Mixins\TextualMixin.cs" />
