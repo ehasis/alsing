@@ -1,13 +1,13 @@
-﻿namespace CompositeDiagrammer
+namespace CompositeDiagrammer
 {
+    using System.ComponentModel;
     using System.Drawing;
     using System.Drawing.Drawing2D;
 
     using QI4N.Framework;
-    using System.ComponentModel;
 
     [Mixins(typeof(BorderedMixin))]
-    public interface Bordered 
+    public interface Bordered
     {
         void RenderBorder(RenderInfo renderInfo, GraphicsPath path);
     }

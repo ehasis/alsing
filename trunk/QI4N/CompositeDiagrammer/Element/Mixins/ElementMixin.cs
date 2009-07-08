@@ -1,5 +1,7 @@
 ﻿namespace CompositeDiagrammer
 {
+    using System.Drawing.Drawing2D;
+
     using QI4N.Framework;
 
     public class ElementMixin : Element
@@ -16,7 +18,7 @@
             var filled = this.self as Filled;
             var container = this.self as ElementContainer;
 
-            using (var path = shape.GetPath())
+            using (GraphicsPath path = this.shape.GetPath())
             {
                 if (filled != null)
                 {

@@ -1,4 +1,4 @@
-﻿namespace CompositeDiagrammer
+namespace CompositeDiagrammer
 {
     using System.Drawing;
     using System.Drawing.Drawing2D;
@@ -10,9 +10,9 @@
         [This]
         private BorderedState border;
 
-        public void RenderBorder(RenderInfo renderInfo,GraphicsPath path)
+        public void RenderBorder(RenderInfo renderInfo, GraphicsPath path)
         {
-            using (var pen = new Pen(border.Color, border.With))
+            using (var pen = new Pen(this.border.Color, this.border.With))
             {
                 renderInfo.Graphics.DrawPath(pen, path);
             }

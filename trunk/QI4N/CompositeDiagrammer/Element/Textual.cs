@@ -1,9 +1,9 @@
-﻿namespace CompositeDiagrammer
+namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
     [Mixins(typeof(TextualMixin))]
-    public interface Textual 
+    public interface Textual
     {
         void SetText(string text);
     }

@@ -35,7 +35,7 @@
                     .Include<RectangleShape>()
                     .Include<EllipseShape>()
                     //.Include<DescriptionTransient>()
-              //      .Include<GroupShape>()
+                    //      .Include<GroupShape>()
                     ;
 
             return module;
@@ -56,12 +56,11 @@
             Module shapeModule = applicationInstance.FindModule("DomainLayer", "ShapeModule");
 
             var rectangle = shapeModule.TransientBuilderFactory.NewTransient<RectangleShape>();
-            rectangle.SetLocation(100,100);
-            rectangle.SetSize(200,200);
+            rectangle.SetBounds(100, 100, 200, 200);
 
             var ellipse = shapeModule.TransientBuilderFactory.NewTransient<EllipseShape>();
-            ellipse.SetLocation(300, 100);
-            ellipse.SetSize(200, 200);
+            ellipse.SetBounds(300, 100, 200, 200);
+
             this.elements.Add(rectangle);
             this.elements.Add(ellipse);
         }

@@ -4,25 +4,22 @@
 
     using QI4N.Framework;
 
-
-    public interface ElementComposite : Element,  TransientComposite
+    public interface ElementComposite : Element, TransientComposite
     {
-        
     }
 
-    public interface Element2DComposite :Element, Element2D, TransientComposite
+    public interface Element2DComposite : Element, Element2D, TransientComposite
     {
-
     }
 
     [Mixins(typeof(ElementMixin))]
-    public interface Element 
+    public interface Element
     {
         void Render(RenderInfo renderInfo);
     }
 
     [Mixins(typeof(Element2DMixin))]
-    public interface Element2D 
+    public interface Element2D
     {
         void SetLocation(int left, int top);
 
@@ -38,9 +35,13 @@
     public interface Element2DState
     {
         int Left { get; set; }
+
         int Top { get; set; }
+
         int Width { get; set; }
+
         int Height { get; set; }
+
         double Angle { get; set; }
     }
 
