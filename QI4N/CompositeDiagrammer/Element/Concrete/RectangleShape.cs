@@ -9,12 +9,10 @@
     {
     }
 
-    public class RectangleShapeMixin : Shape
+    public class RectangleShapeMixin : AbstractShapeMixin
     {
-        [This]
-        private PositionalState state;
 
-        public GraphicsPath GetPath()
+        public override GraphicsPath GetPath()
         {
             var shape = new GraphicsPath();
             var bounds = new System.Drawing.Rectangle(this.state.Left, this.state.Top, this.state.Width, this.state.Height);

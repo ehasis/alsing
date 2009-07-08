@@ -33,7 +33,7 @@
             module
                     .AddTransients()
                     .Include<RectangleShape>()
-                    //.Include<EllipseTransient>()
+                    .Include<EllipseShape>()
                     //.Include<DescriptionTransient>()
                     //.Include<GroupTransient>()
                     ;
@@ -58,7 +58,11 @@
             var rectangle = shapeModule.TransientBuilderFactory.NewTransient<RectangleShape>();
             rectangle.SetBounds(100, 100, 200, 200);
 
+            var ellipse = shapeModule.TransientBuilderFactory.NewTransient<EllipseShape>();
+            ellipse.SetBounds(300, 200, 200, 400);
+
             this.elements.Add(rectangle);
+            this.elements.Add(ellipse);
         }
 
         private void viewPort1_Paint(object sender, PaintEventArgs e)
@@ -66,7 +70,7 @@
             var renderInfo = new RenderInfo();
             renderInfo.Graphics = e.Graphics;
 
-            foreach (ElementComposite element in elements)
+            foreach (ElementComposite element in this.elements)
             {
                 element.Render(renderInfo);
             }
