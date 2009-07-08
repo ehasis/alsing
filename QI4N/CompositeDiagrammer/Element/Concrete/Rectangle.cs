@@ -5,11 +5,7 @@
     using QI4N.Framework;
 
     [Mixins(typeof(RectangleShapeMixin))]
-    public interface Rectangle : Element, Positional, Rotatable, Bordered, Filled, Shape
-    {
-    }
-
-    public interface RectangleTransient : Rectangle, TransientComposite
+    public interface Rectangle : ElementComposite, Positional, Rotatable, Bordered, Filled, Shape
     {
     }
 

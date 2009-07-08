@@ -7,13 +7,13 @@
     [Mixins(typeof(ElementContainerMixin))]
     public interface ElementContainer 
     {
-        void AddChild(Element child);
+        void AddChild(ElementComposite child);
 
-        void RemoveChild(Element child);
+        void RemoveChild(ElementComposite child);
     }
 
     public interface ElementContainerState
     {
-        IList<Element> Children { get; set; }
+        IList<ElementComposite> Children { get; set; }
     }
 }

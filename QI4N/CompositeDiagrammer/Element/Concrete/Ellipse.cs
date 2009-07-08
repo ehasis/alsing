@@ -2,7 +2,7 @@
 {
     using QI4N.Framework;
 
-    public interface Ellipse : Element, Positional, Rotatable, Bordered, Filled
+    public interface Ellipse : ElementComposite, Positional, Rotatable, Bordered, Filled
     {
     }
 

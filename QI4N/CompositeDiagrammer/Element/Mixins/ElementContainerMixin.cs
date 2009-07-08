@@ -1,4 +1,4 @@
-﻿namespace CompositeDiagrammer
+namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
@@ -7,12 +7,12 @@
         [This]
         private ElementContainerState state;
 
-        public void AddChild(Element child)
+        public void AddChild(ElementComposite child)
         {
             this.state.Children.Add(child);
         }
 
-        public void RemoveChild(Element child)
+        public void RemoveChild(ElementComposite child)
         {
             this.state.Children.Remove(child);
         }
