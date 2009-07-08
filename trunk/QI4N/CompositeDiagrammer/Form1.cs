@@ -10,7 +10,7 @@
 
     public partial class Form1 : Form
     {
-        private readonly IList<ElementComposite> elements = new List<ElementComposite>();
+        private readonly IList<Element> elements = new List<Element>();
 
         public Form1()
         {
@@ -35,7 +35,7 @@
                     .Include<RectangleShape>()
                     .Include<EllipseShape>()
                     //.Include<DescriptionTransient>()
-                    //.Include<GroupTransient>()
+              //      .Include<GroupShape>()
                     ;
 
             return module;
@@ -56,21 +56,24 @@
             Module shapeModule = applicationInstance.FindModule("DomainLayer", "ShapeModule");
 
             var rectangle = shapeModule.TransientBuilderFactory.NewTransient<RectangleShape>();
-            rectangle.SetBounds(100, 100, 200, 200);
+            rectangle.SetLocation(100,100);
+            rectangle.SetSize(200,200);
 
             var ellipse = shapeModule.TransientBuilderFactory.NewTransient<EllipseShape>();
-            ellipse.SetBounds(300, 200, 200, 400);
-
+            ellipse.SetLocation(300, 100);
+            ellipse.SetSize(200, 200);
             this.elements.Add(rectangle);
             this.elements.Add(ellipse);
         }
 
         private void viewPort1_Paint(object sender, PaintEventArgs e)
         {
-            var renderInfo = new RenderInfo();
-            renderInfo.Graphics = e.Graphics;
+            var renderInfo = new RenderInfo
+                                 {
+                                         Graphics = e.Graphics
+                                 };
 
-            foreach (ElementComposite element in this.elements)
+            foreach (Element element in this.elements)
             {
                 element.Render(renderInfo);
             }

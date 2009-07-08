@@ -6,7 +6,7 @@
     using QI4N.Framework;
 
     [Mixins(typeof(RectangleShapeMixin))]
-    public interface RectangleShape : ElementComposite, Positional, Rotatable, Bordered, Filled
+    public interface RectangleShape : Element2DComposite, Bordered, Filled
     {
     }
 

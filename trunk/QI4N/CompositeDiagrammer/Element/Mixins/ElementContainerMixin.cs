@@ -1,5 +1,7 @@
 namespace CompositeDiagrammer
 {
+    using System;
+
     using QI4N.Framework;
 
     public class ElementContainerMixin : ElementContainer
@@ -15,6 +17,15 @@ namespace CompositeDiagrammer
         public void RemoveChild(ElementComposite child)
         {
             this.state.Children.Remove(child);
+        }
+
+        public void RenderChildren(RenderInfo renderInfo)
+        {
+            
+            foreach(ElementComposite child in state.Children)
+            {
+                child.Render(renderInfo);
+            }
         }
     }
 }

@@ -25,7 +25,7 @@
 
                 if (container != null)
                 {
-                    //    Render(renderInfo,container.);
+                    container.RenderChildren(renderInfo);
                 }
 
                 if (bordered != null)

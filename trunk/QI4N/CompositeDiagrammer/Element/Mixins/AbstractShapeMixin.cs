@@ -7,7 +7,7 @@
     public abstract class AbstractShapeMixin : Shape
     {
         [This]
-        protected PositionalState state;
+        protected Element2DState state;
 
         public abstract GraphicsPath GetPath();
     }
