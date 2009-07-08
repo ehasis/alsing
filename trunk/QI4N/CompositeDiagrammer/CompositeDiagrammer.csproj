@@ -55,10 +55,11 @@
       <DependentUpon>ViewPort.cs</DependentUpon>
     </Compile>
     <Compile Include="Element\Concrete\Description.cs" />
-    <Compile Include="Element\Concrete\Ellipse.cs" />
+    <Compile Include="Element\Concrete\EllipseShape.cs" />
     <Compile Include="Element\Concrete\Group.cs" />
     <Compile Include="Element\Concrete\RectangleShape.cs" />
     <Compile Include="Element\ElementComposite.cs" />
+    <Compile Include="Element\Mixins\AbstractShapeMixin.cs" />
     <Compile Include="Element\Mixins\BorderedMixin.cs" />
     <Compile Include="Element\Mixins\FilledMixin.cs" />
     <Compile Include="Element\Mixins\RenderableMixin.cs" />
