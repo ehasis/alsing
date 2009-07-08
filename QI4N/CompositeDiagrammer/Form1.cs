@@ -32,7 +32,7 @@
 
             module
                     .AddTransients()
-                    .Include<Rectangle>()
+                    .Include<RectangleShape>()
                     //.Include<EllipseTransient>()
                     //.Include<DescriptionTransient>()
                     //.Include<GroupTransient>()
@@ -55,7 +55,7 @@
 
             Module shapeModule = applicationInstance.FindModule("DomainLayer", "ShapeModule");
 
-            var rectangle = shapeModule.TransientBuilderFactory.NewTransient<Rectangle>();
+            var rectangle = shapeModule.TransientBuilderFactory.NewTransient<RectangleShape>();
             rectangle.SetBounds(100, 100, 200, 200);
 
             this.elements.Add(rectangle);
