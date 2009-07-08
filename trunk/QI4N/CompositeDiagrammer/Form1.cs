@@ -33,9 +33,9 @@
             module
                     .AddTransients()
                     .Include<RectangleTransient>()
-                    .Include<EllipseTransient>()
-                    .Include<DescriptionTransient>()
-                    .Include<GroupTransient>()
+                    //.Include<EllipseTransient>()
+                    //.Include<DescriptionTransient>()
+                    //.Include<GroupTransient>()
                     ;
 
             return module;
