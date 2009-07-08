@@ -1,11 +1,11 @@
-﻿namespace CompositeDiagrammer
+namespace CompositeDiagrammer
 {
     using System.Collections.Generic;
 
     using QI4N.Framework;
 
     [Mixins(typeof(ElementContainerMixin))]
-    public interface ElementContainer 
+    public interface ElementContainer
     {
         void AddChild(ElementComposite child);
 
