@@ -14,29 +14,24 @@ namespace CompositeDiagrammer
         void RenderChildren(RenderInfo renderInfo);
     }
 
-    public interface ElementContainerState
-    {
-        IList<ElementComposite> Children { get; set; }
-    }
 
     public class ElementContainerMixin : ElementContainer
     {
-        [This]
-        private ElementContainerState state;
+        private readonly IList<ElementComposite> children = new List<ElementComposite>();
 
         public void AddChild(ElementComposite child)
         {
-            this.state.Children.Add(child);
+            this.children.Add(child);
         }
 
         public void RemoveChild(ElementComposite child)
         {
-            this.state.Children.Remove(child);
+            this.children.Remove(child);
         }
 
         public void RenderChildren(RenderInfo renderInfo)
         {
-            foreach (ElementComposite child in this.state.Children)
+            foreach (ElementComposite child in this.children)
             {
                 child.Render(renderInfo);
             }
