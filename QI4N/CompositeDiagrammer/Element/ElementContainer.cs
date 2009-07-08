@@ -10,6 +10,8 @@
         void AddChild(ElementComposite child);
 
         void RemoveChild(ElementComposite child);
+
+        void RenderChildren(RenderInfo renderInfo);
     }
 
     public interface ElementContainerState

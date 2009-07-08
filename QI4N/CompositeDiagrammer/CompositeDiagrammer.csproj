@@ -56,21 +56,18 @@
     </Compile>
     <Compile Include="Element\Concrete\Description.cs" />
     <Compile Include="Element\Concrete\EllipseShape.cs" />
-    <Compile Include="Element\Concrete\Group.cs" />
+    <Compile Include="Element\Concrete\GroupShape.cs" />
     <Compile Include="Element\Concrete\RectangleShape.cs" />
     <Compile Include="Element\ElementComposite.cs" />
     <Compile Include="Element\Mixins\AbstractShapeMixin.cs" />
     <Compile Include="Element\Mixins\BorderedMixin.cs" />
+    <Compile Include="Element\Mixins\Element2DMixin.cs" />
     <Compile Include="Element\Mixins\FilledMixin.cs" />
     <Compile Include="Element\Mixins\ElementMixin.cs" />
     <Compile Include="Element\Textual.cs" />
     <Compile Include="Element\Mixins\ElementContainerMixin.cs" />
     <Compile Include="Element\Mixins\TextualMixin.cs" />
-    <Compile Include="Element\Mixins\PositionalMixin.cs" />
-    <Compile Include="Element\Mixins\RotatableMixin.cs" />
-    <Compile Include="Element\Rotatable.cs" />
     <Compile Include="Element\Bordered.cs" />
-    <Compile Include="Element\Positional.cs" />
     <Compile Include="Element\Filled.cs" />
     <Compile Include="Element\Shape.cs" />
     <Compile Include="Element\ElementContainer.cs" />
