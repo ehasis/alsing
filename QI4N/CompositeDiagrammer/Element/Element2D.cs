@@ -1,8 +1,10 @@
-﻿namespace CompositeDiagrammer
+﻿using QI4N.Framework;
+
+namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
-    public interface Element2DComposite : Element, Element2D, TransientComposite
+    public interface Element2DComposite :  Element2D, ElementComposite
     {
     }
 
