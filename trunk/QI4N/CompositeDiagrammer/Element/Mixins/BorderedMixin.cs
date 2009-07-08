@@ -18,7 +18,7 @@
             using (var pen = new Pen(Color.Black, 3))
             {
                 using (GraphicsPath path = this.shape.GetPath())
-                {
+                {                    
                     renderInfo.Graphics.DrawPath(pen, path);
                 }
             }
