@@ -4,6 +4,17 @@
 
     using QI4N.Framework;
 
+    public interface ElementComposite : Element, TransientComposite
+    {
+    }
+
+
+    [Mixins(typeof(ElementMixin))]
+    public interface Element
+    {
+        void Render(RenderInfo renderInfo);
+    }
+
     public class ElementMixin : Element
     {
         [This]
