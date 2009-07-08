@@ -1,20 +1,13 @@
 ﻿namespace CompositeDiagrammer
 {
     using System.Drawing;
-
-    using QI4N.Framework;
+    using System.Drawing.Drawing2D;
 
     public class FilledMixin : Filled
     {
-        [This]
-        private Shape shape;
-
-        public void RenderFilling(RenderInfo renderInfo)
+        public void RenderFilling(RenderInfo renderInfo, GraphicsPath path)
         {
-            using(var path = shape.GetPath())
-            {
-                renderInfo.Graphics.FillPath(Brushes.Blue, path);
-            }
+            renderInfo.Graphics.FillPath(Brushes.Blue, path);
         }
     }
 }

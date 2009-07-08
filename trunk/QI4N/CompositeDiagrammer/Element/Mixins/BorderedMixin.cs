@@ -8,19 +8,13 @@
     public class BorderedMixin : Bordered
     {
         [This]
-        private Shape shape;
-
-        [This]
         private BorderedState border;
 
-        public void RenderBorder(RenderInfo renderInfo)
+        public void RenderBorder(RenderInfo renderInfo,GraphicsPath path)
         {
-            using (var pen = new Pen(Color.Black, 3))
+            using (var pen = new Pen(border.Color, border.With))
             {
-                using (GraphicsPath path = this.shape.GetPath())
-                {                    
-                    renderInfo.Graphics.DrawPath(pen, path);
-                }
+                renderInfo.Graphics.DrawPath(pen, path);
             }
         }
     }
