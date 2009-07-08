@@ -11,9 +11,10 @@
 
         public void RenderFilling(RenderInfo renderInfo)
         {
-            var path = shape.GetPath();
-            renderInfo.Graphics.FillPath(Brushes.Blue,path);
-            path.Dispose();
+            using(var path = shape.GetPath())
+            {
+                renderInfo.Graphics.FillPath(Brushes.Blue, path);
+            }
         }
     }
 }

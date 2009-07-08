@@ -17,6 +17,12 @@
 
     public class BorderInfo
     {
+        public BorderInfo()
+        {
+            BorderSize = 3;
+            BorderColor = Color.Black;
+        }
+
         public float BorderSize { get; set; }
 
         public Color BorderColor { get; set; }
