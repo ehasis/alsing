@@ -10,7 +10,7 @@
 
     public partial class Form1 : Form
     {
-        private readonly IList<Element> elements = new List<Element>();
+        private readonly IList<ElementComposite> elements = new List<ElementComposite>();
 
         public Form1()
         {
@@ -32,7 +32,7 @@
 
             module
                     .AddTransients()
-                    .Include<RectangleTransient>()
+                    .Include<Rectangle>()
                     //.Include<EllipseTransient>()
                     //.Include<DescriptionTransient>()
                     //.Include<GroupTransient>()
@@ -66,7 +66,7 @@
             var renderInfo = new RenderInfo();
             renderInfo.Graphics = e.Graphics;
 
-            foreach (Element element in elements)
+            foreach (ElementComposite element in elements)
             {
                 element.Render(renderInfo);
             }

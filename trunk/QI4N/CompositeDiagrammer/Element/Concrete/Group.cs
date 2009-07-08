@@ -2,7 +2,7 @@
 {
     using QI4N.Framework;
 
-    public interface Group : Element, Positional, Rotatable, ElementContainer
+    public interface Group : ElementComposite, Positional, Rotatable, ElementContainer
     {
     }
 
