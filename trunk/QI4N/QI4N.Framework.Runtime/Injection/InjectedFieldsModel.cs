@@ -23,8 +23,8 @@
             }
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public void Inject(InjectionContext context, object instance)
         {
             foreach (InjectedFieldModel field in this.fields)

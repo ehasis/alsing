@@ -17,8 +17,8 @@ namespace QI4N.Framework.Reflection
             return defaultValue;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public static FieldInfo[] GetAllFields(this Type type)
         {
             const BindingFlags flags = BindingFlags.Instance |
@@ -41,8 +41,8 @@ namespace QI4N.Framework.Reflection
             }
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public static IEnumerable<Type> GetAllInterfaces(this Type targetType)
         {
             var types = new List<Type>();
@@ -55,8 +55,8 @@ namespace QI4N.Framework.Reflection
             return types;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public static IEnumerable<MethodInfo> GetAllMethods(this Type type)
         {
             const BindingFlags flags = BindingFlags.Instance |
@@ -99,8 +99,8 @@ namespace QI4N.Framework.Reflection
             return propertyInfo;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public static MethodBuilder GetMethodOverrideBuilder(this TypeBuilder typeBuilder, MethodInfo method)
         {
             const MethodAttributes methodAttributes = MethodAttributes.NewSlot |
@@ -118,6 +118,17 @@ namespace QI4N.Framework.Reflection
             MethodBuilder methodBuilder = typeBuilder
                     .DefineMethod(methodName, methodAttributes, CallingConventions.Standard, method.ReturnType, parameters);
 
+            if (method.IsGenericMethod)
+            {
+                var genericArguments = method.GetGenericArguments();
+
+                string[] genericNames = genericArguments
+                    .Select(a => a.Name)
+                    .ToArray();
+
+                var genericParameters = methodBuilder.DefineGenericParameters(genericNames);
+            }
+
             typeBuilder.DefineMethodOverride(methodBuilder, method);
             return methodBuilder;
         }
@@ -131,8 +142,8 @@ namespace QI4N.Framework.Reflection
             return appliesTo.ToArray();
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public static string GetTypeName(this Type type)
         {
             if (type.IsGenericType)
@@ -162,15 +173,15 @@ namespace QI4N.Framework.Reflection
         }
 
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public static object NewInstance(this Type self)
         {
             return Activator.CreateInstance(self, null);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private static Type SelectParameterType(ParameterInfo param)
         {
             return param.ParameterType;

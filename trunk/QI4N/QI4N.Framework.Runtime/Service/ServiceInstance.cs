@@ -4,8 +4,8 @@
 
     public sealed class ServiceInstance : AbstractCompositeInstance
     {
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public ServiceInstance(ServiceModel compositeModel, ModuleInstance moduleInstance, object[] mixins)
                 : base(compositeModel, moduleInstance, mixins, null)
         {

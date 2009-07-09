@@ -25,8 +25,8 @@
             }
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public void CheckValid(object proxy, object[] args)
         {
             if (this.valueConstraintsInstances == null)

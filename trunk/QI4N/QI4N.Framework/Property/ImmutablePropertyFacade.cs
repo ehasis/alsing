@@ -38,14 +38,14 @@
 
         public object Value
         {
-            [DebuggerStepThrough]
-            //[DebuggerHidden]
+            //[DebuggerStepThrough]
+            ////[DebuggerHidden]
                     get
             {
                 return this.target.Value;
             }
-            [DebuggerStepThrough]
-            //[DebuggerHidden]
+            //[DebuggerStepThrough]
+            ////[DebuggerHidden]
                     set
             {
                 string message = string.Format("Property '{0}' is immutable", this.QualifiedName);

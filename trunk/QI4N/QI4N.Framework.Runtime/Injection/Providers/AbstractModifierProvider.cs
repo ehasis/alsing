@@ -5,8 +5,8 @@
 
     public class AbstractModifierProvider : InjectionProvider
     {
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object ProvideInjection(InjectionContext context, InjectionAttribute attribute, Type fieldType)
         {
             return context.Next;

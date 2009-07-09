@@ -12,8 +12,8 @@ namespace QI4N.Framework.Runtime
 
         private readonly ProxyReferenceInvocationHandler proxyHandler;
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public MethodConcernsInstance(InvocationHandler firstConcern, FragmentInvocationHandler mixinInvocationHandler, ProxyReferenceInvocationHandler proxyHandler)
         {
             this.firstConcern = firstConcern;
@@ -24,16 +24,16 @@ namespace QI4N.Framework.Runtime
 
         public bool IsEmpty
         {
-            [DebuggerStepThrough]
-            //[DebuggerHidden]
+            //[DebuggerStepThrough]
+            ////[DebuggerHidden]
                     get
             {
                 return this.firstConcern == this.mixinInvocationHandler;
             }
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             this.proxyHandler.Proxy = proxy;

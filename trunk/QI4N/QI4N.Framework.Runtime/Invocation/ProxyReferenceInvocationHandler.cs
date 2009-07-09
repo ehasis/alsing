@@ -8,8 +8,8 @@
     {
         public object Proxy { get; set; }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public void ClearProxy()
         {
             this.Proxy = null;

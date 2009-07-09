@@ -15,8 +15,8 @@
         public ConstraintAttribute Annotation { get; private set; }
 
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public bool IsValid(object value)
         {
             return this.constraint.IsValid(this.Annotation, value);

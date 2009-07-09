@@ -56,6 +56,7 @@
     <Compile Include="Constraint\NotOptionalConstraint.cs" />
     <Compile Include="Constraint\OptionalAttribute.cs" />
     <Compile Include="Constraint\RangeAttribute.cs" />
+    <Compile Include="Entity\IdentityGenerator.cs" />
     <Compile Include="Injection\Scope\ConcernForAttribute.cs" />
     <Compile Include="Injection\Scope\SideEffectForAttribute.cs" />
     <Compile Include="Property\ImmutablePropertyFacade.cs" />

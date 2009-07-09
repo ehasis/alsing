@@ -16,8 +16,8 @@
             this.constructors = type.GetConstructors();
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object NewInstance(InjectionContext injectionContext)
         {
             return Activator.CreateInstance(this.type, null);

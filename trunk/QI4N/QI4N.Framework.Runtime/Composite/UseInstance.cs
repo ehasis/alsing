@@ -10,8 +10,8 @@ namespace QI4N.Framework.Runtime
 
         protected List<object> usedObjects = new List<object>();
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public void Use(params object[] usedObjects)
         {
             this.usedObjects.AddRange(usedObjects);

@@ -89,8 +89,8 @@ namespace QI4N.Framework.Runtime
             return serviceType.IsAssignableFrom(this.compositeType);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public ServiceInstance NewInstance(ModuleInstance module)
         {
             object[] mixins = this.mixinsModel.NewMixinHolder();

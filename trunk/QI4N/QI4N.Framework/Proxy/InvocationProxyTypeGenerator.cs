@@ -26,8 +26,8 @@ namespace QI4N.Framework.Reflection
 
         private TypeBuilder typeBuilder;
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public Type BuildProxyType(Type compositeType, Type[] additionalTypes)
         {
             lock (syncRoot)
@@ -73,8 +73,8 @@ namespace QI4N.Framework.Reflection
             }
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private static void CreateInvocationHandlerMethod(MethodInfo method, ILGenerator generator, FieldBuilder fieldBuilder)
         {
             MethodInfo invokeMethod = typeof(InvocationHandler).GetMethod("Invoke");
@@ -109,7 +109,11 @@ namespace QI4N.Framework.Reflection
                 {
                     generator.Emit(OpCodes.Ldind_Ref);
                     Type t = parameterType.GetElementType();
-                    if (t.IsValueType)
+                    if (t.IsGenericParameter)
+                    {
+                        generator.Emit(OpCodes.Box, t);
+                    }
+                    else if (t.IsValueType)
                     {
                         generator.Emit(OpCodes.Box, t);
                     }
@@ -143,6 +147,12 @@ namespace QI4N.Framework.Reflection
             {
                 generator.Emit(OpCodes.Pop);
             }
+            else if (method.ReturnType.IsGenericParameter)
+            {
+               
+                generator.Emit(OpCodes.Unbox_Any, method.ReturnType);
+                generator.Emit(OpCodes.Ldobj, method.ReturnType);
+            }
             else if (method.ReturnType.IsValueType)
             {
                 generator.Emit(OpCodes.Unbox, method.ReturnType);
@@ -152,15 +162,15 @@ namespace QI4N.Framework.Reflection
             generator.Emit(OpCodes.Ret);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private static Type GetParameterType(ParameterInfo param)
         {
             return param.ParameterType;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private void CreateAssemblyBuilder()
         {
             AppDomain domain = Thread.GetDomain();
@@ -173,8 +183,8 @@ namespace QI4N.Framework.Reflection
             this.assemblyBuilder = domain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private void CreateCtor()
         {
             ConstructorBuilder ctorBuilder = this.typeBuilder.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new[]
@@ -189,15 +199,15 @@ namespace QI4N.Framework.Reflection
             generator.Emit(OpCodes.Ret);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private void CreateDefaultHandlerField()
         {
             this.defaultHandlerFieldBuilder = this.typeBuilder.DefineField("defaultHandler", typeof(InvocationHandler), FieldAttributes.Public);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private void CreateInterfaceList()
         {
             IEnumerable<Type> allFromComposite = this.compositeType.GetAllInterfaces();
@@ -210,8 +220,8 @@ namespace QI4N.Framework.Reflection
             this.interfaces = all;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private void CreateMethod(MethodInfo method)
         {
             MethodBuilder methodBuilder = this.typeBuilder.GetMethodOverrideBuilder(method);
@@ -233,8 +243,8 @@ namespace QI4N.Framework.Reflection
             CreateInvocationHandlerMethod(method, generator, fieldBuilder);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private void CreateTypeBuilder()
         {
             const string moduleName = "Alsing.Proxy";

@@ -52,8 +52,8 @@ namespace QI4N.Framework.Runtime
             return this.serviceProxy;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public CompositeInstance GetInstance()
         {
             lock (this.syncroot)

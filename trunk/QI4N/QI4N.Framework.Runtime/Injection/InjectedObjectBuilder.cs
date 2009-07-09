@@ -18,8 +18,8 @@
             this.injectedMethodsModel = new InjectedMethodsModel(typeToBuild);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object NewInstance(InjectionContext context)
         {
             object instance = this.constructorsModel.NewInstance(context);

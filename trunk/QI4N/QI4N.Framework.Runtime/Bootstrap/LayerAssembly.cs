@@ -7,7 +7,7 @@
 
     using Bootstrap;
 
-    [DebuggerDisplay("Name: {Name}")]
+    //[DebuggerDisplay("Name: {Name}")]
     public class LayerAssemblyImpl : LayerAssembly
     {
         private readonly ApplicationAssembly applicationAssembly;
