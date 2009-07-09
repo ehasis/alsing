@@ -6,7 +6,7 @@ namespace CompositeDiagrammer
     using QI4N.Framework;
 
     [Mixins(typeof(GroupShapeMixin))]
-    public interface GroupShape : Element2DComposite, Container, Contained, Selectable
+    public interface GroupShape : Element2DComposite, Container, Containable, Selectable
     {
     }
 

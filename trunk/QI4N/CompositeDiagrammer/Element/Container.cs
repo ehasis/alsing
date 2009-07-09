@@ -7,9 +7,9 @@ namespace CompositeDiagrammer
     [Mixins(typeof(ContainerMixin))]
     public interface Container
     {
-        void AddChild(Contained child);
+        void AddChild(Containable child);
 
-        void RemoveChild(Contained child);
+        void RemoveChild(Containable child);
 
         void RenderChildren(RenderInfo renderInfo);
     }
@@ -17,12 +17,12 @@ namespace CompositeDiagrammer
 
     public class ContainerMixin : Container
     {
-        private readonly IList<Contained> children = new List<Contained>();
+        private readonly IList<Containable> children = new List<Containable>();
 
         [This]
         private Container self;
 
-        public void AddChild(Contained child)
+        public void AddChild(Containable child)
         {
             if (child.Parent == self)
                 return;
@@ -36,7 +36,7 @@ namespace CompositeDiagrammer
             child.Parent = self;
         }
 
-        public void RemoveChild(Contained child)
+        public void RemoveChild(Containable child)
         {
             this.children.Remove(child);
             child.Parent = null;
