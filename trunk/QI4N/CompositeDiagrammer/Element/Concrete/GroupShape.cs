@@ -6,7 +6,7 @@ namespace CompositeDiagrammer
     using QI4N.Framework;
 
     [Mixins(typeof(GroupShapeMixin))]
-    public interface GroupShape : ElementComposite, Container, Contained
+    public interface GroupShape : ElementComposite, Container, Contained, Selectable
     {
     }
 
@@ -14,7 +14,7 @@ namespace CompositeDiagrammer
     {
         public override GraphicsPath GetPath()
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

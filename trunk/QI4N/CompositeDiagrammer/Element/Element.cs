@@ -28,6 +28,7 @@
             var bordered = this.self as Bordered;
             var filled = this.self as Filled;
             var container = this.self as Container;
+            var selectable = this.self as Selectable;
 
             using (GraphicsPath path = this.shape.GetPath())
             {
@@ -44,6 +45,11 @@
                 if (bordered != null)
                 {
                     bordered.RenderBorder(renderInfo, path);
+                }
+
+                if (selectable != null)
+                {
+                    selectable.RenderSelection(renderInfo,path);
                 }
             }
         }

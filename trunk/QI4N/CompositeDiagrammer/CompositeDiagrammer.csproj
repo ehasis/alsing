@@ -63,6 +63,7 @@
     <Compile Include="Element\Element2D.cs" />
     <Compile Include="Element\Element.cs" />
     <Compile Include="Element\Mixins\AbstractShapeMixin.cs" />
+    <Compile Include="Element\Selectable.cs" />
     <Compile Include="Element\Textual.cs" />
     <Compile Include="Element\Bordered.cs" />
     <Compile Include="Element\Filled.cs" />
