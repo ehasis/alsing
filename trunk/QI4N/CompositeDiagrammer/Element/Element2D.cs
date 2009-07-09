@@ -1,6 +1,6 @@
 ﻿namespace CompositeDiagrammer
 {
-    using System.Drawing;
+    using System.Drawing.Drawing2D;
 
     using QI4N.Framework;
 
@@ -9,7 +9,7 @@
     }
 
     [Mixins(typeof(Element2DMixin))]
-    public interface Element2D
+    public interface Element2D : Element
     {
         void SetLocation(int left, int top);
 
@@ -37,6 +37,12 @@
 
     public class Element2DMixin : Element2D
     {
+        [This]
+        private object self;
+
+        [This]
+        private Shape shape;
+
         [This]
         private Element2DState state;
 
@@ -67,6 +73,37 @@
         {
             this.state.Width = width;
             this.state.Height = height;
+        }
+
+        public void Render(RenderInfo renderInfo)
+        {
+            var bordered = this.self as Bordered;
+            var filled = this.self as Filled;
+            var container = this.self as Container;
+            var selectable = this.self as Selectable;
+
+            using (GraphicsPath path = this.shape.GetPath())
+            {
+                if (filled != null)
+                {
+                    filled.RenderFilling(renderInfo, path);
+                }
+
+                if (container != null)
+                {
+                    container.RenderChildren(renderInfo);
+                }
+
+                if (bordered != null)
+                {
+                    bordered.RenderBorder(renderInfo, path);
+                }
+
+                if (selectable != null)
+                {
+                    selectable.RenderSelection(renderInfo);
+                }
+            }
         }
     }
 }
