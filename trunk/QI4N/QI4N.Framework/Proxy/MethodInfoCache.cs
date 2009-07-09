@@ -1,5 +1,6 @@
 namespace QI4N.Framework.Reflection
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
@@ -29,6 +30,14 @@ namespace QI4N.Framework.Reflection
         public static MethodInfo GetMethod(int methodId)
         {
             return methodLookup[methodId];
+        }
+
+        public static MethodInfo GetGenericMethod(int methodId,Type[] genericArguments)
+        {
+            var method = methodLookup[methodId];
+            var generic = method.MakeGenericMethod(genericArguments);
+
+            return generic;
         }
     }
 }

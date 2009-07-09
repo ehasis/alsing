@@ -79,6 +79,8 @@ namespace QI4N.Framework.Reflection
         {
             MethodInfo invokeMethod = typeof(InvocationHandler).GetMethod("Invoke");
             MethodInfo getFromCacheMethod = typeof(MethodInfoCache).GetMethod("GetMethod");
+            MethodInfo getGenericFromCacheMethod = typeof(MethodInfoCache).GetMethod("GetGenericMethod");
+            MethodInfo getTypeFromHandleMethod = typeof(Type).GetMethod("GetTypeFromHandle");
 
             int methodId = MethodInfoCache.AddMethod(method);
 
@@ -91,6 +93,16 @@ namespace QI4N.Framework.Reflection
             generator.Emit(OpCodes.Ldc_I4_S, paramCount);
             generator.Emit(OpCodes.Newarr, typeof(object));
             generator.Emit(OpCodes.Stloc, paramArray);
+
+            LocalBuilder genericArray = generator.DeclareLocal(typeof(Type[]));
+            if (method.IsGenericMethodDefinition)
+            {
+                int genericCount = method.GetGenericArguments().Count();
+                
+                generator.Emit(OpCodes.Ldc_I4_S, genericCount);
+                generator.Emit(OpCodes.Newarr, typeof(Type));
+                generator.Emit(OpCodes.Stloc, genericArray);
+            }
             //---
 
             int j = 0;
@@ -135,7 +147,37 @@ namespace QI4N.Framework.Reflection
             // param 2 = methodinfo
 
             generator.Emit(OpCodes.Ldc_I4, methodId);
-            generator.Emit(OpCodes.Call, getFromCacheMethod);
+
+            if (method.IsGenericMethodDefinition)
+            {
+                
+                j = 0;
+                foreach (Type genericType in method.GetGenericArguments())
+                {
+                    //load arr
+                    generator.Emit(OpCodes.Ldloc, genericArray);
+                    //load index
+                    generator.Emit(OpCodes.Ldc_I4, j);
+
+                    //load type
+                    generator.Emit(OpCodes.Ldtoken, genericType);
+                    generator.Emit(OpCodes.Call, getTypeFromHandleMethod);
+
+                    //store type
+                    generator.Emit(OpCodes.Stelem_Ref);
+                    j++;
+
+                }
+                generator.Emit(OpCodes.Ldloc,genericArray);
+
+
+                generator.Emit(OpCodes.Call, getGenericFromCacheMethod);
+            }
+            else
+            {
+                generator.Emit(OpCodes.Call, getFromCacheMethod);
+            }
+            
 
             // param 3 = parameter array
             generator.Emit(OpCodes.Ldloc, paramArray);
