@@ -35,7 +35,7 @@
                     .Include<RectangleShape>()
                     .Include<EllipseShape>()
                     //.Include<DescriptionTransient>()
-                    //      .Include<GroupShape>()
+                    .Include<GroupShape>()
                     ;
 
             return module;
@@ -61,8 +61,12 @@
             var ellipse = shapeModule.TransientBuilderFactory.NewTransient<EllipseShape>();
             ellipse.SetBounds(300, 100, 200, 200);
 
-            this.elements.Add(rectangle);
-            this.elements.Add(ellipse);
+            var group = shapeModule.TransientBuilderFactory.NewTransient<GroupShape>();
+            group.AddChild(ellipse);
+            group.AddChild(rectangle);
+
+            this.elements.Add(group);
+            
         }
 
         private void viewPort1_Paint(object sender, PaintEventArgs e)
