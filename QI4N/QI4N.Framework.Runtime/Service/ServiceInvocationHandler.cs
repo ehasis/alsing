@@ -12,8 +12,8 @@
             this.owner = instance;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             if (method.Name == "ToString")

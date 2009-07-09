@@ -10,8 +10,8 @@
 
         private object result;
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             if (this.exception != null)
@@ -21,8 +21,8 @@
             return this.result;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public void SetResult(object result, Exception exception)
         {
             this.result = result;

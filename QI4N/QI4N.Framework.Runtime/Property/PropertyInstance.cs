@@ -2,7 +2,7 @@ namespace QI4N.Framework.Runtime
 {
     using System.Diagnostics;
 
-    [DebuggerDisplay("Value = {Value}")]
+    //[DebuggerDisplay("Value = {Value}")]
     public class PropertyInstance : Property
     {
         private readonly PropertyModel model;

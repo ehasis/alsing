@@ -71,6 +71,7 @@
     <Compile Include="Element\Filled.cs" />
     <Compile Include="Element\Shape.cs" />
     <Compile Include="Element\Container.cs" />
+    <Compile Include="Engine\Drawing.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

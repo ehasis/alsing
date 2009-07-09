@@ -8,8 +8,8 @@ namespace QI4N.Framework.JavaProxy
 
     public static class Proxy
     {
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public static Type BuildProxyType(Type compositeType, params Type[] additionalTypes)
         {
             var builder = new InvocationProxyTypeBuilder();
@@ -30,8 +30,8 @@ namespace QI4N.Framework.JavaProxy
             return defaultHandlerField != null;
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public static object NewProxyInstance(Type type, InvocationHandler handler)
         {
             Type proxyType = BuildProxyType(type);

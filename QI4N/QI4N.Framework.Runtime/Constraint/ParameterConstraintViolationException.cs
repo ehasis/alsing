@@ -7,14 +7,14 @@ namespace QI4N.Framework.Runtime
 
     public class ParameterConstraintViolationException : Exception
     {
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public ParameterConstraintViolationException(Composite composite, MethodInfo method, IEnumerable<ConstraintViolation> violations) : base(GetMessage(composite, method, violations))
         {
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private static string GetMessage(Composite composite, MethodInfo method, IEnumerable<ConstraintViolation> violations)
         {
             string message = string.Format("{0}.{1} caused parameter constraint violations", composite.GetType().Name, method.Name);

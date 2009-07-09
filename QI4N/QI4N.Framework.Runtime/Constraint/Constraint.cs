@@ -4,9 +4,9 @@
 
     public class Constraint
     {
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
-        [DebuggerNonUserCode]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
+        //[DebuggerNonUserCode]
         public bool IsValid(ConstraintAttribute annotation, object value)
         {
             return annotation.IsValid(value);

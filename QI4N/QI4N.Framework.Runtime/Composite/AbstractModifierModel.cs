@@ -21,7 +21,7 @@ namespace QI4N.Framework.Runtime
 
         public bool IsGeneric
         {
-            [DebuggerStepThrough]
+            //[DebuggerStepThrough]
             get
             {
                 return typeof(InvocationHandler).IsAssignableFrom(this.modifierType);
@@ -29,8 +29,8 @@ namespace QI4N.Framework.Runtime
         }
 
         // Context
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object NewInstance(ModuleInstance moduleInstance, object next, ProxyReferenceInvocationHandler proxyHandler)
         {
             var injectionContext = new InjectionContext(moduleInstance, this.WrapNext(next), proxyHandler);
@@ -45,8 +45,8 @@ namespace QI4N.Framework.Runtime
         //    this.injectedMethodsModel.visitModel(modelVisitor);
         //}
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         private object WrapNext(object next)
         {
             if (this.IsGeneric)

@@ -6,7 +6,7 @@ namespace QI4N.Framework.Runtime
 
     using Bootstrap;
 
-    [DebuggerDisplay("Name {Name}")]
+    //[DebuggerDisplay("Name {Name}")]
     public class ModuleAssemblyImpl : ModuleAssembly
     {
         private readonly IList<EntityDeclaration> entityDeclarations = new List<EntityDeclaration>();

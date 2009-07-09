@@ -105,23 +105,23 @@ namespace QI4N.Framework.Runtime
             return this.mixinImplementationTypes.IndexOf(mixinImplementationType);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public MixinModel MixinFor(MethodInfo method)
         {
             int integer = this.MethodIndex[method];
             return this.mixinModels[integer];
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public FragmentInvocationHandler NewInvocationHandler(MethodInfo method)
         {
             return this.MixinFor(method).NewInvocationHandler(method.DeclaringType);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object[] NewMixinHolder()
         {
             return new object[this.mixinModels.Count];

@@ -16,8 +16,8 @@ namespace QI4N.Framework.API.Reflection
 
         public Type FieldType
         {
-            [DebuggerStepThrough]
-            //[DebuggerHidden]
+            //[DebuggerStepThrough]
+            ////[DebuggerHidden]
             get
             {
                 return this.fieldInfo.FieldType;
@@ -29,8 +29,8 @@ namespace QI4N.Framework.API.Reflection
             return this.fieldInfo.GetValue(instance);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public void SetValue(object instance, object value)
         {
             this.fieldInfo.SetValue(instance, value);

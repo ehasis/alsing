@@ -7,8 +7,8 @@
     {
         public abstract string GetConstraintName();
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public abstract bool IsValid(object value);
     }
 }

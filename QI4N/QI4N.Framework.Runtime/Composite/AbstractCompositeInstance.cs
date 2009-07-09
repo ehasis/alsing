@@ -6,8 +6,8 @@
 
     public abstract class AbstractCompositeInstance : CompositeInstance, MixinsInstance
     {
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         protected AbstractCompositeInstance(AbstractCompositeModel compositeModel, ModuleInstance moduleInstance, object[] mixins, StateHolder state)
         {
             this.CompositeModel = compositeModel;
@@ -28,24 +28,24 @@
         public StateHolder State { get; set; }
 
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object Invoke(object proxy, MethodInfo method, object[] args)
         {
             return this.CompositeModel.Invoke(this, this, proxy, method, args, this.ModuleInstance);
         }
 
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object Invoke(object composite, object[] args, CompositeMethodInstance methodInstance)
         {
             object mixin = methodInstance.GetMixin(this.Mixins);
             return methodInstance.Invoke(composite, args, mixin);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object InvokeObject(object proxy, object[] args, MethodInfo method)
         {
             return method.Invoke(this, args);

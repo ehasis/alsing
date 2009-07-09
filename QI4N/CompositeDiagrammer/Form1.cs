@@ -30,6 +30,8 @@
         {
             ModuleAssembly module = layer.NewModuleAssembly("ShapeModule");
 
+            module.AddServices()
+                    .Include<DrawingService>();
             module
                     .AddTransients()
                     .Include<RectangleShape>()
@@ -55,15 +57,18 @@
 
             Module shapeModule = applicationInstance.FindModule("DomainLayer", "ShapeModule");
 
-            var rectangle = shapeModule.TransientBuilderFactory.NewTransient<RectangleShape>();
+            var drawing = shapeModule.ServiceFinder.FindService<Drawing>().Get();
+
+            var rectangle = drawing.Create<RectangleShape>();
             rectangle.SetBounds(100, 100, 200, 200);
+            rectangle.Rotate(1.5);
 
-            var ellipse = shapeModule.TransientBuilderFactory.NewTransient<EllipseShape>();
-            ellipse.SetBounds(300, 100, 200, 200);
 
-            var group = shapeModule.TransientBuilderFactory.NewTransient<GroupShape>();
-            group.AddChild(ellipse);
-            group.AddChild(rectangle);
+            var ellipse = drawing.Create<EllipseShape>();
+            ellipse.SetBounds(300, 100, 200, 300);
+
+            var group = drawing.Group(ellipse,rectangle);
+            
 
             this.elements.Add(group);
             

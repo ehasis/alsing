@@ -10,8 +10,8 @@
         protected StateHolder state;
 
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         object InvocationHandler.Invoke(object proxy, MethodInfo method, object[] args)
         {
             object value = args[0];

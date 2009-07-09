@@ -8,7 +8,7 @@ namespace QI4N.Framework.Runtime
 
     using Reflection;
 
-    [DebuggerDisplay("MixinType {MixinType}")]
+    //[DebuggerDisplay("MixinType {MixinType}")]
     public class MixinModel
     {
         private readonly ConcernsDeclaration concernsDeclaration;
@@ -59,8 +59,8 @@ namespace QI4N.Framework.Runtime
             return this.NewInstance(compositeInstance, stateHolder, UsesInstance.NoUses);
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object NewInstance(CompositeInstance compositeInstance, StateHolder stateHolder, UsesInstance uses)
         {
             var injectionContext = new InjectionContext(compositeInstance, uses, stateHolder);
@@ -69,8 +69,8 @@ namespace QI4N.Framework.Runtime
         }
 
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public FragmentInvocationHandler NewInvocationHandler(Type methodType)
         {
             if (typeof(InvocationHandler).IsAssignableFrom(this.MixinType) && !methodType.IsAssignableFrom(this.MixinType))

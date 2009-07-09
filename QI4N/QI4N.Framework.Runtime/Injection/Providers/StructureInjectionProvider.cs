@@ -5,8 +5,8 @@
 
     public class StructureInjectionProvider : InjectionProvider
     {
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public object ProvideInjection(InjectionContext context, InjectionAttribute attribute, Type fieldType)
         {
             if (fieldType == typeof(TransientBuilderFactory))

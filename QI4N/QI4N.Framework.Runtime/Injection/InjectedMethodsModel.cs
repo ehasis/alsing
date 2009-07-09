@@ -10,8 +10,8 @@ namespace QI4N.Framework.Runtime
             //     throw new NotImplementedException();
         }
 
-        [DebuggerStepThrough]
-        //[DebuggerHidden]
+        //[DebuggerStepThrough]
+        ////[DebuggerHidden]
         public void Inject(InjectionContext context, object mixin)
         {
             //      throw new NotImplementedException();
