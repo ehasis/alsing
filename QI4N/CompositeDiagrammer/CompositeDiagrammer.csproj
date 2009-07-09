@@ -60,7 +60,7 @@
     <Compile Include="Element\Concrete\GroupShape.cs" />
     <Compile Include="Element\Concrete\LineShape.cs" />
     <Compile Include="Element\Concrete\RectangleShape.cs" />
-    <Compile Include="Element\Contained.cs" />
+    <Compile Include="Element\Containable.cs" />
     <Compile Include="Element\Element1D.cs" />
     <Compile Include="Element\Element2D.cs" />
     <Compile Include="Element\Element.cs" />
