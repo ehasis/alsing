@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CompositeDiagrammer
+﻿namespace CompositeDiagrammer
 {
     using QI4N.Framework;
 
@@ -15,30 +10,21 @@ namespace CompositeDiagrammer
 
     public class ContainedMixin : Contained
     {
+        private Container parent;
+
         [This]
         private Contained self;
 
-        private Container parent;
         public Container Parent
         {
             get
             {
-                return parent;
-            } 
+                return this.parent;
+            }
             set
             {
-                if (parent != null)
-                {
-                    parent.RemoveChild(self);
-                }               
-
-                parent = value;
-
-                if (value != null)
-                {
-                    parent.AddChild(self);
-                }
+                this.parent = value;
             }
-        }        
+        }
     }
 }

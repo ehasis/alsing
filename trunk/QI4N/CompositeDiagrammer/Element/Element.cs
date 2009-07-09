@@ -49,7 +49,7 @@
 
                 if (selectable != null)
                 {
-                    selectable.RenderSelection(renderInfo,path);
+                    selectable.RenderSelection(renderInfo);
                 }
             }
         }

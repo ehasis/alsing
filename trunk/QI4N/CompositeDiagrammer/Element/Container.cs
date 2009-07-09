@@ -19,19 +19,32 @@ namespace CompositeDiagrammer
     {
         private readonly IList<Contained> children = new List<Contained>();
 
+        [This]
+        private Container self;
+
         public void AddChild(Contained child)
         {
+            if (child.Parent == self)
+                return;
+
+            if (child.Parent != null)
+            {
+                child.Parent.RemoveChild(child);
+            }
+
             this.children.Add(child);
+            child.Parent = self;
         }
 
         public void RemoveChild(Contained child)
         {
             this.children.Remove(child);
+            child.Parent = null;
         }
 
         public void RenderChildren(RenderInfo renderInfo)
         {
-            foreach (ElementComposite child in this.children)
+            foreach (Element child in this.children)
             {
                 child.Render(renderInfo);
             }

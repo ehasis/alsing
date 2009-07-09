@@ -15,23 +15,32 @@ namespace CompositeDiagrammer
     {
         bool IsSelected { get; set; }
 
-        void RenderSelection(RenderInfo renderInfo, GraphicsPath path);
+        void RenderSelection(RenderInfo renderInfo);
+
+        bool HitTest(int x, int y);
     }
 
     public class SelectableMixin : Selectable
     {
-
+        [This]
+        private Shape shape;
 
         public bool IsSelected { get; set; }
 
-        public void RenderSelection(RenderInfo renderInfo, GraphicsPath path)
+        public void RenderSelection(RenderInfo renderInfo)
         {
             if (IsSelected == false)
                 return;
 
+            var path = shape.GetPath();
             var bounds = path.GetBounds();
             bounds.Inflate(3,3);
             renderInfo.Graphics.DrawRectangle(Pens.Red ,bounds.X,bounds.Y,bounds.Width,bounds.Height);
+        }
+
+        public bool HitTest(int x, int y)
+        {
+            return false;
         }
     }
 }
