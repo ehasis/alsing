@@ -4,7 +4,7 @@
 
     using QI4N.Framework;
 
-    public interface ElementComposite : Element, TransientComposite
+    public interface ElementComposite : Element, Identity, TransientComposite
     {
     }
 
@@ -27,7 +27,7 @@
         {
             var bordered = this.self as Bordered;
             var filled = this.self as Filled;
-            var container = this.self as ElementContainer;
+            var container = this.self as Container;
 
             using (GraphicsPath path = this.shape.GetPath())
             {

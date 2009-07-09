@@ -4,27 +4,27 @@ namespace CompositeDiagrammer
 
     using QI4N.Framework;
 
-    [Mixins(typeof(ElementContainerMixin))]
-    public interface ElementContainer
+    [Mixins(typeof(ContainerMixin))]
+    public interface Container
     {
-        void AddChild(ElementComposite child);
+        void AddChild(Contained child);
 
-        void RemoveChild(ElementComposite child);
+        void RemoveChild(Contained child);
 
         void RenderChildren(RenderInfo renderInfo);
     }
 
 
-    public class ElementContainerMixin : ElementContainer
+    public class ContainerMixin : Container
     {
-        private readonly IList<ElementComposite> children = new List<ElementComposite>();
+        private readonly IList<Contained> children = new List<Contained>();
 
-        public void AddChild(ElementComposite child)
+        public void AddChild(Contained child)
         {
             this.children.Add(child);
         }
 
-        public void RemoveChild(ElementComposite child)
+        public void RemoveChild(Contained child)
         {
             this.children.Remove(child);
         }

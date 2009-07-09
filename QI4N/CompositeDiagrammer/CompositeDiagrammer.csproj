@@ -54,10 +54,12 @@
     <Compile Include="Controls\ViewPort.designer.cs">
       <DependentUpon>ViewPort.cs</DependentUpon>
     </Compile>
+    <Compile Include="Element\Concerns\GenericStateTrackingConcern.cs" />
     <Compile Include="Element\Concrete\Description.cs" />
     <Compile Include="Element\Concrete\EllipseShape.cs" />
     <Compile Include="Element\Concrete\GroupShape.cs" />
     <Compile Include="Element\Concrete\RectangleShape.cs" />
+    <Compile Include="Element\Contained.cs" />
     <Compile Include="Element\Element2D.cs" />
     <Compile Include="Element\Element.cs" />
     <Compile Include="Element\Mixins\AbstractShapeMixin.cs" />
@@ -65,7 +67,7 @@
     <Compile Include="Element\Bordered.cs" />
     <Compile Include="Element\Filled.cs" />
     <Compile Include="Element\Shape.cs" />
-    <Compile Include="Element\ElementContainer.cs" />
+    <Compile Include="Element\Container.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,9 +115,6 @@
       <Project>{46604E99-EE88-42DD-B56D-B396E4886CE2}</Project>
       <Name>QI4N.Framework</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Element\Concerns\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
