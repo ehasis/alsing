@@ -94,7 +94,8 @@ namespace QI4N.Framework.Runtime
                     return this.ImplementMethodWithType(method, mixinType);
                 }
 
-                throw new Exception("No implementation found for method " + method.Name);
+                string message = string.Format("No implementation found for method {0}.{1}",method.DeclaringType.Name,method.Name );
+                throw new Exception(message);
             }
 
             return this.methodImplementation[method];

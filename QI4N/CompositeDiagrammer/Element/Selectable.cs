@@ -32,7 +32,7 @@ namespace CompositeDiagrammer
             if (IsSelected == false)
                 return;
 
-            var path = this.Path.GetPath();
+            var path = this.Path.Get();
             var bounds = path.GetBounds();
             bounds.Inflate(3,3);
             renderInfo.Graphics.DrawRectangle(Pens.Red ,bounds.X,bounds.Y,bounds.Width,bounds.Height);

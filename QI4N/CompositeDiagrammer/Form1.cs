@@ -36,6 +36,7 @@
                     .AddTransients()
                     .Include<RectangleShape>()
                     .Include<EllipseShape>()
+                    .Include<LineShape>()
                     //.Include<DescriptionTransient>()
                     .Include<GroupShape>()
                     ;

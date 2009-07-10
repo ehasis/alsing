@@ -4,6 +4,6 @@
 
     public interface Path
     {
-        GraphicsPath GetPath();
+        GraphicsPath Get();
     }
 }
