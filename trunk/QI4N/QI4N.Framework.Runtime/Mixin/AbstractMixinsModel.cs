@@ -109,7 +109,7 @@ namespace QI4N.Framework.Runtime
         ////[DebuggerHidden]
         public MixinModel MixinFor(MethodInfo method)
         {
-            int integer = this.MethodIndex[method];
+            int integer = this.MethodIndex[method.ToDefinition()];
             return this.mixinModels[integer];
         }
 

@@ -62,16 +62,14 @@ namespace QI4N.Framework.Runtime
         {
             CompositeMethodModel compositeMethod;
 
-            MethodInfo keyMethod = method;
-            if (method.IsGenericMethod)
-                keyMethod = method.GetGenericMethodDefinition();
+            
 
-            if (this.methods.TryGetValue(keyMethod, out compositeMethod) == false)
+            if (this.methods.TryGetValue(method.ToDefinition(), out compositeMethod) == false)
             {
                 return mixins.InvokeObject(proxy, args, method);
             }
 
-            return compositeMethod.Invoke(proxy, args, mixins, moduleInstance);
+            return compositeMethod.Invoke(method, proxy, args, mixins, moduleInstance);
         }
 
         public override string ToString()

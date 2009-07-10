@@ -4,7 +4,7 @@
 
     using QI4N.Framework;
 
-    public interface DrawingService : Drawing, ServiceComposite
+    public interface DrawingService : Drawing, TransientComposite
     {
     }
 

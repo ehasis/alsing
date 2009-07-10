@@ -186,5 +186,14 @@ namespace QI4N.Framework.Reflection
         {
             return param.ParameterType;
         }
+
+
+        public static MethodInfo ToDefinition(this MethodInfo self)
+        {
+            if (self.IsGenericMethod)
+                return self.GetGenericMethodDefinition();
+
+            return self;
+        }
     }
 }

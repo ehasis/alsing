@@ -30,7 +30,7 @@
         {
             ModuleAssembly module = layer.NewModuleAssembly("ShapeModule");
 
-            module.AddServices()
+            module.AddTransients()
                     .Include<DrawingService>();
             module
                     .AddTransients()
@@ -57,7 +57,7 @@
 
             Module shapeModule = applicationInstance.FindModule("DomainLayer", "ShapeModule");
 
-            var drawing = shapeModule.ServiceFinder.FindService<Drawing>().Get();
+            var drawing = shapeModule.TransientBuilderFactory.NewTransient<Drawing>();
 
             var rectangle = drawing.Create<RectangleShape>();
             rectangle.SetBounds(100, 100, 200, 200);
