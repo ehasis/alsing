@@ -15,7 +15,7 @@ namespace CompositeDiagrammer
 
         void Remove(Shape shape);
 
-        GroupShape Group(params Containable[] containables);
+        GroupShape Group(params IsContainable[] isContainables);
 
         string SayHello();
     }
@@ -34,10 +34,10 @@ namespace CompositeDiagrammer
             return element;
         }
 
-        public GroupShape Group(params Containable[] containables)
+        public GroupShape Group(params IsContainable[] isContainables)
         {
             var group = this.Create<GroupShape>();
-            foreach (Containable containable in containables)
+            foreach (IsContainable containable in isContainables)
             {
                 group.AddChild(containable);
             }

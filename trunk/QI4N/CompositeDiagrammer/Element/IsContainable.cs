@@ -3,15 +3,15 @@
     using QI4N.Framework;
 
     [Mixins(typeof(ContainableMixin))]
-    public interface Containable
+    public interface IsContainable
     {
         Container Parent { get; set; }
     }
 
-    public class ContainableMixin : Containable
+    public class ContainableMixin : IsContainable
     {
         [This]
-        private Containable self;
+        private IsContainable self;
 
         public Container Parent { get; set; }
     }

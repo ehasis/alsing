@@ -6,7 +6,7 @@
 
     [Mixins(typeof(LinePathMixin))]
     [Mixins(typeof(LineNodesMixin))]
-    public interface LineShape : SegmentedShapeComposite, Containable, Selectable
+    public interface LineShape : SegmentedShapeComposite, HasLineStyle, IsContainable, IsSelectable
     {
     }
 

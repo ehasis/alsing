@@ -6,7 +6,7 @@
     using QI4N.Framework;
 
     [Mixins(typeof(RectanglePathMixin))]
-    public interface RectangleShape : BoundedShapeComposite, Bordered, Filled, Containable , Selectable
+    public interface RectangleShape : BoundedShapeComposite, HasLineStyle, HasFillStyle, IsContainable , IsSelectable
     {
     }
 

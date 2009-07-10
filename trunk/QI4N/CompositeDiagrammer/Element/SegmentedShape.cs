@@ -39,6 +39,9 @@
         [This]
         private Path path;
 
+        [This]
+        private object self;
+
         private readonly IList<SegmentedShapeNode> selectedNodes = new List<SegmentedShapeNode>();
 
         public void Move(int offsetX, int offsetY)
@@ -54,7 +57,7 @@
         {
             SegmentedShapeNode node = this.nodes.Get()[nodeIndex];
             node.X += offsetX;
-            node.Y += offsetX;
+            node.Y += offsetY;
         }
 
         public void MoveSelectedNodes(int offsetX, int offsetY)
@@ -79,8 +82,32 @@
 
         public void Render(RenderInfo renderInfo)
         {
+            var bordered = this.self as HasLineStyle;
+            var filled = this.self as HasFillStyle;
+            var container = this.self as Container;
+            var selectable = this.self as IsSelectable;
+
             using (GraphicsPath graphicsPath = this.path.Get())
             {
+                if (filled != null)
+                {
+                    filled.RenderFilling(renderInfo, graphicsPath);
+                }
+
+                if (container != null)
+                {
+                    container.RenderChildren(renderInfo);
+                }
+
+                if (bordered != null)
+                {
+                    bordered.RenderBorder(renderInfo, graphicsPath);
+                }
+
+                if (selectable != null)
+                {
+                    selectable.RenderSelection(renderInfo);
+                }
             }
         }
     }

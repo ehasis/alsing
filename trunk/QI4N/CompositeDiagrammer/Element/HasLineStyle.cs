@@ -6,8 +6,8 @@ namespace CompositeDiagrammer
 
     using QI4N.Framework;
 
-    [Mixins(typeof(BorderedMixin))]
-    public interface Bordered
+    [Mixins(typeof(HasLineStyleMixin))]
+    public interface HasLineStyle
     {
         void RenderBorder(RenderInfo renderInfo, GraphicsPath path);
     }
@@ -21,7 +21,7 @@ namespace CompositeDiagrammer
         Color Color { get; set; }
     }
 
-    public class BorderedMixin : Bordered
+    public class HasLineStyleMixin : HasLineStyle
     {
         [This]
         private BorderedState border;

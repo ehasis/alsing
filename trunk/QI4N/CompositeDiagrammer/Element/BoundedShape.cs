@@ -77,10 +77,10 @@
 
         public void Render(RenderInfo renderInfo)
         {
-            var bordered = this.self as Bordered;
-            var filled = this.self as Filled;
+            var bordered = this.self as HasLineStyle;
+            var filled = this.self as HasFillStyle;
             var container = this.self as Container;
-            var selectable = this.self as Selectable;
+            var selectable = this.self as IsSelectable;
 
             using (GraphicsPath graphicsPath = this.path.Get())
             {
