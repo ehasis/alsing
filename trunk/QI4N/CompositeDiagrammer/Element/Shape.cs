@@ -2,12 +2,12 @@
 {
     using QI4N.Framework;
 
-    public interface ElementComposite : Element, Identity, TransientComposite
+    public interface ShapeComposite : Shape, Identity, TransientComposite
     {
     }
 
 
-    public interface Element
+    public interface Shape
     {
         void Render(RenderInfo renderInfo);
     }

@@ -44,7 +44,7 @@ namespace CompositeDiagrammer
 
         public void RenderChildren(RenderInfo renderInfo)
         {
-            foreach (Element child in this.children)
+            foreach (Shape child in this.children)
             {
                 child.Render(renderInfo);
             }

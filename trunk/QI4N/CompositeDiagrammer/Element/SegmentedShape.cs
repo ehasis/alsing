@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CompositeDiagrammer
+﻿namespace CompositeDiagrammer
 {
+    using System.Collections.Generic;
+
     using QI4N.Framework;
 
-    public interface SegmentedShapeComposite : SegmentedShape, ElementComposite
+    public interface SegmentedShapeComposite : SegmentedShape, ShapeComposite
     {
     }
 
@@ -24,20 +21,21 @@ namespace CompositeDiagrammer
     public class SegmentedShapeMixin : SegmentedShape
     {
         private readonly IList<SegmentedShapeNode> nodes = new List<SegmentedShapeNode>();
+
         private readonly IList<SegmentedShapeNode> selectedNodes = new List<SegmentedShapeNode>();
 
-        public void MoveSelectedNodes(int offsetX, int offsetY)
+        public void Move(int offsetX, int offsetY)
         {
-            foreach(var node in selectedNodes)
+            foreach (SegmentedShapeNode node in this.nodes)
             {
                 node.X += offsetX;
                 node.Y += offsetY;
             }
         }
 
-        public void Move(int offsetX, int offsetY)
+        public void MoveSelectedNodes(int offsetX, int offsetY)
         {
-            foreach (var node in nodes)
+            foreach (SegmentedShapeNode node in this.selectedNodes)
             {
                 node.X += offsetX;
                 node.Y += offsetY;

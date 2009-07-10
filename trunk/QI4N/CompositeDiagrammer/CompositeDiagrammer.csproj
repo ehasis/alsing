@@ -62,9 +62,9 @@
     <Compile Include="Element\Concrete\RectangleShape.cs" />
     <Compile Include="Element\Containable.cs" />
     <Compile Include="Element\SegmentedShape.cs" />
-    <Compile Include="Element\Element2D.cs" />
-    <Compile Include="Element\Element.cs" />
-    <Compile Include="Element\Mixins\AbstractShapePathMixin.cs" />
+    <Compile Include="Element\PathShape.cs" />
+    <Compile Include="Element\Shape.cs" />
+    <Compile Include="Element\Mixins\AbstractPathMixin.cs" />
     <Compile Include="Element\Selectable.cs" />
     <Compile Include="Element\Textual.cs" />
     <Compile Include="Element\Bordered.cs" />
