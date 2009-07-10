@@ -5,12 +5,12 @@
 
     using QI4N.Framework;
 
-    [Mixins(typeof(EllipseShapeMixin))]
+    [Mixins(typeof(EllipseShapePathMixin))]
     public interface EllipseShape : Element2DComposite, Bordered, Filled, Containable, Selectable
     {
     }
 
-    public class EllipseShapeMixin : AbstractShapeMixin
+    public class EllipseShapePathMixin : AbstractShapePathMixin
     {
         public override GraphicsPath GetPath()
         {

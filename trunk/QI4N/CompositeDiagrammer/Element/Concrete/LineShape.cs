@@ -5,7 +5,8 @@ using System.Text;
 
 namespace CompositeDiagrammer
 {
-    class LineShape
+    public interface LineShape : SegmentedShapeComposite, Containable, Selectable
     {
+
     }
 }
