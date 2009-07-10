@@ -59,7 +59,10 @@
 
             var drawing = shapeModule.TransientBuilderFactory.NewTransient<Drawing>();
 
+            var str = drawing.ToString();
+            str = drawing.SayHello();
             var rectangle = drawing.Create<RectangleShape>();
+            drawing.Remove(rectangle);
             rectangle.SetBounds(100, 100, 200, 200);
             rectangle.Rotate(1.5);
 

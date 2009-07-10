@@ -3,10 +3,10 @@ namespace QI4N.Framework.Runtime
     using System.Diagnostics;
     using System.Reflection;
 
+    using Reflection;
+
     public class CompositeMethodModel
     {
-        private readonly MethodInfo method;
-
         private readonly MethodConcernsModel methodConcerns;
 
         private readonly MethodConstraintsModel methodConstraints;
@@ -17,13 +17,11 @@ namespace QI4N.Framework.Runtime
 
         private readonly AbstractMixinsModel mixins;
 
-        public CompositeMethodModel(MethodInfo method,
-                                    MethodConstraintsModel methodConstraintsModel,
+        public CompositeMethodModel(MethodConstraintsModel methodConstraintsModel,
                                     MethodConcernsModel methodConcernsModel,
                                     MethodSideEffectsModel methodSideEffectsModel,
                                     AbstractMixinsModel mixinsModel)
         {
-            this.method = method;
             this.mixins = mixinsModel;
             this.methodConcerns = methodConcernsModel;
             this.methodSideEffects = methodSideEffectsModel;
@@ -70,7 +68,7 @@ namespace QI4N.Framework.Runtime
                 invoker = sideEffectsInstance;
             }
 
-            return new CompositeMethodInstance(invoker, mixinInvocationHandler, genericMethod, this.mixins.MethodIndex[this.method]);
+            return new CompositeMethodInstance(invoker, mixinInvocationHandler, genericMethod, this.mixins.MethodIndex[genericMethod.ToDefinition()]);
         }
     }
 }
