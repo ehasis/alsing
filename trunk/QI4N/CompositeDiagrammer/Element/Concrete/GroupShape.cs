@@ -12,7 +12,7 @@ namespace CompositeDiagrammer
 
     public class GroupShapeMixin : AbstractPathMixin
     {
-        public override GraphicsPath GetPath()
+        public override GraphicsPath Get()
         {
             return null;
         }

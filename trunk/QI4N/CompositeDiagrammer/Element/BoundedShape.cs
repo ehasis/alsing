@@ -82,7 +82,7 @@
             var container = this.self as Container;
             var selectable = this.self as Selectable;
 
-            using (GraphicsPath graphicsPath = this.path.GetPath())
+            using (GraphicsPath graphicsPath = this.path.Get())
             {
                 if (filled != null)
                 {

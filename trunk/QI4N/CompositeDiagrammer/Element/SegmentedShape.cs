@@ -1,6 +1,8 @@
 ﻿namespace CompositeDiagrammer
 {
     using System.Collections.Generic;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
 
     using QI4N.Framework;
 
@@ -9,7 +11,7 @@
     }
 
     [Mixins(typeof(SegmentedShapeMixin))]
-    public interface SegmentedShape
+    public interface SegmentedShape : Shape
     {
         void MoveSelectedNodes(int offsetX, int offsetY);
 
@@ -22,15 +24,20 @@
         void Rotate(double angle);
     }
 
-    public interface SegmentedShapeNodes
+    public interface Nodes
     {
         IList<SegmentedShapeNode> Get();
+
+        Point[] GetPoints();
     }
 
     public class SegmentedShapeMixin : SegmentedShape
     {
         [This]
-        private SegmentedShapeNodes nodes;
+        private Nodes nodes;
+
+        [This]
+        private Path path;
 
         private readonly IList<SegmentedShapeNode> selectedNodes = new List<SegmentedShapeNode>();
 
@@ -69,6 +76,13 @@
             node.X = x;
             node.Y = y;
         }
+
+        public void Render(RenderInfo renderInfo)
+        {
+            using (GraphicsPath graphicsPath = this.path.Get())
+            {
+            }
+        }
     }
 
     public class SegmentedShapeNode
@@ -76,5 +90,10 @@
         public int X { get; set; }
 
         public int Y { get; set; }
+
+        public Point ToPoint()
+        {
+            return new Point(X,Y);
+        }
     }
 }

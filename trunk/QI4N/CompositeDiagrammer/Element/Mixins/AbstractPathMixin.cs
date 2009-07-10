@@ -9,6 +9,6 @@
         [This]
         protected BoundedShapeState state;
 
-        public abstract GraphicsPath GetPath();
+        public abstract GraphicsPath Get();
     }
 }
