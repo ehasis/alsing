@@ -4,7 +4,7 @@
 
     using QI4N.Framework;
 
-    public abstract class AbstractShapeMixin : Shape
+    public abstract class AbstractShapePathMixin : ShapePath
     {
         [This]
         protected Element2DState state;

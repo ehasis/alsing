@@ -5,12 +5,12 @@
 
     using QI4N.Framework;
 
-    [Mixins(typeof(RectangleShapeMixin))]
+    [Mixins(typeof(RectangleShapePathMixin))]
     public interface RectangleShape : Element2DComposite, Bordered, Filled, Containable , Selectable
     {
     }
 
-    public class RectangleShapeMixin : AbstractShapeMixin
+    public class RectangleShapePathMixin : AbstractShapePathMixin
     {
         public override GraphicsPath GetPath()
         {

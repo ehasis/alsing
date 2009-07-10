@@ -41,7 +41,7 @@
         private object self;
 
         [This]
-        private Shape shape;
+        private ShapePath shapePath;
 
         [This]
         private Element2DState state;
@@ -82,7 +82,7 @@
             var container = this.self as Container;
             var selectable = this.self as Selectable;
 
-            using (GraphicsPath path = this.shape.GetPath())
+            using (GraphicsPath path = this.shapePath.GetPath())
             {
                 if (filled != null)
                 {
