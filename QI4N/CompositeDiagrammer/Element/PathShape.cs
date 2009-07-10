@@ -4,12 +4,12 @@
 
     using QI4N.Framework;
 
-    public interface Element2DComposite : Element2D, ElementComposite
+    public interface PathShapeComposite : PathShape, ShapeComposite
     {
     }
 
-    [Mixins(typeof(Element2DMixin))]
-    public interface Element2D : Element
+    [Mixins(typeof(PathShapeMixin))]
+    public interface PathShape : Shape
     {
         void SetLocation(int left, int top);
 
@@ -22,7 +22,7 @@
         void Rotate(double angle);
     }
 
-    public interface Element2DState
+    public interface PathShapeState
     {
         int Left { get; set; }
 
@@ -35,7 +35,7 @@
         double Angle { get; set; }
     }
 
-    public class Element2DMixin : Element2D
+    public class PathShapeMixin : PathShape
     {
         [This]
         private object self;
@@ -44,7 +44,7 @@
         private ShapePath shapePath;
 
         [This]
-        private Element2DState state;
+        private PathShapeState state;
 
         public void Move(int offsetX, int offsetY)
         {

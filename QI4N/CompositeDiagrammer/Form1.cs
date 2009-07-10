@@ -10,7 +10,7 @@
 
     public partial class Form1 : Form
     {
-        private readonly IList<Element> elements = new List<Element>();
+        private readonly IList<Shape> elements = new List<Shape>();
 
         public Form1()
         {
@@ -82,7 +82,7 @@
                                          Graphics = e.Graphics
                                  };
 
-            foreach (Element element in this.elements)
+            foreach (Shape element in this.elements)
             {
                 element.Render(renderInfo);
             }

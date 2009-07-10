@@ -6,11 +6,11 @@ namespace CompositeDiagrammer
     using QI4N.Framework;
 
     [Mixins(typeof(GroupShapeMixin))]
-    public interface GroupShape : Element2DComposite, Container, Containable, Selectable
+    public interface GroupShape : PathShapeComposite, Container, Containable, Selectable
     {
     }
 
-    public class GroupShapeMixin : AbstractShapePathMixin
+    public class GroupShapeMixin : AbstractPathMixin
     {
         public override GraphicsPath GetPath()
         {

@@ -1,4 +1,4 @@
-﻿namespace CompositeDiagrammer
+namespace CompositeDiagrammer
 {
     using System.Collections.Generic;
 
@@ -11,9 +11,9 @@
     [Mixins(typeof(DrawingMixin))]
     public interface Drawing
     {
-        T Create<T>() where T : Element;
+        T Create<T>() where T : Shape;
 
-        void Remove(Element element);
+        void Remove(Shape shape);
 
         GroupShape Group(params Containable[] containables);
 
@@ -22,12 +22,12 @@
 
     public class DrawingMixin : Drawing
     {
-        private readonly IList<Element> elements = new List<Element>();
+        private readonly IList<Shape> elements = new List<Shape>();
 
         [Structure]
         private TransientBuilderFactory tbf;
 
-        public T Create<T>() where T : Element
+        public T Create<T>() where T : Shape
         {
             var element = this.tbf.NewTransient<T>();
             this.elements.Add(element);
@@ -45,9 +45,9 @@
             return group;
         }
 
-        public void Remove(Element element)
+        public void Remove(Shape shape)
         {
-            this.elements.Remove(element);
+            this.elements.Remove(shape);
         }
 
         public string SayHello()
