@@ -1,6 +1,6 @@
 namespace CompositeDiagrammer
 {
-    public interface Description : ShapeComposite, Bordered, Filled, Textual
+    public interface Description : ShapeComposite, HasLineStyle, HasFillStyle, Textual
     {
     }
 }

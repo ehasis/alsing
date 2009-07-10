@@ -11,7 +11,7 @@ namespace CompositeDiagrammer
     using QI4N.Framework;
 
     [Mixins(typeof(SelectableMixin))]
-    public interface Selectable
+    public interface IsSelectable
     {
         bool IsSelected { get; set; }
 
@@ -20,7 +20,7 @@ namespace CompositeDiagrammer
         bool HitTest(int x, int y);
     }
 
-    public class SelectableMixin : Selectable
+    public class SelectableMixin : IsSelectable
     {
         [This]
         private Path Path;

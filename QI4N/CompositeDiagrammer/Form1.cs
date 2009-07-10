@@ -69,7 +69,11 @@
             var ellipse = drawing.Create<EllipseShape>();
             ellipse.SetBounds(300, 100, 200, 300);
 
-            var group = drawing.Group(ellipse,rectangle);
+            var line = drawing.Create<LineShape>();
+            line.MoveNode(0,50,150);
+            line.MoveNode(1,500,300);
+
+            var group = drawing.Group(ellipse,rectangle,line);
             
 
             this.elements.Add(group);
