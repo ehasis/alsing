@@ -62,14 +62,12 @@ namespace QI4N.Framework.Runtime
         {
             CompositeMethodModel compositeMethod;
 
-            
-
-            if (this.methods.TryGetValue(method.ToDefinition(), out compositeMethod) == false)
+            if (this.methods.TryGetValue(method.ToDefinition(), out compositeMethod))
             {
-                return mixins.InvokeObject(proxy, args, method);
+                return compositeMethod.Invoke(method, proxy, args, mixins, moduleInstance);
             }
 
-            return compositeMethod.Invoke(method, proxy, args, mixins, moduleInstance);
+            return mixins.InvokeObject(proxy, args, method);
         }
 
         public override string ToString()
@@ -145,7 +143,7 @@ namespace QI4N.Framework.Runtime
 
                     var methodConstraintsModel = new MethodConstraintsModel(method, this.constraintsModel);
 
-                    var compositeMethodModel = new CompositeMethodModel(method, methodConstraintsModel, methodConcernsModel, methodSideEffectsModel, this.mixinsModel);
+                    var compositeMethodModel = new CompositeMethodModel(methodConstraintsModel, methodConcernsModel, methodSideEffectsModel, this.mixinsModel);
                     this.methods.Add(method, compositeMethodModel);
                 }
 

@@ -16,6 +16,8 @@
         void Remove(Element element);
 
         GroupShape Group(params Containable[] containables);
+
+        string SayHello();
     }
 
     public class DrawingMixin : Drawing
@@ -23,11 +25,11 @@
         private readonly IList<Element> elements = new List<Element>();
 
         [Structure]
-        private Module module;
+        private TransientBuilderFactory tbf;
 
         public T Create<T>() where T : Element
         {
-            var element = this.module.TransientBuilderFactory.NewTransient<T>();
+            var element = this.tbf.NewTransient<T>();
             this.elements.Add(element);
             return element;
         }
@@ -46,6 +48,11 @@
         public void Remove(Element element)
         {
             this.elements.Remove(element);
+        }
+
+        public string SayHello()
+        {
+            return "hej";
         }
     }
 }
