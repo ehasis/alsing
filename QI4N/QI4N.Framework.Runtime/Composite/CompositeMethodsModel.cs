@@ -62,7 +62,11 @@ namespace QI4N.Framework.Runtime
         {
             CompositeMethodModel compositeMethod;
 
-            if (this.methods.TryGetValue(method, out compositeMethod) == false)
+            MethodInfo keyMethod = method;
+            if (method.IsGenericMethod)
+                keyMethod = method.GetGenericMethodDefinition();
+
+            if (this.methods.TryGetValue(keyMethod, out compositeMethod) == false)
             {
                 return mixins.InvokeObject(proxy, args, method);
             }
