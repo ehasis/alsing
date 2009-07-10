@@ -4,10 +4,10 @@
 
     using QI4N.Framework;
 
-    public abstract class AbstractPathMixin : ShapePath
+    public abstract class AbstractPathMixin : Path
     {
         [This]
-        protected PathShapeState state;
+        protected BoundedShapeState state;
 
         public abstract GraphicsPath GetPath();
     }

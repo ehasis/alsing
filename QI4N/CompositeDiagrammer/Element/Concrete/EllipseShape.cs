@@ -6,7 +6,7 @@
     using QI4N.Framework;
 
     [Mixins(typeof(EllipsePathMixin))]
-    public interface EllipseShape : PathShapeComposite, Bordered, Filled, Containable, Selectable
+    public interface EllipseShape : BoundedShapeComposite, Bordered, Filled, Containable, Selectable
     {
     }
 

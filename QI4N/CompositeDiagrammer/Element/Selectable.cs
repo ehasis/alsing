@@ -23,7 +23,7 @@ namespace CompositeDiagrammer
     public class SelectableMixin : Selectable
     {
         [This]
-        private ShapePath shapePath;
+        private Path Path;
 
         public bool IsSelected { get; set; }
 
@@ -32,7 +32,7 @@ namespace CompositeDiagrammer
             if (IsSelected == false)
                 return;
 
-            var path = this.shapePath.GetPath();
+            var path = this.Path.GetPath();
             var bounds = path.GetBounds();
             bounds.Inflate(3,3);
             renderInfo.Graphics.DrawRectangle(Pens.Red ,bounds.X,bounds.Y,bounds.Width,bounds.Height);

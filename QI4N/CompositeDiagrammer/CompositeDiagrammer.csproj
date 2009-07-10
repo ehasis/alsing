@@ -62,14 +62,14 @@
     <Compile Include="Element\Concrete\RectangleShape.cs" />
     <Compile Include="Element\Containable.cs" />
     <Compile Include="Element\SegmentedShape.cs" />
-    <Compile Include="Element\PathShape.cs" />
+    <Compile Include="Element\BoundedShape.cs" />
     <Compile Include="Element\Shape.cs" />
     <Compile Include="Element\Mixins\AbstractPathMixin.cs" />
     <Compile Include="Element\Selectable.cs" />
     <Compile Include="Element\Textual.cs" />
     <Compile Include="Element\Bordered.cs" />
     <Compile Include="Element\Filled.cs" />
-    <Compile Include="Element\ShapePath.cs" />
+    <Compile Include="Element\Path.cs" />
     <Compile Include="Element\Container.cs" />
     <Compile Include="Engine\Drawing.cs" />
     <Compile Include="Form1.cs">
