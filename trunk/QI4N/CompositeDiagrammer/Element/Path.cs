@@ -2,7 +2,7 @@
 {
     using System.Drawing.Drawing2D;
 
-    public interface ShapePath
+    public interface Path
     {
         GraphicsPath GetPath();
     }

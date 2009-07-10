@@ -4,12 +4,12 @@
 
     using QI4N.Framework;
 
-    public interface PathShapeComposite : PathShape, ShapeComposite
+    public interface BoundedShapeComposite : BoundedShape, ShapeComposite
     {
     }
 
-    [Mixins(typeof(PathShapeMixin))]
-    public interface PathShape : Shape
+    [Mixins(typeof(BoundedShapeMixin))]
+    public interface BoundedShape : Shape
     {
         void SetLocation(int left, int top);
 
@@ -22,7 +22,7 @@
         void Rotate(double angle);
     }
 
-    public interface PathShapeState
+    public interface BoundedShapeState
     {
         int Left { get; set; }
 
@@ -35,16 +35,16 @@
         double Angle { get; set; }
     }
 
-    public class PathShapeMixin : PathShape
+    public class BoundedShapeMixin : BoundedShape
     {
         [This]
         private object self;
 
         [This]
-        private ShapePath shapePath;
+        private Path path;
 
         [This]
-        private PathShapeState state;
+        private BoundedShapeState state;
 
         public void Move(int offsetX, int offsetY)
         {
@@ -82,11 +82,11 @@
             var container = this.self as Container;
             var selectable = this.self as Selectable;
 
-            using (GraphicsPath path = this.shapePath.GetPath())
+            using (GraphicsPath graphicsPath = this.path.GetPath())
             {
                 if (filled != null)
                 {
-                    filled.RenderFilling(renderInfo, path);
+                    filled.RenderFilling(renderInfo, graphicsPath);
                 }
 
                 if (container != null)
@@ -96,7 +96,7 @@
 
                 if (bordered != null)
                 {
-                    bordered.RenderBorder(renderInfo, path);
+                    bordered.RenderBorder(renderInfo, graphicsPath);
                 }
 
                 if (selectable != null)
