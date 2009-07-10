@@ -1,7 +1,5 @@
 ﻿namespace CompositeDiagrammer
 {
-    using System.Drawing.Drawing2D;
-
     using QI4N.Framework;
 
     [Mixins(typeof(LinePathMixin))]
@@ -15,22 +13,9 @@
         protected override void InitNodes()
         {
             //node1
-            nodes.Add(new SegmentedShapeNode());
+            this.nodes.Add(new SegmentedShapeNode());
             //node2
-            nodes.Add(new SegmentedShapeNode());
-        }
-    }
-
-    public class LinePathMixin : Path
-    {
-        [This]
-        private Nodes nodes;
-
-        public GraphicsPath Get()
-        {
-            var path = new GraphicsPath();
-            path.AddLines(this.nodes.GetPoints());
-            return path;
+            this.nodes.Add(new SegmentedShapeNode());
         }
     }
 }

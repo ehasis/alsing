@@ -62,6 +62,7 @@
     <Compile Include="Element\Concrete\RectangleShape.cs" />
     <Compile Include="Element\IsContainable.cs" />
     <Compile Include="Element\Mixins\AbstractNodesMixin.cs" />
+    <Compile Include="Element\Mixins\LinePathMixin.cs" />
     <Compile Include="Element\SegmentedShape.cs" />
     <Compile Include="Element\BoundedShape.cs" />
     <Compile Include="Element\Shape.cs" />
