@@ -191,9 +191,7 @@ namespace QI4N.Framework.Reflection
             }
             else if (method.ReturnType.IsGenericParameter)
             {
-
-            //    generator.Emit(OpCodes.Unbox_Any);
-            //    generator.Emit(OpCodes.Ldobj, method.ReturnType);
+                generator.Emit(OpCodes.Unbox_Any,method.ReturnType);
             }
             else if (method.ReturnType.IsValueType)
             {
