@@ -34,11 +34,11 @@ namespace QI4N.Framework.Runtime
 
         //[DebuggerStepThrough]
         ////[DebuggerHidden]
-        public object Invoke(object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
+        public object Invoke(MethodInfo genericMethod, object proxy, object[] args, MixinsInstance mixins, ModuleInstance moduleInstance)
         {
             this.methodConstraintsInstance.CheckValid(proxy, args);
 
-            CompositeMethodInstance methodInstance = this.GetInstance(moduleInstance);
+            CompositeMethodInstance methodInstance = this.GetInstance(genericMethod, moduleInstance);
 
             return mixins.Invoke(proxy, args, methodInstance);
         }
@@ -46,17 +46,17 @@ namespace QI4N.Framework.Runtime
 
         //[DebuggerStepThrough]
         ////[DebuggerHidden]
-        private CompositeMethodInstance GetInstance(ModuleInstance moduleInstance)
+        private CompositeMethodInstance GetInstance(MethodInfo genericMethod, ModuleInstance moduleInstance)
         {
-            return this.NewCompositeMethodInstance(moduleInstance);
+            return this.NewCompositeMethodInstance(genericMethod,moduleInstance);
         }
 
 
         //[DebuggerStepThrough]
         ////[DebuggerHidden]
-        private CompositeMethodInstance NewCompositeMethodInstance(ModuleInstance moduleInstance)
+        private CompositeMethodInstance NewCompositeMethodInstance(MethodInfo genericMethod, ModuleInstance moduleInstance)
         {
-            FragmentInvocationHandler mixinInvocationHandler = this.mixins.NewInvocationHandler(this.method);
+            FragmentInvocationHandler mixinInvocationHandler = this.mixins.NewInvocationHandler(genericMethod);
             InvocationHandler invoker = mixinInvocationHandler;
 
             if (this.methodConcerns.HasConcerns)
@@ -70,7 +70,7 @@ namespace QI4N.Framework.Runtime
                 invoker = sideEffectsInstance;
             }
 
-            return new CompositeMethodInstance(invoker, mixinInvocationHandler, this.method, this.mixins.MethodIndex[this.method]);
+            return new CompositeMethodInstance(invoker, mixinInvocationHandler, genericMethod, this.mixins.MethodIndex[this.method]);
         }
     }
 }
