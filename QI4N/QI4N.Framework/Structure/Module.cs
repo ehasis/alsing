@@ -38,10 +38,9 @@ namespace QI4N.Framework
 
         public static IEnumerable<ServiceReference<T>> FindServices<T>(this ServiceFinder self)
         {
-            var services = self.FindServices(typeof(T));
+            IEnumerable<ServiceReference> services = self.FindServices(typeof(T));
 
-            return services.Select<ServiceReference,ServiceReference<T>>(sr => new ServiceReferenceFacade<T>(sr));
+            return services.Select<ServiceReference, ServiceReference<T>>(sr => new ServiceReferenceFacade<T>(sr));
         }
     }
-    
 }

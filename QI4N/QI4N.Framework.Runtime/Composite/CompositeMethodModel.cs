@@ -1,6 +1,5 @@
 namespace QI4N.Framework.Runtime
 {
-    using System.Diagnostics;
     using System.Reflection;
 
     using Reflection;
@@ -46,7 +45,7 @@ namespace QI4N.Framework.Runtime
         ////[DebuggerHidden]
         private CompositeMethodInstance GetInstance(MethodInfo genericMethod, ModuleInstance moduleInstance)
         {
-            return this.NewCompositeMethodInstance(genericMethod,moduleInstance);
+            return this.NewCompositeMethodInstance(genericMethod, moduleInstance);
         }
 
 

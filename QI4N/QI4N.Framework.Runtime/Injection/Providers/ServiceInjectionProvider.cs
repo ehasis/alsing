@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
 
@@ -6,7 +6,7 @@
     {
         public object ProvideInjection(InjectionContext context, InjectionAttribute attribute, Type fieldType)
         {
-            var service = context.ModuleInstance.ServiceFinder.FindService(fieldType);
+            ServiceReference service = context.ModuleInstance.ServiceFinder.FindService(fieldType);
             return service;
         }
     }

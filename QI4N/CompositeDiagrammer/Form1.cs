@@ -1,4 +1,4 @@
-﻿namespace CompositeDiagrammer
+namespace CompositeDiagrammer
 {
     using System;
     using System.Collections.Generic;
@@ -65,19 +65,16 @@
             rectangle.SetBounds(100, 100, 200, 200);
             rectangle.Rotate(1.5);
 
-
             var ellipse = drawing.Create<EllipseShape>();
             ellipse.SetBounds(300, 100, 200, 300);
 
             var line = drawing.Create<LineShape>();
-            line.MoveNode(0,50,150);
-            line.MoveNode(1,500,300);
+            line.MoveNode(0, 50, 150);
+            line.MoveNode(1, 500, 300);
 
-            var group = drawing.Group(ellipse,rectangle,line);
-            
+            GroupShape group = drawing.Group(ellipse, rectangle, line);
 
             this.elements.Add(group);
-            
         }
 
         private void viewPort1_Paint(object sender, PaintEventArgs e)

@@ -1,7 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
-    using System.Diagnostics;
 
     public class InjectedMethodsModel
     {

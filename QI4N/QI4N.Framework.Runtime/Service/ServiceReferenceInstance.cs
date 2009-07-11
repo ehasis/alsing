@@ -1,7 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
-    using System.Diagnostics;
 
     public class ServiceReferenceInstance : ServiceReference
     {
@@ -71,7 +70,5 @@ namespace QI4N.Framework.Runtime
         {
             return this.ServiceModel.NewProxy(new ServiceInvocationHandler(this));
         }
-
-        
     }
 }

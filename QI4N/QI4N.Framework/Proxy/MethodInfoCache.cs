@@ -2,7 +2,6 @@ namespace QI4N.Framework.Reflection
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Reflection;
 
     public static class MethodInfoCache
@@ -27,17 +26,18 @@ namespace QI4N.Framework.Reflection
 
         //[DebuggerStepThrough]
         ////[DebuggerHidden]
+
+        public static MethodInfo GetGenericMethod(int methodId, Type[] genericArguments)
+        {
+            MethodInfo method = methodLookup[methodId];
+            MethodInfo generic = method.MakeGenericMethod(genericArguments);
+
+            return generic;
+        }
+
         public static MethodInfo GetMethod(int methodId)
         {
             return methodLookup[methodId];
-        }
-
-        public static MethodInfo GetGenericMethod(int methodId,Type[] genericArguments)
-        {
-            var method = methodLookup[methodId];
-            var generic = method.MakeGenericMethod(genericArguments);
-
-            return generic;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace ConsoleApplication23.Experimental
 
         public Customer NewCustomer(string name)
         {
-            var customer = tbf.NewTransient<Customer>();
+            var customer = this.tbf.NewTransient<Customer>();
             customer.Name = name;
             return customer;
         }
