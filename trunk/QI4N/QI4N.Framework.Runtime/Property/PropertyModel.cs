@@ -44,13 +44,13 @@ namespace QI4N.Framework.Runtime
 
         public Property NewBuilderInstance()
         {
-            var instance = new PropertyInstance(null, initialValue, this);
+            var instance = new PropertyInstance(null, this.initialValue, this);
             return instance;
         }
 
         public Property NewInitialInstance()
         {
-            var instance = new PropertyInstance(null, initialValue, this);
+            var instance = new PropertyInstance(null, this.initialValue, this);
             return instance;
         }
 

@@ -1,7 +1,6 @@
-﻿namespace QI4N.Framework
+namespace QI4N.Framework
 {
     using System;
-    using System.Diagnostics;
 
     public abstract class ConstraintAttribute : Attribute, ConstraintSource
     {

@@ -2,21 +2,12 @@ namespace QI4N.Framework.Reflection
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
     using System.Reflection.Emit;
 
     public static class TypeExtensions
     {
-
-        public static object GetDefaultValue(this Type self)
-        {
-            Array a = Array.CreateInstance(self, 1);
-            var defaultValue = a.GetValue(0);
-            return defaultValue;
-        }
-
         //[DebuggerStepThrough]
         ////[DebuggerHidden]
         public static FieldInfo[] GetAllFields(this Type type)
@@ -89,6 +80,13 @@ namespace QI4N.Framework.Reflection
             return attribs;
         }
 
+        public static object GetDefaultValue(this Type self)
+        {
+            Array a = Array.CreateInstance(self, 1);
+            object defaultValue = a.GetValue(0);
+            return defaultValue;
+        }
+
         public static PropertyInfo GetInterfaceProperty(this Type interfaceType, string propertyName)
         {
             PropertyInfo propertyInfo = (
@@ -120,13 +118,13 @@ namespace QI4N.Framework.Reflection
 
             if (method.IsGenericMethod)
             {
-                var genericArguments = method.GetGenericArguments();
+                Type[] genericArguments = method.GetGenericArguments();
 
                 string[] genericNames = genericArguments
-                    .Select(a => a.Name)
-                    .ToArray();
+                        .Select(a => a.Name)
+                        .ToArray();
 
-                var genericParameters = methodBuilder.DefineGenericParameters(genericNames);
+                GenericTypeParameterBuilder[] genericParameters = methodBuilder.DefineGenericParameters(genericNames);
             }
 
             typeBuilder.DefineMethodOverride(methodBuilder, method);
@@ -182,18 +180,21 @@ namespace QI4N.Framework.Reflection
 
         //[DebuggerStepThrough]
         ////[DebuggerHidden]
-        private static Type SelectParameterType(ParameterInfo param)
-        {
-            return param.ParameterType;
-        }
 
 
         public static MethodInfo ToDefinition(this MethodInfo self)
         {
             if (self.IsGenericMethod)
+            {
                 return self.GetGenericMethodDefinition();
+            }
 
             return self;
+        }
+
+        private static Type SelectParameterType(ParameterInfo param)
+        {
+            return param.ParameterType;
         }
     }
 }

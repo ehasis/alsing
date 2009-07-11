@@ -1,7 +1,5 @@
 ﻿namespace CompositeDiagrammer
 {
-    using System.Drawing.Drawing2D;
-
     using QI4N.Framework;
 
     public interface BoundedShapeComposite : BoundedShape, ShapeComposite
@@ -9,7 +7,7 @@
     }
 
     [Mixins(typeof(BoundedShapeMixin))]
-    public interface BoundedShape : Shape
+    public interface BoundedShape
     {
         void SetLocation(int left, int top);
 
@@ -37,12 +35,6 @@
 
     public class BoundedShapeMixin : BoundedShape
     {
-        [This]
-        private object self;
-
-        [This]
-        private Path path;
-
         [This]
         private BoundedShapeState state;
 
@@ -73,37 +65,6 @@
         {
             this.state.Width = width;
             this.state.Height = height;
-        }
-
-        public void Render(RenderInfo renderInfo)
-        {
-            var bordered = this.self as HasLineStyle;
-            var filled = this.self as HasFillStyle;
-            var container = this.self as Container;
-            var selectable = this.self as IsSelectable;
-
-            using (GraphicsPath graphicsPath = this.path.Get())
-            {
-                if (filled != null)
-                {
-                    filled.RenderFilling(renderInfo, graphicsPath);
-                }
-
-                if (container != null)
-                {
-                    container.RenderChildren(renderInfo);
-                }
-
-                if (bordered != null)
-                {
-                    bordered.RenderBorder(renderInfo, graphicsPath);
-                }
-
-                if (selectable != null)
-                {
-                    selectable.RenderSelection(renderInfo);
-                }
-            }
         }
     }
 }

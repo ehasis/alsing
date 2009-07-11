@@ -1,4 +1,4 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
     using System;
 
@@ -10,8 +10,6 @@
             {
                 return context.State;
             }
-
-            
 
             return null;
         }

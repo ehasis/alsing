@@ -1,7 +1,6 @@
 namespace QI4N.Framework.Runtime
 {
     using System;
-    using System.Diagnostics;
     using System.Reflection;
 
     public class MethodConcernsInstance : InvocationHandler
@@ -26,7 +25,7 @@ namespace QI4N.Framework.Runtime
         {
             //[DebuggerStepThrough]
             ////[DebuggerHidden]
-                    get
+            get
             {
                 return this.firstConcern == this.mixinInvocationHandler;
             }

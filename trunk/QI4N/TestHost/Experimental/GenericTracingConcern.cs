@@ -1,7 +1,6 @@
-﻿namespace ConsoleApplication23.Experimental
+namespace ConsoleApplication23.Experimental
 {
     using System;
-    using System.Diagnostics;
     using System.Reflection;
 
     using QI4N.Framework;

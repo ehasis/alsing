@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace CompositeDiagrammer
 {
     using System.Drawing;
@@ -27,20 +22,22 @@ namespace CompositeDiagrammer
 
         public bool IsSelected { get; set; }
 
-        public void RenderSelection(RenderInfo renderInfo)
-        {
-            if (IsSelected == false)
-                return;
-
-            var path = this.Path.Get();
-            var bounds = path.GetBounds();
-            bounds.Inflate(3,3);
-            renderInfo.Graphics.DrawRectangle(Pens.Red ,bounds.X,bounds.Y,bounds.Width,bounds.Height);
-        }
-
         public bool HitTest(int x, int y)
         {
             return false;
+        }
+
+        public void RenderSelection(RenderInfo renderInfo)
+        {
+            if (this.IsSelected == false)
+            {
+                return;
+            }
+
+            GraphicsPath path = this.Path.Get();
+            RectangleF bounds = path.GetBounds();
+            bounds.Inflate(3, 3);
+            renderInfo.Graphics.DrawRectangle(Pens.Red, bounds.X, bounds.Y, bounds.Width, bounds.Height);
         }
     }
 }

@@ -98,7 +98,7 @@ namespace QI4N.Framework.Reflection
             if (method.IsGenericMethodDefinition)
             {
                 int genericCount = method.GetGenericArguments().Count();
-                
+
                 generator.Emit(OpCodes.Ldc_I4_S, genericCount);
                 generator.Emit(OpCodes.Newarr, typeof(Type));
                 generator.Emit(OpCodes.Stloc, genericArray);
@@ -150,7 +150,6 @@ namespace QI4N.Framework.Reflection
 
             if (method.IsGenericMethodDefinition)
             {
-
                 j = 0;
                 foreach (Type genericType in method.GetGenericArguments())
                 {
@@ -166,10 +165,8 @@ namespace QI4N.Framework.Reflection
                     //store type
                     generator.Emit(OpCodes.Stelem_Ref);
                     j++;
-
                 }
                 generator.Emit(OpCodes.Ldloc, genericArray);
-
 
                 generator.Emit(OpCodes.Call, getGenericFromCacheMethod);
             }
@@ -177,7 +174,6 @@ namespace QI4N.Framework.Reflection
             {
                 generator.Emit(OpCodes.Call, getFromCacheMethod);
             }
-            
 
             // param 3 = parameter array
             generator.Emit(OpCodes.Ldloc, paramArray);
@@ -191,7 +187,7 @@ namespace QI4N.Framework.Reflection
             }
             else if (method.ReturnType.IsGenericParameter)
             {
-                generator.Emit(OpCodes.Unbox_Any,method.ReturnType);
+                generator.Emit(OpCodes.Unbox_Any, method.ReturnType);
             }
             else if (method.ReturnType.IsValueType)
             {

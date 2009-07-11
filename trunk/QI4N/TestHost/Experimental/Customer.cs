@@ -20,14 +20,13 @@ namespace ConsoleApplication23.Experimental
     public interface HasEmail
     {
         string Email { get; set; }
-    }   
-
-    public interface ContactTransient : Contact , TransientComposite
-    {
-        
     }
+
+    public interface ContactTransient : Contact, TransientComposite
+    {
+    }
+
     public interface Contact : HasName
     {
-        
     }
 }

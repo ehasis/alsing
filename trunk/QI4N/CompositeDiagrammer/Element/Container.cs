@@ -24,8 +24,10 @@ namespace CompositeDiagrammer
 
         public void AddChild(IsContainable child)
         {
-            if (child.Parent == self)
+            if (child.Parent == this.self)
+            {
                 return;
+            }
 
             if (child.Parent != null)
             {
@@ -33,7 +35,7 @@ namespace CompositeDiagrammer
             }
 
             this.children.Add(child);
-            child.Parent = self;
+            child.Parent = this.self;
         }
 
         public void RemoveChild(IsContainable child)

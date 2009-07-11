@@ -1,7 +1,5 @@
-﻿namespace QI4N.Framework.Runtime
+namespace QI4N.Framework.Runtime
 {
-    using System.Diagnostics;
-
     public class ConstraintInstance
     {
         private readonly Constraint constraint;

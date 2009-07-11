@@ -2,7 +2,6 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Reflection;
 
     public class MethodSideEffectsModel
@@ -19,7 +18,7 @@ namespace QI4N.Framework.Runtime
         {
             //[DebuggerStepThrough]
             ////[DebuggerHidden]
-                    get
+            get
             {
                 return this.sideEffectModels != null && this.sideEffectModels.Count != 0;
             }

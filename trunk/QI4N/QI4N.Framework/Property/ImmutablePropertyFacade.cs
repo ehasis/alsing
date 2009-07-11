@@ -1,7 +1,6 @@
 ﻿namespace QI4N.Framework
 {
     using System.Data;
-    using System.Diagnostics;
 
     public class ImmutablePropertyFacade : Property
     {
@@ -40,13 +39,13 @@
         {
             //[DebuggerStepThrough]
             ////[DebuggerHidden]
-                    get
+            get
             {
                 return this.target.Value;
             }
             //[DebuggerStepThrough]
             ////[DebuggerHidden]
-                    set
+            set
             {
                 string message = string.Format("Property '{0}' is immutable", this.QualifiedName);
                 throw new ReadOnlyException(message);

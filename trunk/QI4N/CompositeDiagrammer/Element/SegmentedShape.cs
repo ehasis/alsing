@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Drawing;
-    using System.Drawing.Drawing2D;
 
     using QI4N.Framework;
 
@@ -11,7 +10,7 @@
     }
 
     [Mixins(typeof(SegmentedShapeMixin))]
-    public interface SegmentedShape : Shape
+    public interface SegmentedShape
     {
         void MoveSelectedNodes(int offsetX, int offsetY);
 
@@ -33,16 +32,10 @@
 
     public class SegmentedShapeMixin : SegmentedShape
     {
+        private readonly IList<SegmentedShapeNode> selectedNodes = new List<SegmentedShapeNode>();
+
         [This]
         private Nodes nodes;
-
-        [This]
-        private Path path;
-
-        [This]
-        private object self;
-
-        private readonly IList<SegmentedShapeNode> selectedNodes = new List<SegmentedShapeNode>();
 
         public void Move(int offsetX, int offsetY)
         {
@@ -79,37 +72,6 @@
             node.X = x;
             node.Y = y;
         }
-
-        public void Render(RenderInfo renderInfo)
-        {
-            var bordered = this.self as HasLineStyle;
-            var filled = this.self as HasFillStyle;
-            var container = this.self as Container;
-            var selectable = this.self as IsSelectable;
-
-            using (GraphicsPath graphicsPath = this.path.Get())
-            {
-                if (filled != null)
-                {
-                    filled.RenderFilling(renderInfo, graphicsPath);
-                }
-
-                if (container != null)
-                {
-                    container.RenderChildren(renderInfo);
-                }
-
-                if (bordered != null)
-                {
-                    bordered.RenderBorder(renderInfo, graphicsPath);
-                }
-
-                if (selectable != null)
-                {
-                    selectable.RenderSelection(renderInfo);
-                }
-            }
-        }
     }
 
     public class SegmentedShapeNode
@@ -120,7 +82,7 @@
 
         public Point ToPoint()
         {
-            return new Point(X,Y);
+            return new Point(this.X, this.Y);
         }
     }
 }

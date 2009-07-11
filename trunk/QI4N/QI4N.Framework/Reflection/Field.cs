@@ -1,7 +1,6 @@
 namespace QI4N.Framework.API.Reflection
 {
     using System;
-    using System.Diagnostics;
     using System.Reflection;
 
     //should be optimized to IL generation later on instad of reflection

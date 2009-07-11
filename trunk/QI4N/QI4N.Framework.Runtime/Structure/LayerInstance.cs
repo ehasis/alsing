@@ -50,7 +50,7 @@ namespace QI4N.Framework.Runtime
         public bool VisitModules(ModuleVisitor visitor, Visibility visibility)
         {
             // Visit modules in this layer
-            foreach (ModuleInstance moduleInstance in moduleInstances)
+            foreach (ModuleInstance moduleInstance in this.moduleInstances)
             {
                 if (!visitor.VisitModule(moduleInstance, moduleInstance.Model, visibility))
                 {
@@ -61,13 +61,13 @@ namespace QI4N.Framework.Runtime
             if (visibility == Visibility.Layer)
             {
                 // Visit modules in this layer
-                if (!VisitModules(visitor, Visibility.Application))
+                if (!this.VisitModules(visitor, Visibility.Application))
                 {
                     return false;
                 }
 
                 // Visit modules in used layers
-                return UsedLayersInstance.VisitModules(visitor);
+                return this.UsedLayersInstance.VisitModules(visitor);
             }
 
             return true;

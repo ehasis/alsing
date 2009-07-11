@@ -1,6 +1,5 @@
 namespace QI4N.Framework
 {
-    using System.Diagnostics;
     using System.Reflection;
 
     [AppliesTo(typeof(GetPropertyFilter))]

@@ -2,7 +2,6 @@ namespace QI4N.Framework.Runtime
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
 
@@ -26,7 +25,9 @@ namespace QI4N.Framework.Runtime
             this.mixinImplementationTypes.Add(typeof(CompositeMixin));
 
             foreach (Type assemblyMixin in assemblyMixins)
+            {
                 this.mixinImplementationTypes.Add(assemblyMixin);
+            }
         }
 
         public void AddMixinType(Type mixinType)
@@ -56,7 +57,7 @@ namespace QI4N.Framework.Runtime
                 foreach (Type implementationType in this.mixinImplementationTypes)
                 {
                     IEnumerable<Type> fieldTypes = implementationType.GetAllFields()
-                            .Where(f => f.HasAttribute<ThisAttribute>())
+                            .Where(f => TypeExtensions.HasAttribute<ThisAttribute>(f))
                             .Select(f => f.FieldType);
 
                     thisTypes.AddRange(fieldTypes);
@@ -94,7 +95,7 @@ namespace QI4N.Framework.Runtime
                     return this.ImplementMethodWithType(method, mixinType);
                 }
 
-                string message = string.Format("No implementation found for method {0}.{1}",method.DeclaringType.Name,method.Name );
+                string message = string.Format("No implementation found for method {0}.{1}", method.DeclaringType.Name, method.Name);
                 throw new Exception(message);
             }
 

@@ -90,7 +90,6 @@ namespace ConsoleApplication23
 
             Address otherAddress = addressBuilder.NewInstance();
 
-
             bool areEqual = customer.Address.Equals(otherAddress);
 
             if (areEqual)
@@ -100,17 +99,15 @@ namespace ConsoleApplication23
 
             //customer.SayHelloTo(null); //should throw, name is not optional
 
-            var customerRepo = experimentalModule
-                .ServiceFinder
-                .FindService<CustomerRepository>()
-                .Get();
+            CustomerRepository customerRepo = experimentalModule
+                    .ServiceFinder
+                    .FindService<CustomerRepository>()
+                    .Get();
 
             var id = customerRepo as Identity;
             Console.WriteLine(id.Identity);
 
-            var x = customerRepo.NewCustomer("arne");
-
-
+            Customer x = customerRepo.NewCustomer("arne");
 
             customer.SayHelloTo("Roger");
 

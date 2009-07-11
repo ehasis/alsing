@@ -1,6 +1,5 @@
 namespace CompositeDiagrammer
 {
-    using System;
     using System.Drawing.Drawing2D;
 
     using QI4N.Framework;
