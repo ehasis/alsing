@@ -18,6 +18,8 @@
             var bounds = new Rectangle(this.state.Left, this.state.Top, this.state.Width, this.state.Height);
             path.AddRectangle(bounds);
             return path;
+
+            
         }
     }
 }
