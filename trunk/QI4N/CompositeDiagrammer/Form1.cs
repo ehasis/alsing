@@ -37,6 +37,7 @@ namespace CompositeDiagrammer
                     .Include<RectangleShape>()
                     .Include<EllipseShape>()
                     .Include<LineShape>()
+                    .Include<SplineShape>()
                     //.Include<DescriptionTransient>()
                     .Include<GroupShape>()
                     ;
@@ -72,7 +73,14 @@ namespace CompositeDiagrammer
             line.MoveNode(0, 50, 150);
             line.MoveNode(1, 500, 300);
 
-            GroupShape group = drawing.Group(ellipse, rectangle, line);
+            var spline = drawing.Create<SplineShape>();
+            
+
+            spline.MoveNode(0,50,150);
+            spline.MoveNode(1, 150, 50);
+            spline.MoveNode(2,200, 150);
+           
+            GroupShape group = drawing.Group(ellipse, rectangle, line,spline);
 
             this.elements.Add(group);
         }
