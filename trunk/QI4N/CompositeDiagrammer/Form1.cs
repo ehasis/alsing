@@ -2,6 +2,7 @@ namespace CompositeDiagrammer
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing.Drawing2D;
     using System.Windows.Forms;
 
     using QI4N.Framework;
@@ -87,6 +88,7 @@ namespace CompositeDiagrammer
 
         private void viewPort1_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             var renderInfo = new RenderInfo
                                  {
                                          Graphics = e.Graphics

@@ -10,7 +10,7 @@
     }
 
     [Mixins(typeof(SegmentedShapeMixin))]
-    public interface SegmentedShape
+    public interface SegmentedShape : HasDragHandles
     {
         void MoveSelectedNodes(int offsetX, int offsetY);
 
@@ -32,6 +32,8 @@
 
     public class SegmentedShapeMixin : SegmentedShape
     {
+        private readonly IList<DragHandle> dragHandles = new List<DragHandle>();
+
         private readonly IList<SegmentedShapeNode> selectedNodes = new List<SegmentedShapeNode>();
 
         [This]
@@ -71,6 +73,11 @@
             SegmentedShapeNode node = this.nodes.Get()[nodeIndex];
             node.X = x;
             node.Y = y;
+        }
+
+        public IEnumerable<DragHandle> GetDragHandles()
+        {
+            return dragHandles;
         }
     }
 

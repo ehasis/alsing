@@ -1,5 +1,7 @@
 ﻿namespace CompositeDiagrammer
 {
+    using System.Collections.Generic;
+
     using QI4N.Framework;
 
     public interface BoundedShapeComposite : BoundedShape, ShapeComposite
@@ -7,7 +9,7 @@
     }
 
     [Mixins(typeof(BoundedShapeMixin))]
-    public interface BoundedShape
+    public interface BoundedShape : HasDragHandles
     {
         void SetLocation(int left, int top);
 
@@ -35,6 +37,8 @@
 
     public class BoundedShapeMixin : BoundedShape
     {
+        private readonly IList<DragHandle> dragHandles = new List<DragHandle>();
+
         [This]
         private BoundedShapeState state;
 
@@ -65,6 +69,11 @@
         {
             this.state.Width = width;
             this.state.Height = height;
+        }
+
+        public IEnumerable<DragHandle> GetDragHandles()
+        {
+            return dragHandles; 
         }
     }
 }
