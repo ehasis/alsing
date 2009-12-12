@@ -45,8 +45,7 @@ namespace Alsing
             if (item is T)
                 return (T) item;
 
-            throw new InvalidCastException("Can not cast from type {0} to {1}"
-                                               .FormatWith(item.GetType().Name, typeof (T).Name));
+            throw new InvalidCastException(string.Format("Can not cast from type {0} to {1}",item.GetType().Name, typeof (T).Name));
         }
 
         /// <summary>

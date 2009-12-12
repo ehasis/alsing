@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain", "Samples\My
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain.Tests", "Samples\MyBlog\MyBlog.Domain.Tests\MyBlog.Domain.Tests.csproj", "{933F8717-E773-467E-B83D-555EAAA39DEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Serialization.Tests", "Alsing.Serialization.Tests\Alsing.Serialization.Tests.csproj", "{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Alsing.All.vsmdi
@@ -69,6 +71,10 @@ Global
 		{933F8717-E773-467E-B83D-555EAAA39DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{933F8717-E773-467E-B83D-555EAAA39DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{933F8717-E773-467E-B83D-555EAAA39DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
