@@ -43,9 +43,6 @@
     <Compile Include="TestMessage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AuthoringTests.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Alsing.Messaging\Alsing.Messaging.csproj">
       <Project>{14266723-E951-48F2-8603-D3B3072C1EF6}</Project>
       <Name>Alsing.Messaging</Name>
