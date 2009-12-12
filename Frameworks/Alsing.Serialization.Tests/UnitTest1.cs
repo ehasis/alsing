@@ -34,6 +34,10 @@ namespace Alsing.Serialization.Tests
             root.ReferenceProperty.B = new ClassB();
             root.ReferenceProperty.B.A = root.ReferenceProperty;
 
+            root.DictionaryProperty.Add("a", 1);
+            root.DictionaryProperty.Add("b", 2);
+            root.DictionaryProperty.Add("c", 3);
+
             engine.Serialize(stream, root);
 
             stream.Position = 0;
