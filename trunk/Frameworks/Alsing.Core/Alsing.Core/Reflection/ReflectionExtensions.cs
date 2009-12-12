@@ -43,8 +43,10 @@ namespace Alsing.Core
             if (type.IsGenericType)
             {
 
-                var argNames = (from argType in type.GetGenericArguments()
-                                select GetTypeName(argType)).ToArray();
+                var argNames = type
+                    .GetGenericArguments()
+                    .Select(argType => GetTypeName(argType))
+                    .ToArray();
 
                 string args = string.Join(",", argNames);
 
