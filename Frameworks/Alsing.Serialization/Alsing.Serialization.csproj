@@ -71,7 +71,7 @@
     <Compile Include="Serialization\XmlFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Alsing.Core\Alsing.Core\Alsing.Core.csproj">
+    <ProjectReference Include="..\Alsing.Core\Alsing.Core\Alsing.Core.csproj">
       <Project>{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}</Project>
       <Name>Alsing.Core</Name>
     </ProjectReference>

@@ -5,7 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Core.Tests", "Alsing
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{122C143C-BBAA-434C-81EB-B3DC479FC3B8}"
 	ProjectSection(SolutionItems) = preProject
+		Alsing.All.vsmdi = Alsing.All.vsmdi
 		Alsing.Core\LocalTestRun.testrunconfig = Alsing.Core\LocalTestRun.testrunconfig
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Core", "Alsing.Core\Alsing.Core\Alsing.Core.csproj", "{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}"
@@ -20,7 +22,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Workspace", "Alsing.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Serialization", "Alsing.Serialization\Alsing.Serialization.csproj", "{5BE56FB7-9D71-450C-BB74-BB6712510417}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Messaging.Tests", "Alsing.Messaging.Tests\Alsing.Messaging.Tests.csproj", "{64680081-2549-445D-A2F9-4EE6167C0E4C}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Alsing.All.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -54,6 +61,10 @@ Global
 		{5BE56FB7-9D71-450C-BB74-BB6712510417}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BE56FB7-9D71-450C-BB74-BB6712510417}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BE56FB7-9D71-450C-BB74-BB6712510417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64680081-2549-445D-A2F9-4EE6167C0E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64680081-2549-445D-A2F9-4EE6167C0E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64680081-2549-445D-A2F9-4EE6167C0E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64680081-2549-445D-A2F9-4EE6167C0E4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
