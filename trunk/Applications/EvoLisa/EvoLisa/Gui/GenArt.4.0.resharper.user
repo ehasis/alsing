@@ -1,0 +1,60 @@
+<Configuration>
+  <UnitTestRunner>
+    <CustomStartDirectory>
+    </CustomStartDirectory>
+    <UseShadowCopy>True</UseShadowCopy>
+    <UseCustomFolder>False</UseCustomFolder>
+    <EnableUnitTesting>True</EnableUnitTesting>
+    <Providers />
+  </UnitTestRunner>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:Canvas.Designer.cs" caret="1037" scrollPosition="0|0" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:Canvas.cs" caret="236" scrollPosition="0|0" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.cs" caret="1182" scrollPosition="0|15" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:SettingsForm.cs" caret="0" scrollPosition="0|0" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.Designer.cs" caret="20728" scrollPosition="0|0" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:Canvas.cs" caret="495" scrollPosition="0|3" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:Canvas.cs" caret="236" scrollPosition="0|3" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:Canvas.Designer.cs" caret="1037" scrollPosition="0|18" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.Designer.cs" caret="20785" scrollPosition="0|3" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.Designer.cs" caret="20728" scrollPosition="0|15" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.Designer.cs" caret="20728" scrollPosition="0|60" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.cs" caret="9290" scrollPosition="0|180" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.cs" caret="9290" scrollPosition="0|165" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.cs" caret="9290" scrollPosition="0|165" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.cs" caret="9290" scrollPosition="0|151" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.cs" caret="4388" scrollPosition="0|153" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.cs" caret="732" scrollPosition="0|0" />
+      <File id="1B071C96-9E78-40E4-A8AC-66FB065D61C8/f:MainForm.cs" caret="1182" scrollPosition="0|15" />
+    </RecentEdits>
+  </RecentFiles>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+      <setting name="UseSolutionBuilder">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="ScrollStateVScrollVisible" priority="0" />
+      <Item value="UserPaint" priority="0" />
+      <Item value="Opaque" priority="0" />
+      <Item value="AllPaintingInWmPaint" priority="0" />
+      <Item value="Graphics" priority="0" />
+      <Item value="Clear" priority="0" />
+      <Item value="Black" priority="0" />
+      <Item value="TimeSpan" priority="0" />
+      <Item value="Ticks" priority="0" />
+      <Item value="menuStrip1" priority="0" />
+      <Item value="RenderMode" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>
