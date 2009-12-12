@@ -1,0 +1,116 @@
+<sourceanalysisresultscache>
+  <version>9</version>
+  <project key="-1828854754">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name="Program.cs" parser="Microsoft.SourceAnalysis.CSharp.CsParser">
+    <settings>
+      <timestamp>03/18/2008 22:41:10</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>05/24/2008 12:15:39</timestamp>
+    <milliseconds>121</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.CsParser" rule="SyntaxException" ruleCheckId="SA0102">
+        <context>A syntax error has been discovered in file C:\Documents and Settings\roal\Mina dokument\Visual Studio 2008\Projects\MyExtensions\ExtensionDemo\Program.cs on line 15.</context>
+        <line>15</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="Microsoft.SourceAnalysis.CSharp.CsParser">
+    <settings>
+      <timestamp>03/18/2008 22:41:10</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>05/23/2008 20:12:15</timestamp>
+    <milliseconds>59</milliseconds>
+    <violations>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.DocumentationRules" rule="FileMustHaveHeader" ruleCheckId="SA1633">
+        <context>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</context>
+        <line>1</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.LayoutRules" rule="SingleLineCommentsMustNotBeFollowedByBlankLine" ruleCheckId="SA1512">
+        <context>A single-line comment must not be followed by a blank line. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
+        <line>6</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.LayoutRules" rule="SingleLineCommentsMustNotBeFollowedByBlankLine" ruleCheckId="SA1512">
+        <context>A single-line comment must not be followed by a blank line. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
+        <line>19</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.LayoutRules" rule="SingleLineCommentsMustNotBeFollowedByBlankLine" ruleCheckId="SA1512">
+        <context>A single-line comment must not be followed by a blank line. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
+        <line>23</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.LayoutRules" rule="SingleLineCommentsMustNotBeFollowedByBlankLine" ruleCheckId="SA1512">
+        <context>A single-line comment must not be followed by a blank line. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
+        <line>36</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>8</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>9</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>10</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>11</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>12</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>13</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>14</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>15</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>21</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>25</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>38</line>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="Microsoft.SourceAnalysis.CSharp.SpacingRules" rule="ColonsMustBeSpacedCorrectly" ruleCheckId="SA1024">
+        <context>Invalid spacing around the colon.</context>
+        <line>39</line>
+        <warning>False</warning>
+      </violation>
+    </violations>
+  </sourcecode>
+</sourceanalysisresultscache>

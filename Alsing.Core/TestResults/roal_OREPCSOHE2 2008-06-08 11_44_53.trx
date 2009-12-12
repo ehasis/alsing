@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="f4ff494b-9e0e-49fa-bdf2-81f26dd1aa58" name="roal@OREPCSOHE2 2008-06-08 11:44:53" runUser="PRECIO\roal" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="22c199e8-4b2b-44d2-b22e-7aa15214004c">
+    <Deployment runDeploymentRoot="C:\Alsing\Core\TestResults\roal_OREPCSOHE2 2008-06-08 11_44_53">
+      <DeploymentItem filename="C:\Alsing\Core\Alsing.Core\bin\Debug\Alsing.Core.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Completed">
+    <Counters total="32" executed="32" passed="32" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2008-06-08T11:44:53.0024704+02:00" queuing="2008-06-08T11:44:59.4617584+02:00" start="2008-06-08T11:45:00.2528960+02:00" finish="2008-06-08T11:45:03.5276048+02:00" />
+  <TestDefinitions>
+    <UnitTest name="ParseCaseSensitiveTokens" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="7053b5a2-8129-0b1c-92c1-f031f6718d06">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="e03413ba-6e42-4686-b3f0-e211d09ba638" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Text.TokenizerTests, Alsing.Core.Tests" name="ParseCaseSensitiveTokens" />
+    </UnitTest>
+    <UnitTest name="PassNotEmpty" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="e4675a27-e51d-b6f8-9ae5-87e917d7810a">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="98a4da05-a40b-4e1b-82ed-5374778cced6" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="PassNotEmpty" />
+    </UnitTest>
+    <UnitTest name="ForkCall" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="e52779b7-f731-8b9c-1a8b-f8f7af98cdec">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="f2969dc1-32de-47d0-b594-cdcf5db57c99" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Threading.ForkTests, Alsing.Core.Tests" name="ForkCall" />
+    </UnitTest>
+    <UnitTest name="PassLongerThan" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="30ba6b10-62a9-284e-c8c9-b7015aadb294">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="2a2c77b6-762c-4d28-829a-3079bb548b38" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="PassLongerThan" />
+    </UnitTest>
+    <UnitTest name="ParseCaseInsensitiveTokens" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="56c09a31-0f45-cb22-e156-61ab13406a3a">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="fa924ffd-c359-4bd8-996f-785e617d4929" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Text.TokenizerTests, Alsing.Core.Tests" name="ParseCaseInsensitiveTokens" />
+    </UnitTest>
+    <UnitTest name="FormatWithTest" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="7999b90c-414c-bcf2-c762-d52d5c2a5e07">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="f3ae392b-2614-410c-852e-f18b1a70e8ce" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.StringExtensionTests, Alsing.Core.Tests" name="FormatWithTest" />
+    </UnitTest>
+    <UnitTest name="FailNotEmpty" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="886e9844-26d2-263b-65c7-f059d04cccfa">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="d1ac7cbd-f726-4a37-817f-094509c40143" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="FailNotEmpty" />
+    </UnitTest>
+    <UnitTest name="PassIsEqualTo" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="bd788459-e190-581c-d67b-afb507af8338">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="d43a0a0f-a438-4a15-a166-20785dd343a3" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.ValidationExtensionsTests, Alsing.Core.Tests" name="PassIsEqualTo" />
+    </UnitTest>
+    <UnitTest name="FailShorterThan" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="b69ed77e-c510-4911-0212-e170aea81343">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="28c8d3c2-0d5a-4656-857a-1df5499bad41" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="FailShorterThan" />
+    </UnitTest>
+    <UnitTest name="CalculateWithString" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="68688450-de0d-5606-e229-fce8bb1b07ec">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="55c428b6-24a9-40ad-8a96-5aee94af9aa7" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.GenericMath.GenericMathTests, Alsing.Core.Tests" name="CalculateWithString" />
+    </UnitTest>
+    <UnitTest name="PassIsInRange" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="db008a7c-085c-8cca-b165-fa0d5da5443c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="fde2cd2a-58ce-45d3-beb3-fd6ea3c9e5d7" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.ValidationExtensionsTests, Alsing.Core.Tests" name="PassIsInRange" />
+    </UnitTest>
+    <UnitTest name="PassShorterThan" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="e4e79db9-d38c-8b86-39f7-3cad1ba6712c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="c083518c-a972-4909-a7c6-e59c9ce6c126" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="PassShorterThan" />
+    </UnitTest>
+    <UnitTest name="PassStartsWith" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="455ffb4a-49e3-e9cf-ee8e-8de49d0e8091">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="7e1c00e0-d41c-4db3-8043-c18f2274dfde" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="PassStartsWith" />
+    </UnitTest>
+    <UnitTest name="FormatAsTest" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="5fe29db7-c566-f9e5-e652-e7112e89abeb">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a51c839a-a4e6-45d5-90a7-6c87d6f1399d" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.StringExtensionTests, Alsing.Core.Tests" name="FormatAsTest" />
+    </UnitTest>
+    <UnitTest name="PassIsLessThan" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="cb12548b-0786-4830-8a34-b3bcec75010e">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="343193ec-8d96-498b-a989-553da1a098dd" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.ValidationExtensionsTests, Alsing.Core.Tests" name="PassIsLessThan" />
+    </UnitTest>
+    <UnitTest name="PassExistsInList" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="3404d762-fdf2-284f-a82c-1df5ea88560f">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="74c226f4-cc74-41fb-b9b3-97111998d2a3" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.ValidationExtensionsTests, Alsing.Core.Tests" name="PassExistsInList" />
+    </UnitTest>
+    <UnitTest name="PassExactLength" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="225d31cc-dcfb-5327-baea-bf26f4377b12">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="e5e8765e-89fa-4ef0-939b-a5ef67208641" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="PassExactLength" />
+    </UnitTest>
+    <UnitTest name="ParseCaseInsensitiveTokensWithoutSeparators" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="b1ac4638-16c2-32c0-0142-e06e65860449">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a806b30a-2c1f-4b25-a804-a0d800a0afa7" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Text.TokenizerTests, Alsing.Core.Tests" name="ParseCaseInsensitiveTokensWithoutSeparators" />
+    </UnitTest>
+    <UnitTest name="FailStartsWith" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="12e7e019-5c02-b573-ae9a-acfab39de34d">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="fd357887-5e76-4fd2-a8cc-8435e50d5c8c" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="FailStartsWith" />
+    </UnitTest>
+    <UnitTest name="PassNotNull" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="b773a2c8-6738-84c6-6ba4-41cb116f7d87">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1e42d285-4bfc-403a-9eb7-482cbfcd0c2b" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.ValidationExtensionsTests, Alsing.Core.Tests" name="PassNotNull" />
+    </UnitTest>
+    <UnitTest name="CalculateWithDouble" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="1cb01d37-b728-a436-5193-d11480d8130d">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="c6c3fabb-7db5-4f8a-9597-3b611a88551e" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.GenericMath.GenericMathTests, Alsing.Core.Tests" name="CalculateWithDouble" />
+    </UnitTest>
+    <UnitTest name="CalculateWithInt" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="399968f3-febd-3630-36d0-9e00c2fbf201">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6e89ddbe-d421-425f-9469-f783fa634fa8" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.GenericMath.GenericMathTests, Alsing.Core.Tests" name="CalculateWithInt" />
+    </UnitTest>
+    <UnitTest name="ToProperCaseTest" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="5164ac23-d24d-1a76-aef8-5dba04db5aa0">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="20a41752-1052-4704-b857-34258a8f8b4a" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.StringExtensionTests, Alsing.Core.Tests" name="ToProperCaseTest" />
+    </UnitTest>
+    <UnitTest name="ParsePatternWithoutSeparators" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="a7c6a690-1d54-d240-b0bd-c7df7d002539">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a35237b7-f4c1-4cf8-9068-9dddff7620a7" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Text.TokenizerTests, Alsing.Core.Tests" name="ParsePatternWithoutSeparators" />
+    </UnitTest>
+    <UnitTest name="ParseCaseSensitiveTokensWithoutSeparators" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="246341f2-173b-3134-e57e-35dca428d850">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="3def54e7-9086-4f8e-8629-cec76db14c23" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Text.TokenizerTests, Alsing.Core.Tests" name="ParseCaseSensitiveTokensWithoutSeparators" />
+    </UnitTest>
+    <UnitTest name="CalculateWithDecimal" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="68c60299-f2b8-891c-5214-b1c2e521930f">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="c52e11bb-ea6d-4623-9d7f-8c57a455174f" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.GenericMath.GenericMathTests, Alsing.Core.Tests" name="CalculateWithDecimal" />
+    </UnitTest>
+    <UnitTest name="PassTypeCheck" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="41797be2-d7d4-efb2-01aa-31f4394c0d50">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="e9bdecb8-585b-4c27-8434-0ad6a041cbd0" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.ValidationExtensionsTests, Alsing.Core.Tests" name="PassTypeCheck" />
+    </UnitTest>
+    <UnitTest name="FailExactLength" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="de357fea-a3f3-d0be-98cc-b716e961f40f">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="8cc5d92a-f657-4576-b546-f532d5e2fc78" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="FailExactLength" />
+    </UnitTest>
+    <UnitTest name="FailLongerThan" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="d519d819-1aa4-d188-36b5-8b1a6c841223">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="7a486a01-9d8c-4a15-a029-9596332fdaf6" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.StringValidationExtensionsTests, Alsing.Core.Tests" name="FailLongerThan" />
+    </UnitTest>
+    <UnitTest name="PassIsGreaterThan" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="a8af94ec-4b41-94c1-e247-e4d66ae21b66">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6e95d4ee-8914-474a-aedb-1ccae8ce41b1" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.Validation.ValidationExtensionsTests, Alsing.Core.Tests" name="PassIsGreaterThan" />
+    </UnitTest>
+    <UnitTest name="ParsePattern" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="4243c7da-9272-6dd4-0e4f-c3470140da48">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="8848c361-05cc-4333-851e-904607736042" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Text.TokenizerTests, Alsing.Core.Tests" name="ParsePattern" />
+    </UnitTest>
+    <UnitTest name="LikeTest" storage="c:\alsing\core\alsing.core.tests\bin\debug\alsing.core.tests.dll" id="5191dce7-869c-e11b-4ea8-94fe9ef8e344">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1921e2b1-adf8-45ce-9bb1-d7a1106f3e6a" />
+      <TestMethod codeBase="C:\Alsing\Core\Alsing.Core.Tests\bin\Debug\Alsing.Core.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Alsing.Core.Tests.Extensions.StringExtensionTests, Alsing.Core.Tests" name="LikeTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="5fe29db7-c566-f9e5-e652-e7112e89abeb" executionId="a51c839a-a4e6-45d5-90a7-6c87d6f1399d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7999b90c-414c-bcf2-c762-d52d5c2a5e07" executionId="f3ae392b-2614-410c-852e-f18b1a70e8ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5164ac23-d24d-1a76-aef8-5dba04db5aa0" executionId="20a41752-1052-4704-b857-34258a8f8b4a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5191dce7-869c-e11b-4ea8-94fe9ef8e344" executionId="1921e2b1-adf8-45ce-9bb1-d7a1106f3e6a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="886e9844-26d2-263b-65c7-f059d04cccfa" executionId="d1ac7cbd-f726-4a37-817f-094509c40143" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e4675a27-e51d-b6f8-9ae5-87e917d7810a" executionId="98a4da05-a40b-4e1b-82ed-5374778cced6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b69ed77e-c510-4911-0212-e170aea81343" executionId="28c8d3c2-0d5a-4656-857a-1df5499bad41" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e4e79db9-d38c-8b86-39f7-3cad1ba6712c" executionId="c083518c-a972-4909-a7c6-e59c9ce6c126" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d519d819-1aa4-d188-36b5-8b1a6c841223" executionId="7a486a01-9d8c-4a15-a029-9596332fdaf6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="30ba6b10-62a9-284e-c8c9-b7015aadb294" executionId="2a2c77b6-762c-4d28-829a-3079bb548b38" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="12e7e019-5c02-b573-ae9a-acfab39de34d" executionId="fd357887-5e76-4fd2-a8cc-8435e50d5c8c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="455ffb4a-49e3-e9cf-ee8e-8de49d0e8091" executionId="7e1c00e0-d41c-4db3-8043-c18f2274dfde" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="de357fea-a3f3-d0be-98cc-b716e961f40f" executionId="8cc5d92a-f657-4576-b546-f532d5e2fc78" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="225d31cc-dcfb-5327-baea-bf26f4377b12" executionId="e5e8765e-89fa-4ef0-939b-a5ef67208641" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b773a2c8-6738-84c6-6ba4-41cb116f7d87" executionId="1e42d285-4bfc-403a-9eb7-482cbfcd0c2b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3404d762-fdf2-284f-a82c-1df5ea88560f" executionId="74c226f4-cc74-41fb-b9b3-97111998d2a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="db008a7c-085c-8cca-b165-fa0d5da5443c" executionId="fde2cd2a-58ce-45d3-beb3-fd6ea3c9e5d7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a8af94ec-4b41-94c1-e247-e4d66ae21b66" executionId="6e95d4ee-8914-474a-aedb-1ccae8ce41b1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cb12548b-0786-4830-8a34-b3bcec75010e" executionId="343193ec-8d96-498b-a989-553da1a098dd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bd788459-e190-581c-d67b-afb507af8338" executionId="d43a0a0f-a438-4a15-a166-20785dd343a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="41797be2-d7d4-efb2-01aa-31f4394c0d50" executionId="e9bdecb8-585b-4c27-8434-0ad6a041cbd0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1cb01d37-b728-a436-5193-d11480d8130d" executionId="c6c3fabb-7db5-4f8a-9597-3b611a88551e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="399968f3-febd-3630-36d0-9e00c2fbf201" executionId="6e89ddbe-d421-425f-9469-f783fa634fa8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="68c60299-f2b8-891c-5214-b1c2e521930f" executionId="c52e11bb-ea6d-4623-9d7f-8c57a455174f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="68688450-de0d-5606-e229-fce8bb1b07ec" executionId="55c428b6-24a9-40ad-8a96-5aee94af9aa7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7053b5a2-8129-0b1c-92c1-f031f6718d06" executionId="e03413ba-6e42-4686-b3f0-e211d09ba638" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="56c09a31-0f45-cb22-e156-61ab13406a3a" executionId="fa924ffd-c359-4bd8-996f-785e617d4929" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="246341f2-173b-3134-e57e-35dca428d850" executionId="3def54e7-9086-4f8e-8629-cec76db14c23" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b1ac4638-16c2-32c0-0142-e06e65860449" executionId="a806b30a-2c1f-4b25-a804-a0d800a0afa7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4243c7da-9272-6dd4-0e4f-c3470140da48" executionId="8848c361-05cc-4333-851e-904607736042" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a7c6a690-1d54-d240-b0bd-c7df7d002539" executionId="a35237b7-f4c1-4cf8-9068-9dddff7620a7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e52779b7-f731-8b9c-1a8b-f8f7af98cdec" executionId="f2969dc1-32de-47d0-b594-cdcf5db57c99" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="a51c839a-a4e6-45d5-90a7-6c87d6f1399d" testId="5fe29db7-c566-f9e5-e652-e7112e89abeb" testName="FormatAsTest" computerName="OREPCSOHE2" duration="00:00:00.0934353" startTime="2008-06-08T11:45:00.5032560+02:00" endTime="2008-06-08T11:45:01.6949696+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f3ae392b-2614-410c-852e-f18b1a70e8ce" testId="7999b90c-414c-bcf2-c762-d52d5c2a5e07" testName="FormatWithTest" computerName="OREPCSOHE2" duration="00:00:00.0009646" startTime="2008-06-08T11:45:01.7450416+02:00" endTime="2008-06-08T11:45:01.7550560+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="20a41752-1052-4704-b857-34258a8f8b4a" testId="5164ac23-d24d-1a76-aef8-5dba04db5aa0" testName="ToProperCaseTest" computerName="OREPCSOHE2" duration="00:00:00.0011521" startTime="2008-06-08T11:45:01.7650704+02:00" endTime="2008-06-08T11:45:01.7750848+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1921e2b1-adf8-45ce-9bb1-d7a1106f3e6a" testId="5191dce7-869c-e11b-4ea8-94fe9ef8e344" testName="LikeTest" computerName="OREPCSOHE2" duration="00:00:00.0021248" startTime="2008-06-08T11:45:01.7750848+02:00" endTime="2008-06-08T11:45:01.7850992+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d1ac7cbd-f726-4a37-817f-094509c40143" testId="886e9844-26d2-263b-65c7-f059d04cccfa" testName="FailNotEmpty" computerName="OREPCSOHE2" duration="00:00:00.1926144" startTime="2008-06-08T11:45:01.7850992+02:00" endTime="2008-06-08T11:45:01.9853872+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="98a4da05-a40b-4e1b-82ed-5374778cced6" testId="e4675a27-e51d-b6f8-9ae5-87e917d7810a" testName="PassNotEmpty" computerName="OREPCSOHE2" duration="00:00:00.0004268" startTime="2008-06-08T11:45:01.9954016+02:00" endTime="2008-06-08T11:45:02.0054160+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="28c8d3c2-0d5a-4656-857a-1df5499bad41" testId="b69ed77e-c510-4911-0212-e170aea81343" testName="FailShorterThan" computerName="OREPCSOHE2" duration="00:00:00.0075987" startTime="2008-06-08T11:45:02.0154304+02:00" endTime="2008-06-08T11:45:02.0354592+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c083518c-a972-4909-a7c6-e59c9ce6c126" testId="e4e79db9-d38c-8b86-39f7-3cad1ba6712c" testName="PassShorterThan" computerName="OREPCSOHE2" duration="00:00:00.0004251" startTime="2008-06-08T11:45:02.0354592+02:00" endTime="2008-06-08T11:45:02.0454736+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7a486a01-9d8c-4a15-a029-9596332fdaf6" testId="d519d819-1aa4-d188-36b5-8b1a6c841223" testName="FailLongerThan" computerName="OREPCSOHE2" duration="00:00:00.0078593" startTime="2008-06-08T11:45:02.0554880+02:00" endTime="2008-06-08T11:45:02.0655024+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2a2c77b6-762c-4d28-829a-3079bb548b38" testId="30ba6b10-62a9-284e-c8c9-b7015aadb294" testName="PassLongerThan" computerName="OREPCSOHE2" duration="00:00:00.0005081" startTime="2008-06-08T11:45:02.0755168+02:00" endTime="2008-06-08T11:45:02.0855312+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fd357887-5e76-4fd2-a8cc-8435e50d5c8c" testId="12e7e019-5c02-b573-ae9a-acfab39de34d" testName="FailStartsWith" computerName="OREPCSOHE2" duration="00:00:00.0087377" startTime="2008-06-08T11:45:02.0955456+02:00" endTime="2008-06-08T11:45:02.1055600+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7e1c00e0-d41c-4db3-8043-c18f2274dfde" testId="455ffb4a-49e3-e9cf-ee8e-8de49d0e8091" testName="PassStartsWith" computerName="OREPCSOHE2" duration="00:00:00.0004676" startTime="2008-06-08T11:45:02.1155744+02:00" endTime="2008-06-08T11:45:02.1356032+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="8cc5d92a-f657-4576-b546-f532d5e2fc78" testId="de357fea-a3f3-d0be-98cc-b716e961f40f" testName="FailExactLength" computerName="OREPCSOHE2" duration="00:00:00.0210493" startTime="2008-06-08T11:45:02.1356032+02:00" endTime="2008-06-08T11:45:02.1756608+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e5e8765e-89fa-4ef0-939b-a5ef67208641" testId="225d31cc-dcfb-5327-baea-bf26f4377b12" testName="PassExactLength" computerName="OREPCSOHE2" duration="00:00:00.0004682" startTime="2008-06-08T11:45:02.1756608+02:00" endTime="2008-06-08T11:45:02.1856752+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1e42d285-4bfc-403a-9eb7-482cbfcd0c2b" testId="b773a2c8-6738-84c6-6ba4-41cb116f7d87" testName="PassNotNull" computerName="OREPCSOHE2" duration="00:00:00.0007568" startTime="2008-06-08T11:45:02.1956896+02:00" endTime="2008-06-08T11:45:02.2057040+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="74c226f4-cc74-41fb-b9b3-97111998d2a3" testId="3404d762-fdf2-284f-a82c-1df5ea88560f" testName="PassExistsInList" computerName="OREPCSOHE2" duration="00:00:00.0027391" startTime="2008-06-08T11:45:02.2657904+02:00" endTime="2008-06-08T11:45:02.2758048+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fde2cd2a-58ce-45d3-beb3-fd6ea3c9e5d7" testId="db008a7c-085c-8cca-b165-fa0d5da5443c" testName="PassIsInRange" computerName="OREPCSOHE2" duration="00:00:00.0030911" startTime="2008-06-08T11:45:02.2858192+02:00" endTime="2008-06-08T11:45:02.2958336+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6e95d4ee-8914-474a-aedb-1ccae8ce41b1" testId="a8af94ec-4b41-94c1-e247-e4d66ae21b66" testName="PassIsGreaterThan" computerName="OREPCSOHE2" duration="00:00:00.0017703" startTime="2008-06-08T11:45:02.3058480+02:00" endTime="2008-06-08T11:45:02.3158624+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="343193ec-8d96-498b-a989-553da1a098dd" testId="cb12548b-0786-4830-8a34-b3bcec75010e" testName="PassIsLessThan" computerName="OREPCSOHE2" duration="00:00:00.0017781" startTime="2008-06-08T11:45:02.3258768+02:00" endTime="2008-06-08T11:45:02.3358912+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d43a0a0f-a438-4a15-a166-20785dd343a3" testId="bd788459-e190-581c-d67b-afb507af8338" testName="PassIsEqualTo" computerName="OREPCSOHE2" duration="00:00:00.0017806" startTime="2008-06-08T11:45:02.3459056+02:00" endTime="2008-06-08T11:45:02.3559200+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e9bdecb8-585b-4c27-8434-0ad6a041cbd0" testId="41797be2-d7d4-efb2-01aa-31f4394c0d50" testName="PassTypeCheck" computerName="OREPCSOHE2" duration="00:00:00.0041312" startTime="2008-06-08T11:45:02.3659344+02:00" endTime="2008-06-08T11:45:02.3859632+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c6c3fabb-7db5-4f8a-9597-3b611a88551e" testId="1cb01d37-b728-a436-5193-d11480d8130d" testName="CalculateWithDouble" computerName="OREPCSOHE2" duration="00:00:00.2408415" startTime="2008-06-08T11:45:02.3859632+02:00" endTime="2008-06-08T11:45:02.6463376+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6e89ddbe-d421-425f-9469-f783fa634fa8" testId="399968f3-febd-3630-36d0-9e00c2fbf201" testName="CalculateWithInt" computerName="OREPCSOHE2" duration="00:00:00.0153125" startTime="2008-06-08T11:45:02.6463376+02:00" endTime="2008-06-08T11:45:02.6763808+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c52e11bb-ea6d-4623-9d7f-8c57a455174f" testId="68c60299-f2b8-891c-5214-b1c2e521930f" testName="CalculateWithDecimal" computerName="OREPCSOHE2" duration="00:00:00.0723343" startTime="2008-06-08T11:45:02.6763808+02:00" endTime="2008-06-08T11:45:02.7665104+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="55c428b6-24a9-40ad-8a96-5aee94af9aa7" testId="68688450-de0d-5606-e229-fce8bb1b07ec" testName="CalculateWithString" computerName="OREPCSOHE2" duration="00:00:00.2821492" startTime="2008-06-08T11:45:02.7665104+02:00" endTime="2008-06-08T11:45:03.0669424+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e03413ba-6e42-4686-b3f0-e211d09ba638" testId="7053b5a2-8129-0b1c-92c1-f031f6718d06" testName="ParseCaseSensitiveTokens" computerName="OREPCSOHE2" duration="00:00:00.0513297" startTime="2008-06-08T11:45:03.0769568+02:00" endTime="2008-06-08T11:45:03.1370432+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fa924ffd-c359-4bd8-996f-785e617d4929" testId="56c09a31-0f45-cb22-e156-61ab13406a3a" testName="ParseCaseInsensitiveTokens" computerName="OREPCSOHE2" duration="00:00:00.0115129" startTime="2008-06-08T11:45:03.1470576+02:00" endTime="2008-06-08T11:45:03.1670864+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="3def54e7-9086-4f8e-8629-cec76db14c23" testId="246341f2-173b-3134-e57e-35dca428d850" testName="ParseCaseSensitiveTokensWithoutSeparators" computerName="OREPCSOHE2" duration="00:00:00.0025187" startTime="2008-06-08T11:45:03.1771008+02:00" endTime="2008-06-08T11:45:03.1871152+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a806b30a-2c1f-4b25-a804-a0d800a0afa7" testId="b1ac4638-16c2-32c0-0142-e06e65860449" testName="ParseCaseInsensitiveTokensWithoutSeparators" computerName="OREPCSOHE2" duration="00:00:00.0024885" startTime="2008-06-08T11:45:03.1871152+02:00" endTime="2008-06-08T11:45:03.2071440+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="8848c361-05cc-4333-851e-904607736042" testId="4243c7da-9272-6dd4-0e4f-c3470140da48" testName="ParsePattern" computerName="OREPCSOHE2" duration="00:00:00.0057758" startTime="2008-06-08T11:45:03.2271728+02:00" endTime="2008-06-08T11:45:03.2472016+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a35237b7-f4c1-4cf8-9068-9dddff7620a7" testId="a7c6a690-1d54-d240-b0bd-c7df7d002539" testName="ParsePatternWithoutSeparators" computerName="OREPCSOHE2" duration="00:00:00.0026567" startTime="2008-06-08T11:45:03.2472016+02:00" endTime="2008-06-08T11:45:03.2672304+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f2969dc1-32de-47d0-b594-cdcf5db57c99" testId="e52779b7-f731-8b9c-1a8b-f8f7af98cdec" testName="ForkCall" computerName="OREPCSOHE2" duration="00:00:00.0280393" startTime="2008-06-08T11:45:03.2772448+02:00" endTime="2008-06-08T11:45:03.3072880+02:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>
