@@ -2,7 +2,7 @@
 
 namespace Alsing.Collections
 {
-    public class CheckSet<T>
+    public class CheckSet<T> : Alsing.Lists.ICheckSet<T>
     {
         private readonly Dictionary<T, bool> lookup = new Dictionary<T, bool>();
 

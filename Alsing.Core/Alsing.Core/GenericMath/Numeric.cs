@@ -73,6 +73,16 @@ namespace Alsing
             }
         }
 
+        public override int GetHashCode()
+        {
+            return value.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equal(this.value, obj.As<Numeric<T>>().value);
+        }
+
 
 
         private static Func<T, T, T> CompileDelegate(Func<Expression, Expression, Expression> operation)
