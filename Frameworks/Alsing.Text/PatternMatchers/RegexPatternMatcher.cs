@@ -95,7 +95,7 @@ namespace Alsing.Text.PatternMatchers
         {
             const RegexOptions options = RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.Singleline;
 
-            regEx = new Regex(pattern.FormatAs(@"\G({0})"), options);
+            regEx = new Regex(string.Format(@"\G({0})",pattern), options);
         }
     }
 }

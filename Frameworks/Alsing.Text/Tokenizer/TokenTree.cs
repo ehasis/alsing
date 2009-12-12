@@ -9,6 +9,7 @@
 // *
 
 using Alsing.Text.PatternMatchers;
+using System;
 
 namespace Alsing.Text
 {
@@ -61,8 +62,8 @@ namespace Alsing.Text
         //do not refactor extract methods from this if you want to keep the speed
         public MatchResult Match(string text, int startIndex)
         {
-            text.Require("text")
-                .NotNullOrEmpty();
+            if (string.IsNullOrEmpty(text))
+                throw new ArgumentNullException("tText");
 
             var lastMatch = new MatchResult {Text = text};
             int textLength = text.Length;
