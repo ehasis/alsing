@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain.Tests", "Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Lisp", "Alsing.Lisp\Alsing.Lisp.csproj", "{ADDF48A7-471F-45CC-B013-12FD4B1F2FBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Reflection", "Alsing.Reflection\Alsing.Reflection.csproj", "{5AA88E07-BAE0-4AFB-A7E8-0CB53369B0E5}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Alsing.All.vsmdi
@@ -93,6 +95,10 @@ Global
 		{ADDF48A7-471F-45CC-B013-12FD4B1F2FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADDF48A7-471F-45CC-B013-12FD4B1F2FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADDF48A7-471F-45CC-B013-12FD4B1F2FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AA88E07-BAE0-4AFB-A7E8-0CB53369B0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AA88E07-BAE0-4AFB-A7E8-0CB53369B0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AA88E07-BAE0-4AFB-A7E8-0CB53369B0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AA88E07-BAE0-4AFB-A7E8-0CB53369B0E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

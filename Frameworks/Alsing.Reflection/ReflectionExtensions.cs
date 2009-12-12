@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Alsing.Core;
 
-namespace Alsing.Core
+namespace Alsing.Reflection
 {
     public static class ReflectionExtensions
     {
         public static bool HasAttribute<T>(this ICustomAttributeProvider self)
         {
             return self
-                .GetCustomAttributes(typeof(T), true)
-                .HasContent();
+                .GetCustomAttributes(typeof(T), true).Count() > 0;
         }
 
         public static FieldInfo GetAnyField(this Type type,string fieldName)
