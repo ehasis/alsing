@@ -8,7 +8,6 @@ namespace Alsing.Serialization
         public abstract bool CanSerialize(SerializerEngine engine, object item);
         public abstract MetaObject SerializerGetObject(SerializerEngine engine, object item);
 
-
         public abstract bool CanDeserialize(DeserializerEngine engine, XmlNode objectNode);
         public abstract object DeserializerCreateObject(DeserializerEngine engine, XmlNode objectNode);
         public abstract void DeserializerSetupObject(DeserializerEngine engine, XmlNode objectNode, object instance);
