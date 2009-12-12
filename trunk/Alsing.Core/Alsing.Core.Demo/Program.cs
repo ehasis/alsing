@@ -11,10 +11,8 @@ namespace ExtensionDemo
     {
         private static void Main(string[] args)
         {            
-            Func<double, double, double> pow = Math.Pow;
-            var res = pow.Apply(3,2);
 
-            res
+            1
                 .FormatAs("res {0}")
                 .Output();
             

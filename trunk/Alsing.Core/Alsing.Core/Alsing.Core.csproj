@@ -54,9 +54,8 @@
     <Compile Include="Extensions\Logging\SimpleLog.cs" />
     <Compile Include="Extensions\NullObjectExtensions.cs" />
     <Compile Include="Extensions\NumericExtensions.cs" />
-    <Compile Include="Functional\Curry.cs" />
-    <Compile Include="Functional\Func.cs" />
     <Compile Include="Lists\CheckSet.cs" />
+    <Compile Include="Lists\ICheckSet.cs" />
     <Compile Include="Reflection\ReflectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
@@ -89,7 +88,6 @@
     <Compile Include="Serialization\SerializerEngine.cs" />
     <Compile Include="Serialization\MetaObjects\MetaValueObject.cs" />
     <Compile Include="Serialization\XmlFormatter.cs" />
-    <Compile Include="Singleton\Singleton.cs" />
     <Compile Include="Text\PatternMatchers\BinPatternMatcher.cs" />
     <Compile Include="Text\PatternMatchers\DecPatternMatcher.cs" />
     <Compile Include="Text\PatternMatchers\HexPatternMatcher.cs" />
