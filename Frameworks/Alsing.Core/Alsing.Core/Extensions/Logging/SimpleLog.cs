@@ -30,7 +30,7 @@ namespace Alsing.Logging
 
         public void WriteLine(object item)
         {
-            string input = item.FormatAs("{0}");
+            string input = string.Format("{0}", item);
             string output = Formatter(input);
             Out.WriteLine(output);
         }

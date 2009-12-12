@@ -52,7 +52,6 @@
     <Compile Include="Extensions\Lists\ListExtensions.cs" />
     <Compile Include="Extensions\Logging\LogExtensions.cs" />
     <Compile Include="Extensions\Logging\SimpleLog.cs" />
-    <Compile Include="Extensions\NullObjectExtensions.cs" />
     <Compile Include="Extensions\NumericExtensions.cs" />
     <Compile Include="Extensions\Validation\StringValidationExtensions.cs">
       <SubType>Code</SubType>

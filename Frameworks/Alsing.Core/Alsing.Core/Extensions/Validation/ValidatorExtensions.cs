@@ -64,9 +64,7 @@ namespace Alsing
         public static Validation<T> ExistsInList<T>(this Validation<T> item, IList<T> list)
         {
             if (!list.Contains(item.Value))
-                throw new ArgumentException(
-                    "The value {0} did not exist in the provided list of valid values."
-                        .FormatWith(item.ArgName), item.ArgName);
+                throw new ArgumentException(string.Format("The value {0} did not exist in the provided list of valid values.",item.ArgName), item.ArgName);
 
             return item;
         }
@@ -78,9 +76,8 @@ namespace Alsing
         {
 
             if ((item.Value.CompareTo(lowerBoundry) < 0) || (item.Value.CompareTo(upperBoundry) > 0))
-                throw new ArgumentOutOfRangeException(item.ArgName, item.Value,
-                                                      "Parameter {0} cannot be less than {1} or greater than {2}".
-                                                          FormatWith(item.ArgName, lowerBoundry, upperBoundry));
+                throw new ArgumentOutOfRangeException( item.ArgName, item.Value,
+                                                      string.Format("Parameter {0} cannot be less than {1} or greater than {2}",item.ArgName, lowerBoundry, upperBoundry));
 
             return item;
         }
@@ -88,9 +85,7 @@ namespace Alsing
         public static Validation<T> IsGreaterThan<T>(this Validation<T> item,T other) where T : IComparable
         {
             if ((item.Value.CompareTo(other) <= 0))
-                throw new ArgumentOutOfRangeException(item.ArgName, item.Value,
-                                                      "Parameter {0} must be greater than {1} ".
-                                                          FormatWith(item.ArgName, other));
+                throw new ArgumentOutOfRangeException(item.ArgName, item.Value,string.Format("Parameter {0} must be greater than {1} ",item.ArgName, other));
             
             return item;
         }
@@ -98,9 +93,7 @@ namespace Alsing
         public static Validation<T> IsLessThan<T>(this Validation<T> item, T other) where T : IComparable
         {
             if ((item.Value.CompareTo(other) >= 0))
-                throw new ArgumentOutOfRangeException(item.ArgName, item.Value,
-                                                      "Parameter {0} must be less than {1} ".
-                                                          FormatWith(item.ArgName, other));
+                throw new ArgumentOutOfRangeException(item.ArgName, item.Value,string.Format("Parameter {0} must be less than {1} ",item.ArgName, other));
 
             return item;
         }
@@ -108,9 +101,7 @@ namespace Alsing
         public static Validation<T> IsEqualTo<T>(this Validation<T> item, T other) where T : IComparable
         {
             if ((item.Value.CompareTo(other) != 0))
-                throw new ArgumentOutOfRangeException(item.ArgName, item.Value,
-                                                      "Parameter {0} must be Equal to {1} ".
-                                                          FormatWith(item.ArgName, other));
+                throw new ArgumentOutOfRangeException(item.ArgName, item.Value,string.Format("Parameter {0} must be Equal to {1} ",item.ArgName, other));
 
             return item;
         }
@@ -136,7 +127,7 @@ namespace Alsing
             {
                 var lambda = expression as LambdaExpression;
                 string expressionText = lambda.Body.ToString();
-                throw new ArgumentException(expressionText.FormatAs("Expression '{0}' evaluated false"), item.ArgName);
+                throw new ArgumentException(string.Format("Expression '{0}' evaluated false", expressionText), item.ArgName);
             }
 
             return item;

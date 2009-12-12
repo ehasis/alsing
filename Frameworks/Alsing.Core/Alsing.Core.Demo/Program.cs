@@ -10,15 +10,8 @@ namespace ExtensionDemo
     internal class Program
     {
         private static void Main(string[] args)
-        {            
-
-            1
-                .FormatAs("res {0}")
-                .Output();
-            
-            
-
-
+        {           
+           
             //List<string> list = new List<string>()
             //                    {
             //                        "a",

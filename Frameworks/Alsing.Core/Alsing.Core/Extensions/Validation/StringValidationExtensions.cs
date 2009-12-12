@@ -19,7 +19,7 @@ namespace Alsing
         public static Validation<string> ShorterThan(this Validation<string> item, int limit)
         {
             if (item.Value.Length >= limit)
-                throw new ArgumentException("Parameter {0} must be shorter than {1} chars".FormatWith(item.ArgName,
+                throw new ArgumentException( string.Format("Parameter {0} must be shorter than {1} chars",item.ArgName,
                                                                                                       limit));
 
             return item;
@@ -29,7 +29,7 @@ namespace Alsing
         public static Validation<string> LongerThan(this Validation<string> item, int limit)
         {
             if (item.Value.Length <= limit)
-                throw new ArgumentException("Parameter {0} must be longer than {1} chars".FormatWith(item.ArgName, limit));
+                throw new ArgumentException( string.Format("Parameter {0} must be longer than {1} chars",item.ArgName, limit));
 
             return item;
         }
@@ -38,7 +38,7 @@ namespace Alsing
         public static Validation<string> StartsWith(this Validation<string> item, string pattern)
         {
             if (!item.Value.StartsWith(pattern))
-                throw new ArgumentException("Parameter {0} must start with {1}".FormatWith(item.ArgName, pattern));
+                throw new ArgumentException(string.Format("Parameter {0} must start with {1}",item.ArgName, pattern));
 
             return item;
         }
@@ -49,7 +49,7 @@ namespace Alsing
         {
             if (item.Value.Length != length)
                 throw new ArgumentOutOfRangeException(item.ArgName, item.Value,
-                                                      "Parameter {0} has to be {1} characters long.".FormatWith(
+                                                     string.Format( "Parameter {0} has to be {1} characters long.",
                                                           item.ArgName, length));
             return item;
         }
@@ -58,7 +58,7 @@ namespace Alsing
         public static Validation<string> NotEmpty(this Validation<string> item)
         {
             if (item == "")
-                throw new ArgumentException("Parameter {0} may not be empty".FormatWith(item.ArgName), item.ArgName);
+                throw new ArgumentException(string.Format("Parameter {0} may not be empty",item.ArgName), item.ArgName);
 
             return item;
         }

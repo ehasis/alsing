@@ -36,9 +36,9 @@ namespace Alsing.Serialization
             return objectID++;
         }
 
-        public void Serialize(Stream output, object graph)
+        public void Serialize(Stream output, object graphRoot)
         {
-            BuildSerilizationGraph(graph);
+            BuildSerilizationGraph(graphRoot);
             var xml = new XmlTextWriter(output, Encoding.Default)
                           {
                               Formatting = Formatting.Indented,

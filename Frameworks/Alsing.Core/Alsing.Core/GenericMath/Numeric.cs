@@ -111,7 +111,7 @@ namespace Alsing
                 
                 //Giving credit where credit is due:
                 //This part is a ripp of from Marc Gravell generic math implementation               
-                return (a, b) => { throw new NotSupportedException("Type '{0}' does not support math operations".FormatWith(typeof(T).Name)); };
+                return (a, b) => { throw new NotSupportedException( string.Format("Type '{0}' does not support math operations",typeof(T).Name)); };
             }        
         }
 
@@ -139,7 +139,7 @@ namespace Alsing
 
                 //Giving credit where credit is due:
                 //This part is a ripp of from Marc Gravell generic math implementation               
-                return (a, b) => { throw new NotSupportedException("Type '{0}' does not support math operations".FormatWith(typeof(T).Name)); };
+                return (a, b) => { throw new NotSupportedException(string.Format("Type '{0}' does not support math operations", (typeof(T).Name))); };
             }
         }
 
@@ -221,7 +221,7 @@ namespace Alsing
 
         public override string ToString()
         {
-            return Value.FormatAs("Numeric: {0}");
+            return string.Format("Numeric: {0}",Value);
         }
     }
 }
