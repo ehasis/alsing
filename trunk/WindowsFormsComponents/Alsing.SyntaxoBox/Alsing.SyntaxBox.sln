@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.SyntaxBox.NET", "Alsing.SyntaxBox\Alsing.SyntaxBox.NET.csproj", "{19EF75B2-B414-4EB0-9486-160FAF93E62C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "Samples\HelloWorld\HelloWorld.csproj", "{FCF83FF2-7D05-4301-9CC0-09234A9ED0DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDIDemo", "Samples\MdiDemo\MDIDemo.csproj", "{2AE13325-8AC7-4AE8-A835-F434DC3F11EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19EF75B2-B414-4EB0-9486-160FAF93E62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19EF75B2-B414-4EB0-9486-160FAF93E62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19EF75B2-B414-4EB0-9486-160FAF93E62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19EF75B2-B414-4EB0-9486-160FAF93E62C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCF83FF2-7D05-4301-9CC0-09234A9ED0DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCF83FF2-7D05-4301-9CC0-09234A9ED0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCF83FF2-7D05-4301-9CC0-09234A9ED0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCF83FF2-7D05-4301-9CC0-09234A9ED0DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE13325-8AC7-4AE8-A835-F434DC3F11EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE13325-8AC7-4AE8-A835-F434DC3F11EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE13325-8AC7-4AE8-A835-F434DC3F11EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE13325-8AC7-4AE8-A835-F434DC3F11EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
