@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Infrastructure", "Alsing.Workspace\Alsing.Infrastructure.csproj", "{6550948C-10DD-44BC-A380-E086441B9E10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain", "MyBlog.Domain\MyBlog.Domain.csproj", "{29C654F7-38DB-41D3-BC36-FF55C876D4C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.TestHarness", "MyBlog.TesTHarness\MyBlog.TestHarness.csproj", "{DDB5493B-937E-4A9E-941F-D77E64D350A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Tests", "MyBlog.Tests\MyBlog.Tests.csproj", "{933F8717-E773-467E-B83D-555EAAA39DEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ADE1C73E-034E-4F46-B56B-1A136BD49E35}"
+	ProjectSection(SolutionItems) = preProject
+		Alsing.Infrastrucutre.vsmdi = Alsing.Infrastrucutre.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Infrastructure.Tests", "Alsing.Infrastructure.Tests\Alsing.Infrastructure.Tests.csproj", "{F9DBA7C1-BDB0-4429-B230-909523F6C278}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Alsing.Infrastrucutre.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6550948C-10DD-44BC-A380-E086441B9E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6550948C-10DD-44BC-A380-E086441B9E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6550948C-10DD-44BC-A380-E086441B9E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6550948C-10DD-44BC-A380-E086441B9E10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29C654F7-38DB-41D3-BC36-FF55C876D4C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C654F7-38DB-41D3-BC36-FF55C876D4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29C654F7-38DB-41D3-BC36-FF55C876D4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29C654F7-38DB-41D3-BC36-FF55C876D4C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB5493B-937E-4A9E-941F-D77E64D350A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB5493B-937E-4A9E-941F-D77E64D350A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB5493B-937E-4A9E-941F-D77E64D350A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB5493B-937E-4A9E-941F-D77E64D350A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{933F8717-E773-467E-B83D-555EAAA39DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{933F8717-E773-467E-B83D-555EAAA39DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{933F8717-E773-467E-B83D-555EAAA39DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{933F8717-E773-467E-B83D-555EAAA39DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9DBA7C1-BDB0-4429-B230-909523F6C278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9DBA7C1-BDB0-4429-B230-909523F6C278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9DBA7C1-BDB0-4429-B230-909523F6C278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9DBA7C1-BDB0-4429-B230-909523F6C278}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
