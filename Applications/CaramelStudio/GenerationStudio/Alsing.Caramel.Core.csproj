@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9D36715-45EA-4C21-9C7F-9E4F999B845F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GenerationStudio</RootNamespace>
+    <AssemblyName>GenerationStudio.Core</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppCore\Engine.cs" />
+    <Compile Include="Attributes\AllowMultipleAttribute.cs" />
+    <Compile Include="Attributes\ElementIconAttribute.cs" />
+    <Compile Include="Attributes\ElementNameAttribute.cs" />
+    <Compile Include="Attributes\ElementVerbAttribute.cs" />
+    <Compile Include="Attributes\ElementParentAttribute.cs" />
+    <Compile Include="Design\ConnectionStringEditor.cs" />
+    <Compile Include="Design\ElementSelectEditor.cs" />
+    <Compile Include="Elements\DB\ColumnElement.cs" />
+    <Compile Include="Elements\DB\ColumnPairElement.cs" />
+    <Compile Include="Elements\DB\ColumnsElement.cs" />
+    <Compile Include="Elements\DB\DataBaseElement.cs" />
+    <Compile Include="Elements\DB\ForeignKeyElement.cs" />
+    <Compile Include="Elements\DB\ForeignKeysElement.cs" />
+    <Compile Include="Elements\DB\ProcedureElement.cs" />
+    <Compile Include="Elements\DB\ProceduresElement.cs" />
+    <Compile Include="Elements\DB\TableElement.cs" />
+    <Compile Include="Elements\DB\TablesElement.cs" />
+    <Compile Include="Elements\DB\ViewElement.cs" />
+    <Compile Include="Elements\DB\ViewsElement.cs" />
+    <Compile Include="Elements\ElementError.cs" />
+    <Compile Include="Elements\ElementTransaction.cs" />
+    <Compile Include="Elements\NamedElement.cs" />
+    <Compile Include="Elements\OO\ClassDiagram\DiagramRelationElement.cs" />
+    <Compile Include="Elements\OO\ClassDiagram\DiagramCommentElement.cs" />
+    <Compile Include="Elements\OO\ClassDiagram\DiagramElement.cs" />
+    <Compile Include="Elements\OO\ClassDiagram\DiagramMemberElement.cs" />
+    <Compile Include="Elements\OO\ClassDiagram\DiagramTypeElement.cs" />
+    <Compile Include="Elements\OO\ClassElement.cs" />
+    <Compile Include="Elements\Element.cs" />
+    <Compile Include="Elements\OO\EnumElement.cs" />
+    <Compile Include="Elements\OO\EnumValueElement.cs" />
+    <Compile Include="Elements\OO\ImplementationElement.cs" />
+    <Compile Include="Elements\OO\InstanceTypeElement.cs" />
+    <Compile Include="Elements\OO\InterfaceElement.cs" />
+    <Compile Include="Elements\OO\MethodElement.cs" />
+    <Compile Include="Elements\OO\NamespaceElement.cs" />
+    <Compile Include="Elements\OO\ParameterElement.cs" />
+    <Compile Include="Elements\OO\ProjectElement.cs" />
+    <Compile Include="Elements\OO\PropertyElement.cs" />
+    <Compile Include="Elements\ORM\ClassTableMappingElement.cs" />
+    <Compile Include="Elements\ORM\NamespaceDbMappingElement.cs" />
+    <Compile Include="Elements\ORM\PropertyColumnMappingElement.cs" />
+    <Compile Include="Elements\RootElement.cs" />
+    <Compile Include="Elements\OO\TypeElement.cs" />
+    <Compile Include="Elements\OO\TypeMemberElement.cs" />
+    <Compile Include="Elements\StaticElement.cs" />
+    <Compile Include="Elements\Templates\TemplateElement.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Graphics\Utils.cs" />
+    <Compile Include="Gui\ClassDiagram\ClassDiagramEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\ClassDiagram\ClassDiagramEditor.Designer.cs">
+      <DependentUpon>ClassDiagramEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\ClassDiagram\UmlAssociationData.cs" />
+    <Compile Include="Gui\ClassDiagram\UmlClassDiagramData.cs" />
+    <Compile Include="Gui\ClassDiagram\UmlCommentData.cs" />
+    <Compile Include="Gui\ClassDiagram\UmlEnumData.cs" />
+    <Compile Include="Gui\ClassDiagram\UmlInterfaceData.cs" />
+    <Compile Include="Gui\ClassDiagram\UmlTypeMemberData.cs" />
+    <Compile Include="Gui\ClassDiagram\UmlClassData.cs" />
+    <Compile Include="Gui\IHost.cs" />
+    <Compile Include="Gui\TableDataView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\TableDataView.Designer.cs">
+      <DependentUpon>TableDataView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\TemplateEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\TemplateEditor.Designer.cs">
+      <DependentUpon>TemplateEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateEngine\ITemplate.cs" />
+    <Compile Include="TemplateEngine\ScriptCompiler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gui\TableDataView.resx">
+      <DependentUpon>TableDataView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gui\TemplateEditor.resx">
+      <DependentUpon>TemplateEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="TemplateSyntax\CSharp.syn" />
+    <None Include="TemplateSyntax\CSharpTemplate.syn" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\class.gif" />
+    <EmbeddedResource Include="Images\column.gif" />
+    <EmbeddedResource Include="Images\database.gif" />
+    <EmbeddedResource Include="Images\dummy.bmp" />
+    <EmbeddedResource Include="Images\entity.bmp" />
+    <EmbeddedResource Include="Images\enum.gif" />
+    <EmbeddedResource Include="Images\enumvalue.gif" />
+    <EmbeddedResource Include="Images\error.gif" />
+    <EmbeddedResource Include="Images\exclude.gif" />
+    <EmbeddedResource Include="Images\field.bmp" />
+    <EmbeddedResource Include="Images\implementation.bmp" />
+    <EmbeddedResource Include="Images\interface.bmp" />
+    <EmbeddedResource Include="Images\mapping.gif" />
+    <EmbeddedResource Include="Images\namespace.gif" />
+    <EmbeddedResource Include="Images\pk.gif" />
+    <EmbeddedResource Include="Images\project.gif" />
+    <EmbeddedResource Include="Images\property.gif" />
+    <EmbeddedResource Include="Images\struct.bmp" />
+    <EmbeddedResource Include="Images\table.gif" />
+    <EmbeddedResource Include="Images\template.gif" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\template.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\class.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\project.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Folder.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Gui\ClassDiagram\ClassDiagramEditor.resx">
+      <DependentUpon>ClassDiagramEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\classdiagram.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\method.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\comment.gif" />
+    <EmbeddedResource Include="Images\type.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\association.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AlbinoHorse\Alsing.AlbinoHorse\Alsing.AlbinoHorse.csproj">
+      <Project>{4E22716D-047F-4CBC-9B86-785E2A0CAB67}</Project>
+      <Name>Alsing.AlbinoHorse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MyMeta\MyMeta.csproj">
+      <Project>{72BEAB1C-B55F-4F0E-89AF-17F71E74A452}</Project>
+      <Name>MyMeta</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SyntaxBox\Alsing.SyntaxBox\Alsing.SyntaxBox.NET.csproj">
+      <Project>{19EF75B2-B414-4EB0-9486-160FAF93E62C}</Project>
+      <Name>Alsing.SyntaxBox.NET</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\fk.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{2A75196C-D9EB-4129-B803-931327F72D5C}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="MSDASC">
+      <Guid>{2206CEB0-19C1-11D1-89E0-00C04FD7A829}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\view.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\sproc.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
