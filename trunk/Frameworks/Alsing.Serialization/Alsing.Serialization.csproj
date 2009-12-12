@@ -67,6 +67,7 @@
     <Compile Include="MetaObjects\MetaObject.cs" />
     <Compile Include="MetaObjects\MetaReferenceObject.cs" />
     <Compile Include="MetaObjects\MetaValueObject.cs" />
+    <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="SerializerEngine.cs" />
     <Compile Include="XmlFormatter.cs" />
   </ItemGroup>
@@ -74,10 +75,6 @@
     <ProjectReference Include="..\Alsing.Core\Alsing.Core\Alsing.Core.csproj">
       <Project>{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}</Project>
       <Name>Alsing.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alsing.Reflection\Alsing.Reflection.csproj">
-      <Project>{5AA88E07-BAE0-4AFB-A7E8-0CB53369B0E5}</Project>
-      <Name>Alsing.Reflection</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
