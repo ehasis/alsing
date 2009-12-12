@@ -54,14 +54,20 @@
     <Compile Include="Extensions\Logging\SimpleLog.cs" />
     <Compile Include="Extensions\NullObjectExtensions.cs" />
     <Compile Include="Extensions\NumericExtensions.cs" />
+    <Compile Include="Extensions\Validation\StringValidationExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\Validation\TypeCheckExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\Validation\ValidatorExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Lists\CheckSet.cs" />
     <Compile Include="Lists\ICheckSet.cs" />
     <Compile Include="Reflection\ReflectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Extensions\Validation\StringValidationExtensions.cs" />
-    <Compile Include="Extensions\Validation\TypeCheckExtensions.cs" />
-    <Compile Include="Extensions\Validation\ValidatorExtensions.cs" />
     <Compile Include="GenericMath\Numeric.cs" />
     <Compile Include="Lists\Bag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

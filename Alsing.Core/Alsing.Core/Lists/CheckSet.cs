@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Alsing.Collections
 {
@@ -13,13 +14,31 @@ namespace Alsing.Collections
             return res;
         }
 
+        public bool this[T item]
+        {
+            get
+            {
+                return this.IsChecked(item);
+            }
+            set
+            {
+                this.Check(item);
+            }
+        }
+
         public void Check(T item)
         {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
             lookup[item] = true;
         }
 
         public void UnCheck(T item)
         {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
             lookup[item] = false;
         }
     }
