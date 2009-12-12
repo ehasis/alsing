@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{122C143C-BBAA-434C-81EB-B3DC479FC3B8}"
+	ProjectSection(SolutionItems) = preProject
+		Alsing.All.vsmdi = Alsing.All.vsmdi
+		Alsing.Core\LocalTestRun.testrunconfig = Alsing.Core\LocalTestRun.testrunconfig
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Core", "Alsing.Core\Alsing.Core\Alsing.Core.csproj", "{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Messaging", "Alsing.Messaging\Alsing.Messaging.csproj", "{14266723-E951-48F2-8603-D3B3072C1EF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Workspace", "Alsing.Workspace\Alsing.Workspace.csproj", "{08710662-90CC-43F2-8DFE-985732DF99B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Serialization", "Alsing.Serialization\Alsing.Serialization.csproj", "{5BE56FB7-9D71-450C-BB74-BB6712510417}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Messaging.Tests", "Alsing.Messaging.Tests\Alsing.Messaging.Tests.csproj", "{64680081-2549-445D-A2F9-4EE6167C0E4C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{ED35CF8B-EF95-48F9-8D42-AD0C43D82A62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyBlog", "MyBlog", "{F185DDC6-D647-4B0C-BB4B-DA718A139FDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Transactional", "Alsing.Transactional\Alsing.Transactional.csproj", "{42EE6937-8DBA-4D2C-BC8E-8575AC7468A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain", "Samples\MyBlog\MyBlog.Domain\MyBlog.Domain.csproj", "{4878AD8C-D5B1-4B35-8060-8AA298E9143E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain.Tests", "Samples\MyBlog\MyBlog.Domain.Tests\MyBlog.Domain.Tests.csproj", "{933F8717-E773-467E-B83D-555EAAA39DEA}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Alsing.All.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14266723-E951-48F2-8603-D3B3072C1EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14266723-E951-48F2-8603-D3B3072C1EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14266723-E951-48F2-8603-D3B3072C1EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14266723-E951-48F2-8603-D3B3072C1EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08710662-90CC-43F2-8DFE-985732DF99B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08710662-90CC-43F2-8DFE-985732DF99B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08710662-90CC-43F2-8DFE-985732DF99B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08710662-90CC-43F2-8DFE-985732DF99B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BE56FB7-9D71-450C-BB74-BB6712510417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BE56FB7-9D71-450C-BB74-BB6712510417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BE56FB7-9D71-450C-BB74-BB6712510417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BE56FB7-9D71-450C-BB74-BB6712510417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64680081-2549-445D-A2F9-4EE6167C0E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64680081-2549-445D-A2F9-4EE6167C0E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64680081-2549-445D-A2F9-4EE6167C0E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64680081-2549-445D-A2F9-4EE6167C0E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42EE6937-8DBA-4D2C-BC8E-8575AC7468A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42EE6937-8DBA-4D2C-BC8E-8575AC7468A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42EE6937-8DBA-4D2C-BC8E-8575AC7468A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42EE6937-8DBA-4D2C-BC8E-8575AC7468A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4878AD8C-D5B1-4B35-8060-8AA298E9143E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4878AD8C-D5B1-4B35-8060-8AA298E9143E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4878AD8C-D5B1-4B35-8060-8AA298E9143E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4878AD8C-D5B1-4B35-8060-8AA298E9143E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{933F8717-E773-467E-B83D-555EAAA39DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{933F8717-E773-467E-B83D-555EAAA39DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{933F8717-E773-467E-B83D-555EAAA39DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{933F8717-E773-467E-B83D-555EAAA39DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F185DDC6-D647-4B0C-BB4B-DA718A139FDC} = {ED35CF8B-EF95-48F9-8D42-AD0C43D82A62}
+		{4878AD8C-D5B1-4B35-8060-8AA298E9143E} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
+		{933F8717-E773-467E-B83D-555EAAA39DEA} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
+	EndGlobalSection
+EndGlobal
