@@ -10,7 +10,7 @@ namespace Alsing.Reflection
         public static bool HasAttribute<T>(this ICustomAttributeProvider self)
         {
             return self
-                .GetCustomAttributes(typeof(T), true).Count() > 0;
+                .GetCustomAttributes(typeof(T), true).Length > 0;
         }
 
         public static FieldInfo GetAnyField(this Type type,string fieldName)
