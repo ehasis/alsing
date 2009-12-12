@@ -146,9 +146,6 @@ namespace Alsing.Core.Tests.Text
             const string text = @"The quick brown 1337 fox jumped 0v3r the little pig";
             //                                    XXXX            X X
 
-            // only two tokens should be found, the rest 
-            // are either wrong casing or do not have separators next to them
-
             tokenizer.Text = text;
             var tokens = tokenizer.Tokenize();
 
