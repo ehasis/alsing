@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
-using Alsing.Core;
+using Alsing.Reflection;
 
 namespace Alsing.Serialization
 {
