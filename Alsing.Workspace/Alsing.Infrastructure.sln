@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Tests", "MyBlog.Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ADE1C73E-034E-4F46-B56B-1A136BD49E35}"
 	ProjectSection(SolutionItems) = preProject
-		Alsing.Workspace.vsmdi = Alsing.Workspace.vsmdi
+		Alsing.Infrastrucutre.vsmdi = Alsing.Infrastrucutre.vsmdi
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Infrastructure.Tests
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Alsing.Workspace.vsmdi
+		CategoryFile = Alsing.Infrastrucutre.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

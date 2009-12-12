@@ -45,9 +45,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AuthoringTests.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Alsing.Workspace\Alsing.Infrastructure.csproj">
       <Project>{6550948C-10DD-44BC-A380-E086441B9E10}</Project>
       <Name>Alsing.Infrastructure</Name>
