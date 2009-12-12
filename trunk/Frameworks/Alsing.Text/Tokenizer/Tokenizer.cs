@@ -34,10 +34,9 @@ namespace Alsing.Text
 
         public Token[] Tokenize()
         {
-            
 
-            Text.Require("Text")
-                .NotNullOrEmpty();
+            if (string.IsNullOrEmpty(Text))
+                throw new ArgumentNullException("Text");
 
             MakeImmutable();
 

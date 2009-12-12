@@ -9,6 +9,7 @@
 // *
 
 using Alsing.Text.PatternMatchers;
+using System;
 
 namespace Alsing.Text
 {
@@ -16,15 +17,15 @@ namespace Alsing.Text
     {
         public void AddPattern(IPatternMatcher matcher, bool caseSensitive, bool needSeparators, object[] tags)
         {
-            matcher.Require("matcher")
-                .NotNull();
-
+            if (matcher == null)
+                throw new ArgumentNullException("matcher");
+            
             AddPattern(null, matcher, caseSensitive, needSeparators, tags);
         }
 
         public void AddPattern(string prefix, IPatternMatcher matcher, bool caseSensitive, bool needSeparators, object[] tags)
         {
-            if (prefix.IsNullOrEmpty())
+            if (string.IsNullOrEmpty(prefix))
             {
                 AddPatternWithoutPrefix(matcher, caseSensitive, needSeparators, tags);
             }
@@ -42,8 +43,8 @@ namespace Alsing.Text
 
         public void AddToken(string text, bool caseSensitive, bool needSeparators, object[] tags)
         {
-            text.Require("text")
-                .NotNullOrEmpty();
+            if (string.IsNullOrEmpty(text))
+                throw new ArgumentNullException("text");
 
             if (caseSensitive)
             {

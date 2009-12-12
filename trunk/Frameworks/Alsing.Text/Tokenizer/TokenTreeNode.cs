@@ -9,6 +9,7 @@
 // *
 
 using Alsing.Text.PatternMatchers;
+using System;
 
 namespace Alsing.Text
 {
@@ -41,8 +42,8 @@ namespace Alsing.Text
         public void AddPattern(string prefix, bool caseSensitive, bool needSeparators, IPatternMatcher matcher,
                                   object[] tags)
         {
-            prefix.Require("prefix")
-                .NotNullOrEmpty();
+            if (string.IsNullOrEmpty(prefix))
+                throw new ArgumentNullException("prefix");
 
             TokenTreeNode node = AddTokenInternal(prefix, caseSensitive);
 
@@ -70,8 +71,8 @@ namespace Alsing.Text
 
         public void AddToken(string token, bool caseSensitive, bool needSeparators, object[] tags)
         {
-            token.Require("token")
-                .NotNullOrEmpty();
+            if (string.IsNullOrEmpty(token))
+                throw new ArgumentNullException("token");
 
             TokenTreeNode node = AddTokenInternal(token, caseSensitive);
             node.IsEnd = true;
