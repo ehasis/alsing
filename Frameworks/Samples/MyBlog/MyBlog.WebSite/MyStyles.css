@@ -73,6 +73,7 @@
 	text-align: center;
 	text-transform: capitalize;
 	text-decoration: none;
+	vertical-align:middle;
 }
 .PostSubject
 {
@@ -80,17 +81,29 @@
 	display:inline-block;
 	padding: 8px;
 }
-.PostSubject A
+
+.PostSubject H1
 {
-	text-decoration:none;
-	color: #a0a0f0;
+    color:Black;
+    vertical-align:middle;
 }
 
-.PostReplies
+.PostSubject H1 A
 {
-	border:1px solid transparent;
-	padding: 8px;
+    color:Black;
+    text-decoration:none;
+}
 
+.Comments
+{
+
+}
+
+.Comments .Comment
+{
+    border:1px solid Black;
+    padding: 8px;
+    margin-top: 8px;
 }
 
 .PostBody

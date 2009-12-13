@@ -17,9 +17,23 @@ namespace MyBlog.WebSite
             {
                 PostRepository postRepository = new PostRepository(ws);
                 var posts = postRepository.FindLastXPosts(10);
+
                 repLatestPosts.DataSource = posts;
                 repLatestPosts.DataBind();
             }
+        }
+
+
+        protected string FormatPublishDate(object o)
+        {
+            DateTime dt = (DateTime) o;
+            return Utils.FormatDate(dt);
+        }
+
+        public string FormatBody(object o)
+        {
+            string body = (string)o;
+            return body.Replace("\r", "<br/>");
         }
     }
 }

@@ -6,8 +6,7 @@
         <div class="PostList">
             <div class="Post">
                 <div class="PostPublishDate">
-                    <asp:Literal ID="litPublishDate" runat="server" Text="" ></asp:Literal>
-                    
+                    <asp:Literal ID="litPublishDate" runat="server" Text="" ></asp:Literal>                    
                 </div>
                 <div class="PostSubject">
                     <h1>
@@ -17,7 +16,7 @@
                 <div class="PostBody">
                     <asp:Literal ID="litBody" runat="server" Text="" ></asp:Literal>
                 </div> 
-                <div class="PostReplies">
+                <div class="Comments">
                     <asp:Repeater ID="repReplies" runat="server">
                         <HeaderTemplate>
                             <div>
@@ -26,8 +25,10 @@
                             </div>
                         </FooterTemplate>
                         <ItemTemplate>
-                            <%# Eval("UserName") %>
-                            <%# Eval("Body") %>
+                            <div class="Comment">
+                                <%# Eval("UserName") %>
+                                <%# Eval("Body") %>
+                            </div>
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>   

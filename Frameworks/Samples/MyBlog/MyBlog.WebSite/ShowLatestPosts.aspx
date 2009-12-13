@@ -11,7 +11,7 @@
             <ItemTemplate>
                 <div class="Post">
                     <div class="PostPublishDate">
-                        <%#Eval("PublishDate")%>
+                        <%# FormatPublishDate(Eval("PublishDate"))%>
                     </div>
                     <div class="PostSubject">
                         <h1>
@@ -21,10 +21,12 @@
                         </h1>
                     </div>
                     <div class="PostBody">
-                        <%#Eval("Body") %>
+                        <%# FormatBody( Eval("Body")) %>
                     </div> 
-                    <div class="PostReplies">
-                        Replies: <%#Eval("ReplyCount") %>
+                    <div class="Comments">
+                        <div class="Comment">
+                            Replies: <%#Eval("ReplyCount") %>
+                        </div>
                     </div>   
                 </div>
             </ItemTemplate>
