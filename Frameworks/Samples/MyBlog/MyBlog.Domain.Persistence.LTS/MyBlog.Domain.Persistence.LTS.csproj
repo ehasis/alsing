@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4878AD8C-D5B1-4B35-8060-8AA298E9143E}</ProjectGuid>
+    <ProjectGuid>{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyBlog.Domain</RootNamespace>
-    <AssemblyName>MyBlog.Domain</AssemblyName>
+    <RootNamespace>MyBlog.Domain.Persistence.LTS</RootNamespace>
+    <AssemblyName>MyBlog.Domain.Persistence.LTS</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,28 +48,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Comment.cs" />
-    <Compile Include="DomainEvents\CommentApprovedNotification.cs" />
-    <Compile Include="DomainEvents\CommentNotification.cs" />
-    <Compile Include="Constants\Constants.cs" />
-    <Compile Include="Exceptions\DomainException.cs" />
-    <Compile Include="Projections\FlattenedPost.cs" />
-    <Compile Include="Entities\Post.cs" />
-    <Compile Include="Entities\PostCategory.cs" />
-    <Compile Include="Entities\PostCategoryLink.cs" />
-    <Compile Include="Repositories\PostCategoryRepository.cs" />
-    <Compile Include="Repositories\PostRepository.cs" />
+    <Compile Include="ModelDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Alsing.Messaging\Alsing.Messaging.csproj">
-      <Project>{14266723-E951-48F2-8603-D3B3072C1EF6}</Project>
-      <Name>Alsing.Messaging</Name>
+    <Content Include="ModelDataMapping.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyBlog.Domain\MyBlog.Domain.csproj">
+      <Project>{4878AD8C-D5B1-4B35-8060-8AA298E9143E}</Project>
+      <Name>MyBlog.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Alsing.Workspace\Alsing.Workspace.csproj">
-      <Project>{08710662-90CC-43F2-8DFE-985732DF99B0}</Project>
-      <Name>Alsing.Workspace</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

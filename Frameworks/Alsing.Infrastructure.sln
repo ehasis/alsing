@@ -30,6 +30,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain.Tests", "Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Serialization.Tests", "Alsing.Serialization.Tests\Alsing.Serialization.Tests.csproj", "{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.WebSite", "Samples\MyBlog\MyBlog.WebSite\MyBlog.WebSite.csproj", "{B4110913-59C3-4CF2-A786-8816ADEE9628}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain.Persistence.LTS", "Samples\MyBlog\MyBlog.Domain.Persistence.LTS\MyBlog.Domain.Persistence.LTS.csproj", "{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Alsing.All.vsmdi
@@ -75,6 +79,14 @@ Global
 		{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4110913-59C3-4CF2-A786-8816ADEE9628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4110913-59C3-4CF2-A786-8816ADEE9628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4110913-59C3-4CF2-A786-8816ADEE9628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4110913-59C3-4CF2-A786-8816ADEE9628}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,5 +95,7 @@ Global
 		{F185DDC6-D647-4B0C-BB4B-DA718A139FDC} = {ED35CF8B-EF95-48F9-8D42-AD0C43D82A62}
 		{4878AD8C-D5B1-4B35-8060-8AA298E9143E} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
 		{933F8717-E773-467E-B83D-555EAAA39DEA} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
+		{B4110913-59C3-4CF2-A786-8816ADEE9628} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
+		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
 	EndGlobalSection
 EndGlobal
