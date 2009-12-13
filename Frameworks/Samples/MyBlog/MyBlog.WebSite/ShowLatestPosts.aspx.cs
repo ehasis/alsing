@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MyBlog.Domain.Repositories;
 using Alsing.Workspace;
+using MyBlog.Domain;
 
 namespace MyBlog.WebSite
 {
@@ -32,6 +33,15 @@ namespace MyBlog.WebSite
         public string FormatBody(object o)
         {
             return Utils.FormatText(o as string);
+        }
+
+        public string FormatCategories(object o)
+        {
+            IEnumerable<PostCategoryLink> links = o as IEnumerable<PostCategoryLink>;
+
+            var strings = links.Select(l => l.PostCategory.Name).ToArray();
+
+            return string.Join(", ", strings);
         }
     }
 }
