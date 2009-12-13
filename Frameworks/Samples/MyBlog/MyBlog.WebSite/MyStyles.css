@@ -32,10 +32,10 @@
 
 .Middle .Menu
 {
-	position:absolute;
-	width: 200px;
+	width: 300px;
 	display: block;
-	clear: none;
+	clear: left;
+	float:right;
 	background-color:Silver;
 	left:0px;
 	height:100%;
@@ -43,9 +43,8 @@
 
 .Middle .MainContent
 {
-	position:absolute;
+    float:left;
 	width: 1024px;
-	left:200px;
 	height:100%;
 }
 
