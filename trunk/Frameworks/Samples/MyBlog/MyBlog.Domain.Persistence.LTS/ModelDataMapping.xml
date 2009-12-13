@@ -14,7 +14,7 @@
       <Association Member="CategoryLinks" Storage="categoryLinks" Name = "Post_PostCategoryLink" ThisKey = "Id" OtherKey = "PostId"/>      
     </Type>
   </Table>
-  <Table Name="dbo.PostReply" Member="PostReply">
+  <Table Name="dbo.Comment" Member="Comment">
     <Type Name="Comment">
       <Column Member="Id" AutoSync = "OnInsert" DbType = "Int NOT NULL IDENTITY" IsPrimaryKey = "true" IsDbGenerated = "true" />
       <Column Member="Approved" DbType = "Bit NOT NULL"/>

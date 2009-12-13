@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
-    <Content Include="ShowLatestPosts.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +68,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MyMaster.Master.cs">
+      <DependentUpon>MyMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyMaster.Master.designer.cs">
+      <DependentUpon>MyMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowLatestPosts.aspx.cs">
       <DependentUpon>ShowLatestPosts.aspx</DependentUpon>
@@ -77,6 +83,14 @@
     <Compile Include="ShowLatestPosts.aspx.designer.cs">
       <DependentUpon>ShowLatestPosts.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ShowPost.aspx.cs">
+      <DependentUpon>ShowPost.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowPost.aspx.designer.cs">
+      <DependentUpon>ShowPost.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Alsing.Messaging\Alsing.Messaging.csproj">
@@ -99,6 +113,12 @@
       <Project>{4878AD8C-D5B1-4B35-8060-8AA298E9143E}</Project>
       <Name>MyBlog.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MyMaster.Master" />
+    <Content Include="MyStyles.css" />
+    <Content Include="ShowLatestPosts.aspx" />
+    <Content Include="ShowPost.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
