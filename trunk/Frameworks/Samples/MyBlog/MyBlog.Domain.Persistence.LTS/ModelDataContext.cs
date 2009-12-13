@@ -4,14 +4,14 @@ namespace MyBlog.Domain
     using System.Data.Linq.Mapping;
     using System.IO;
 
-    using Properties;
+    using MyBlog.Domain.Persistence.LTS.Properties;
 
     [Database(Name = "MyBlog")]
     public class ModelDataContext : DataContext
     {
         private static readonly MappingSource mappingSource = new AttributeMappingSource();
 
-        private static readonly XmlMappingSource xmlSource = XmlMappingSource.FromXml(File.ReadAllText(@"c:\dev\Experimental\Alsing.Workspace\MyBlog.Domain\ModelDataMapping.xml"));
+        private static readonly XmlMappingSource xmlSource = XmlMappingSource.FromXml(File.ReadAllText(@"C:\Projects\svn\Frameworks\Samples\MyBlog\MyBlog.Domain\ModelDataMapping.xml"));
 
         public ModelDataContext() :
                 base(Settings.Default.MyBlogConnectionString, xmlSource)
@@ -20,7 +20,6 @@ namespace MyBlog.Domain
             ds.LoadWith<Post>(p => p.Comments);
             ds.LoadWith<Post>(p => p.CategoryLinks);
             ds.LoadWith<PostCategoryLink>(o => o.PostCategory);
-            //ds.AssociateWith<Customer>(p => p.Orders.Where(o => o.Freight > 20));
             this.LoadOptions = ds;
         }
     }
