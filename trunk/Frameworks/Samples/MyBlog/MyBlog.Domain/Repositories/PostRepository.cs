@@ -79,7 +79,8 @@ namespace MyBlog.Domain.Repositories
                                         PostId = post.Id,
                                         PublishDate = post.PublishDate,
                                         ReplyCount = post.Comments.Count(),
-                                        Subject = post.Subject
+                                        Subject = post.Subject,
+                                        CategoryLinks = post.CategoryLinks,
                                 }
                     );
         }

@@ -15,9 +15,9 @@ namespace MyBlog.WebSite
         {
             using (var ws = Config.GetWorkspace())
             {
-                var postAppServices = new PostRepository(ws);
+                var postRepository = new PostRepository(ws);
                 int postId = this.GetCurrentPostId();
-                Post post = postAppServices.FindById(postId);
+                Post post = postRepository.FindById(postId);
 
                 this.BindPost(post);
             }
@@ -28,7 +28,9 @@ namespace MyBlog.WebSite
             this.litPublishDate.Text = Utils.FormatDate(post.PublishDate.Value);
             this.litSubject.Text = Utils.FormatText(post.Subject);
             this.litBody.Text = Utils.FormatText(post.Body);
-            this.repReplies.DataSource = post.Comments;
+
+            //Up to the page to decide how to order the comments
+            this.repReplies.DataSource = post.Comments.OrderBy(c => c.CreationDate);
             this.repReplies.DataBind();
         }
 
