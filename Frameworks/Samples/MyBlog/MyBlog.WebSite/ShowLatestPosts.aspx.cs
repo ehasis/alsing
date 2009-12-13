@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Alsing.Workspace;
 using MyBlog.Domain.Repositories;
+using Alsing.Workspace;
 
 namespace MyBlog.WebSite
 {
@@ -17,8 +17,8 @@ namespace MyBlog.WebSite
             {
                 PostRepository postRepository = new PostRepository(ws);
                 var posts = postRepository.FindLastXPosts(10);
-                repLastPosts.DataSource = posts;
-                repLastPosts.DataBind();
+                repLatestPosts.DataSource = posts;
+                repLatestPosts.DataBind();
             }
         }
     }

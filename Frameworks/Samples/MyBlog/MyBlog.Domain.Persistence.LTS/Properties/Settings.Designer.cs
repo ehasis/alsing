@@ -25,7 +25,7 @@ namespace MyBlog.Domain.Persistence.LTS.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=MyBlog;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=OREPCROAL2\\;Initial Catalog=MyBlog;Integrated Security=True")]
         public string MyBlogConnectionString {
             get {
                 return ((string)(this["MyBlogConnectionString"]));

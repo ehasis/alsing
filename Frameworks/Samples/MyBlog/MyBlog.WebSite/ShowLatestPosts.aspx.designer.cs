@@ -14,21 +14,12 @@ namespace MyBlog.WebSite {
     public partial class ShowLatestPosts {
         
         /// <summary>
-        /// form1 control.
+        /// repLatestPosts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// repLastPosts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repLastPosts;
+        protected global::System.Web.UI.WebControls.Repeater repLatestPosts;
     }
 }

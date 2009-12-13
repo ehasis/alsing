@@ -11,7 +11,7 @@ namespace MyBlog.Domain
     {
         private static readonly MappingSource mappingSource = new AttributeMappingSource();
 
-        private static readonly XmlMappingSource xmlSource = XmlMappingSource.FromXml(File.ReadAllText(@"C:\Projects\svn\Frameworks\Samples\MyBlog\MyBlog.Domain\ModelDataMapping.xml"));
+        private static readonly XmlMappingSource xmlSource = XmlMappingSource.FromXml(Resources.ModelDataMapping);
 
         public ModelDataContext() :
                 base(Settings.Default.MyBlogConnectionString, xmlSource)

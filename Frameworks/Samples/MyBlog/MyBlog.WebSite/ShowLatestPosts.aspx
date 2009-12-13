@@ -1,20 +1,37 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowLatestPosts.aspx.cs" Inherits="MyBlog.WebSite.ShowLatestPosts" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MyMaster.Master" AutoEventWireup="true" CodeBehind="ShowLatestPosts.aspx.cs" Inherits="MyBlog.WebSite.ShowLatestPosts" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+ <div class="MainContent">
+        <asp:Repeater ID="repLatestPosts" runat="server">
+            <HeaderTemplate>
+                <div class="PostList">
+            </HeaderTemplate>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+            <ItemTemplate>
+                <div class="Post">
+                    <div class="PostPublishDate">
+                        <%#Eval("PublishDate")%>
+                    </div>
+                    <div class="PostSubject">
+                        <h1>
+                            <a href="ShowPost.aspx?postId=<%#Eval("PostId") %>">
+                                <%#Eval("Subject") %>
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="PostBody">
+                        <%#Eval("Body") %>
+                    </div> 
+                    <div class="PostReplies">
+                        Replies: <%#Eval("ReplyCount") %>
+                    </div>   
+                </div>
+            </ItemTemplate>
 
-<html xmlns="http://www.w3.org/1999/xhtml" >
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:Repeater ID="repLastPosts" runat="server">
-        <ItemTemplate>
-            <h1>aa</h1>
-        </ItemTemplate>
+            <FooterTemplate>
+                </div>
+            </FooterTemplate>        
         </asp:Repeater>
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>
