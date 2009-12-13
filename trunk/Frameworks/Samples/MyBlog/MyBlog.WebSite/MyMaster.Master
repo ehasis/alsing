@@ -14,7 +14,16 @@
     <div>
         <div class="Header">Header</div>
         <div class="Middle">
-            <div class="Menu">foo foo foo</div>
+            <div class="Menu">
+            foo foo foo<br />
+            foo foo foo<br />
+            foo foo foo<br />
+            foo foo foo<br />
+            foo foo foo<br />
+            foo foo foo<br />
+            foo foo foo<br />
+            foo foo foo<br />
+            </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
             </asp:ContentPlaceHolder>

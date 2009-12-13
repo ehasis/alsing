@@ -23,7 +23,6 @@ namespace MyBlog.WebSite
             }
         }
 
-
         protected string FormatPublishDate(object o)
         {
             DateTime dt = (DateTime) o;
@@ -32,8 +31,7 @@ namespace MyBlog.WebSite
 
         public string FormatBody(object o)
         {
-            string body = (string)o;
-            return body.Replace("\r", "<br/>");
+            return Utils.FormatText(o as string);
         }
     }
 }

@@ -32,6 +32,8 @@ namespace MyBlog.WebSite
             this.repReplies.DataBind();
         }
 
+
+
         private int GetCurrentPostId()
         {
             return int.Parse(this.Request["postId"]);

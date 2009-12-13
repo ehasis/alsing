@@ -14,7 +14,7 @@ namespace MyBlog.WebSite
 
         public static string FormatText(string text)
         {
-            return HttpContext.Current.Server.HtmlEncode(text);
+            return HttpContext.Current.Server.HtmlEncode(text).Replace("\r","<br/>");
         }
     }
 }
