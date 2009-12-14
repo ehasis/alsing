@@ -33,6 +33,8 @@ namespace MyBlog.WebSite
             //Up to the page to decide how to order the comments
             this.repReplies.DataSource = post.Comments.OrderBy(c => c.CreationDate);
             this.repReplies.DataBind();
+
+            pnlReply.Visible = post.CommentsEnabled;
         }
 
         private int GetCurrentPostId()
