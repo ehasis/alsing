@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MyBlog.Domain.Repositories;
 using MyBlog.Domain;
+using System.Transactions;
 
 namespace MyBlog.WebSite
 {
@@ -13,13 +14,16 @@ namespace MyBlog.WebSite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (var ws = Config.GetWorkspace())
+            if (!IsPostBack)
             {
-                var postRepository = new PostRepository(ws);
-                int postId = this.GetCurrentPostId();
-                Post post = postRepository.FindById(postId);
+                using (var ws = Config.GetWorkspace())
+                {
+                    var postRepository = new PostRepository(ws);
+                    int postId = this.GetCurrentPostId();
+                    Post post = postRepository.FindById(postId);
 
-                this.BindPost(post);
+                    this.BindPost(post);
+                }
             }
         }
 
@@ -60,7 +64,33 @@ namespace MyBlog.WebSite
 
         protected void btnSubmitComment_Click(object sender, EventArgs e)
         {
+            int postId = this.GetCurrentPostId();
+            string userName = txtUserName.Text;
+            string userEmail  = txtUserEmail.Text;
+            string userWebSite = txtUserWebSite.Text;
+            string comment = txtComment.Text;
 
+            ReplyToPost(postId, userName, userEmail, userWebSite, comment);   
+
+            txtComment.Text = "";
+        }
+
+        private void ReplyToPost(int postId, string userName, string userEmail, string userWebSite, string comment)
+        {
+            using (TransactionScope scope = new TransactionScope())
+            using (var ws = Config.GetWorkspace())
+            {
+                var messageBus = Config.GetMessageBus(ws);
+                var postRepository = new PostRepository(ws);
+
+                Post post = postRepository.FindById(postId);
+
+                post.ReplyTo(messageBus, userName, userEmail, userWebSite, comment);
+                ws.Commit();
+
+                BindPost(post);
+                scope.Complete();
+            }
         }
     }
 }
