@@ -113,23 +113,23 @@
                                 </asp:Label>
                             </p>
                             <p>
-                            
-                                
                                 <asp:TextBox ID="txtUserEmail" runat="server" CssClass="comment" Columns="22"/>
                                 <asp:Label ID="lblUserEmail" Text="" AssociatedControlID="txtUserEmail" runat="server">
                                     <small>E-mail (will not be published) (required)</small>                                    
+                                </asp:Label>                                    
+                            </p>
+                            <p>
+                                <asp:TextBox ID="txtUserWebSite" runat="server" CssClass="comment" Columns="22"/>
+                                <asp:Label ID="lblUserWebSite" Text="" AssociatedControlID="txtUserWebSite" runat="server">
+                                    <small>Website</small>                                    
                                 </asp:Label>
-                                    
                             </p>
                             <p>
-                                <input class="comment" type="text" name="url" id="url" value="" size="22" tabindex="3" />
-                                <label for="url">
-                                    <small>Website</small></label>
-                            </p>
+                                <asp:TextBox ID="txtComment" runat="server" TextMode="MultiLine" Columns="22" Rows="10" TabIndex="4"></asp:TextBox>                                
                             <p>
-                                <textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
-                            <p>
-                                <asp:Button ID="btnSubmitComment" Text="Submit Comment" runat=server ToolTip="Please review your comment before submitting" TabIndex="5"/>
+                                <asp:Button ID="btnSubmitComment" Text="Submit Comment" runat="server" 
+                                    ToolTip="Please review your comment before submitting" TabIndex="5" 
+                                    onclick="btnSubmitComment_Click"/>
                             </p>
                         </div>
                     </div>

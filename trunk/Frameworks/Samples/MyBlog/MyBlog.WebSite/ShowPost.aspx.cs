@@ -57,5 +57,10 @@ namespace MyBlog.WebSite
             DateTime dt = (DateTime)o;
             return Utils.FormatDateTime(dt);
         }
+
+        protected void btnSubmitComment_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
