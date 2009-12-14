@@ -107,14 +107,19 @@
                     <div id="commentform">
                         <div class="postinput">
                             <p>
-                                <input class="comment" type="text" name="author" id="author" value="" size="22" tabindex="1" />
-                                <label for="author">
-                                    <small>Name (required)</small></label>
+                                <asp:TextBox ID="txtUserName" runat="server" CssClass="comment" Columns="22"/>
+                                <asp:Label ID="lblUserName" Text="" AssociatedControlID="txtUserName" runat="server">
+                                    <small>Name (required)</small>                                    
+                                </asp:Label>
                             </p>
                             <p>
-                                <input class="comment" type="text" name="email" id="email" value="" size="22" tabindex="2" />
-                                <label for="email">
-                                    <small>E-mail (will not be published) (required)</small></label>
+                            
+                                
+                                <asp:TextBox ID="txtUserEmail" runat="server" CssClass="comment" Columns="22"/>
+                                <asp:Label ID="lblUserEmail" Text="" AssociatedControlID="txtUserEmail" runat="server">
+                                    <small>E-mail (will not be published) (required)</small>                                    
+                                </asp:Label>
+                                    
                             </p>
                             <p>
                                 <input class="comment" type="text" name="url" id="url" value="" size="22" tabindex="3" />
@@ -124,10 +129,7 @@
                             <p>
                                 <textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
                             <p>
-                                <input class="submit" name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment"
-                                    title="Please review your comment before submitting" />
-                                <input type='hidden' name='comment_post_ID' value='699' id='comment_post_ID' />
-                                <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+                                <asp:Button ID="btnSubmitComment" Text="Submit Comment" runat=server ToolTip="Please review your comment before submitting" TabIndex="5"/>
                             </p>
                         </div>
                     </div>
