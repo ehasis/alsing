@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Repeater ID="repLatestPosts" runat="server">
+    <asp:Repeater ID="repLatestPosts" runat="server" EnableViewState="False">
         <HeaderTemplate>
         </HeaderTemplate>
         <ItemTemplate>
@@ -38,9 +38,14 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div>                           
         </ItemTemplate>
         <FooterTemplate>
         </FooterTemplate>
     </asp:Repeater>
+    
+    <div class="navigation group">
+        <div class="alignleft"><a href="http://rogeralsing.com/page/2/" >&laquo; Older Entries</a></div>
+        <div class="alignright"></div>
+    </div>
 </asp:Content>

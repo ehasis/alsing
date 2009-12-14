@@ -101,7 +101,7 @@ namespace MyBlog.Domain
             var comment = new Comment(this, userName, userEmail, userWebsite, body);
             this.comments.Add(comment);
 
-            var commentNotification = new CommentNotification(comment);
+            var commentNotification = new CommentCreated(comment);
             messageSink.Send(commentNotification);
         }
 

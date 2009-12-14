@@ -2,9 +2,9 @@ namespace MyBlog.Domain
 {
     using Alsing.Messaging;
 
-    public class CommentNotification : IMessage
+    public class CommentCreated : IMessage
     {
-        public CommentNotification(Comment comment)
+        public CommentCreated(Comment comment)
         {
             this.Comment = comment;
         }

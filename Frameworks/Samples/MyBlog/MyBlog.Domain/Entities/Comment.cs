@@ -53,7 +53,7 @@ namespace MyBlog.Domain
         {
             this.Approved = true;
 
-            var commentApprovedNotification = new CommentApprovedNotification(this);
+            var commentApprovedNotification = new CommentApproved(this);
             messageBus.Send(commentApprovedNotification);
         }
     }

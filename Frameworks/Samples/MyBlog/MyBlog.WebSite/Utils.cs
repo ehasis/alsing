@@ -12,6 +12,11 @@ namespace MyBlog.WebSite
             return date.ToLongDateString();
         }
 
+        public static string FormatDateTime(DateTime date)
+        {
+            return date.ToLongDateString() + " - " + date.ToLongTimeString();
+        }
+
         public static string FormatText(string text)
         {
             return HttpContext.Current.Server.HtmlEncode(text).Replace("\r","<br/>");
