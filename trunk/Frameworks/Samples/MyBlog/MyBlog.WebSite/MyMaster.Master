@@ -28,12 +28,6 @@
 
         
             <div id="sidebar">
-                    <!--                 
-                    <div><label class="screen-reader-text" for="s">Search for:</label>
-                        <input type="text" value="" name="s" id="s" />
-                        <input type="submit" id="searchsubmit" value="Search" />
-                    </div>
-                    -->	   
                     
                     <h3>Categories</h3>			
                     <ul>
@@ -41,6 +35,13 @@
                         <li><a href=''>Aspect Oriented Programming</a></li>
                         <li><a href=''>Object Relational Mapping</a></li>                        
                     </ul>
+                    
+                    <br />
+                    <br />
+                    <div class="Onesys">
+                        <img src="http://www.puzzleframework.com/blog/onesys.gif" border="0" alt="" align="absmiddle"> Design by <a href="http://www.onesys.se"> Onesys</a>
+                    </div>
+
             </div>
      
             <div id="footer">
