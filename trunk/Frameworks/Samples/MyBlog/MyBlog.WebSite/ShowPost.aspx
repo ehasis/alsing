@@ -91,4 +91,46 @@
                     </AlternatingItemTemplate>
                 </asp:Repeater>
             </ol>
+            
+            <asp:Panel ID="pnlReply" runat="server">
+                <div class="navigation">
+                    <div class="alignleft">
+                    </div>
+                    <div class="alignright">
+                    </div>
+                </div>
+                <br />
+                <div id="respond">
+                    <h3 class="reply">
+                        Leave a Reply</h3>
+                   
+                    <div id="commentform">
+                        <div class="postinput">
+                            <p>
+                                <input class="comment" type="text" name="author" id="author" value="" size="22" tabindex="1" />
+                                <label for="author">
+                                    <small>Name (required)</small></label>
+                            </p>
+                            <p>
+                                <input class="comment" type="text" name="email" id="email" value="" size="22" tabindex="2" />
+                                <label for="email">
+                                    <small>E-mail (will not be published) (required)</small></label>
+                            </p>
+                            <p>
+                                <input class="comment" type="text" name="url" id="url" value="" size="22" tabindex="3" />
+                                <label for="url">
+                                    <small>Website</small></label>
+                            </p>
+                            <p>
+                                <textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+                            <p>
+                                <input class="submit" name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment"
+                                    title="Please review your comment before submitting" />
+                                <input type='hidden' name='comment_post_ID' value='699' id='comment_post_ID' />
+                                <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </asp:Panel>
 </asp:Content>
