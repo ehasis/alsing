@@ -23,28 +23,24 @@
                 </asp:ContentPlaceHolder>
 
             
-                <div class="navigation group">
-	                <div class="alignleft"><a href="http://rogeralsing.com/page/2/" >&laquo; Older Entries</a></div>
-	                <div class="alignright"></div>
-                </div>                 
+                
             </div> 
 
         
             <div id="sidebar">
-			        <div class="textwidget"><br/>
-                        <a href="http://feeds.feedburner.com/RogerAlsingWeblog" title="Subscribe to my feed" rel="alternate">
-                        <img src="http://www.feedburner.com/fb/images/pub/feed-icon16x16.png" border="0" alt="" align="absmiddle"/> RSS-Feed</a>
-                        <br/>
-                        <br/>
-                        <a href="http://feedburner.google.com/fb/a/mailverify?uri=RogerAlsingWeblog&amp;loc=en_US">Subscribe by Email</a>
-                        <br/>
-                        <br/>
-                        <p>
-                        <a href="http://feeds2.feedburner.com/RogerAlsingWeblog">
-                        <img src="http://feeds2.feedburner.com/~fc/RogerAlsingWeblog?bg=eecc55&amp;fg=000000&amp;anim=0" height="26" width="88" style="border:0;" alt="" />
-                        </a>
-                        </p>
+                    <!--                 
+                    <div><label class="screen-reader-text" for="s">Search for:</label>
+                        <input type="text" value="" name="s" id="s" />
+                        <input type="submit" id="searchsubmit" value="Search" />
                     </div>
+                    -->	   
+                    
+                    <h3>Categories</h3>			
+                    <ul>
+                        <li><a href=''>Domain Driven Design</a></li>
+                        <li><a href=''>Aspect Oriented Programming</a></li>
+                        <li><a href=''>Object Relational Mapping</a></li>                        
+                    </ul>
             </div>
      
             <div id="footer">

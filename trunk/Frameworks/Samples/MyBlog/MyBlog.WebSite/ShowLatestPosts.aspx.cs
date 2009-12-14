@@ -35,6 +35,7 @@ namespace MyBlog.WebSite
             return Utils.FormatText(o as string);
         }
 
+        //TODO: fix this
         public string FormatCategories(object o)
         {
             IEnumerable<PostCategoryLink> links = o as IEnumerable<PostCategoryLink>;

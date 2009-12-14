@@ -28,17 +28,32 @@ namespace MyBlog.WebSite
             this.litPublishDate.Text = Utils.FormatDate(post.PublishDate.Value);
             this.litSubject.Text = Utils.FormatText(post.Subject);
             this.litBody.Text = Utils.FormatText(post.Body);
+            litCommentCount.Text = post.Comments.Count().ToString();
 
             //Up to the page to decide how to order the comments
             this.repReplies.DataSource = post.Comments.OrderBy(c => c.CreationDate);
             this.repReplies.DataBind();
         }
 
-
-
         private int GetCurrentPostId()
         {
             return int.Parse(this.Request["postId"]);
+        }
+
+        //TODO: fix this
+        public string FormatCategories(object o)
+        {
+            IEnumerable<PostCategoryLink> links = o as IEnumerable<PostCategoryLink>;
+
+            var strings = links.Select(l => l.PostCategory.Name).ToArray();
+
+            return string.Join(", ", strings);
+        }
+
+        protected string FormatCreationDate(object o)
+        {
+            DateTime dt = (DateTime)o;
+            return Utils.FormatDateTime(dt);
         }
     }
 }

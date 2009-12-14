@@ -193,7 +193,7 @@
             {
                 //register a handler for CommentApprovedNotification, in this test, increase a local variable to
                 //hold the number of sent CommentApprovedNotification
-                messageBus.RegisterHandler<CommentApprovedNotification>(MessageHandlerType.Synchronous, commentApprovedNotification => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
+                messageBus.RegisterHandler<CommentApproved>(MessageHandlerType.Synchronous, commentApproved => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
 
                 var post = new Post();
                 post.Edit("AOP for dummies", "...");
@@ -230,7 +230,7 @@
             {
                 //register a handler for CommentNotifications, in this test, increase a local variable to
                 //hold the number of sent CommentNotifications
-                messageBus.RegisterHandler<CommentNotification>(MessageHandlerType.Synchronous, commentNotification => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
+                messageBus.RegisterHandler<CommentCreated>(MessageHandlerType.Synchronous, commentCreated => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
 
                 var post = new Post();
                 post.Edit("AOP for dummies", "...");

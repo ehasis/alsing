@@ -14,15 +14,6 @@ namespace MyBlog.WebSite {
     public partial class ShowPost {
         
         /// <summary>
-        /// litPublishDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litPublishDate;
-        
-        /// <summary>
         /// litSubject control.
         /// </summary>
         /// <remarks>
@@ -39,6 +30,24 @@ namespace MyBlog.WebSite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litBody;
+        
+        /// <summary>
+        /// litPublishDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litPublishDate;
+        
+        /// <summary>
+        /// litCommentCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litCommentCount;
         
         /// <summary>
         /// repReplies control.

@@ -49,8 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Comment.cs" />
-    <Compile Include="DomainEvents\CommentApprovedNotification.cs" />
-    <Compile Include="DomainEvents\CommentNotification.cs" />
+    <Compile Include="DomainEvents\CommentApproved.cs" />
+    <Compile Include="DomainEvents\CommentCreated.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Exceptions\DomainException.cs" />
     <Compile Include="Projections\FlattenedPost.cs" />
