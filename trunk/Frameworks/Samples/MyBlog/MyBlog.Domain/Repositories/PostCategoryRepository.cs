@@ -4,6 +4,7 @@
     using System.Linq;
 
     using Alsing.Workspace;
+    using MyBlog.Domain.Projections;
 
     public class PostCategoryRepository : Repository<PostCategory>
     {
@@ -16,13 +17,6 @@
             this
                     .workspace
                     .Add(postCategory);
-        }
-
-        public IList<PostCategory> FindAll()
-        {
-            return this
-                    .MakeQuery()
-                    .ToList();
         }
 
         public void Remove(PostCategory postCategory)

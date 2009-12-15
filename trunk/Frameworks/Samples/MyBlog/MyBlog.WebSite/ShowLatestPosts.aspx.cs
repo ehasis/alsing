@@ -6,7 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MyBlog.Domain.Repositories;
 using Alsing.Workspace;
-using MyBlog.Domain;
+using MyBlog.Reporting.Queries;
+using MyBlog.Reporting.Projections;
 
 namespace MyBlog.WebSite
 {
@@ -14,13 +15,13 @@ namespace MyBlog.WebSite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (IWorkspace ws = Config.GetWorkspace())
+            using (IWorkspace ws = Config.GetReportingWorkspace())
             {
-                PostRepository postRepository = new PostRepository(ws);
+                PostQueries postRepository = new PostQueries(ws);
                 var posts = postRepository.FindLastXPosts(10);
 
                 repLatestPosts.DataSource = posts;
-                repLatestPosts.DataBind();
+                repLatestPosts.DataBind();                
             }
         }
 
@@ -38,9 +39,9 @@ namespace MyBlog.WebSite
         //TODO: fix this
         public string FormatCategories(object o)
         {
-            IEnumerable<PostCategoryLink> links = o as IEnumerable<PostCategoryLink>;
+            IEnumerable<Category> links = o as IEnumerable<Category>;
 
-            var strings = links.Select(l => l.PostCategory.Name).ToArray();
+            var strings = links.Select(l => l.Name).ToArray();
 
             return string.Join(", ", strings);
         }

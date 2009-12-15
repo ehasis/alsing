@@ -16,7 +16,7 @@ namespace MyBlog.WebSite
         {
             if (!IsPostBack)
             {
-                using (var ws = Config.GetWorkspace())
+                using (var ws = Config.GetDomainWorkspace())
                 {
                     var postRepository = new PostRepository(ws);
                     int postId = this.GetCurrentPostId();
@@ -78,7 +78,7 @@ namespace MyBlog.WebSite
         private void ReplyToPost(int postId, string userName, string userEmail, string userWebSite, string comment)
         {
             using (TransactionScope scope = new TransactionScope())
-            using (var ws = Config.GetWorkspace())
+            using (var ws = Config.GetDomainWorkspace())
             {
                 var messageBus = Config.GetMessageBus(ws);
                 var postRepository = new PostRepository(ws);

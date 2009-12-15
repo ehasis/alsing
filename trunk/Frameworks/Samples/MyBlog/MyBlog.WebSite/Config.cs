@@ -6,14 +6,29 @@ using Alsing.Workspace;
 using Alsing.Messaging;
 using MyBlog.Domain;
 using System.Diagnostics;
+using System.IO;
 
 namespace MyBlog.WebSite
 {
     public static class Config
     {
-        public static IWorkspace GetWorkspace()
+        public static IWorkspace GetDomainWorkspace()
         {
             var context = new MyBlog.Domain.ModelDataContext();
+
+            TraceTextWriter sw = new TraceTextWriter();
+            context.Log = sw;
+            
+            return new LinqToSqlWorkspace(context);
+        }
+
+        public static IWorkspace GetReportingWorkspace()
+        {
+            var context = new MyBlog.Reporting.ReportingModelDataContext();
+
+            TraceTextWriter sw = new TraceTextWriter();
+            context.Log = sw;
+
             return new LinqToSqlWorkspace(context);
         }
 
@@ -46,4 +61,20 @@ namespace MyBlog.WebSite
 
         }
     }
+
+    public class TraceTextWriter : System.IO.TextWriter
+    {
+        public override System.Text.Encoding Encoding
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override void WriteLine(string value)
+        {
+            HttpContext.Current.Trace.Write("LINQ", value);
+            base.WriteLine(value);
+        }
+    }  
+
+    
 }
