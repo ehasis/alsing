@@ -29,11 +29,18 @@
         
             <div id="sidebar">
                     
-                    <h3>Categories</h3>			
+                    <h3>Categories</h3>		
+                    
                     <ul>
-                        <li><a href=''>Domain Driven Design</a></li>
-                        <li><a href=''>Aspect Oriented Programming</a></li>
-                        <li><a href=''>Object Relational Mapping</a></li>                        
+                        <asp:Repeater ID="repCategories" runat="server" EnableViewState="False">
+                            <HeaderTemplate>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <li><a href=''> <%#Eval("Name") %></a> (<%#Eval("PostCount") %>) </li>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                            </FooterTemplate>
+                        </asp:Repeater>	                       
                     </ul>
                     
                     <br />

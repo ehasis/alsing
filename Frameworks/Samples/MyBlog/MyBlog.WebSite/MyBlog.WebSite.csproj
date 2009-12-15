@@ -106,6 +106,10 @@
       <Project>{08710662-90CC-43F2-8DFE-985732DF99B0}</Project>
       <Name>Alsing.Workspace</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MyBlog.Reporting\MyBlog.Reporting.csproj">
+      <Project>{5D701B09-2BE6-4B42-9C5F-1B06B2DE21A4}</Project>
+      <Name>MyBlog.Reporting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyBlog.Domain.Persistence.LTS\MyBlog.Domain.Persistence.LTS.csproj">
       <Project>{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}</Project>
       <Name>MyBlog.Domain.Persistence.LTS</Name>

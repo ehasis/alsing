@@ -34,7 +34,7 @@
                     </div>
                     <div class="tags">
                         <p>
-                            Posted in  <%# FormatCategories( Eval("CategoryLinks")) %>                             
+                            Posted in  <%# FormatCategories( Eval("Categories")) %>                             
                         </p>
                     </div>
                 </div>
