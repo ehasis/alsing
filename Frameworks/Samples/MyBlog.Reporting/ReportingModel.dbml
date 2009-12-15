@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="MyBlog" Class="ReportingModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=OREPCROAL2\;Initial Catalog=MyBlog;Integrated Security=True" SettingsObjectName="MyBlog.Reporting.Properties.Settings" SettingsPropertyName="MyBlogConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Comment" Member="Comments">
+    <Type Name="Comment">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PostId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Body" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Approved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="UserEmail" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="UserWebSite" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="Post_Comment" Member="Post" ThisKey="PostId" OtherKey="Id" Type="Post" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PostCategoryLink" Member="PostCategoryLinks">
+    <Type Name="PostCategoryLink">
+      <Column Name="PostId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PostCategoryId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Post_PostCategoryLink" Member="Post" ThisKey="PostId" OtherKey="Id" Type="Post" IsForeignKey="true" />
+      <Association Name="PostCategory_PostCategoryLink" Member="PostCategory" ThisKey="PostCategoryId" OtherKey="Id" Type="PostCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Post" Member="Posts">
+    <Type Name="Post">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CreationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastModifiedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PublishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Subject" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Body" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CommentsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Post_Comment" Member="Comments" ThisKey="Id" OtherKey="PostId" Type="Comment" />
+      <Association Name="Post_PostCategoryLink" Member="PostCategoryLinks" ThisKey="Id" OtherKey="PostId" Type="PostCategoryLink" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PostCategory" Member="PostCategories">
+    <Type Name="PostCategory">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="PostCategory_PostCategoryLink" Member="PostCategoryLinks" ThisKey="Id" OtherKey="PostCategoryId" Type="PostCategoryLink" />
+    </Type>
+  </Table>
+</Database>

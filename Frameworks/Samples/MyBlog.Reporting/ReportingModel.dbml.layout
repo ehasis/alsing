@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ReportingModel">
+  <DataContextMoniker Name="/ReportingModelDataContext" />
+  <nestedChildShapes>
+    <classShape Id="4d920171-9d00-432f-bb74-b64395df89f6" absoluteBounds="3.5, 5.125, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/ReportingModelDataContext/Comment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="44c44cdc-423b-408d-8822-ca67de15907d" absoluteBounds="3.515, 5.585, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ce0e0bd1-df8e-4447-8645-426bef0faf2b" absoluteBounds="3.5, 2.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ReportingModelDataContext/PostCategoryLink" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bf6cbf9a-1a76-450d-bce9-8d48e47ab578" absoluteBounds="3.515, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0869c9c5-768f-4b27-a0c7-4de61882b356" absoluteBounds="0.75, 3.25, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ReportingModelDataContext/Post" />
+      <nestedChildShapes>
+        <elementListCompartment Id="677fa38e-0bd3-4fa3-994e-61f1b0d5b64b" absoluteBounds="0.765, 3.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a97c7912-377f-4d11-a277-284268ad066b" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ReportingModelDataContext/PostCategory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ef952a4-bdd7-43ae-996d-75f55e1130cd" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 5.40549967447917); (1.75 : 6.439150890625); (3.5 : 6.439150890625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReportingModelDataContext/Post/Post_Comment" />
+      <nodes>
+        <classShapeMoniker Id="0869c9c5-768f-4b27-a0c7-4de61882b356" />
+        <classShapeMoniker Id="4d920171-9d00-432f-bb74-b64395df89f6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.59699625651042); (3.5 : 3.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReportingModelDataContext/Post/Post_PostCategoryLink" />
+      <nodes>
+        <classShapeMoniker Id="0869c9c5-768f-4b27-a0c7-4de61882b356" />
+        <classShapeMoniker Id="ce0e0bd1-df8e-4447-8645-426bef0faf2b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.34699625651042); (4.5 : 1.34699625651042); (4.5 : 2.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ReportingModelDataContext/PostCategory/PostCategory_PostCategoryLink" />
+      <nodes>
+        <classShapeMoniker Id="a97c7912-377f-4d11-a277-284268ad066b" />
+        <classShapeMoniker Id="ce0e0bd1-df8e-4447-8645-426bef0faf2b" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
