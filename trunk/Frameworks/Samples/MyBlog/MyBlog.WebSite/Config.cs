@@ -37,7 +37,8 @@ namespace MyBlog.WebSite
 
         private static void OnCommentCreated(CommentCreated commentCreated)
         {
-
+            Trace.Write("comment created handled");
+            Debug.Write("comment created handled");
         }
 
         private static void OnCommentApproved(CommentApproved commentApproved)
