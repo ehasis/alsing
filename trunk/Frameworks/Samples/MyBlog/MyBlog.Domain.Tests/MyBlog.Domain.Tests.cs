@@ -11,7 +11,6 @@
 
     using Domain;
     using Domain.Exceptions;
-    using Domain.Projections;
     using Domain.Repositories;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;

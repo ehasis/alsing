@@ -4,7 +4,6 @@
     using System.Linq;
 
     using Alsing.Workspace;
-    using MyBlog.Domain.Projections;
 
     public class PostCategoryRepository : Repository<PostCategory>
     {

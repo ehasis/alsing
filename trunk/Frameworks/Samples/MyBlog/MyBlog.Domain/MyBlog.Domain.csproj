@@ -53,8 +53,6 @@
     <Compile Include="DomainEvents\CommentCreated.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Exceptions\DomainException.cs" />
-    <Compile Include="Projections\FlattenedCategory.cs" />
-    <Compile Include="Projections\FlattenedPost.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\PostCategory.cs" />
     <Compile Include="Entities\PostCategoryLink.cs" />
