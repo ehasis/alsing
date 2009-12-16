@@ -5,8 +5,6 @@ namespace MyBlog.Domain.Repositories
 
     using Alsing.Workspace;
 
-    using Projections;
-
     public class PostRepository : Repository<Post>
     {
         public PostRepository(IWorkspace workspace)
