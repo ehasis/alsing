@@ -8,8 +8,8 @@
     <ProjectGuid>{EB268498-3DE8-413D-B7A0-4F033399B6BB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyBlog.Services</RootNamespace>
-    <AssemblyName>MyBlog.Services</AssemblyName>
+    <RootNamespace>MyBlog.Commands</RootNamespace>
+    <AssemblyName>MyBlog.Commands</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
