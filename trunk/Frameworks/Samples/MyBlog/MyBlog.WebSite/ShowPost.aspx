@@ -27,7 +27,7 @@
                 </div>
                 <div class="tags">
                     <p>
-                        Posted in  <%# FormatCategories( Eval("CategoryLinks")) %>                             
+                        Posted in  <asp:Literal ID="litCategories" runat="server" Text="" ></asp:Literal>                      
                     </p>
                 </div>
             </div>

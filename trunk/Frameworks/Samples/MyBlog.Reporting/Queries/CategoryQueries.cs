@@ -4,19 +4,22 @@ using System.Linq;
 using System.Text;
 using Alsing.Workspace;
 using MyBlog.Reporting.Projections;
+using MyBlog.Reporting.Data;
+using System.IO;
 
 namespace MyBlog.Reporting.Queries
 {
-    public class CategoryQueries : Repository<PostCategory>
+    public class CategoryQueries
     {
-        public CategoryQueries(IWorkspace workspace)
-            : base(workspace)
+        public CategoryQueries(TextWriter log)
         {
+            context.Log = log;
         }
+        private Data.ReportingModelDataContext context = new MyBlog.Reporting.Data.ReportingModelDataContext();
 
-        public IList<FlattenedCategory> FindAll()
+        public IList<DTOFlattenedCategory> FindAll()
         {
-            return this.MakeQuery()
+            return this.context.PostCategories
                 .SelectFlattenedCategoryProjection()
                 .ToList();
         }
@@ -29,11 +32,11 @@ namespace MyBlog.Reporting.Queries
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        internal static IQueryable<FlattenedCategory> SelectFlattenedCategoryProjection(this IQueryable<PostCategory> query)
+        internal static IQueryable<DTOFlattenedCategory> SelectFlattenedCategoryProjection(this IQueryable<PostCategory> query)
         {
             return query
                     .Select(c =>
-                            new FlattenedCategory
+                            new DTOFlattenedCategory
                             {
                                 CategoryId = c.Id,
                                 Name = c.Name,

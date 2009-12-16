@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Projections\Category.cs" />
-    <Compile Include="Projections\FlattenedCategory.cs" />
-    <Compile Include="Projections\FlattenedPost.cs" />
+    <Compile Include="Projections\DTOCategory.cs" />
+    <Compile Include="Projections\DTOComment.cs" />
+    <Compile Include="Projections\DTOFlattenedCategory.cs" />
+    <Compile Include="Projections\DTOFlattenedPost.cs" />
+    <Compile Include="Projections\DTOPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -59,7 +61,7 @@
     </Compile>
     <Compile Include="Queries\CategoryQueries.cs" />
     <Compile Include="Queries\PostQueries.cs" />
-    <Compile Include="ReportingModel.designer.cs">
+    <Compile Include="Data\ReportingModel.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportingModel.dbml</DependentUpon>
@@ -72,7 +74,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReportingModel.dbml">
+    <None Include="Data\ReportingModel.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ReportingModel.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
@@ -87,7 +89,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="ReportingModel.dbml.layout">
+    <None Include="Data\ReportingModel.dbml.layout">
       <DependentUpon>ReportingModel.dbml</DependentUpon>
     </None>
   </ItemGroup>

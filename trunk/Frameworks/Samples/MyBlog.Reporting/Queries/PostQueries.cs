@@ -4,20 +4,33 @@ using System.Linq;
 using System.Text;
 using Alsing.Workspace;
 using MyBlog.Reporting.Projections;
+using System.IO;
 
 namespace MyBlog.Reporting.Queries
 {
-    public class PostQueries : Repository<Post>
+    public class PostQueries
     {
-        public PostQueries(IWorkspace workspace)
-            : base(workspace)
+        public PostQueries(TextWriter log)
         {
+            context.Log = log;
         }
+        private Data.ReportingModelDataContext context = new MyBlog.Reporting.Data.ReportingModelDataContext();
 
-        public IList<FlattenedPost> FindLastXPosts(int postCount)
+        public Projections.DTOPost FindById(int postId)
         {
             return this
-                    .MakeQuery()
+                .context
+                .Posts
+                .Where(p => p.Id == postId)
+                .SelectPost()
+                .FirstOrDefault();
+        }
+
+        public IList<DTOFlattenedPost> FindLastXPosts(int postCount)
+        {
+            return this
+                .context
+                .Posts
                     .OrderByDescending(post => post.PublishDate)
                     .Take(postCount)
                     .SelectFlattenedPostProjection()
@@ -32,11 +45,11 @@ namespace MyBlog.Reporting.Queries
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        internal static IQueryable<FlattenedPost> SelectFlattenedPostProjection(this IQueryable<Post> query)
+        internal static IQueryable<DTOFlattenedPost> SelectFlattenedPostProjection(this IQueryable<Data.Post> query)
         {
             return query
                     .Select(post =>
-                            new FlattenedPost
+                            new DTOFlattenedPost
                             {
                                 Body = post.Body,
                                 CreatedDate = post.CreationDate,
@@ -45,13 +58,47 @@ namespace MyBlog.Reporting.Queries
                                 PublishDate = post.PublishDate,
                                 ReplyCount = post.Comments.Count(),
                                 Subject = post.Subject,
-                                Categories = post.PostCategoryLinks.Select(l => new Category
+                                Categories = post.PostCategoryLinks.Select(l => new DTOCategory
                                 {
                                     CategoryId = l.PostCategory.Id,
                                     Name = l.PostCategory.Name,
                                 }),
                             }
                     );
+        }
+
+        internal static IQueryable<DTOPost> SelectPost(this IQueryable<Data.Post> query)
+        {
+            return query
+               .Select(p => new Projections.DTOPost()
+                {
+                    Body = p.Body,
+                    CreatedDate = p.CreationDate,
+                    LastModifiedDate = p.LastModifiedDate,
+                    PostId = p.Id,
+                    PublishDate = p.PublishDate,
+                    Subject = p.Subject,
+                    CommentsEnabled = p.CommentsEnabled,
+                    Comments = p.Comments
+                                .Where(c => c.Approved)
+                                .Select(c =>
+
+                                        new DTOComment
+                                        {
+                                            Body = c.Body,
+                                            UserEmail = c.UserEmail,
+                                            UserName = c.UserName,
+                                            UserWebsite = c.UserWebSite,
+                                            CreationDate = c.CreationDate,
+                                        }),
+                    Categories = p.PostCategoryLinks
+                                    .Select(l =>
+                                        new DTOCategory
+                                {
+                                    CategoryId = l.PostCategory.Id,
+                                    Name = l.PostCategory.Name,
+                                }),
+                });
         }
     }
 }

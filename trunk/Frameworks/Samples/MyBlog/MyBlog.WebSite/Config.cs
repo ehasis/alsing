@@ -16,20 +16,24 @@ namespace MyBlog.WebSite
         {
             var context = new MyBlog.Domain.ModelDataContext();
 
-            TraceTextWriter sw = new TraceTextWriter();
-            context.Log = sw;
+            context.Log = GetLog();
             
             return new LinqToSqlWorkspace(context);
         }
 
         public static IWorkspace GetReportingWorkspace()
         {
-            var context = new MyBlog.Reporting.ReportingModelDataContext();
+            var context = new MyBlog.Reporting.Data.ReportingModelDataContext();
 
             TraceTextWriter sw = new TraceTextWriter();
             context.Log = sw;
 
             return new LinqToSqlWorkspace(context);
+        }
+
+        public static TextWriter GetLog()
+        {
+            return new TraceTextWriter();
         }
 
         public static IMessageBus GetMessageBus(IWorkspace workspace)
