@@ -31,10 +31,10 @@ namespace MyBlog.Reporting.Queries
             return this
                 .context
                 .Posts
-                    .OrderByDescending(post => post.PublishDate)
-                    .Take(postCount)
-                    .SelectFlattenedPostProjection()
-                    .ToList();
+                .OrderByDescending(post => post.PublishDate)
+                .Take(postCount)
+                .SelectFlattenedPostProjection()
+                .ToList();
         }
     }
 
@@ -82,7 +82,6 @@ namespace MyBlog.Reporting.Queries
                     Comments = p.Comments
                                 .Where(c => c.Approved)
                                 .Select(c =>
-
                                         new DTOComment
                                         {
                                             Body = c.Body,
@@ -92,12 +91,12 @@ namespace MyBlog.Reporting.Queries
                                             CreationDate = c.CreationDate,
                                         }),
                     Categories = p.PostCategoryLinks
-                                    .Select(l =>
+                                   .Select(l =>
                                         new DTOCategory
-                                {
-                                    CategoryId = l.PostCategory.Id,
-                                    Name = l.PostCategory.Name,
-                                }),
+                                        {
+                                            CategoryId = l.PostCategory.Id,
+                                            Name = l.PostCategory.Name,
+                                        }),
                 });
         }
     }
