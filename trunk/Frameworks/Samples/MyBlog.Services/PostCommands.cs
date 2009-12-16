@@ -5,7 +5,7 @@ using System.Text;
 using System.Transactions;
 using MyBlog.Domain.Repositories;
 
-namespace MyBlog.Services
+namespace MyBlog.Commands
 {
     public class PostCommands
     {

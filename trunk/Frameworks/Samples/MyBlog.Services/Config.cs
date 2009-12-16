@@ -8,7 +8,7 @@ using MyBlog.Domain;
 using System.Diagnostics;
 using System.IO;
 
-namespace MyBlog.Services
+namespace MyBlog.Commands
 {
     public static class Config
     {

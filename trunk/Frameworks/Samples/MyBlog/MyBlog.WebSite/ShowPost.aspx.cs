@@ -4,12 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using MyBlog.Domain.Repositories;
 using System.Transactions;
 using MyBlog.Reporting.Queries;
 using MyBlog.Reporting.Projections;
-using MyBlog.Domain;
-using MyBlog.Services;
+using MyBlog.Commands;
 
 namespace MyBlog.WebSite
 {

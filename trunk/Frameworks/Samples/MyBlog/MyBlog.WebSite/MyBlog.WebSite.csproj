@@ -94,33 +94,13 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Alsing.Messaging\Alsing.Messaging.csproj">
-      <Project>{14266723-E951-48F2-8603-D3B3072C1EF6}</Project>
-      <Name>Alsing.Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Alsing.Transactional\Alsing.Transactional.csproj">
-      <Project>{42EE6937-8DBA-4D2C-BC8E-8575AC7468A9}</Project>
-      <Name>Alsing.Transactional</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Alsing.Workspace\Alsing.Workspace.csproj">
-      <Project>{08710662-90CC-43F2-8DFE-985732DF99B0}</Project>
-      <Name>Alsing.Workspace</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MyBlog.Reporting\MyBlog.Reporting.csproj">
       <Project>{5D701B09-2BE6-4B42-9C5F-1B06B2DE21A4}</Project>
       <Name>MyBlog.Reporting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MyBlog.Services\MyBlog.Services.csproj">
+    <ProjectReference Include="..\..\MyBlog.Services\MyBlog.Commands.csproj">
       <Project>{EB268498-3DE8-413D-B7A0-4F033399B6BB}</Project>
-      <Name>MyBlog.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyBlog.Domain.Persistence.LTS\MyBlog.Domain.Persistence.LTS.csproj">
-      <Project>{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}</Project>
-      <Name>MyBlog.Domain.Persistence.LTS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyBlog.Domain\MyBlog.Domain.csproj">
-      <Project>{4878AD8C-D5B1-4B35-8060-8AA298E9143E}</Project>
-      <Name>MyBlog.Domain</Name>
+      <Name>MyBlog.Commands</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.WebSite", "Samples\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain.Persistence.LTS", "Samples\MyBlog\MyBlog.Domain.Persistence.LTS\MyBlog.Domain.Persistence.LTS.csproj", "{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Services", "Samples\MyBlog.Services\MyBlog.Services.csproj", "{EB268498-3DE8-413D-B7A0-4F033399B6BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Commands", "Samples\MyBlog.Services\MyBlog.Commands.csproj", "{EB268498-3DE8-413D-B7A0-4F033399B6BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Reporting", "Samples\MyBlog.Reporting\MyBlog.Reporting.csproj", "{5D701B09-2BE6-4B42-9C5F-1B06B2DE21A4}"
 EndProject

@@ -4,8 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using MyBlog.Domain.Repositories;
-using Alsing.Workspace;
 using MyBlog.Reporting.Queries;
 using MyBlog.Reporting.Projections;
 
