@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MyBlog.Reporting.Projections.DTOCategory">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Projections\DTOCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyBlog.Reporting.Projections.DTOComment">
+    <Position X="1.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAQAACAAAAAI=</HashCode>
+      <FileName>Projections\DTOComment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyBlog.Reporting.Projections.DTOFlattenedCategory">
+    <Position X="1.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Projections\DTOFlattenedCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyBlog.Reporting.Projections.DTOFlattenedPost">
+    <Position X="10.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAEACIABAAAAAAAQEAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Projections\DTOFlattenedPost.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Categories" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MyBlog.Reporting.Projections.DTOPost">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAEACIgBAAAAAAAQEAAAAgAAAAAAIAA=</HashCode>
+      <FileName>Projections\DTOPost.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Categories" />
+      <Property Name="Comments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
