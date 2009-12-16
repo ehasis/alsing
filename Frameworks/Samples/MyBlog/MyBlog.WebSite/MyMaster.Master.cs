@@ -14,14 +14,13 @@ namespace MyBlog.WebSite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (IWorkspace ws = Config.GetReportingWorkspace())
-            {
-                CategoryQueries categoryRepository = new CategoryQueries(ws);
-                var categories = categoryRepository.FindAll();
 
-                repCategories.DataSource = categories.OrderBy(c => c.Name);
-                repCategories.DataBind();
-            }
+            CategoryQueries categoryRepository = new CategoryQueries(Config.GetLog());
+            var categories = categoryRepository.FindAll();
+
+            repCategories.DataSource = categories.OrderBy(c => c.Name);
+            repCategories.DataBind();
+
         }
     }
 }

@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyBlog.Reporting
+namespace MyBlog.Reporting.Data
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;

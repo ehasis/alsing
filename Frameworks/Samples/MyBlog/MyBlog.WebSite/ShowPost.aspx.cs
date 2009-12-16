@@ -5,8 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MyBlog.Domain.Repositories;
-using MyBlog.Domain;
 using System.Transactions;
+using MyBlog.Reporting.Queries;
+using MyBlog.Reporting.Projections;
+using MyBlog.Domain;
 
 namespace MyBlog.WebSite
 {
@@ -16,23 +18,21 @@ namespace MyBlog.WebSite
         {
             if (!IsPostBack)
             {
-                using (var ws = Config.GetDomainWorkspace())
-                {
-                    var postRepository = new PostRepository(ws);
-                    int postId = this.GetCurrentPostId();
-                    Post post = postRepository.FindById(postId);
-
-                    this.BindPost(post);
-                }
+                this.BindPost();
             }
         }
 
-        private void BindPost(Post post)
+        private void BindPost()
         {
+            PostQueries postRepository = new PostQueries(Config.GetLog());
+            int postId = this.GetCurrentPostId();
+            MyBlog.Reporting.Projections.DTOPost post = postRepository.FindById(postId);
+
             this.litPublishDate.Text = Utils.FormatDate(post.PublishDate.Value);
             this.litSubject.Text = Utils.FormatText(post.Subject);
             this.litBody.Text = Utils.FormatText(post.Body);
-            litCommentCount.Text = post.Comments.Count().ToString();
+            this.litCommentCount.Text = post.Comments.Count().ToString();
+            this.litCategories.Text = FormatCategories(post.Categories);
 
             //Up to the page to decide how to order the comments
             this.repReplies.DataSource = post.Comments.OrderBy(c => c.CreationDate);
@@ -49,9 +49,9 @@ namespace MyBlog.WebSite
         //TODO: fix this
         public string FormatCategories(object o)
         {
-            IEnumerable<PostCategoryLink> links = o as IEnumerable<PostCategoryLink>;
+            IEnumerable<DTOCategory> links = o as IEnumerable<DTOCategory>;
 
-            var strings = links.Select(l => l.PostCategory.Name).ToArray();
+            var strings = links.Select(l => l.Name).ToArray();
 
             return string.Join(", ", strings);
         }
@@ -83,14 +83,14 @@ namespace MyBlog.WebSite
                 var messageBus = Config.GetMessageBus(ws);
                 var postRepository = new PostRepository(ws);
 
-                Post post = postRepository.FindById(postId);
+                MyBlog.Domain.Post post = postRepository.FindById(postId);
 
                 post.ReplyTo(messageBus, userName, userEmail, userWebSite, comment);
                 ws.Commit();
-
-                BindPost(post);
+                
                 scope.Complete();
             }
+            BindPost();
         }
     }
 }

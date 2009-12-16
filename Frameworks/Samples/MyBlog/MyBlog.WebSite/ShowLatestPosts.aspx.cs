@@ -15,14 +15,12 @@ namespace MyBlog.WebSite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (IWorkspace ws = Config.GetReportingWorkspace())
-            {
-                PostQueries postRepository = new PostQueries(ws);
+
+                PostQueries postRepository = new PostQueries(Config.GetLog());
                 var posts = postRepository.FindLastXPosts(10);
 
                 repLatestPosts.DataSource = posts;
                 repLatestPosts.DataBind();                
-            }
         }
 
         protected string FormatPublishDate(object o)
@@ -39,7 +37,7 @@ namespace MyBlog.WebSite
         //TODO: fix this
         public string FormatCategories(object o)
         {
-            IEnumerable<Category> links = o as IEnumerable<Category>;
+            IEnumerable<DTOCategory> links = o as IEnumerable<DTOCategory>;
 
             var strings = links.Select(l => l.Name).ToArray();
 
