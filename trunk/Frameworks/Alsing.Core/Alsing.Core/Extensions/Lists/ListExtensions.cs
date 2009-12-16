@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-
+using System;
+using System.Linq;
 namespace Alsing.Core
 {
     public struct ListEntry<T>
@@ -8,13 +9,17 @@ namespace Alsing.Core
         public readonly T Item;
         public readonly bool IsFirst;
         public readonly bool IsLast;
+        public readonly TimeSpan AverageIterationInterval;
+        public readonly DateTime EstimatedCompletion;
 
-        public ListEntry(T item, int index, bool isFirst, bool isLast)
+        public ListEntry(T item, int index, bool isFirst, bool isLast,TimeSpan averageIterationInterval,DateTime estimatedCompletion)
         {
             Item = item;
             Index = index;
             IsFirst = isFirst;
             IsLast = isLast;
+            AverageIterationInterval = averageIterationInterval;
+            EstimatedCompletion = estimatedCompletion;
         }
     }
 
@@ -32,8 +37,27 @@ namespace Alsing.Core
 
         public static IEnumerable<ListEntry<T>> GetEntries<T>(this IList<T> list)
         {
+            DateTime start = DateTime.Now;
             for (int i = 0; i < list.Count; i++)
-                yield return new ListEntry<T>(list[i], i, i == 0, i == list.Count - 1);
+            {
+                TimeSpan totalTime = DateTime.Now - start;
+                TimeSpan averageTime = new TimeSpan( totalTime.Ticks / (i + 1));
+                TimeSpan totalSpan = new TimeSpan(averageTime.Ticks * list.Count);
+                DateTime estimatedCompletion = start + totalSpan;
+
+                yield return new ListEntry<T>(list[i], i, i == 0, i == list.Count - 1,averageTime,estimatedCompletion);
+            }
+        }
+
+        public static IEnumerable<T> ToPersistentEnumerable<T>(this IEnumerable<T> enumerable,string filename)
+        {
+            int i = 0;
+            int persistentIndex = 0;
+            foreach (var item in enumerable.Skip(persistentIndex))
+            {
+                yield return item;
+                i++;
+            }            
         }
     }
 }
