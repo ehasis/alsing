@@ -9,6 +9,7 @@ using System.Transactions;
 using MyBlog.Reporting.Queries;
 using MyBlog.Reporting.Projections;
 using MyBlog.Domain;
+using MyBlog.Services;
 
 namespace MyBlog.WebSite
 {
@@ -77,19 +78,8 @@ namespace MyBlog.WebSite
 
         private void ReplyToPost(int postId, string userName, string userEmail, string userWebSite, string comment)
         {
-            using (TransactionScope scope = new TransactionScope())
-            using (var ws = Config.GetDomainWorkspace())
-            {
-                var messageBus = Config.GetMessageBus(ws);
-                var postRepository = new PostRepository(ws);
-
-                MyBlog.Domain.Post post = postRepository.FindById(postId);
-
-                post.ReplyTo(messageBus, userName, userEmail, userWebSite, comment);
-                ws.Commit();
-                
-                scope.Complete();
-            }
+            PostCommands commands = new PostCommands();
+            commands.ReplyToPost(postId, userName, userEmail, userWebSite, comment);
             BindPost();
         }
     }

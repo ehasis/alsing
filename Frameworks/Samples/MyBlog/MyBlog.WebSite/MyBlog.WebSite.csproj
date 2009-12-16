@@ -110,6 +110,10 @@
       <Project>{5D701B09-2BE6-4B42-9C5F-1B06B2DE21A4}</Project>
       <Name>MyBlog.Reporting</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MyBlog.Services\MyBlog.Services.csproj">
+      <Project>{EB268498-3DE8-413D-B7A0-4F033399B6BB}</Project>
+      <Name>MyBlog.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyBlog.Domain.Persistence.LTS\MyBlog.Domain.Persistence.LTS.csproj">
       <Project>{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}</Project>
       <Name>MyBlog.Domain.Persistence.LTS</Name>
