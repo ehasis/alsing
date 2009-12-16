@@ -56,13 +56,14 @@ namespace MyBlog.Reporting.Queries
                                 LastModifiedDate = post.LastModifiedDate,
                                 PostId = post.Id,
                                 PublishDate = post.PublishDate,
-                                ReplyCount = post.Comments.Count(),
+                                ReplyCount = post.Comments.Where(c => c.Approved).Count(),
                                 Subject = post.Subject,
-                                Categories = post.PostCategoryLinks.Select(l => new DTOCategory
-                                {
-                                    CategoryId = l.PostCategory.Id,
-                                    Name = l.PostCategory.Name,
-                                }),
+                                Categories = post.PostCategoryLinks.Select(l => 
+                                    new DTOCategory
+                                    {
+                                        CategoryId = l.PostCategory.Id,
+                                        Name = l.PostCategory.Name,
+                                    }),
                             }
                     );
         }
