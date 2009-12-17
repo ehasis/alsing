@@ -40,19 +40,16 @@ namespace MyBlog.WebSite
             pnlReply.Visible = post.CommentsEnabled;
         }
 
-        private int GetCurrentPostId()
+        private string FormatCategories(IEnumerable<DTOCategory> links)
         {
-            return int.Parse(this.Request["postId"]);
-        }
-
-        //TODO: fix this
-        public string FormatCategories(object o)
-        {
-            IEnumerable<DTOCategory> links = o as IEnumerable<DTOCategory>;
-
             var strings = links.Select(l => l.Name).ToArray();
 
             return string.Join(", ", strings);
+        }
+
+        private int GetCurrentPostId()
+        {
+            return int.Parse(this.Request["postId"]);
         }
 
         protected string FormatCreationDate(object o)

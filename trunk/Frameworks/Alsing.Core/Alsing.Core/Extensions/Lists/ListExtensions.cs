@@ -48,16 +48,5 @@ namespace Alsing.Core
                 yield return new ListEntry<T>(list[i], i, i == 0, i == list.Count - 1,averageTime,estimatedCompletion);
             }
         }
-
-        public static IEnumerable<T> ToPersistentEnumerable<T>(this IEnumerable<T> enumerable,string filename)
-        {
-            int i = 0;
-            int persistentIndex = 0;
-            foreach (var item in enumerable.Skip(persistentIndex))
-            {
-                yield return item;
-                i++;
-            }            
-        }
     }
 }
