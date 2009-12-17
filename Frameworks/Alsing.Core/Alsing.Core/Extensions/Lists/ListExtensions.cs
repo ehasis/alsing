@@ -25,15 +25,15 @@ namespace Alsing.Core
 
     public static class ListExtensions
     {
-        public static bool HasContent<T>(this IList<T> list)
-        {
-            return list.Count > 0;
-        }
+        //public static bool HasContent<T>(this IList<T> list)
+        //{
+        //    return list.Count > 0;
+        //}
 
-        public static bool HasContent<T>(this T[] array)
-        {
-            return array.Length > 0;
-        }
+        //public static bool HasContent<T>(this T[] array)
+        //{
+        //    return array.Length > 0;
+        //}
 
         public static IEnumerable<ListEntry<T>> GetEntries<T>(this IList<T> list)
         {
