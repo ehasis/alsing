@@ -4,47 +4,74 @@ using System.Linq;
 using System.Text;
 using System.Transactions;
 using MyBlog.Domain.Repositories;
+using MyBlog.Domain.Entities;
 
 namespace MyBlog.Commands
 {
     public class PostCommands
     {
-        public void ReplyToPost(int postId, string userName, string userEmail, string userWebsite, string comment)
+        private void Apply(Action<BlogContext> action)
         {
             using (TransactionScope scope = new TransactionScope())
-            using (var ws = Config.GetDomainWorkspace())
+            using (var context = Config.GetContext())
             {
-                var messageBus = Config.GetMessageBus(ws);
-                var postRepository = new PostRepository(ws);
 
-                var post = postRepository.FindById(postId);
-                post.MessageSink = messageBus;
+                action(context);
 
-                post.ReplyTo(userName, userEmail, userWebsite, comment);
-                ws.Commit();
-
+                context.Workspace.Commit();
                 scope.Complete();
-            }
+            }        
+        }
+
+        public void ReplyToPost(int postId, string userName, string userEmail, string userWebsite, string comment)
+        {
+            Apply(c => c
+                .Posts
+                .FindById(postId)
+                .ReplyTo(userName, userEmail, userWebsite, comment));
         }
 
         public void Publish(int postId)
         {
+            Apply(c => c
+                .Posts
+                .FindById(postId)
+                .Publish());
         }
 
         public void Unpublish(int postId)
         {
+            Apply(c => c
+                .Posts
+                .FindById(postId)
+                .Unpublish());
         }
 
         public void EnableComments(int postId)
-        { 
+        {
+            Apply(c => c
+                .Posts
+                .FindById(postId)
+                .EnableComments()
+                );
         }
 
         public void DisableComments(int postId)
         {
+            Apply(c => c
+                 .Posts
+                 .FindById(postId)
+                 .DisableComments()
+                 );
         }
 
         public void AssignCategory(int postId,int categoryId)
         {
+            Apply(c => c
+                 .Posts
+                 .FindById(postId)
+                 .AssignCategory(c.Categories.FindById(categoryId))
+                 );
         }
     }
 }

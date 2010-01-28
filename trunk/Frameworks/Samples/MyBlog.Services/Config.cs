@@ -11,16 +11,31 @@ using MyBlog.Domain.Events;
 using MyBlog.Domain.Entities;
 using System.Data.SqlClient;
 using System.Data.EntityClient;
+using MyBlog.Domain.DomainEvents;
 
 namespace MyBlog.Commands
 {
     public static class Config
     {
-        public static IWorkspace GetDomainWorkspace()
-        {            
-            var context = ContextFactory.CreateContext();
+        public static BlogContext GetContext()
+        {
+            var context = new Entities();
+            var messageBus = GetMessageBus();
+            var workspace = GetDomainWorkspace(context);
 
-          //  context.Log = GetLog();
+            context.ObjectMaterialized += (s, e) =>
+            {
+                var entity = e.Entity as IDomainEventAware;
+                if (entity != null)
+                    entity.MessageSink = messageBus;
+            };
+
+            return new BlogContext(workspace,messageBus);
+        }
+        
+
+        public static IWorkspace GetDomainWorkspace(Entities context)
+        {                     
             Func<Type, object> selector = t =>
                 {
 
@@ -44,13 +59,13 @@ namespace MyBlog.Commands
             return new TraceTextWriter();
         }
 
-        public static IMessageBus GetMessageBus(IWorkspace workspace)
+        public static IMessageBus GetMessageBus()
         {
             var messageBus = new MessageBus();
 
             messageBus.RegisterHandler<FailedMessage>(MessageHandlerType.Synchronous, OnFailMessage, false);
-            messageBus.RegisterHandler<CommentCreated>(MessageHandlerType.Asynchronous, OnCommentCreated, true);
-            messageBus.RegisterHandler<CommentApproved>(MessageHandlerType.Asynchronous, OnCommentApproved, true);
+            messageBus.RegisterHandler<RepliedToPost>(MessageHandlerType.Asynchronous, OnRepliedToPost, true);
+            messageBus.RegisterHandler<ApprovedComment>(MessageHandlerType.Asynchronous, OnApprovedComment, true);
 
             return messageBus;
         }
@@ -61,13 +76,13 @@ namespace MyBlog.Commands
         }
 
 
-        private static void OnCommentCreated(CommentCreated commentCreated)
+        private static void OnRepliedToPost(RepliedToPost commentCreated)
         {
             Trace.Write("comment created handled");
             Debug.Write("comment created handled");
         }
 
-        private static void OnCommentApproved(CommentApproved commentApproved)
+        private static void OnApprovedComment(ApprovedComment commentApproved)
         {
 
         }
