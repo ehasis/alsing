@@ -14,6 +14,8 @@
     using Domain.Repositories;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MyBlog.Domain.Entities;
+    using MyBlog.Domain.Events;
 
     /// <summary>
     /// Summary description for UnitTest1
@@ -53,14 +55,14 @@
             post.Edit("AOP for dummies", "...");
             post.Publish();
             post.EnableComments();
-
+            post.MessageSink = messageBus;
             Assert.AreEqual(0, post.Comments.Count());
 
-            post.ReplyTo(messageBus, "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
+            post.ReplyTo( "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
 
             Comment comment = post.Comments.First();
-
-            comment.Approve(messageBus);
+            comment.MessageSink = messageBus;
+            comment.Approve();
 
             Assert.IsTrue(comment.Approved);
         }
@@ -68,12 +70,12 @@
         [TestMethod]
         public void Can_assign_category_to_post()
         {
-            var category = new PostCategory("C#");
+            var category = new Category("C#");
 
             var post = new Post();
             post.AssignCategory(category);
 
-            Assert.AreEqual(1, post.CategoryLinks.Count());
+            Assert.AreEqual(1, post.Categories.Count());
         }
 
         [TestMethod]
@@ -176,10 +178,11 @@
             var post = new Post();
             post.Edit("AOP for dummies", "...");
             post.Publish();
+            post.MessageSink = messageBus;
 
             Assert.AreEqual(0, post.Comments.Count());
 
-            post.ReplyTo(messageBus, "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Boom boom pow");
+            post.ReplyTo( "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Boom boom pow");
         }
 
         [TestMethod]
@@ -198,14 +201,15 @@
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
-
+                post.MessageSink = messageBus;
                 Assert.AreEqual(0, post.Comments.Count());
 
-                post.ReplyTo(messageBus, "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
+                post.ReplyTo( "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
 
                 Comment comment = post.Comments.First();
+                comment.MessageSink = messageBus;
 
-                comment.Approve(messageBus);
+                comment.Approve();
 
                 //ensure that no comment approved notifications have been processed yet
                 Assert.AreEqual(0, numberOfSentNotifications);
@@ -235,9 +239,9 @@
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
-
+                post.MessageSink = messageBus;
                 //pass the DomainEvent container to the method so we can raise domain events in the current context.
-                post.ReplyTo(messageBus, "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
+                post.ReplyTo( "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
 
                 //ensure that no comment notifications have been processed yet
                 Assert.AreEqual(0, numberOfSentNotifications);
@@ -282,10 +286,11 @@
             post.Edit("AOP for dummies", "...");
             post.Publish();
             post.EnableComments();
+            post.MessageSink = messageBus;
 
             Assert.AreEqual(0, post.Comments.Count());
 
-            post.ReplyTo(messageBus, "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
+            post.ReplyTo( "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
 
             //ensure the comment is added to the post
             Assert.AreEqual(1, post.Comments.Count());

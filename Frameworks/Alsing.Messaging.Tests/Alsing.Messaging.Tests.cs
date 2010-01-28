@@ -6,6 +6,7 @@
     using Alsing.Messaging;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Linq;
 
     /// <summary>
     /// Summary description for UnitTest1
@@ -26,7 +27,7 @@
 
             var sentMessage = new TestMessage
                                   {
-                                          Text = "Hello bus"
+                                      Text = "Hello bus"
                                   };
 
             bus.Send(sentMessage);
@@ -53,12 +54,11 @@
 
             var sentMessage = new TestMessage
                                   {
-                                          Text = "Hello bus"
+                                      Text = "Hello bus"
                                   };
 
             bus.Send(sentMessage);
             trigger.WaitOne(1000);
-
             //ensure we got the message
             Assert.AreSame(sentMessage, receivedMessage);
 
@@ -76,7 +76,7 @@
 
             var sentMessage = new TestMessage
                                   {
-                                          Text = "Hello bus"
+                                      Text = "Hello bus"
                                   };
 
             bus.Send(sentMessage);
@@ -95,12 +95,49 @@
 
             var sentMessage = new TestMessage
                                   {
-                                          Text = "Hello bus"
+                                      Text = "Hello bus"
                                   };
 
             bus.Send(sentMessage);
 
             Assert.IsNotNull(receivedFailedMessage);
+        }
+
+        [TestMethod]
+        public void Can_process_messages_via_RX()
+        {
+            var trigger = new AutoResetEvent(false);
+            IMessageBus bus = new MessageBus();
+
+            string receivedMessage=null;
+            var query = bus.MessageSubject
+                .Delay(new TimeSpan(0, 0, 1))
+                .Select(m => m as TestMessage)
+                .Where(m => m != null)
+                .Select(m => m.Text)
+                .Where(s => s == "Hello bus");
+
+            query.Subscribe(m =>
+            {
+                receivedMessage = m;
+                trigger.Set();
+            });
+
+            var sentMessage1 = new TestMessage
+            {
+                Text = "First message"
+            };
+            var sentMessage2 = new TestMessage
+            {
+                Text = "Hello bus"
+            };
+
+            bus.Send(sentMessage1);
+            bus.Send(sentMessage2);
+
+             trigger.WaitOne(3000);
+
+             Assert.AreEqual(sentMessage2.Text,receivedMessage);
         }
     }
 }

@@ -1,6 +1,7 @@
-namespace MyBlog.Domain
+namespace MyBlog.Domain.Events
 {
     using Alsing.Messaging;
+    using MyBlog.Domain.Entities;
 
     public class CommentCreated : IMessage
     {

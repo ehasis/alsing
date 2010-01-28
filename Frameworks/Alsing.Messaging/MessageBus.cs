@@ -7,7 +7,16 @@ namespace Alsing.Messaging
 
     public class MessageBus : IMessageBus
     {
-        private readonly Dictionary<Type, IList<object>> handlers = new Dictionary<Type, IList<object>>();
+        private readonly Dictionary<Type, IList<object>> handlers = new Dictionary<Type, IList<object>>();        
+        private readonly Subject<IMessage> messageSubject = new Subject<IMessage>();
+
+        public Subject<IMessage> MessageSubject
+        {
+            get
+            {
+                return messageSubject;
+            }
+        }
 
         public void RegisterHandler<T>(MessageHandlerType handlerType, Action<T> messageHandler, bool catchAndSendExceptions)
         {
@@ -33,6 +42,8 @@ namespace Alsing.Messaging
 
         public void Send<T>(T message) where T : class, IMessage
         {
+            messageSubject.OnNext(message);        
+
             IEnumerable<MessageHandler<T>> handldersForType = this.GetHandlers<T>();
             foreach (var handlerForType in handldersForType)
             {
@@ -78,5 +89,18 @@ namespace Alsing.Messaging
                                       };
             return wrappedAction;
         }
+
+        #region IMessageBus Members
+
+
+        public IObservable<T> AsObservable<T>() where T:IMessage
+        {
+            return this
+                .MessageSubject
+                .Where(m => m is T)
+                .Select(m => (T)m);
+        }
+
+        #endregion
     }
 }

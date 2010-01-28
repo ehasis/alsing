@@ -4,6 +4,7 @@ namespace MyBlog.Domain.Repositories
     using System.Linq;
 
     using Alsing.Workspace;
+    using MyBlog.Domain.Entities;
 
     public class PostRepository : Repository<Post>
     {
