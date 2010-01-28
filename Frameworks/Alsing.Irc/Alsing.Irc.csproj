@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6C507F76-5661-45A2-BCDD-772290383B24}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Alsing.Irc</RootNamespace>
+    <AssemblyName>Alsing.Irc</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.CoreEx, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft Reactive Extensions\Redist\DesktopV4\System.CoreEx.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Interactive, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft Reactive Extensions\Redist\DesktopV4\System.Interactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft Reactive Extensions\Redist\DesktopV4\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IrcCommands.cs" />
+    <Compile Include="IrcConnection.cs" />
+    <Compile Include="IrcMessagePatterns.cs" />
+    <Compile Include="Messages\IrcChannelMessage.cs" />
+    <Compile Include="Messages\IrcChannelInfoMessage.cs" />
+    <Compile Include="Messages\IrcChannelMemberMessage.cs" />
+    <Compile Include="Messages\IrcChannelSayMessage.cs" />
+    <Compile Include="Messages\IrcErrorMessage.cs" />
+    <Compile Include="Messages\IrcJoinMessage.cs" />
+    <Compile Include="Messages\IrcModeMessage.cs" />
+    <Compile Include="Messages\IrcNickMessage.cs" />
+    <Compile Include="Messages\IrcNoticeMessage.cs" />
+    <Compile Include="Messages\IrcPartMessage.cs" />
+    <Compile Include="Messages\IrcPingMessage.cs" />
+    <Compile Include="Messages\IrcPrivateSayMessage.cs" />
+    <Compile Include="Messages\IrcQuitMessage.cs" />
+    <Compile Include="Messages\IrcReplyCodeeMessage.cs" />
+    <Compile Include="Messages\IrcSayMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rfc2812.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alsing.Messaging\Alsing.Messaging.csproj">
+      <Project>{14266723-E951-48F2-8603-D3B3072C1EF6}</Project>
+      <Name>Alsing.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alsing.Net\Alsing.Net.csproj">
+      <Project>{269B54FB-03A2-4EC3-B018-8504181783DE}</Project>
+      <Name>Alsing.Net</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Alsing.Infrastructure">
+</Property><Property Name="Solution File" Value="C:\Projects\svn\Frameworks\Alsing.Infrastructure.sln">
+</Property><Property Name="Date" Value="den 19 januari 2010">
+</Property><Property Name="Time" Value="12:19">
+</Property></Properties><Event ErrorLevel="0" Project="Alsing.Core" Source="Alsing.Core\Alsing.Core\Alsing.Core.csproj" Description="The project file does not require conversion.">
+</Event><Event ErrorLevel="3" Project="Alsing.Core" Source="Alsing.Core\Alsing.Core\Alsing.Core.csproj" Description="No Conversion Required">
+</Event><Event ErrorLevel="0" Project="Alsing.Messaging" Source="Alsing.Messaging\Alsing.Messaging.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Alsing.Messaging" Source="Alsing.Messaging\Alsing.Messaging.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Alsing.Workspace" Source="Alsing.Workspace\Alsing.Workspace.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Alsing.Workspace" Source="Alsing.Workspace\Alsing.Workspace.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Alsing.Serialization" Source="Alsing.Serialization\Alsing.Serialization.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Alsing.Serialization" Source="Alsing.Serialization\Alsing.Serialization.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Alsing.Messaging.Tests" Source="Alsing.Messaging.Tests\Alsing.Messaging.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Alsing.Messaging.Tests" Source="Alsing.Messaging.Tests\Alsing.Messaging.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Alsing.Transactional" Source="Alsing.Transactional\Alsing.Transactional.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Alsing.Transactional" Source="Alsing.Transactional\Alsing.Transactional.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MyBlog.Domain" Source="Samples\MyBlog\MyBlog.Domain\MyBlog.Domain.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="MyBlog.Domain" Source="Samples\MyBlog\MyBlog.Domain\MyBlog.Domain.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MyBlog.Domain.Tests" Source="Samples\MyBlog\MyBlog.Domain.Tests\MyBlog.Domain.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="MyBlog.Domain.Tests" Source="Samples\MyBlog\MyBlog.Domain.Tests\MyBlog.Domain.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Alsing.Serialization.Tests" Source="Alsing.Serialization.Tests\Alsing.Serialization.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Alsing.Serialization.Tests" Source="Alsing.Serialization.Tests\Alsing.Serialization.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MyBlog.WebSite" Source="Samples\MyBlog\MyBlog.WebSite\MyBlog.WebSite.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="MyBlog.WebSite" Source="Samples\MyBlog\MyBlog.WebSite\MyBlog.WebSite.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MyBlog.Domain.Persistence.LTS" Source="Samples\MyBlog\MyBlog.Domain.Persistence.LTS\MyBlog.Domain.Persistence.LTS.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="MyBlog.Domain.Persistence.LTS" Source="Samples\MyBlog\MyBlog.Domain.Persistence.LTS\MyBlog.Domain.Persistence.LTS.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MyBlog.Commands" Source="Samples\MyBlog.Services\MyBlog.Commands.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="MyBlog.Commands" Source="Samples\MyBlog.Services\MyBlog.Commands.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MyBlog.Reporting" Source="Samples\MyBlog.Reporting\MyBlog.Reporting.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="MyBlog.Reporting" Source="Samples\MyBlog.Reporting\MyBlog.Reporting.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Alsing.Infrastructure.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="Alsing.Infrastructure.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="MyBlog.Domain" Source="Samples\MyBlog\MyBlog.Domain\MyBlog.Domain.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="3" Project="" Source="Alsing.All.vsmdi" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Alsing.All.vsmdi" Description="The file was converted to the current format.">
+</Event><Event ErrorLevel="3" Project="" Source="LocalTestRun.testrunconfig" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="LocalTestRun.testrunconfig" Description="The file was converted to the current format.">
+</Event><Event ErrorLevel="0" Project="MyBlog.Domain.Tests" Source="Samples\MyBlog\MyBlog.Domain.Tests\MyBlog.Domain.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="MyBlog.WebSite" Source="Samples\MyBlog\MyBlog.WebSite\MyBlog.WebSite.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="MyBlog.Domain.Persistence.LTS" Source="Samples\MyBlog\MyBlog.Domain.Persistence.LTS\MyBlog.Domain.Persistence.LTS.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="MyBlog.Commands" Source="Samples\MyBlog.Services\MyBlog.Commands.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="MyBlog.Reporting" Source="Samples\MyBlog.Reporting\MyBlog.Reporting.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Alsing.Messaging" Source="Alsing.Messaging\Alsing.Messaging.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Alsing.Workspace" Source="Alsing.Workspace\Alsing.Workspace.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Alsing.Serialization" Source="Alsing.Serialization\Alsing.Serialization.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Alsing.Messaging.Tests" Source="Alsing.Messaging.Tests\Alsing.Messaging.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Alsing.Transactional" Source="Alsing.Transactional\Alsing.Transactional.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Alsing.Serialization.Tests" Source="Alsing.Serialization.Tests\Alsing.Serialization.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
