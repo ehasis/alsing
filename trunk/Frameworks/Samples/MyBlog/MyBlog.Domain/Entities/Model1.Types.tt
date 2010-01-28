@@ -1,0 +1,327 @@
+<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ include file="EF.Utility.CS.ttinclude"#><#@
+ output extension=".cs"#><#
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+CodeRegion region = new CodeRegion(this, 1);
+MetadataTools ef = new MetadataTools(this);
+
+string inputFile = @"C:\Projects\svn\Frameworks\Samples\MyBlog\MyBlog.Domain\Entities\MyBlogModel.edmx";
+EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(inputFile);
+string namespaceName = code.VsNamespaceSuggestion();
+
+TemplateFileManager fileManager = TemplateFileManager.Create(this);
+
+
+// Emit Entity Types
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+    fileManager.StartNewFile(entity.Name + ".cs");
+    WriteHeader(namespaceName, code);
+
+#>
+<#=Accessibility.ForType(entity)#> <#=code.SpaceAfter(code.AbstractOption(entity))#>partial class <#=code.Escape(entity)#><#=code.StringBefore(" : ", code.Escape(entity.BaseType))#>
+{
+<#
+
+    foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+    {
+#>
+
+    <#=Accessibility.ForProperty(edmProperty)#> virtual <#=code.Escape(edmProperty.TypeUsage)#> <#=code.Escape(edmProperty)#> { <#=code.SpaceAfter(Accessibility.ForGetter(edmProperty))#>get; <#=code.SpaceAfter(Accessibility.ForSetter(edmProperty))#>set; }
+<#
+    }
+
+#>
+<#
+
+    foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == entity))
+    {
+#>
+
+    <#=Accessibility.ForProperty(edmProperty)#> <#=code.Escape(edmProperty.TypeUsage)#> <#=code.Escape(edmProperty)#> { get; <#=code.SpaceAfter(Accessibility.ForSetter(edmProperty))#>set;}
+<#
+    }
+
+    ////////
+    //////// Write Navigation properties -------------------------------------------------------------------------------------------
+    ////////
+
+
+        foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(np => np.DeclaringType == entity))
+        {
+            NavigationProperty inverse = ef.Inverse(navProperty);
+            EntityType fromType = navProperty.FromEndMember.GetEntityType();
+            EntityType toType = navProperty.ToEndMember.GetEntityType();
+            if (inverse != null && !IsReadWriteAccessibleProperty(inverse))
+            {
+                inverse = null;
+            }
+#>
+
+<#
+			if (navProperty.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many)
+			{
+#>
+    <#=ReadOnlyPropertyAccessibilityAndVirtual(navProperty)#> IEnumerable<<#=code.Escape(toType)#>> <#=code.Escape(navProperty)#>{ get { return <#=code.FieldName(navProperty)#>; } }
+    private List<<#=code.Escape(toType)#>> <#=code.FieldName(navProperty)#> = new List<<#=code.Escape(toType)#>>();
+<#
+          	}
+          	else
+          	{
+#>
+
+    <#=PropertyAccessibilityAndVirtual(navProperty)#> <#=code.Escape(toType)#> <#=code.Escape(navProperty)#>{ <#=code.SpaceAfter(Accessibility.ForGetter(navProperty))#>get; <#=code.SpaceAfter(Accessibility.ForSetter(navProperty))#>set; }
+<#
+
+        }
+    }
+
+#>
+}
+<#
+    WriteFooter(namespaceName);
+}
+
+foreach (ComplexType complex in ItemCollection.GetItems<ComplexType>().OrderBy(e => e.Name))
+{
+    fileManager.StartNewFile(complex.Name + ".cs");
+    WriteHeader(namespaceName, code);
+#>
+
+<#=Accessibility.ForType(complex)#> partial class <#=code.Escape(complex)#>
+{
+<#
+    foreach (EdmProperty edmProperty in complex.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == complex))
+    {
+#>
+    <#=Accessibility.ForProperty(edmProperty)#> <#=code.Escape(edmProperty.TypeUsage)#> <#=code.Escape(edmProperty)#> { <#=code.SpaceAfter(Accessibility.ForGetter(edmProperty))#>get; <#=code.SpaceAfter(Accessibility.ForSetter(edmProperty))#>set; }
+<#
+    }
+#>
+
+<#
+    foreach (EdmProperty edmProperty in complex.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == complex))
+    {
+#>
+    <#=Accessibility.ForProperty(edmProperty)#> <#=code.Escape(edmProperty.TypeUsage)#> <#=code.Escape(edmProperty)#>
+    {
+        <#=code.SpaceAfter(Accessibility.ForGetter(edmProperty))#>get
+        {
+            if (!<#=InitializedTrackingField(edmProperty, code)#> && <#=code.FieldName(edmProperty)#> == null)
+            {
+                <#=code.FieldName(edmProperty)#> = new <#=code.Escape(edmProperty.TypeUsage)#>();
+            }
+            <#=InitializedTrackingField(edmProperty, code)#> = true;
+            return <#=code.FieldName(edmProperty)#>;
+        }
+        <#=code.SpaceAfter(Accessibility.ForSetter(edmProperty))#>set
+        {
+            <#=InitializedTrackingField(edmProperty, code)#> = true;
+            <#=code.FieldName(edmProperty)#> = value;
+        }
+
+    }
+    private <#=code.Escape(edmProperty.TypeUsage)#> <#=code.FieldName(edmProperty)#>;
+    private bool <#=InitializedTrackingField(edmProperty, code)#> = false;
+<#
+    }
+#>
+}
+<#
+    WriteFooter(namespaceName);
+}
+
+fileManager.WriteFiles();
+#>
+<#+
+void WriteHeader(string namespaceName, CodeGenerationTools code, params string[] extraUsings)
+{
+    CodeRegion region = new CodeRegion(this);
+#>
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated from a template.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+<#=string.Join(string.Empty, extraUsings.Select(u => "using " + u + ";" + Environment.NewLine).ToArray())#>
+<#+
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+#>
+namespace <#=code.EscapeNamespace(namespaceName)#>
+{
+<#+
+        PushIndent(CodeRegion.GetIndent(1));
+    }
+}
+
+
+void WriteFooter(string namespaceName)
+{
+    if (!String.IsNullOrEmpty(namespaceName))
+    {
+        PopIndent();
+#>
+}
+<#+
+    }
+}
+#>
+<#+
+void WriteFixupCollection(string namespaceName, CodeGenerationTools code)
+{
+    WriteHeader(namespaceName, code, "System.Collections");
+#>
+public partial class FixupCollection<TFrom, TTo> : ICollection<TTo>
+{
+    private readonly TFrom _owner;
+
+    private readonly Dictionary<TTo, bool> _items = new Dictionary<TTo, bool>();
+
+    private readonly Func<TFrom, TTo, bool> _contains;
+    private readonly Action<TFrom, TTo> _add;
+    private readonly Action<TFrom, TTo> _remove;
+
+    public FixupCollection(TFrom owner, Func<TFrom, TTo, bool> contains,
+        Action<TFrom, TTo> add, Action<TFrom, TTo> remove)
+    {
+        _owner = owner;
+        _contains = contains;
+        _add = add;
+        _remove = remove;
+    }
+
+    #region ICollection<T> Members
+
+    public void Add(TTo item)
+    {
+        if (!Equals(item, default(TTo)))
+        {
+            if (!_items.ContainsKey(item))
+            {
+                _items.Add(item, true);
+            }
+
+            if (!_contains(_owner, item))
+            {
+                _add(_owner, item);
+            }
+        }
+    }
+
+    public void Clear()
+    {
+        _items.Clear();
+    }
+
+    public bool Contains(TTo item)
+    {
+        return _items.ContainsKey(item);
+    }
+
+    public void CopyTo(TTo[] array, int arrayIndex)
+    {
+        ((ICollection)_items.Keys).CopyTo(array, arrayIndex);
+    }
+
+    public int Count
+    {
+        get { return _items.Count; }
+    }
+
+    public bool IsReadOnly
+    {
+        get { return false; }
+    }
+
+    public bool Remove(TTo item)
+    {
+        var result = false;
+
+        if (!Equals(item, default(TTo)))
+        {
+            result = _items.Remove(item);
+
+            if (_contains(_owner, item))
+            {
+                _remove(_owner, item);
+            }
+        }
+
+        return result;
+    }
+
+    #endregion
+
+    #region IEnumerable<T> Members
+
+    public IEnumerator<TTo> GetEnumerator()
+    {
+        return _items.Keys.GetEnumerator();
+    }
+
+    #endregion
+
+    #region IEnumerable Members
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return _items.Keys.GetEnumerator();
+    }
+
+    #endregion
+}
+<#+
+    WriteFooter(namespaceName);
+}
+
+string PropertyAccessibilityAndVirtual(EdmMember member)
+{
+    string accessibility = Accessibility.ForProperty(member);
+    if (accessibility != "private")
+    {
+        return accessibility + " virtual";
+    }
+
+    return accessibility;
+}
+
+string ReadOnlyPropertyAccessibilityAndVirtual(EdmMember member)
+{
+    string accessibility = Accessibility.ForReadOnlyProperty(member);
+    if (accessibility != "private")
+    {
+        return accessibility + " virtual";
+    }
+
+    return accessibility;
+}
+
+bool IsReadWriteAccessibleProperty(EdmMember member)
+{
+    string setter = Accessibility.ForWriteOnlyProperty(member);
+    string getter = Accessibility.ForReadOnlyProperty(member);
+
+    return getter != "private" && getter != "protected" && setter != "private" && setter != "protected";
+}
+
+string InitializedTrackingField(EdmProperty property, CodeGenerationTools code)
+{
+    string namePart = property.Name + "Initialized";
+    if (code.CamelCaseFields)
+    {
+        namePart = code.CamelCase(namePart);
+    }
+    return "_" + namePart;
+}
+
+#>
