@@ -77,7 +77,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContextFactory.cs" />
     <Compile Include="DomainEvents\IDomainEventAware.cs" />
     <Compile Include="Entities\Category.cs">
       <DependentUpon>Model1.Types.tt</DependentUpon>
@@ -85,8 +84,8 @@
     <Compile Include="Entities\Comment.cs">
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
-    <Compile Include="DomainEvents\CommentApproved.cs" />
-    <Compile Include="DomainEvents\CommentCreated.cs" />
+    <Compile Include="DomainEvents\ApprovedComment.cs" />
+    <Compile Include="DomainEvents\RepliedToPost.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Entities\Custom\Category.cs" />
     <Compile Include="Entities\Custom\Comment.cs" />

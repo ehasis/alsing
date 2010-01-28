@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogContext.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="PostCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MyBlog.Domain.DomainEvents;
 using Alsing.Messaging;
+using MyBlog.Domain.Events;
 
 namespace MyBlog.Domain.Entities
 {
@@ -27,6 +28,9 @@ namespace MyBlog.Domain.Entities
         public void Approve()
         {
             this.Approved = true;
+
+            var message = new ApprovedComment(this);
+            MessageSink.Send(message);
         }
     }
 }

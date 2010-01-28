@@ -6,9 +6,9 @@
     using Alsing.Workspace;
     using MyBlog.Domain.Entities;
 
-    public class PostCategoryRepository : Repository<Category>
+    public class CategoryRepository : Repository<Category>
     {
-        public PostCategoryRepository(IWorkspace workspace) : base(workspace)
+        public CategoryRepository(IWorkspace workspace) : base(workspace)
         {
         }
 
@@ -24,6 +24,13 @@
             this
                     .workspace
                     .Remove(postCategory);
+        }
+
+        public Category FindById(int categoryId)
+        {
+            return this.MakeQuery()
+                .Where(c => c.Id == categoryId)
+                .FirstOrDefault();
         }
     }
 }

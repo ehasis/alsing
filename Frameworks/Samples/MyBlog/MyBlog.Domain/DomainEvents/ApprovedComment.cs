@@ -3,9 +3,9 @@ namespace MyBlog.Domain.Events
     using Alsing.Messaging;
     using MyBlog.Domain.Entities;
 
-    public class CommentApproved : IMessage
+    public class ApprovedComment : IMessage
     {
-        public CommentApproved(Comment comment)
+        public ApprovedComment(Comment comment)
         {
             this.Comment = comment;
         }
