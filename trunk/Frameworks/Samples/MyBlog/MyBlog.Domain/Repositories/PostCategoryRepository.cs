@@ -4,21 +4,22 @@
     using System.Linq;
 
     using Alsing.Workspace;
+    using MyBlog.Domain.Entities;
 
-    public class PostCategoryRepository : Repository<PostCategory>
+    public class PostCategoryRepository : Repository<Category>
     {
         public PostCategoryRepository(IWorkspace workspace) : base(workspace)
         {
         }
 
-        public void Add(PostCategory postCategory)
+        public void Add(Category postCategory)
         {
             this
                     .workspace
                     .Add(postCategory);
         }
 
-        public void Remove(PostCategory postCategory)
+        public void Remove(Category postCategory)
         {
             this
                     .workspace

@@ -13,13 +13,13 @@ namespace MyBlog.Reporting.Queries
     {
         public CategoryQueries(TextWriter log)
         {
-            context.Log = log;
+        //    context.Log = log;
         }
-        private Data.ReportingModelDataContext context = new MyBlog.Reporting.Data.ReportingModelDataContext();
+        private Data.MyBlogEntities context = new MyBlog.Reporting.Data.MyBlogEntities();
 
         public IList<DTOFlattenedCategory> FindAll()
         {
-            return this.context.PostCategories
+            return this.context.Categories
                 .SelectFlattenedCategoryProjection()
                 .ToList();
         }
@@ -32,7 +32,7 @@ namespace MyBlog.Reporting.Queries
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        internal static IQueryable<DTOFlattenedCategory> SelectFlattenedCategoryProjection(this IQueryable<PostCategory> query)
+        internal static IQueryable<DTOFlattenedCategory> SelectFlattenedCategoryProjection(this IQueryable<Category> query)
         {
             return query
                     .Select(c =>
@@ -40,7 +40,7 @@ namespace MyBlog.Reporting.Queries
                             {
                                 CategoryId = c.Id,
                                 Name = c.Name,
-                                PostCount = c.PostCategoryLinks.Where(l => l.Post.PublishDate != null).Count(),
+                                PostCount = c.Posts.Where(p => p.PublishDate != null).Count(),
                             }
                     );
         }

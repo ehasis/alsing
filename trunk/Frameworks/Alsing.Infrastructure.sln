@@ -1,12 +1,16 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{122C143C-BBAA-434C-81EB-B3DC479FC3B8}"
 	ProjectSection(SolutionItems) = preProject
 		Alsing.All.vsmdi = Alsing.All.vsmdi
 		Alsing.Core\LocalTestRun.testrunconfig = Alsing.Core\LocalTestRun.testrunconfig
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{ED35CF8B-EF95-48F9-8D42-AD0C43D82A62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyBlog", "MyBlog", "{F185DDC6-D647-4B0C-BB4B-DA718A139FDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Core", "Alsing.Core\Alsing.Core\Alsing.Core.csproj", "{389A097D-82DC-4C7D-A3E3-9ED89BA9FF99}"
 EndProject
@@ -18,10 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Serialization", "Als
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Messaging.Tests", "Alsing.Messaging.Tests\Alsing.Messaging.Tests.csproj", "{64680081-2549-445D-A2F9-4EE6167C0E4C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{ED35CF8B-EF95-48F9-8D42-AD0C43D82A62}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyBlog", "MyBlog", "{F185DDC6-D647-4B0C-BB4B-DA718A139FDC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Transactional", "Alsing.Transactional\Alsing.Transactional.csproj", "{42EE6937-8DBA-4D2C-BC8E-8575AC7468A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain", "Samples\MyBlog\MyBlog.Domain\MyBlog.Domain.csproj", "{4878AD8C-D5B1-4B35-8060-8AA298E9143E}"
@@ -31,8 +31,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.Serialization.Tests", "Alsing.Serialization.Tests\Alsing.Serialization.Tests.csproj", "{3E88E85D-5DAE-43F8-858E-4D76B15E60AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.WebSite", "Samples\MyBlog\MyBlog.WebSite\MyBlog.WebSite.csproj", "{B4110913-59C3-4CF2-A786-8816ADEE9628}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain.Persistence.LTS", "Samples\MyBlog\MyBlog.Domain.Persistence.LTS\MyBlog.Domain.Persistence.LTS.csproj", "{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Commands", "Samples\MyBlog.Services\MyBlog.Commands.csproj", "{EB268498-3DE8-413D-B7A0-4F033399B6BB}"
 EndProject
@@ -87,10 +85,6 @@ Global
 		{B4110913-59C3-4CF2-A786-8816ADEE9628}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4110913-59C3-4CF2-A786-8816ADEE9628}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4110913-59C3-4CF2-A786-8816ADEE9628}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB268498-3DE8-413D-B7A0-4F033399B6BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB268498-3DE8-413D-B7A0-4F033399B6BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB268498-3DE8-413D-B7A0-4F033399B6BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -108,7 +102,6 @@ Global
 		{4878AD8C-D5B1-4B35-8060-8AA298E9143E} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
 		{933F8717-E773-467E-B83D-555EAAA39DEA} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
 		{B4110913-59C3-4CF2-A786-8816ADEE9628} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
-		{EC6DCF10-7480-4F1C-BD65-30059EA95A6C} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
 		{EB268498-3DE8-413D-B7A0-4F033399B6BB} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
 		{5D701B09-2BE6-4B42-9C5F-1B06B2DE21A4} = {F185DDC6-D647-4B0C-BB4B-DA718A139FDC}
 	EndGlobalSection

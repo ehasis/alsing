@@ -17,9 +17,10 @@ namespace MyBlog.Commands
                 var messageBus = Config.GetMessageBus(ws);
                 var postRepository = new PostRepository(ws);
 
-                MyBlog.Domain.Post post = postRepository.FindById(postId);
+                var post = postRepository.FindById(postId);
+                post.MessageSink = messageBus;
 
-                post.ReplyTo(messageBus, userName, userEmail, userWebsite, comment);
+                post.ReplyTo(userName, userEmail, userWebsite, comment);
                 ws.Commit();
 
                 scope.Complete();

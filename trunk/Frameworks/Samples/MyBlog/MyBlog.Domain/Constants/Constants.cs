@@ -10,6 +10,6 @@
 
         public const string ExceptionPostIsPublished = "Post is published";
 
-        public const string ForLTSOnly = "Do not use, for Linq To SQL materialization only";
+        public const string OnlyForORMapper = "Do not use, for Linq To SQL materialization only";
     }
 }

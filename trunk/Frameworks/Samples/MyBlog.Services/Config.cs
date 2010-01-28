@@ -7,18 +7,36 @@ using Alsing.Messaging;
 using MyBlog.Domain;
 using System.Diagnostics;
 using System.IO;
+using MyBlog.Domain.Events;
+using MyBlog.Domain.Entities;
+using System.Data.SqlClient;
+using System.Data.EntityClient;
 
 namespace MyBlog.Commands
 {
     public static class Config
     {
         public static IWorkspace GetDomainWorkspace()
-        {
-            var context = new MyBlog.Domain.ModelDataContext();
+        {            
+            var context = ContextFactory.CreateContext();
 
-            context.Log = GetLog();
+          //  context.Log = GetLog();
+            Func<Type, object> selector = t =>
+                {
 
-            return new LinqToSqlWorkspace(context);
+                    if (t == typeof(MyBlog.Domain.Entities.Post))
+                        return context.Posts;
+                    
+                    if (t == typeof(MyBlog.Domain.Entities.Comment))
+                        return context.Comments;
+
+                    if (t == typeof(MyBlog.Domain.Entities.Category))
+                        return context.Categories;
+
+                    return null;
+                };
+
+            return new EF4Workspace(context,selector);
         }
 
         public static TextWriter GetLog()
@@ -38,8 +56,7 @@ namespace MyBlog.Commands
         }
 
         private static void OnFailMessage(FailedMessage failMessage)
-        {
-            EventLog eventLog = new EventLog();
+        {       
             EventLog.WriteEntry("MyBlog", failMessage.MessageFailureException.ToString());
         }
 

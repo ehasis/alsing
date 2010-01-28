@@ -12,9 +12,9 @@ namespace MyBlog.Reporting.Queries
     {
         public PostQueries(TextWriter log)
         {
-            context.Log = log;
+            //context.Log = log;
         }
-        private Data.ReportingModelDataContext context = new MyBlog.Reporting.Data.ReportingModelDataContext();
+        private Reporting.Data.MyBlogEntities context= new MyBlog.Reporting.Data.MyBlogEntities();
 
         public Projections.DTOPost FindById(int postId)
         {
@@ -58,11 +58,11 @@ namespace MyBlog.Reporting.Queries
                                 PublishDate = post.PublishDate,
                                 ReplyCount = post.Comments.Where(c => c.Approved).Count(),
                                 Subject = post.Subject,
-                                Categories = post.PostCategoryLinks.Select(l => 
+                                Categories = post.Categories.Select(l => 
                                     new DTOCategory
                                     {
-                                        CategoryId = l.PostCategory.Id,
-                                        Name = l.PostCategory.Name,
+                                        CategoryId = l.Id,
+                                        Name = l.Name,
                                     }),
                             }
                     );
@@ -91,12 +91,12 @@ namespace MyBlog.Reporting.Queries
                                             UserWebsite = c.UserWebSite,
                                             CreationDate = c.CreationDate,
                                         }),
-                    Categories = p.PostCategoryLinks
+                    Categories = p.Categories
                                    .Select(l =>
                                         new DTOCategory
                                         {
-                                            CategoryId = l.PostCategory.Id,
-                                            Name = l.PostCategory.Name,
+                                            CategoryId = l.Id,
+                                            Name = l.Name,
                                         }),
                 });
         }
