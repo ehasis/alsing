@@ -18,5 +18,10 @@ namespace MyBlog.Domain.Entities
             var post = new Post(this);
             return post;
         }
+
+        public void Edit(string title)
+        {
+            this.Title = title;
+        }
     }
 }

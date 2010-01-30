@@ -15,21 +15,21 @@ namespace MyBlog.Domain.Entities
     public partial class Post
     {
     
-        public virtual int Id { get; set; }
+        public virtual int Id { get; private set; }
     
-        public virtual System.DateTime CreationDate { get; set; }
+        public virtual System.DateTime CreationDate { get; private set; }
     
-        public virtual System.DateTime LastModifiedDate { get; set; }
+        public virtual System.DateTime LastModifiedDate { get; private set; }
     
-        public virtual Nullable<System.DateTime> PublishDate { get; set; }
+        public virtual Nullable<System.DateTime> PublishDate { get; private set; }
     
-        public virtual string Subject { get; set; }
+        public virtual string Subject { get; private set; }
     
-        public virtual string Body { get; set; }
+        public virtual string Body { get; private set; }
     
-        public virtual bool CommentsEnabled { get; set; }
+        public virtual bool CommentsEnabled { get; private set; }
     
-        public virtual int BlogId { get; set; }
+        public virtual int BlogId { get; private set; }
     
         public virtual IEnumerable<Comment> Comments{ get { return _comments; } }
         private List<Comment> _comments = new List<Comment>();
@@ -38,6 +38,6 @@ namespace MyBlog.Domain.Entities
         private List<Category> _categories = new List<Category>();
     
     
-        public virtual Blog Blog{ get; set; }
+        public virtual Blog Blog{ get; private set; }
     }
 }

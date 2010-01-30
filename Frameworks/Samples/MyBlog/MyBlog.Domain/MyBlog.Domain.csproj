@@ -82,12 +82,13 @@
     <Compile Include="DomainEvents\DomainEvents.cs" />
     <Compile Include="DomainEvents\EditedPostEvent.cs" />
     <Compile Include="DomainEvents\EnabledCommentsEvent.cs" />
+    <Compile Include="DomainEvents\PostCreated.cs" />
     <Compile Include="DomainEvents\PublishedPostEvent.cs" />
     <Compile Include="DomainEvents\UnpublishedPostEvent.cs" />
     <Compile Include="DomainEvents\ApprovedCommentEvent.cs" />
     <Compile Include="DomainEvents\RepliedToPostEvent.cs" />
     <Compile Include="Constants\Constants.cs" />
-    <Compile Include="BlogContext.cs" />
+    <Compile Include="DomainContext.cs" />
     <Compile Include="Entities\Blog.cs">
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
@@ -101,6 +102,7 @@
     <Compile Include="Entities\Custom\Category.cs" />
     <Compile Include="Entities\Custom\Comment.cs" />
     <Compile Include="Entities\Custom\Post.cs" />
+    <Compile Include="Entities\Custom\Posts.cs" />
     <Compile Include="Entities\Custom\UserInfo.cs" />
     <Compile Include="Entities\Model1.Context.cs">
       <AutoGen>True</AutoGen>
