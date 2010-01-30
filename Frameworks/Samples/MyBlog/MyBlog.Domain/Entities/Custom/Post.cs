@@ -15,7 +15,7 @@ namespace MyBlog.Domain.Entities
             var comment = new Comment(this, userInfo, text);
             _comments.Add(comment);
 
-            DomainEvents.Raise(new RepliedToPost(comment));
+            DomainEvents.Raise(new RepliedToPost(this,comment));
         }
 
         public void Edit(string subject, string body)
