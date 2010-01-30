@@ -11,10 +11,10 @@ namespace MyBlog.Commands
 {
     public class PostCommands
     {
-        private void Apply(Action<BlogContext> action)
+        private void Apply(Action<DomainContext> action)
         {
             using (TransactionScope scope = new TransactionScope())
-            using (var context = Config.GetNewBlogContext())
+            using (var context = Config.GetBlogContext())
             {
                 action(context);
 

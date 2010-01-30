@@ -15,8 +15,8 @@ namespace MyBlog.Domain.Entities
     public partial class Blog
     {
     
-        public virtual int Id { get; set; }
+        public virtual int Id { get; private set; }
     
-        public virtual string Title { get; set; }
+        public virtual string Title { get; private set; }
     }
 }

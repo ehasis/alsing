@@ -16,14 +16,13 @@ namespace MyBlog.Commands
 {
     public static class Config
     {
-        public static BlogContext GetNewBlogContext()
+        public static DomainContext GetBlogContext()
         {
-            var context = new Entities();
+            var dataContext = new Entities();
             var messageBus = GetMessageBus();
-            DomainEvents.BeginNewScope(messageBus);
-            var workspace = GetDomainWorkspace(context);
+            var workspace = GetDomainWorkspace(dataContext);
 
-            return new BlogContext(workspace,messageBus);
+            return new DomainContext(workspace,messageBus);
         }
         
 

@@ -15,13 +15,13 @@ namespace MyBlog.Domain.Entities
     public partial class Category
     {
     
-        public virtual int Id { get; set; }
+        public virtual int Id { get; private set; }
     
-        public virtual string Name { get; set; }
+        public virtual string Name { get; private set; }
     
-        public virtual int BlogId { get; set; }
+        public virtual int BlogId { get; private set; }
     
     
-        public virtual Blog Blog{ get; set; }
+        public virtual Blog Blog{ get; private set; }
     }
 }
