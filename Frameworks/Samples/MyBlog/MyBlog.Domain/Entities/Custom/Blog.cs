@@ -10,7 +10,6 @@ namespace MyBlog.Domain.Entities
         public void AddCategory(string name)
         {
             var category = new Category(name);
-            _categories.Add(category);
         }
     }
 }
