@@ -1,4 +1,4 @@
-﻿namespace MyBlog.Domain.Exceptions
+﻿namespace MyBlog.Domain
 {
     using System;
 
