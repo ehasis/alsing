@@ -9,7 +9,7 @@ namespace MyBlog.Domain.Repositories
     public class PostRepository : Repository<Post>
     {
         public PostRepository(IWorkspace workspace)
-                : base(workspace)
+            : base(workspace)
         {
         }
 
