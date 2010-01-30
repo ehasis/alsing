@@ -22,11 +22,19 @@ namespace MyBlog.Domain.Entities
 
         public void ReplyTo(string userName, string userEmail, string userWebsite, string text)
         {
+            EnsureCommentsEnabled();
+
             var userInfo = new UserInfo(userName, userEmail, userWebsite);
             var comment = new Comment(this, userInfo, text);
             _comments.Add(comment);
 
             DomainEvents.Raise(new RepliedToPostEvent(this, comment));
+        }
+
+        private void EnsureCommentsEnabled()
+        {
+            if (CommentsEnabled == false)
+                throw new DomainException(Constants.ExceptionCommentsAreNotEnabled);
         }
 
         public void Edit(string subject, string body)
