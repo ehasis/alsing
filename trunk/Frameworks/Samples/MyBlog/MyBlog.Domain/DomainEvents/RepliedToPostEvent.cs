@@ -3,9 +3,9 @@ namespace MyBlog.Domain.Events
     using Alsing.Messaging;
     using MyBlog.Domain.Entities;
 
-    public class RepliedToPost : IMessage
+    public class RepliedToPostEvent : IMessage
     {
-        public RepliedToPost(Post post,Comment comment)
+        public RepliedToPostEvent(Post post,Comment comment)
         {
             this.Post = post;
             this.Comment = comment;

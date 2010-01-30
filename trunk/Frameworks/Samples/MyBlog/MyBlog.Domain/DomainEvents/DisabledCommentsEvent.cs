@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MyBlog.Domain.Entities;
 using Alsing.Messaging;
+using MyBlog.Domain.Entities;
 
 namespace MyBlog.Domain.Events
 {
-    public class PublishedPost : IMessage
+    public class DisabledCommentsEvent : IMessage
     {
-        public PublishedPost(Post post)
+        public DisabledCommentsEvent(Post post)
         {
             this.Post = post;
         }
 
-        public Post Post { get; set; }
+        public Post Post { get; private set; }
     }
 }

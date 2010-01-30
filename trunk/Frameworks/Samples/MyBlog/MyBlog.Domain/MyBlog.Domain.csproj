@@ -77,15 +77,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainEvents\AssignedCategoryToPost.cs" />
-    <Compile Include="DomainEvents\DisabledComments.cs" />
+    <Compile Include="DomainEvents\AssignedCategoryToPostEvent.cs" />
+    <Compile Include="DomainEvents\DisabledCommentsEvent.cs" />
     <Compile Include="DomainEvents\DomainEvents.cs" />
-    <Compile Include="DomainEvents\EditedPost.cs" />
-    <Compile Include="DomainEvents\EnabledComments.cs" />
-    <Compile Include="DomainEvents\PublishedPost.cs" />
-    <Compile Include="DomainEvents\UnpublishedPost.cs" />
-    <Compile Include="DomainEvents\ApprovedComment.cs" />
-    <Compile Include="DomainEvents\RepliedToPost.cs" />
+    <Compile Include="DomainEvents\EditedPostEvent.cs" />
+    <Compile Include="DomainEvents\EnabledCommentsEvent.cs" />
+    <Compile Include="DomainEvents\PublishedPostEvent.cs" />
+    <Compile Include="DomainEvents\UnpublishedPostEvent.cs" />
+    <Compile Include="DomainEvents\ApprovedCommentEvent.cs" />
+    <Compile Include="DomainEvents\RepliedToPostEvent.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="BlogContext.cs" />
     <Compile Include="Entities\Blog.cs">

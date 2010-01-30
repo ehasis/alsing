@@ -15,7 +15,7 @@ namespace MyBlog.Domain.Entities
             var comment = new Comment(this, userInfo, text);
             _comments.Add(comment);
 
-            DomainEvents.Raise(new RepliedToPost(this,comment));
+            DomainEvents.Raise(new RepliedToPostEvent(this,comment));
         }
 
         public void Edit(string subject, string body)
@@ -23,42 +23,42 @@ namespace MyBlog.Domain.Entities
             this.Subject = subject;
             this.Body = body;
 
-            DomainEvents.Raise(new EditedPost(this));
+            DomainEvents.Raise(new EditedPostEvent(this));
         }
 
         public void EnableComments()
         {
             this.CommentsEnabled = true;
 
-            DomainEvents.Raise(new EnabledComments(this));
+            DomainEvents.Raise(new EnabledCommentsEvent(this));
         }
 
         public void DisableComments()
         {
             this.CommentsEnabled = false;
 
-            DomainEvents.Raise(new DisabledComments(this));
+            DomainEvents.Raise(new DisabledCommentsEvent(this));
         }
 
         public void Publish()
         {
             this.PublishDate = DateTime.Now;
 
-            DomainEvents.Raise(new PublishedPost(this));
+            DomainEvents.Raise(new PublishedPostEvent(this));
         }
 
         public void Unpublish()
         {
             this.PublishDate = null;
 
-            DomainEvents.Raise(new UnpublishedPost(this));
+            DomainEvents.Raise(new UnpublishedPostEvent(this));
         }
 
         public void AssignCategory(Category category)
         {
             _categories.Add(category);
 
-            DomainEvents.Raise(new AssignedCategoryToPost(this, category));
+            DomainEvents.Raise(new AssignedCategoryToPostEvent(this, category));
         }
     }
 }

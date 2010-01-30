@@ -25,7 +25,7 @@ namespace MyBlog.Domain.Entities
         {
             this.Approved = true;
 
-            var message = new ApprovedComment(this);
+            var message = new ApprovedCommentEvent(this);
             DomainEvents.Raise(message);
         }
     }
