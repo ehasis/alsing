@@ -18,11 +18,5 @@ namespace MyBlog.Domain.Entities
         public virtual int Id { get; set; }
     
         public virtual string Title { get; set; }
-    
-        public virtual IEnumerable<Post> Posts{ get { return _posts; } }
-        private List<Post> _posts = new List<Post>();
-    
-        public virtual IEnumerable<Category> Categories{ get { return _categories; } }
-        private List<Category> _categories = new List<Category>();
     }
 }

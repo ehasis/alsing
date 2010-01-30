@@ -21,9 +21,6 @@ namespace MyBlog.Domain.Entities
     
         public virtual int BlogId { get; set; }
     
-        public virtual IEnumerable<Post> Posts{ get { return _posts; } }
-        private List<Post> _posts = new List<Post>();
-    
     
         public virtual Blog Blog{ get; set; }
     }
