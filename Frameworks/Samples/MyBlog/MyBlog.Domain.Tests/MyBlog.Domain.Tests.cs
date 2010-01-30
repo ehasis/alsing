@@ -32,8 +32,10 @@
         [TestMethod]
         public void Can_add_new_post()
         {
+           
             var ws = new InMemWorkspace();
-            var postAboutAOP = new Post();
+            var blog = GetDefaultBlog();
+            var postAboutAOP = new Post(blog);
             postAboutAOP.Edit("AOP for dummies", "...");
             ws.ClearUoW();
 
@@ -45,13 +47,18 @@
             Assert.AreEqual(1, ws.GetAddedEntityCount<Post>());
         }
 
+        private Blog GetDefaultBlog()
+        {
+            return new Blog();
+        }
+
         [TestMethod]
         public void Can_approve_comment()
         {
             var ws = new InMemWorkspace();
             IMessageBus messageBus = GetMessageBus(ws);
-
-            var post = new Post();
+            var blog = GetDefaultBlog();
+            var post = new Post(blog);
             post.Edit("AOP for dummies", "...");
             post.Publish();
             post.EnableComments();
@@ -70,7 +77,8 @@
         {
             var category = new Category("C#");
 
-            var post = new Post();
+            var blog = GetDefaultBlog();
+            var post = new Post(blog);
             post.AssignCategory(category);
 
             Assert.AreEqual(1, post.Categories.Count());
@@ -79,7 +87,8 @@
         [TestMethod]
         public void Can_edit_post()
         {
-            var post = new Post();
+            var blog = GetDefaultBlog();
+            var post = new Post(blog);
             const string expectedSubject = "AOP for dummies";
             const string expectedBody = "...";
 
@@ -92,7 +101,8 @@
         public void Can_find_post_by_id()
         {
             var ws = new InMemWorkspace();
-            var postAboutAOP = new Post();
+            var blog = GetDefaultBlog();
+            var postAboutAOP = new Post(blog);
             postAboutAOP.Edit("AOP for dummies", "...");
             ws.Add(postAboutAOP);
 
@@ -173,7 +183,8 @@
             var ws = new InMemWorkspace();
             IMessageBus messageBus = GetMessageBus(ws);
 
-            var post = new Post();
+            var blog = GetDefaultBlog();
+            var post = new Post(blog);
             post.Edit("AOP for dummies", "...");
             post.Publish();
 
@@ -194,7 +205,8 @@
                 //hold the number of sent CommentApprovedNotification
                 messageBus.RegisterHandler<ApprovedCommentEvent>(MessageHandlerType.Synchronous, commentApproved => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
 
-                var post = new Post();
+                var blog = GetDefaultBlog();
+                var post = new Post(blog);
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -230,7 +242,8 @@
                 //hold the number of sent CommentNotifications
                 messageBus.RegisterHandler<RepliedToPostEvent>(MessageHandlerType.Synchronous, commentCreated => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
 
-                var post = new Post();
+                var blog = GetDefaultBlog();
+                var post = new Post(blog);
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -253,7 +266,8 @@
         {
             var ws = new InMemWorkspace();
 
-            var post = new Post();
+            var blog = GetDefaultBlog();
+            var post = new Post(blog);
             post.Edit("AOP for dummies", "...");
             post.Publish();
 
@@ -276,7 +290,8 @@
             var ws = new InMemWorkspace();
             IMessageBus messageBus = GetMessageBus(ws);
 
-            var post = new Post();
+            var blog = GetDefaultBlog();
+            var post = new Post(blog);
             post.Edit("AOP for dummies", "...");
             post.Publish();
             post.EnableComments();

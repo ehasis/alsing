@@ -20,7 +20,7 @@ namespace MyBlog.Commands
 
                 context.Workspace.Commit();
                 scope.Complete();
-            }        
+            }
         }
 
         public void EditPost(int postId, string subject, string body)
@@ -28,7 +28,8 @@ namespace MyBlog.Commands
             Apply(c => c
                 .Posts
                 .FindById(postId)
-                .Edit(subject,body));
+                .Edit(subject, body)
+                );
         }
 
         public void ReplyToPost(int postId, string userName, string userEmail, string userWebsite, string comment)
@@ -36,7 +37,8 @@ namespace MyBlog.Commands
             Apply(c => c
                 .Posts
                 .FindById(postId)
-                .ReplyTo(userName, userEmail, userWebsite, comment));
+                .ReplyTo(userName, userEmail, userWebsite, comment)
+                );
         }
 
         public void Publish(int postId)
@@ -44,7 +46,8 @@ namespace MyBlog.Commands
             Apply(c => c
                 .Posts
                 .FindById(postId)
-                .Publish());
+                .Publish()
+                );
         }
 
         public void Unpublish(int postId)
@@ -52,7 +55,8 @@ namespace MyBlog.Commands
             Apply(c => c
                 .Posts
                 .FindById(postId)
-                .Unpublish());
+                .Unpublish()
+                );
         }
 
         public void EnableComments(int postId)
@@ -73,7 +77,7 @@ namespace MyBlog.Commands
                  );
         }
 
-        public void AssignCategory(int postId,int categoryId)
+        public void AssignCategory(int postId, int categoryId)
         {
             Apply(c => c
                  .Posts

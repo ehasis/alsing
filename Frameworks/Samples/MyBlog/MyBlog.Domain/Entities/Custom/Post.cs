@@ -7,15 +7,24 @@ using MyBlog.Domain.Events;
 
 namespace MyBlog.Domain.Entities
 {
-    public partial class Post 
+    public partial class Post
     {
-         public void ReplyTo(string userName,string userEmail,string userWebsite,string text)
+        private Post()
+        {
+        }
+
+        public Post(Blog belongsToBlog)
+        {
+            this.Blog = belongsToBlog;
+        }
+
+        public void ReplyTo(string userName, string userEmail, string userWebsite, string text)
         {
             var userInfo = new UserInfo(userName, userEmail, userWebsite);
             var comment = new Comment(this, userInfo, text);
             _comments.Add(comment);
 
-            DomainEvents.Raise(new RepliedToPostEvent(this,comment));
+            DomainEvents.Raise(new RepliedToPostEvent(this, comment));
         }
 
         public void Edit(string subject, string body)
