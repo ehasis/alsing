@@ -7,12 +7,13 @@ namespace MyBlog.Domain.Entities
 {
     public partial class Category
     {
-        private Category()
+        protected Category()
         {
         }
 
-        public Category(string name)
+        public Category(Blog belongsToBlog, string name)
         {
+            this.Blog = belongsToBlog;
             this.Name = name;
         }
     }

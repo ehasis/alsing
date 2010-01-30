@@ -9,7 +9,7 @@ namespace MyBlog.Domain.Entities
 {
     public partial class Comment
     {
-        private Comment()
+        protected Comment()
         {
         }
 

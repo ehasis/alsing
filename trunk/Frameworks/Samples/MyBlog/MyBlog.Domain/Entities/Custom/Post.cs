@@ -9,7 +9,7 @@ namespace MyBlog.Domain.Entities
 {
     public partial class Post
     {
-        private Post()
+        protected Post()
         {
         }
 

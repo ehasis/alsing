@@ -56,7 +56,7 @@
         public void Can_approve_comment()
         {
             var ws = new InMemWorkspace();
-            IMessageBus messageBus = GetMessageBus(ws);
+            IMessageBus messageBus = GetMessageBus();
             var blog = GetDefaultBlog();
             var post = new Post(blog);
             post.Edit("AOP for dummies", "...");
@@ -75,9 +75,8 @@
         [TestMethod]
         public void Can_assign_category_to_post()
         {
-            var category = new Category("C#");
-
             var blog = GetDefaultBlog();
+            var category = new Category(blog,"C#");
             var post = new Post(blog);
             post.AssignCategory(category);
 
@@ -181,7 +180,7 @@
         public void Can_not_reply_to_post_when_comments_are_disabled()
         {
             var ws = new InMemWorkspace();
-            IMessageBus messageBus = GetMessageBus(ws);
+            IMessageBus messageBus = GetMessageBus();
 
             var blog = GetDefaultBlog();
             var post = new Post(blog);
@@ -197,7 +196,7 @@
         public void Can_publish_approved_comment_notifications()
         {
             var ws = new InMemWorkspace();
-            IMessageBus messageBus = GetMessageBus(ws);
+            IMessageBus messageBus = GetMessageBus();
             int numberOfSentNotifications = 0;
             using (var scope = new TransactionScope())
             {
@@ -234,7 +233,7 @@
         public void Can_publish_comment_notifications()
         {
             var ws = new InMemWorkspace();
-            IMessageBus messageBus = GetMessageBus(ws);
+            IMessageBus messageBus = GetMessageBus();
             int numberOfSentNotifications = 0;
             using (var scope = new TransactionScope())
             {
@@ -288,7 +287,7 @@
         public void Can_reply_to_post_when_comments_are_enabled()
         {
             var ws = new InMemWorkspace();
-            IMessageBus messageBus = GetMessageBus(ws);
+            IMessageBus messageBus = GetMessageBus();
 
             var blog = GetDefaultBlog();
             var post = new Post(blog);
@@ -304,12 +303,21 @@
             Assert.AreEqual(1, post.Comments.Count());
         }
 
-        private static IMessageBus GetMessageBus(IWorkspace ws)
+        private static IMessageBus GetMessageBus()
         {
             var messageBus = new MessageBus();
             DomainEvents.BeginNewScope(messageBus);
 
             return messageBus;
         }
+
+        //private static BlogContext GetNewBlogContext()
+        //{
+        //    var messageBus = GetMessageBus();
+        //    var workspace = new InMemWorkspace();
+        //    DomainEvents.BeginNewScope(messageBus);
+
+        //    return new BlogContext(workspace, messageBus);           
+        //}
     }
 }

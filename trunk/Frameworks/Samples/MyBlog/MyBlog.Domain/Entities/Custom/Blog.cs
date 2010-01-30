@@ -7,9 +7,16 @@ namespace MyBlog.Domain.Entities
 {
     public partial class Blog
     {
-        public void AddCategory(string name)
+        public Category NewCategory(string name)
         {
-            var category = new Category(name);
+            var category = new Category(this,name);
+            return category;
+        }
+
+        public Post NewPost()
+        {
+            var post = new Post(this);
+            return post;
         }
     }
 }

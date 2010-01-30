@@ -18,6 +18,9 @@ namespace MyBlog.Domain.Events
 
         public static void Raise<T>(T @event) where T : class,IMessage
         {
+            if (messageSink == null)
+                throw new Exception("There is no active event scope, call BeginNewScope(messageSink) first!");
+
             messageSink.Send(@event);
         }
     }
