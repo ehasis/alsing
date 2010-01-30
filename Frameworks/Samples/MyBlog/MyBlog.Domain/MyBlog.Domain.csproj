@@ -124,6 +124,7 @@
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\DomainException.cs" />
+    <Compile Include="Repositories\BlogRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

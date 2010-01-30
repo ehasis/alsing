@@ -8,7 +8,8 @@
 
     public class CategoryRepository : Repository<Category>
     {
-        public CategoryRepository(IWorkspace workspace) : base(workspace)
+        public CategoryRepository(IWorkspace workspace)
+            : base(workspace)
         {
         }
 
