@@ -5,11 +5,13 @@ namespace MyBlog.Domain.Events
 
     public class RepliedToPost : IMessage
     {
-        public RepliedToPost(Comment comment)
+        public RepliedToPost(Post post,Comment comment)
         {
+            this.Post = post;
             this.Comment = comment;
         }
 
+        public Post Post { get; set; }
         public Comment Comment { get; private set; }
     }
 }

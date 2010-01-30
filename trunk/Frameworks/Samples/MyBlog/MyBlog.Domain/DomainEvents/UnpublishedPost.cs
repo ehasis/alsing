@@ -14,6 +14,6 @@ namespace MyBlog.Domain.Events
             this.Post = post;
         }
 
-        public Post Post { get; set; }
+        public Post Post { get;private set; }
     }
 }

@@ -84,16 +84,20 @@
     <Compile Include="DomainEvents\EnabledComments.cs" />
     <Compile Include="DomainEvents\PublishedPost.cs" />
     <Compile Include="DomainEvents\UnpublishedPost.cs" />
+    <Compile Include="DomainEvents\ApprovedComment.cs" />
+    <Compile Include="DomainEvents\RepliedToPost.cs" />
+    <Compile Include="Constants\Constants.cs" />
+    <Compile Include="BlogContext.cs" />
+    <Compile Include="Entities\Blog.cs">
+      <DependentUpon>Model1.Types.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Category.cs">
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Comment.cs">
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
-    <Compile Include="DomainEvents\ApprovedComment.cs" />
-    <Compile Include="DomainEvents\RepliedToPost.cs" />
-    <Compile Include="Constants\Constants.cs" />
-    <Compile Include="BlogContext.cs" />
+    <Compile Include="Entities\Custom\Blog.cs" />
     <Compile Include="Entities\Custom\Category.cs" />
     <Compile Include="Entities\Custom\Comment.cs" />
     <Compile Include="Entities\Custom\Post.cs" />
@@ -113,14 +117,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyBlogModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Post.cs">
+      <DependentUpon>Model1.Types.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\UserInfo.cs">
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\DomainException.cs" />
-    <Compile Include="Entities\Post.cs">
-      <DependentUpon>Model1.Types.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Repositories\PostCategoryRepository.cs" />
+    <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
