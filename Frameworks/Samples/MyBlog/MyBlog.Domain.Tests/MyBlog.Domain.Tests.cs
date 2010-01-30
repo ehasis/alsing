@@ -10,7 +10,6 @@
     using Alsing.Workspace;
 
     using Domain;
-    using Domain.Repositories;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using MyBlog.Domain.Entities;
@@ -35,8 +34,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDefaultBlog();
-                var postAboutAOP = new Post(blog);
+                var blog = GetDummyBlog();
+                var postAboutAOP = blog.NewPost();
                 postAboutAOP.Edit("AOP for dummies", "...");
                 ws.ClearUoW();
 
@@ -53,8 +52,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDefaultBlog();
-                var post = new Post(blog);
+                var blog = GetDummyBlog();
+                var post = blog.NewPost();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -75,9 +74,9 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDefaultBlog();
-                var category = new Category(blog, "C#");
-                var post = new Post(blog);
+                var blog = GetDummyBlog();
+                var category = blog.NewCategory("C#");
+                var post = blog.NewPost();
                 post.AssignCategory(category);
 
                 Assert.AreEqual(1, post.Categories.Count());
@@ -90,8 +89,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDefaultBlog();
-                var post = new Post(blog);
+                var blog = GetDummyBlog();
+                var post = blog.NewPost();
                 const string expectedSubject = "AOP for dummies";
                 const string expectedBody = "...";
 
@@ -107,8 +106,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDefaultBlog();
-                var postAboutAOP = new Post(blog);
+                var blog = GetDummyBlog();
+                var postAboutAOP = blog.NewPost();
                 postAboutAOP.Edit("AOP for dummies", "...");
                 ws.Add(postAboutAOP);
 
@@ -128,8 +127,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDefaultBlog();
-                var post = new Post(blog);
+                var blog = GetDummyBlog();
+                var post = blog.NewPost();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
 
@@ -151,8 +150,8 @@
                 //hold the number of sent CommentApprovedNotification
                 context.MessageBus.RegisterHandler<ApprovedCommentEvent>(MessageHandlerType.Synchronous, commentApproved => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
 
-                var blog = GetDefaultBlog();
-                var post = new Post(blog);
+                var blog = GetDummyBlog();
+                var post = blog.NewPost();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -188,8 +187,8 @@
                 //hold the number of sent CommentNotifications
                 context.MessageBus.RegisterHandler<RepliedToPostEvent>(MessageHandlerType.Synchronous, commentCreated => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
 
-                var blog = GetDefaultBlog();
-                var post = new Post(blog);
+                var blog = GetDummyBlog();
+                var post = blog.NewPost();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -214,8 +213,8 @@
             var ws = new InMemWorkspace();
             using(var context = GetDomainContext(ws))
             {
-                var blog = GetDefaultBlog();
-                var post = new Post(blog);
+                var blog = GetDummyBlog();
+                var post = blog.NewPost();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
 
@@ -237,8 +236,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDefaultBlog();
-                var post = new Post(blog);
+                var blog = GetDummyBlog();
+                var post = blog.NewPost();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -252,9 +251,12 @@
             }
         }
 
-        private Blog GetDefaultBlog()
+        private Blog GetDummyBlog()
         {
-            return new Blog();
+            var blog = new Blog();
+            blog.Edit(title: "Dummy");
+            
+            return blog;
         }
 
         private static IMessageBus GetMessageBus()
