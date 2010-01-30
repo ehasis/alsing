@@ -171,7 +171,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Posts" Relationship="MyBlogModel.PostCategoryLinks" FromRole="Categories" ToRole="Posts" />
           <Property Type="Int32" Name="BlogId" Nullable="false" />
           <NavigationProperty Name="Blog" Relationship="MyBlogModel.FK_Categories_Blogs" FromRole="Category" ToRole="Blog" />
         </EntityType>
@@ -228,8 +227,7 @@
             <PropertyRef Name="Id" /></Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Posts" Relationship="MyBlogModel.FK_Posts_Blogs" FromRole="Blog" ToRole="Post" />
-          <NavigationProperty Name="Categories" Relationship="MyBlogModel.FK_Categories_Blogs" FromRole="Blog" ToRole="Category" /></EntityType>
+          </EntityType>
         <Association Name="FK_Posts_Blogs">
           <End Type="MyBlogModel.Blog" Role="Blog" Multiplicity="1" />
           <End Type="MyBlogModel.Post" Role="Post" Multiplicity="*" />
@@ -313,19 +311,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="MyBlogModel">
-        <EntityTypeShape EntityType="MyBlogModel.Category" Width="1.5" PointX="5.25" PointY="1" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyBlogModel.Category" Width="1.5" PointX="5.25" PointY="1" Height="1.787985026041667" IsExpanded="true" />
         <EntityTypeShape EntityType="MyBlogModel.Comment" Width="1.5" PointX="5.25" PointY="3.375" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="MyBlogModel.Post" Width="1.5" PointX="3" PointY="1.875" Height="3.1340950520833322" IsExpanded="true" />
         <AssociationConnector Association="MyBlogModel.FK_BlogPostReply_BlogPost" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="4.1920475260416659" />
           <ConnectorPoint PointX="5.25" PointY="4.1920475260416659" /></AssociationConnector>
         <AssociationConnector Association="MyBlogModel.PostCategoryLinks" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="2.4276432291666663" />
-          <ConnectorPoint PointX="5.25" PointY="2.4276432291666663" /></AssociationConnector>
-        <EntityTypeShape EntityType="MyBlogModel.Blog" Width="1.5" PointX="0.75" PointY="2.625" Height="1.5956835937499996" />
+          <ConnectorPoint PointX="4.5" PointY="2.3314925130208337" />
+          <ConnectorPoint PointX="5.25" PointY="2.3314925130208337" /></AssociationConnector>
+        <EntityTypeShape EntityType="MyBlogModel.Blog" Width="1.5" PointX="0.75" PointY="2.625" Height="1.4033821614583326" />
         <AssociationConnector Association="MyBlogModel.FK_Posts_Blogs" >
-          <ConnectorPoint PointX="2.25" PointY="3.5189925130208328" />
-          <ConnectorPoint PointX="3" PointY="3.5189925130208328" /></AssociationConnector>
+          <ConnectorPoint PointX="2.25" PointY="3.3266910807291663" />
+          <ConnectorPoint PointX="3" PointY="3.3266910807291663" /></AssociationConnector>
         <AssociationConnector Association="MyBlogModel.FK_Categories_Blogs" >
           <ConnectorPoint PointX="1.5" PointY="2.625" />
           <ConnectorPoint PointX="1.5" PointY="1.40625" />
