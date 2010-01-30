@@ -6,7 +6,7 @@ using Alsing.Workspace;
 using Alsing.Messaging;
 using MyBlog.Domain.Repositories;
 
-namespace MyBlog.Commands
+namespace MyBlog.Domain.Entities
 {
     public class BlogContext : IDisposable
     {

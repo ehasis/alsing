@@ -5,6 +5,7 @@ using System.Text;
 using System.Transactions;
 using MyBlog.Domain.Repositories;
 using MyBlog.Domain.Entities;
+using MyBlog.Domain;
 
 namespace MyBlog.Commands
 {
@@ -13,14 +14,21 @@ namespace MyBlog.Commands
         private void Apply(Action<BlogContext> action)
         {
             using (TransactionScope scope = new TransactionScope())
-            using (var context = Config.GetContext())
+            using (var context = Config.GetNewBlogContext())
             {
-
                 action(context);
 
                 context.Workspace.Commit();
                 scope.Complete();
             }        
+        }
+
+        public void EditPost(int postId, string subject, string body)
+        {
+            Apply(c => c
+                .Posts
+                .FindById(postId)
+                .Edit(subject,body));
         }
 
         public void ReplyToPost(int postId, string userName, string userEmail, string userWebsite, string comment)
