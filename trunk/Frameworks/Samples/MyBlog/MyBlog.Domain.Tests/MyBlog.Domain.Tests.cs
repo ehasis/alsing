@@ -55,13 +55,11 @@
             post.Edit("AOP for dummies", "...");
             post.Publish();
             post.EnableComments();
-            post.MessageSink = messageBus;
             Assert.AreEqual(0, post.Comments.Count());
 
             post.ReplyTo( "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
 
             Comment comment = post.Comments.First();
-            comment.MessageSink = messageBus;
             comment.Approve();
 
             Assert.IsTrue(comment.Approved);
@@ -178,7 +176,6 @@
             var post = new Post();
             post.Edit("AOP for dummies", "...");
             post.Publish();
-            post.MessageSink = messageBus;
 
             Assert.AreEqual(0, post.Comments.Count());
 
@@ -201,13 +198,11 @@
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
-                post.MessageSink = messageBus;
                 Assert.AreEqual(0, post.Comments.Count());
 
                 post.ReplyTo( "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
 
                 Comment comment = post.Comments.First();
-                comment.MessageSink = messageBus;
 
                 comment.Approve();
 
@@ -239,7 +234,6 @@
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
-                post.MessageSink = messageBus;
                 //pass the DomainEvent container to the method so we can raise domain events in the current context.
                 post.ReplyTo( "Roger Alsing", "roger.alsing@precio.se", "http://www.rogeralsing.com", "Hi there");
 
@@ -286,7 +280,6 @@
             post.Edit("AOP for dummies", "...");
             post.Publish();
             post.EnableComments();
-            post.MessageSink = messageBus;
 
             Assert.AreEqual(0, post.Comments.Count());
 
@@ -299,6 +292,7 @@
         private static IMessageBus GetMessageBus(IWorkspace ws)
         {
             var messageBus = new MessageBus();
+            DomainEvents.BeginNewScope(messageBus);
 
             return messageBus;
         }

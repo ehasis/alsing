@@ -2,23 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MyBlog.Domain.DomainEvents;
 using Alsing.Messaging;
 using MyBlog.Domain.Events;
 
 namespace MyBlog.Domain.Entities
 {
-    public partial class Comment : IDomainEventAware
+    public partial class Comment
     {
-        public IMessageSink MessageSink { get; set; }
-
-        public Comment()
+        private Comment()
         {
         }
 
         public Comment(Post post, UserInfo userInfo, string text)
         {
-            // TODO: Complete member initialization
             this.Post = post;
             this.UserInfo = userInfo;
             this.Body = text;
@@ -30,7 +26,7 @@ namespace MyBlog.Domain.Entities
             this.Approved = true;
 
             var message = new ApprovedComment(this);
-            MessageSink.Send(message);
+            DomainEvents.Raise(message);
         }
     }
 }

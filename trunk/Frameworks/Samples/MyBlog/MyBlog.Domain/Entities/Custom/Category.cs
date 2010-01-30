@@ -7,9 +7,10 @@ namespace MyBlog.Domain.Entities
 {
     public partial class Category
     {
-        public Category()
+        private Category()
         {
         }
+
         public Category(string name)
         {
             this.Name = name;

@@ -77,7 +77,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainEvents\IDomainEventAware.cs" />
+    <Compile Include="DomainEvents\AssignedCategoryToPost.cs" />
+    <Compile Include="DomainEvents\DisabledComments.cs" />
+    <Compile Include="DomainEvents\DomainEvents.cs" />
+    <Compile Include="DomainEvents\EditedPost.cs" />
+    <Compile Include="DomainEvents\EnabledComments.cs" />
+    <Compile Include="DomainEvents\PublishedPost.cs" />
+    <Compile Include="DomainEvents\UnpublishedPost.cs" />
     <Compile Include="Entities\Category.cs">
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
@@ -87,6 +93,7 @@
     <Compile Include="DomainEvents\ApprovedComment.cs" />
     <Compile Include="DomainEvents\RepliedToPost.cs" />
     <Compile Include="Constants\Constants.cs" />
+    <Compile Include="BlogContext.cs" />
     <Compile Include="Entities\Custom\Category.cs" />
     <Compile Include="Entities\Custom\Comment.cs" />
     <Compile Include="Entities\Custom\Post.cs" />

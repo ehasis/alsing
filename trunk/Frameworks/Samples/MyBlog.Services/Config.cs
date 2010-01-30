@@ -11,24 +11,17 @@ using MyBlog.Domain.Events;
 using MyBlog.Domain.Entities;
 using System.Data.SqlClient;
 using System.Data.EntityClient;
-using MyBlog.Domain.DomainEvents;
 
 namespace MyBlog.Commands
 {
     public static class Config
     {
-        public static BlogContext GetContext()
+        public static BlogContext GetNewBlogContext()
         {
             var context = new Entities();
             var messageBus = GetMessageBus();
+            DomainEvents.BeginNewScope(messageBus);
             var workspace = GetDomainWorkspace(context);
-
-            context.ObjectMaterialized += (s, e) =>
-            {
-                var entity = e.Entity as IDomainEventAware;
-                if (entity != null)
-                    entity.MessageSink = messageBus;
-            };
 
             return new BlogContext(workspace,messageBus);
         }
