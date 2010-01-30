@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Alsing.Messaging;
 using MyBlog.Domain.Entities;
+using Alsing.Messaging;
 
 namespace MyBlog.Domain.Events
 {
-    public class DisabledComments : IMessage
+    public class UnpublishedPostEvent : IMessage
     {
-        public DisabledComments(Post post)
+        public UnpublishedPostEvent(Post post)
         {
             this.Post = post;
         }
 
-        public Post Post { get; private set; }
+        public Post Post { get;private set; }
     }
 }

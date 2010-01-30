@@ -7,16 +7,13 @@ using MyBlog.Domain.Entities;
 
 namespace MyBlog.Domain.Events
 {
-    public class AssignedCategoryToPost : IMessage
+    public class EnabledCommentsEvent : IMessage
     {
-        public AssignedCategoryToPost(Post post,Category category)
+        public EnabledCommentsEvent(Post post)
         {
             this.Post = post;
-            this.Category = category;
         }
 
         public Post Post { get;private set; }
-
-        public Category Category { get;private set; }
     }
 }

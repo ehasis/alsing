@@ -57,8 +57,8 @@ namespace MyBlog.Commands
             var messageBus = new MessageBus();
 
             messageBus.RegisterHandler<FailedMessage>(MessageHandlerType.Synchronous, OnFailMessage, false);
-            messageBus.RegisterHandler<RepliedToPost>(MessageHandlerType.Asynchronous, OnRepliedToPost, true);
-            messageBus.RegisterHandler<ApprovedComment>(MessageHandlerType.Asynchronous, OnApprovedComment, true);
+            messageBus.RegisterHandler<RepliedToPostEvent>(MessageHandlerType.Asynchronous, OnRepliedToPost, true);
+            messageBus.RegisterHandler<ApprovedCommentEvent>(MessageHandlerType.Asynchronous, OnApprovedComment, true);
 
             return messageBus;
         }
@@ -69,13 +69,13 @@ namespace MyBlog.Commands
         }
 
 
-        private static void OnRepliedToPost(RepliedToPost commentCreated)
+        private static void OnRepliedToPost(RepliedToPostEvent commentCreated)
         {
             Trace.Write("comment created handled");
             Debug.Write("comment created handled");
         }
 
-        private static void OnApprovedComment(ApprovedComment commentApproved)
+        private static void OnApprovedComment(ApprovedCommentEvent commentApproved)
         {
 
         }

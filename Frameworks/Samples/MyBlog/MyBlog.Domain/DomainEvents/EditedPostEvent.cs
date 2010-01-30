@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MyBlog.Domain.Entities;
 using Alsing.Messaging;
+using MyBlog.Domain.Entities;
 
 namespace MyBlog.Domain.Events
 {
-    public class UnpublishedPost : IMessage
+    public class EditedPostEvent : IMessage
     {
-        public UnpublishedPost(Post post)
+        public EditedPostEvent(Post post)
         {
             this.Post = post;
         }
 
-        public Post Post { get;private set; }
+        public Post Post { get;private  set; }
     }
 }
