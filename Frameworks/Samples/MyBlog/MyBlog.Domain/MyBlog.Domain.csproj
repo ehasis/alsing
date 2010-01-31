@@ -83,6 +83,7 @@
     <Compile Include="DomainEvents\EditedPostEvent.cs" />
     <Compile Include="DomainEvents\EnabledCommentsEvent.cs" />
     <Compile Include="DomainEvents\PostCreated.cs" />
+    <Compile Include="DomainEvents\PostDeleted.cs" />
     <Compile Include="DomainEvents\PublishedPostEvent.cs" />
     <Compile Include="DomainEvents\UnpublishedPostEvent.cs" />
     <Compile Include="DomainEvents\ApprovedCommentEvent.cs" />

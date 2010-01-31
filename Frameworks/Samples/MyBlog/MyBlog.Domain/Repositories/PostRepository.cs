@@ -19,6 +19,8 @@ namespace MyBlog.Domain.Repositories
             this
                     .workspace
                     .Add(post);
+
+            DomainEvents.Raise(new PostCreated(post));
         }
 
         public Post FindById(int postId)
@@ -34,6 +36,8 @@ namespace MyBlog.Domain.Repositories
             this
                     .workspace
                     .Remove(post);
+
+            DomainEvents.Raise(new PostDeleted(post));
         }
     }
 }
