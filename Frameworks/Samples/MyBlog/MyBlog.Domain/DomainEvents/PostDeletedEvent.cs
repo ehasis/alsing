@@ -7,9 +7,9 @@ using MyBlog.Domain.Entities;
 
 namespace MyBlog.Domain.Events
 {
-    public class PostDeleted : IMessage
+    public class PostDeletedEvent : IMessage
     {
-        public PostDeleted(Post post)
+        public PostDeletedEvent(Post post)
         {
             this.Post = post;
         }
