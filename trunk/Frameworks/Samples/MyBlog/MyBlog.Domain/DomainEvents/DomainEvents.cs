@@ -8,46 +8,51 @@ namespace MyBlog.Domain.Events
 {
     public static class DomainEvents
     {
+        public static void Raise<T>(T @event) where T : class,IMessage
+        {
+            DomainEventScope.Raise(@event);
+        }
+    }
+
+    public class DomainEventScope : IDisposable
+    {
         [ThreadStatic]
         private static IMessageSink messageSink;
 
-        public static void BeginScope(IMessageSink messageSink)
+        private static void BeginScope(IMessageSink messageSink)
         {
-            DomainEvents.messageSink = messageSink;
+            DomainEventScope.messageSink = messageSink;
         }
 
-        public static void EndScope()
+        private static void EndScope()
         {
-            DomainEvents.messageSink = null;
+            DomainEventScope.messageSink = null;
         }
 
-        public static bool IsInScope()
+        private static bool IsInScope()
         {
             return messageSink != null;
         }
 
         public static void Raise<T>(T @event) where T : class,IMessage
         {
-            if (messageSink == null)
+            if (IsInScope() == false)
                 throw new Exception("There is no active event scope, call BeginNewScope(messageSink) first!");
 
             messageSink.Send(@event);
         }
-    }
 
-    public class DomainEventScope : IDisposable
-    {
         public DomainEventScope(IMessageSink messageSink)
         {
-            if (DomainEvents.IsInScope())
+            if (IsInScope())
                 throw new Exception("Nested scopes are not supported");
 
-            DomainEvents.BeginScope(messageSink);
+            BeginScope(messageSink);
         }
 
         public void Dispose()
         {
-            DomainEvents.EndScope();
+            EndScope();
         }
     }
 }

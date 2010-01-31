@@ -16,8 +16,6 @@ namespace MyBlog.Domain.Entities
         public Post(Blog belongsToBlog)
         {
             this.Blog = belongsToBlog;
-
-            DomainEvents.Raise(new PostCreated(this));
         }
 
         public void ReplyTo(string userName, string userEmail, string userWebsite, string text)
