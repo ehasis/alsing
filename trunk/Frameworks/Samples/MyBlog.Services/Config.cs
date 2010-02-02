@@ -55,9 +55,13 @@ namespace MyBlog.Commands
         {
             var persistedEventBus = new MessageBus();
 
+            //application handlers
+
             persistedEventBus.RegisterHandler<RepliedToPostEvent>(MessageHandlerType.Synchronous, OnRepliedToPost, true);
             persistedEventBus.RegisterHandler<ApprovedCommentEvent>(MessageHandlerType.Synchronous, OnApprovedComment, true);
             persistedEventBus.RegisterHandler<FailedMessage>(MessageHandlerType.Synchronous, OnFailMessage, false);
+
+            //sync handlers
 
             persistedEventBus.RegisterHandler<RepliedToPostEvent>(MessageHandlerType.Synchronous, e => UpdateComment( e.Comment), true);
             persistedEventBus.RegisterHandler<ApprovedCommentEvent>(MessageHandlerType.Synchronous, e => UpdateComment( e.Comment), true);
