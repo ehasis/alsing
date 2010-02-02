@@ -21,38 +21,25 @@ namespace MyBlog.Commands
         public static DomainContext GetBlogContext()
         {
             var dataContext = new Entities();
-            var messageBus = GetMessageBus();
+            var earlyEventBus = GetMessageBus();
+            var persistentEventBus = new MessageBus();
             var workspace = GetDomainWorkspace(dataContext);
 
-            //workspace.Committing += (s, e) =>
-            //    {
-            //        var added = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added);
-            //        var deleted = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Deleted);
-            //        var modified = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified);
+            earlyEventBus
+                .AsObservable<IDomainEvent>()
+                .Where(e =>
+                    {
+                        ObjectStateEntry entry;
+                        return dataContext.ObjectStateManager.TryGetObjectStateEntry(e.Sender, out entry);
+                    })
+                .Do(e => persistentEventBus.Send(e))
+                .Subscribe();
 
-            //        Console.WriteLine("ds");
-            //    };
-
-            AddHandler<RepliedToPostEvent>(dataContext, messageBus, workspace, e => Console.WriteLine(e));
-
-            var context = new DomainContext(workspace,messageBus);
+            var context = new DomainContext(workspace, earlyEventBus, persistentEventBus);
 
             return context;
         }
 
-        private static void AddHandler<T>(Entities dataContext, IMessageBus messageBus, IWorkspace workspace, Action<T> action) where T:class,IDomainEvent
-        {
-            messageBus
-                .RegisterHandler<T>(MessageHandlerType.Synchronous, e => workspace.Committing += (s, ea) =>
-                {
-                    ObjectStateEntry entry;
-                    if (dataContext.ObjectStateManager.TryGetObjectStateEntry(e.Sender, out entry))
-                    {
-                        action(e);
-                    }
-                }
-            , false);
-        }
         
 
         public static IWorkspace GetDomainWorkspace(Entities context)
