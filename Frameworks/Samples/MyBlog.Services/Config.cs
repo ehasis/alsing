@@ -40,8 +40,8 @@ namespace MyBlog.Commands
                 {
                     committed = true;
                 };
-
             
+            //handler for phase 1
             messageBus
                 .AsObservable<IDomainEvent>()
                 .Where(_ => committed == false)
@@ -57,6 +57,7 @@ namespace MyBlog.Commands
                     })
                 .Subscribe();
 
+            //handler for phase 2
             messageBus
                 .AsObservable<RepliedToPostEvent>()
                 .Where(_ => committed)
