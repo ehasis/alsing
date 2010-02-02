@@ -79,11 +79,13 @@
   <ItemGroup>
     <Compile Include="DomainEvents\AssignedCategoryToPostEvent.cs" />
     <Compile Include="DomainEvents\DisabledCommentsEvent.cs" />
+    <Compile Include="DomainEvents\DomainEventArgs.cs" />
     <Compile Include="DomainEvents\DomainEvents.cs" />
     <Compile Include="DomainEvents\EditedPostEvent.cs" />
     <Compile Include="DomainEvents\EnabledCommentsEvent.cs" />
-    <Compile Include="DomainEvents\PostCreated.cs" />
-    <Compile Include="DomainEvents\PostDeleted.cs" />
+    <Compile Include="DomainEvents\IDomainEvent.cs" />
+    <Compile Include="DomainEvents\PostCreatedEvent.cs" />
+    <Compile Include="DomainEvents\PostDeletedEvent.cs" />
     <Compile Include="DomainEvents\PublishedPostEvent.cs" />
     <Compile Include="DomainEvents\UnpublishedPostEvent.cs" />
     <Compile Include="DomainEvents\ApprovedCommentEvent.cs" />

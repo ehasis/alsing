@@ -7,7 +7,7 @@ using MyBlog.Domain.Entities;
 
 namespace MyBlog.Domain.Events
 {
-    public class DisabledCommentsEvent : IMessage
+    public class DisabledCommentsEvent : IDomainEvent
     {
         public DisabledCommentsEvent(Post post)
         {
@@ -15,5 +15,14 @@ namespace MyBlog.Domain.Events
         }
 
         public Post Post { get; private set; }
+
+        #region IDomainEvent Members
+
+        public object Sender
+        {
+            get { return Post; }
+        }
+
+        #endregion
     }
 }

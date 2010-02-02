@@ -7,7 +7,7 @@ using MyBlog.Domain.Entities;
 
 namespace MyBlog.Domain.Events
 {
-    public class PostCreatedEvent : IMessage
+    public class PostCreatedEvent : IDomainEvent
     {
         public PostCreatedEvent(Post post)
         {
@@ -15,5 +15,14 @@ namespace MyBlog.Domain.Events
         }
 
         public Post Post { get;private  set; }
+
+        #region IDomainEvent Members
+
+        public object Sender
+        {
+            get { return Post; }
+        }
+
+        #endregion
     }
 }

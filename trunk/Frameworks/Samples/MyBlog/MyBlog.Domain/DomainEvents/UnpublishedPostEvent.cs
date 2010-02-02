@@ -7,7 +7,7 @@ using Alsing.Messaging;
 
 namespace MyBlog.Domain.Events
 {
-    public class UnpublishedPostEvent : IMessage
+    public class UnpublishedPostEvent : IDomainEvent
     {
         public UnpublishedPostEvent(Post post)
         {
@@ -15,5 +15,14 @@ namespace MyBlog.Domain.Events
         }
 
         public Post Post { get;private set; }
+
+        #region IDomainEvent Members
+
+        public object Sender
+        {
+            get { return Post; }
+        }
+
+        #endregion
     }
 }
