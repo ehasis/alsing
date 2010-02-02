@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 using System.Data.EntityClient;
 using Alsing.Transactional;
 using System.Data.Objects;
+using MyBlog.Commands.Services;
 
 namespace MyBlog.Commands
 {
@@ -21,30 +22,15 @@ namespace MyBlog.Commands
         public static DomainContext GetBlogContext()
         {
             var dataContext = new Entities();
-            var messageBus = GetMessageBus();
+            var messageBus = new MessageBus();
             var workspace = GetDomainWorkspace(dataContext);
 
-
-            //workspace.Committing += (s, e) =>
-            //    {
-            //        var added = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added);
-            //        var deleted = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Deleted);
-            //        var modified = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified);
-
-            //        Console.WriteLine("ds");
-            //    };
+            var persistedEventBus = new MessageBus();
             
-            bool committed = false;
-
-            workspace.Committing += (s, ea) =>
-                {
-                    committed = true;
-                };
             
             //handler for phase 1
             messageBus
                 .AsObservable<IDomainEvent>()
-                .Where(_ => committed == false)
                 .Do(e =>
                     workspace.Committing += (s, ea) =>
                     {
@@ -52,25 +38,26 @@ namespace MyBlog.Commands
                         if (dataContext.ObjectStateManager.TryGetObjectStateEntry(e.Sender, out entry))
                         {
                             //resend the same event after commit
-                            messageBus.Send(e);
+                            persistedEventBus.Send(e);
                         }
                     })
                 .Subscribe();
 
             //handler for phase 2
-            messageBus
+            persistedEventBus
                 .AsObservable<RepliedToPostEvent>()
-                .Where(_ => committed)
-                .Do(e => 
-                {
-                    Console.WriteLine(e);
-                })
+                .Do(e => OnRepliedToPost(e))
+                .Subscribe();
+
+            persistedEventBus
+                .AsObservable<ApprovedCommentEvent>()
+                .Do(e => OnApprovedComment(e))
                 .Subscribe();
 
             var context = new DomainContext(workspace,messageBus);
 
             return context;
-        }      
+        }
 
         public static IWorkspace GetDomainWorkspace(Entities context)
         {                     
@@ -97,32 +84,27 @@ namespace MyBlog.Commands
             return new TraceTextWriter();
         }
 
-        public static IMessageBus GetMessageBus()
-        {
-            var messageBus = new MessageBus();
-
-            messageBus.RegisterHandler<FailedMessage>(MessageHandlerType.Synchronous, OnFailMessage, false);
-            messageBus.RegisterHandler<RepliedToPostEvent>(MessageHandlerType.Asynchronous, OnRepliedToPost, true);
-            messageBus.RegisterHandler<ApprovedCommentEvent>(MessageHandlerType.Asynchronous, OnApprovedComment, true);
-
-            return messageBus;
-        }
-
         private static void OnFailMessage(FailedMessage failMessage)
         {       
             EventLog.WriteEntry("MyBlog", failMessage.MessageFailureException.ToString());
         }
 
 
-        private static void OnRepliedToPost(RepliedToPostEvent commentCreated)
+        private static void OnRepliedToPost(RepliedToPostEvent e)
         {
-            Trace.Write("comment created handled");
-            Debug.Write("comment created handled");
+            IEmailService emailService = GetEmailService();
+            emailService.SendEmail("roger.alsing@precio.se", "New comment for post: " + e.Post.Subject, "Click http://foo.bar/ApproveComment.aspx?commentId=" + e.Comment.Id);
+
         }
 
         private static void OnApprovedComment(ApprovedCommentEvent commentApproved)
         {
 
+        }
+
+        private static IEmailService GetEmailService()
+        {
+            return new DefaultEmailService();
         }
     }
 
