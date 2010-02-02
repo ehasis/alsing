@@ -17,7 +17,7 @@ namespace MyBlog.Domain.Entities
     {
         public string Name { get; set; }
         public string Email { get; set; }
-        public string WebSite { get; set; }
+        public string Website { get; set; }
     
     }
 }

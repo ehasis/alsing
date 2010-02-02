@@ -9,15 +9,6 @@ namespace MyBlog.Domain.Entities
 {
     public partial class Post
     {
-        protected Post()
-        {
-        }
-
-        public Post(Blog belongsToBlog)
-        {
-            this.Blog = belongsToBlog;
-        }
-
         public void ReplyTo(string userName, string userEmail, string userWebsite, string text)
         {
             EnsureCommentsEnabled();
