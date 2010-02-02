@@ -11,16 +11,18 @@ namespace MyBlog.Domain
 {
     public class DomainContext : IDisposable
     {
-        public DomainContext(IWorkspace workspace, IMessageBus messageBus)
+        public DomainContext(IWorkspace workspace, IMessageBus earlyEventBus,IMessageBus persistedEventBus)
         {
             this.Workspace = workspace;
-            this.MessageBus = messageBus;
-            this.DomainEvents = new DomainEventScope(messageBus);
+            this.EarlyEventBus = earlyEventBus;
+            this.PersistedEventBus = persistedEventBus;
+            this.DomainEvents = new DomainEventScope(earlyEventBus);
         }
 
         private DomainEventScope DomainEvents { get; set; }
         public IWorkspace Workspace { get; private set; }
-        public IMessageBus MessageBus { get; private set; }
+        public IMessageBus EarlyEventBus { get; private set; }
+        public IMessageBus PersistedEventBus { get; set; }
 
         public void Dispose()
         {
