@@ -22,13 +22,19 @@ namespace MyBlog.Commands
         public static DomainContext GetBlogContext()
         {
             var dataContext = new Entities();
-            var messageBus = new MessageBus();
+            
             var workspace = GetDomainWorkspace(dataContext);
+            var persistedEventBus = GetPersistedEventBus();
+            var messageBus = GetEarlyEventBus(dataContext, workspace, persistedEventBus);
 
-            var persistedEventBus = new MessageBus();
-            
-            
-            //handler for phase 1
+            var context = new DomainContext(workspace,messageBus);
+
+            return context;
+        }
+
+        private static MessageBus GetEarlyEventBus(Entities dataContext, IWorkspace workspace, MessageBus persistedEventBus)
+        {
+            var messageBus = new MessageBus();
             messageBus
                 .AsObservable<IDomainEvent>()
                 .Do(e =>
@@ -42,8 +48,13 @@ namespace MyBlog.Commands
                         }
                     })
                 .Subscribe();
+            return messageBus;
+        }
 
-            //handler for phase 2
+        private static MessageBus GetPersistedEventBus()
+        {
+            var persistedEventBus = new MessageBus();
+
             persistedEventBus
                 .AsObservable<RepliedToPostEvent>()
                 .Do(e => OnRepliedToPost(e))
@@ -54,9 +65,7 @@ namespace MyBlog.Commands
                 .Do(e => OnApprovedComment(e))
                 .Subscribe();
 
-            var context = new DomainContext(workspace,messageBus);
-
-            return context;
+            return persistedEventBus;
         }
 
         public static IWorkspace GetDomainWorkspace(Entities context)
