@@ -79,7 +79,6 @@
   <ItemGroup>
     <Compile Include="DomainEvents\AssignedCategoryToPostEvent.cs" />
     <Compile Include="DomainEvents\DisabledCommentsEvent.cs" />
-    <Compile Include="DomainEvents\DomainEventArgs.cs" />
     <Compile Include="DomainEvents\DomainEvents.cs" />
     <Compile Include="DomainEvents\EditedPostEvent.cs" />
     <Compile Include="DomainEvents\EnabledCommentsEvent.cs" />

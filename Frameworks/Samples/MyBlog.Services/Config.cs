@@ -55,17 +55,46 @@ namespace MyBlog.Commands
         {
             var persistedEventBus = new MessageBus();
 
-            persistedEventBus
-                .AsObservable<RepliedToPostEvent>()
-                .Do(e => OnRepliedToPost(e))
-                .Subscribe();
+            persistedEventBus.RegisterHandler<RepliedToPostEvent>(MessageHandlerType.Synchronous, OnRepliedToPost, true);
+            persistedEventBus.RegisterHandler<ApprovedCommentEvent>(MessageHandlerType.Synchronous, OnApprovedComment, true);
+            persistedEventBus.RegisterHandler<FailedMessage>(MessageHandlerType.Synchronous, OnFailMessage, false);
 
-            persistedEventBus
-                .AsObservable<ApprovedCommentEvent>()
-                .Do(e => OnApprovedComment(e))
-                .Subscribe();
+            persistedEventBus.RegisterHandler<RepliedToPostEvent>(MessageHandlerType.Synchronous, e => UpdateComment( e.Comment), true);
+            persistedEventBus.RegisterHandler<ApprovedCommentEvent>(MessageHandlerType.Synchronous, e => UpdateComment( e.Comment), true);
+
+            persistedEventBus.RegisterHandler<AssignedCategoryToPostEvent>(MessageHandlerType.Synchronous, e => CreateCategoryLink(e.Post,e.Category), true);
+
+            persistedEventBus.RegisterHandler<EditedPostEvent>(MessageHandlerType.Synchronous, e => UpdatePost(e.Post), true);
+            persistedEventBus.RegisterHandler<EnabledCommentsEvent>(MessageHandlerType.Synchronous, e => UpdatePost(e.Post), true);
+            persistedEventBus.RegisterHandler<DisabledCommentsEvent>(MessageHandlerType.Synchronous, e => UpdatePost(e.Post), true);
+            persistedEventBus.RegisterHandler<PostCreatedEvent>(MessageHandlerType.Synchronous, e => UpdatePost(e.Post), true);
+            persistedEventBus.RegisterHandler<PublishedPostEvent>(MessageHandlerType.Synchronous, e => DeletePost(e.Post), true);
+            persistedEventBus.RegisterHandler<UnpublishedPostEvent>(MessageHandlerType.Synchronous, e => DeletePost(e.Post), true);
+
+            persistedEventBus.RegisterHandler<PostDeletedEvent>(MessageHandlerType.Synchronous, e => DeletePost(e.Post), true);
+
 
             return persistedEventBus;
+        }
+
+        private static void DeletePost(Post post)
+        {
+         
+        }
+
+        private static void UpdatePost(Post post)
+        {
+            
+        }
+
+        private static void CreateCategoryLink(Post post, Category category)
+        {
+            
+        }
+
+        private static void UpdateComment(Comment comment)
+        {
+            
         }
 
         public static IWorkspace GetDomainWorkspace(Entities context)
@@ -97,7 +126,6 @@ namespace MyBlog.Commands
         {       
             EventLog.WriteEntry("MyBlog", failMessage.MessageFailureException.ToString());
         }
-
 
         private static void OnRepliedToPost(RepliedToPostEvent e)
         {
