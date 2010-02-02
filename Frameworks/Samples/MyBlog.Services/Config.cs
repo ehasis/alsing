@@ -11,6 +11,8 @@ using MyBlog.Domain.Events;
 using MyBlog.Domain.Entities;
 using System.Data.SqlClient;
 using System.Data.EntityClient;
+using Alsing.Transactional;
+using System.Data.Objects;
 
 namespace MyBlog.Commands
 {
@@ -22,7 +24,34 @@ namespace MyBlog.Commands
             var messageBus = GetMessageBus();
             var workspace = GetDomainWorkspace(dataContext);
 
-            return new DomainContext(workspace,messageBus);
+            //workspace.Committing += (s, e) =>
+            //    {
+            //        var added = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added);
+            //        var deleted = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Deleted);
+            //        var modified = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified);
+
+            //        Console.WriteLine("ds");
+            //    };
+
+            AddHandler<RepliedToPostEvent>(dataContext, messageBus, workspace, e => Console.WriteLine(e));
+
+            var context = new DomainContext(workspace,messageBus);
+
+            return context;
+        }
+
+        private static void AddHandler<T>(Entities dataContext, IMessageBus messageBus, IWorkspace workspace, Action<T> action) where T:class,IDomainEvent
+        {
+            messageBus
+                .RegisterHandler<T>(MessageHandlerType.Synchronous, e => workspace.Committing += (s, ea) =>
+                {
+                    ObjectStateEntry entry;
+                    if (dataContext.ObjectStateManager.TryGetObjectStateEntry(e.Sender, out entry))
+                    {
+                        action(e);
+                    }
+                }
+            , false);
         }
         
 

@@ -2,6 +2,7 @@ namespace Alsing.Workspace
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System;
 
     public class InMemWorkspace : IWorkspace
     {
@@ -36,6 +37,8 @@ namespace Alsing.Workspace
             {
                 action();
             }
+
+            OnCommitted();
         }
 
         public void Dispose()
@@ -89,5 +92,25 @@ namespace Alsing.Workspace
             this.entities.Remove(entity);
             this.removedEntities.Add(entity);
         }
+
+        #region IWorkspace Members
+
+        public event EventHandler Committed;
+
+        protected void OnCommitted()
+        {
+            if (Committed != null)
+                Committed(this, EventArgs.Empty);
+        }
+
+        public event EventHandler Committing;
+
+        protected void OnCommitting()
+        {
+            if (Committing != null)
+                Committing(this, EventArgs.Empty);
+        }
+
+        #endregion
     }
 }

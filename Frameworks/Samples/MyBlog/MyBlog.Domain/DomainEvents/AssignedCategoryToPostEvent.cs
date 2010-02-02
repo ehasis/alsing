@@ -7,7 +7,7 @@ using MyBlog.Domain.Entities;
 
 namespace MyBlog.Domain.Events
 {
-    public class AssignedCategoryToPostEvent : IMessage
+    public class AssignedCategoryToPostEvent : IDomainEvent
     {
         public AssignedCategoryToPostEvent(Post post,Category category)
         {
@@ -18,5 +18,14 @@ namespace MyBlog.Domain.Events
         public Post Post { get;private set; }
 
         public Category Category { get;private set; }
+
+        #region IDomainEvent Members
+
+        public object Sender
+        {
+            get { return Post; }
+        }
+
+        #endregion
     }
 }

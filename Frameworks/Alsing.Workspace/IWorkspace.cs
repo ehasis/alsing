@@ -5,6 +5,10 @@ namespace Alsing.Workspace
 
     public interface IWorkspace : IDisposable
     {
+        event EventHandler Committed;
+
+        event EventHandler Committing;
+
         IQueryable<T> MakeQuery<T>() where T : class;
 
         void Add<T>(T entity) where T : class;

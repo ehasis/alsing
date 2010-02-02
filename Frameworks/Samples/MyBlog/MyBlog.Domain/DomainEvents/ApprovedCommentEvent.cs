@@ -3,7 +3,7 @@ namespace MyBlog.Domain.Events
     using Alsing.Messaging;
     using MyBlog.Domain.Entities;
 
-    public class ApprovedCommentEvent : IMessage
+    public class ApprovedCommentEvent : IDomainEvent
     {
         public ApprovedCommentEvent(Comment comment)
         {
@@ -11,5 +11,14 @@ namespace MyBlog.Domain.Events
         }
 
         public Comment Comment { get; private set; }
+
+        #region IDomainEvent Members
+
+        public object Sender
+        {
+            get { return Comment; }
+        }
+
+        #endregion
     }
 }

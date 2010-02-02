@@ -37,12 +37,23 @@ namespace Alsing.Workspace
 
         public void Commit()
         {
+            context.DetectChanges();
+
+            OnCommitting();
+
             context.SaveChanges();
+
+            OnCommitted();
+
+            foreach (CommitAction action in this.commitActions)
+            {
+                action();
+            }
         }
 
         public void AddCommitAction(CommitAction commitAction)
         {
-            throw new NotImplementedException();
+            this.commitActions.Add(commitAction);
         }
 
         #endregion
@@ -59,5 +70,25 @@ namespace Alsing.Workspace
         {
             return (ObjectSet<T>)selector(typeof(T));
         }
+
+        #region IWorkspace Members
+
+        public event EventHandler Committed;
+
+        protected void OnCommitted()
+        {
+            if (Committed != null)
+                Committed(this, EventArgs.Empty);
+        }
+
+        public event EventHandler Committing;
+
+        protected void OnCommitting()
+        {
+            if (Committing != null)
+                Committing(this, EventArgs.Empty);
+        }
+
+        #endregion
     }
 }

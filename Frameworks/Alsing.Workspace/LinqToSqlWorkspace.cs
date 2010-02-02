@@ -3,6 +3,7 @@ namespace Alsing.Workspace
     using System.Collections.Generic;
     using System.Data.Linq;
     using System.Linq;
+    using System;
 
     public class LinqToSqlWorkspace : IWorkspace
     {
@@ -27,12 +28,16 @@ namespace Alsing.Workspace
 
         public void Commit()
         {
+            OnCommitting();
             this.context.SubmitChanges(ConflictMode.FailOnFirstConflict);
+            OnCommitted();
 
             foreach (CommitAction action in this.commitActions)
             {
                 action();
             }
+
+
         }
 
         public void Dispose()
@@ -48,5 +53,25 @@ namespace Alsing.Workspace
         {
             this.context.GetTable<T>().DeleteOnSubmit(entity);
         }
+
+        #region IWorkspace Members
+
+        public event EventHandler Committed;
+
+        protected void OnCommitted()
+        {
+            if (Committed != null)
+                Committed(this, EventArgs.Empty);
+        }
+
+        public event EventHandler Committing;
+
+        protected void OnCommitting()
+        {
+            if (Committing != null)
+                Committing(this, EventArgs.Empty);
+        }
+
+        #endregion
     }
 }

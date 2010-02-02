@@ -8,7 +8,7 @@ namespace MyBlog.Domain.Events
 {
     public static class DomainEvents
     {
-        public static void Raise<T>(T @event) where T : class,IMessage
+        public static void Raise<TEvent>(TEvent @event) where TEvent : class,IMessage
         {
             DomainEventScope.Raise(@event);
         }
