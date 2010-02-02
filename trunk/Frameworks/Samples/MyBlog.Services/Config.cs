@@ -21,26 +21,55 @@ namespace MyBlog.Commands
         public static DomainContext GetBlogContext()
         {
             var dataContext = new Entities();
-            var earlyEventBus = GetMessageBus();
-            var persistentEventBus = new MessageBus();
+            var messageBus = GetMessageBus();
             var workspace = GetDomainWorkspace(dataContext);
 
-            earlyEventBus
+
+            //workspace.Committing += (s, e) =>
+            //    {
+            //        var added = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added);
+            //        var deleted = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Deleted);
+            //        var modified = dataContext.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified);
+
+            //        Console.WriteLine("ds");
+            //    };
+            
+            bool committed = false;
+
+            workspace.Committing += (s, ea) =>
+                {
+                    committed = true;
+                };
+
+            
+            messageBus
                 .AsObservable<IDomainEvent>()
-                .Where(e =>
+                .Where(_ => committed == false)
+                .Do(e =>
+                    workspace.Committing += (s, ea) =>
                     {
                         ObjectStateEntry entry;
-                        return dataContext.ObjectStateManager.TryGetObjectStateEntry(e.Sender, out entry);
+                        if (dataContext.ObjectStateManager.TryGetObjectStateEntry(e.Sender, out entry))
+                        {
+                            //resend the same event after commit
+                            messageBus.Send(e);
+                        }
                     })
-                .Do(e => persistentEventBus.Send(e))
                 .Subscribe();
 
-            var context = new DomainContext(workspace, earlyEventBus, persistentEventBus);
+            messageBus
+                .AsObservable<RepliedToPostEvent>()
+                .Where(_ => committed)
+                .Do(e => 
+                {
+                    Console.WriteLine(e);
+                })
+                .Subscribe();
+
+            var context = new DomainContext(workspace,messageBus);
 
             return context;
-        }
-
-        
+        }      
 
         public static IWorkspace GetDomainWorkspace(Entities context)
         {                     
