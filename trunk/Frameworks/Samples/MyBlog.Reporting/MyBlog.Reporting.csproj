@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportingModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MessageHandlers.cs" />
     <Compile Include="Projections\DTOCategory.cs" />
     <Compile Include="Projections\DTOComment.cs" />
     <Compile Include="Projections\DTOFlattenedCategory.cs" />
@@ -93,6 +94,10 @@
     <Compile Include="Queries\PostQueries.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Alsing.Messaging\Alsing.Messaging.csproj">
+      <Project>{14266723-E951-48F2-8603-D3B3072C1EF6}</Project>
+      <Name>Alsing.Messaging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Alsing.Workspace\Alsing.Workspace.csproj">
       <Project>{08710662-90CC-43F2-8DFE-985732DF99B0}</Project>
       <Name>Alsing.Workspace</Name>
