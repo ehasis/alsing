@@ -15,19 +15,17 @@ namespace MyBlog.Domain.Entities
     public partial class Comment
     {
     
-        public virtual int Id { get; private set; }
+        public virtual int Id { get; set; }
     
-        public virtual int PostId { get; private set; }
+        public virtual string Body { get; set; }
     
-        public virtual string Body { get; private set; }
+        public virtual bool Approved { get; set; }
     
-        public virtual bool Approved { get; private set; }
+        public virtual System.DateTime CreationDate { get; set; }
     
-        public virtual System.DateTime CreationDate { get; private set; }
-    
-        public UserInfo UserInfo { get; private set;}
+        public UserInfo UserInfo { get; set;}
     
     
-        public virtual Post Post{ get; private set; }
+        public virtual Post Post{ get; set; }
     }
 }

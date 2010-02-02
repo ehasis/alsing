@@ -11,9 +11,8 @@ namespace MyBlog.Domain.Entities
         {
         }
 
-        public Category(Blog belongsToBlog, string name)
+        public Category(string name)
         {
-            this.Blog = belongsToBlog;
             this.Name = name;
         }
     }

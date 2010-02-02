@@ -6,7 +6,6 @@
     <edmx:StorageModels>
     <Schema Namespace="MyBlogModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="MyBlogModelStoreContainer">
-          <EntitySet Name="Blogs" EntityType="MyBlogModel.Store.Blogs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Categories" EntityType="MyBlogModel.Store.Categories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Comments" EntityType="MyBlogModel.Store.Comments" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PostCategoryLinks" EntityType="MyBlogModel.Store.PostCategoryLinks" store:Type="Tables" Schema="dbo" />
@@ -23,29 +22,13 @@
             <End Role="Posts" EntitySet="Posts" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
-          <AssociationSet Name="FK_Categories_Blogs" Association="MyBlogModel.Store.FK_Categories_Blogs">
-            <End Role="Blogs" EntitySet="Blogs" />
-            <End Role="Categories" EntitySet="Categories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Posts_Blogs" Association="MyBlogModel.Store.FK_Posts_Blogs">
-            <End Role="Blogs" EntitySet="Blogs" />
-            <End Role="Posts" EntitySet="Posts" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Blogs">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="500" />
-        </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="500" />
-          <Property Name="BlogId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Comments">
           <Key>
@@ -73,7 +56,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="BlogId" Type="int" Nullable="false" />
           <Property Name="CreationDate" Type="datetime" Nullable="false" />
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="PublishDate" Type="datetime" />
@@ -117,30 +99,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Categories_Blogs">
-          <End Role="Blogs" Type="MyBlogModel.Store.Blogs" Multiplicity="1" />
-          <End Role="Categories" Type="MyBlogModel.Store.Categories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Blogs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Categories">
-              <PropertyRef Name="BlogId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Posts_Blogs">
-          <End Role="Blogs" Type="MyBlogModel.Store.Blogs" Multiplicity="1" />
-          <End Role="Posts" Type="MyBlogModel.Store.Posts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Blogs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Posts">
-              <PropertyRef Name="BlogId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -150,146 +108,90 @@
           <EntitySet Name="Comments" EntityType="MyBlogModel.Comment" />
           <EntitySet Name="Posts" EntityType="MyBlogModel.Post" />
           <AssociationSet Name="FK_BlogPostReply_BlogPost" Association="MyBlogModel.FK_BlogPostReply_BlogPost">
-            <End Role="Posts" EntitySet="Posts" />
-            <End Role="Comments" EntitySet="Comments" />
-          </AssociationSet>
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Comment" EntitySet="Comments" /></AssociationSet>
           <AssociationSet Name="PostCategoryLinks" Association="MyBlogModel.PostCategoryLinks">
-            <End Role="Posts" EntitySet="Posts" />
-            <End Role="Categories" EntitySet="Categories" />
-          </AssociationSet>
-          <EntitySet Name="Blogs" EntityType="MyBlogModel.Blog" />
-          <AssociationSet Name="FK_Posts_Blogs" Association="MyBlogModel.FK_Posts_Blogs">
-            <End Role="Blog" EntitySet="Blogs" />
-            <End Role="Post" EntitySet="Posts" /></AssociationSet>
-          <AssociationSet Name="FK_Categories_Blogs" Association="MyBlogModel.FK_Categories_Blogs">
-            <End Role="Blog" EntitySet="Blogs" />
-            <End Role="Category" EntitySet="Categories" /></AssociationSet>
-        </EntityContainer>
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Category" EntitySet="Categories" /></AssociationSet></EntityContainer>
         <EntityType Name="Category">
           <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Type="Int32" Name="BlogId" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="Blog" Relationship="MyBlogModel.FK_Categories_Blogs" FromRole="Category" ToRole="Blog" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-        </EntityType>
+            <PropertyRef Name="Id" /></Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Posts" Relationship="MyBlogModel.PostCategoryLinks" FromRole="Category" ToRole="Post" /></EntityType>
         <EntityType Name="Comment">
           <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="PostId" Type="Int32" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="Approved" Type="Boolean" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="CreationDate" Type="DateTime" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="Post" Relationship="MyBlogModel.FK_BlogPostReply_BlogPost" FromRole="Comments" ToRole="Posts" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="UserInfo" Type="MyBlogModel.UserInfo" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-        </EntityType>
+            <PropertyRef Name="Id" /></Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Approved" Nullable="false" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" />
+          <NavigationProperty Name="Post" Relationship="MyBlogModel.FK_BlogPostReply_BlogPost" FromRole="Comment" ToRole="Post" />
+          <Property Name="UserInfo" Type="MyBlogModel.UserInfo" Nullable="false" /></EntityType>
         <EntityType Name="Post">
           <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="CreationDate" Type="DateTime" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="PublishDate" Type="DateTime" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="Subject" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Name="CommentsEnabled" Type="Boolean" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="Comments" Relationship="MyBlogModel.FK_BlogPostReply_BlogPost" FromRole="Posts" ToRole="Comments" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="Categories" Relationship="MyBlogModel.PostCategoryLinks" FromRole="Posts" ToRole="Categories" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Type="Int32" Name="BlogId" Nullable="false" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <NavigationProperty Name="Blog" Relationship="MyBlogModel.FK_Posts_Blogs" FromRole="Post" ToRole="Blog" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-        </EntityType>
+            <PropertyRef Name="Id" /></Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastModifiedDate" Nullable="false" />
+          <Property Type="DateTime" Name="PublishDate" />
+          <Property Type="String" Name="Subject" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="CommentsEnabled" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="MyBlogModel.FK_BlogPostReply_BlogPost" FromRole="Post" ToRole="Comment" />
+          <NavigationProperty Name="Categories" Relationship="MyBlogModel.PostCategoryLinks" FromRole="Post" ToRole="Category" /></EntityType>
         <Association Name="FK_BlogPostReply_BlogPost">
-          <End Role="Posts" Type="MyBlogModel.Post" Multiplicity="1" />
-          <End Role="Comments" Type="MyBlogModel.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Posts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Comments">
-              <PropertyRef Name="PostId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+          <End Type="MyBlogModel.Post" Role="Post" Multiplicity="1" />
+          <End Type="MyBlogModel.Comment" Role="Comment" Multiplicity="*" /></Association>
         <Association Name="PostCategoryLinks">
-          <End Role="Posts" Type="MyBlogModel.Post" Multiplicity="*" />
-          <End Role="Categories" Type="MyBlogModel.Category" Multiplicity="*" />
-        </Association>
+          <End Type="MyBlogModel.Post" Role="Post" Multiplicity="*" />
+          <End Type="MyBlogModel.Category" Role="Category" Multiplicity="*" /></Association>
         <ComplexType Name="UserInfo">
           <Property Type="String" Name="Name" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Email" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="WebSite" MaxLength="500" FixedLength="false" Unicode="true" /></ComplexType>
-        <EntityType Name="Blog">
-          <Key>
-            <PropertyRef Name="Id" /></Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <Property Type="String" Name="Title" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          </EntityType>
-        <Association Name="FK_Posts_Blogs">
-          <End Type="MyBlogModel.Blog" Role="Blog" Multiplicity="1" />
-          <End Type="MyBlogModel.Post" Role="Post" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Blog">
-              <PropertyRef Name="Id" /></Principal>
-            <Dependent Role="Post">
-              <PropertyRef Name="BlogId" /></Dependent></ReferentialConstraint></Association>
-        <Association Name="FK_Categories_Blogs">
-          <End Type="MyBlogModel.Blog" Role="Blog" Multiplicity="1" />
-          <End Type="MyBlogModel.Category" Role="Category" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Blog">
-              <PropertyRef Name="Id" /></Principal>
-            <Dependent Role="Category">
-              <PropertyRef Name="BlogId" /></Dependent></ReferentialConstraint></Association>
-      </Schema>
+          <Property Type="String" Name="Website" MaxLength="500" FixedLength="false" Unicode="true" /></ComplexType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MyBlogModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="Categories"><EntityTypeMapping TypeName="MyBlogModel.Category"><MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="Name" ColumnName="Name" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Comments"><EntityTypeMapping TypeName="MyBlogModel.Comment"><MappingFragment StoreEntitySet="Comments">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="PostId" ColumnName="PostId" />
-            <ScalarProperty Name="Body" ColumnName="Body" />
-            <ScalarProperty Name="Approved" ColumnName="Approved" />
-            <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ComplexProperty Name="UserInfo">
-                  <ScalarProperty Name="WebSite" ColumnName="UserWebSite" />
-                  <ScalarProperty Name="Email" ColumnName="UserEmail" />
-                  <ScalarProperty Name="Name" ColumnName="UserName" /></ComplexProperty>
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Posts"><EntityTypeMapping TypeName="MyBlogModel.Post"><MappingFragment StoreEntitySet="Posts">
-                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-            <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
-            <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
-            <ScalarProperty Name="Subject" ColumnName="Subject" />
-            <ScalarProperty Name="Body" ColumnName="Body" />
-            <ScalarProperty Name="CommentsEnabled" ColumnName="CommentsEnabled" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <AssociationSetMapping Name="PostCategoryLinks" TypeName="MyBlogModel.PostCategoryLinks" StoreEntitySet="PostCategoryLinks">
-            <EndProperty Name="Posts">
-              <ScalarProperty Name="Id" ColumnName="PostId" />
-            </EndProperty>
-            <EndProperty Name="Categories">
-              <ScalarProperty Name="Id" ColumnName="PostCategoryId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="Blogs">
-            <EntityTypeMapping TypeName="MyBlogModel.Blog">
-              <MappingFragment StoreEntitySet="Blogs">
-                <ScalarProperty Name="Title" ColumnName="Title" />
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="MyBlogModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="MyBlogModel.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ComplexProperty Name="UserInfo">
+                  <ScalarProperty Name="Website" ColumnName="UserWebSite" />
+                  <ScalarProperty Name="Email" ColumnName="UserEmail" />
+                  <ScalarProperty Name="Name" ColumnName="UserName" /></ComplexProperty></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="MyBlogModel.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="CommentsEnabled" ColumnName="CommentsEnabled" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_BlogPostReply_BlogPost" TypeName="MyBlogModel.FK_BlogPostReply_BlogPost" StoreEntitySet="Comments">
+            <EndProperty Name="Comment">
+              <ScalarProperty Name="Id" ColumnName="Id" /></EndProperty>
+            <EndProperty Name="Post">
+              <ScalarProperty Name="Id" ColumnName="PostId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="PostCategoryLinks" TypeName="MyBlogModel.PostCategoryLinks" StoreEntitySet="PostCategoryLinks">
+            <EndProperty Name="Category">
+              <ScalarProperty Name="Id" ColumnName="PostCategoryId" /></EndProperty>
+            <EndProperty Name="Post">
+              <ScalarProperty Name="Id" ColumnName="PostId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -304,30 +206,21 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="MyBlogModel">
-        <EntityTypeShape EntityType="MyBlogModel.Category" Width="1.5" PointX="5.25" PointY="1" Height="1.787985026041667" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyBlogModel.Comment" Width="1.5" PointX="5.25" PointY="3.375" Height="2.3648893229166674" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyBlogModel.Post" Width="1.5" PointX="3" PointY="1.875" Height="3.1340950520833322" IsExpanded="true" />
-        <AssociationConnector Association="MyBlogModel.FK_BlogPostReply_BlogPost" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="4.1920475260416659" />
-          <ConnectorPoint PointX="5.25" PointY="4.1920475260416659" /></AssociationConnector>
-        <AssociationConnector Association="MyBlogModel.PostCategoryLinks" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="2.3314925130208337" />
-          <ConnectorPoint PointX="5.25" PointY="2.3314925130208337" /></AssociationConnector>
-        <EntityTypeShape EntityType="MyBlogModel.Blog" Width="1.5" PointX="0.75" PointY="2.625" Height="1.4033821614583326" />
-        <AssociationConnector Association="MyBlogModel.FK_Posts_Blogs" >
-          <ConnectorPoint PointX="2.25" PointY="3.3266910807291663" />
-          <ConnectorPoint PointX="3" PointY="3.3266910807291663" /></AssociationConnector>
-        <AssociationConnector Association="MyBlogModel.FK_Categories_Blogs" >
-          <ConnectorPoint PointX="1.5" PointY="2.625" />
-          <ConnectorPoint PointX="1.5" PointY="1.40625" />
-          <ConnectorPoint PointX="5.25" PointY="1.40625" /></AssociationConnector>
-        </Diagram></Diagrams>
+        <EntityTypeShape EntityType="MyBlogModel.Category" Width="1.5" PointX="3" PointY="1.125" Height="1.59568359375" />
+        <EntityTypeShape EntityType="MyBlogModel.Comment" Width="1.5" PointX="3" PointY="3.375" Height="2.5571907552083335" />
+        <EntityTypeShape EntityType="MyBlogModel.Post" Width="1.5" PointX="0.75" PointY="2.125" Height="2.7494921874999996" />
+        <AssociationConnector Association="MyBlogModel.FK_BlogPostReply_BlogPost" >
+          <ConnectorPoint PointX="2.25" PointY="4.12474609375" />
+          <ConnectorPoint PointX="3" PointY="4.12474609375" /></AssociationConnector>
+        <AssociationConnector Association="MyBlogModel.PostCategoryLinks" >
+          <ConnectorPoint PointX="2.25" PointY="2.422841796875" />
+          <ConnectorPoint PointX="3" PointY="2.422841796875" /></AssociationConnector></Diagram></Diagrams>
   </Designer>
 </edmx:Edmx>

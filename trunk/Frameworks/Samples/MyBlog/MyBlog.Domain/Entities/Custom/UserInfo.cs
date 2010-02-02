@@ -15,7 +15,7 @@ namespace MyBlog.Domain.Entities
         {
             this.Name = userName;
             this.Email = userEmail;
-            this.WebSite = userWebSite;
+            this.Website = userWebSite;
         }
     }
 }

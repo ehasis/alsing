@@ -31,18 +31,7 @@ namespace MyBlog.Domain
 
         private PostRepository posts;
         private CategoryRepository categories;
-        private BlogRepository blogs;
 
-        public BlogRepository Blogs
-        {
-            get
-            {
-                if (blogs == null)
-                    blogs = new BlogRepository(Workspace);
-
-                return blogs;
-            }
-        }
 
         public PostRepository Posts
         {

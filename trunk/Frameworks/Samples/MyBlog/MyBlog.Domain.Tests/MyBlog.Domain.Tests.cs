@@ -34,8 +34,7 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDummyBlog();
-                var postAboutAOP = blog.NewPost();
+                var postAboutAOP = new Post();
                 postAboutAOP.Edit("AOP for dummies", "...");
                 ws.ClearUoW();
 
@@ -52,8 +51,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDummyBlog();
-                var post = blog.NewPost();
+                
+                var post = new Post();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -74,9 +73,9 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDummyBlog();
-                var category = blog.NewCategory("C#");
-                var post = blog.NewPost();
+
+                var category = new Category("C#");
+                var post = new Post();
                 post.AssignCategory(category);
 
                 Assert.AreEqual(1, post.Categories.Count());
@@ -89,8 +88,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDummyBlog();
-                var post = blog.NewPost();
+                
+                var post = new Post();
                 const string expectedSubject = "AOP for dummies";
                 const string expectedBody = "...";
 
@@ -106,8 +105,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDummyBlog();
-                var postAboutAOP = blog.NewPost();
+                
+                var postAboutAOP = new Post();
                 postAboutAOP.Edit("AOP for dummies", "...");
                 ws.Add(postAboutAOP);
 
@@ -127,8 +126,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDummyBlog();
-                var post = blog.NewPost();
+                
+                var post = new Post();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
 
@@ -150,8 +149,8 @@
                 //hold the number of sent CommentApprovedNotification
                 context.MessageBus.RegisterHandler<ApprovedCommentEvent>(MessageHandlerType.Synchronous, commentApproved => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
 
-                var blog = GetDummyBlog();
-                var post = blog.NewPost();
+                
+                var post = new Post();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -187,8 +186,8 @@
                 //hold the number of sent CommentNotifications
                 context.MessageBus.RegisterHandler<RepliedToPostEvent>(MessageHandlerType.Synchronous, commentCreated => OnTransactionCommitted.Invoke(() => numberOfSentNotifications++), false);
 
-                var blog = GetDummyBlog();
-                var post = blog.NewPost();
+                
+                var post = new Post();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -213,8 +212,8 @@
             var ws = new InMemWorkspace();
             using(var context = GetDomainContext(ws))
             {
-                var blog = GetDummyBlog();
-                var post = blog.NewPost();
+                
+                var post = new Post();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
 
@@ -236,8 +235,8 @@
             var ws = new InMemWorkspace();
             using (var context = GetDomainContext(ws))
             {
-                var blog = GetDummyBlog();
-                var post = blog.NewPost();
+                
+                var post = new Post();
                 post.Edit("AOP for dummies", "...");
                 post.Publish();
                 post.EnableComments();
@@ -249,14 +248,6 @@
                 //ensure the comment is added to the post
                 Assert.AreEqual(1, post.Comments.Count());
             }
-        }
-
-        private Blog GetDummyBlog()
-        {
-            var blog = new Blog();
-            blog.Edit(title: "Dummy");
-            
-            return blog;
         }
 
         private static IMessageBus GetMessageBus()

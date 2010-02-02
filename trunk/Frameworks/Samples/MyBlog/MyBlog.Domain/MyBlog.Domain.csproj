@@ -91,16 +91,12 @@
     <Compile Include="DomainEvents\RepliedToPostEvent.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="DomainContext.cs" />
-    <Compile Include="Entities\Blog.cs">
-      <DependentUpon>Model1.Types.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Category.cs">
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Comment.cs">
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Custom\Blog.cs" />
     <Compile Include="Entities\Custom\Category.cs" />
     <Compile Include="Entities\Custom\Comment.cs" />
     <Compile Include="Entities\Custom\Post.cs" />
@@ -128,7 +124,6 @@
       <DependentUpon>Model1.Types.tt</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\DomainException.cs" />
-    <Compile Include="Repositories\BlogRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

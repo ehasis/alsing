@@ -61,13 +61,6 @@ namespace MyBlog.Domain.Entities
         }
     
         private ObjectSet<Post> _posts;
-    
-        public virtual ObjectSet<Blog> Blogs
-        {
-            get { return _blogs  ?? (_blogs = CreateObjectSet<Blog>("Blogs")); }
-        }
-    
-        private ObjectSet<Blog> _blogs;
 
         #endregion
     }
