@@ -144,7 +144,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MyBlogModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Entities\Custom\ClassDiagram1.cd" />
     <None Include="Entities\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
