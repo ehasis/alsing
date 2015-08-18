@@ -1,0 +1,1 @@
+![http://www.puzzleframework.com/GoogleCode/SyntaxBox/SH-infotip.gif](http://www.puzzleframework.com/GoogleCode/SyntaxBox/SH-infotip.gif)
