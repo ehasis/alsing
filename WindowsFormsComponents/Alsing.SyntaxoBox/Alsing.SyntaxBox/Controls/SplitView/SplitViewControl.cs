@@ -32,7 +32,7 @@ namespace Alsing.Windows.Forms.CoreLib
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private Container components;
+        private Container components = null;
 
         private bool FirstTime;
         private Panel Horizontal;

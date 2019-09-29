@@ -172,15 +172,15 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     if (GFX.BackBuffer != null)
                         GFX.BackBuffer.Dispose();
 
-                    GFX.StringBuffer = new GDISurface(1, 1, Control, true) {Font = GFX.FontNormal};
+                    GFX.StringBuffer = new GDISurface(1, 1, Control, true) { Font = GFX.FontNormal };
                     int h = GFX.StringBuffer.MeasureTabbedString("ABC", 0).Height + Control._SyntaxBox.RowPadding;
-                    GFX.BackBuffer = new GDISurface(Control.ClientWidth, h, Control, true) {Font = GFX.FontNormal};
+                    GFX.BackBuffer = new GDISurface(Control.ClientWidth, h, Control, true) { Font = GFX.FontNormal };
 
-                    GFX.SelectionBuffer = new GDISurface(Control.ClientWidth, h, Control, true) {Font = GFX.FontNormal};
+                    GFX.SelectionBuffer = new GDISurface(Control.ClientWidth, h, Control, true) { Font = GFX.FontNormal };
 
-                    Control.View.RowHeight = GFX.BackBuffer.MeasureTabbedString("ABC", 0).Height +
+                    Control.View_RowHeight = GFX.BackBuffer.MeasureTabbedString("ABC", 0).Height +
                                              Control._SyntaxBox.RowPadding;
-                    Control.View.CharWidth = GFX.BackBuffer.MeasureTabbedString(" ", 0).Width;
+                    Control.View_CharWidth = GFX.BackBuffer.MeasureTabbedString(" ", 0).Width;
                 }
             }
         }
@@ -192,8 +192,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
         public void RenderAll()
         {
             //
-            Control.View.RowHeight = GFX.BackBuffer.MeasureString("ABC").Height;
-            Control.View.CharWidth = GFX.BackBuffer.MeasureString(" ").Width;
+            Control.View_RowHeight = GFX.BackBuffer.MeasureString("ABC").Height;
+            Control.View_CharWidth = GFX.BackBuffer.MeasureString(" ").Width;
 
 
             Control.InitVars();
@@ -224,7 +224,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 Control.InitScrollbars();
                 SetBrackets();
                 SetSpanIndicators();
-                int j = Control.View.FirstVisibleRow;
+                int j = Control.View_FirstVisibleRow;
 
                 int diff = j - LastRow;
                 LastRow = j;
@@ -232,9 +232,9 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 {
                     if (diff == 1)
                     {
-                        for (int i = Control.View.RowHeight; i > 0; i -= Control.SmoothScrollSpeed)
+                        for (int i = Control.View_RowHeight; i > 0; i -= Control.SmoothScrollSpeed)
                         {
-                            yOffset = i + Control.View.YOffset;
+                            yOffset = i + Control.View_YOffset;
                             RenderAll2();
                             g.Flush();
                             Thread.Sleep(0);
@@ -242,9 +242,9 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     }
                     else if (diff == -1)
                     {
-                        for (int i = -Control.View.RowHeight; i < 0; i += Control.SmoothScrollSpeed)
+                        for (int i = -Control.View_RowHeight; i < 0; i += Control.SmoothScrollSpeed)
                         {
-                            yOffset = i + Control.View.YOffset;
+                            yOffset = i + Control.View_YOffset;
                             RenderAll2();
                             g.Flush();
                             Thread.Sleep(0);
@@ -252,7 +252,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     }
                 }
 
-                yOffset = Control.View.YOffset;
+                yOffset = Control.View_YOffset;
                 RenderAll2();
                 //g.Flush ();
                 //System.Threading.Thread.Sleep (0);
@@ -281,7 +281,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
         {
             try
             {
-                int RowIndex = Y/Control.View.RowHeight + Control.View.FirstVisibleRow;
+                int RowIndex = Y / Control.View_RowHeight + Control.View_FirstVisibleRow;
                 RowIndex = Math.Min(RowIndex, Control.Document.VisibleRows.Count);
                 if (RowIndex == Control.Document.VisibleRows.Count)
                 {
@@ -314,15 +314,15 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
 
                 //this.RenderRow (xtr.Index,-200);
 
-                if (X < row.Expansion_PixelEnd - Control.View.FirstVisibleColumn*Control.View.CharWidth)
+                if (X < row.Expansion_PixelEnd - Control.View_FirstVisibleColumn * Control.View_CharWidth)
                 {
                     //start of collapsed line
                     return ColumnFromPixel(RowIndex, X);
                 }
 
                 if (X >=
-                    row.Expansion_EndRow.Expansion_PixelStart - Control.View.FirstVisibleColumn*Control.View.CharWidth +
-                    Control.View.TextMargin)
+                    row.Expansion_EndRow.Expansion_PixelStart - Control.View_FirstVisibleColumn * Control.View_CharWidth +
+                    Control.View_TextMargin)
                 {
                     //end of collapsed line
                     return ColumnFromPixel(row.Expansion_EndRow.Index,
@@ -422,8 +422,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
         public Size MeasureRow(Row xtr, int Count)
         {
             int width = 0;
-            int taborig = -Control.View.FirstVisibleColumn*Control.View.CharWidth + Control.View.TextMargin;
-            int xpos = Control.View.TextMargin - Control.View.ClientAreaStart;
+            int taborig = -Control.View_FirstVisibleColumn * Control.View_CharWidth + Control.View_TextMargin;
+            int xpos = Control.View_TextMargin - Control.View_ClientAreaStart;
             if (xtr.InQueue)
             {
                 SetStringFont(false, false, false);
@@ -557,7 +557,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
         {
             try
             {
-                int j = Control.View.FirstVisibleRow;
+                int j = Control.View_FirstVisibleRow;
 
 
                 if (Control.AutoListStartPos != null)
@@ -573,7 +573,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                             }
                             else
                             {
-                                alP.Y += Control.View.RowHeight + 2;
+                                alP.Y += Control.View_RowHeight + 2;
                                 alP.X += -20;
                                 alP = Control.PointToScreen(alP);
 
@@ -581,7 +581,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
 
                                 if (alP.Y + Control.AutoList.Height > screen.WorkingArea.Height)
                                 {
-                                    alP.Y -= Control.View.RowHeight + 2 + Control.AutoList.Height;
+                                    alP.Y -= Control.View_RowHeight + 2 + Control.AutoList.Height;
                                 }
 
                                 if (alP.X + Control.AutoList.Width > screen.WorkingArea.Width)
@@ -614,7 +614,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                             }
                             else
                             {
-                                itP.Y += Control.View.RowHeight + 2;
+                                itP.Y += Control.View_RowHeight + 2;
                                 itP.X += -20;
 
                                 itP = Control.PointToScreen(itP);
@@ -623,7 +623,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
 
                                 if (itP.Y + Control.InfoTip.Height > screen.WorkingArea.Height)
                                 {
-                                    itP.Y -= Control.View.RowHeight + 2 + Control.InfoTip.Height;
+                                    itP.Y -= Control.View_RowHeight + 2 + Control.InfoTip.Height;
                                 }
 
                                 if (itP.X + Control.InfoTip.Width > screen.WorkingArea.Width)
@@ -648,7 +648,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     }
                 }
 
-                for (int i = 0; i < Control.View.VisibleRowCount; i++)
+                for (int i = 0; i < Control.View_VisibleRowCount; i++)
                 {
                     if (j >= 0 && j < Control.Document.VisibleRows.Count)
                     {
@@ -823,9 +823,9 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 }
 
 
-                if (Control.ContainsFocus || Control.View.Action == EditAction.DragText)
+                if (Control.ContainsFocus || Control.View_Action == EditAction.DragText)
                 {
-                    RenderCaret(RowIndex, RowPos*Control.View.RowHeight + yOffset);
+                    RenderCaret(RowIndex, RowPos * Control.View_RowHeight + yOffset);
                 }
 
                 RenderSelection(RowIndex);
@@ -835,7 +835,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
 
                 var e = new RowPaintEventArgs();
 
-                var rec = new Rectangle(0, 0, Control.Width, Control.View.RowHeight);
+                var rec = new Rectangle(0, 0, Control.Width, Control.View_RowHeight);
                 e.Graphics = Graphics.FromHdc(bbuff.hDC);
                 e.Bounds = rec;
                 e.Row = null;
@@ -846,9 +846,9 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
 
 
                 bbuff.Flush();
-                bbuff.RenderToControl(0, RowPos*Control.View.RowHeight + yOffset);
+                bbuff.RenderToControl(0, RowPos * Control.View_RowHeight + yOffset);
 
-                //GFX.SelectionBuffer.RenderToControl (0,RowPos*Control.View.RowHeight+this.yOffset);
+                //GFX.SelectionBuffer.RenderToControl (0,RowPos*Control.ViewRowHeight+this.yOffset);
 
 
                 if (found)
@@ -906,19 +906,19 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
             string str = r.CollapsedText;
 
             xPos++;
-            int taborig = -Control.View.FirstVisibleColumn*Control.View.CharWidth + Control.View.TextMargin;
+            int taborig = -Control.View_FirstVisibleColumn * Control.View_CharWidth + Control.View_TextMargin;
             GFX.StringBuffer.Font = GFX.FontBold;
             int wdh = GFX.StringBuffer.DrawTabbedString(str, xPos + 1, 0, taborig, Control.PixelTabSize).Width;
 
             if (Control.ContainsFocus)
             {
-                bbuff.FillRect(Control.SelectionForeColor, xPos + 0, 0, wdh + 2, Control.View.RowHeight);
-                bbuff.FillRect(Control.SelectionBackColor, xPos + 1, 1, wdh, Control.View.RowHeight - 2);
+                bbuff.FillRect(Control.SelectionForeColor, xPos + 0, 0, wdh + 2, Control.View_RowHeight);
+                bbuff.FillRect(Control.SelectionBackColor, xPos + 1, 1, wdh, Control.View_RowHeight - 2);
             }
             else
             {
-                bbuff.FillRect(Control.InactiveSelectionForeColor, xPos + 0, 0, wdh + 2, Control.View.RowHeight);
-                bbuff.FillRect(Control.InactiveSelectionBackColor, xPos + 1, 1, wdh, Control.View.RowHeight - 2);
+                bbuff.FillRect(Control.InactiveSelectionForeColor, xPos + 0, 0, wdh + 2, Control.View_RowHeight);
+                bbuff.FillRect(Control.InactiveSelectionBackColor, xPos + 1, 1, wdh, Control.View_RowHeight - 2);
             }
 
 
@@ -934,8 +934,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                         Control.Document.Parser.ParseRow(r.expansion_StartSpan.EndRow.Index, true);
 
                     Word last = r.expansion_StartSpan.EndWord;
-                    xPos += Control.View.FirstVisibleColumn*Control.View.CharWidth;
-                    r.expansion_StartSpan.EndRow.Expansion_PixelStart = xPos + wdh - Control.View.TextMargin + 2;
+                    xPos += Control.View_FirstVisibleColumn * Control.View_CharWidth;
+                    r.expansion_StartSpan.EndRow.Expansion_PixelStart = xPos + wdh - Control.View_TextMargin + 2;
                     r.Expansion_PixelEnd = xPos - 1;
                     RenderSelectedText(Control.Document.IndexOf(r.expansion_StartSpan.EndRow),
                                        r.expansion_StartSpan.EndRow.Expansion_PixelStart, last);
@@ -958,11 +958,11 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
             string str = r.CollapsedText;
 
             xPos++;
-            int taborig = -Control.View.FirstVisibleColumn*Control.View.CharWidth + Control.View.TextMargin;
+            int taborig = -Control.View_FirstVisibleColumn * Control.View_CharWidth + Control.View_TextMargin;
             GFX.StringBuffer.Font = GFX.FontBold;
             int wdh = GFX.StringBuffer.DrawTabbedString(str, xPos + 1, 0, taborig, Control.PixelTabSize).Width;
-            bbuff.FillRect(GFX.OutlineBrush, xPos + 0, 0, wdh + 2, Control.View.RowHeight);
-            bbuff.FillRect(GFX.BackgroundBrush, xPos + 1, 1, wdh, Control.View.RowHeight - 2);
+            bbuff.FillRect(GFX.OutlineBrush, xPos + 0, 0, wdh + 2, Control.View_RowHeight);
+            bbuff.FillRect(GFX.BackgroundBrush, xPos + 1, 1, wdh, Control.View_RowHeight - 2);
             wdh = bbuff.DrawTabbedString(str, xPos + 1, 0, taborig, Control.PixelTabSize).Width;
 
 
@@ -975,8 +975,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                         Control.Document.Parser.ParseRow(r.expansion_StartSpan.EndRow.Index, true);
 
                     Word last = r.expansion_StartSpan.EndWord;
-                    xPos += Control.View.FirstVisibleColumn*Control.View.CharWidth;
-                    r.expansion_StartSpan.EndRow.Expansion_PixelStart = xPos + wdh - Control.View.TextMargin + 2;
+                    xPos += Control.View_FirstVisibleColumn * Control.View_CharWidth;
+                    r.expansion_StartSpan.EndRow.Expansion_PixelStart = xPos + wdh - Control.View_TextMargin + 2;
                     r.Expansion_PixelEnd = xPos - 1;
                     RenderText(Control.Document.IndexOf(r.expansion_StartSpan.EndRow),
                                r.expansion_StartSpan.EndRow.Expansion_PixelStart, last);
@@ -1007,11 +1007,11 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 //	bbuff.DrawTabbedString (xtr.startSpan.GetHashCode ().ToString (System.Globalization.CultureInfo.InvariantCulture),100,0,0,0);
 
                 //bbuff.TextForeColor = Color.Black;
-                //bbuff.DrawTabbedString (xtr.Text,(int)(Control.View.TextMargin -Control.View.ClientAreaStart),1,-Control.View.FirstVisibleColumn*Control.View.CharWidth+Control.View.TextMargin,Control.PixelTabSize);					
+                //bbuff.DrawTabbedString (xtr.Text,(int)(Control.View_TextMargin -Control.View_ClientAreaStart),1,-Control.View_FirstVisibleColumn*Control.ViewCharWidth+Control.View_TextMargin,Control.PixelTabSize);					
 
-                int xpos = Control.View.TextMargin - Control.View.ClientAreaStart + XOffset;
+                int xpos = Control.View_TextMargin - Control.View_ClientAreaStart + XOffset;
                 int wdh = 0;
-                int taborig = -Control.View.FirstVisibleColumn*Control.View.CharWidth + Control.View.TextMargin;
+                int taborig = -Control.View_FirstVisibleColumn * Control.View_CharWidth + Control.View_TextMargin;
 
 
                 bool ws = Control.ShowWhitespace;
@@ -1036,9 +1036,9 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                         if ((w.Type == WordType.Space || w.Type == WordType.Tab) && !DrawBreakpoint &&
                             Control.ShowTabGuides)
                         {
-                            int xtab = xpos - (Control.View.TextMargin - Control.View.ClientAreaStart + XOffset);
-                            if ((xtab/(double) Control.PixelTabSize) == (xtab/Control.PixelTabSize))
-                                bbuff.FillRect(Control.TabGuideColor, xpos, 0, 1, Control.View.RowHeight);
+                            int xtab = xpos - (Control.View_TextMargin - Control.View_ClientAreaStart + XOffset);
+                            if ((xtab / (double)Control.PixelTabSize) == (xtab / Control.PixelTabSize))
+                                bbuff.FillRect(Control.TabGuideColor, xpos, 0, 1, Control.View_RowHeight);
                         }
 
                         if (w.Type == WordType.Word || ws == false)
@@ -1083,7 +1083,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                                 if (Control.BracketBorderColor != Color.Transparent)
                                 {
                                     bbuff.DrawRect(Control.BracketBorderColor, xpos - 1, 0, wdh,
-                                                   Control.View.RowHeight - 1);
+                                                   Control.View_RowHeight - 1);
                                 }
                             }
                             else
@@ -1095,8 +1095,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                             //render errors
                             if (w.HasError)
                             {
-                                //bbuff.FillRect (Color.Red,xpos,Control.View.RowHeight-2,wdh,2);
-                                int ey = Control.View.RowHeight - 1;
+                                //bbuff.FillRect (Color.Red,xpos,Control.ViewRowHeight-2,wdh,2);
+                                int ey = Control.View_RowHeight - 1;
                                 Color c = w.ErrorColor;
                                 for (int x = 0; x < wdh + 3; x += 4)
                                 {
@@ -1140,8 +1140,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                         if (w.Pattern != null)
                             if (w.Pattern.IsSeparator)
                             {
-                                bbuff.FillRect(Control.SeparatorColor, Control.View.TextMargin - 4,
-                                               Control.View.RowHeight - 1, Control.View.ClientAreaWidth, 1);
+                                bbuff.FillRect(Control.SeparatorColor, Control.View_TextMargin - 4,
+                                               Control.View_RowHeight - 1, Control.View_ClientAreaWidth, 1);
                             }
 
                         xpos += wdh;
@@ -1165,7 +1165,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                          xtr.endSpan.spanDefinition.Style != null)
                 {
                     bbuff.FillRect(xtr.endSpan.spanDefinition.Style.BackColor, xpos, 0, Control.Width - xpos,
-                                   Control.View.RowHeight);
+                                   Control.View_RowHeight);
                 }
 
                 if (Control._SyntaxBox.ShowEOLMarker && !HasExpansion)
@@ -1201,11 +1201,11 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 //	bbuff.DrawTabbedString (xtr.startSpan.GetHashCode ().ToString (System.Globalization.CultureInfo.InvariantCulture),100,0,0,0);
 
                 //bbuff.TextForeColor = Color.Black;
-                //bbuff.DrawTabbedString (xtr.Text,(int)(Control.View.TextMargin -Control.View.ClientAreaStart),1,-Control.View.FirstVisibleColumn*Control.View.CharWidth+Control.View.TextMargin,Control.PixelTabSize);					
+                //bbuff.DrawTabbedString (xtr.Text,(int)(Control.View_TextMargin -Control.View_ClientAreaStart),1,-Control.View_FirstVisibleColumn*Control.ViewCharWidth+Control.View_TextMargin,Control.PixelTabSize);					
 
-                int xpos = Control.View.TextMargin - Control.View.ClientAreaStart + XOffset;
+                int xpos = Control.View_TextMargin - Control.View_ClientAreaStart + XOffset;
                 int wdh = 0;
-                int taborig = -Control.View.FirstVisibleColumn*Control.View.CharWidth + Control.View.TextMargin;
+                int taborig = -Control.View_FirstVisibleColumn * Control.View_CharWidth + Control.View_TextMargin;
 
 
                 bool ws = Control.ShowWhitespace;
@@ -1244,8 +1244,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                             //render errors
                             if (w.HasError)
                             {
-                                //bbuff.FillRect (Color.Red,xpos,Control.View.RowHeight-2,wdh,2);
-                                int ey = Control.View.RowHeight - 1;
+                                //bbuff.FillRect (Color.Red,xpos,Control.ViewRowHeight-2,wdh,2);
+                                int ey = Control.View_RowHeight - 1;
                                 Color c = w.ErrorColor;
                                 for (int x = 0; x < wdh + 3; x += 4)
                                 {
@@ -1269,8 +1269,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                         if (w.Pattern != null)
                             if (w.Pattern.IsSeparator)
                             {
-                                bbuff.FillRect(Control.SeparatorColor, Control.View.TextMargin - 4,
-                                               Control.View.RowHeight - 1, Control.View.ClientAreaWidth, 1);
+                                bbuff.FillRect(Control.SeparatorColor, Control.View_TextMargin - 4,
+                                               Control.View_RowHeight - 1, Control.View_ClientAreaWidth, 1);
                             }
 
                         xpos += wdh;
@@ -1293,7 +1293,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                          xtr.endSpan.spanDefinition.Style != null)
                 {
                     GFX.BackBuffer.FillRect(xtr.endSpan.spanDefinition.Style.BackColor, xpos, 0,
-                                            Control.Width - xpos, Control.View.RowHeight);
+                                            Control.Width - xpos, Control.View_RowHeight);
                 }
 
                 if (Control._SyntaxBox.ShowEOLMarker && !HasExpansion)
@@ -1330,7 +1330,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
             if (RowIndex != cr && RowIndex != StartRow)
                 return;
 
-            if (Control.View.Action == EditAction.DragText)
+            if (Control.View_Action == EditAction.DragText)
             {
                 //drop Control.Caret
                 Row xtr = Control.Document[cr];
@@ -1343,10 +1343,10 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     pos -= MeasureRow(xtr, xtr.Expansion_StartChar).Width;
                 }
 
-                GFX.BackBuffer.InvertRect(pos + Control.View.TextMargin - Control.View.ClientAreaStart - 1, 0, 3,
-                                          Control.View.RowHeight);
-                GFX.BackBuffer.InvertRect(pos + Control.View.TextMargin - Control.View.ClientAreaStart, 1, 1,
-                                          Control.View.RowHeight - 2);
+                GFX.BackBuffer.InvertRect(pos + Control.View_TextMargin - Control.View_ClientAreaStart - 1, 0, 3,
+                                          Control.View_RowHeight);
+                GFX.BackBuffer.InvertRect(pos + Control.View_TextMargin - Control.View_ClientAreaStart, 1, 1,
+                                          Control.View_RowHeight - 2);
             }
             else
             {
@@ -1355,7 +1355,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 Row xtr = Control.Document[cr];
                 if (!Control.OverWrite)
                 {
-                    int pos = Control.View.TextMargin - Control.View.ClientAreaStart;
+                    int pos = Control.View_TextMargin - Control.View_ClientAreaStart;
                     pos += MeasureRow(xtr, Control.Caret.Position.X).Width + 1;
                     if (Collapsed)
                     {
@@ -1363,13 +1363,13 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                         pos -= MeasureRow(xtr, xtr.Expansion_StartChar).Width;
                     }
 
-                    int wdh = Control.View.CharWidth/12 + 1;
+                    int wdh = Control.View_CharWidth / 12 + 1;
                     if (wdh < 2)
                         wdh = 2;
 
                     if (Control.Caret.Blink)
                     {
-                        GFX.BackBuffer.InvertRect(pos, 0, wdh, Control.View.RowHeight);
+                        GFX.BackBuffer.InvertRect(pos, 0, wdh, Control.View_RowHeight);
                     }
 
                     if (Control.IMEWindow == null)
@@ -1390,10 +1390,10 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                         pos1 -= MeasureRow(xtr, xtr.Expansion_StartChar).Width;
                     }
 
-                    int pos = pos1 + Control.View.TextMargin - Control.View.ClientAreaStart;
+                    int pos = pos1 + Control.View_TextMargin - Control.View_ClientAreaStart;
                     if (Control.Caret.Blink)
                     {
-                        GFX.BackBuffer.InvertRect(pos, 0, wdh, Control.View.RowHeight);
+                        GFX.BackBuffer.InvertRect(pos, 0, wdh, Control.View_RowHeight);
                     }
                     Control.IMEWindow.Loation = new Point(pos, ypos);
                 }
@@ -1406,14 +1406,14 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
 
             if (Control.ShowGutterMargin)
             {
-                bbuff.FillRect(GFX.GutterMarginBrush, 0, 0, Control.View.GutterMarginWidth, Control.View.RowHeight);
-                bbuff.FillRect(GFX.GutterMarginBorderBrush, Control.View.GutterMarginWidth - 1, 0, 1,
-                               Control.View.RowHeight);
+                bbuff.FillRect(GFX.GutterMarginBrush, 0, 0, Control.View_GutterMarginWidth, Control.View_RowHeight);
+                bbuff.FillRect(GFX.GutterMarginBorderBrush, Control.View_GutterMarginWidth - 1, 0, 1,
+                               Control.View_RowHeight);
                 if (RowIndex <= Control.Document.Count - 1)
                 {
                     Row r = Control.Document[RowIndex];
 
-                    if (Control.View.RowHeight >= Control._SyntaxBox.GutterIcons.ImageSize.Height)
+                    if (Control.View_RowHeight >= Control._SyntaxBox.GutterIcons.ImageSize.Height)
                     {
                         if (r.Bookmarked)
                             Control._SyntaxBox.GutterIcons.Draw(Graphics.FromHdc(bbuff.hDC), 0, 0, 1);
@@ -1422,7 +1422,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     }
                     else
                     {
-                        int w = Control.View.RowHeight;
+                        int w = Control.View_RowHeight;
                         if (r.Bookmarked)
                             Control._SyntaxBox.GutterIcons.Draw(Graphics.FromHdc(bbuff.hDC), 0, 0, w, w, 1);
                         if (r.Breakpoint)
@@ -1433,13 +1433,13 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     {
                         foreach (int i in r.Images)
                         {
-                            if (Control.View.RowHeight >= Control._SyntaxBox.GutterIcons.ImageSize.Height)
+                            if (Control.View_RowHeight >= Control._SyntaxBox.GutterIcons.ImageSize.Height)
                             {
                                 Control._SyntaxBox.GutterIcons.Draw(Graphics.FromHdc(bbuff.hDC), 0, 0, i);
                             }
                             else
                             {
-                                int w = Control.View.RowHeight;
+                                int w = Control.View_RowHeight;
                                 Control._SyntaxBox.GutterIcons.Draw(Graphics.FromHdc(bbuff.hDC), 0, 0, w, w, i);
                             }
                         }
@@ -1450,25 +1450,25 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
 
             if (Control.ShowLineNumbers)
             {
-                bbuff.FillRect(GFX.LineNumberMarginBrush, Control.View.GutterMarginWidth, 0,
-                               Control.View.LineNumberMarginWidth + 1, Control.View.RowHeight);
+                bbuff.FillRect(GFX.LineNumberMarginBrush, Control.View_GutterMarginWidth, 0,
+                               Control.View_LineNumberMarginWidth + 1, Control.View_RowHeight);
 
-                //bbuff.FillRect (GFX.LineNumberMarginBrush  ,Control.View.GutterMarginWidth+Control.View.LineNumberMarginWidth,0,1,Control.View.RowHeight);
+                //bbuff.FillRect (GFX.LineNumberMarginBrush  ,Control.View_GutterMarginWidth+Control.View_LineNumberMarginWidth,0,1,Control.ViewRowHeight);
 
-                for (int j = 0; j < Control.View.RowHeight; j += 2)
+                for (int j = 0; j < Control.View_RowHeight; j += 2)
                 {
                     bbuff.FillRect(GFX.LineNumberMarginBorderBrush,
-                                   Control.View.GutterMarginWidth + Control.View.LineNumberMarginWidth, j, 1, 1);
+                                   Control.View_GutterMarginWidth + Control.View_LineNumberMarginWidth, j, 1, 1);
                 }
             }
 
 
             if (!Control.ShowLineNumbers || !Control.ShowGutterMargin)
-                bbuff.FillRect(GFX.BackgroundBrush, Control.View.TotalMarginWidth, 0,
-                               Control.View.TextMargin - Control.View.TotalMarginWidth - 3, Control.View.RowHeight);
+                bbuff.FillRect(GFX.BackgroundBrush, Control.View_TotalMarginWidth, 0,
+                               Control.View_TextMargin - Control.View_TotalMarginWidth - 3, Control.View_RowHeight);
             else
-                bbuff.FillRect(GFX.BackgroundBrush, Control.View.TotalMarginWidth + 1, 0,
-                               Control.View.TextMargin - Control.View.TotalMarginWidth - 4, Control.View.RowHeight);
+                bbuff.FillRect(GFX.BackgroundBrush, Control.View_TotalMarginWidth + 1, 0,
+                               Control.View_TextMargin - Control.View_TotalMarginWidth - 4, Control.View_RowHeight);
 
             if (Control.ShowLineNumbers)
             {
@@ -1481,7 +1481,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     int nw = MeasureString((RowIndex + 1).ToString(CultureInfo.InvariantCulture)).Width;
 
                     bbuff.DrawTabbedString((RowIndex + 1).ToString(CultureInfo.InvariantCulture),
-                                           Control.View.GutterMarginWidth + Control.View.LineNumberMarginWidth - nw - 1,
+                                           Control.View_GutterMarginWidth + Control.View_LineNumberMarginWidth - nw - 1,
                                            1, 0, Control.PixelTabSize);
                 }
             }
@@ -1504,32 +1504,32 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     {
                         if (!xtr.IsCollapsed)
                         {
-                            bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset, yo, 1,
-                                           Control.View.RowHeight - yo);
+                            bbuff.FillRect(GFX.OutlineBrush, Control.View_TotalMarginWidth + expansionOffset, yo, 1,
+                                           Control.View_RowHeight - yo);
                         }
                     }
                     else if ((xtr.endSpan.Parent != null || xtr.expansion_EndSpan != null))
                     {
-                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset, 0, 1,
-                                       Control.View.RowHeight);
+                        bbuff.FillRect(GFX.OutlineBrush, Control.View_TotalMarginWidth + expansionOffset, 0, 1,
+                                       Control.View_RowHeight);
                     }
 
                     if (xtr.expansion_StartSpan != null)
                     {
-                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset - 4, yo, 9, 9);
-                        bbuff.FillRect(GFX.BackgroundBrush, Control.View.TotalMarginWidth + expansionOffset - 3, yo + 1,
+                        bbuff.FillRect(GFX.OutlineBrush, Control.View_TotalMarginWidth + expansionOffset - 4, yo, 9, 9);
+                        bbuff.FillRect(GFX.BackgroundBrush, Control.View_TotalMarginWidth + expansionOffset - 3, yo + 1,
                                        7, 7);
                         //render plus / minus
-                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset - 2, yo + 4, 5,
+                        bbuff.FillRect(GFX.OutlineBrush, Control.View_TotalMarginWidth + expansionOffset - 2, yo + 4, 5,
                                        1);
                         if (!xtr.expansion_StartSpan.Expanded)
-                            bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset, yo + 2, 1,
+                            bbuff.FillRect(GFX.OutlineBrush, Control.View_TotalMarginWidth + expansionOffset, yo + 2, 1,
                                            5);
                     }
                     if (xtr.expansion_EndSpan != null)
                     {
-                        bbuff.FillRect(GFX.OutlineBrush, Control.View.TotalMarginWidth + expansionOffset + 1,
-                                       Control.View.RowHeight - 1,
+                        bbuff.FillRect(GFX.OutlineBrush, Control.View_TotalMarginWidth + expansionOffset + 1,
+                                       Control.View_RowHeight - 1,
                                        5, 1);
                     }
                 }
@@ -1538,10 +1538,10 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 //				if (SpanFound)
                 //				{
                 //					if (RowIndex==FirstSpanRow)
-                //						bbuff.FillRect (GFX.OutlineBrush,this.Control.View.TotalMarginWidth +14,0,Control.ClientWidth ,1);
+                //						bbuff.FillRect (GFX.OutlineBrush,this.Control.View_TotalMarginWidth +14,0,Control.ClientWidth ,1);
                 //
                 //					if (RowIndex==LastSpanRow)
-                //						bbuff.FillRect (GFX.OutlineBrush,this.Control.View.TotalMarginWidth +14,Control.View.RowHeight-1,Control.ClientWidth,1);				
+                //						bbuff.FillRect (GFX.OutlineBrush,this.Control.View_TotalMarginWidth +14,Control.ViewRowHeight-1,Control.ClientWidth,1);				
                 //				}
 
                 //RENDER SPAN MARGIN
@@ -1549,16 +1549,16 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     Control._SyntaxBox.ShowScopeIndicator)
                 {
                     if (RowIndex >= FirstSpanRow && RowIndex <= LastSpanRow)
-                        bbuff.FillRect(Control._SyntaxBox.ScopeIndicatorColor, Control.View.TotalMarginWidth + 14, 0, 2,
-                                       Control.View.RowHeight);
+                        bbuff.FillRect(Control._SyntaxBox.ScopeIndicatorColor, Control.View_TotalMarginWidth + 14, 0, 2,
+                                       Control.View_RowHeight);
 
                     if (RowIndex == FirstSpanRow)
-                        bbuff.FillRect(Control._SyntaxBox.ScopeIndicatorColor, Control.View.TotalMarginWidth + 14, 0, 4,
+                        bbuff.FillRect(Control._SyntaxBox.ScopeIndicatorColor, Control.View_TotalMarginWidth + 14, 0, 4,
                                        2);
 
                     if (RowIndex == LastSpanRow)
-                        bbuff.FillRect(Control._SyntaxBox.ScopeIndicatorColor, Control.View.TotalMarginWidth + 14,
-                                       Control.View.RowHeight - 2, 4, 2);
+                        bbuff.FillRect(Control._SyntaxBox.ScopeIndicatorColor, Control.View_TotalMarginWidth + 14,
+                                       Control.View_RowHeight - 2, 4, 2);
                 }
 
                 if (Control._SyntaxBox.ShowRevisionMarks)
@@ -1566,12 +1566,12 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     if (xtr.RevisionMark == RowRevisionMark.BeforeSave)
                     {
                         bbuff.FillRect(Control._SyntaxBox.RevisionMarkBeforeSave,
-                                       Control.View.TotalMarginWidth + 1, 0, 3, Control.View.RowHeight);
+                                       Control.View_TotalMarginWidth + 1, 0, 3, Control.View_RowHeight);
                     }
                     else if (xtr.RevisionMark == RowRevisionMark.AfterSave)
                     {
                         bbuff.FillRect(Control._SyntaxBox.RevisionMarkAfterSave,
-                                       Control.View.TotalMarginWidth + 1, 0, 3, Control.View.RowHeight);
+                                       Control.View_TotalMarginWidth + 1, 0, 3, Control.View_RowHeight);
                     }
                 }
             }
@@ -1590,8 +1590,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                         (RowIndex < Control.Selection.LogicalBounds.LastRow))
                     {
                         int width = MeasureRow(xtr, xtr.Text.Length).Width + MeasureString("¶").Width + 3;
-                        RenderBox(Control.View.TextMargin, 0, Math.Max(width - Control.View.ClientAreaStart, 0),
-                                  Control.View.RowHeight);
+                        RenderBox(Control.View_TextMargin, 0, Math.Max(width - Control.View_ClientAreaStart, 0),
+                                  Control.View_RowHeight);
                     }
                     else if ((RowIndex == Control.Selection.LogicalBounds.FirstRow) &&
                              (RowIndex == Control.Selection.LogicalBounds.LastRow))
@@ -1602,16 +1602,16 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                         int width =
                             MeasureRow(xtr, Math.Min(xtr.Text.Length, Control.Selection.LogicalBounds.LastColumn)).
                                 Width - start;
-                        RenderBox(Control.View.TextMargin + start - Control.View.ClientAreaStart, 0, width,
-                                  Control.View.RowHeight);
+                        RenderBox(Control.View_TextMargin + start - Control.View_ClientAreaStart, 0, width,
+                                  Control.View_RowHeight);
                     }
                     else if (RowIndex == Control.Selection.LogicalBounds.LastRow)
                     {
                         int width =
                             MeasureRow(xtr, Math.Min(xtr.Text.Length, Control.Selection.LogicalBounds.LastColumn)).
                                 Width;
-                        RenderBox(Control.View.TextMargin, 0, Math.Max(width - Control.View.ClientAreaStart, 0),
-                                  Control.View.RowHeight);
+                        RenderBox(Control.View_TextMargin, 0, Math.Max(width - Control.View_ClientAreaStart, 0),
+                                  Control.View_RowHeight);
                     }
                     else if (RowIndex == Control.Selection.LogicalBounds.FirstRow)
                     {
@@ -1619,8 +1619,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                             MeasureRow(xtr, Math.Min(xtr.Text.Length, Control.Selection.LogicalBounds.FirstColumn)).
                                 Width;
                         int width = MeasureRow(xtr, xtr.Text.Length).Width + MeasureString("¶").Width + 3 - start;
-                        RenderBox(Control.View.TextMargin + start - Control.View.ClientAreaStart, 0, width,
-                                  Control.View.RowHeight);
+                        RenderBox(Control.View_TextMargin + start - Control.View_ClientAreaStart, 0, width,
+                                  Control.View_RowHeight);
                     }
                 }
                 else
@@ -1637,8 +1637,8 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 (RowIndex < Control.Selection.LogicalBounds.LastRow))
             {
                 int width = MeasureRow(xtr, xtr.Expansion_EndChar).Width;
-                RenderBox(Control.View.TextMargin, 0, Math.Max(width - Control.View.ClientAreaStart, 0),
-                          Control.View.RowHeight);
+                RenderBox(Control.View_TextMargin, 0, Math.Max(width - Control.View_ClientAreaStart, 0),
+                          Control.View_RowHeight);
             }
             else if ((RowIndex == Control.Selection.LogicalBounds.FirstRow) &&
                      (RowIndex == Control.Selection.LogicalBounds.LastRow))
@@ -1648,33 +1648,33 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 int min = Math.Min(xtr.Text.Length, Control.Selection.LogicalBounds.LastColumn);
                 min = Math.Min(min, xtr.Expansion_EndChar);
                 int width = MeasureRow(xtr, min).Width - start;
-                RenderBox(Control.View.TextMargin + start - Control.View.ClientAreaStart, 0, width,
-                          Control.View.RowHeight);
+                RenderBox(Control.View_TextMargin + start - Control.View_ClientAreaStart, 0, width,
+                          Control.View_RowHeight);
             }
             else if (RowIndex == Control.Selection.LogicalBounds.LastRow)
             {
                 int width =
                     MeasureRow(xtr, Math.Min(xtr.Text.Length, Control.Selection.LogicalBounds.LastColumn)).Width;
-                RenderBox(Control.View.TextMargin, 0, Math.Max(width - Control.View.ClientAreaStart, 0),
-                          Control.View.RowHeight);
+                RenderBox(Control.View_TextMargin, 0, Math.Max(width - Control.View_ClientAreaStart, 0),
+                          Control.View_RowHeight);
             }
             else if (RowIndex == Control.Selection.LogicalBounds.FirstRow)
             {
                 int start =
                     MeasureRow(xtr, Math.Min(xtr.Text.Length, Control.Selection.LogicalBounds.FirstColumn)).Width;
                 int width = MeasureRow(xtr, Math.Min(xtr.Text.Length, xtr.Expansion_EndChar)).Width - start;
-                RenderBox(Control.View.TextMargin + start - Control.View.ClientAreaStart, 0, width,
-                          Control.View.RowHeight);
+                RenderBox(Control.View_TextMargin + start - Control.View_ClientAreaStart, 0, width,
+                          Control.View_RowHeight);
             }
 
             if (Control.Selection.LogicalBounds.LastRow > RowIndex &&
                 Control.Selection.LogicalBounds.FirstRow <= RowIndex)
             {
                 int start = xtr.Expansion_PixelEnd;
-                int end = xtr.Expansion_EndRow.Expansion_PixelStart - start + Control.View.TextMargin;
+                int end = xtr.Expansion_EndRow.Expansion_PixelStart - start + Control.View_TextMargin;
                 //start+=100;
                 //end=200;
-                RenderBox(start - Control.View.ClientAreaStart, 0, end, Control.View.RowHeight);
+                RenderBox(start - Control.View_ClientAreaStart, 0, end, Control.View_RowHeight);
             }
 
             RowIndex = xtr.Expansion_EndRow.Index;
@@ -1713,7 +1713,7 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     end += 6;
 
 
-                RenderBox(Control.View.TextMargin + start - Control.View.ClientAreaStart, 0, end, Control.View.RowHeight);
+                RenderBox(Control.View_TextMargin + start - Control.View_ClientAreaStart, 0, end, Control.View_RowHeight);
             }
         }
 
@@ -1725,21 +1725,21 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
         private TextPoint ColumnFromPixel(int RowIndex, int X)
         {
             Row xtr = Control.Document[RowIndex];
-            X -= Control.View.TextMargin - 2 - Control.View.FirstVisibleColumn*Control.View.CharWidth;
+            X -= Control.View_TextMargin - 2 - Control.View_FirstVisibleColumn * Control.View_CharWidth;
 
             if (xtr.Count == 0)
             {
-                if (Control.VirtualWhitespace && Control.View.CharWidth > 0)
+                if (Control.VirtualWhitespace && Control.View_CharWidth > 0)
                 {
-                    return new TextPoint(X/Control.View.CharWidth, RowIndex);
+                    return new TextPoint(X / Control.View_CharWidth, RowIndex);
                 }
 
                 return new TextPoint(0, RowIndex);
             }
 
 
-            int taborig = -Control.View.FirstVisibleColumn*Control.View.CharWidth + Control.View.TextMargin;
-            int xpos = Control.View.TextMargin - Control.View.ClientAreaStart;
+            int taborig = -Control.View_FirstVisibleColumn * Control.View_CharWidth + Control.View_TextMargin;
+            int xpos = Control.View_TextMargin - Control.View_ClientAreaStart;
             int CharNo = 0;
             int TotWidth = 0;
             Word Word = null;
@@ -1798,10 +1798,10 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                     WordStart += tmpWidth;
                 }
 
-            if (!found && Control.View.CharWidth > 0 && Control.VirtualWhitespace)
+            if (!found && Control.View_CharWidth > 0 && Control.VirtualWhitespace)
             {
                 int xx = X - WordStart;
-                int cn = xx/Control.View.CharWidth;
+                int cn = xx / Control.View_CharWidth;
                 CharNo += cn;
             }
 
@@ -1820,11 +1820,11 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
             Row r = xtr.IsCollapsedEndPart ? xtr.Expansion_StartRow : xtr;
 
             int index = r.VisibleIndex;
-            int yPos = (index - Control.View.FirstVisibleRow);
-            if (yPos < 0 || yPos > Control.View.VisibleRowCount)
+            int yPos = (index - Control.View_FirstVisibleRow);
+            if (yPos < 0 || yPos > Control.View_VisibleRowCount)
                 return new Point(-1, -1);
 
-            yPos *= Control.View.RowHeight;
+            yPos *= Control.View_RowHeight;
 
             bool Collapsed = (xtr.IsCollapsedEndPart);
             int pos = MeasureRow(xtr, tp.X).Width + 1;
@@ -1836,9 +1836,9 @@ namespace Alsing.Windows.Forms.SyntaxBox.Painter
                 pos -= MeasureRow(xtr, xtr.Expansion_StartChar).Width;
             }
 
-            int xPos = pos + Control.View.TextMargin - Control.View.ClientAreaStart;
+            int xPos = pos + Control.View_TextMargin - Control.View_ClientAreaStart;
 
-            if (xPos < Control.View.TextMargin || xPos > Control.View.ClientAreaWidth + Control.View.TextMargin)
+            if (xPos < Control.View_TextMargin || xPos > Control.View_ClientAreaWidth + Control.View_TextMargin)
                 return new Point(-1, -1);
 
 

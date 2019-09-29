@@ -76,7 +76,7 @@ namespace Alsing.SourceCode
         /// </summary>
         public PatternList()
         {
-            SimplePatterns = new Hashtable(CaseInsensitiveHashCodeProvider.Default, CaseInsensitiveComparer.Default);
+            SimplePatterns = new Hashtable(StringComparer.CurrentCultureIgnoreCase);
         }
 
         #region IEnumerable Members

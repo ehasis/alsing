@@ -38,7 +38,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private Container components;
+        private Container components = null;
 
         private GroupBox groupBox1;
         private Label label1;

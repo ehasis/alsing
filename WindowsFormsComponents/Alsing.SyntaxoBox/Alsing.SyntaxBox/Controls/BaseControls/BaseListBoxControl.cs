@@ -28,7 +28,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         private BorderStyle borderStyle;
 
-        private Container components;
+        private Container components = null;
         private bool RunOnce = true;
 
 
@@ -100,14 +100,6 @@ namespace Alsing.Windows.Forms
                 }
             }
         }
-
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Obsolete("Do not use!", true)]
-        public override Image BackgroundImage
-        {
-            get { return base.BackgroundImage; }
-            set { base.BackgroundImage = value; }
-        }
-
 
         [Browsable(false)]
         public int ClientWidth

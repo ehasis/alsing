@@ -507,6 +507,77 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         #endregion
 
+        #region Internal Properties
+
+        internal EditAction View_Action
+        {
+            get { return View.Action; }
+        }
+
+        internal int View_CharWidth
+        {
+            get { return View.CharWidth; }
+            set { View.CharWidth = value; }
+        }
+
+        internal int View_ClientAreaStart
+        {
+            get { return View.ClientAreaStart; }
+        }
+
+        internal int View_ClientAreaWidth
+        {
+            get { return View.ClientAreaWidth; }
+        }
+
+        internal int View_FirstVisibleColumn
+        {
+            get { return View.FirstVisibleColumn; }
+        }
+
+        internal int View_FirstVisibleRow
+        {
+            get { return View.FirstVisibleRow; }
+        }
+
+        internal int View_GutterMarginWidth
+        {
+            get { return View.GutterMarginWidth; }
+        }
+
+        internal int View_LineNumberMarginWidth
+        {
+            get { return View.LineNumberMarginWidth; }
+        }
+
+        internal int View_RowHeight
+        {
+            get { return View.RowHeight; }
+            set { View.RowHeight = value; }
+        }
+
+        internal int View_TextMargin
+        {
+            get { return View.TextMargin; }
+        }
+
+        internal int View_TotalMarginWidth
+        {
+            get { return View.TotalMarginWidth; }
+        }
+
+        internal int View_VisibleRowCount
+        {
+            get { return View.VisibleRowCount; }
+        }
+
+        internal int View_YOffset
+        {
+            get { return View.YOffset; }
+        }
+
+        #endregion
+
         #region Private/Protected/public Properties
 
         public int PixelTabSize

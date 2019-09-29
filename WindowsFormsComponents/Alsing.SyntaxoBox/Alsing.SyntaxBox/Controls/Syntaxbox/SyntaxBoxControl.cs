@@ -1645,31 +1645,14 @@ namespace Alsing.Windows.Forms
 
         #endregion //END Public Methods
 
-        [Browsable(false)]
-        [Obsolete("Use .FontName and .FontSize", true)]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Font Font
         {
             get { return base.Font; }
             set { base.Font = value; }
         }
 
-        //		[Browsable(true)]
-        //		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-        //		[RefreshProperties (RefreshProperties.All)]
-        //		public override string Text
-        //		{
-        //			get
-        //			{
-        //				return this.Document.Text;
-        //			}
-        //			set
-        //			{
-        //				this.Document.Text=value;
-        //			}
-        //		}
-
-        [Browsable(false)]
-        [Obsolete("Apply a syntax instead", true)]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Color ForeColor
         {
             get { return base.ForeColor; }

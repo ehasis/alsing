@@ -23,7 +23,7 @@ namespace Alsing.Windows.Forms
         private const int WS_EX_CLIENTEDGE = unchecked(0x00000200);
         private Color borderColor = Color.Black;
         private BorderStyle borderStyle;
-        private Container components;
+        private Container components = null;
         private bool RunOnce = true;
 
 
@@ -82,7 +82,7 @@ namespace Alsing.Windows.Forms
             }
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Obsolete("Do not use!", true)]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Image BackgroundImage
         {
             get { return base.BackgroundImage; }

@@ -28,7 +28,7 @@ namespace Alsing.SourceCode
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private Container components;
+        private Container components = null;
 
         private Label lblCaption;
         private Label lblPreview;

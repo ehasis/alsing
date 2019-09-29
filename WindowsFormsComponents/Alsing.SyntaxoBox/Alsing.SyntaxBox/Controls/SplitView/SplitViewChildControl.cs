@@ -20,7 +20,7 @@ namespace Alsing.Windows.Forms.CoreLib
     /// </summary>
     public class SplitViewChildControl : BaseControl
     {
-        private Container components;
+        private Container components = null;
         private Panel Filler;
         protected HScrollBar hScroll;
         public ThumbControl LeftThumb;

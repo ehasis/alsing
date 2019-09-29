@@ -111,7 +111,7 @@ namespace Alsing.Windows.Forms.CoreLib
         }
 
 
-        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Obsolete("", false)]
+        [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
         public override Image BackgroundImage
         {
             get { return base.BackgroundImage; }
@@ -130,7 +130,7 @@ namespace Alsing.Windows.Forms.CoreLib
 
         #region Defaults
 
-        private Container components;
+        private Container components = null;
 
         public FormatLabelControl()
         {

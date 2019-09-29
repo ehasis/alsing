@@ -28,7 +28,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         private BorderStyle borderStyle;
 
-        private Container components;
+        private Container components = null;
         private bool RunOnce = true;
 
 
@@ -101,7 +101,7 @@ namespace Alsing.Windows.Forms
             }
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Obsolete("Do not use!", true)]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override Image BackgroundImage
         {
             get { return base.BackgroundImage; }
