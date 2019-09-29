@@ -1,251 +1,50 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <ApplicationIcon />
-    <AssemblyKeyContainerName />
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>netcoreapp3.0;net40;net45</TargetFrameworks>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RootNamespace>Alsing.Windows.Forms.SyntaxBox</RootNamespace>
     <AssemblyName>Alsing.SyntaxBox</AssemblyName>
-    <AssemblyOriginatorKeyFile />
-    <DefaultClientScript>JScript</DefaultClientScript>
-    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
-    <DefaultTargetSchema>IE50</DefaultTargetSchema>
-    <RootNamespace />
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <ApplicationIcon />
     <StartupObject />
-    <FileUpgradeFlags />
-    <UpgradeBackupLocation />
-    <TargetFramework>net40</TargetFramework>
-    <PublishUrl>http://localhost/Puzzle.SyntaxBox.NET2/</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <AssemblyTitle>Alsing SyntaxBox</AssemblyTitle>
+    <Version>1.5.0</Version>
     <Company>Alsing</Company>
     <Product>SyntaxBox</Product>
-    <Description>SyntaxHighlight Edit Control</Description>
-    <Copyright>2002-2003</Copyright>
-    <Deterministic>false</Deterministic>
-    <AssemblyVersion>1.4.10.*</AssemblyVersion>
-    <FileVersion>1.4.10.*</FileVersion>
-    <FileAlignment>4096</FileAlignment>
-    <NoStdLib>false</NoStdLib>
-    <RemoveIntegerChecks>false</RemoveIntegerChecks>
-    <RegisterForComInterop>false</RegisterForComInterop>
+    <Description>Powerful Syntax Highlight Windows Forms Control for the Microsoft.NET Platform. Written in C#. Supports syntax highlighting and code folding for just about any programming language.</Description>
+    <Authors>Roger Alsing (creator); Edison Henrique Andreassy (maintainer)</Authors>
+    <PackageProjectUrl>https://code.google.com/p/alsing/</PackageProjectUrl>
+    <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/ehasis/alsing.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>syntax highlighter winforms</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Added support to .NET Core 3.0</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <BaseAddress>285212672</BaseAddress>
-    <NoWarn />
-    <ConfigurationOverrideFile />
-    <PreBuildEvent />
-    <PostBuildEvent />
-    <PreBuildEvent />
-    <PostBuildEvent />
-    <PreBuildEvent />
-    <PostBuildEvent />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DocumentationFile />
-    <DebugType>full</DebugType>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DocumentationFile>Compona.Syntaxbox.xml</DocumentationFile>
-    <DebugType>none</DebugType>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent />
-    <PostBuildEvent />
-  </PropertyGroup>
-  <ItemGroup>
+
+  <!-- References for .NET Framework 4.0 target -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
     <Reference Include="System.Design" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Controls\ThumbControl\ThumbControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\ThumbControl\ThumbControl.Designer.cs">
-      <DependentUpon>ThumbControl.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Controls\Autolist\AutoListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Controls\Autolist\TabListBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\BaseControls\BaseControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\BaseControls\BaseListBoxControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\BaseControls\BasePanelControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\EditView\EditViewControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\FormatLabel\FormatLabelControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\InfoTip\InfoTipForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Controls\IntelliMouse\IntelliMouse.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\RegionHandler\RegionHandler.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\SplitView\SplitViewChildControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\SplitView\SplitViewControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\SplitView\SplitViewParentControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Controls\Syntaxbox\Dialogs\FindReplace.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Controls\Syntaxbox\Dialogs\GotoLine.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Controls\Syntaxbox\SyntaxBoxControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Design\CollectionEditorGui.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Document\Print\SourceCodePrintDocument.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Document\SyntaxDocument.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Document\SyntaxDefinition\TextStyle\TextStyleDesignerDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <EmbeddedResource Update="Controls\Autolist\AutoListForm.resx">
-      <DependentUpon>AutoListForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\Autolist\TabListBox.resx">
-      <DependentUpon>TabListBox.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\BaseControls\BaseControl.resx">
-      <DependentUpon>BaseControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\BaseControls\BaseListBoxControl.resx">
-      <DependentUpon>BaseListBoxControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\BaseControls\BasePanelControl.resx">
-      <DependentUpon>BasePanelControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\EditView\EditViewControl.resx">
-      <DependentUpon>EditViewControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FormatLabel\FormatLabelControl.resx">
-      <DependentUpon>FormatLabelControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\InfoTip\InfoTipForm.resx">
-      <DependentUpon>InfoTipForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\IntelliMouse\IntelliMouse.resx">
-      <DependentUpon>IntelliMouse.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\RegionHandler\RegionHandler.resx">
-      <DependentUpon>RegionHandler.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\SplitView\SplitViewChildControl.resx">
-      <DependentUpon>SplitViewChildControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\SplitView\SplitViewControl.resx">
-      <DependentUpon>SplitViewControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\SplitView\SplitViewParentControl.resx">
-      <DependentUpon>SplitViewParentControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\Syntaxbox\Dialogs\FindReplace.resx">
-      <DependentUpon>FindReplace.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\Syntaxbox\Dialogs\GotoLine.resx">
-      <DependentUpon>GotoLine.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\Syntaxbox\Dialogs\Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Controls\Syntaxbox\SyntaxBoxControl.resx">
-      <DependentUpon>SyntaxBoxControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Design\CollectionEditorGui.resx">
-      <DependentUpon>CollectionEditorGui.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Document\Print\SourceCodePrintDocument.resx">
-      <DependentUpon>SourceCodePrintDocument.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Document\SyntaxDocument.resx">
-      <DependentUpon>SyntaxDocument.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Document\SyntaxDefinition\TextStyle\TextStyleDesignerDialog.resx">
-      <DependentUpon>TextStyleDesignerDialog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <None Include="FlippedCursor.cur" />
-    <None Include="Alsing.Windows.Forms.SyntaxBoxControl.bmp" />
+
+  <!-- References for .NET Framework 4.5 target -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <Reference Include="System.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <None Include="Alsing.SourceCode.SourceCodePrintDocument.bmp" />
-    <None Include="Alsing.SourceCode.SyntaxDocument.bmp" />
-    <None Include="MoveUp.cur" />
-    <None Include="MoveUpDown.cur" />
-    <None Include="MoveDown.cur" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Text\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Collections\CollectionBase.cs" />
-  </ItemGroup>
+
 </Project>

@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alsing.SyntaxBox.NET", "Alsing.SyntaxBox\Alsing.SyntaxBox.NET.csproj", "{19EF75B2-B414-4EB0-9486-160FAF93E62C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsing.SyntaxBox.NET", "Alsing.SyntaxBox\Alsing.SyntaxBox.NET.csproj", "{19EF75B2-B414-4EB0-9486-160FAF93E62C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "Samples\HelloWorld\HelloWorld.csproj", "{FCF83FF2-7D05-4301-9CC0-09234A9ED0DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorld", "Samples\HelloWorld\HelloWorld.csproj", "{FCF83FF2-7D05-4301-9CC0-09234A9ED0DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDIDemo", "Samples\MdiDemo\MDIDemo.csproj", "{2AE13325-8AC7-4AE8-A835-F434DC3F11EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDIDemo", "Samples\MdiDemo\MDIDemo.csproj", "{2AE13325-8AC7-4AE8-A835-F434DC3F11EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
