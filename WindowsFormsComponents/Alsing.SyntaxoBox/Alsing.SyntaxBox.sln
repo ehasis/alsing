@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29324.140
+VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alsing.SyntaxBox.NET", "Alsing.SyntaxBox\Alsing.SyntaxBox.NET.csproj", "{19EF75B2-B414-4EB0-9486-160FAF93E62C}"
 EndProject

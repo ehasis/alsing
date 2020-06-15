@@ -44,8 +44,7 @@
             this.syntaxBoxControl1.CopyAsRTF = false;
             this.syntaxBoxControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.syntaxBoxControl1.Document = this.syntaxDocument1;
-            this.syntaxBoxControl1.FontName = "Courier new";
-            this.syntaxBoxControl1.FontSize = 12F;
+            this.syntaxBoxControl1.FontName = "Consolas";
             this.syntaxBoxControl1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.syntaxBoxControl1.InfoTipCount = 1;
             this.syntaxBoxControl1.InfoTipPosition = null;
@@ -933,7 +932,7 @@
         "}"};
             this.syntaxDocument1.MaxUndoBufferSize = 1000;
             this.syntaxDocument1.Modified = false;
-            this.syntaxDocument1.SyntaxFile = "C:\\Puzzle\\SyntaxBox\\Puzzle.Syntaxbox.DefaultSyntaxFiles\\CSharp.syn";
+            this.syntaxDocument1.SyntaxFile = "..\\..\\..\\..\\..\\SyntaxFiles\\CSharp.syn";
             this.syntaxDocument1.UndoStep = 0;
             // 
             // Form1

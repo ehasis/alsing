@@ -88,10 +88,10 @@ namespace Alsing.Design
                 if (types.Length > 1)
                 {
                     GUI.btnDropdown.Visible = true;
-                    GUI.btnDropdown.ContextMenu = new ContextMenu();
+                    GUI.btnDropdown.ContextMenuStrip = new ContextMenuStrip();
                     for (int i = 0; (i < types.Length); i ++)
                     {
-                        GUI.btnDropdown.ContextMenu.MenuItems.Add(new TypeMenuItem(types[i], btnDropDownMenuItem_Click));
+                        GUI.btnDropdown.ContextMenuStrip.Items.Add(new TypeMenuItem(types[i], btnDropDownMenuItem_Click));
                     }
                 }
 
@@ -164,7 +164,7 @@ namespace Alsing.Design
 
             protected void btnDropDown_Click(object o, EventArgs e)
             {
-                GUI.btnDropdown.ContextMenu.Show(GUI.btnDropdown, new Point(0, GUI.btnDropdown.Height));
+                GUI.btnDropdown.ContextMenuStrip.Show(GUI.btnDropdown, new Point(0, GUI.btnDropdown.Height));
             }
 
             protected void btnDropDownMenuItem_Click(object o, EventArgs e)
@@ -335,7 +335,7 @@ namespace Alsing.Design
 
         #region Nested type: TypeMenuItem
 
-        public class TypeMenuItem : MenuItem
+        public class TypeMenuItem : ToolStripMenuItem
         {
             #region PUBLIC PROPERTY TYPE
 

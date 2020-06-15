@@ -34,7 +34,7 @@ namespace Alsing.Design
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private Container components = null;
+        private IContainer components = null;
 
         private GroupBox groupBox1;
 

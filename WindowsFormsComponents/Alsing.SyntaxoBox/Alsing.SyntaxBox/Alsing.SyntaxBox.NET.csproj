@@ -2,49 +2,50 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>netcoreapp3.0;net40;net45</TargetFrameworks>
+    <TargetFrameworks>net40;netcoreapp3.1</TargetFrameworks>
+    <AssemblyName>Alsing.SyntaxBox</AssemblyName>
+    <RootNamespace>Alsing</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup>
-    <RootNamespace>Alsing.Windows.Forms.SyntaxBox</RootNamespace>
-    <AssemblyName>Alsing.SyntaxBox</AssemblyName>
-    <ApplicationIcon />
-    <StartupObject />
-    <Version>1.5.0</Version>
+    <PackageId>Alsing.SyntaxBox</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>Roger Alsing (creator); Edison Henrique Andreassy (maintainer)</Authors>
     <Company>Alsing</Company>
     <Product>SyntaxBox</Product>
     <Description>Powerful Syntax Highlight Windows Forms Control for the Microsoft.NET Platform. Written in C#. Supports syntax highlighting and code folding for just about any programming language.</Description>
-    <Authors>Roger Alsing (creator); Edison Henrique Andreassy (maintainer)</Authors>
-    <PackageProjectUrl>https://code.google.com/p/alsing/</PackageProjectUrl>
+    <Copyright>© Roger Alsing. All rights reserved.</Copyright>
     <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+    <PackageProjectUrl>https://code.google.com/p/alsing/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ehasis/alsing.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>syntax highlighter winforms</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>Added support to .NET Core 3.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support to .NET Core 3.1.</PackageReleaseNotes>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <!-- References for .NET Framework 4.0 target -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net40'">
     <Reference Include="System.Design" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
-  <!-- References for .NET Framework 4.5 target -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-    <Reference Include="System.Design" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Windows.Forms" />
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
