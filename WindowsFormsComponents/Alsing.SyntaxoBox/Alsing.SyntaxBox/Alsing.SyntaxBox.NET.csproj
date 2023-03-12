@@ -22,9 +22,9 @@
     <RepositoryUrl>https://github.com/ehasis/alsing.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>syntax highlighter winforms</PackageTags>
-    <PackageReleaseNotes>Added support to .NET Core 3.1.</PackageReleaseNotes>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.1.0</FileVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net40'">
@@ -46,6 +46,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
