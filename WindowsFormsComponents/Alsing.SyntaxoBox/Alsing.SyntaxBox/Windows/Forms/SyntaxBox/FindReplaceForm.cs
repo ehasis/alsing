@@ -130,7 +130,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             pnlReplaceButtons.Visible = false;
             Text = "Find";
             Show();
-            Height = 160;
+            ClientSize = new System.Drawing.Size(ClientSize.Width, 136);
             btnDoReplace.Visible = false;
             btnReplace.Visible = true;
             _Last = "";
@@ -146,7 +146,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             pnlReplaceButtons.Visible = true;
             Text = "Replace";
             Show();
-            Height = 200;
+            ClientSize = new System.Drawing.Size(ClientSize.Width, 176);
             btnDoReplace.Visible = true;
             btnReplace.Visible = false;
             _Last = "";
@@ -538,7 +538,6 @@ namespace Alsing.Windows.Forms.SyntaxBox
             // FindReplaceForm
             //
             this.AcceptButton = this.btnFind;
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(496, 178);
             this.Controls.AddRange(new System.Windows.Forms.Control[]

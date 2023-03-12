@@ -364,7 +364,6 @@ namespace Alsing.Windows.Forms.SyntaxBox
             // 
             // AutoListForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(168, 165);
             this.Controls.AddRange(new System.Windows.Forms.Control[] {this.LB});
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

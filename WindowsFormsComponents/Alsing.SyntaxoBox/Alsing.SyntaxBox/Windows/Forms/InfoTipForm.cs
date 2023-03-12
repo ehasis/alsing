@@ -362,7 +362,6 @@ namespace Alsing.Windows.Forms
             //
             // InfoTipForm
             //
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(240, 37);
             this.ControlBox = false;
