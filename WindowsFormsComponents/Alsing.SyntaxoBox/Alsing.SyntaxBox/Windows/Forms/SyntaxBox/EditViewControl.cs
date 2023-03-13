@@ -3377,7 +3377,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         protected override void OnMouseWheel(MouseEventArgs e)
         {
             int l = SystemInformation.MouseWheelScrollLines;
-            ScrollScreen(- (e.Delta/120)*l);
+            ScrollScreen(-Math.Sign(e.Delta) * l);
 
             base.OnMouseWheel(e);
         }
