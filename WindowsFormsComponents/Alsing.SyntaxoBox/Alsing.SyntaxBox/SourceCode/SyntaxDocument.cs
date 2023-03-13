@@ -248,8 +248,11 @@ namespace Alsing.SourceCode
             get { return modified; }
             set
             {
-                modified = value;
-                OnModifiedChanged();
+                if (modified != value)
+                {
+                    modified = value;
+                    OnModifiedChanged();
+                }
             }
         }
 
