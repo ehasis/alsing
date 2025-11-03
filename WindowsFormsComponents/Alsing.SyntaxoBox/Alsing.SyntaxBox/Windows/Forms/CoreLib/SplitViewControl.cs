@@ -9,7 +9,6 @@
 // *
 
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -18,27 +17,25 @@ namespace Alsing.Windows.Forms.CoreLib
     /// <summary>
     /// Summary description for SplitView.
     /// </summary>
-    public class SplitViewControl : Control
+    public partial class SplitViewControl : Control
     {
+        private enum SizeAction
+        {
+            None = 0,
+            SizeH = 1,
+            SizeV = 2,
+            SizeA = 3
+        }
+
         private Control _LowerLeft;
         private Control _LowerRight;
         private Control _UpperLeft;
         private Control _UpperRight;
 
         private SizeAction Action = 0;
-        private Panel Center;
-
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private IContainer components = null;
-
         private bool FirstTime;
-        private Panel Horizontal;
         private Point PrevPos = new Point(0);
-
         private Point StartPos = new Point(0, 0);
-        private Panel Vertical;
 
         /// <summary>
         /// Default constructor for the splitview control
@@ -126,70 +123,6 @@ namespace Alsing.Windows.Forms.CoreLib
             }
         }
 
-        #region Component Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.Vertical = new System.Windows.Forms.Panel();
-            this.Horizontal = new System.Windows.Forms.Panel();
-            this.Center = new System.Windows.Forms.Panel();
-            this.SuspendLayout();
-            //
-            // Vertical
-            //
-            this.Vertical.BackColor = System.Drawing.SystemColors.Control;
-            this.Vertical.Cursor = System.Windows.Forms.Cursors.VSplit;
-            this.Vertical.Name = "Vertical";
-            this.Vertical.Size = new System.Drawing.Size(4, 264);
-            this.Vertical.TabIndex = 0;
-            this.Vertical.Resize += new System.EventHandler(this.Vertical_Resize);
-            this.Vertical.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Vertical_MouseUp);
-            this.Vertical.DoubleClick += new System.EventHandler(this.Vertical_DoubleClick);
-            this.Vertical.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Vertical_MouseMove);
-            this.Vertical.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Vertical_MouseDown);
-            //
-            // Horizontal
-            //
-            this.Horizontal.BackColor = System.Drawing.SystemColors.Control;
-            this.Horizontal.Cursor = System.Windows.Forms.Cursors.HSplit;
-            this.Horizontal.Name = "Horizontal";
-            this.Horizontal.Size = new System.Drawing.Size(320, 4);
-            this.Horizontal.TabIndex = 1;
-            this.Horizontal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Horizontal_MouseUp);
-            this.Horizontal.DoubleClick += new System.EventHandler(this.Horizontal_DoubleClick);
-            this.Horizontal.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Horizontal_MouseMove);
-            this.Horizontal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Horizontal_MouseDown);
-            //
-            // Center
-            //
-            this.Center.BackColor = System.Drawing.SystemColors.Control;
-            this.Center.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.Center.Location = new System.Drawing.Point(146, 69);
-            this.Center.Name = "Center";
-            this.Center.Size = new System.Drawing.Size(24, 24);
-            this.Center.TabIndex = 2;
-            this.Center.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Center_MouseUp);
-            this.Center.DoubleClick += new System.EventHandler(this.Center_DoubleClick);
-            this.Center.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Center_MouseMove);
-            this.Center.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Center_MouseDown);
-            //
-            // SplitViewControl
-            //
-            this.BackColor = System.Drawing.Color.Magenta;
-            this.Controls.AddRange(new System.Windows.Forms.Control[] { this.Center, this.Horizontal, this.Vertical });
-            this.Size = new System.Drawing.Size(200, 200);
-            this.VisibleChanged += new System.EventHandler(this.SplitViewControl_VisibleChanged);
-            this.Enter += new System.EventHandler(this.SplitViewControl_Enter);
-            this.Leave += new System.EventHandler(this.SplitViewControl_Leave);
-            this.ResumeLayout(false);
-        }
-
-        #endregion Component Designer generated code
-
         /// <summary>
         /// an event fired when the split view is resized.
         /// </summary>
@@ -223,37 +156,6 @@ namespace Alsing.Windows.Forms.CoreLib
                 HideTop(this, new EventArgs());
         }
 
-        //		protected override void OnLoad(EventArgs e)
-        //		{
-        //
-        //		}
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        protected override void Dispose(bool disposing)
-        {
-#if DEBUG
-            try
-            {
-                Console.WriteLine("disposing splitview");
-            }
-            catch { }
-#endif
-            if (disposing)
-            {
-                if (components != null)
-                {
-                    components.Dispose();
-                }
-            }
-            base.Dispose(disposing);
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="e"></param>
         protected override void OnResize(EventArgs e)
         {
             DoResize();
@@ -333,17 +235,9 @@ namespace Alsing.Windows.Forms.CoreLib
             }
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="e"></param>
         protected override void OnControlAdded(ControlEventArgs e)
         {
             DoResize();
-        }
-
-        private void Vertical_Resize(object sender, EventArgs e)
-        {
         }
 
         private void Horizontal_MouseDown(object sender, MouseEventArgs e)
@@ -659,29 +553,5 @@ namespace Alsing.Windows.Forms.CoreLib
             IntPtr hwnd = Vertical.Handle;
             NativeMethods.SendMessage(hwnd, (int)WindowMessage.WM_LBUTTONDOWN, 0, 0);
         }
-
-        private void SplitViewControl_Leave(object sender, EventArgs e)
-        {
-        }
-
-        private void SplitViewControl_Enter(object sender, EventArgs e)
-        {
-        }
-
-        private void SplitViewControl_VisibleChanged(object sender, EventArgs e)
-        {
-        }
-
-        #region Nested type: SizeAction
-
-        private enum SizeAction
-        {
-            None = 0,
-            SizeH = 1,
-            SizeV = 2,
-            SizeA = 3
-        }
-
-        #endregion Nested type: SizeAction
     }
 }

@@ -417,17 +417,3 @@ namespace Alsing.Windows.Forms.CoreLib
         #endregion
     }
 }
-
-namespace Alsing.Windows.Forms
-{
-    /// <summary>
-    /// Represents which split view is currently active in the syntaxbox
-    /// </summary>
-    public enum ActiveView
-    {
-        TopLeft,
-        TopRight,
-        BottomLeft,
-        BottomRight,
-    }
-}

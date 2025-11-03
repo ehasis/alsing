@@ -17,7 +17,7 @@ using Alsing.Drawing;
 namespace Alsing.Windows.Forms
 {
     [ToolboxItem(true)]
-    public class BaseListBoxControl : ListBox
+    public partial class BaseListBoxControl : ListBox
     {
         private const int WS_BORDER = unchecked(0x00800000);
         private const int WS_EX_CLIENTEDGE = unchecked(0x00000200);
@@ -28,13 +28,13 @@ namespace Alsing.Windows.Forms
         /// </summary>
         private BorderStyle borderStyle;
 
-        private IContainer components = null;
         private bool RunOnce = true;
 
         public BaseListBoxControl()
         {
             SetStyle(ControlStyles.EnableNotifyMessage, true);
             BorderStyle = BorderStyle.FixedSingle;
+            InitializeComponent();
         }
 
         [Browsable(false)]
@@ -178,21 +178,6 @@ namespace Alsing.Windows.Forms
         }
 
         public event EventHandler Load = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (components != null)
-                {
-                    components.Dispose();
-                }
-            }
-            base.Dispose(disposing);
-        }
 
         protected virtual void OnLoad(EventArgs e)
         {

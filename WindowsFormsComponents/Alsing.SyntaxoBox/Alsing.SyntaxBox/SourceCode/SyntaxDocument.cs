@@ -21,7 +21,7 @@ namespace Alsing.SourceCode
     /// <summary>
     /// The SyntaxDocument is a component that is responsible for Parsing , Folding , Undo / Redo actions and various text actions.
     /// </summary>
-    public class SyntaxDocument : Component, IEnumerable
+    public partial class SyntaxDocument : Component, IEnumerable
     {
         #region General declarations
 
@@ -219,19 +219,12 @@ namespace Alsing.SourceCode
 
         #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
         public SyntaxDocument(IContainer container) : this()
         {
             container.Add(this);
             InitializeComponent();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public SyntaxDocument()
         {
             Parser.Document = this;
@@ -390,19 +383,6 @@ namespace Alsing.SourceCode
                 Text = s.Substring(0, s.Length - 1);
             }
         }
-
-        #region Component Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            new System.ComponentModel.Container();
-        }
-
-        #endregion
 
         #region IEnumerable Members
 

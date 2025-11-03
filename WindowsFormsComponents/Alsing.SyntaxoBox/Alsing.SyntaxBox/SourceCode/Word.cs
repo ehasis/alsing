@@ -13,25 +13,6 @@ using System.Drawing;
 namespace Alsing.SourceCode
 {
     /// <summary>
-    /// Word types
-    /// </summary>
-    public enum WordType
-    {
-        /// <summary>
-        /// The word is a normal word/text
-        /// </summary>
-        Word = 0,
-        /// <summary>
-        /// The word is a space char
-        /// </summary>
-        Space = 1,
-        /// <summary>
-        /// The word is a tab char
-        /// </summary>
-        Tab = 2
-    }
-
-    /// <summary>
     /// The word object class represents a word in a Row object
     /// </summary>
     public sealed class Word

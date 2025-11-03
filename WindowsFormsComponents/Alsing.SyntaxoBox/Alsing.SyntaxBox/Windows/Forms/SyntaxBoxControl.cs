@@ -8,22 +8,17 @@
 // *
 // *
 
-#region using...
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Design;
 using System.IO;
-using System.Resources;
 using System.Windows.Forms;
 using Alsing.Drawing.GDI;
 using Alsing.SourceCode;
 using Alsing.Windows.Forms.CoreLib;
 using Alsing.Windows.Forms.SyntaxBox;
-
-#endregion
 
 namespace Alsing.Windows.Forms
 {
@@ -31,7 +26,7 @@ namespace Alsing.Windows.Forms
     /// Syntaxbox control that can be used as a pure text editor or as a code editor when a syntaxfile is used.
     /// </summary>
     [Designer(typeof (SyntaxBoxDesigner), typeof (IDesigner))]
-    public class SyntaxBoxControl : SplitViewParentControl
+    public partial class SyntaxBoxControl : SplitViewParentControl
     {
         protected internal bool DisableAutoList;
         protected internal bool DisableFindForm;
@@ -87,15 +82,6 @@ namespace Alsing.Windows.Forms
         private int _TooltipDelay = 240;
         private bool _VirtualWhitespace;
         private Color _WhitespaceColor = SystemColors.ControlDark;
-        private IContainer components;
-
-        #endregion
-
-        #region Internal Components/Controls
-
-        private ImageList _AutoListIcons;
-        private ImageList _GutterIcons;
-        private Timer ParseTimer;
 
         #endregion
 
@@ -2070,54 +2056,7 @@ namespace Alsing.Windows.Forms
 
         #endregion
 
-        #region DISPOSE()
-
-        /// <summary>
-        /// </summary>
-        /// <param name="disposing"></param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (components != null)
-                    components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        #endregion //END DISPOSE
-
         #region Private/Protected/Internal methods
-
-        private void InitializeComponent()
-        {
-            components = new Container();
-            var resources = new ResourceManager(typeof (SyntaxBoxControl));
-            _GutterIcons = new ImageList(components);
-            _AutoListIcons = new ImageList(components);
-            ParseTimer = new Timer(components);
-            // 
-            // _GutterIcons
-            // 
-            _GutterIcons.ColorDepth = ColorDepth.Depth32Bit;
-            _GutterIcons.ImageSize = new Size(17, 17);
-            _GutterIcons.ImageStream = ((ImageListStreamer) (resources.GetObject("_GutterIcons.ImageStream")));
-            _GutterIcons.TransparentColor = Color.Transparent;
-            // 
-            // _AutoListIcons
-            // 
-            _AutoListIcons.ColorDepth = ColorDepth.Depth8Bit;
-            _AutoListIcons.ImageSize = new Size(16, 16);
-            _AutoListIcons.ImageStream = ((ImageListStreamer) (resources.GetObject("_AutoListIcons.ImageStream")));
-            _AutoListIcons.TransparentColor = Color.Transparent;
-            // 
-            // ParseTimer
-            // 
-            ParseTimer.Enabled = true;
-            ParseTimer.Interval = 1;
-            ParseTimer.Tick += ParseTimer_Tick;
-        }
-
 
         protected override void OnLoad(EventArgs e)
         {

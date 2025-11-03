@@ -17,7 +17,7 @@ using Alsing.Drawing;
 namespace Alsing.Windows.Forms
 {
     [ToolboxItem(true)]
-    public class BaseControl : Control
+    public partial class BaseControl : Control
     {
         private const int WS_BORDER = unchecked(0x00800000);
         private const int WS_EX_CLIENTEDGE = unchecked(0x00000200);
@@ -28,7 +28,6 @@ namespace Alsing.Windows.Forms
         /// </summary>
         private BorderStyle borderStyle;
 
-        private IContainer components = null;
         private bool RunOnce = true;
 
         public BaseControl()
@@ -177,38 +176,7 @@ namespace Alsing.Windows.Forms
             }
         }
 
-        #region Component Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            //
-            // BaseControl
-            //
-            this.Size = new System.Drawing.Size(272, 264);
-        }
-
-        #endregion Component Designer generated code
-
         public event EventHandler Load = null;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (components != null)
-                {
-                    components.Dispose();
-                }
-            }
-            base.Dispose(disposing);
-        }
 
         protected virtual void OnLoad(EventArgs e)
         {
