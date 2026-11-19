@@ -53,6 +53,7 @@ namespace Alsing.SourceCode
             Document = document;
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public SyntaxDocument Document { get; set; }
 
         //Override OnBeginPrint to set up the font we are going to use

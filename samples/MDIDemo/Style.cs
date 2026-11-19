@@ -23,6 +23,7 @@ namespace MDIDemo
         }
 
         [Category("Color")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color ForeColor
         {
             get { return TextStyle.ForeColor; }
@@ -30,6 +31,7 @@ namespace MDIDemo
         }
 
         [Category("Color")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color BackColor
         {
             get { return TextStyle.BackColor; }
@@ -37,6 +39,7 @@ namespace MDIDemo
         }
 
         [Category("Font")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool FontBold
         {
             get { return TextStyle.Bold; }
@@ -44,6 +47,7 @@ namespace MDIDemo
         }
 
         [Category("Font")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool FontItalic
         {
             get { return TextStyle.Italic; }
@@ -51,6 +55,7 @@ namespace MDIDemo
         }
 
         [Category("Font")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool FontUnderline
         {
             get { return TextStyle.Underline; }

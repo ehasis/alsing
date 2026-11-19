@@ -8,13 +8,12 @@ Powerful Syntax Highlight Windows Forms Control for the Microsoft.NET Platform. 
 - Set the `Document` property of `SyntaxControl` with one `SyntaxDocument` object.
 - Set the `SyntaxFile` property of `SyntaxDocument` with one syntax file.
 
-## Commom Directories
+## Common Directories
 
- The Repository structure still the original layout and I have no plan to change that, but here are some frequent asked directory locations, all inside **WindowsFormsComponents** directory.
-
-- [SyntaxBox solution](WindowsFormsComponents/Alsing.SyntaxoBox)
-- [Sample projects](WindowsFormsComponents/Alsing.SyntaxoBox/Samples)
-- [Common syntax files](WindowsFormsComponents/Alsing.SyntaxoBox/SyntaxFiles)
+- [SyntaxBox solution](Alsing.SyntaxBox.slnx)
+- [SyntaxBox library](src/Alsing.SyntaxBox)
+- [Sample projects](samples)
+- [Common syntax files](files)
 
 ## Additional Info
 

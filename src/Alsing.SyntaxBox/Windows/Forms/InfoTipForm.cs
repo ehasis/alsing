@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace Alsing.Windows.Forms
 {
@@ -49,6 +50,7 @@ namespace Alsing.Windows.Forms
             set { _Control = new WeakReference(value); }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SelectedIndex
         {
             get { return _SelectedIndex; }
@@ -65,12 +67,14 @@ namespace Alsing.Windows.Forms
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Count
         {
             get { return _Count; }
             set { _Count = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Image Image
         {
             get { return picIcon.Image; }
@@ -91,6 +95,7 @@ namespace Alsing.Windows.Forms
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Data
         {
             get { return InfoText.Text; }

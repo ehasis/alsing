@@ -81,6 +81,7 @@ namespace Alsing.Windows.Forms
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
         [Category("Appearance - Borders"), Description("The border style")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public BorderStyle BorderStyle
         {
             get { return borderStyle; }

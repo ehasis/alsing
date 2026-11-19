@@ -339,6 +339,7 @@ namespace Alsing.Design
         {
             #region PUBLIC PROPERTY TYPE
 
+            [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
             public object Type { get; set; }
 
             #endregion

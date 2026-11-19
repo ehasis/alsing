@@ -33,6 +33,7 @@ namespace Alsing.Windows.Forms
             InitializeComponent();
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Color BorderColor
         {
             get { return borderColor; }
@@ -63,6 +64,7 @@ namespace Alsing.Windows.Forms
         }
 
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public new BorderStyle BorderStyle
         {
             get { return borderStyle; }

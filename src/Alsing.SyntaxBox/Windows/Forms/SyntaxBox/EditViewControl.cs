@@ -75,6 +75,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         private AutoListForm _AutoList;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public AutoListForm AutoList
         {
             get
@@ -92,6 +93,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         private InfoTipForm _InfoTip;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public InfoTipForm InfoTip
         {
             get
@@ -107,6 +109,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         #region PUBLIC PROPERTY IMEWINDOW
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IMEWindow IMEWindow { get; set; }
 
         #endregion
@@ -115,6 +118,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
         private FindReplaceForm _FindReplaceDialog;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public FindReplaceForm FindReplaceDialog
         {
             get
@@ -140,6 +144,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         }
 
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SyntaxBoxControl _SyntaxBox
         {
             get
@@ -2308,6 +2313,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// </summary>
         [Category("Appearance")]
         [Description("The background color of the client area")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public new Color BackColor
         {
             get { return _SyntaxBox.BackColor; }
@@ -2442,6 +2448,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// Positions the AutoList
         /// </summary>
         [Category("Behavior")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TextPoint AutoListPosition
         {
             get { return AutoListStartPos; }
@@ -2452,6 +2459,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// Positions the InfoTip
         /// </summary>
         [Category("Behavior")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TextPoint InfoTipPosition
         {
             get { return InfoTipStartPos; }
@@ -2463,6 +2471,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// Gets or Sets if the intellisense list is visible.
         /// </summary>
         [Category("Behavior")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool AutoListVisible
         {
             set
@@ -2504,6 +2513,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
         /// Gets or Sets if the infotip is visible
         /// </summary>
         [Category("Behavior")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool InfoTipVisible
         {
             set

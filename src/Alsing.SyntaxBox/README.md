@@ -12,8 +12,8 @@ Powerful Syntax Highlight Windows Forms Control for the Microsoft.NET Platform. 
 
 For more information, check on the repository the example projects:
 
-https://github.com/ehasis/alsing/tree/master/WindowsFormsComponents/Alsing.SyntaxoBox/Samples
+https://github.com/ehasis/alsing/tree/master/samples
 
 Common syntax files:
 
-https://github.com/ehasis/alsing/tree/master/WindowsFormsComponents/Alsing.SyntaxoBox/SyntaxFiles
+https://github.com/ehasis/alsing/tree/master/files

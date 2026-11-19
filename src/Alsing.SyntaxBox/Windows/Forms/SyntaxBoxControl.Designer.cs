@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            var resources = new System.Resources.ResourceManager(typeof(SyntaxBoxControl));
-            this._GutterIcons = new System.Windows.Forms.ImageList(components);
-            this._AutoListIcons = new System.Windows.Forms.ImageList(components);
-            this.ParseTimer = new System.Windows.Forms.Timer(components);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SyntaxBoxControl));
+            this._GutterIcons = new System.Windows.Forms.ImageList(this.components);
+            this._AutoListIcons = new System.Windows.Forms.ImageList(this.components);
+            this.ParseTimer = new System.Windows.Forms.Timer(this.components);
             // 
             // _GutterIcons
             // 
@@ -52,7 +52,7 @@
             // 
             this.ParseTimer.Enabled = true;
             this.ParseTimer.Interval = 1;
-            this.ParseTimer.Tick += ParseTimer_Tick;
+            this.ParseTimer.Tick += new System.EventHandler(this.ParseTimer_Tick);
         }
 
         #endregion Component Designer generated code

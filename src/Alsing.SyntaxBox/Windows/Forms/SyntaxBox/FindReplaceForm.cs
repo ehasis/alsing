@@ -98,7 +98,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
             ShowReplace();
         }
 
-        private void FindReplace_Closing(object sender, CancelEventArgs e)
+        private void FindReplace_Closing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             Hide();

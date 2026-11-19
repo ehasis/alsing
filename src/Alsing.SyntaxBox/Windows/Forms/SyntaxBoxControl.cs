@@ -239,6 +239,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         [Category("Behavior")]
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TextPoint AutoListPosition
         {
             get { return ((EditViewControl) _ActiveView).AutoListPosition; }
@@ -256,6 +257,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         [Category("Behavior")]
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TextPoint InfoTipPosition
         {
             get { return ((EditViewControl) _ActiveView).InfoTipPosition; }
@@ -293,6 +295,7 @@ namespace Alsing.Windows.Forms
         [Description("Prevents the control from changing the cursor.")]
         [Category("Appearance")]
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool LockCursorUpdate { get; set; }
 
         /// <summary>
@@ -308,6 +311,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         [Category("Appearance - Infotip"), Description("The currently active selection in the infotip")]
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int InfoTipSelectedIndex
         {
             get { return ((EditViewControl) _ActiveView).InfoTip.SelectedIndex; }
@@ -343,6 +347,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         [Category("Appearance"), Description("Get or Sets the number of choices that could be made in the infotip")]
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int InfoTipCount
         {
             get { return ((EditViewControl) _ActiveView).InfoTip.Count; }
@@ -423,6 +428,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         [Category("Appearance"), Description("Gets or Sets if the AutoList is visible in the active view.")]
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool AutoListVisible
         {
             get { return (_ActiveView) != null && ((EditViewControl) _ActiveView).AutoListVisible; }
@@ -438,6 +444,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         [Category("Appearance"), Description("Gets or Sets if the InfoTip is visible in the active view.")]
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool InfoTipVisible
         {
             get { return (_ActiveView) != null && ((EditViewControl) _ActiveView).InfoTipVisible; }
@@ -494,6 +501,7 @@ namespace Alsing.Windows.Forms
         /// Image Index 1 is used to display the Bookmark icon.
         /// </remarks>		
         [Category("Appearance - Gutter Margin"), Description("Gets or Sets the imagelist to use in the gutter margin.")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public ImageList GutterIcons
         {
             get { return _GutterIcons; }
@@ -743,6 +751,7 @@ namespace Alsing.Windows.Forms
         /// </summary>
         [Category("Content")]
         [Description("The SyntaxDocument that is attatched to the contro")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public SyntaxDocument Document
         {
             get { return _Document; }
@@ -1649,6 +1658,7 @@ namespace Alsing.Windows.Forms
         /// The currently highlighted text in the autolist.
         /// </summary>
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string AutoListSelectedText
         {
             get { return ((EditViewControl) _ActiveView).AutoList.SelectedText; }

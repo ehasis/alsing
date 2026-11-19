@@ -166,18 +166,21 @@ namespace Alsing.Design
 
         #region PUBLIC PROPERTY EDITOR
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ComponaCollectionEditor Editor { get; set; }
 
         #endregion
 
         #region PUBLIC PROPERTY EDITORSERVICE
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IWindowsFormsEditorService EditorService { get; set; }
 
         #endregion
 
         #region PUBLIC PROPERTY EDITVALUE
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object EditValue { get; set; }
 
         #endregion

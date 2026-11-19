@@ -35,10 +35,6 @@
             // 
             // syntaxBoxControl1
             // 
-            this.syntaxBoxControl1.ActiveView = Alsing.Windows.Forms.ActiveView.BottomRight;
-            this.syntaxBoxControl1.AutoListPosition = null;
-            this.syntaxBoxControl1.AutoListSelectedText = "a123";
-            this.syntaxBoxControl1.AutoListVisible = false;
             this.syntaxBoxControl1.BackColor = System.Drawing.Color.White;
             this.syntaxBoxControl1.BorderStyle = Alsing.Windows.Forms.BorderStyle.None;
             this.syntaxBoxControl1.CopyAsRTF = false;
@@ -46,18 +42,11 @@
             this.syntaxBoxControl1.Document = this.syntaxDocument1;
             this.syntaxBoxControl1.FontName = "Consolas";
             this.syntaxBoxControl1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.syntaxBoxControl1.InfoTipCount = 1;
-            this.syntaxBoxControl1.InfoTipPosition = null;
-            this.syntaxBoxControl1.InfoTipSelectedIndex = 1;
-            this.syntaxBoxControl1.InfoTipVisible = false;
             this.syntaxBoxControl1.Location = new System.Drawing.Point(0, 0);
-            this.syntaxBoxControl1.LockCursorUpdate = false;
             this.syntaxBoxControl1.Name = "syntaxBoxControl1";
             this.syntaxBoxControl1.ShowScopeIndicator = false;
             this.syntaxBoxControl1.Size = new System.Drawing.Size(844, 592);
             this.syntaxBoxControl1.SmoothScroll = false;
-            this.syntaxBoxControl1.SplitviewH = -4;
-            this.syntaxBoxControl1.SplitviewV = -4;
             this.syntaxBoxControl1.TabGuideColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(243)))), ((int)(((byte)(234)))));
             this.syntaxBoxControl1.TabIndex = 0;
             this.syntaxBoxControl1.Text = "syntaxBoxControl1";
@@ -931,9 +920,7 @@
         "    }\r",
         "}"};
             this.syntaxDocument1.MaxUndoBufferSize = 1000;
-            this.syntaxDocument1.Modified = false;
             this.syntaxDocument1.SyntaxFile = "..\\..\\..\\..\\files\\CSharp.syn";
-            this.syntaxDocument1.UndoStep = 0;
             // 
             // Form1
             // 

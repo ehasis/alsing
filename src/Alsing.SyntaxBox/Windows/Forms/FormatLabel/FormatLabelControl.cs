@@ -37,6 +37,7 @@ namespace Alsing.Windows.Forms.CoreLib
         private string _Text = "format <b>label</b>";
         private bool _WordWrap = true;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public ImageList ImageList
         {
             get { return _ImageList; }
@@ -48,6 +49,7 @@ namespace Alsing.Windows.Forms.CoreLib
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Color Link_Color
         {
             get { return _Link_Color; }
@@ -58,6 +60,7 @@ namespace Alsing.Windows.Forms.CoreLib
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Color Link_Color_Hover
         {
             get { return _Link_Color_Hover; }
@@ -68,6 +71,7 @@ namespace Alsing.Windows.Forms.CoreLib
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool Link_UnderLine
         {
             get { return _Link_UnderLine; }
@@ -78,6 +82,7 @@ namespace Alsing.Windows.Forms.CoreLib
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool Link_UnderLine_Hover
         {
             get { return _Link_UnderLine_Hover; }
@@ -88,10 +93,13 @@ namespace Alsing.Windows.Forms.CoreLib
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool AutoSizeHorizontal { get; set; }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool AutoSizeVertical { get; set; }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public bool WordWrap
         {
             get { return _WordWrap; }
@@ -110,6 +118,7 @@ namespace Alsing.Windows.Forms.CoreLib
             set { base.BackgroundImage = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public ScrollBars ScrollBars
         {
             get { return _ScrollBars; }
@@ -1152,6 +1161,7 @@ namespace Alsing.Windows.Forms.CoreLib
 
         private int _Margin;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public new int Margin
         {
             get { return _Margin; }

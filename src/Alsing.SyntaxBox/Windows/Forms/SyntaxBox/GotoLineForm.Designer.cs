@@ -81,7 +81,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Go To Line";
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.GotoLine_Closing);
             this.Activated += new System.EventHandler(this.GotoLine_Activated);
             this.ResumeLayout(false);
         }

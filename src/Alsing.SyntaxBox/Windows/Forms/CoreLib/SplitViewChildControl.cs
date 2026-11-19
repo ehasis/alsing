@@ -39,6 +39,7 @@ namespace Alsing.Windows.Forms.CoreLib
         /// <summary>
         /// Gets or Sets if the Left side thumb control is visible or not.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool LeftThumbVisible
         {
             get { return LeftThumb.Visible; }
@@ -52,6 +53,7 @@ namespace Alsing.Windows.Forms.CoreLib
         /// <summary>
         /// Getd ot Sets if the Top thumb control is visible or not.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool TopThumbVisible
         {
             get { return TopThumb.Visible; }
@@ -92,6 +94,7 @@ namespace Alsing.Windows.Forms.CoreLib
 
         private bool HasThumbs;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ScrollBars ScrollBars
         {
             get { return _ScrollBars; }

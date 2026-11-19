@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using Alsing.Properties;
 using ScrollEventArgs=Alsing.Windows.Forms.IntelliMouse.ScrollEventArgs;
 using ScrollEventHandler=Alsing.Windows.Forms.IntelliMouse.ScrollEventHandler;
+using System.ComponentModel;
 
 namespace Alsing.Windows.Forms.CoreLib
 {
@@ -65,6 +66,7 @@ namespace Alsing.Windows.Forms.CoreLib
 
         protected Bitmap _Image;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Bitmap Image
         {
             get { return _Image; }
@@ -81,6 +83,7 @@ namespace Alsing.Windows.Forms.CoreLib
 
         protected Color _TransparencyKey = Color.FromArgb(255, 0, 255);
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Color TransparencyKey
         {
             get { return _TransparencyKey; }

@@ -19,14 +19,17 @@ namespace Alsing.Windows.Forms.CoreLib
     {
         private Color _TransparencyKey = Color.FromArgb(255, 0, 255);
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Color TransparencyKey
         {
             get { return _TransparencyKey; }
             set { _TransparencyKey = value; }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Control Control { get; set; }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public Bitmap MaskImage { get; set; }
 
         public RegionHandler()

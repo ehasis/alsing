@@ -53,12 +53,6 @@ namespace Alsing.Windows.Forms.SyntaxBox
             Close();
         }
 
-        private void GotoLine_Closing(object sender, CancelEventArgs e)
-        {
-            //e.Cancel =true;
-            //this.Hide ();
-        }
-
         private void GotoLine_Activated(object sender, EventArgs e)
         {
             txtRow.Focus();

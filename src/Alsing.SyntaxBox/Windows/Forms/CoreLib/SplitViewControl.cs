@@ -11,6 +11,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace Alsing.Windows.Forms.CoreLib
 {
@@ -54,6 +55,7 @@ namespace Alsing.Windows.Forms.CoreLib
         /// <summary>
         /// Gets or Sets the control that should be confined to the upper left view.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Control UpperLeft
         {
             get { return _UpperLeft; }
@@ -67,6 +69,7 @@ namespace Alsing.Windows.Forms.CoreLib
         /// <summary>
         /// Gets or Sets the control that should be confined to the upper right view.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Control UpperRight
         {
             get { return _UpperRight; }
@@ -80,6 +83,7 @@ namespace Alsing.Windows.Forms.CoreLib
         /// <summary>
         /// Gets or Sets the control that should be confined to the lower left view.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Control LowerLeft
         {
             get { return _LowerLeft; }
@@ -93,6 +97,7 @@ namespace Alsing.Windows.Forms.CoreLib
         /// <summary>
         /// Gets or Sets the control that should be confined to the lower right view.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Control LowerRight
         {
             get { return _LowerRight; }
@@ -103,6 +108,7 @@ namespace Alsing.Windows.Forms.CoreLib
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SplitviewV
         {
             get { return Vertical.Left; }
@@ -113,6 +119,7 @@ namespace Alsing.Windows.Forms.CoreLib
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SplitviewH
         {
             get { return Horizontal.Top; }

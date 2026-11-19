@@ -81,6 +81,7 @@ namespace Alsing.Windows.Forms.CoreLib
         /// Gets or Sets the active view
         /// </summary>
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ActiveView ActiveView
         {
             get
@@ -216,7 +217,10 @@ namespace Alsing.Windows.Forms.CoreLib
 
         protected virtual SplitViewChildControl GetNewView()
         {
-            return null;
+            // Derived controls (e.g. SyntaxBoxControl) override this to supply their own view type.
+            // A default instance is returned so the base class can be constructed on its own,
+            // which is what the Windows Forms designer does when designing a derived control.
+            return new SplitViewChildControl();
         }
 
         protected void View_Enter(object sender, EventArgs e)
@@ -242,6 +246,7 @@ namespace Alsing.Windows.Forms.CoreLib
         #region PUBLIC PROPERTY SPLITVIEWV
 
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SplitviewV
         {
             get { return splitView.SplitviewV; }
@@ -259,6 +264,7 @@ namespace Alsing.Windows.Forms.CoreLib
         #region PUBLIC PROPERTY SPLITVIEWH
 
         [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int SplitviewH
         {
             get { return splitView.SplitviewH; }

@@ -81,6 +81,7 @@ namespace Alsing.SourceCode
 
         private int _UndoStep;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int UndoStep
         {
             get
@@ -197,6 +198,7 @@ namespace Alsing.SourceCode
         /// <summary>
         /// Gets or Sets the Maximum number of entries in the undobuffer
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public int MaxUndoBufferSize
         {
             get { return UndoBuffer.MaxSize; }
@@ -236,6 +238,7 @@ namespace Alsing.SourceCode
         /// <summary>
         /// Get or Set the Modified flag
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Modified
         {
             get { return modified; }
@@ -300,6 +303,7 @@ namespace Alsing.SourceCode
         /// <summary>
         /// Returns the row at the specified index
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Row this[int index]
         {
             get
@@ -372,6 +376,7 @@ namespace Alsing.SourceCode
         /// <summary>
         /// Gets and string array containing the text of all rows.
         /// </summary>
+        [DefaultValue(new string[] { })]
         public string[] Lines
         {
             get { return Text.Split("\n".ToCharArray()); }

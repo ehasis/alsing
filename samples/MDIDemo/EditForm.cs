@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -29,7 +28,8 @@ namespace MDIDemo
 
             Doc = Document;
             sBox.Document = sDoc;
-            sBox.Document.Parser.Init(SyntaxDefinition);
+            if (SyntaxDefinition != null)
+                sBox.Document.Parser.Init(SyntaxDefinition);
             sBox.Document.Text = Document.Text;
             Text = Doc.Title;
         }
@@ -41,12 +41,12 @@ namespace MDIDemo
                 s = "*";
 
             Text = Doc.Title + s;
-            statusBar1.Panels[1].Text = "Undo buffer :\t" + sDoc.UndoStep;
+            statusLabel2.Text = "Undo buffer : " + sDoc.UndoStep;
         }
 
         private void sDoc_Change(object sender, EventArgs e)
         {
-            statusBar1.Panels[1].Text = "Undo buffer :\t" + sDoc.UndoStep;
+            statusLabel2.Text = "Undo buffer : " + sDoc.UndoStep;
         }
 
         private void tbrSettings_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -87,7 +87,7 @@ namespace MDIDemo
             }
         }
 
-        private void EditForm_Closing(object sender, CancelEventArgs e)
+        private void EditForm_Closing(object sender, FormClosingEventArgs e)
         {
             if (sDoc.Modified)
             {

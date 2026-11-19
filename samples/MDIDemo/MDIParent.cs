@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -9,6 +10,19 @@ namespace MDIDemo
     public partial class MDIParent : Form
     {
         private readonly SyntaxDefinitionList Languages = new SyntaxDefinitionList();
+
+        //maps a file extension to the syntax file used to highlight it.
+        //the syntax files are copied to the "SyntaxFiles" folder next to the exe (see MDIDemo.csproj).
+        private static readonly Dictionary<string, string> SyntaxFilesByExtension =
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { ".cs", "CSharp.syn" },
+                { ".vb", "VB.NET.syn" },
+                { ".xml", "XML.syn" },
+            };
+
+        private readonly Dictionary<string, SyntaxDefinition> loadedSyntaxDefinitions =
+            new Dictionary<string, SyntaxDefinition>(StringComparer.OrdinalIgnoreCase);
 
         public MDIParent()
         {
@@ -21,6 +35,11 @@ namespace MDIDemo
 
             //add a *.* pattern to the filter
             string filter = "All Files(*.*)|*.*";
+
+            //add the filetypes we have a dedicated syntax file for
+            filter += "|C# code file(*.cs)|*.cs";
+            filter += "|VB.NET code file(*.vb)|*.vb";
+            filter += "|XML file(*.xml)|*.xml";
 
             //get all filetypes from our syntax list.
             foreach (SyntaxDefinition l in Languages.GetSyntaxDefinitions())
@@ -54,10 +73,37 @@ namespace MDIDemo
             var fi = new FileInfo(FileName);
             doc.Title = fi.Name;
             doc.Text = text;
-            SyntaxDefinition syntax = Languages.GetLanguageFromFile(doc.Path);
+            SyntaxDefinition syntax = GetSyntaxDefinition(doc.Path);
 
             var ef = new EditForm(doc, syntax) { MdiParent = this };
             ef.Show();
+        }
+
+        /// <summary>
+        /// Selects the syntax definition based on the extension of the file being opened.
+        /// </summary>
+        private SyntaxDefinition GetSyntaxDefinition(string path)
+        {
+            string extension = Path.GetExtension(path);
+
+            if (SyntaxFilesByExtension.TryGetValue(extension, out string synFile))
+            {
+                if (!loadedSyntaxDefinitions.TryGetValue(synFile, out SyntaxDefinition syntax))
+                {
+                    string synPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SyntaxFiles", synFile);
+                    if (File.Exists(synPath))
+                    {
+                        syntax = new SyntaxDefinitionLoader().Load(synPath);
+                        loadedSyntaxDefinitions[synFile] = syntax;
+                    }
+                }
+
+                if (syntax != null)
+                    return syntax;
+            }
+
+            //fall back to any syntax file found in the working directory
+            return Languages.GetLanguageFromFile(path);
         }
 
         private void mnuEdit_DropDownOpening(object sender, EventArgs e)
