@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/HelloWorld/HelloWorld.csproj" />
+    <Project Path="samples/MdiDemo/MDIDemo.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Alsing.SyntaxBox/Alsing.SyntaxBox.csproj" />
+  </Folder>
+</Solution>
