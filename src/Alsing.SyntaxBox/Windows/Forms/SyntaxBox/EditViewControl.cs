@@ -389,17 +389,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                         wordtext = wordtext.Substring(c1 - w.Column);
 
 
-                    wordtext =
-                        wordtext.Replace(@"\", @" \ \ ").Replace(@"
-        }
-        ", @" \
-      }
-      ").
-                            Replace(@"
-      {
-        ", @" \
-        {
-          ");
+                    wordtext = EscapeRtf(wordtext);
 
                     sb.Append(wordtext);
 
@@ -424,7 +414,7 @@ namespace Alsing.Windows.Forms.SyntaxBox
                 }
                 if (Done) break;
 
-                sb.Append(@"\par");
+                sb.Append(@"\par ");
             }
 
 
@@ -436,6 +426,33 @@ namespace Alsing.Windows.Forms.SyntaxBox
 
             var ea = new CopyEventArgs {Text = s};
             OnClipboardUpdated(ea);
+        }
+
+        /// <summary>
+        /// Escapes the characters that have a special meaning in RTF: backslash and braces.
+        /// Characters outside ASCII are written as \uN? so they survive any code page.
+        /// </summary>
+        private static string EscapeRtf(string text)
+        {
+            var sb = new StringBuilder(text.Length);
+            foreach (char c in text)
+            {
+                switch (c)
+                {
+                    case '\\':
+                    case '{':
+                    case '}':
+                        sb.Append('\\').Append(c);
+                        break;
+                    default:
+                        if (c > 127)
+                            sb.Append(@"\u").Append(((int) (short) c).ToString(CultureInfo.InvariantCulture)).Append('?');
+                        else
+                            sb.Append(c);
+                        break;
+                }
+            }
+            return sb.ToString();
         }
 
         #region Constructor
